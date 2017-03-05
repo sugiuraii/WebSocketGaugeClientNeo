@@ -59,6 +59,8 @@ POSSIBILITY OF SUCH DAMAGE.
     // 6.取得したTextureを使ってSpriteを生成
     var bunny = new PIXI.Sprite(texture);
     
+    //回転軸の設定
+    bunny.pivot = new PIXI.Point(100,100);
     // 7. SpriteでのTextureの位置を調整
     bunny.anchor.x = 0.5;
     bunny.anchor.y = 0.5;

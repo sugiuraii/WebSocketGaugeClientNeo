@@ -32,10 +32,6 @@ var PixiCustom1DGauge = function()
     /**
      * @private
      */
-    this._sprite = new PIXI.Sprite();
-    /**
-     * @private
-     */
     this._max;
     /**
      * @private
@@ -50,30 +46,12 @@ var PixiCustom1DGauge = function()
      */
     this._InterpolatedAnimation = false;
     
+    /**
+     * @private
+     */
+    this._container = new PIXI.Container();
+    
     var self = this;
-    /*
-    this.Anchor;
-    Object.defineProperty(this, "Anchor",
-    {
-        get : function() {return self._sprite.anchor; }
-    });
-    this.Position;
-    Object.defineProperty(this, "Position",
-    {
-        get : function() {return self._sprite.position; }
-    });
-    */
-    this.Sprite;
-    Object.defineProperty(this, "Sprite",
-    {
-        get : function(){ return self._sprite;}
-    });
-    this.Texture;
-    Object.defineProperty(this, "Texture",
-    {
-        get : function(){ return self._sprite.texture; },
-        set : function(texture){self._sprite.texture = texture;}
-    });
     this.Max;
     Object.defineProperty(this, "Max",
     {
@@ -98,30 +76,18 @@ var PixiCustom1DGauge = function()
         get : function(){return self._InterpolatedAnimation;},
         set : function(flag){ self._InterpolatedAnimation = flag;}        
     });
+    this.Container;
+    Object.defineProperty(this, "Container",
+    {
+       get : function(){ return self._container; } 
+    });
 };
 
-PixiCustom1DGauge.prototype.getSprite = function()
-{
-    'use strict';
-    return this._sprite;
-};
-
-PixiCustom1DGauge.prototype.getContainer = function()
-{
-    'use strict';
-    var container = new PIXI.Container();
-    container.addChild(this._sprite);
-    container.addChild(this._mask);
-    
-    return container;
-};
-
-PixiCustom1DGauge.prototype.getStage = function()
+PixiCustom1DGauge.prototype.createStage = function()
 {
     'use strict';
     var stage = new PIXI.Stage(0x66FF99);
-    stage.addChild(this._sprite);
-    stage.addChild(this._mask);
+    stage.addChild(this._container);
     
     return stage;
 };
@@ -129,17 +95,39 @@ PixiCustom1DGauge.prototype.getStage = function()
 PixiCustom1DGauge.prototype.draw = function()
 {
     'use strict';
-    this._update();
+    this._update(false);
 };
 
 var PixiCustomProgressBar = function()
 {
     'use strict';
     PixiCustom1DGauge.call(this);
+    var self = this;
+
+    /**
+     * @private
+     */
+    this._sprite = new PIXI.Sprite();
+    /**
+     * @private
+     */
     this._mask = new PIXI.Graphics();
+    //Assign mask to sprite
     this._sprite.mask = this._mask;
+    //Assign spirite and mask to container
+    this._container.addChild(this._sprite);
+    this._container.addChild(this._mask);
+    
+    this.Texture;
+    Object.defineProperty(this, "Texture",
+    {
+        get : function(){ return self._sprite.texture; },
+        set : function(texture){self._sprite.texture = texture;}
+    });  
 };
 Object.setPrototypeOf(PixiCustomProgressBar.prototype, PixiCustom1DGauge.prototype);
+
+
 
 var PixiCircularCustomProgressBar = function()
 {
@@ -166,7 +154,7 @@ var PixiCircularCustomProgressBar = function()
     /**
      * @private
      */
-    this._pieCenterPosition = new PIXI.Point(0,0);
+    this._center = new PIXI.Point(0,0);
     /**
      * @private
      */
@@ -217,11 +205,11 @@ var PixiCircularCustomProgressBar = function()
         get : function(){ return self._innerRadius; },
         set : function(val){ self._innerRadius = val;}
     });
-    this.PieCenterPosition;
-    Object.defineProperty(this, "PieCenterPosition",
+    this.Center;
+    Object.defineProperty(this, "Center",
     {
-        get : function(){ return self._pieCenterPosition; },
-        set : function(val){ self._pieCenterPosition = val; }
+        get : function(){ return self._center; },
+        set : function(val){ self._center = val; }
     });
 };
 Object.setPrototypeOf(PixiCircularCustomProgressBar.prototype, PixiCustomProgressBar.prototype);
@@ -234,7 +222,7 @@ Object.setPrototypeOf(PixiCircularCustomProgressBar.prototype, PixiCustomProgres
 PixiCircularCustomProgressBar.prototype._update = function(skipAngleStepCheck)
 {
     'use strict';
-    var centerPos = this._pieCenterPosition;
+    var centerPos = this._center;
     var radius = this._radius;
     var innerRadius = this._innerRadius;
     var anticlockwise = this._antiClockwise;
@@ -278,4 +266,117 @@ PixiCircularCustomProgressBar.prototype._update = function(skipAngleStepCheck)
     mask.endFill();
     
     return;
+};
+
+var PixiNeedleGauge = function()
+{
+    'use strict';
+    PixiCustom1DGauge.call(this);
+    var self = this;
+
+    /**
+     * @private
+     */
+    this._sprite = new PIXI.Sprite();
+    this._container.addChild(this._sprite);
+    
+    /**
+     * @private
+     */
+    this._offsetAngle = 0;
+    /**
+     * @private
+     */
+    this._fullAngle = 360;
+    /**
+     * @private
+     */
+    this._angleStep = 0.1;
+    /**
+     * @private
+     */
+    this._antiClockwise = false;
+    /**
+     * @private
+     */
+    this._currAngle;
+    
+    this.OffsetAngle;
+    Object.defineProperty(this, "OffsetAngle",
+    {
+        get : function(){ return self._offsetAngle; },
+        set : function(val){ self._offsetAngle = val;}
+    });
+    this.FullAngle;
+    Object.defineProperty(this, "FullAngle",
+    {
+        get : function(){ return self._fullAngle; },
+        set : function(val){ self._fullAngle = val;}
+    });
+    this.AngleStep;
+    Object.defineProperty(this, "AngleStep",
+    {
+        get : function() { return self.angleStep; },
+        set : function(val) { self._angleStep = val; }
+    });
+    this.AntiClockwise;
+    Object.defineProperty(this, "AntiClockwise",
+    {
+        get : function(){ return self._antiClockwise; },
+        set : function(flag){ self._antiClockwise = flag;}
+    });
+    this.Pivot;
+    Object.defineProperty(this, "Pivot",
+    {
+        get : function(){return self._sprite.pivot;},
+        set : function(val){ self._sprite.pivot = val;}
+    });    
+    this.Texture;
+    Object.defineProperty(this, "Texture",
+    {
+        get : function(){ return self._sprite.texture; },
+        set : function(texture){self._sprite.texture = texture;}
+    });  
+};
+Object.setPrototypeOf(PixiNeedleGauge.prototype, PixiCustom1DGauge.prototype);
+
+PixiNeedleGauge.prototype._update = function(skipAngleStepCheck)
+{
+    'use strict';
+    var anticlockwise = this._antiClockwise;
+    var offsetAngle = this._offsetAngle;
+    var fullAngle = this._fullAngle;
+    var angleStep = this._angleStep;
+    
+    var valueMax = this._max;
+    var valueMin = this._min;
+    var value = this._value;
+    
+    var sprite = this._sprite;
+    
+    var currentAngle = this._currAngle;
+    var angle;
+    if(!anticlockwise)
+        angle = (value - valueMin)/(valueMax - valueMin) * fullAngle + offsetAngle;
+    else
+        angle = -(value - valueMin)/(valueMax - valueMin) * fullAngle + offsetAngle;
+    
+    //Check angle displacement over the angleStep or not 
+    if(!skipAngleStepCheck && Math.abs(angle - currentAngle) < angleStep)
+        return;
+    else
+    {
+        //Round into angle_resolution
+        angle = Math.floor(angle/angleStep) * angleStep;
+        //Update currentAngle
+        this._currAngle = angle;
+    }
+    
+    var angleRad = Math.PI/180*angle;
+    
+    //Set sprite angle
+    sprite.rotation = angleRad;
+    
+    return;
+    
 };
