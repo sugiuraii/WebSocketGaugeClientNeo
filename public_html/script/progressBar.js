@@ -127,8 +127,6 @@ var PixiCustomProgressBar = function()
 };
 Object.setPrototypeOf(PixiCustomProgressBar.prototype, PixiCustom1DGauge.prototype);
 
-
-
 var PixiCircularCustomProgressBar = function()
 {
     'use strict';
@@ -246,7 +244,8 @@ PixiCircularCustomProgressBar.prototype._update = function(skipAngleStepCheck)
         endAngle = -(value - valueMin)/(valueMax - valueMin) * fullAngle + offsetAngle;
     
     //Check angle displacement over the angleStep or not 
-    if(!skipAngleStepCheck && Math.abs(endAngle - currentAngle) < angleStep)
+    var deltaAngle = Math.abs(endAngle - currentAngle);
+    if(!skipAngleStepCheck && deltaAngle < angleStep)
         return;
     else
     {
@@ -263,6 +262,139 @@ PixiCircularCustomProgressBar.prototype._update = function(skipAngleStepCheck)
     mask.beginFill();
     mask.arc(centerPos.x, centerPos.y, radius ,startAngleRad, endAngleRad, anticlockwise);
     mask.arc(centerPos.x, centerPos.y, innerRadius , endAngleRad, startAngleRad, !anticlockwise);    
+    mask.endFill();
+    
+    return;
+};
+
+var PixiRectangularCustomProgressBar = function()
+{
+    'use strict';
+    var self = this;
+    PixiCustomProgressBar.call(this);
+    
+    /**
+     * @private
+     */
+    this._currBarPixel;
+    
+    /**
+     * @private
+     */
+    this._vertical = false;
+    this.Vertical;
+    Object.defineProperty(this, "Vertical",
+    {
+        get : function(){ return self._vertical; },
+        set : function(val){ self._vertical = val; }                
+    });
+    /**
+     * @private
+     */
+    this._invertDirection = false;
+    this.InvertDirection;
+    Object.defineProperty(this, "InvertDirection",
+    {
+        get : function(){ return self._invertDirection; },
+        set : function(val){ self._invertDirection = val; }                        
+    });
+    /**
+     * @private
+     */
+    this._width;
+    this.Width;
+    Object.defineProperty(this, "Width",
+    {
+        get : function(){ return self._width; },
+        set : function(val){ self._width = val; }        
+    });
+    /**
+     * @private
+     */
+    this._height;
+    this.Height;
+    Object.defineProperty(this, "Height",
+    {
+        get : function(){ return self._height;},
+        set : function(val){ self._height = val; }
+    });
+    /**
+     * @private
+     */
+    this._pixelStep = 1;
+    this.PixelStep;
+    Object.defineProperty(this, "PixelStep",
+    {
+       get : function(){ return self._pixelStep;},
+       set : function(val){ self._pixelStep = val; }
+    });
+};
+Object.setPrototypeOf(PixiRectangularCustomProgressBar.prototype, PixiCustomProgressBar.prototype);
+
+PixiRectangularCustomProgressBar.prototype._update = function(skipBarPixelCheck)
+{
+    'use strict';
+    var height = this._height;
+    var width = this._width;
+    var currBarPixel = this._currBarPixel;
+    var pixelStep = this._pixelStep;
+    
+    var valueMax = this._max;
+    var valueMin = this._min;
+    var value = this._value;
+    
+    var mask = this._mask;
+    
+    var vertical = this._vertical;
+    var invertDirection = this._invertDirection;
+    
+    var pixelRange;
+    if(vertical)
+        pixelRange = height;
+    else
+        pixelRange = width;
+    
+    var barPixel = (value - valueMin)/(valueMax - valueMin)*pixelRange;
+    
+    // Check deltaPixel over the pixelStep
+    var deltaPixel = Math.abs(barPixel - currBarPixel);
+    if(!skipBarPixelCheck && deltaPixel < pixelStep )
+        return;
+    else
+    {
+        //Round into pixelStep
+        barPixel = Math.floor(barPixel/pixelStep) * pixelStep;
+        this._currBarPixel = barPixel;
+    }
+    
+    //Define mask rectangle parameters
+    var maskX, maskY;
+    var maskHeight, maskWidth;
+    if(vertical)
+    {
+        maskX = 0;
+        maskWidth = width;
+        maskHeight = barPixel;
+        if(invertDirection) //Up to down
+            maskY = 0;
+        else //Down to Up
+            maskY = height - barPixel;
+    }
+    else
+    {
+        maskY = 0;
+        maskHeight = height;
+        maskWidth = barPixel;
+        if(invertDirection) //Right to left
+            maskX = width - barPixel;
+        else //Left to right
+            maskX = 0;
+    }
+    
+    //Define mask
+    mask.clear();
+    mask.beginFill();
+    mask.drawRect(maskX, maskY, maskWidth, maskHeight);
     mask.endFill();
     
     return;
@@ -361,8 +493,9 @@ PixiNeedleGauge.prototype._update = function(skipAngleStepCheck)
     else
         angle = -(value - valueMin)/(valueMax - valueMin) * fullAngle + offsetAngle;
     
-    //Check angle displacement over the angleStep or not 
-    if(!skipAngleStepCheck && Math.abs(angle - currentAngle) < angleStep)
+    //Check angle displacement over the angleStep or not
+    var deltaAngle = Math.abs(angle - currentAngle);
+    if(!skipAngleStepCheck && deltaAngle < angleStep)
         return;
     else
     {
