@@ -248,9 +248,14 @@ PixiCircularCustomProgressBar.prototype._update = function(skipAngleStepCheck)
     
     var mask = this._mask;
     
-    var startAngleRad = Math.PI/180*offsetAngle;
-    var endAngle = (value - valueMin)/(valueMax - valueMin) * fullAngle + offsetAngle;
     var currentAngle = this._currAngle;
+    var startAngleRad = Math.PI/180*offsetAngle;
+    var endAngle;
+    
+    if(!anticlockwise)
+        endAngle = (value - valueMin)/(valueMax - valueMin) * fullAngle + offsetAngle;
+    else
+        endAngle = -(value - valueMin)/(valueMax - valueMin) * fullAngle + offsetAngle;
     
     //Check angle displacement over the angleStep or not 
     if(!skipAngleStepCheck && Math.abs(endAngle - currentAngle) < angleStep)
