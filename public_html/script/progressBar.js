@@ -86,7 +86,8 @@ var PixiCustom1DGauge = function()
 PixiCustom1DGauge.prototype.createStage = function()
 {
     'use strict';
-    var stage = new PIXI.Stage(0x66FF99);
+    //var stage = new PIXI.Stage(0x66FF99);
+    var stage = new PIXI.Container();
     stage.addChild(this._container);
     
     return stage;

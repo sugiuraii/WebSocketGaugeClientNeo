@@ -54,18 +54,21 @@ POSSIBILITY OF SUCH DAMAGE.
 
             var progressBarObj = this.progressBarObj;
             progressBarObj.Width = 200;
-            progressBarObj.Height = 600;
+            progressBarObj.Height = 400;
             progressBarObj.Max = 100;
             progressBarObj.Min = 0;
             progressBarObj.Vertical = true;
-            progressBarObj.InvertDirection = false;
+            progressBarObj.InvertDirection = true;
             
             var texture = PIXI.Texture.fromImage("./img/back1.jpg");
             progressBarObj.Texture = texture;
             
-            this.stage = progressBarObj.createStage();
-            this.stage.x = 0;
-            this.stage.y = 0;
+            this.container = progressBarObj.getContainer();
+            this.container.x = 200;
+            this.container.y = 100;
+            
+            this.stage = new PIXI.Stage(0x66FF99);
+            this.stage.addChild(this.container);
             var self = this;
             function frame()
             {
