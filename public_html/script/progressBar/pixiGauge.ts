@@ -153,6 +153,7 @@ namespace webSocketGauge.lib.graphics
         
         protected _update(skipStepCheck : boolean): void
         {
+            'use strict';
             let centerPos: PIXI.Point = this.center;
             let radius : number = this.radius;
             let innerRadius : number = this.innerRadius;
@@ -177,7 +178,7 @@ namespace webSocketGauge.lib.graphics
                 endAngle = -(value - valueMin)/(valueMax - valueMin) * fullAngle + offsetAngle;
 
             //Check angle displacement over the angleStep or not 
-            let deltaAngle = Math.abs(endAngle - currentAngle);
+            let deltaAngle: number = Math.abs(endAngle - currentAngle);
             if(!skipStepCheck && deltaAngle < angleStep)
                 return;
             else
@@ -188,7 +189,7 @@ namespace webSocketGauge.lib.graphics
                 this.currAngle = endAngle;
             }
 
-            let endAngleRad = Math.PI/180*endAngle;
+            let endAngleRad: number = Math.PI/180*endAngle;
 
             // Draw pie-shaped mask
             mask.clear();
@@ -198,6 +199,275 @@ namespace webSocketGauge.lib.graphics
             mask.endFill();
 
             return;
+        }
+    }
+    
+    export class RectangularProgressBar extends ProgressBar
+    {
+        private currBarPixel : number;
+        
+        private vertical : boolean;
+        private invertDirection : boolean;
+        private width : number;
+        private height : number;
+        private pixelStep : number;
+        
+        constructor()
+        {
+            super();
+            this.vertical = false;
+            this.invertDirection = false;
+            this.width = 100;
+            this.height = 100;
+            this.pixelStep = 1;
+        }
+        
+        get Vertical() : boolean { return this.vertical; }
+        set Vertical(val : boolean) { this.vertical = val; }
+        get InvertDirection(): boolean {return this.invertDirection; }
+        set InvertDirection(val : boolean) { this.invertDirection = val; }
+        get Width(): number {return this.width; }
+        set Width(val: number) {this.width = val; }
+        get Height(): number {return this.height; }
+        set Height(val: number) {this.height = val; }
+        get PixelStep(): number {return this.pixelStep; }
+        set PixelStep(val: number) {this.pixelStep = val; }
+        
+        protected _update(skipStepCheck : boolean) : void
+        {
+            'use strict';
+            let height: number = this.height;
+            let width: number = this.width;
+            let currBarPixel: number = this.currBarPixel;
+            let pixelStep: number = this.pixelStep;
+
+            let valueMax: number = this.Max;
+            let valueMin: number = this.Min;
+            let value: number = this.Value;
+
+            let mask: PIXI.Graphics = this.Mask;
+
+            let vertical: boolean = this.vertical;
+            let invertDirection: boolean = this.invertDirection;
+
+            let pixelRange: number;
+            if(vertical)
+                pixelRange = height;
+            else
+                pixelRange = width;
+
+            let barPixel = (value - valueMin)/(valueMax - valueMin)*pixelRange;
+
+            // Check deltaPixel over the pixelStep
+            let deltaPixel: number = Math.abs(barPixel - currBarPixel);
+            if(!skipStepCheck && deltaPixel < pixelStep )
+                return;
+            else
+            {
+                //Round into pixelStep
+                barPixel = Math.floor(barPixel/pixelStep) * pixelStep;
+                this.currBarPixel = barPixel;
+            }
+
+            //Define mask rectangle parameters
+            let maskX: number, maskY: number;
+            let maskHeight: number, maskWidth: number;
+            if(vertical)
+            {
+                maskX = 0;
+                maskWidth = width;
+                maskHeight = barPixel;
+                if(invertDirection) //Up to down
+                    maskY = 0;
+                else //Down to Up
+                    maskY = height - barPixel;
+            }
+            else
+            {
+                maskY = 0;
+                maskHeight = height;
+                maskWidth = barPixel;
+                if(invertDirection) //Right to left
+                    maskX = width - barPixel;
+                else //Left to right
+                    maskX = 0;
+            }
+
+            //Define mask
+            mask.clear();
+            mask.beginFill(0x000000, 1);
+            mask.drawRect(maskX, maskY, maskWidth, maskHeight);
+            mask.endFill();
+
+            return;
+        }
+    }
+    
+    export abstract class NeedleGauge extends Gauge1D
+    {
+        private sprite : PIXI.Sprite;
+        
+        constructor()
+        {
+            super();
+            this.sprite = new PIXI.Sprite();
+                        
+            //Assign spirite and mask to container
+            this.Container.addChild(this.sprite);
+        }
+        
+        get Texture(): PIXI.Texture {return this.sprite.texture; }
+        set Texture(val: PIXI.Texture) {this.sprite.texture = val;}
+        
+        get Sprite(): PIXI.Sprite { return this.sprite; }
+    }
+    
+    export class RotationNeedleGauge extends NeedleGauge
+    {
+        private offsetAngle : number;
+        private fullAngle : number;
+        private angleStep : number;
+        private antiClockwise : boolean;
+        
+        private currAngle : number;
+        
+        constructor()
+        {
+            super();
+            this.offsetAngle = 0;
+            this.fullAngle = 360;
+            this.angleStep = 0.1;
+            this.antiClockwise = false;
+        }
+        
+        get OffsetAngle() : number { return this.offsetAngle; }
+        set OffsetAngle(val: number) { this.offsetAngle = val; }
+        get FullAngle() : number { return this.fullAngle; }
+        set FullAngle(val: number) { this.fullAngle = val; }
+        get AngleStep(): number {return this.angleStep; }
+        set AngleStep(val: number) {this.angleStep = val; }
+        get AntiClockwise(): boolean {return this.antiClockwise; }
+        set AntiClockwise(val: boolean) {this.antiClockwise = val; }
+        get Pivot(): PIXI.Point {return this.Sprite.pivot; }
+        set Pivot(val: PIXI.Point) {this.Sprite.pivot = val; }
+        
+        protected _update(skipStepCheck: boolean): void
+        {
+            'use strict';
+            let anticlockwise : boolean = this.antiClockwise;
+            let offsetAngle : number = this.offsetAngle;
+            let fullAngle : number = this.fullAngle;
+            let angleStep : number = this.angleStep;
+
+            let valueMax : number = this.Max;
+            let valueMin : number = this.Min;
+            let value : number = this.Value;
+
+            let sprite: PIXI.Sprite = this.Sprite;
+
+            let currentAngle: number= this.currAngle;
+            let angle: number;
+            if(!anticlockwise)
+                angle = (value - valueMin)/(valueMax - valueMin) * fullAngle + offsetAngle;
+            else
+                angle = -(value - valueMin)/(valueMax - valueMin) * fullAngle + offsetAngle;
+
+            //Check angle displacement over the angleStep or not
+            let deltaAngle: number = Math.abs(angle - currentAngle);
+            if(!skipStepCheck && deltaAngle < angleStep)
+                return;
+            else
+            {
+                //Round into angle_resolution
+                angle = Math.floor(angle/angleStep) * angleStep;
+                //Update currentAngle
+                this.currAngle = angle;
+            }
+
+            let angleRad: number = Math.PI/180*angle;
+
+            //Set sprite angle
+            sprite.rotation = angleRad;
+
+            return;
+        }
+    }
+    
+    export class SlideNeedleGauge extends NeedleGauge
+    {
+        private currentPos : PIXI.Point;
+        
+        private minPoint : PIXI.Point;
+        private maxPoint : PIXI.Point;
+        private positionStep : number;
+        private invertDirection : boolean;
+        
+        constructor()
+        {
+            super();
+            this.minPoint = new PIXI.Point(0,0);
+            this.maxPoint = new PIXI.Point(100,100);
+            this.currentPos = new PIXI.Point(this.minPoint.x, this.minPoint.y);
+            this.positionStep = 1;
+            this.invertDirection = false;
+
+            //Set the sprite anchor to midpoint of the sprite.
+            this.Sprite.anchor.x = 0.5;
+            this.Sprite.anchor.y = 0.5;
+        }
+        
+        get MinPoint() : PIXI.Point { return this.minPoint; }
+        set MinPoint(val: PIXI.Point) { this.minPoint = val; }
+        get MaxPoint() : PIXI.Point { return this.maxPoint; }
+        set MaxPoint(val: PIXI.Point) { this.maxPoint = val; }
+        get PositionStep(): number { return this.positionStep; }
+        set PositionStep(val: number) { this.positionStep = val; }
+        get InvertDirection(): boolean { return this.invertDirection; }
+        set InvertDirection(val: boolean) { this.invertDirection = val; }
+        
+        get Anchor(): PIXI.ObservablePoint {return this.Sprite.anchor; }
+        set Anchor(val: PIXI.ObservablePoint) {this.Sprite.anchor = val; }
+        
+        protected _update(skipStepCheck: boolean): void
+        {
+            'use strict';
+            let valueMax: number = this.Max;
+            let valueMin: number = this.Min;
+            let value: number = this.Value;
+            
+            let sprite: PIXI.Sprite = this.Sprite;
+            
+            let minPoint: PIXI.Point = this.minPoint;
+            let maxPoint: PIXI.Point = this.maxPoint;
+            let positionStep: number = this.positionStep;
+            let invertDirection: boolean = this.invertDirection;
+            
+            let currentPos: PIXI.Point = this.currentPos;
+            
+            // Calculate moveRatio
+            let moveRatio : number = value/(valueMax - valueMin);
+            
+            let minToMaxVector: PIXI.Point = new PIXI.Point(maxPoint.x - minPoint.x, maxPoint.y - minPoint.y);
+            //Calculate final position
+            let finalPos: PIXI.Point;
+            if (!invertDirection)
+            {
+                finalPos = new PIXI.Point(minPoint.x + minToMaxVector.x * moveRatio, minPoint.y + minToMaxVector.y * moveRatio);
+            }
+            else
+            {   
+                finalPos = new PIXI.Point(maxPoint.x - minToMaxVector.x * moveRatio, maxPoint.y - minToMaxVector.y * moveRatio);
+            }
+                
+            // Check moveDist is larger than positionStep
+            let moveDist = Math.sqrt((finalPos.x - currentPos.x) ^ 2 + (finalPos.y - currentPos.y)^2);
+            if (!skipStepCheck && moveDist < positionStep)
+                return;
+            else
+            {
+                
+            }
+
         }
     }
 }

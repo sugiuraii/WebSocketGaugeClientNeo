@@ -36,13 +36,13 @@ POSSIBILITY OF SUCH DAMAGE.
         }
     </style>
     <script type="text/javascript" src="script/lib/pixi.min.js"></script>
-    <script type="text/javascript" src="script/progressBar.js"></script>
+    <script type="text/javascript" src="script/progressBar/pixiGauge.js"></script>
     <script type="text/javascript">
         var MaskingClass = function()
         {
             'use strict';
             this.Value = 0;
-            this.progressBarObj = new PixiRectangularCustomProgressBar();
+            this.progressBarObj = new webSocketGauge.lib.graphics.RectangularProgressBar();
             this.renderer = PIXI.autoDetectRenderer(800, 600);
             document.body.appendChild(this.renderer.view);
             this.stage;
@@ -57,24 +57,23 @@ POSSIBILITY OF SUCH DAMAGE.
             progressBarObj.Height = 400;
             progressBarObj.Max = 100;
             progressBarObj.Min = 0;
-            progressBarObj.Vertical = true;
+            progressBarObj.Vertical = false;
             progressBarObj.InvertDirection = true;
             
             var texture = PIXI.Texture.fromImage("./img/back1.jpg");
             progressBarObj.Texture = texture;
             
-            this.container = progressBarObj.getContainer();
-            this.container.x = 200;
-            this.container.y = 100;
-            
-            this.stage = new PIXI.Stage(0x66FF99);
-            this.stage.addChild(this.container);
+            this.stage = progressBarObj.getContainer();
+            this.stage.x = 100;
+            this.stage.y = 100;
+
+            progressBarObj.updateForce();
             var self = this;
             function frame()
             {
                 'use strict';
                 self.progressBarObj.Value = self.Value;
-                self.progressBarObj.draw();
+                self.progressBarObj.update();
 
                 self.renderer.render(self.stage);
 
