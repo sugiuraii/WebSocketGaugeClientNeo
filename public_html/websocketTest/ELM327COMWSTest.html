@@ -26,44 +26,51 @@ POSSIBILITY OF SUCH DAMAGE.
 -->
 <html>
     <head>
-        <title>ArduinoCOM WebSocket Test</title>
+        <title>ELM327COM WebSocket Test</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <script src="../script/lib/jquery-3.1.1.min.js"></script>
         <script src="../script/websocket/websocketClient.js"></script>
-        <script src="ArduinoCOMWSTest.js"></script>
+        <script src="ELM327COMWSTest.js"></script>
     </head>
     <body>
-        <div><h2>ArduinoCOM WebSocket Test</h2></div>
+        <div><h2>ELM327COM WebSocket Test</h2></div>
         <hr>
         Server URL : <input type="text" required="required" id="serverURL_box" /> 
-         <input type="button" id="connectButton" value="Connect" onclick="ArduinoCOMWSTest.connectWebSocket()"/>
-         <input type="button" id="disconnectButton" value="Disconnect" onclick="ArduinoCOMWSTest.disconnectWebSocket()"/><br>
+         <input type="button" id="connectButton" value="Connect" onclick="ELM327COMWSTest.connectWebSocket()"/>
+         <input type="button" id="disconnectButton" value="Disconnect" onclick="ELM327COMWSTest.disconnectWebSocket()"/><br>
          <hr>
         
-         <h4>ARDUINO_WS_SEND</h4>
+         <h4>ELM327_COM_READ</h4>
          <ul>
-             <li>ArduinoCode<br>
-                <select id="deficode_select"></select>
+             <li>OBDIICode<br>
+                <select id="ssmcomcode_select">
+                </select>
+             </li>
+             <li>Read_mode<br>
+                <select id="ssmcode_readmode">
+                    <option value="FAST">FAST</option>
+                    <option value="SLOW">SLOW</option>
+                </select>
              </li>
              <li>Flag<br>
-                <select id="deficode_flag">
+                <select id="ssmcode_flag">
                     <option value="true">true</option>
                     <option value="false">false</option>
                 </select>
              </li>
              <li>
-                 <input type="button" id="button_DEFI_WS_SEND" value="input ARDUINO_WS_SEND" onclick="ArduinoCOMWSTest.input_ARDUINO_WS_SEND()"/>
+                 <input type="button" id="button_SSM_COM_READ" value="input ELM327_COM_READ" onclick="ELM327COMWSTest.input_SSM_COM_READ()"/>
              </li>
          </ul>
          
-         <h4>ARDUINO_WS_INTERVAL</h4>
+        <h4>ELM327COM_SLOWREAD_INTERVAL</h4>
          <ul>
              <li>
-                <input type="number"  id="interval_DEFI_WS_INTERVAL">
+                <input type="number"  id="interval_SSMCOM_SLOWREAD_INTERVAL">
              </li>
             <li>
-                <input type="button" id="button_DEFI_WS_INTERVAL" value="input ARDUINO_WS_INTERVAL" onclick="ArduinoCOMWSTest.input_ARDUINO_WS_INTERVAL()"/>
+                 <input type="button" id="button_SSMCOM_SLOWREAD_INTERVAL" value="input ELM327COM_SLOWREAD_INTERVAL" onclick="ELM327COMWSTest.input_SSMCOM_SLOWREAD_INTERVAL()"/>
              </li>
          </ul>
                   

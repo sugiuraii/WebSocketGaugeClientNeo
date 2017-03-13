@@ -25,26 +25,26 @@
  */
 /// <reference path="../script/websocket/websocketClient.ts" />
 /// <reference path="../node_modules/@types/jquery/index.d.ts" />
-var SSMWebsocket = webSocketGauge.lib.communication.SSMWebsocket;
-var SSMParameterCode = webSocketGauge.lib.communication.SSMParameterCode;
+var ELM327COMWebsocket = webSocketGauge.lib.communication.ELM327COMWebsocket;
+var OBDIIParameterCode = webSocketGauge.lib.communication.OBDIIParameterCode;
 window.onload = function () {
-    SSMCOMWSTest.main();
+    ELM327COMWSTest.main();
 };
-var SSMCOMWSTest = (function () {
-    function SSMCOMWSTest() {
+var ELM327COMWSTest = (function () {
+    function ELM327COMWSTest() {
     }
-    SSMCOMWSTest.main = function () {
-        this.ssmWS = new ELM327COMWebsocket();
+    ELM327COMWSTest.main = function () {
+        this.elm327WS = new ELM327COMWebsocket();
         $('#serverURL_box').val("ws://localhost:2013/");
         this.setParameterCodeSelectBox();
         this.registerWSEvents();
     };
-    SSMCOMWSTest.setParameterCodeSelectBox = function () {
+    ELM327COMWSTest.setParameterCodeSelectBox = function () {
         for (var code in OBDIIParameterCode)
             $('#ssmcomcode_select').append($('<option>').html(code).val(code));
     };
-    SSMCOMWSTest.registerWSEvents = function () {
-        this.ssmWS.OnVALPacketReceived = function (intervalTime, val) {
+    ELM327COMWSTest.registerWSEvents = function () {
+        this.elm327WS.OnVALPacketReceived = function (intervalTime, val) {
             $('#interval').text(intervalTime.toFixed(2));
             //clear
             $('#div_val_data').html("");
@@ -52,23 +52,23 @@ var SSMCOMWSTest = (function () {
                 $('#div_val_data').append(key + " : " + val[key] + "<br>");
             }
         };
-        this.ssmWS.OnERRPacketReceived = function (msg) {
+        this.elm327WS.OnERRPacketReceived = function (msg) {
             $('#div_err_data').append(msg + "<br>");
         };
-        this.ssmWS.OnRESPacketReceived = function (msg) {
+        this.elm327WS.OnRESPacketReceived = function (msg) {
             $('#div_res_data').append(msg + "<br>");
         };
-        this.ssmWS.OnWebsocketError = function (msg) {
+        this.elm327WS.OnWebsocketError = function (msg) {
             $('#div_ws_message').append(msg + "<br>");
         };
-        this.ssmWS.OnWebsocketOpen = function () {
+        this.elm327WS.OnWebsocketOpen = function () {
             $('#div_ws_message').append('* Connection open<br/>');
             $('#sendmessagecontent_box').removeAttr("disabled");
             $('#sendButton').removeAttr("disabled");
             $('#connectButton').attr("disabled", "disabled");
             $('#disconnectButton').removeAttr("disabled");
         };
-        this.ssmWS.OnWebsocketClose = function () {
+        this.elm327WS.OnWebsocketClose = function () {
             $('#div_ws_message').append('* Connection closed<br/>');
             $('#sendmessagecontent_box').attr("disabled", "disabled");
             $('#sendButton').attr("disabled", "disabled");
@@ -76,23 +76,23 @@ var SSMCOMWSTest = (function () {
             $('#disconnectButton').attr("disabled", "disabled");
         };
     };
-    SSMCOMWSTest.connectWebSocket = function () {
-        this.ssmWS.URL = $("#serverURL_box").val();
-        this.ssmWS.Connect();
+    ELM327COMWSTest.connectWebSocket = function () {
+        this.elm327WS.URL = $("#serverURL_box").val();
+        this.elm327WS.Connect();
     };
     ;
-    SSMCOMWSTest.disconnectWebSocket = function () {
-        this.ssmWS.Close();
+    ELM327COMWSTest.disconnectWebSocket = function () {
+        this.elm327WS.Close();
     };
     ;
-    SSMCOMWSTest.input_SSM_COM_READ = function () {
-        this.ssmWS.SendCOMRead($('#ssmcomcode_select').val(), $('#ssmcode_readmode').val(), $('#ssmcode_flag').val());
+    ELM327COMWSTest.input_SSM_COM_READ = function () {
+        this.elm327WS.SendCOMRead($('#ssmcomcode_select').val(), $('#ssmcode_readmode').val(), $('#ssmcode_flag').val());
     };
     ;
-    SSMCOMWSTest.input_SSMCOM_SLOWREAD_INTERVAL = function () {
-        this.ssmWS.SendSlowreadInterval(($('#interval_SSMCOM_SLOWREAD_INTERVAL').val()));
+    ELM327COMWSTest.input_SSMCOM_SLOWREAD_INTERVAL = function () {
+        this.elm327WS.SendSlowreadInterval(($('#interval_SSMCOM_SLOWREAD_INTERVAL').val()));
     };
     ;
-    return SSMCOMWSTest;
+    return ELM327COMWSTest;
 }());
-//# sourceMappingURL=SSMCOMWSTest.js.map
+//# sourceMappingURL=ELM327COMWSTest.js.map
