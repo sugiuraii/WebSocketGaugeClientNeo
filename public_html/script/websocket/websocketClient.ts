@@ -26,7 +26,7 @@
 
 module webSocketGauge.lib.communication
 {
-    namespace JSONFormat
+    namespace JSONFormats
     {
         export interface IJSONMessage
         {
@@ -86,15 +86,31 @@ module webSocketGauge.lib.communication
             public storemax : number;
         }
     }
+    
+    export namespace EventListeners
+    {
+        type NoArgumentDelegate = () =>void;
+        type StringArgumentDelegate = (message : string) => void;
+        export type WebsocketOpenEvent = NoArgumentDelegate;
+        export type WebsocketCloseEvent = NoArgumentDelegate;
+        export type WebsocketErrorEvent = StringArgumentDelegate;
+        export type RESPacketEvent = StringArgumentDelegate;
+        export type ERRPacketEvent = StringArgumentDelegate;
+        
+        export type VALPacketEvent =  {[code : string] : (val : number)=>void};
+        export type MomentFUELTRIPPacketEvent = (momentGasMilage : number, totalGas : number, totalTrip : number, totalGasMilage : number)=>void;
+        export type SectFUELTRIPPacketEvent = (sectSpan : number, sectTrip : number[], sectGas : number[], sectGasMilage: number[])=>void;
+    }
+    
     abstract class WebsocketCommon
     {
         private websocket: WebSocket;
         private url : string;
-        private onRESPacketReceived : (msg:string)=>void;
-        private onERRPacketReceived : (msg:string)=>void;
-        private onWebsocketOpen : ()=>void;
-        private onWebsocketClose : ()=>void;
-        private onWebsocketError : (msg:string)=>void;
+        private onRESPacketReceived: EventListeners.RESPacketEvent;
+        private onERRPacketReceived: EventListeners.ERRPacketEvent;
+        private onWebsocketOpen: EventListeners.WebsocketOpenEvent;
+        private onWebsocketClose: EventListeners.WebsocketCloseEvent
+        private onWebsocketError: EventListeners.WebsocketErrorEvent;
         
         constructor()
         {
@@ -109,7 +125,8 @@ module webSocketGauge.lib.communication
         {
             this.websocket = new WebSocket(this.url); 
             if (this.websocket === null) {
-               this.onWebsocketError("Websocket is not supported.");
+                if (typeof (this.onWebsocketError) !== "undefined")
+                    this.onWebsocketError("Websocket is not supported.");
                 return;
             };
 
@@ -121,10 +138,12 @@ module webSocketGauge.lib.communication
             };
             // when the connection is established, this method is called
             this.websocket.onopen = function () {
-                self.onWebsocketOpen();
+                if (typeof (self.onWebsocketOpen) !== "undefined")
+                    self.onWebsocketOpen();
             };
             // when the connection is closed, this method is called
             this.websocket.onclose = function () {
+                if (typeof (self.onWebsocketClose) !== "undefined")
                 self.onWebsocketClose();
             };
         }
@@ -134,7 +153,7 @@ module webSocketGauge.lib.communication
         */
         public SendReset(): void
         {
-            let jsonstr: string = JSON.stringify(new JSONFormat.ResetJSONMessage());
+            let jsonstr: string = JSON.stringify(new JSONFormats.ResetJSONMessage());
             this.websocket.send(jsonstr);
         }
         
@@ -164,16 +183,16 @@ module webSocketGauge.lib.communication
         protected get WebSocket() : WebSocket { return this.websocket; }
         public get URL(): string { return this.url; }
         public set URL(val : string) { this.url = val; }
-        public get OnRESPacketReceived() : (msg: string) => void { return this.onRESPacketReceived; };
-        public set OnRESPacketReceived(func : (msg: string) => void) { this.onRESPacketReceived = func; };
-        public get OnERRPacketReceived() : (msg: string) => void { return this.onERRPacketReceived; };
-        public set OnERRPacketReceived(func : (msg: string) => void) { this.onERRPacketReceived = func; };
-        public get OnWebsocketOpen(): () => void {return this.onWebsocketOpen; };
-        public set OnWebsocketOpen(func: () => void) {this.onWebsocketOpen = func; };
-        public get OnWebsocketClose(): () => void {return this.onWebsocketClose; };
-        public set OnWebsocketClose(func: () => void) {this.onWebsocketClose = func; };
-        public get OnWebsocketError(): (msg:string)=>void {return this.onWebsocketError; };
-        public set OnWebsocketError(func: (msg:string)=>void) {this.onWebsocketError = func; };
+        public get OnRESPacketReceived(): EventListeners.RESPacketEvent { return this.onRESPacketReceived; };
+        public set OnRESPacketReceived(func : EventListeners.RESPacketEvent) { this.onRESPacketReceived = func; };
+        public get OnERRPacketReceived(): EventListeners.ERRPacketEvent { return this.onERRPacketReceived; };
+        public set OnERRPacketReceived(func : EventListeners.ERRPacketEvent ) { this.onERRPacketReceived = func; };
+        public get OnWebsocketOpen(): EventListeners.WebsocketOpenEvent {return this.onWebsocketOpen; };
+        public set OnWebsocketOpen(func: EventListeners.WebsocketOpenEvent) {this.onWebsocketOpen = func; };
+        public get OnWebsocketClose(): EventListeners.WebsocketCloseEvent {return this.onWebsocketClose; };
+        public set OnWebsocketClose(func: EventListeners.WebsocketCloseEvent) {this.onWebsocketClose = func; };
+        public get OnWebsocketError(): EventListeners.WebsocketErrorEvent {return this.onWebsocketError; };
+        public set OnWebsocketError(func: EventListeners.WebsocketErrorEvent) {this.onWebsocketError = func; };
     }
     
     /**
@@ -184,7 +203,8 @@ module webSocketGauge.lib.communication
         protected ModePrefix: string;
         private recordIntervalTimeEnabled : boolean;
         
-        private onVALPacketReceived : {[code : string] : (val : number)=>void};
+        private onVALPacketReceivedByCode : {[code : string] : (val : number)=>void};
+        private onVALPacketReceived : (intervalTime : number, val:{[code : string] : number}) => void;
         
         //Internal state
         private valPacketPreviousTimeStamp : number;
@@ -201,7 +221,7 @@ module webSocketGauge.lib.communication
         protected parseIncomingMessage(msg : string) : void
         {
             let receivedJson : any = JSON.parse(msg);    
-            let receivedJSONIface: JSONFormat.IJSONMessage = receivedJson;
+            let receivedJSONIface: JSONFormats.IJSONMessage = receivedJson;
             switch (receivedJSONIface.mode)
             {
                 case ("VAL") :
@@ -213,20 +233,26 @@ module webSocketGauge.lib.communication
                         this.valPacketPreviousTimeStamp = nowTime;
                     };
                     
-                    let receivedVALJSON: JSONFormat.VALJSONMessage = receivedJson;
-                    for (let key in receivedVALJSON.val)
+                    let receivedVALJSON: JSONFormats.VALJSONMessage = receivedJson;
+                    if ( typeof(this.onVALPacketReceived) !== "undefined" )
+                        this.OnVALPacketReceived(this.valPacketIntervalTime, receivedVALJSON.val);
+                    
+                    if (typeof (this.onVALPacketReceivedByCode) !== "undefined")
                     {
-                        if (key in this.onVALPacketReceived)
-                            this.OnVALPacketReceived[key](receivedVALJSON.val[key]);
+                        for (let key in receivedVALJSON.val)
+                            if (key in this.onVALPacketReceivedByCode)
+                                this.OnVALPacketReceivedByCode[key](receivedVALJSON.val[key]);
                     }
                     break;
                 case("ERR"):
-                    let receivedERRJSON: JSONFormat.ErrorJSONMessage = receivedJson;
-                    this.OnERRPacketReceived(receivedERRJSON.msg);
+                    let receivedERRJSON: JSONFormats.ErrorJSONMessage = receivedJson;
+                    if (typeof (this.OnERRPacketReceived) !== "undefined")
+                        this.OnERRPacketReceived(receivedERRJSON.msg);
                     break;
                 case("RES"):
-                    let receivedRESJSON: JSONFormat.ResponseJSONMessage = receivedJson;
-                    this.OnRESPacketReceived(receivedRESJSON.msg);
+                    let receivedRESJSON: JSONFormats.ResponseJSONMessage = receivedJson;
+                    if(typeof (this.OnRESPacketReceived) !== "undefined")
+                        this.OnRESPacketReceived(receivedRESJSON.msg);
                     break;
                 default:
                     this.OnWebsocketError("Unknown mode packet received. " + msg);
@@ -235,8 +261,10 @@ module webSocketGauge.lib.communication
         
         public get RecordIntervalTimeEnabled(): boolean { return this.recordIntervalTimeEnabled;}
         public set RecordIntervalTimeEnabled(val : boolean) { this.recordIntervalTimeEnabled = val;}
-        public get OnVALPacketReceived(): {[code : string] : (val : number)=>void} {return this.onVALPacketReceived;}
-        public set OnVALPacketReceived(funclist: {[code : string] : (val : number)=>void}) {this.onVALPacketReceived = funclist;}
+        public get OnVALPacketReceivedByCode(): EventListeners.VALPacketEvent {return this.onVALPacketReceivedByCode;}
+        public set OnVALPacketReceivedByCode(funclist: EventListeners.VALPacketEvent) {this.onVALPacketReceivedByCode = funclist;}
+        public get OnVALPacketReceived() {return this.onVALPacketReceived};
+        public set OnVALPacketReceived(func) {this.onVALPacketReceived = func };
         public get VALPacketIntervalTime(): number { return this.valPacketIntervalTime; }
     }
     
@@ -254,15 +282,19 @@ module webSocketGauge.lib.communication
         
         public SendWSSend(code : string, flag : boolean) : void
         {
-            let sendWSSendObj :
+            type sendWSSendObj = 
             {
                 mode : string,
                 code : string,
                 flag : boolean
-            };
-            sendWSSendObj.mode = this.ModePrefix + "_WS_SEND";
-            sendWSSendObj.code = code;
-            sendWSSendObj.flag = flag;
+            }
+            
+            let sendWSSendObj = 
+            {
+                mode : this.ModePrefix + "_WS_SEND",
+                code : code,
+                flag : flag
+            }
             let jsonstr: string = JSON.stringify(sendWSSendObj);
             this.WebSocket.send(jsonstr);
         }
@@ -344,8 +376,8 @@ module webSocketGauge.lib.communication
     export class FUELTRIPWebsocket extends WebsocketCommon
     {
         private ModePrefix = "FUELTRIP";
-        private onMomentFUELTRIPPacketReceived : (momentGasMilage : number, totalGas : number, totalTrip : number, totalGasMilage : number)=>void;
-        private onSectFUELTRIPPacketReceived : (sectSpan : number, sectTrip : number[], sectGas : number[], sectGasMilage: number[])=>void;
+        private onMomentFUELTRIPPacketReceived: EventListeners.MomentFUELTRIPPacketEvent;
+        private onSectFUELTRIPPacketReceived: EventListeners.SectFUELTRIPPacketEvent;
         
         get OnMomentFUELTRIPPacketReceived() { return this.onMomentFUELTRIPPacketReceived;}
         set OnMomentFUELTRIPPacketReceived(func) { this.onMomentFUELTRIPPacketReceived = func; }
@@ -354,14 +386,14 @@ module webSocketGauge.lib.communication
 
         public SendSectStoreMax(storeMax : number): void
         {
-            const obj = new JSONFormat.SectStoreMaxJSONMessage();
+            const obj = new JSONFormats.SectStoreMaxJSONMessage();
             obj.storemax = storeMax;
             const jsonstr:string = JSON.stringify(obj);
             this.WebSocket.send(jsonstr);    
         };
         public SendSectSpan(sectSpan : number): void
         {
-            const obj = new JSONFormat.SectSpanJSONMessage();
+            const obj = new JSONFormats.SectSpanJSONMessage();
             obj.sect_span = sectSpan;
             const jsonstr: string = JSON.stringify(obj);
             this.WebSocket.send(jsonstr);
@@ -369,42 +401,74 @@ module webSocketGauge.lib.communication
         
         protected parseIncomingMessage(msg : string) : void
         {
-            const recevedJSONIface: JSONFormat.IJSONMessage = JSON.parse(msg);
+            const recevedJSONIface: JSONFormats.IJSONMessage = JSON.parse(msg);
             switch(recevedJSONIface.mode)
             {
                 case ("MOMENT_FUELTRIP") :
                 {
-                    const jsonObj: JSONFormat.MomentFuelTripJSONMessage = JSON.parse(msg);
-                    this.onMomentFUELTRIPPacketReceived(jsonObj.moment_gasmilage,
-                    jsonObj.total_gas,
-                    jsonObj.total_trip,
-                    jsonObj.total_gasmilage);
+                    const jsonObj: JSONFormats.MomentFuelTripJSONMessage = JSON.parse(msg);
+                    if (typeof (this.onMomentFUELTRIPPacketReceived) !== "undefined")
+                    {
+                        this.onMomentFUELTRIPPacketReceived(jsonObj.moment_gasmilage,
+                        jsonObj.total_gas,
+                        jsonObj.total_trip,
+                        jsonObj.total_gasmilage);
+                    }
                     break;
                 }
                 case ("SECT_FUELTRIP") :
                 {
-                    const jsonObj: JSONFormat.SectFuelTripJSONMessage = JSON.parse(msg);
-                    this.onSectFUELTRIPPacketReceived(jsonObj.sect_span,
-                    jsonObj.sect_trip,
-                    jsonObj.sect_gas,
-                    jsonObj.sect_gasmilage);
+                    const jsonObj: JSONFormats.SectFuelTripJSONMessage = JSON.parse(msg);
+                    if (typeof (this.onSectFUELTRIPPacketReceived) !== "undefined")
+                    {
+                        this.onSectFUELTRIPPacketReceived(jsonObj.sect_span,
+                        jsonObj.sect_trip,
+                        jsonObj.sect_gas,
+                        jsonObj.sect_gasmilage);
+                    }
                     break;
                 }
                 case("ERR"):
                 {
-                    const jsonObj: JSONFormat.ErrorJSONMessage = JSON.parse(msg);
-                    this.OnERRPacketReceived(jsonObj.msg);
+                    const jsonObj: JSONFormats.ErrorJSONMessage = JSON.parse(msg);
+                    if (typeof (this.OnERRPacketReceived) !== "undefined")
+                        this.OnERRPacketReceived(jsonObj.msg);
                     break;
                 }
                 case("RES"):
                 {
-                    const jsonObj: JSONFormat.ResponseJSONMessage = JSON.parse(msg);
-                    this.OnRESPacketReceived(jsonObj.msg);
+                    const jsonObj: JSONFormats.ResponseJSONMessage = JSON.parse(msg);
+                    if(typeof (this.OnRESPacketReceived) !== "undefined")
+                        this.OnRESPacketReceived(jsonObj.msg);
                     break;
                 }
                 default:
                     this.OnWebsocketError("Unknown mode packet received. " + msg);
             }
         }
+    }
+    
+    //Define string based enum of ParameterCode
+    export namespace DefiParameterCode
+    {
+        export const Manifold_Absolute_Pressure = "Manifold_Absolute_Pressure";
+        export const Engine_Speed = "Engine_Speed";
+        export const Oil_Pressure = "Oil_Pressure";
+        export const Fuel_Rail_Pressure = "Fuel_Rail_Pressure";
+        export const Exhaust_Gas_Temperature = "Exhaust_Gas_Temperature";
+        export const Oil_Temperature = "Oil_Temperature";
+        export const Coolant_Temperature = "Coolant_Temperature";
+    }
+    
+    export namespace ArduinoParameterCode
+    {
+        export const Engine_Speed = "Engine_Speed";
+        export const Vehicle_Speed = "Vehicle_Speed";
+        export const Manifold_Absolute_Pressure = "Manifold_Absolute_Pressure";
+        export const Coolant_Temperature = "Coolant_Temperature";
+        export const Oil_Temperature = "Oil_Temperature";
+        export const Oil_Temperature2 = "Oil_Temperature2";
+        export const Oil_Pressure = "Oil_Pressure";
+        export const Fuel_Rail_Pressure = "Fuel_Rail_Pressure";
     }
 }

@@ -34,65 +34,65 @@ var webSocketGauge;
     (function (lib) {
         var communication;
         (function (communication) {
-            var JSONFormat;
-            (function (JSONFormat) {
+            var JSONFormats;
+            (function (JSONFormats) {
                 var ResetJSONMessage = (function () {
                     function ResetJSONMessage() {
                         this.mode = "RESET";
                     }
                     return ResetJSONMessage;
                 }());
-                JSONFormat.ResetJSONMessage = ResetJSONMessage;
+                JSONFormats.ResetJSONMessage = ResetJSONMessage;
                 var VALJSONMessage = (function () {
                     function VALJSONMessage() {
                         this.mode = "VAL";
                     }
                     return VALJSONMessage;
                 }());
-                JSONFormat.VALJSONMessage = VALJSONMessage;
+                JSONFormats.VALJSONMessage = VALJSONMessage;
                 var ErrorJSONMessage = (function () {
                     function ErrorJSONMessage() {
                         this.mode = "ERR";
                     }
                     return ErrorJSONMessage;
                 }());
-                JSONFormat.ErrorJSONMessage = ErrorJSONMessage;
+                JSONFormats.ErrorJSONMessage = ErrorJSONMessage;
                 var ResponseJSONMessage = (function () {
                     function ResponseJSONMessage() {
                         this.mode = "RES";
                     }
                     return ResponseJSONMessage;
                 }());
-                JSONFormat.ResponseJSONMessage = ResponseJSONMessage;
+                JSONFormats.ResponseJSONMessage = ResponseJSONMessage;
                 var MomentFuelTripJSONMessage = (function () {
                     function MomentFuelTripJSONMessage() {
                         this.mode = "MOMENT_FUELTRIP";
                     }
                     return MomentFuelTripJSONMessage;
                 }());
-                JSONFormat.MomentFuelTripJSONMessage = MomentFuelTripJSONMessage;
+                JSONFormats.MomentFuelTripJSONMessage = MomentFuelTripJSONMessage;
                 var SectFuelTripJSONMessage = (function () {
                     function SectFuelTripJSONMessage() {
                         this.mode = "SECT_FUELTRIP";
                     }
                     return SectFuelTripJSONMessage;
                 }());
-                JSONFormat.SectFuelTripJSONMessage = SectFuelTripJSONMessage;
+                JSONFormats.SectFuelTripJSONMessage = SectFuelTripJSONMessage;
                 var SectSpanJSONMessage = (function () {
                     function SectSpanJSONMessage() {
                         this.mode = "SECT_SPAN";
                     }
                     return SectSpanJSONMessage;
                 }());
-                JSONFormat.SectSpanJSONMessage = SectSpanJSONMessage;
+                JSONFormats.SectSpanJSONMessage = SectSpanJSONMessage;
                 var SectStoreMaxJSONMessage = (function () {
                     function SectStoreMaxJSONMessage() {
                         this.mode = "SECT_STOREMAX";
                     }
                     return SectStoreMaxJSONMessage;
                 }());
-                JSONFormat.SectStoreMaxJSONMessage = SectStoreMaxJSONMessage;
-            })(JSONFormat || (JSONFormat = {}));
+                JSONFormats.SectStoreMaxJSONMessage = SectStoreMaxJSONMessage;
+            })(JSONFormats || (JSONFormats = {}));
             var WebsocketCommon = (function () {
                 function WebsocketCommon() {
                     this.onWebsocketError = function (msg) { return alert(msg); };
@@ -103,7 +103,8 @@ var webSocketGauge;
                 WebsocketCommon.prototype.Connect = function () {
                     this.websocket = new WebSocket(this.url);
                     if (this.websocket === null) {
-                        this.onWebsocketError("Websocket is not supported.");
+                        if (typeof (this.onWebsocketError) !== "undefined")
+                            this.onWebsocketError("Websocket is not supported.");
                         return;
                     }
                     ;
@@ -115,18 +116,20 @@ var webSocketGauge;
                     };
                     // when the connection is established, this method is called
                     this.websocket.onopen = function () {
-                        self.onWebsocketOpen();
+                        if (typeof (self.onWebsocketOpen) !== "undefined")
+                            self.onWebsocketOpen();
                     };
                     // when the connection is closed, this method is called
                     this.websocket.onclose = function () {
-                        self.onWebsocketClose();
+                        if (typeof (self.onWebsocketClose) !== "undefined")
+                            self.onWebsocketClose();
                     };
                 };
                 /**
                 * Send reset packet.
                 */
                 WebsocketCommon.prototype.SendReset = function () {
-                    var jsonstr = JSON.stringify(new JSONFormat.ResetJSONMessage());
+                    var jsonstr = JSON.stringify(new JSONFormats.ResetJSONMessage());
                     this.websocket.send(jsonstr);
                 };
                 /**
@@ -225,18 +228,23 @@ var webSocketGauge;
                             }
                             ;
                             var receivedVALJSON = receivedJson;
-                            for (var key in receivedVALJSON.val) {
-                                if (key in this.onVALPacketReceived)
-                                    this.OnVALPacketReceived[key](receivedVALJSON.val[key]);
+                            if (typeof (this.onVALPacketReceived) !== "undefined")
+                                this.OnVALPacketReceived(this.valPacketIntervalTime, receivedVALJSON.val);
+                            if (typeof (this.onVALPacketReceivedByCode) !== "undefined") {
+                                for (var key in receivedVALJSON.val)
+                                    if (key in this.onVALPacketReceivedByCode)
+                                        this.OnVALPacketReceivedByCode[key](receivedVALJSON.val[key]);
                             }
                             break;
                         case ("ERR"):
                             var receivedERRJSON = receivedJson;
-                            this.OnERRPacketReceived(receivedERRJSON.msg);
+                            if (typeof (this.OnERRPacketReceived) !== "undefined")
+                                this.OnERRPacketReceived(receivedERRJSON.msg);
                             break;
                         case ("RES"):
                             var receivedRESJSON = receivedJson;
-                            this.OnRESPacketReceived(receivedRESJSON.msg);
+                            if (typeof (this.OnRESPacketReceived) !== "undefined")
+                                this.OnRESPacketReceived(receivedRESJSON.msg);
                             break;
                         default:
                             this.OnWebsocketError("Unknown mode packet received. " + msg);
@@ -249,12 +257,20 @@ var webSocketGauge;
                     enumerable: true,
                     configurable: true
                 });
-                Object.defineProperty(DefiSSMWebsocketCommon.prototype, "OnVALPacketReceived", {
-                    get: function () { return this.onVALPacketReceived; },
-                    set: function (funclist) { this.onVALPacketReceived = funclist; },
+                Object.defineProperty(DefiSSMWebsocketCommon.prototype, "OnVALPacketReceivedByCode", {
+                    get: function () { return this.onVALPacketReceivedByCode; },
+                    set: function (funclist) { this.onVALPacketReceivedByCode = funclist; },
                     enumerable: true,
                     configurable: true
                 });
+                Object.defineProperty(DefiSSMWebsocketCommon.prototype, "OnVALPacketReceived", {
+                    get: function () { return this.onVALPacketReceived; },
+                    set: function (func) { this.onVALPacketReceived = func; },
+                    enumerable: true,
+                    configurable: true
+                });
+                ;
+                ;
                 Object.defineProperty(DefiSSMWebsocketCommon.prototype, "VALPacketIntervalTime", {
                     get: function () { return this.valPacketIntervalTime; },
                     enumerable: true,
@@ -274,10 +290,11 @@ var webSocketGauge;
                     return _this;
                 }
                 DefiCOMWebsocket.prototype.SendWSSend = function (code, flag) {
-                    var sendWSSendObj;
-                    sendWSSendObj.mode = this.ModePrefix + "_WS_SEND";
-                    sendWSSendObj.code = code;
-                    sendWSSendObj.flag = flag;
+                    var sendWSSendObj = {
+                        mode: this.ModePrefix + "_WS_SEND",
+                        code: code,
+                        flag: flag
+                    };
                     var jsonstr = JSON.stringify(sendWSSendObj);
                     this.WebSocket.send(jsonstr);
                 };
@@ -361,14 +378,14 @@ var webSocketGauge;
                     configurable: true
                 });
                 FUELTRIPWebsocket.prototype.SendSectStoreMax = function (storeMax) {
-                    var obj = new JSONFormat.SectStoreMaxJSONMessage();
+                    var obj = new JSONFormats.SectStoreMaxJSONMessage();
                     obj.storemax = storeMax;
                     var jsonstr = JSON.stringify(obj);
                     this.WebSocket.send(jsonstr);
                 };
                 ;
                 FUELTRIPWebsocket.prototype.SendSectSpan = function (sectSpan) {
-                    var obj = new JSONFormat.SectSpanJSONMessage();
+                    var obj = new JSONFormats.SectSpanJSONMessage();
                     obj.sect_span = sectSpan;
                     var jsonstr = JSON.stringify(obj);
                     this.WebSocket.send(jsonstr);
@@ -379,25 +396,31 @@ var webSocketGauge;
                         case ("MOMENT_FUELTRIP"):
                             {
                                 var jsonObj = JSON.parse(msg);
-                                this.onMomentFUELTRIPPacketReceived(jsonObj.moment_gasmilage, jsonObj.total_gas, jsonObj.total_trip, jsonObj.total_gasmilage);
+                                if (typeof (this.onMomentFUELTRIPPacketReceived) !== "undefined") {
+                                    this.onMomentFUELTRIPPacketReceived(jsonObj.moment_gasmilage, jsonObj.total_gas, jsonObj.total_trip, jsonObj.total_gasmilage);
+                                }
                                 break;
                             }
                         case ("SECT_FUELTRIP"):
                             {
                                 var jsonObj = JSON.parse(msg);
-                                this.onSectFUELTRIPPacketReceived(jsonObj.sect_span, jsonObj.sect_trip, jsonObj.sect_gas, jsonObj.sect_gasmilage);
+                                if (typeof (this.onSectFUELTRIPPacketReceived) !== "undefined") {
+                                    this.onSectFUELTRIPPacketReceived(jsonObj.sect_span, jsonObj.sect_trip, jsonObj.sect_gas, jsonObj.sect_gasmilage);
+                                }
                                 break;
                             }
                         case ("ERR"):
                             {
                                 var jsonObj = JSON.parse(msg);
-                                this.OnERRPacketReceived(jsonObj.msg);
+                                if (typeof (this.OnERRPacketReceived) !== "undefined")
+                                    this.OnERRPacketReceived(jsonObj.msg);
                                 break;
                             }
                         case ("RES"):
                             {
                                 var jsonObj = JSON.parse(msg);
-                                this.OnRESPacketReceived(jsonObj.msg);
+                                if (typeof (this.OnRESPacketReceived) !== "undefined")
+                                    this.OnRESPacketReceived(jsonObj.msg);
                                 break;
                             }
                         default:
@@ -407,6 +430,28 @@ var webSocketGauge;
                 return FUELTRIPWebsocket;
             }(WebsocketCommon));
             communication.FUELTRIPWebsocket = FUELTRIPWebsocket;
+            //Define string based enum of ParameterCode
+            var DefiParameterCode;
+            (function (DefiParameterCode) {
+                DefiParameterCode.Manifold_Absolute_Pressure = "Manifold_Absolute_Pressure";
+                DefiParameterCode.Engine_Speed = "Engine_Speed";
+                DefiParameterCode.Oil_Pressure = "Oil_Pressure";
+                DefiParameterCode.Fuel_Rail_Pressure = "Fuel_Rail_Pressure";
+                DefiParameterCode.Exhaust_Gas_Temperature = "Exhaust_Gas_Temperature";
+                DefiParameterCode.Oil_Temperature = "Oil_Temperature";
+                DefiParameterCode.Coolant_Temperature = "Coolant_Temperature";
+            })(DefiParameterCode = communication.DefiParameterCode || (communication.DefiParameterCode = {}));
+            var ArduinoParameterCode;
+            (function (ArduinoParameterCode) {
+                ArduinoParameterCode.Engine_Speed = "Engine_Speed";
+                ArduinoParameterCode.Vehicle_Speed = "Vehicle_Speed";
+                ArduinoParameterCode.Manifold_Absolute_Pressure = "Manifold_Absolute_Pressure";
+                ArduinoParameterCode.Coolant_Temperature = "Coolant_Temperature";
+                ArduinoParameterCode.Oil_Temperature = "Oil_Temperature";
+                ArduinoParameterCode.Oil_Temperature2 = "Oil_Temperature2";
+                ArduinoParameterCode.Oil_Pressure = "Oil_Pressure";
+                ArduinoParameterCode.Fuel_Rail_Pressure = "Fuel_Rail_Pressure";
+            })(ArduinoParameterCode = communication.ArduinoParameterCode || (communication.ArduinoParameterCode = {}));
         })(communication = lib.communication || (lib.communication = {}));
     })(lib = webSocketGauge.lib || (webSocketGauge.lib = {}));
 })(webSocketGauge || (webSocketGauge = {}));
