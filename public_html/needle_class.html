@@ -36,13 +36,13 @@ POSSIBILITY OF SUCH DAMAGE.
         }
     </style>
     <script type="text/javascript" src="script/lib/pixi.min.js"></script>
-    <script type="text/javascript" src="script/progressBar.js"></script>
+    <script type="text/javascript" src="script/progressBar/pixiGauge.js"></script>
     <script type="text/javascript">
         var MainClass = function()
         {
             'use strict';
             this.Value = 0;
-            this.needleObj = new PixiNeedleGauge();
+            this.needleObj = new webSocketGauge.lib.graphics.RotationNeedleGauge();
             this.renderer = PIXI.autoDetectRenderer(800, 600);
             document.body.appendChild(this.renderer.view);
             this.stage;
@@ -53,7 +53,7 @@ POSSIBILITY OF SUCH DAMAGE.
             'use strict';
 
             var needleObj = this.needleObj;
-            needleObj.Pivot = new PIXI.Point(20,20);
+            needleObj.Pivot = new PIXI.Point(20,10);
             needleObj.Max = 100;
             needleObj.Min = 0;
             needleObj.OffsetAngle = 0;
@@ -69,13 +69,14 @@ POSSIBILITY OF SUCH DAMAGE.
             this.container.y = 300;
             this.stage = new PIXI.Stage(0x66FF99);
             this.stage.addChild(this.container);
-            
+
+            needleObj.updateForce();
             var self = this;
             function frame()
             {
                 'use strict';
                 self.needleObj.Value = self.Value;
-                self.needleObj.draw();
+                self.needleObj.update();
 
                 self.renderer.render(self.stage);
 
