@@ -93,7 +93,6 @@ var webSocketGauge;
                 };
                 return Gauge1D;
             }());
-            graphics.Gauge1D = Gauge1D;
             var ProgressBar = (function (_super) {
                 __extends(ProgressBar, _super);
                 function ProgressBar() {
@@ -125,7 +124,6 @@ var webSocketGauge;
                 });
                 return ProgressBar;
             }(Gauge1D));
-            graphics.ProgressBar = ProgressBar;
             var CircularProgressBar = (function (_super) {
                 __extends(CircularProgressBar, _super);
                 function CircularProgressBar() {
@@ -342,7 +340,6 @@ var webSocketGauge;
                 });
                 return NeedleGauge;
             }(Gauge1D));
-            graphics.NeedleGauge = NeedleGauge;
             var RotationNeedleGauge = (function (_super) {
                 __extends(RotationNeedleGauge, _super);
                 function RotationNeedleGauge() {
@@ -417,82 +414,6 @@ var webSocketGauge;
                 return RotationNeedleGauge;
             }(NeedleGauge));
             graphics.RotationNeedleGauge = RotationNeedleGauge;
-            var SlideNeedleGauge = (function (_super) {
-                __extends(SlideNeedleGauge, _super);
-                function SlideNeedleGauge() {
-                    var _this = _super.call(this) || this;
-                    _this.minPoint = new PIXI.Point(0, 0);
-                    _this.maxPoint = new PIXI.Point(100, 100);
-                    _this.currentPos = new PIXI.Point(_this.minPoint.x, _this.minPoint.y);
-                    _this.positionStep = 1;
-                    _this.invertDirection = false;
-                    //Set the sprite anchor to midpoint of the sprite.
-                    _this.Sprite.anchor.x = 0.5;
-                    _this.Sprite.anchor.y = 0.5;
-                    return _this;
-                }
-                Object.defineProperty(SlideNeedleGauge.prototype, "MinPoint", {
-                    get: function () { return this.minPoint; },
-                    set: function (val) { this.minPoint = val; },
-                    enumerable: true,
-                    configurable: true
-                });
-                Object.defineProperty(SlideNeedleGauge.prototype, "MaxPoint", {
-                    get: function () { return this.maxPoint; },
-                    set: function (val) { this.maxPoint = val; },
-                    enumerable: true,
-                    configurable: true
-                });
-                Object.defineProperty(SlideNeedleGauge.prototype, "PositionStep", {
-                    get: function () { return this.positionStep; },
-                    set: function (val) { this.positionStep = val; },
-                    enumerable: true,
-                    configurable: true
-                });
-                Object.defineProperty(SlideNeedleGauge.prototype, "InvertDirection", {
-                    get: function () { return this.invertDirection; },
-                    set: function (val) { this.invertDirection = val; },
-                    enumerable: true,
-                    configurable: true
-                });
-                Object.defineProperty(SlideNeedleGauge.prototype, "Anchor", {
-                    get: function () { return this.Sprite.anchor; },
-                    set: function (val) { this.Sprite.anchor = val; },
-                    enumerable: true,
-                    configurable: true
-                });
-                SlideNeedleGauge.prototype._update = function (skipStepCheck) {
-                    'use strict';
-                    var valueMax = this.Max;
-                    var valueMin = this.Min;
-                    var value = this.Value;
-                    var sprite = this.Sprite;
-                    var minPoint = this.minPoint;
-                    var maxPoint = this.maxPoint;
-                    var positionStep = this.positionStep;
-                    var invertDirection = this.invertDirection;
-                    var currentPos = this.currentPos;
-                    // Calculate moveRatio
-                    var moveRatio = value / (valueMax - valueMin);
-                    var minToMaxVector = new PIXI.Point(maxPoint.x - minPoint.x, maxPoint.y - minPoint.y);
-                    //Calculate final position
-                    var finalPos;
-                    if (!invertDirection) {
-                        finalPos = new PIXI.Point(minPoint.x + minToMaxVector.x * moveRatio, minPoint.y + minToMaxVector.y * moveRatio);
-                    }
-                    else {
-                        finalPos = new PIXI.Point(maxPoint.x - minToMaxVector.x * moveRatio, maxPoint.y - minToMaxVector.y * moveRatio);
-                    }
-                    // Check moveDist is larger than positionStep
-                    var moveDist = Math.sqrt((finalPos.x - currentPos.x) ^ 2 + (finalPos.y - currentPos.y) ^ 2);
-                    if (!skipStepCheck && moveDist < positionStep)
-                        return;
-                    else {
-                    }
-                };
-                return SlideNeedleGauge;
-            }(NeedleGauge));
-            graphics.SlideNeedleGauge = SlideNeedleGauge;
         })(graphics = lib.graphics || (lib.graphics = {}));
     })(lib = webSocketGauge.lib || (webSocketGauge.lib = {}));
 })(webSocketGauge || (webSocketGauge = {}));
