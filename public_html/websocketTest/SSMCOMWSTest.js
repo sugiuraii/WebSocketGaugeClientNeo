@@ -25,26 +25,26 @@
  */
 /// <reference path="../script/websocket/websocketClient.ts" />
 /// <reference path="../node_modules/@types/jquery/index.d.ts" />
-var DefiCOMWebsocket = webSocketGauge.lib.communication.DefiCOMWebsocket;
-var DefiParameterCode = webSocketGauge.lib.communication.DefiParameterCode;
+var SSMWebsocket = webSocketGauge.lib.communication.SSMWebsocket;
+var SSMParameterCode = webSocketGauge.lib.communication.SSMParameterCode;
 window.onload = function () {
-    DefiCOMWSTest.main();
+    SSMCOMWSTest.main();
 };
-var DefiCOMWSTest = (function () {
-    function DefiCOMWSTest() {
+var SSMCOMWSTest = (function () {
+    function SSMCOMWSTest() {
     }
-    DefiCOMWSTest.main = function () {
-        this.defiWS = new DefiCOMWebsocket();
-        $('#serverURL_box').val("ws://localhost:2012/");
+    SSMCOMWSTest.main = function () {
+        this.ssmWS = new SSMWebsocket();
+        $('#serverURL_box').val("ws://localhost:2013/");
         this.setParameterCodeSelectBox();
         this.registerWSEvents();
     };
-    DefiCOMWSTest.setParameterCodeSelectBox = function () {
-        for (var code in DefiParameterCode)
-            $('#deficode_select').append($('<option>').html(code).val(code));
+    SSMCOMWSTest.setParameterCodeSelectBox = function () {
+        for (var code in SSMParameterCode)
+            $('#ssmcomcode_select').append($('<option>').html(code).val(code));
     };
-    DefiCOMWSTest.registerWSEvents = function () {
-        this.defiWS.OnVALPacketReceived = function (intervalTime, val) {
+    SSMCOMWSTest.registerWSEvents = function () {
+        this.ssmWS.OnVALPacketReceived = function (intervalTime, val) {
             $('#interval').text(intervalTime.toFixed(2));
             //clear
             $('#div_val_data').html("");
@@ -52,23 +52,23 @@ var DefiCOMWSTest = (function () {
                 $('#div_val_data').append(key + " : " + val[key] + "<br>");
             }
         };
-        this.defiWS.OnERRPacketReceived = function (msg) {
+        this.ssmWS.OnERRPacketReceived = function (msg) {
             $('#div_err_data').append(msg + "<br>");
         };
-        this.defiWS.OnRESPacketReceived = function (msg) {
+        this.ssmWS.OnRESPacketReceived = function (msg) {
             $('#div_res_data').append(msg + "<br>");
         };
-        this.defiWS.OnWebsocketError = function (msg) {
+        this.ssmWS.OnWebsocketError = function (msg) {
             $('#div_ws_message').append(msg + "<br>");
         };
-        this.defiWS.OnWebsocketOpen = function () {
+        this.ssmWS.OnWebsocketOpen = function () {
             $('#div_ws_message').append('* Connection open<br/>');
             $('#sendmessagecontent_box').removeAttr("disabled");
             $('#sendButton').removeAttr("disabled");
             $('#connectButton').attr("disabled", "disabled");
             $('#disconnectButton').removeAttr("disabled");
         };
-        this.defiWS.OnWebsocketClose = function () {
+        this.ssmWS.OnWebsocketClose = function () {
             $('#div_ws_message').append('* Connection closed<br/>');
             $('#sendmessagecontent_box').attr("disabled", "disabled");
             $('#sendButton').attr("disabled", "disabled");
@@ -76,23 +76,23 @@ var DefiCOMWSTest = (function () {
             $('#disconnectButton').attr("disabled", "disabled");
         };
     };
-    DefiCOMWSTest.connectWebSocket = function () {
-        this.defiWS.URL = $("#serverURL_box").val();
-        this.defiWS.Connect();
+    SSMCOMWSTest.connectWebSocket = function () {
+        this.ssmWS.URL = $("#serverURL_box").val();
+        this.ssmWS.Connect();
     };
     ;
-    DefiCOMWSTest.disconnectWebSocket = function () {
-        this.defiWS.Close();
+    SSMCOMWSTest.disconnectWebSocket = function () {
+        this.ssmWS.Close();
     };
     ;
-    DefiCOMWSTest.input_DEFI_WS_SEND = function () {
-        this.defiWS.SendWSSend($('#deficode_select').val(), $('#deficode_flag').val());
+    SSMCOMWSTest.input_SSM_COM_READ = function () {
+        this.ssmWS.SendCOMRead($('#ssmcomcode_select').val(), $('#ssmcode_readmode').val(), $('#ssmcode_flag').val());
     };
     ;
-    DefiCOMWSTest.input_DEFI_WS_INTERVAL = function () {
-        this.defiWS.SendWSInterval($('#interval_DEFI_WS_INTERVAL').val());
+    SSMCOMWSTest.input_SSMCOM_SLOWREAD_INTERVAL = function () {
+        this.ssmWS.SendSlowreadInterval(($('#interval_SSMCOM_SLOWREAD_INTERVAL').val()));
     };
     ;
-    return DefiCOMWSTest;
+    return SSMCOMWSTest;
 }());
-//# sourceMappingURL=DefiCOMWSTest.js.map
+//# sourceMappingURL=SSMCOMWSTest.js.map

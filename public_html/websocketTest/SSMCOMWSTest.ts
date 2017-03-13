@@ -25,35 +25,35 @@
  */
 /// <reference path="../script/websocket/websocketClient.ts" />
 /// <reference path="../node_modules/@types/jquery/index.d.ts" />
-import DefiCOMWebsocket = webSocketGauge.lib.communication.DefiCOMWebsocket;
-import DefiParameterCode = webSocketGauge.lib.communication.DefiParameterCode;
+import SSMWebsocket = webSocketGauge.lib.communication.SSMWebsocket;
+import SSMParameterCode = webSocketGauge.lib.communication.SSMParameterCode;
 
 window.onload = function()
 {
-    DefiCOMWSTest.main();
+    SSMCOMWSTest.main();
 }
 
-class DefiCOMWSTest
+class SSMCOMWSTest
 {    
-    private static defiWS : DefiCOMWebsocket;
+    private static ssmWS : SSMWebsocket;
     
     public static main(): void
     {
-        this.defiWS = new DefiCOMWebsocket();
-        $('#serverURL_box').val("ws://localhost:2012/");
+        this.ssmWS = new SSMWebsocket();
+        $('#serverURL_box').val("ws://localhost:2013/");
         this.setParameterCodeSelectBox();
         this.registerWSEvents();
     }
     
     private static setParameterCodeSelectBox()
     {
-        for (let code in DefiParameterCode)
-            $('#deficode_select').append($('<option>').html(code).val(code));
+        for (let code in SSMParameterCode)
+            $('#ssmcomcode_select').append($('<option>').html(code).val(code));
     }
     
     private static registerWSEvents() : void
     {
-        this.defiWS.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: number}) => 
+        this.ssmWS.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: number}) => 
         {
             $('#interval').text(intervalTime.toFixed(2));
              //clear
@@ -63,20 +63,20 @@ class DefiCOMWSTest
                 $('#div_val_data').append(key + " : " + val[key] + "<br>" );
             }
         }
-        this.defiWS.OnERRPacketReceived = (msg:string)=>
+        this.ssmWS.OnERRPacketReceived = (msg:string)=>
         {
             $('#div_err_data').append(msg + "<br>")
         };
         
-        this.defiWS.OnRESPacketReceived = (msg : string) =>
+        this.ssmWS.OnRESPacketReceived = (msg : string) =>
         {
             $('#div_res_data').append(msg + "<br>");
         };
-        this.defiWS.OnWebsocketError = (msg : string) =>
+        this.ssmWS.OnWebsocketError = (msg : string) =>
         {
             $('#div_ws_message').append(msg + "<br>");
         };
-        this.defiWS.OnWebsocketOpen = () =>
+        this.ssmWS.OnWebsocketOpen = () =>
         {
             $('#div_ws_message').append('* Connection open<br/>');
 
@@ -85,7 +85,7 @@ class DefiCOMWSTest
             $('#connectButton').attr("disabled", "disabled");
             $('#disconnectButton').removeAttr("disabled");  
         };
-        this.defiWS.OnWebsocketClose = () =>
+        this.ssmWS.OnWebsocketClose = () =>
         {
             $('#div_ws_message').append('* Connection closed<br/>');
 
@@ -98,23 +98,23 @@ class DefiCOMWSTest
     
     public static connectWebSocket() : void
     {
-        this.defiWS.URL = $("#serverURL_box").val();
-        this.defiWS.Connect();
+        this.ssmWS.URL = $("#serverURL_box").val();
+        this.ssmWS.Connect();
     };
     
     public static disconnectWebSocket()
     {
-        this.defiWS.Close();
+        this.ssmWS.Close();
     };
 
-    public static input_DEFI_WS_SEND()
+    public static input_SSM_COM_READ()
     {
-        this.defiWS.SendWSSend($('#deficode_select').val(),$('#deficode_flag').val());
+        this.ssmWS.SendCOMRead($('#ssmcomcode_select').val(), $('#ssmcode_readmode').val(), $('#ssmcode_flag').val());
     };
 
-    public static input_DEFI_WS_INTERVAL()
+    public static input_SSMCOM_SLOWREAD_INTERVAL()
     {
-        this.defiWS.SendWSInterval($('#interval_DEFI_WS_INTERVAL').val());
+        this.ssmWS.SendSlowreadInterval(($('#interval_SSMCOM_SLOWREAD_INTERVAL').val()));
     };
 } 
 

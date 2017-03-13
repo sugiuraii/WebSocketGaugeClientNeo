@@ -26,24 +26,24 @@ POSSIBILITY OF SUCH DAMAGE.
 -->
 <html>
     <head>
-        <title>DefiCOM WebSocket Test</title>
+        <title>ArduinoCOM WebSocket Test</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
-        <script type="text/javascript" src="../script/lib/jquery-3.1.1.min.js"></script>
-        <script type="text/javascript" src="../script/websocket/websocketClient.js"></script>
-        <script type="text/javascript" src="DefiCOMWSTest.js"></script>
+        <script src="../script/lib/jquery-3.1.1.min.js"></script>
+        <script src="../script/websocket/websocketClient.js"></script>
+        <script src="ArduinoCOMWSTest.js"></script>
     </head>
     <body>
-        <div><h2>DefiSSMCOM WebSocket Test</h2></div>
+        <div><h2>ArduinoCOM WebSocket Test</h2></div>
         <hr>
         Server URL : <input type="text" required="required" id="serverURL_box" /> 
-         <input type="button" id="connectButton" value="Connect" onclick="DefiCOMWSTest.connectWebSocket()"/>
-         <input type="button" id="disconnectButton" value="Disconnect" onclick="DefiCOMWSTest.disconnectWebSocket()"/><br>
+         <input type="button" id="connectButton" value="Connect" onclick="ArduinoCOMWSTest.connectWebSocket()"/>
+         <input type="button" id="disconnectButton" value="Disconnect" onclick="ArduinoCOMWSTest.disconnectWebSocket()"/><br>
          <hr>
         
-         <h4>DEFI_WS_SEND</h4>
+         <h4>ARDUINO_WS_SEND</h4>
          <ul>
-             <li>DefiCode<br>
+             <li>ArduinoCode<br>
                 <select id="deficode_select"></select>
              </li>
              <li>Flag<br>
@@ -53,17 +53,17 @@ POSSIBILITY OF SUCH DAMAGE.
                 </select>
              </li>
              <li>
-                 <input type="button" id="button_DEFI_WS_SEND" value="input DEFI_WS_SEND" onclick="DefiCOMWSTest.input_DEFI_WS_SEND()"/>
+                 <input type="button" id="button_DEFI_WS_SEND" value="input DEFI_WS_SEND" onclick="ArduinoCOMWSTest.input_ARDUINO_WS_SEND()"/>
              </li>
          </ul>
          
-         <h4>DEFI_WS_INTERVAL</h4>
+         <h4>ARDUINO_WS_INTERVAL</h4>
          <ul>
              <li>
                 <input type="number"  id="interval_DEFI_WS_INTERVAL">
              </li>
             <li>
-                 <input type="button" id="button_DEFI_WS_INTERVAL" value="input DEFI_WS_INTERVAL" onclick="DefiCOMWSTest.input_DEFI_WS_INTERVAL()"/>
+                <input type="button" id="button_DEFI_WS_INTERVAL" value="input DEFI_WS_INTERVAL" onclick="ArduinoCOMWSTest.input_ARDUINO_WS_INTERVAL()"/>
              </li>
          </ul>
                   

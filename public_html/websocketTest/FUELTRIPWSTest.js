@@ -25,50 +25,52 @@
  */
 /// <reference path="../script/websocket/websocketClient.ts" />
 /// <reference path="../node_modules/@types/jquery/index.d.ts" />
-var DefiCOMWebsocket = webSocketGauge.lib.communication.DefiCOMWebsocket;
-var DefiParameterCode = webSocketGauge.lib.communication.DefiParameterCode;
+var FUELTRIPWebsocket = webSocketGauge.lib.communication.FUELTRIPWebsocket;
 window.onload = function () {
-    DefiCOMWSTest.main();
+    FUELTRIPWSTest.main();
 };
-var DefiCOMWSTest = (function () {
-    function DefiCOMWSTest() {
+var FUELTRIPWSTest = (function () {
+    function FUELTRIPWSTest() {
     }
-    DefiCOMWSTest.main = function () {
-        this.defiWS = new DefiCOMWebsocket();
-        $('#serverURL_box').val("ws://localhost:2012/");
-        this.setParameterCodeSelectBox();
+    FUELTRIPWSTest.main = function () {
+        this.fueltripWS = new FUELTRIPWebsocket();
+        $('#serverURL_box').val("ws://localhost:2014/");
         this.registerWSEvents();
     };
-    DefiCOMWSTest.setParameterCodeSelectBox = function () {
-        for (var code in DefiParameterCode)
-            $('#deficode_select').append($('<option>').html(code).val(code));
-    };
-    DefiCOMWSTest.registerWSEvents = function () {
-        this.defiWS.OnVALPacketReceived = function (intervalTime, val) {
-            $('#interval').text(intervalTime.toFixed(2));
+    FUELTRIPWSTest.registerWSEvents = function () {
+        this.fueltripWS.OnMomentFUELTRIPPacketReceived = function (moment_gasmilage, total_gas, total_trip, total_gasmilage) {
             //clear
-            $('#div_val_data').html("");
-            for (var key in val) {
-                $('#div_val_data').append(key + " : " + val[key] + "<br>");
-            }
+            $('#div_moment_fueltrip_data').html("");
+            $('#div_moment_fueltrip_data').append("Moment GasMilage : " + moment_gasmilage + "<br>");
+            $('#div_moment_fueltrip_data').append("Total Gas : " + total_gas + "<br>");
+            $('#div_moment_fueltrip_data').append("Total Trip : " + total_trip + "<br>");
+            $('#div_moment_fueltrip_data').append("Total GasMilage : " + total_gasmilage + "<br>");
         };
-        this.defiWS.OnERRPacketReceived = function (msg) {
+        this.fueltripWS.OnSectFUELTRIPPacketReceived = function (sect_span, sect_trip, sect_gas, sect_gasmilage) {
+            //clear
+            $('#div_sect_fueltrip_data').html("");
+            $('#div_sect_fueltrip_data').append("Sect Span : " + sect_span + "<br>");
+            $('#div_sect_fueltrip_data').append("Sect Trip : " + sect_trip + "<br>");
+            $('#div_sect_fueltrip_data').append("Sect Gas : " + sect_gas + "<br>");
+            $('#div_sect_fueltrip_data').append("Sect GasMilage : " + sect_gasmilage + "<br>");
+        };
+        this.fueltripWS.OnERRPacketReceived = function (msg) {
             $('#div_err_data').append(msg + "<br>");
         };
-        this.defiWS.OnRESPacketReceived = function (msg) {
+        this.fueltripWS.OnRESPacketReceived = function (msg) {
             $('#div_res_data').append(msg + "<br>");
         };
-        this.defiWS.OnWebsocketError = function (msg) {
+        this.fueltripWS.OnWebsocketError = function (msg) {
             $('#div_ws_message').append(msg + "<br>");
         };
-        this.defiWS.OnWebsocketOpen = function () {
+        this.fueltripWS.OnWebsocketOpen = function () {
             $('#div_ws_message').append('* Connection open<br/>');
             $('#sendmessagecontent_box').removeAttr("disabled");
             $('#sendButton').removeAttr("disabled");
             $('#connectButton').attr("disabled", "disabled");
             $('#disconnectButton').removeAttr("disabled");
         };
-        this.defiWS.OnWebsocketClose = function () {
+        this.fueltripWS.OnWebsocketClose = function () {
             $('#div_ws_message').append('* Connection closed<br/>');
             $('#sendmessagecontent_box').attr("disabled", "disabled");
             $('#sendButton').attr("disabled", "disabled");
@@ -76,23 +78,23 @@ var DefiCOMWSTest = (function () {
             $('#disconnectButton').attr("disabled", "disabled");
         };
     };
-    DefiCOMWSTest.connectWebSocket = function () {
-        this.defiWS.URL = $("#serverURL_box").val();
-        this.defiWS.Connect();
+    FUELTRIPWSTest.connectWebSocket = function () {
+        this.fueltripWS.URL = $("#serverURL_box").val();
+        this.fueltripWS.Connect();
     };
     ;
-    DefiCOMWSTest.disconnectWebSocket = function () {
-        this.defiWS.Close();
+    FUELTRIPWSTest.disconnectWebSocket = function () {
+        this.fueltripWS.Close();
     };
     ;
-    DefiCOMWSTest.input_DEFI_WS_SEND = function () {
-        this.defiWS.SendWSSend($('#deficode_select').val(), $('#deficode_flag').val());
+    FUELTRIPWSTest.input_SECT_SPAN = function () {
+        this.fueltripWS.SendSectSpan($('#span_SECT_SPAN').val());
     };
     ;
-    DefiCOMWSTest.input_DEFI_WS_INTERVAL = function () {
-        this.defiWS.SendWSInterval($('#interval_DEFI_WS_INTERVAL').val());
+    FUELTRIPWSTest.input_SECT_STOREMAX = function () {
+        this.fueltripWS.SendSectStoreMax($('#storemax_SECT_STOREMAX').val());
     };
     ;
-    return DefiCOMWSTest;
+    return FUELTRIPWSTest;
 }());
-//# sourceMappingURL=DefiCOMWSTest.js.map
+//# sourceMappingURL=FUELTRIPWSTest.js.map

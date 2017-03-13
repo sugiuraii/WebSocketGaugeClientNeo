@@ -26,52 +26,47 @@ POSSIBILITY OF SUCH DAMAGE.
 -->
 <html>
     <head>
-        <title>DefiCOM WebSocket Test</title>
+        <title>FUELTRIP WebSocket Test</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <script type="text/javascript" src="../script/lib/jquery-3.1.1.min.js"></script>
         <script type="text/javascript" src="../script/websocket/websocketClient.js"></script>
-        <script type="text/javascript" src="DefiCOMWSTest.js"></script>
+        <script type="text/javascript" src="FUELTRIPWSTest.js"></script>
     </head>
     <body>
-        <div><h2>DefiSSMCOM WebSocket Test</h2></div>
+        <div><h2>FUELTRIP WebSocket Test</h2></div>
         <hr>
         Server URL : <input type="text" required="required" id="serverURL_box" /> 
-         <input type="button" id="connectButton" value="Connect" onclick="DefiCOMWSTest.connectWebSocket()"/>
-         <input type="button" id="disconnectButton" value="Disconnect" onclick="DefiCOMWSTest.disconnectWebSocket()"/><br>
+         <input type="button" id="connectButton" value="Connect" onclick="FUELTRIPWSTest.connectWebSocket()"/>
+         <input type="button" id="disconnectButton" value="Disconnect" onclick="FUELTRIPWSTest.disconnectWebSocket()"/><br>
          <hr>
         
-         <h4>DEFI_WS_SEND</h4>
-         <ul>
-             <li>DefiCode<br>
-                <select id="deficode_select"></select>
-             </li>
-             <li>Flag<br>
-                <select id="deficode_flag">
-                    <option value="true">true</option>
-                    <option value="false">false</option>
-                </select>
-             </li>
+        <h4>SECT SPAN</h4>
+        <ul>
              <li>
-                 <input type="button" id="button_DEFI_WS_SEND" value="input DEFI_WS_SEND" onclick="DefiCOMWSTest.input_DEFI_WS_SEND()"/>
-             </li>
-         </ul>
-         
-         <h4>DEFI_WS_INTERVAL</h4>
-         <ul>
-             <li>
-                <input type="number"  id="interval_DEFI_WS_INTERVAL">
+                <input type="number"  id="span_SECT_SPAN">
              </li>
             <li>
-                 <input type="button" id="button_DEFI_WS_INTERVAL" value="input DEFI_WS_INTERVAL" onclick="DefiCOMWSTest.input_DEFI_WS_INTERVAL()"/>
+                 <input type="button" id="button_SECT_SPAN" value="send SECT_SPAN" onclick="FUELTRIPWSTest.input_SECT_SPAN()"/>
              </li>
          </ul>
-                  
+        <h4>SECT STOREMAX</h4>
+        <ul>
+             <li>
+                <input type="number"  id="storemax_SECT_STOREMAX">
+             </li>
+            <li>
+                 <input type="button" id="button_SECT_STOREMAX" value="send SECT_STOREMAX" onclick="FUELTRIPWSTest.input_SECT_STOREMAX()"/>
+             </li>
+         </ul>
+        
          <hr>
          
-         <h3>VAL packet</h3>
-         <p><b>Interval time: </b><span id="interval">0</span> msec</p>
-         <div id="div_val_data"></div>
+         <h3>MOMENT FUELTRIP packet</h3>
+         <div id="div_moment_fueltrip_data"></div>
+         <hr>
+         <h3>SECT FUELTRIP packet</h3>
+         <div id="div_sect_fueltrip_data"></div>
          <hr>
          <h3>ERR packet</h3>
          <div id="div_err_data"></div>

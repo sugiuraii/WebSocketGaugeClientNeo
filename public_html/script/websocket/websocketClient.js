@@ -92,9 +92,34 @@ var webSocketGauge;
                     return SectStoreMaxJSONMessage;
                 }());
                 JSONFormats.SectStoreMaxJSONMessage = SectStoreMaxJSONMessage;
+                var SendWSSendJSONMessage = (function () {
+                    function SendWSSendJSONMessage() {
+                    }
+                    return SendWSSendJSONMessage;
+                }());
+                JSONFormats.SendWSSendJSONMessage = SendWSSendJSONMessage;
+                var SendWSIntervalJSONMessage = (function () {
+                    function SendWSIntervalJSONMessage() {
+                    }
+                    return SendWSIntervalJSONMessage;
+                }());
+                JSONFormats.SendWSIntervalJSONMessage = SendWSIntervalJSONMessage;
+                var SendCOMReadJSONMessage = (function () {
+                    function SendCOMReadJSONMessage() {
+                    }
+                    return SendCOMReadJSONMessage;
+                }());
+                JSONFormats.SendCOMReadJSONMessage = SendCOMReadJSONMessage;
+                var SendSlowReadIntervalJSONMessage = (function () {
+                    function SendSlowReadIntervalJSONMessage() {
+                    }
+                    return SendSlowReadIntervalJSONMessage;
+                }());
+                JSONFormats.SendSlowReadIntervalJSONMessage = SendSlowReadIntervalJSONMessage;
             })(JSONFormats || (JSONFormats = {}));
             var WebsocketCommon = (function () {
                 function WebsocketCommon() {
+                    this.isConnetced = false;
                     this.onWebsocketError = function (msg) { return alert(msg); };
                 }
                 /**
@@ -124,11 +149,14 @@ var webSocketGauge;
                         if (typeof (self.onWebsocketClose) !== "undefined")
                             self.onWebsocketClose();
                     };
+                    this.isConnetced = true;
                 };
                 /**
                 * Send reset packet.
                 */
                 WebsocketCommon.prototype.SendReset = function () {
+                    if (!this.isConnetced)
+                        return;
                     var jsonstr = JSON.stringify(new JSONFormats.ResetJSONMessage());
                     this.websocket.send(jsonstr);
                 };
@@ -139,6 +167,7 @@ var webSocketGauge;
                     if (this.websocket) {
                         this.websocket.close();
                     }
+                    this.isConnetced = false;
                 };
                 /**
                  * Get websocket ready state.
@@ -200,6 +229,12 @@ var webSocketGauge;
                     configurable: true
                 });
                 ;
+                ;
+                Object.defineProperty(WebsocketCommon.prototype, "IsConnetced", {
+                    get: function () { return this.isConnetced; },
+                    enumerable: true,
+                    configurable: true
+                });
                 ;
                 return WebsocketCommon;
             }());
@@ -290,17 +325,20 @@ var webSocketGauge;
                     return _this;
                 }
                 DefiCOMWebsocket.prototype.SendWSSend = function (code, flag) {
-                    var sendWSSendObj = {
-                        mode: this.ModePrefix + "_WS_SEND",
-                        code: code,
-                        flag: flag
-                    };
+                    if (!this.IsConnetced)
+                        return;
+                    var sendWSSendObj = new JSONFormats.SendWSSendJSONMessage();
+                    sendWSSendObj.mode = this.ModePrefix + "_WS_SEND";
+                    sendWSSendObj.code = code;
+                    sendWSSendObj.flag = flag;
                     var jsonstr = JSON.stringify(sendWSSendObj);
                     this.WebSocket.send(jsonstr);
                 };
                 DefiCOMWebsocket.prototype.SendWSInterval = function (interval) {
-                    var sendWSIntervalObj;
-                    sendWSIntervalObj.mode = this.ModePrefix + +"_WS_INTERVAL";
+                    if (!this.IsConnetced)
+                        return;
+                    var sendWSIntervalObj = new JSONFormats.SendWSIntervalJSONMessage();
+                    sendWSIntervalObj.mode = this.ModePrefix + "_WS_INTERVAL";
                     sendWSIntervalObj.interval = interval;
                     var jsonstr = JSON.stringify(sendWSIntervalObj);
                     this.WebSocket.send(jsonstr);
@@ -330,7 +368,9 @@ var webSocketGauge;
                     return _this;
                 }
                 SSMWebsocket.prototype.SendCOMRead = function (code, readmode, flag) {
-                    var sendCOMReadObj;
+                    if (!this.IsConnetced)
+                        return;
+                    var sendCOMReadObj = new JSONFormats.SendCOMReadJSONMessage();
                     sendCOMReadObj.mode = this.ModePrefix + "_COM_READ";
                     sendCOMReadObj.code = code;
                     sendCOMReadObj.read_mode = readmode;
@@ -339,7 +379,9 @@ var webSocketGauge;
                     this.WebSocket.send(jsonstr);
                 };
                 SSMWebsocket.prototype.SendSlowreadInterval = function (interval) {
-                    var sendSlowreadIntervalObj;
+                    if (!this.IsConnetced)
+                        return;
+                    var sendSlowreadIntervalObj = new JSONFormats.SendSlowReadIntervalJSONMessage();
                     sendSlowreadIntervalObj.mode = this.ModePrefix + "_SLOWREAD_INTERVAL";
                     sendSlowreadIntervalObj.interval = interval;
                     var jsonstr = JSON.stringify(sendSlowreadIntervalObj);
@@ -361,9 +403,7 @@ var webSocketGauge;
             var FUELTRIPWebsocket = (function (_super) {
                 __extends(FUELTRIPWebsocket, _super);
                 function FUELTRIPWebsocket() {
-                    var _this = _super !== null && _super.apply(this, arguments) || this;
-                    _this.ModePrefix = "FUELTRIP";
-                    return _this;
+                    return _super !== null && _super.apply(this, arguments) || this;
                 }
                 Object.defineProperty(FUELTRIPWebsocket.prototype, "OnMomentFUELTRIPPacketReceived", {
                     get: function () { return this.onMomentFUELTRIPPacketReceived; },
@@ -378,6 +418,8 @@ var webSocketGauge;
                     configurable: true
                 });
                 FUELTRIPWebsocket.prototype.SendSectStoreMax = function (storeMax) {
+                    if (!this.IsConnetced)
+                        return;
                     var obj = new JSONFormats.SectStoreMaxJSONMessage();
                     obj.storemax = storeMax;
                     var jsonstr = JSON.stringify(obj);
@@ -385,6 +427,8 @@ var webSocketGauge;
                 };
                 ;
                 FUELTRIPWebsocket.prototype.SendSectSpan = function (sectSpan) {
+                    if (!this.IsConnetced)
+                        return;
                     var obj = new JSONFormats.SectSpanJSONMessage();
                     obj.sect_span = sectSpan;
                     var jsonstr = JSON.stringify(obj);
@@ -452,6 +496,155 @@ var webSocketGauge;
                 ArduinoParameterCode.Oil_Pressure = "Oil_Pressure";
                 ArduinoParameterCode.Fuel_Rail_Pressure = "Fuel_Rail_Pressure";
             })(ArduinoParameterCode = communication.ArduinoParameterCode || (communication.ArduinoParameterCode = {}));
+            var SSMParameterCode;
+            (function (SSMParameterCode) {
+                SSMParameterCode.Engine_Load = "Engine_Load";
+                SSMParameterCode.Coolant_Temperature = "Coolant_Temperature";
+                SSMParameterCode.Air_Fuel_Correction_1 = "Air_Fuel_Correction_1";
+                SSMParameterCode.Air_Fuel_Learning_1 = "Air_Fuel_Learning_1";
+                SSMParameterCode.Air_Fuel_Correction_2 = "Air_Fuel_Correction_2";
+                SSMParameterCode.Air_Fuel_Learning_2 = "Air_Fuel_Learning_2";
+                SSMParameterCode.Manifold_Absolute_Pressure = "Manifold_Absolute_Pressure";
+                SSMParameterCode.Engine_Speed = "Engine_Speed";
+                SSMParameterCode.Vehicle_Speed = "Vehicle_Speed";
+                SSMParameterCode.Ignition_Timing = "Ignition_Timing";
+                SSMParameterCode.Intake_Air_Temperature = "Intake_Air_Temperature";
+                SSMParameterCode.Mass_Air_Flow = "Mass_Air_Flow";
+                SSMParameterCode.Throttle_Opening_Angle = "Throttle_Opening_Angle";
+                SSMParameterCode.Front_O2_Sensor_1 = "Front_O2_Sensor_1";
+                SSMParameterCode.Rear_O2_Sensor = "Rear_O2_Sensor";
+                SSMParameterCode.Front_O2_Sensor_2 = "Front_O2_Sensor_2";
+                SSMParameterCode.Battery_Voltage = "Battery_Voltage";
+                SSMParameterCode.Air_Flow_Sensor_Voltage = "Air_Flow_Sensor_Voltage";
+                SSMParameterCode.Throttle_Sensor_Voltage = "Throttle_Sensor_Voltage";
+                SSMParameterCode.Differential_Pressure_Sensor_Voltage = "Differential_Pressure_Sensor_Voltage";
+                SSMParameterCode.Fuel_Injection_1_Pulse_Width = "Fuel_Injection_1_Pulse_Width";
+                SSMParameterCode.Fuel_Injection_2_Pulse_Width = "Fuel_Injection_2_Pulse_Width";
+                SSMParameterCode.Knock_Correction = "Knock_Correction";
+                SSMParameterCode.Atmospheric_Pressure = "Atmospheric_Pressure";
+                SSMParameterCode.Manifold_Relative_Pressure = "Manifold_Relative_Pressure";
+                SSMParameterCode.Pressure_Differential_Sensor = "Pressure_Differential_Sensor";
+                SSMParameterCode.Fuel_Tank_Pressure = "Fuel_Tank_Pressure";
+                SSMParameterCode.CO_Adjustment = "CO_Adjustment";
+                SSMParameterCode.Learned_Ignition_Timing = "Learned_Ignition_Timing";
+                SSMParameterCode.Accelerator_Opening_Angle = "Accelerator_Opening_Angle";
+                SSMParameterCode.Fuel_Temperature = "Fuel_Temperature";
+                SSMParameterCode.Front_O2_Heater_1 = "Front_O2_Heater_1";
+                SSMParameterCode.Rear_O2_Heater_Current = "Rear_O2_Heater_Current";
+                SSMParameterCode.Front_O2_Heater_2 = "Front_O2_Heater_2";
+                SSMParameterCode.Fuel_Level = "Fuel_Level";
+                SSMParameterCode.Primary_Wastegate_Duty_Cycle = "Primary_Wastegate_Duty_Cycle";
+                SSMParameterCode.Secondary_Wastegate_Duty_Cycle = "Secondary_Wastegate_Duty_Cycle";
+                SSMParameterCode.CPC_Valve_Duty_Ratio = "CPC_Valve_Duty_Ratio";
+                SSMParameterCode.Tumble_Valve_Position_Sensor_Right = "Tumble_Valve_Position_Sensor_Right";
+                SSMParameterCode.Tumble_Valve_Position_Sensor_Left = "Tumble_Valve_Position_Sensor_Left";
+                SSMParameterCode.Idle_Speed_Control_Valve_Duty_Ratio = "Idle_Speed_Control_Valve_Duty_Ratio";
+                SSMParameterCode.Air_Fuel_Lean_Correction = "Air_Fuel_Lean_Correction";
+                SSMParameterCode.Air_Fuel_Heater_Duty = "Air_Fuel_Heater_Duty";
+                SSMParameterCode.Idle_Speed_Control_Valve_Step = "Idle_Speed_Control_Valve_Step";
+                SSMParameterCode.Number_of_Ex_Gas_Recirc_Steps = "Number_of_Ex_Gas_Recirc_Steps";
+                SSMParameterCode.Alternator_Duty = "Alternator_Duty";
+                SSMParameterCode.Fuel_Pump_Duty = "Fuel_Pump_Duty";
+                SSMParameterCode.Intake_VVT_Advance_Angle_Right = "Intake_VVT_Advance_Angle_Right";
+                SSMParameterCode.Intake_VVT_Advance_Angle_Left = "Intake_VVT_Advance_Angle_Left";
+                SSMParameterCode.Intake_OCV_Duty_Right = "Intake_OCV_Duty_Right";
+                SSMParameterCode.Intake_OCV_Duty_Left = "Intake_OCV_Duty_Left";
+                SSMParameterCode.Intake_OCV_Current_Right = "Intake_OCV_Current_Right";
+                SSMParameterCode.Intake_OCV_Current_Left = "Intake_OCV_Current_Left";
+                SSMParameterCode.Air_Fuel_Sensor_1_Current = "Air_Fuel_Sensor_1_Current";
+                SSMParameterCode.Air_Fuel_Sensor_2_Current = "Air_Fuel_Sensor_2_Current";
+                SSMParameterCode.Air_Fuel_Sensor_1_Resistance = "Air_Fuel_Sensor_1_Resistance";
+                SSMParameterCode.Air_Fuel_Sensor_2_Resistance = "Air_Fuel_Sensor_2_Resistance";
+                SSMParameterCode.Air_Fuel_Sensor_1 = "Air_Fuel_Sensor_1";
+                SSMParameterCode.Air_Fuel_Sensor_2 = "Air_Fuel_Sensor_2";
+                SSMParameterCode.Gear_Position = "Gear_Position";
+                SSMParameterCode.A_F_Sensor_1_Heater_Current = "A_F_Sensor_1_Heater_Current";
+                SSMParameterCode.A_F_Sensor_2_Heater_Current = "A_F_Sensor_2_Heater_Current";
+                SSMParameterCode.Roughness_Monitor_Cylinder_1 = "Roughness_Monitor_Cylinder_1";
+                SSMParameterCode.Roughness_Monitor_Cylinder_2 = "Roughness_Monitor_Cylinder_2";
+                SSMParameterCode.Air_Fuel_Correction_3 = "Air_Fuel_Correction_3";
+                SSMParameterCode.Air_Fuel_Learning_3 = "Air_Fuel_Learning_3";
+                SSMParameterCode.Rear_O2_Heater_Voltage = "Rear_O2_Heater_Voltage";
+                SSMParameterCode.Air_Fuel_Adjustment_Voltage = "Air_Fuel_Adjustment_Voltage";
+                SSMParameterCode.Roughness_Monitor_Cylinder_3 = "Roughness_Monitor_Cylinder_3";
+                SSMParameterCode.Roughness_Monitor_Cylinder_4 = "Roughness_Monitor_Cylinder_4";
+                SSMParameterCode.Throttle_Motor_Duty = "Throttle_Motor_Duty";
+                SSMParameterCode.Throttle_Motor_Voltage = "Throttle_Motor_Voltage";
+                SSMParameterCode.Sub_Throttle_Sensor = "Sub_Throttle_Sensor";
+                SSMParameterCode.Main_Throttle_Sensor = "Main_Throttle_Sensor";
+                SSMParameterCode.Sub_Accelerator_Sensor = "Sub_Accelerator_Sensor";
+                SSMParameterCode.Main_Accelerator_Sensor = "Main_Accelerator_Sensor";
+                SSMParameterCode.Brake_Booster_Pressure = "Brake_Booster_Pressure";
+                SSMParameterCode.Fuel_Rail_Pressure = "Fuel_Rail_Pressure";
+                SSMParameterCode.Exhaust_Gas_Temperature = "Exhaust_Gas_Temperature";
+                SSMParameterCode.Cold_Start_Injector = "Cold_Start_Injector";
+                SSMParameterCode.SCV_Step = "SCV_Step";
+                SSMParameterCode.Memorised_Cruise_Speed = "Memorised_Cruise_Speed";
+                SSMParameterCode.Exhaust_VVT_Advance_Angle_Right = "Exhaust_VVT_Advance_Angle_Right";
+                SSMParameterCode.Exhaust_VVT_Advance_Angle_Left = "Exhaust_VVT_Advance_Angle_Left";
+                SSMParameterCode.Exhaust_OCV_Duty_Right = "Exhaust_OCV_Duty_Right";
+                SSMParameterCode.Exhaust_OCV_Duty_Left = "Exhaust_OCV_Duty_Left";
+                SSMParameterCode.Exhaust_OCV_Current_Right = "Exhaust_OCV_Current_Right";
+                SSMParameterCode.Exhaust_OCV_Current_Left = "Exhaust_OCV_Current_Left";
+                SSMParameterCode.Switch_P0x061 = "Switch_P0x061";
+                SSMParameterCode.Switch_P0x062 = "Switch_P0x062";
+                SSMParameterCode.Switch_P0x063 = "Switch_P0x063";
+                SSMParameterCode.Switch_P0x064 = "Switch_P0x064";
+                SSMParameterCode.Switch_P0x065 = "Switch_P0x065";
+                SSMParameterCode.Switch_P0x066 = "Switch_P0x066";
+                SSMParameterCode.Switch_P0x067 = "Switch_P0x067";
+                SSMParameterCode.Switch_P0x068 = "Switch_P0x068";
+                SSMParameterCode.Switch_P0x069 = "Switch_P0x069";
+                SSMParameterCode.Switch_P0x120 = "Switch_P0x120";
+                SSMParameterCode.Switch_P0x121 = "Switch_P0x121";
+            })(SSMParameterCode = communication.SSMParameterCode || (communication.SSMParameterCode = {}));
+            var OBDIIParameterCode;
+            (function (OBDIIParameterCode) {
+                OBDIIParameterCode.Engine_Load = "Engine_Load";
+                OBDIIParameterCode.Coolant_Temperature = "Coolant_Temperature";
+                OBDIIParameterCode.Air_Fuel_Correction_1 = "Air_Fuel_Correction_1";
+                OBDIIParameterCode.Air_Fuel_Learning_1 = "Air_Fuel_Learning_1";
+                OBDIIParameterCode.Air_Fuel_Correction_2 = "Air_Fuel_Correction_2";
+                OBDIIParameterCode.Air_Fuel_Learning_2 = "Air_Fuel_Learning_2";
+                OBDIIParameterCode.Fuel_Tank_Pressure = "Fuel_Tank_Pressure";
+                OBDIIParameterCode.Manifold_Absolute_Pressure = "Manifold_Absolute_Pressure";
+                OBDIIParameterCode.Engine_Speed = "Engine_Speed";
+                OBDIIParameterCode.Vehicle_Speed = "Vehicle_Speed";
+                OBDIIParameterCode.Ignition_Timing = "Ignition_Timing";
+                OBDIIParameterCode.Intake_Air_Temperature = "Intake_Air_Temperature";
+                OBDIIParameterCode.Mass_Air_Flow = "Mass_Air_Flow";
+                OBDIIParameterCode.Throttle_Opening_Angle = "Throttle_Opening_Angle";
+                OBDIIParameterCode.Run_time_since_engine_start = "Run_time_since_engine_start";
+                OBDIIParameterCode.Distance_traveled_with_MIL_on = "Distance_traveled_with_MIL_on";
+                OBDIIParameterCode.Fuel_Rail_Pressure = "Fuel_Rail_Pressure";
+                OBDIIParameterCode.Fuel_Rail_Pressure_diesel = "Fuel_Rail_Pressure_diesel";
+                OBDIIParameterCode.Commanded_EGR = "Commanded_EGR";
+                OBDIIParameterCode.EGR_Error = "EGR_Error";
+                OBDIIParameterCode.Commanded_evaporative_purge = "Commanded_evaporative_purge";
+                OBDIIParameterCode.Fuel_Level_Input = "Fuel_Level_Input";
+                OBDIIParameterCode.Number_of_warmups_since_codes_cleared = "Number_of_warmups_since_codes_cleared";
+                OBDIIParameterCode.Distance_traveled_since_codes_cleared = "Distance_traveled_since_codes_cleared";
+                OBDIIParameterCode.Evap_System_Vapor_Pressure = "Evap_System_Vapor_Pressure";
+                OBDIIParameterCode.Atmospheric_Pressure = "Atmospheric_Pressure";
+                OBDIIParameterCode.Catalyst_TemperatureBank_1_Sensor_1 = "Catalyst_TemperatureBank_1_Sensor_1";
+                OBDIIParameterCode.Catalyst_TemperatureBank_2_Sensor_1 = "Catalyst_TemperatureBank_2_Sensor_1";
+                OBDIIParameterCode.Catalyst_TemperatureBank_1_Sensor_2 = "Catalyst_TemperatureBank_1_Sensor_2";
+                OBDIIParameterCode.Catalyst_TemperatureBank_2_Sensor_2 = "Catalyst_TemperatureBank_2_Sensor_2";
+                OBDIIParameterCode.Battery_Voltage = "Battery_Voltage";
+                OBDIIParameterCode.Absolute_load_value = "Absolute_load_value";
+                OBDIIParameterCode.Command_equivalence_ratio = "Command_equivalence_ratio";
+                OBDIIParameterCode.Relative_throttle_position = "Relative_throttle_position";
+                OBDIIParameterCode.Ambient_air_temperature = "Ambient_air_temperature";
+                OBDIIParameterCode.Absolute_throttle_position_B = "Absolute_throttle_position_B";
+                OBDIIParameterCode.Absolute_throttle_position_C = "Absolute_throttle_position_C";
+                OBDIIParameterCode.Accelerator_pedal_position_D = "Accelerator_pedal_position_D";
+                OBDIIParameterCode.Accelerator_pedal_position_E = "Accelerator_pedal_position_E";
+                OBDIIParameterCode.Accelerator_pedal_position_F = "Accelerator_pedal_position_F";
+                OBDIIParameterCode.Commanded_throttle_actuator = "Commanded_throttle_actuator";
+                OBDIIParameterCode.Time_run_with_MIL_on = "Time_run_with_MIL_on";
+                OBDIIParameterCode.Time_since_trouble_codes_cleared = "Time_since_trouble_codes_cleared";
+                OBDIIParameterCode.Ethanol_fuel_percent = "Ethanol_fuel_percent";
+            })(OBDIIParameterCode = communication.OBDIIParameterCode || (communication.OBDIIParameterCode = {}));
         })(communication = lib.communication || (lib.communication = {}));
     })(lib = webSocketGauge.lib || (webSocketGauge.lib = {}));
 })(webSocketGauge || (webSocketGauge = {}));

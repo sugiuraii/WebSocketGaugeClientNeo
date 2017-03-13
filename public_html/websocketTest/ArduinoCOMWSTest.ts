@@ -25,21 +25,21 @@
  */
 /// <reference path="../script/websocket/websocketClient.ts" />
 /// <reference path="../node_modules/@types/jquery/index.d.ts" />
-import DefiCOMWebsocket = webSocketGauge.lib.communication.DefiCOMWebsocket;
-import DefiParameterCode = webSocketGauge.lib.communication.DefiParameterCode;
+import ArduinoCOMWebsocket = webSocketGauge.lib.communication.ArduinoCOMWebsocket;
+import ArduinoParameterCode = webSocketGauge.lib.communication.ArduinoParameterCode;
 
 window.onload = function()
 {
-    DefiCOMWSTest.main();
+    ArduinoCOMWSTest.main();
 }
 
-class DefiCOMWSTest
+class ArduinoCOMWSTest
 {    
-    private static defiWS : DefiCOMWebsocket;
+    private static arduinoWS : ArduinoCOMWebsocket;
     
     public static main(): void
     {
-        this.defiWS = new DefiCOMWebsocket();
+        this.arduinoWS = new ArduinoCOMWebsocket();
         $('#serverURL_box').val("ws://localhost:2012/");
         this.setParameterCodeSelectBox();
         this.registerWSEvents();
@@ -47,13 +47,13 @@ class DefiCOMWSTest
     
     private static setParameterCodeSelectBox()
     {
-        for (let code in DefiParameterCode)
+        for (let code in ArduinoParameterCode)
             $('#deficode_select').append($('<option>').html(code).val(code));
     }
     
     private static registerWSEvents() : void
     {
-        this.defiWS.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: number}) => 
+        this.arduinoWS.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: number}) => 
         {
             $('#interval').text(intervalTime.toFixed(2));
              //clear
@@ -63,20 +63,20 @@ class DefiCOMWSTest
                 $('#div_val_data').append(key + " : " + val[key] + "<br>" );
             }
         }
-        this.defiWS.OnERRPacketReceived = (msg:string)=>
+        this.arduinoWS.OnERRPacketReceived = (msg:string)=>
         {
             $('#div_err_data').append(msg + "<br>")
         };
         
-        this.defiWS.OnRESPacketReceived = (msg : string) =>
+        this.arduinoWS.OnRESPacketReceived = (msg : string) =>
         {
             $('#div_res_data').append(msg + "<br>");
         };
-        this.defiWS.OnWebsocketError = (msg : string) =>
+        this.arduinoWS.OnWebsocketError = (msg : string) =>
         {
             $('#div_ws_message').append(msg + "<br>");
         };
-        this.defiWS.OnWebsocketOpen = () =>
+        this.arduinoWS.OnWebsocketOpen = () =>
         {
             $('#div_ws_message').append('* Connection open<br/>');
 
@@ -85,7 +85,7 @@ class DefiCOMWSTest
             $('#connectButton').attr("disabled", "disabled");
             $('#disconnectButton').removeAttr("disabled");  
         };
-        this.defiWS.OnWebsocketClose = () =>
+        this.arduinoWS.OnWebsocketClose = () =>
         {
             $('#div_ws_message').append('* Connection closed<br/>');
 
@@ -98,23 +98,23 @@ class DefiCOMWSTest
     
     public static connectWebSocket() : void
     {
-        this.defiWS.URL = $("#serverURL_box").val();
-        this.defiWS.Connect();
+        this.arduinoWS.URL = $("#serverURL_box").val();
+        this.arduinoWS.Connect();
     };
     
     public static disconnectWebSocket()
     {
-        this.defiWS.Close();
+        this.arduinoWS.Close();
     };
 
-    public static input_DEFI_WS_SEND()
+    public static input_ARDUINO_WS_SEND()
     {
-        this.defiWS.SendWSSend($('#deficode_select').val(),$('#deficode_flag').val());
+        this.arduinoWS.SendWSSend($('#deficode_select').val(),$('#deficode_flag').val());
     };
 
-    public static input_DEFI_WS_INTERVAL()
+    public static input_ARDUINO_WS_INTERVAL()
     {
-        this.defiWS.SendWSInterval($('#interval_DEFI_WS_INTERVAL').val());
+        this.arduinoWS.SendWSInterval($('#interval_DEFI_WS_INTERVAL').val());
     };
 } 
 
