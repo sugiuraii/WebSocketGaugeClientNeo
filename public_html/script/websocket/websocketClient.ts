@@ -636,4 +636,154 @@ module webSocketGauge.lib.communication
         export const Time_since_trouble_codes_cleared = "Time_since_trouble_codes_cleared";
         export const Ethanol_fuel_percent = "Ethanol_fuel_percent";
     }
+    
+    namespace Interpolation
+    {
+        export enum UpdatePeriodCalcMethod
+        {
+            Direct,
+            Average,
+            Median
+        }
+        
+        export class VALInterpolationBuffer
+        {
+            public static UpdatePeriodCalcMethod: UpdatePeriodCalcMethod = UpdatePeriodCalcMethod.Median;
+            public static UpdatePeriodBufferLength : number = 4;
+            
+            private lastUpdateTimeStamp : number;
+            private lastValue : number;
+            private value : number;
+            private valUpdatePeriod : number;
+            
+            private updatePeriodAveragingQueue: MovingAverageQueue;
+            
+            constructor()
+            {
+                this.updatePeriodAveragingQueue = new MovingAverageQueue(VALInterpolationBuffer.UpdatePeriodBufferLength);
+            }
+            
+            /**
+             * Set value to buffer.
+             * @param value value to store.
+             * @param period value update period.
+             * @param timestamp timestamp of value update.
+             */
+            public setVal(value : number, period? : number, timestamp? : number) : void
+            {
+                //Calculate value update period
+                let currentPeriod : number;
+                if (typeof(period) === "number")
+                    currentPeriod = period;
+                else if(typeof(timestamp) === "number")
+                    currentPeriod = timestamp - this.lastUpdateTimeStamp;
+                else
+                    currentPeriod = performance.now() - this.lastUpdateTimeStamp;
+                
+                //Calculate average/median of valueUpdate period
+                switch (VALInterpolationBuffer.UpdatePeriodCalcMethod)
+                {
+                    case UpdatePeriodCalcMethod.Direct:
+                        this.valUpdatePeriod = currentPeriod;
+                        break;
+                    case UpdatePeriodCalcMethod.Median:
+                        this.updatePeriodAveragingQueue.add(currentPeriod);
+                        this.valUpdatePeriod = this.updatePeriodAveragingQueue.getMedian();
+                        break;
+                    case UpdatePeriodCalcMethod.Average:
+                        this.updatePeriodAveragingQueue.add(currentPeriod);
+                        this.valUpdatePeriod = this.updatePeriodAveragingQueue.getAverage();
+                        break;
+                }
+                    
+                // Store lastUpdateTimeStamp
+                if (typeof(timestamp) === "number" )
+                    this.lastUpdateTimeStamp = timestamp;
+                else
+                    this.lastUpdateTimeStamp = performance.now();
+
+                this.lastValue = this.value;
+                this.value = value;
+            }
+
+            public get LastValue() : number { return this.lastValue; }
+            public get Value(): number {return this.value; }
+
+            public getInterpolatedVal(timeStamp?: number): number
+            {
+                let actualTimeStamp : number
+                if(!(typeof(timeStamp) === "number"))
+                    actualTimeStamp = performance.now();
+                else
+                    actualTimeStamp = timeStamp;
+                
+                let interpolateFactor = (actualTimeStamp - this.lastUpdateTimeStamp) / this.valUpdatePeriod;
+                if(interpolateFactor > 1)
+                    interpolateFactor = 1;
+                if(interpolateFactor < 0)
+                    interpolateFactor = 0;
+                const interpolatedVal = this.lastValue + (this.value - this.lastValue)*interpolateFactor;
+                
+                return interpolatedVal;
+            }
+        }
+        
+        class MovingAverageQueue
+        {
+            private queueLength : number;
+            private valArray : number[];
+            
+            constructor(queueLength : number)
+            {
+                this.queueLength = queueLength;
+            }
+            
+            /**
+             * Add value to buffer queue.
+             * @param value value to add.
+             */
+            public add(value : number) : void
+            {
+                //Discard one oldest item
+                if (this.valArray.length == this.queueLength)
+                    this.valArray.shift();
+                
+                this.valArray.push(value);
+            }
+            
+            /**
+             * Get moving average.
+             */
+            public getAverage() : number
+            {
+                const length : number = this.valArray.length;
+                let temp : number = 0;
+                for(let i = 0; i < length; i++)
+                    temp += this.valArray[i];
+
+                if (length === 0)
+                    return 1;
+
+                return temp/length;
+            }
+            
+            /**
+             * Get movinig median.
+             */
+            public getMedian() : number
+            {
+                const temp : number[] = this.valArray.sort(function(a,b){return a-b;});
+                const length = temp.length;
+                const half : number = (temp.length/2)|0;
+
+                if (length === 0)
+                    return 1;
+
+                if(length % 2)
+                    return temp[half];
+                else
+                    return (temp[half-1] + temp[half])/2;
+            }
+        }
+    }
 }
