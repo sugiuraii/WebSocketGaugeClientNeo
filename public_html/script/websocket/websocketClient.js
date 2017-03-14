@@ -645,6 +645,127 @@ var webSocketGauge;
                 OBDIIParameterCode.Time_since_trouble_codes_cleared = "Time_since_trouble_codes_cleared";
                 OBDIIParameterCode.Ethanol_fuel_percent = "Ethanol_fuel_percent";
             })(OBDIIParameterCode = communication.OBDIIParameterCode || (communication.OBDIIParameterCode = {}));
+            var Interpolation;
+            (function (Interpolation) {
+                var UpdatePeriodCalcMethod;
+                (function (UpdatePeriodCalcMethod) {
+                    UpdatePeriodCalcMethod[UpdatePeriodCalcMethod["Direct"] = 0] = "Direct";
+                    UpdatePeriodCalcMethod[UpdatePeriodCalcMethod["Average"] = 1] = "Average";
+                    UpdatePeriodCalcMethod[UpdatePeriodCalcMethod["Median"] = 2] = "Median";
+                })(UpdatePeriodCalcMethod = Interpolation.UpdatePeriodCalcMethod || (Interpolation.UpdatePeriodCalcMethod = {}));
+                var VALInterpolationBuffer = (function () {
+                    function VALInterpolationBuffer() {
+                        this.updatePeriodAveragingQueue = new MovingAverageQueue(VALInterpolationBuffer.UpdatePeriodBufferLength);
+                    }
+                    /**
+                     * Set value to buffer.
+                     * @param value value to store.
+                     * @param period value update period.
+                     * @param timestamp timestamp of value update.
+                     */
+                    VALInterpolationBuffer.prototype.setVal = function (value, period, timestamp) {
+                        //Calculate value update period
+                        var currentPeriod;
+                        if (typeof (period) === "number")
+                            currentPeriod = period;
+                        else if (typeof (timestamp) === "number")
+                            currentPeriod = timestamp - this.lastUpdateTimeStamp;
+                        else
+                            currentPeriod = performance.now() - this.lastUpdateTimeStamp;
+                        //Calculate average/median of valueUpdate period
+                        switch (VALInterpolationBuffer.UpdatePeriodCalcMethod) {
+                            case UpdatePeriodCalcMethod.Direct:
+                                this.valUpdatePeriod = currentPeriod;
+                                break;
+                            case UpdatePeriodCalcMethod.Median:
+                                this.updatePeriodAveragingQueue.add(currentPeriod);
+                                this.valUpdatePeriod = this.updatePeriodAveragingQueue.getMedian();
+                                break;
+                            case UpdatePeriodCalcMethod.Average:
+                                this.updatePeriodAveragingQueue.add(currentPeriod);
+                                this.valUpdatePeriod = this.updatePeriodAveragingQueue.getAverage();
+                                break;
+                        }
+                        // Store lastUpdateTimeStamp
+                        if (typeof (timestamp) === "number")
+                            this.lastUpdateTimeStamp = timestamp;
+                        else
+                            this.lastUpdateTimeStamp = performance.now();
+                        this.lastValue = this.value;
+                        this.value = value;
+                    };
+                    Object.defineProperty(VALInterpolationBuffer.prototype, "LastValue", {
+                        get: function () { return this.lastValue; },
+                        enumerable: true,
+                        configurable: true
+                    });
+                    Object.defineProperty(VALInterpolationBuffer.prototype, "Value", {
+                        get: function () { return this.value; },
+                        enumerable: true,
+                        configurable: true
+                    });
+                    VALInterpolationBuffer.prototype.getInterpolatedVal = function (timeStamp) {
+                        var actualTimeStamp;
+                        if (!(typeof (timeStamp) === "number"))
+                            actualTimeStamp = performance.now();
+                        else
+                            actualTimeStamp = timeStamp;
+                        var interpolateFactor = (actualTimeStamp - this.lastUpdateTimeStamp) / this.valUpdatePeriod;
+                        if (interpolateFactor > 1)
+                            interpolateFactor = 1;
+                        if (interpolateFactor < 0)
+                            interpolateFactor = 0;
+                        var interpolatedVal = this.lastValue + (this.value - this.lastValue) * interpolateFactor;
+                        return interpolatedVal;
+                    };
+                    return VALInterpolationBuffer;
+                }());
+                VALInterpolationBuffer.UpdatePeriodCalcMethod = UpdatePeriodCalcMethod.Median;
+                VALInterpolationBuffer.UpdatePeriodBufferLength = 4;
+                Interpolation.VALInterpolationBuffer = VALInterpolationBuffer;
+                var MovingAverageQueue = (function () {
+                    function MovingAverageQueue(queueLength) {
+                        this.queueLength = queueLength;
+                    }
+                    /**
+                     * Add value to buffer queue.
+                     * @param value value to add.
+                     */
+                    MovingAverageQueue.prototype.add = function (value) {
+                        //Discard one oldest item
+                        if (this.valArray.length == this.queueLength)
+                            this.valArray.shift();
+                        this.valArray.push(value);
+                    };
+                    /**
+                     * Get moving average.
+                     */
+                    MovingAverageQueue.prototype.getAverage = function () {
+                        var length = this.valArray.length;
+                        var temp = 0;
+                        for (var i = 0; i < length; i++)
+                            temp += this.valArray[i];
+                        if (length === 0)
+                            return 1;
+                        return temp / length;
+                    };
+                    /**
+                     * Get movinig median.
+                     */
+                    MovingAverageQueue.prototype.getMedian = function () {
+                        var temp = this.valArray.sort(function (a, b) { return a - b; });
+                        var length = temp.length;
+                        var half = (temp.length / 2) | 0;
+                        if (length === 0)
+                            return 1;
+                        if (length % 2)
+                            return temp[half];
+                        else
+                            return (temp[half - 1] + temp[half]) / 2;
+                    };
+                    return MovingAverageQueue;
+                }());
+            })(Interpolation || (Interpolation = {}));
         })(communication = lib.communication || (lib.communication = {}));
     })(lib = webSocketGauge.lib || (webSocketGauge.lib = {}));
 })(webSocketGauge || (webSocketGauge = {}));
