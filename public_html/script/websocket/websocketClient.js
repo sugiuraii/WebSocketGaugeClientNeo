@@ -245,11 +245,29 @@ var webSocketGauge;
                 __extends(DefiSSMWebsocketCommon, _super);
                 function DefiSSMWebsocketCommon() {
                     var _this = _super.call(this) || this;
+                    //Interpolate value buffer
+                    _this.interpolateBuffers = {};
                     _this.recordIntervalTimeEnabled = true;
                     _this.valPacketPreviousTimeStamp = window.performance.now();
                     _this.valPacketIntervalTime = 0;
                     return _this;
                 }
+                DefiSSMWebsocketCommon.prototype.EnableInterpolate = function (code) {
+                    this.checkInterpolateBufferAndCreateIfEmpty(code);
+                    this.interpolateBuffers[code].InterpolateEnabled = true;
+                };
+                DefiSSMWebsocketCommon.prototype.DisableInterpolate = function (code) {
+                    this.checkInterpolateBufferAndCreateIfEmpty(code);
+                    this.interpolateBuffers[code].InterpolateEnabled = false;
+                };
+                DefiSSMWebsocketCommon.prototype.checkInterpolateBufferAndCreateIfEmpty = function (code) {
+                    if (!(code in this.interpolateBuffers))
+                        this.interpolateBuffers[code] = new Interpolation.VALInterpolationBuffer();
+                };
+                DefiSSMWebsocketCommon.prototype.getVal = function (code, timestamp) {
+                    this.checkInterpolateBufferAndCreateIfEmpty(code);
+                    return this.interpolateBuffers[code].getVal(timestamp);
+                };
                 DefiSSMWebsocketCommon.prototype.parseIncomingMessage = function (msg) {
                     var receivedJson = JSON.parse(msg);
                     var receivedJSONIface = receivedJson;
@@ -263,12 +281,19 @@ var webSocketGauge;
                             }
                             ;
                             var receivedVALJSON = receivedJson;
+                            // Invoke VALPacketReceived Event
                             if (typeof (this.onVALPacketReceived) !== "undefined")
                                 this.OnVALPacketReceived(this.valPacketIntervalTime, receivedVALJSON.val);
-                            if (typeof (this.onVALPacketReceivedByCode) !== "undefined") {
-                                for (var key in receivedVALJSON.val)
+                            for (var key in receivedVALJSON.val) {
+                                var val = Number(receivedVALJSON.val[key]);
+                                // Register to interpolate buffer
+                                this.checkInterpolateBufferAndCreateIfEmpty(key);
+                                this.interpolateBuffers[key].setVal(val);
+                                // Invoke onVALPacketReceivedByCode event
+                                if (typeof (this.onVALPacketReceivedByCode) !== "undefined") {
                                     if (key in this.onVALPacketReceivedByCode)
-                                        this.OnVALPacketReceivedByCode[key](receivedVALJSON.val[key]);
+                                        this.OnVALPacketReceivedByCode[key](val);
+                                }
                             }
                             break;
                         case ("ERR"):
@@ -655,6 +680,7 @@ var webSocketGauge;
                 })(UpdatePeriodCalcMethod = Interpolation.UpdatePeriodCalcMethod || (Interpolation.UpdatePeriodCalcMethod = {}));
                 var VALInterpolationBuffer = (function () {
                     function VALInterpolationBuffer() {
+                        this.interpolateEnabled = false;
                         this.updatePeriodAveragingQueue = new MovingAverageQueue(VALInterpolationBuffer.UpdatePeriodBufferLength);
                     }
                     /**
@@ -694,17 +720,15 @@ var webSocketGauge;
                         this.lastValue = this.value;
                         this.value = value;
                     };
-                    Object.defineProperty(VALInterpolationBuffer.prototype, "LastValue", {
-                        get: function () { return this.lastValue; },
+                    Object.defineProperty(VALInterpolationBuffer.prototype, "InterpolateEnabled", {
+                        get: function () { return this.interpolateEnabled; },
+                        set: function (flag) { this.interpolateEnabled = flag; },
                         enumerable: true,
                         configurable: true
                     });
-                    Object.defineProperty(VALInterpolationBuffer.prototype, "Value", {
-                        get: function () { return this.value; },
-                        enumerable: true,
-                        configurable: true
-                    });
-                    VALInterpolationBuffer.prototype.getInterpolatedVal = function (timeStamp) {
+                    VALInterpolationBuffer.prototype.getVal = function (timeStamp) {
+                        if (!this.InterpolateEnabled)
+                            return this.value;
                         var actualTimeStamp;
                         if (!(typeof (timeStamp) === "number"))
                             actualTimeStamp = performance.now();
@@ -726,6 +750,7 @@ var webSocketGauge;
                 var MovingAverageQueue = (function () {
                     function MovingAverageQueue(queueLength) {
                         this.queueLength = queueLength;
+                        this.valArray = new Array();
                     }
                     /**
                      * Add value to buffer queue.

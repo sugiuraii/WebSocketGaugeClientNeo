@@ -223,17 +223,43 @@ module webSocketGauge.lib.communication
         
         private onVALPacketReceivedByCode : {[code : string] : (val : number)=>void};
         private onVALPacketReceived : (intervalTime : number, val:{[code : string] : number}) => void;
-        
+                
         //Internal state
         private valPacketPreviousTimeStamp : number;
         private valPacketIntervalTime : number;
         
+        //Interpolate value buffer
+        private interpolateBuffers: {[code: string]: Interpolation.VALInterpolationBuffer} = {};
+                
         constructor()
         {
             super();
             this.recordIntervalTimeEnabled = true;
             this.valPacketPreviousTimeStamp = window.performance.now();
             this.valPacketIntervalTime = 0;
+        }
+        
+        public EnableInterpolate(code : string) : void
+        {
+            this.checkInterpolateBufferAndCreateIfEmpty(code);
+            this.interpolateBuffers[code].InterpolateEnabled = true;
+        }
+        public DisableInterpolate(code : string) : void
+        {
+            this.checkInterpolateBufferAndCreateIfEmpty(code);
+            this.interpolateBuffers[code].InterpolateEnabled = false;
+        }
+        
+        private checkInterpolateBufferAndCreateIfEmpty(code: string): void
+        {
+            if(!(code in this.interpolateBuffers))
+                this.interpolateBuffers[code] = new Interpolation.VALInterpolationBuffer();            
+        }
+        
+        public getVal(code : string, timestamp? : number) : number
+        {
+            this.checkInterpolateBufferAndCreateIfEmpty(code);
+            return this.interpolateBuffers[code].getVal(timestamp);
         }
         
         protected parseIncomingMessage(msg : string) : void
@@ -252,14 +278,24 @@ module webSocketGauge.lib.communication
                     };
                     
                     let receivedVALJSON: JSONFormats.VALJSONMessage = receivedJson;
+                    
+                    // Invoke VALPacketReceived Event
                     if ( typeof(this.onVALPacketReceived) !== "undefined" )
                         this.OnVALPacketReceived(this.valPacketIntervalTime, receivedVALJSON.val);
                     
-                    if (typeof (this.onVALPacketReceivedByCode) !== "undefined")
+                    for (let key in receivedVALJSON.val)
                     {
-                        for (let key in receivedVALJSON.val)
+                        const val: number = Number(receivedVALJSON.val[key]);
+                        // Register to interpolate buffer
+                        this.checkInterpolateBufferAndCreateIfEmpty(key);
+                        this.interpolateBuffers[key].setVal(val);
+                        
+                        // Invoke onVALPacketReceivedByCode event
+                        if (typeof (this.onVALPacketReceivedByCode) !== "undefined")
+                        {
                             if (key in this.onVALPacketReceivedByCode)
-                                this.OnVALPacketReceivedByCode[key](receivedVALJSON.val[key]);
+                                this.OnVALPacketReceivedByCode[key](val);
+                        }
                     }
                     break;
                 case("ERR"):
@@ -658,6 +694,8 @@ module webSocketGauge.lib.communication
             
             private updatePeriodAveragingQueue: MovingAverageQueue;
             
+            private interpolateEnabled : boolean = false;
+            
             constructor()
             {
                 this.updatePeriodAveragingQueue = new MovingAverageQueue(VALInterpolationBuffer.UpdatePeriodBufferLength);
@@ -706,11 +744,14 @@ module webSocketGauge.lib.communication
                 this.value = value;
             }
 
-            public get LastValue() : number { return this.lastValue; }
-            public get Value(): number {return this.value; }
+            public get InterpolateEnabled() {return this.interpolateEnabled;}
+            public set InterpolateEnabled(flag) {this.interpolateEnabled = flag;}
 
-            public getInterpolatedVal(timeStamp?: number): number
+            public getVal(timeStamp?: number): number
             {
+                if (!this.InterpolateEnabled)
+                    return this.value;
+                
                 let actualTimeStamp : number
                 if(!(typeof(timeStamp) === "number"))
                     actualTimeStamp = performance.now();
@@ -722,7 +763,7 @@ module webSocketGauge.lib.communication
                     interpolateFactor = 1;
                 if(interpolateFactor < 0)
                     interpolateFactor = 0;
-                const interpolatedVal = this.lastValue + (this.value - this.lastValue)*interpolateFactor;
+                const interpolatedVal : number = this.lastValue + (this.value - this.lastValue)*interpolateFactor;
                 
                 return interpolatedVal;
             }
@@ -736,6 +777,7 @@ module webSocketGauge.lib.communication
             constructor(queueLength : number)
             {
                 this.queueLength = queueLength;
+                this.valArray = new Array();
             }
             
             /**

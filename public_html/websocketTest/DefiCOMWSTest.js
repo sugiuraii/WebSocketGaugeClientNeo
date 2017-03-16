@@ -38,20 +38,33 @@ var DefiCOMWSTest = (function () {
         $('#serverURL_box').val("ws://localhost:2012/");
         this.setParameterCodeSelectBox();
         this.registerWSEvents();
+        window.requestAnimationFrame(DefiCOMWSTest.showInterpolateVal);
     };
     DefiCOMWSTest.setParameterCodeSelectBox = function () {
         for (var code in DefiParameterCode)
             $('#deficode_select').append($('<option>').html(code).val(code));
     };
+    DefiCOMWSTest.showInterpolateVal = function (timestamp) {
+        $('#div_val_data').html("");
+        for (var key in DefiParameterCode) {
+            var val = DefiCOMWSTest.defiWS.getVal(key, timestamp);
+            $('#div_val_data').append(key + " : " + val + "<br>");
+        }
+        window.requestAnimationFrame(DefiCOMWSTest.showInterpolateVal);
+    };
     DefiCOMWSTest.registerWSEvents = function () {
-        this.defiWS.OnVALPacketReceived = function (intervalTime, val) {
+        /*
+        this.defiWS.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: number}) =>
+        {
             $('#interval').text(intervalTime.toFixed(2));
-            //clear
+             //clear
             $('#div_val_data').html("");
-            for (var key in val) {
-                $('#div_val_data').append(key + " : " + val[key] + "<br>");
+            for (var key in val)
+            {
+                $('#div_val_data').append(key + " : " + val[key] + "<br>" );
             }
-        };
+        }
+        */
         this.defiWS.OnERRPacketReceived = function (msg) {
             $('#div_err_data').append(msg + "<br>");
         };
@@ -86,7 +99,9 @@ var DefiCOMWSTest = (function () {
     };
     ;
     DefiCOMWSTest.input_DEFI_WS_SEND = function () {
-        this.defiWS.SendWSSend($('#deficode_select').val(), $('#deficode_flag').val());
+        var key = $('#deficode_select').val();
+        this.defiWS.SendWSSend(key, $('#deficode_flag').val());
+        this.defiWS.EnableInterpolate(key);
     };
     ;
     DefiCOMWSTest.input_DEFI_WS_INTERVAL = function () {
