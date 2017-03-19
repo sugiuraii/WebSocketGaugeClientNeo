@@ -35,24 +35,34 @@ var webSocketGauge;
     (function (lib) {
         var graphics;
         (function (graphics) {
+            var Gauge1DOptions = (function () {
+                function Gauge1DOptions() {
+                    this.Max = 100;
+                    this.Min = 0;
+                    this.InterPolationAnimation = false;
+                }
+                return Gauge1DOptions;
+            }());
             var Gauge1D = (function (_super) {
                 __extends(Gauge1D, _super);
-                function Gauge1D() {
+                function Gauge1D(options) {
                     var _this = _super.call(this) || this;
-                    _this.max = 100;
-                    _this.min = 0;
+                    if (!(options instanceof Gauge1DOptions))
+                        _this.gauge1DOptions = new Gauge1DOptions;
+                    else
+                        _this.gauge1DOptions = options;
                     _this.value = 0;
                     return _this;
                 }
                 Object.defineProperty(Gauge1D.prototype, "Max", {
-                    get: function () { return this.max; },
-                    set: function (val) { this.max = val; },
+                    get: function () { return this.gauge1DOptions.Max; },
+                    set: function (val) { this.gauge1DOptions.Max = val; },
                     enumerable: true,
                     configurable: true
                 });
                 Object.defineProperty(Gauge1D.prototype, "Min", {
-                    get: function () { return this.min; },
-                    set: function (val) { this.min = val; },
+                    get: function () { return this.gauge1DOptions.Min; },
+                    set: function (val) { this.gauge1DOptions.Min = val; },
                     enumerable: true,
                     configurable: true
                 });
@@ -63,8 +73,8 @@ var webSocketGauge;
                     configurable: true
                 });
                 Object.defineProperty(Gauge1D.prototype, "InterpolatedAnimation", {
-                    get: function () { return this.interPolationAnimaton; },
-                    set: function (val) { this.interPolationAnimaton = val; },
+                    get: function () { return this.gauge1DOptions.InterPolationAnimation; },
+                    set: function (val) { this.gauge1DOptions.InterPolationAnimation = val; },
                     enumerable: true,
                     configurable: true
                 });
@@ -82,22 +92,41 @@ var webSocketGauge;
                 };
                 return Gauge1D;
             }(PIXI.Container));
+            var ProgressBarOptions = (function (_super) {
+                __extends(ProgressBarOptions, _super);
+                function ProgressBarOptions() {
+                    return _super.call(this) || this;
+                }
+                return ProgressBarOptions;
+            }(Gauge1DOptions));
             var ProgressBar = (function (_super) {
                 __extends(ProgressBar, _super);
-                function ProgressBar() {
-                    var _this = _super.call(this) || this;
+                function ProgressBar(options) {
+                    var _this = this;
+                    if (!(options instanceof ProgressBarOptions)) {
+                        _this.progressBarOptions = new ProgressBarOptions();
+                    }
+                    else {
+                        _this.progressBarOptions = options;
+                    }
+                    _this = _super.call(this, _this.progressBarOptions) || this;
                     _this.sprite = new PIXI.Sprite();
                     _this.spriteMask = new PIXI.Graphics();
                     //Assign mask to sprite
                     _this.sprite.mask = _this.spriteMask;
+                    //Assign texture to sprite
+                    _this.sprite.texture = _this.progressBarOptions.Texture;
                     //Assign spirite and mask to container
                     _super.prototype.addChild.call(_this, _this.sprite);
                     _super.prototype.addChild.call(_this, _this.spriteMask);
                     return _this;
                 }
                 Object.defineProperty(ProgressBar.prototype, "Texture", {
-                    get: function () { return this.sprite.texture; },
-                    set: function (val) { this.sprite.texture = val; },
+                    get: function () { return this.progressBarOptions.Texture; },
+                    set: function (val) {
+                        this.progressBarOptions.Texture = val;
+                        this.sprite.texture = this.progressBarOptions.Texture;
+                    },
                     enumerable: true,
                     configurable: true
                 });
@@ -113,68 +142,82 @@ var webSocketGauge;
                 });
                 return ProgressBar;
             }(Gauge1D));
+            var CircularProgressBarOptions = (function (_super) {
+                __extends(CircularProgressBarOptions, _super);
+                function CircularProgressBarOptions() {
+                    var _this = _super.call(this) || this;
+                    _this.OffsetAngle = 0;
+                    _this.FullAngle = 360;
+                    _this.AngleStep = 0.1;
+                    _this.AntiClockwise = false;
+                    _this.Center = new PIXI.Point(0, 0);
+                    return _this;
+                }
+                return CircularProgressBarOptions;
+            }(ProgressBarOptions));
+            graphics.CircularProgressBarOptions = CircularProgressBarOptions;
             var CircularProgressBar = (function (_super) {
                 __extends(CircularProgressBar, _super);
-                function CircularProgressBar() {
-                    var _this = _super.call(this) || this;
-                    _this.offsetAngle = 0;
-                    _this.fullAngle = 360;
-                    _this.angleStep = 0.1;
-                    _this.antiClockwise = false;
-                    _this.center = new PIXI.Point(0, 0);
+                function CircularProgressBar(options) {
+                    var _this = this;
+                    if (!(options instanceof CircularProgressBarOptions))
+                        _this.circularProgressBarOptions = new CircularProgressBarOptions();
+                    else
+                        _this.circularProgressBarOptions = options;
+                    _this = _super.call(this, _this.circularProgressBarOptions) || this;
                     return _this;
                 }
                 Object.defineProperty(CircularProgressBar.prototype, "OffsetAngle", {
-                    get: function () { return this.offsetAngle; },
-                    set: function (val) { this.offsetAngle = val; },
+                    get: function () { return this.circularProgressBarOptions.OffsetAngle; },
+                    set: function (val) { this.circularProgressBarOptions.OffsetAngle = val; },
                     enumerable: true,
                     configurable: true
                 });
                 Object.defineProperty(CircularProgressBar.prototype, "FullAngle", {
-                    get: function () { return this.fullAngle; },
-                    set: function (val) { this.fullAngle = val; },
+                    get: function () { return this.circularProgressBarOptions.FullAngle; },
+                    set: function (val) { this.circularProgressBarOptions.FullAngle = val; },
                     enumerable: true,
                     configurable: true
                 });
                 Object.defineProperty(CircularProgressBar.prototype, "AngleStep", {
-                    get: function () { return this.angleStep; },
-                    set: function (val) { this.angleStep = val; },
+                    get: function () { return this.circularProgressBarOptions.AngleStep; },
+                    set: function (val) { this.circularProgressBarOptions.AngleStep = val; },
                     enumerable: true,
                     configurable: true
                 });
                 Object.defineProperty(CircularProgressBar.prototype, "AntiClockwise", {
-                    get: function () { return this.antiClockwise; },
-                    set: function (val) { this.antiClockwise = val; },
+                    get: function () { return this.circularProgressBarOptions.AntiClockwise; },
+                    set: function (val) { this.circularProgressBarOptions.AntiClockwise = val; },
                     enumerable: true,
                     configurable: true
                 });
                 Object.defineProperty(CircularProgressBar.prototype, "Center", {
-                    get: function () { return this.center; },
-                    set: function (val) { this.center = val; },
+                    get: function () { return this.circularProgressBarOptions.Center; },
+                    set: function (val) { this.circularProgressBarOptions.Center = val; },
                     enumerable: true,
                     configurable: true
                 });
                 Object.defineProperty(CircularProgressBar.prototype, "Radius", {
-                    get: function () { return this.radius; },
-                    set: function (val) { this.radius = val; },
+                    get: function () { return this.circularProgressBarOptions.Radius; },
+                    set: function (val) { this.circularProgressBarOptions.Radius = val; },
                     enumerable: true,
                     configurable: true
                 });
                 Object.defineProperty(CircularProgressBar.prototype, "InnerRadius", {
-                    get: function () { return this.innerRadius; },
-                    set: function (val) { this.innerRadius = val; },
+                    get: function () { return this.circularProgressBarOptions.InnerRadius; },
+                    set: function (val) { this.circularProgressBarOptions.InnerRadius = val; },
                     enumerable: true,
                     configurable: true
                 });
                 CircularProgressBar.prototype._update = function (skipStepCheck) {
                     'use strict';
-                    var centerPos = this.center;
-                    var radius = this.radius;
-                    var innerRadius = this.innerRadius;
-                    var anticlockwise = this.antiClockwise;
-                    var offsetAngle = this.offsetAngle;
-                    var fullAngle = this.fullAngle;
-                    var angleStep = this.angleStep;
+                    var centerPos = this.Center;
+                    var radius = this.Radius;
+                    var innerRadius = this.InnerRadius;
+                    var anticlockwise = this.AntiClockwise;
+                    var offsetAngle = this.OffsetAngle;
+                    var fullAngle = this.FullAngle;
+                    var angleStep = this.AngleStep;
                     var valueMax = this.Max;
                     var valueMin = this.Min;
                     var value = this.Value;
@@ -208,59 +251,73 @@ var webSocketGauge;
                 return CircularProgressBar;
             }(ProgressBar));
             graphics.CircularProgressBar = CircularProgressBar;
+            var RectangularProgressBarOptions = (function (_super) {
+                __extends(RectangularProgressBarOptions, _super);
+                function RectangularProgressBarOptions() {
+                    var _this = _super.call(this) || this;
+                    _this.Vertical = false;
+                    _this.InvertDirection = false;
+                    _this.MaskWidth = 100;
+                    _this.MaskHeight = 100;
+                    _this.PixelStep = 1;
+                    return _this;
+                }
+                return RectangularProgressBarOptions;
+            }(ProgressBarOptions));
+            graphics.RectangularProgressBarOptions = RectangularProgressBarOptions;
             var RectangularProgressBar = (function (_super) {
                 __extends(RectangularProgressBar, _super);
-                function RectangularProgressBar() {
-                    var _this = _super.call(this) || this;
-                    _this.vertical = false;
-                    _this.invertDirection = false;
-                    _this.maskWidth = 100;
-                    _this.maskHeight = 100;
-                    _this.pixelStep = 1;
+                function RectangularProgressBar(options) {
+                    var _this = this;
+                    if (!(options instanceof RectangularProgressBarOptions))
+                        _this.rectangularProgressBarOptions = new RectangularProgressBarOptions();
+                    else
+                        _this.rectangularProgressBarOptions = options;
+                    _this = _super.call(this, _this.rectangularProgressBarOptions) || this;
                     return _this;
                 }
                 Object.defineProperty(RectangularProgressBar.prototype, "Vertical", {
-                    get: function () { return this.vertical; },
-                    set: function (val) { this.vertical = val; },
+                    get: function () { return this.rectangularProgressBarOptions.Vertical; },
+                    set: function (val) { this.rectangularProgressBarOptions.Vertical = val; },
                     enumerable: true,
                     configurable: true
                 });
                 Object.defineProperty(RectangularProgressBar.prototype, "InvertDirection", {
-                    get: function () { return this.invertDirection; },
-                    set: function (val) { this.invertDirection = val; },
+                    get: function () { return this.rectangularProgressBarOptions.InvertDirection; },
+                    set: function (val) { this.rectangularProgressBarOptions.InvertDirection = val; },
                     enumerable: true,
                     configurable: true
                 });
                 Object.defineProperty(RectangularProgressBar.prototype, "MaskWidth", {
-                    get: function () { return this.maskWidth; },
-                    set: function (val) { this.maskWidth = val; },
+                    get: function () { return this.rectangularProgressBarOptions.MaskWidth; },
+                    set: function (val) { this.rectangularProgressBarOptions.MaskWidth = val; },
                     enumerable: true,
                     configurable: true
                 });
                 Object.defineProperty(RectangularProgressBar.prototype, "MaskHeight", {
-                    get: function () { return this.maskHeight; },
-                    set: function (val) { this.maskHeight = val; },
+                    get: function () { return this.rectangularProgressBarOptions.MaskHeight; },
+                    set: function (val) { this.rectangularProgressBarOptions.MaskHeight = val; },
                     enumerable: true,
                     configurable: true
                 });
                 Object.defineProperty(RectangularProgressBar.prototype, "PixelStep", {
-                    get: function () { return this.pixelStep; },
-                    set: function (val) { this.pixelStep = val; },
+                    get: function () { return this.rectangularProgressBarOptions.PixelStep; },
+                    set: function (val) { this.rectangularProgressBarOptions.PixelStep = val; },
                     enumerable: true,
                     configurable: true
                 });
                 RectangularProgressBar.prototype._update = function (skipStepCheck) {
                     'use strict';
-                    var maskHeight = this.maskHeight;
-                    var maskWidth = this.maskWidth;
+                    var maskHeight = this.MaskHeight;
+                    var maskWidth = this.MaskWidth;
                     var currBarPixel = this.currBarPixel;
-                    var pixelStep = this.pixelStep;
+                    var pixelStep = this.PixelStep;
                     var valueMax = this.Max;
                     var valueMin = this.Min;
                     var value = this.Value;
                     var spriteMask = this.SpriteMask;
-                    var vertical = this.vertical;
-                    var invertDirection = this.invertDirection;
+                    var vertical = this.Vertical;
+                    var invertDirection = this.InvertDirection;
                     var pixelRange;
                     if (vertical)
                         pixelRange = maskHeight;
@@ -307,18 +364,34 @@ var webSocketGauge;
                 return RectangularProgressBar;
             }(ProgressBar));
             graphics.RectangularProgressBar = RectangularProgressBar;
+            var NeedleGaugeOptions = (function (_super) {
+                __extends(NeedleGaugeOptions, _super);
+                function NeedleGaugeOptions() {
+                    return _super.call(this) || this;
+                }
+                return NeedleGaugeOptions;
+            }(Gauge1DOptions));
             var NeedleGauge = (function (_super) {
                 __extends(NeedleGauge, _super);
-                function NeedleGauge() {
-                    var _this = _super.call(this) || this;
+                function NeedleGauge(options) {
+                    var _this = this;
+                    if (!(options instanceof NeedleGaugeOptions))
+                        _this.needleGaugeOptions = new NeedleGaugeOptions();
+                    else
+                        _this.needleGaugeOptions = options;
+                    _this = _super.call(this, _this.needleGaugeOptions) || this;
                     _this.sprite = new PIXI.Sprite();
+                    _this.sprite.texture = _this.needleGaugeOptions.Texture;
                     //Assign spirite and mask to container
                     _this.addChild(_this.sprite);
                     return _this;
                 }
                 Object.defineProperty(NeedleGauge.prototype, "Texture", {
-                    get: function () { return this.sprite.texture; },
-                    set: function (val) { this.sprite.texture = val; },
+                    get: function () { return this.needleGaugeOptions.Texture; },
+                    set: function (val) {
+                        this.needleGaugeOptions.Texture = val;
+                        this.sprite.texture = this.needleGaugeOptions.Texture;
+                    },
                     enumerable: true,
                     configurable: true
                 });
@@ -329,52 +402,69 @@ var webSocketGauge;
                 });
                 return NeedleGauge;
             }(Gauge1D));
+            var RotationNeedleGaugeOptions = (function (_super) {
+                __extends(RotationNeedleGaugeOptions, _super);
+                function RotationNeedleGaugeOptions() {
+                    var _this = _super.call(this) || this;
+                    _this.OffsetAngle = 0;
+                    _this.FullAngle = 360;
+                    _this.AngleStep = 0.1;
+                    _this.AntiClockwise = false;
+                    _this.Pivot = new PIXI.Point();
+                    return _this;
+                }
+                return RotationNeedleGaugeOptions;
+            }(NeedleGaugeOptions));
+            graphics.RotationNeedleGaugeOptions = RotationNeedleGaugeOptions;
             var RotationNeedleGauge = (function (_super) {
                 __extends(RotationNeedleGauge, _super);
-                function RotationNeedleGauge() {
-                    var _this = _super.call(this) || this;
-                    _this.offsetAngle = 0;
-                    _this.fullAngle = 360;
-                    _this.angleStep = 0.1;
-                    _this.antiClockwise = false;
+                function RotationNeedleGauge(options) {
+                    var _this = this;
+                    if (!(options instanceof RotationNeedleGaugeOptions))
+                        _this.rotationNeedleGaugeOptions = new RotationNeedleGaugeOptions();
+                    else
+                        _this.rotationNeedleGaugeOptions = options;
+                    _this = _super.call(this, _this.rotationNeedleGaugeOptions) || this;
+                    //Set sprite pivot
+                    _this.Sprite.pivot = _this.rotationNeedleGaugeOptions.Pivot;
                     return _this;
                 }
                 Object.defineProperty(RotationNeedleGauge.prototype, "OffsetAngle", {
-                    get: function () { return this.offsetAngle; },
-                    set: function (val) { this.offsetAngle = val; },
+                    get: function () { return this.rotationNeedleGaugeOptions.OffsetAngle; },
+                    set: function (val) { this.rotationNeedleGaugeOptions.OffsetAngle = val; },
                     enumerable: true,
                     configurable: true
                 });
                 Object.defineProperty(RotationNeedleGauge.prototype, "FullAngle", {
-                    get: function () { return this.fullAngle; },
-                    set: function (val) { this.fullAngle = val; },
+                    get: function () { return this.rotationNeedleGaugeOptions.FullAngle; },
+                    set: function (val) { this.rotationNeedleGaugeOptions.FullAngle = val; },
                     enumerable: true,
                     configurable: true
                 });
                 Object.defineProperty(RotationNeedleGauge.prototype, "AngleStep", {
-                    get: function () { return this.angleStep; },
-                    set: function (val) { this.angleStep = val; },
+                    get: function () { return this.rotationNeedleGaugeOptions.AngleStep; },
+                    set: function (val) { this.rotationNeedleGaugeOptions.AngleStep = val; },
                     enumerable: true,
                     configurable: true
                 });
                 Object.defineProperty(RotationNeedleGauge.prototype, "AntiClockwise", {
-                    get: function () { return this.antiClockwise; },
-                    set: function (val) { this.antiClockwise = val; },
+                    get: function () { return this.rotationNeedleGaugeOptions.AntiClockwise; },
+                    set: function (val) { this.rotationNeedleGaugeOptions.AntiClockwise = val; },
                     enumerable: true,
                     configurable: true
                 });
                 Object.defineProperty(RotationNeedleGauge.prototype, "Pivot", {
-                    get: function () { return this.Sprite.pivot; },
-                    set: function (val) { this.Sprite.pivot = val; },
+                    get: function () { return this.rotationNeedleGaugeOptions.Pivot; },
+                    set: function (val) { this.rotationNeedleGaugeOptions.Pivot = val; },
                     enumerable: true,
                     configurable: true
                 });
                 RotationNeedleGauge.prototype._update = function (skipStepCheck) {
                     'use strict';
-                    var anticlockwise = this.antiClockwise;
-                    var offsetAngle = this.offsetAngle;
-                    var fullAngle = this.fullAngle;
-                    var angleStep = this.angleStep;
+                    var anticlockwise = this.AntiClockwise;
+                    var offsetAngle = this.OffsetAngle;
+                    var fullAngle = this.FullAngle;
+                    var angleStep = this.AngleStep;
                     var valueMax = this.Max;
                     var valueMin = this.Min;
                     var value = this.Value;
