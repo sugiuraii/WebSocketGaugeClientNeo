@@ -28,16 +28,15 @@
 
 module webSocketGauge.lib.graphics
 {
-    abstract class Gauge1D
+    abstract class Gauge1D extends PIXI.Container
     {
         private max : number;
         private min : number;
         private value : number;
         private interPolationAnimaton : boolean;
-        private container : PIXI.Container;
         constructor()
         {
-            this.container = new PIXI.Container();
+            super();
             this.max = 100;
             this.min = 0;
             this.value = 0;
@@ -54,18 +53,7 @@ module webSocketGauge.lib.graphics
         
         get InterpolatedAnimation(): boolean {return this.interPolationAnimaton;}
         set InterpolatedAnimation(val: boolean) {this.interPolationAnimaton = val;}
-        
-        get Container(): PIXI.Container { return this.container;};
-        
-        /**
-         * Get container.
-         * @return {PIXI.Container} container.
-         */
-        public getContainer(): PIXI.Container
-        {
-            return this.Container;
-        }
-        
+                
         /**
          * Apply value and update gauge.
          */
@@ -91,25 +79,25 @@ module webSocketGauge.lib.graphics
     abstract class ProgressBar extends Gauge1D
     {
         private sprite : PIXI.Sprite;
-        private mask : PIXI.Graphics;
+        private spriteMask : PIXI.Graphics;
         
         constructor()
         {
             super();
             this.sprite = new PIXI.Sprite();
-            this.mask = new PIXI.Graphics();
+            this.spriteMask = new PIXI.Graphics();
             
             //Assign mask to sprite
-            this.sprite.mask = this.mask;            
+            this.sprite.mask = this.spriteMask;            
             //Assign spirite and mask to container
-            this.Container.addChild(this.sprite);
-            this.Container.addChild(this.mask);
+            super.addChild(this.sprite);
+            super.addChild(this.spriteMask);
         }
         
         get Texture(): PIXI.Texture {return this.sprite.texture; }
         set Texture(val: PIXI.Texture) {this.sprite.texture = val;}
         
-        get Mask(): PIXI.Graphics { return this.mask; }
+        get SpriteMask(): PIXI.Graphics { return this.spriteMask; }
         get Sprite(): PIXI.Sprite { return this.sprite; }
 
     }
@@ -166,7 +154,7 @@ module webSocketGauge.lib.graphics
             const valueMin : number = this.Min;
             const value : number = this.Value;
 
-            const mask: PIXI.Graphics = this.Mask;
+            const spriteMask: PIXI.Graphics = this.SpriteMask;
 
             const currentAngle : number = this.currAngle;
             const startAngleRad : number = Math.PI/180*offsetAngle;
@@ -192,11 +180,11 @@ module webSocketGauge.lib.graphics
             const endAngleRad: number = Math.PI/180*endAngle;
 
             // Draw pie-shaped mask
-            mask.clear();
-            mask.beginFill(0x000000, 1);
-            mask.arc(centerPos.x, centerPos.y, radius ,startAngleRad, endAngleRad, anticlockwise);
-            mask.arc(centerPos.x, centerPos.y, innerRadius , endAngleRad, startAngleRad, !anticlockwise);    
-            mask.endFill();
+            spriteMask.clear();
+            spriteMask.beginFill(0x000000, 1);
+            spriteMask.arc(centerPos.x, centerPos.y, radius ,startAngleRad, endAngleRad, anticlockwise);
+            spriteMask.arc(centerPos.x, centerPos.y, innerRadius , endAngleRad, startAngleRad, !anticlockwise);    
+            spriteMask.endFill();
 
             return;
         }
@@ -208,8 +196,8 @@ module webSocketGauge.lib.graphics
         
         private vertical : boolean;
         private invertDirection : boolean;
-        private width : number;
-        private height : number;
+        private maskWidth : number;
+        private maskHeight : number;
         private pixelStep : number;
         
         constructor()
@@ -217,8 +205,8 @@ module webSocketGauge.lib.graphics
             super();
             this.vertical = false;
             this.invertDirection = false;
-            this.width = 100;
-            this.height = 100;
+            this.maskWidth = 100;
+            this.maskHeight = 100;
             this.pixelStep = 1;
         }
         
@@ -226,18 +214,18 @@ module webSocketGauge.lib.graphics
         set Vertical(val : boolean) { this.vertical = val; }
         get InvertDirection(): boolean {return this.invertDirection; }
         set InvertDirection(val : boolean) { this.invertDirection = val; }
-        get Width(): number {return this.width; }
-        set Width(val: number) {this.width = val; }
-        get Height(): number {return this.height; }
-        set Height(val: number) {this.height = val; }
+        get MaskWidth(): number {return this.maskWidth; }
+        set MaskWidth(val: number) {this.maskWidth = val; }
+        get MaskHeight(): number {return this.maskHeight; }
+        set MaskHeight(val: number) {this.maskHeight = val; }
         get PixelStep(): number {return this.pixelStep; }
         set PixelStep(val: number) {this.pixelStep = val; }
         
         protected _update(skipStepCheck : boolean) : void
         {
             'use strict';
-            const height: number = this.height;
-            const width: number = this.width;
+            const maskHeight: number = this.maskHeight;
+            const maskWidth: number = this.maskWidth;
             const currBarPixel: number = this.currBarPixel;
             const pixelStep: number = this.pixelStep;
 
@@ -245,16 +233,16 @@ module webSocketGauge.lib.graphics
             const valueMin: number = this.Min;
             const value: number = this.Value;
 
-            const mask: PIXI.Graphics = this.Mask;
+            const spriteMask: PIXI.Graphics = this.SpriteMask;
 
             const vertical: boolean = this.vertical;
             const invertDirection: boolean = this.invertDirection;
 
             let pixelRange: number;
             if(vertical)
-                pixelRange = height;
+                pixelRange = maskHeight;
             else
-                pixelRange = width;
+                pixelRange = maskWidth;
 
             let barPixel = (value - valueMin)/(valueMax - valueMin)*pixelRange;
 
@@ -270,34 +258,34 @@ module webSocketGauge.lib.graphics
             }
 
             //Define mask rectangle parameters
-            let maskX: number, maskY: number;
-            let maskHeight: number, maskWidth: number;
+            let drawMaskX: number, drawMaskY: number;
+            let drawMaskHeight: number, drawMaskWidth: number;
             if(vertical)
             {
-                maskX = 0;
-                maskWidth = width;
-                maskHeight = barPixel;
+                drawMaskX = 0;
+                drawMaskWidth = maskWidth;
+                drawMaskHeight = barPixel;
                 if(invertDirection) //Up to down
-                    maskY = 0;
+                    drawMaskY = 0;
                 else //Down to Up
-                    maskY = height - barPixel;
+                    drawMaskY = maskHeight - barPixel;
             }
             else
             {
-                maskY = 0;
-                maskHeight = height;
-                maskWidth = barPixel;
+                drawMaskY = 0;
+                drawMaskHeight = maskHeight;
+                drawMaskWidth = barPixel;
                 if(invertDirection) //Right to left
-                    maskX = width - barPixel;
+                    drawMaskX = maskWidth - barPixel;
                 else //Left to right
-                    maskX = 0;
+                    drawMaskX = 0;
             }
 
             //Define mask
-            mask.clear();
-            mask.beginFill(0x000000, 1);
-            mask.drawRect(maskX, maskY, maskWidth, maskHeight);
-            mask.endFill();
+            spriteMask.clear();
+            spriteMask.beginFill(0x000000, 1);
+            spriteMask.drawRect(drawMaskX, drawMaskY, drawMaskWidth, drawMaskHeight);
+            spriteMask.endFill();
 
             return;
         }
@@ -313,7 +301,7 @@ module webSocketGauge.lib.graphics
             this.sprite = new PIXI.Sprite();
                         
             //Assign spirite and mask to container
-            this.Container.addChild(this.sprite);
+            this.addChild(this.sprite);
         }
         
         get Texture(): PIXI.Texture {return this.sprite.texture; }

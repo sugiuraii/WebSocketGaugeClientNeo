@@ -63,12 +63,10 @@ POSSIBILITY OF SUCH DAMAGE.
             
             var texture = PIXI.Texture.fromImage("./img/Needle.png");
             needleObj.Texture = texture;
-            
-            this.container = needleObj.Container;
-            this.container.x = 400;
-            this.container.y = 300;
-            this.stage = new PIXI.Stage(0x66FF99);
-            this.stage.addChild(this.container);
+            needleObj.x = 400;
+            needleObj.y = 300;
+            this.stage = new PIXI.Stage();
+            this.stage.addChild(needleObj);
 
             needleObj.updateForce();
             var self = this;

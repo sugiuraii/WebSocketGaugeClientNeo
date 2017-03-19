@@ -65,9 +65,11 @@ POSSIBILITY OF SUCH DAMAGE.
             var texture = PIXI.Texture.fromImage("./img/back1.jpg");
             progressBarObj.Texture = texture;
             
-            this.stage = progressBarObj.getContainer();
-            this.stage.x = 100;
-            this.stage.y = 100;
+            this.stage = new PIXI.Stage();
+            this.stage.addChild(progressBarObj);
+            progressBarObj.x = 100;
+            progressBarObj.y = 100;
+            progressBarObj.AngleStep = 5;
             
             progressBarObj.updateForce();
             var self = this;

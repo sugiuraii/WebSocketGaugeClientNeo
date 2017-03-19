@@ -35,12 +35,14 @@ var webSocketGauge;
     (function (lib) {
         var graphics;
         (function (graphics) {
-            var Gauge1D = (function () {
+            var Gauge1D = (function (_super) {
+                __extends(Gauge1D, _super);
                 function Gauge1D() {
-                    this.container = new PIXI.Container();
-                    this.max = 100;
-                    this.min = 0;
-                    this.value = 0;
+                    var _this = _super.call(this) || this;
+                    _this.max = 100;
+                    _this.min = 0;
+                    _this.value = 0;
+                    return _this;
                 }
                 Object.defineProperty(Gauge1D.prototype, "Max", {
                     get: function () { return this.max; },
@@ -66,19 +68,6 @@ var webSocketGauge;
                     enumerable: true,
                     configurable: true
                 });
-                Object.defineProperty(Gauge1D.prototype, "Container", {
-                    get: function () { return this.container; },
-                    enumerable: true,
-                    configurable: true
-                });
-                ;
-                /**
-                 * Get container.
-                 * @return {PIXI.Container} container.
-                 */
-                Gauge1D.prototype.getContainer = function () {
-                    return this.Container;
-                };
                 /**
                  * Apply value and update gauge.
                  */
@@ -92,18 +81,18 @@ var webSocketGauge;
                     this._update(true);
                 };
                 return Gauge1D;
-            }());
+            }(PIXI.Container));
             var ProgressBar = (function (_super) {
                 __extends(ProgressBar, _super);
                 function ProgressBar() {
                     var _this = _super.call(this) || this;
                     _this.sprite = new PIXI.Sprite();
-                    _this.mask = new PIXI.Graphics();
+                    _this.spriteMask = new PIXI.Graphics();
                     //Assign mask to sprite
-                    _this.sprite.mask = _this.mask;
+                    _this.sprite.mask = _this.spriteMask;
                     //Assign spirite and mask to container
-                    _this.Container.addChild(_this.sprite);
-                    _this.Container.addChild(_this.mask);
+                    _super.prototype.addChild.call(_this, _this.sprite);
+                    _super.prototype.addChild.call(_this, _this.spriteMask);
                     return _this;
                 }
                 Object.defineProperty(ProgressBar.prototype, "Texture", {
@@ -112,8 +101,8 @@ var webSocketGauge;
                     enumerable: true,
                     configurable: true
                 });
-                Object.defineProperty(ProgressBar.prototype, "Mask", {
-                    get: function () { return this.mask; },
+                Object.defineProperty(ProgressBar.prototype, "SpriteMask", {
+                    get: function () { return this.spriteMask; },
                     enumerable: true,
                     configurable: true
                 });
@@ -189,7 +178,7 @@ var webSocketGauge;
                     var valueMax = this.Max;
                     var valueMin = this.Min;
                     var value = this.Value;
-                    var mask = this.Mask;
+                    var spriteMask = this.SpriteMask;
                     var currentAngle = this.currAngle;
                     var startAngleRad = Math.PI / 180 * offsetAngle;
                     var endAngle;
@@ -209,11 +198,11 @@ var webSocketGauge;
                     }
                     var endAngleRad = Math.PI / 180 * endAngle;
                     // Draw pie-shaped mask
-                    mask.clear();
-                    mask.beginFill(0x000000, 1);
-                    mask.arc(centerPos.x, centerPos.y, radius, startAngleRad, endAngleRad, anticlockwise);
-                    mask.arc(centerPos.x, centerPos.y, innerRadius, endAngleRad, startAngleRad, !anticlockwise);
-                    mask.endFill();
+                    spriteMask.clear();
+                    spriteMask.beginFill(0x000000, 1);
+                    spriteMask.arc(centerPos.x, centerPos.y, radius, startAngleRad, endAngleRad, anticlockwise);
+                    spriteMask.arc(centerPos.x, centerPos.y, innerRadius, endAngleRad, startAngleRad, !anticlockwise);
+                    spriteMask.endFill();
                     return;
                 };
                 return CircularProgressBar;
@@ -225,8 +214,8 @@ var webSocketGauge;
                     var _this = _super.call(this) || this;
                     _this.vertical = false;
                     _this.invertDirection = false;
-                    _this.width = 100;
-                    _this.height = 100;
+                    _this.maskWidth = 100;
+                    _this.maskHeight = 100;
                     _this.pixelStep = 1;
                     return _this;
                 }
@@ -242,15 +231,15 @@ var webSocketGauge;
                     enumerable: true,
                     configurable: true
                 });
-                Object.defineProperty(RectangularProgressBar.prototype, "Width", {
-                    get: function () { return this.width; },
-                    set: function (val) { this.width = val; },
+                Object.defineProperty(RectangularProgressBar.prototype, "MaskWidth", {
+                    get: function () { return this.maskWidth; },
+                    set: function (val) { this.maskWidth = val; },
                     enumerable: true,
                     configurable: true
                 });
-                Object.defineProperty(RectangularProgressBar.prototype, "Height", {
-                    get: function () { return this.height; },
-                    set: function (val) { this.height = val; },
+                Object.defineProperty(RectangularProgressBar.prototype, "MaskHeight", {
+                    get: function () { return this.maskHeight; },
+                    set: function (val) { this.maskHeight = val; },
                     enumerable: true,
                     configurable: true
                 });
@@ -262,21 +251,21 @@ var webSocketGauge;
                 });
                 RectangularProgressBar.prototype._update = function (skipStepCheck) {
                     'use strict';
-                    var height = this.height;
-                    var width = this.width;
+                    var maskHeight = this.maskHeight;
+                    var maskWidth = this.maskWidth;
                     var currBarPixel = this.currBarPixel;
                     var pixelStep = this.pixelStep;
                     var valueMax = this.Max;
                     var valueMin = this.Min;
                     var value = this.Value;
-                    var mask = this.Mask;
+                    var spriteMask = this.SpriteMask;
                     var vertical = this.vertical;
                     var invertDirection = this.invertDirection;
                     var pixelRange;
                     if (vertical)
-                        pixelRange = height;
+                        pixelRange = maskHeight;
                     else
-                        pixelRange = width;
+                        pixelRange = maskWidth;
                     var barPixel = (value - valueMin) / (valueMax - valueMin) * pixelRange;
                     // Check deltaPixel over the pixelStep
                     var deltaPixel = Math.abs(barPixel - currBarPixel);
@@ -288,31 +277,31 @@ var webSocketGauge;
                         this.currBarPixel = barPixel;
                     }
                     //Define mask rectangle parameters
-                    var maskX, maskY;
-                    var maskHeight, maskWidth;
+                    var drawMaskX, drawMaskY;
+                    var drawMaskHeight, drawMaskWidth;
                     if (vertical) {
-                        maskX = 0;
-                        maskWidth = width;
-                        maskHeight = barPixel;
+                        drawMaskX = 0;
+                        drawMaskWidth = maskWidth;
+                        drawMaskHeight = barPixel;
                         if (invertDirection)
-                            maskY = 0;
+                            drawMaskY = 0;
                         else
-                            maskY = height - barPixel;
+                            drawMaskY = maskHeight - barPixel;
                     }
                     else {
-                        maskY = 0;
-                        maskHeight = height;
-                        maskWidth = barPixel;
+                        drawMaskY = 0;
+                        drawMaskHeight = maskHeight;
+                        drawMaskWidth = barPixel;
                         if (invertDirection)
-                            maskX = width - barPixel;
+                            drawMaskX = maskWidth - barPixel;
                         else
-                            maskX = 0;
+                            drawMaskX = 0;
                     }
                     //Define mask
-                    mask.clear();
-                    mask.beginFill(0x000000, 1);
-                    mask.drawRect(maskX, maskY, maskWidth, maskHeight);
-                    mask.endFill();
+                    spriteMask.clear();
+                    spriteMask.beginFill(0x000000, 1);
+                    spriteMask.drawRect(drawMaskX, drawMaskY, drawMaskWidth, drawMaskHeight);
+                    spriteMask.endFill();
                     return;
                 };
                 return RectangularProgressBar;
@@ -324,7 +313,7 @@ var webSocketGauge;
                     var _this = _super.call(this) || this;
                     _this.sprite = new PIXI.Sprite();
                     //Assign spirite and mask to container
-                    _this.Container.addChild(_this.sprite);
+                    _this.addChild(_this.sprite);
                     return _this;
                 }
                 Object.defineProperty(NeedleGauge.prototype, "Texture", {
