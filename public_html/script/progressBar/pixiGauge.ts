@@ -28,7 +28,7 @@
 
 module webSocketGauge.lib.graphics
 {
-    abstract class Gauge1DOptions
+    class Gauge1DOptions
     {
         public Max: number;
         public Min: number;
@@ -51,8 +51,8 @@ module webSocketGauge.lib.graphics
         constructor(options? : Gauge1DOptions)
         {
             super();
-            if !(options instanceof Gauge1DOptions)
-                this.gauge1DOptions = new Gauge1DOptions;
+            if (!(options instanceof Gauge1DOptions))
+                this.gauge1DOptions = new Gauge1DOptions();
             else
                 this.gauge1DOptions = options;
                 
@@ -93,7 +93,7 @@ module webSocketGauge.lib.graphics
         protected abstract _update(skipStepCheck : boolean) : void;
     }
     
-    abstract class ProgressBarOptions extends Gauge1DOptions
+    class ProgressBarOptions extends Gauge1DOptions
     {
         public Texture: PIXI.Texture;
         constructor()
@@ -110,15 +110,17 @@ module webSocketGauge.lib.graphics
         
         constructor(options?: ProgressBarOptions)
         {
-            if !(options instanceof ProgressBarOptions)
+            let progressBarOptions: ProgressBarOptions;
+            if (!(options instanceof ProgressBarOptions))
             {
-                this.progressBarOptions = new ProgressBarOptions();
+                progressBarOptions = new ProgressBarOptions();
             }
             else
             {
-                this.progressBarOptions = options;
+                progressBarOptions = options;
             }
-            super(this.progressBarOptions);
+            super(progressBarOptions);
+            this.progressBarOptions = progressBarOptions;
             
             this.sprite = new PIXI.Sprite();
             this.spriteMask = new PIXI.Graphics();
@@ -173,12 +175,14 @@ module webSocketGauge.lib.graphics
         
         constructor(options?: CircularProgressBarOptions)
         {
-            if !(options instanceof CircularProgressBarOptions)
-                this.circularProgressBarOptions = new CircularProgressBarOptions();
+            let circularProgressBarOptions: CircularProgressBarOptions;
+            if (!(options instanceof CircularProgressBarOptions))
+                circularProgressBarOptions = new CircularProgressBarOptions();
             else
-                this.circularProgressBarOptions = options;
+                circularProgressBarOptions = options;
             
-            super(this.circularProgressBarOptions);
+            super(circularProgressBarOptions);
+            this.circularProgressBarOptions = circularProgressBarOptions;
         }
         
         get OffsetAngle(): number {return this.circularProgressBarOptions.OffsetAngle; }
@@ -274,11 +278,13 @@ module webSocketGauge.lib.graphics
                 
         constructor(options?: RectangularProgressBarOptions)
         {
-            if !(options instanceof RectangularProgressBarOptions)
-                this.rectangularProgressBarOptions = new RectangularProgressBarOptions();
+            let rectangularProgressBarOptions: RectangularProgressBarOptions;
+            if (!(options instanceof RectangularProgressBarOptions))
+                rectangularProgressBarOptions = new RectangularProgressBarOptions();
             else
-                this.rectangularProgressBarOptions = options;
-            super(this.rectangularProgressBarOptions);
+                rectangularProgressBarOptions = options;
+            super(rectangularProgressBarOptions);
+            this.rectangularProgressBarOptions = rectangularProgressBarOptions;
         }
         
         get Vertical() : boolean { return this.rectangularProgressBarOptions.Vertical; }
@@ -362,7 +368,7 @@ module webSocketGauge.lib.graphics
         }
     }
     
-    abstract class NeedleGaugeOptions extends Gauge1DOptions
+    class NeedleGaugeOptions extends Gauge1DOptions
     {
         public Texture: PIXI.Texture;
         constructor()
@@ -378,11 +384,13 @@ module webSocketGauge.lib.graphics
         
         constructor(options?: NeedleGaugeOptions)
         {
-            if !(options instanceof NeedleGaugeOptions)
-                this.needleGaugeOptions = new NeedleGaugeOptions();
+            let needleGaugeOptions: NeedleGaugeOptions;
+            if (!(options instanceof NeedleGaugeOptions))
+                needleGaugeOptions = new NeedleGaugeOptions();
             else
-                this.needleGaugeOptions = options;
-            super(this.needleGaugeOptions);
+                needleGaugeOptions = options;
+            super(needleGaugeOptions);
+            this.needleGaugeOptions = needleGaugeOptions;
             
             this.sprite = new PIXI.Sprite();
             this.sprite.texture = this.needleGaugeOptions.Texture;
@@ -427,11 +435,13 @@ module webSocketGauge.lib.graphics
         
         constructor(options?: RotationNeedleGaugeOptions)
         {
-            if !(options instanceof RotationNeedleGaugeOptions)
-                this.rotationNeedleGaugeOptions = new RotationNeedleGaugeOptions();
+            let rotationNeedleGaugeOptions: RotationNeedleGaugeOptions;
+            if (!(options instanceof RotationNeedleGaugeOptions))
+                rotationNeedleGaugeOptions = new RotationNeedleGaugeOptions();
             else
-                this.rotationNeedleGaugeOptions = options;
-            super(this.rotationNeedleGaugeOptions);
+                rotationNeedleGaugeOptions = options;
+            super(rotationNeedleGaugeOptions);
+            this.rotationNeedleGaugeOptions = rotationNeedleGaugeOptions;
             
             //Set sprite pivot
             this.Sprite.pivot = this.rotationNeedleGaugeOptions.Pivot;

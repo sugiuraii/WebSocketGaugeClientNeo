@@ -48,7 +48,7 @@ var webSocketGauge;
                 function Gauge1D(options) {
                     var _this = _super.call(this) || this;
                     if (!(options instanceof Gauge1DOptions))
-                        _this.gauge1DOptions = new Gauge1DOptions;
+                        _this.gauge1DOptions = new Gauge1DOptions();
                     else
                         _this.gauge1DOptions = options;
                     _this.value = 0;
@@ -103,13 +103,15 @@ var webSocketGauge;
                 __extends(ProgressBar, _super);
                 function ProgressBar(options) {
                     var _this = this;
+                    var progressBarOptions;
                     if (!(options instanceof ProgressBarOptions)) {
-                        _this.progressBarOptions = new ProgressBarOptions();
+                        progressBarOptions = new ProgressBarOptions();
                     }
                     else {
-                        _this.progressBarOptions = options;
+                        progressBarOptions = options;
                     }
-                    _this = _super.call(this, _this.progressBarOptions) || this;
+                    _this = _super.call(this, progressBarOptions) || this;
+                    _this.progressBarOptions = progressBarOptions;
                     _this.sprite = new PIXI.Sprite();
                     _this.spriteMask = new PIXI.Graphics();
                     //Assign mask to sprite
@@ -160,11 +162,13 @@ var webSocketGauge;
                 __extends(CircularProgressBar, _super);
                 function CircularProgressBar(options) {
                     var _this = this;
+                    var circularProgressBarOptions;
                     if (!(options instanceof CircularProgressBarOptions))
-                        _this.circularProgressBarOptions = new CircularProgressBarOptions();
+                        circularProgressBarOptions = new CircularProgressBarOptions();
                     else
-                        _this.circularProgressBarOptions = options;
-                    _this = _super.call(this, _this.circularProgressBarOptions) || this;
+                        circularProgressBarOptions = options;
+                    _this = _super.call(this, circularProgressBarOptions) || this;
+                    _this.circularProgressBarOptions = circularProgressBarOptions;
                     return _this;
                 }
                 Object.defineProperty(CircularProgressBar.prototype, "OffsetAngle", {
@@ -269,11 +273,13 @@ var webSocketGauge;
                 __extends(RectangularProgressBar, _super);
                 function RectangularProgressBar(options) {
                     var _this = this;
+                    var rectangularProgressBarOptions;
                     if (!(options instanceof RectangularProgressBarOptions))
-                        _this.rectangularProgressBarOptions = new RectangularProgressBarOptions();
+                        rectangularProgressBarOptions = new RectangularProgressBarOptions();
                     else
-                        _this.rectangularProgressBarOptions = options;
-                    _this = _super.call(this, _this.rectangularProgressBarOptions) || this;
+                        rectangularProgressBarOptions = options;
+                    _this = _super.call(this, rectangularProgressBarOptions) || this;
+                    _this.rectangularProgressBarOptions = rectangularProgressBarOptions;
                     return _this;
                 }
                 Object.defineProperty(RectangularProgressBar.prototype, "Vertical", {
@@ -375,11 +381,13 @@ var webSocketGauge;
                 __extends(NeedleGauge, _super);
                 function NeedleGauge(options) {
                     var _this = this;
+                    var needleGaugeOptions;
                     if (!(options instanceof NeedleGaugeOptions))
-                        _this.needleGaugeOptions = new NeedleGaugeOptions();
+                        needleGaugeOptions = new NeedleGaugeOptions();
                     else
-                        _this.needleGaugeOptions = options;
-                    _this = _super.call(this, _this.needleGaugeOptions) || this;
+                        needleGaugeOptions = options;
+                    _this = _super.call(this, needleGaugeOptions) || this;
+                    _this.needleGaugeOptions = needleGaugeOptions;
                     _this.sprite = new PIXI.Sprite();
                     _this.sprite.texture = _this.needleGaugeOptions.Texture;
                     //Assign spirite and mask to container
@@ -420,11 +428,13 @@ var webSocketGauge;
                 __extends(RotationNeedleGauge, _super);
                 function RotationNeedleGauge(options) {
                     var _this = this;
+                    var rotationNeedleGaugeOptions;
                     if (!(options instanceof RotationNeedleGaugeOptions))
-                        _this.rotationNeedleGaugeOptions = new RotationNeedleGaugeOptions();
+                        rotationNeedleGaugeOptions = new RotationNeedleGaugeOptions();
                     else
-                        _this.rotationNeedleGaugeOptions = options;
-                    _this = _super.call(this, _this.rotationNeedleGaugeOptions) || this;
+                        rotationNeedleGaugeOptions = options;
+                    _this = _super.call(this, rotationNeedleGaugeOptions) || this;
+                    _this.rotationNeedleGaugeOptions = rotationNeedleGaugeOptions;
                     //Set sprite pivot
                     _this.Sprite.pivot = _this.rotationNeedleGaugeOptions.Pivot;
                     return _this;
