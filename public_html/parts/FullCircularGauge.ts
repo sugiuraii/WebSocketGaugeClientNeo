@@ -50,22 +50,27 @@ function main()
     document.body.appendChild(app.view);
     let gaugeArray : webSocketGauge.parts.FullCircularGauge[] = new Array();
     let index = 0;
-    for (let j = 0; j < 5; j++)
+    for (let j = 0; j < 2; j++)
     {
-        for (let i = 0; i < 5 ; i++)
+        for (let i = 0; i < 3 ; i++)
         {
             gaugeArray.push(new webSocketGauge.parts.FullCircularGauge());
-            gaugeArray[index].createBackTexture();
-            gaugeArray[index].backContainer.pivot = new PIXI.Point(400,400);
-            gaugeArray[index].backContainer.scale = new PIXI.Point(0.3, 0.3);
-            gaugeArray[index].backContainer.position = new PIXI.Point(300*i+200,300*j+200);
-            app.stage.addChild(gaugeArray[index].backContainer);
+            gaugeArray[index].create();
+            gaugeArray[index].mainContainer.pivot = new PIXI.Point(400,400);
+            gaugeArray[index].mainContainer.scale = new PIXI.Point(0.3, 0.3);
+            gaugeArray[index].mainContainer.position = new PIXI.Point(250*i+200,250*j+200);
+            app.stage.addChild(gaugeArray[index].mainContainer);
             index++;
         }
     }
     app.ticker.add(() => {
         for (let i = 0; i < gaugeArray.length; i++)
-            gaugeArray[i].backContainer.rotation += 0.01*i;
+        {
+            if(gaugeArray[i].getVal() + 0.01 >= 2.0)
+                gaugeArray[i].setVal(-1.0);
+            else           
+                gaugeArray[i].setVal(gaugeArray[i].getVal() + 0.03*(i+1));
+        }
         });
 }
 
@@ -113,6 +118,7 @@ module webSocketGauge.parts
         public RedZoneBarTexture : PIXI.Texture;
         public GreenZoneBarTexture: PIXI.Texture;
         public YellowZoneBarTexture: PIXI.Texture;
+        public ValueBarTexture: PIXI.Texture;
         
         public BackTexture: PIXI.Texture;
         public GridTexture: PIXI.Texture;
@@ -132,7 +138,7 @@ module webSocketGauge.parts
             dropShadowColor: "white",
             dropShadowDistance: 0,
             fill : "white",
-            fontFamily: "FreeSans-Bold",
+            fontFamily: "FreeSans-Bold"
         });
         public TitleLabelOption = new TextOption("TURBO BOOST", new PIXI.Point(400, 740), new PIXI.Point(0.5, 0.5), "center", 75);
         public UnitLabelOption = new TextOption("x100kpa", new PIXI.Point(400, 470), new PIXI.Point(0.5, 0.5), "center", 45);
@@ -145,6 +151,14 @@ module webSocketGauge.parts
         {
             super();
             this.createDefaultAxisLabel();
+            this.OffsetAngle = 90;
+            this.FullAngle = 270;
+            this.Min = -1.0;
+            this.Max = 2.0;
+            this.AngleStep = 0.1;
+            this.Center.set(400,400);
+            this.Radius = 300;
+            this.InnerRadius = 100;
         }
         
         private createDefaultAxisLabel()
@@ -163,8 +177,10 @@ module webSocketGauge.parts
     export class FullCircularGauge
     {
         private gaugeOption: FullCircularGaugeOptions = new FullCircularGaugeOptions();
-        
+        private progressBar: CircularProgressBar;
+        private valueTextLabel: PIXI.Text;
         public backContainer: PIXI.Container;
+        public mainContainer: PIXI.Container;
         
         public static preloadTextures()
         {
@@ -173,9 +189,44 @@ module webSocketGauge.parts
             .add("FullCircularGauge_YellowZone_Bar.png")
             .add("FullCircularGauge_Back.png")
             .add("FullCircularGauge_Grid.png")
-            .add("FullCircularGauge_Shaft.png");
+            .add("FullCircularGauge_Shaft.png")
+            .add("FullCircularGauge_ValueBar.png")
         }
+        
+        public create()
+        {
+            this.mainContainer = new PIXI.Container();
+            this.createBackTexture();
+            this.mainContainer.addChild(this.backContainer);
+            
+            const option = this.gaugeOption; 
+            option.ValueBarTexture = PIXI.loader.resources["FullCircularGauge_ValueBar.png"].texture;
 
+            this.progressBar = new CircularProgressBar(option);
+            this.progressBar.Texture = option.ValueBarTexture;
+            this.mainContainer.addChild(this.progressBar);
+            
+            this.valueTextLabel = new PIXI.Text(option.Min.toFixed(option.ValueNumberRoundDigit).toString());
+            this.valueTextLabel.style = option.MasterTextStyle.clone();
+            this.valueTextLabel.style.fontSize = 160;
+            this.valueTextLabel.position.set(400,370);
+            this.valueTextLabel.anchor.set(0.5,0.5);
+            this.valueTextLabel.style.align = "center";
+            this.valueTextLabel.style.letterSpacing = -6;
+            this.mainContainer.addChild(this.valueTextLabel);
+        }
+        
+        public setVal(value : number)
+        {
+            this.progressBar.Value = value;
+            this.progressBar.update();
+            if (value.toFixed(this.gaugeOption.ValueNumberRoundDigit).toString() !== this.valueTextLabel.text)
+                this.valueTextLabel.text = value.toFixed(this.gaugeOption.ValueNumberRoundDigit).toString();
+        }
+        public getVal():number
+        {
+            return this.progressBar.Value;
+        }
         public createBackTexture()
         {   
             const backContainer = this.backContainer = new PIXI.Container();
