@@ -423,7 +423,7 @@ module webSocketGauge.lib.graphics
             this.FullAngle = 360;
             this.AngleStep = 0.1;
             this.AntiClockwise = false;
-            this.Pivot = new PIXI.Point();
+            this.Pivot = new PIXI.Point(0,0);
         }
     }
     

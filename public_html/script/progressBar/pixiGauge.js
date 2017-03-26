@@ -418,7 +418,7 @@ var webSocketGauge;
                     _this.FullAngle = 360;
                     _this.AngleStep = 0.1;
                     _this.AntiClockwise = false;
-                    _this.Pivot = new PIXI.Point();
+                    _this.Pivot = new PIXI.Point(0, 0);
                     return _this;
                 }
                 return RotationNeedleGaugeOptions;
