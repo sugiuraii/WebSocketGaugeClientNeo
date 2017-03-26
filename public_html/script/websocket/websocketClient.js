@@ -245,11 +245,29 @@ var webSocketGauge;
                 __extends(DefiSSMWebsocketCommon, _super);
                 function DefiSSMWebsocketCommon() {
                     var _this = _super.call(this) || this;
+                    //Interpolate value buffer
+                    _this.interpolateBuffers = {};
                     _this.recordIntervalTimeEnabled = true;
                     _this.valPacketPreviousTimeStamp = window.performance.now();
                     _this.valPacketIntervalTime = 0;
                     return _this;
                 }
+                DefiSSMWebsocketCommon.prototype.EnableInterpolate = function (code) {
+                    this.checkInterpolateBufferAndCreateIfEmpty(code);
+                    this.interpolateBuffers[code].InterpolateEnabled = true;
+                };
+                DefiSSMWebsocketCommon.prototype.DisableInterpolate = function (code) {
+                    this.checkInterpolateBufferAndCreateIfEmpty(code);
+                    this.interpolateBuffers[code].InterpolateEnabled = false;
+                };
+                DefiSSMWebsocketCommon.prototype.checkInterpolateBufferAndCreateIfEmpty = function (code) {
+                    if (!(code in this.interpolateBuffers))
+                        this.interpolateBuffers[code] = new Interpolation.VALInterpolationBuffer();
+                };
+                DefiSSMWebsocketCommon.prototype.getVal = function (code, timestamp) {
+                    this.checkInterpolateBufferAndCreateIfEmpty(code);
+                    return this.interpolateBuffers[code].getVal(timestamp);
+                };
                 DefiSSMWebsocketCommon.prototype.parseIncomingMessage = function (msg) {
                     var receivedJson = JSON.parse(msg);
                     var receivedJSONIface = receivedJson;
@@ -263,12 +281,19 @@ var webSocketGauge;
                             }
                             ;
                             var receivedVALJSON = receivedJson;
+                            // Invoke VALPacketReceived Event
                             if (typeof (this.onVALPacketReceived) !== "undefined")
                                 this.OnVALPacketReceived(this.valPacketIntervalTime, receivedVALJSON.val);
-                            if (typeof (this.onVALPacketReceivedByCode) !== "undefined") {
-                                for (var key in receivedVALJSON.val)
+                            for (var key in receivedVALJSON.val) {
+                                var val = Number(receivedVALJSON.val[key]);
+                                // Register to interpolate buffer
+                                this.checkInterpolateBufferAndCreateIfEmpty(key);
+                                this.interpolateBuffers[key].setVal(val);
+                                // Invoke onVALPacketReceivedByCode event
+                                if (typeof (this.onVALPacketReceivedByCode) !== "undefined") {
                                     if (key in this.onVALPacketReceivedByCode)
-                                        this.OnVALPacketReceivedByCode[key](receivedVALJSON.val[key]);
+                                        this.OnVALPacketReceivedByCode[key](val);
+                                }
                             }
                             break;
                         case ("ERR"):
@@ -645,6 +670,127 @@ var webSocketGauge;
                 OBDIIParameterCode.Time_since_trouble_codes_cleared = "Time_since_trouble_codes_cleared";
                 OBDIIParameterCode.Ethanol_fuel_percent = "Ethanol_fuel_percent";
             })(OBDIIParameterCode = communication.OBDIIParameterCode || (communication.OBDIIParameterCode = {}));
+            var Interpolation;
+            (function (Interpolation) {
+                var UpdatePeriodCalcMethod;
+                (function (UpdatePeriodCalcMethod) {
+                    UpdatePeriodCalcMethod[UpdatePeriodCalcMethod["Direct"] = 0] = "Direct";
+                    UpdatePeriodCalcMethod[UpdatePeriodCalcMethod["Average"] = 1] = "Average";
+                    UpdatePeriodCalcMethod[UpdatePeriodCalcMethod["Median"] = 2] = "Median";
+                })(UpdatePeriodCalcMethod = Interpolation.UpdatePeriodCalcMethod || (Interpolation.UpdatePeriodCalcMethod = {}));
+                var VALInterpolationBuffer = (function () {
+                    function VALInterpolationBuffer() {
+                        this.interpolateEnabled = false;
+                        this.updatePeriodAveragingQueue = new MovingAverageQueue(VALInterpolationBuffer.UpdatePeriodBufferLength);
+                    }
+                    /**
+                     * Set value to buffer.
+                     * @param value value to store.
+                     * @param period value update period.
+                     * @param timestamp timestamp of value update.
+                     */
+                    VALInterpolationBuffer.prototype.setVal = function (value, period, timestamp) {
+                        //Calculate value update period
+                        var currentPeriod;
+                        if (typeof (period) === "number")
+                            currentPeriod = period;
+                        else if (typeof (timestamp) === "number")
+                            currentPeriod = timestamp - this.lastUpdateTimeStamp;
+                        else
+                            currentPeriod = performance.now() - this.lastUpdateTimeStamp;
+                        //Calculate average/median of valueUpdate period
+                        switch (VALInterpolationBuffer.UpdatePeriodCalcMethod) {
+                            case UpdatePeriodCalcMethod.Direct:
+                                this.valUpdatePeriod = currentPeriod;
+                                break;
+                            case UpdatePeriodCalcMethod.Median:
+                                this.updatePeriodAveragingQueue.add(currentPeriod);
+                                this.valUpdatePeriod = this.updatePeriodAveragingQueue.getMedian();
+                                break;
+                            case UpdatePeriodCalcMethod.Average:
+                                this.updatePeriodAveragingQueue.add(currentPeriod);
+                                this.valUpdatePeriod = this.updatePeriodAveragingQueue.getAverage();
+                                break;
+                        }
+                        // Store lastUpdateTimeStamp
+                        if (typeof (timestamp) === "number")
+                            this.lastUpdateTimeStamp = timestamp;
+                        else
+                            this.lastUpdateTimeStamp = performance.now();
+                        this.lastValue = this.value;
+                        this.value = value;
+                    };
+                    Object.defineProperty(VALInterpolationBuffer.prototype, "InterpolateEnabled", {
+                        get: function () { return this.interpolateEnabled; },
+                        set: function (flag) { this.interpolateEnabled = flag; },
+                        enumerable: true,
+                        configurable: true
+                    });
+                    VALInterpolationBuffer.prototype.getVal = function (timeStamp) {
+                        if (!this.InterpolateEnabled)
+                            return this.value;
+                        var actualTimeStamp;
+                        if (!(typeof (timeStamp) === "number"))
+                            actualTimeStamp = performance.now();
+                        else
+                            actualTimeStamp = timeStamp;
+                        var interpolateFactor = (actualTimeStamp - this.lastUpdateTimeStamp) / this.valUpdatePeriod;
+                        if (interpolateFactor > 1)
+                            interpolateFactor = 1;
+                        if (interpolateFactor < 0)
+                            interpolateFactor = 0;
+                        var interpolatedVal = this.lastValue + (this.value - this.lastValue) * interpolateFactor;
+                        return interpolatedVal;
+                    };
+                    return VALInterpolationBuffer;
+                }());
+                VALInterpolationBuffer.UpdatePeriodCalcMethod = UpdatePeriodCalcMethod.Median;
+                VALInterpolationBuffer.UpdatePeriodBufferLength = 4;
+                Interpolation.VALInterpolationBuffer = VALInterpolationBuffer;
+                var MovingAverageQueue = (function () {
+                    function MovingAverageQueue(queueLength) {
+                        this.queueLength = queueLength;
+                        this.valArray = new Array();
+                    }
+                    /**
+                     * Add value to buffer queue.
+                     * @param value value to add.
+                     */
+                    MovingAverageQueue.prototype.add = function (value) {
+                        //Discard one oldest item
+                        if (this.valArray.length == this.queueLength)
+                            this.valArray.shift();
+                        this.valArray.push(value);
+                    };
+                    /**
+                     * Get moving average.
+                     */
+                    MovingAverageQueue.prototype.getAverage = function () {
+                        var length = this.valArray.length;
+                        var temp = 0;
+                        for (var i = 0; i < length; i++)
+                            temp += this.valArray[i];
+                        if (length === 0)
+                            return 1;
+                        return temp / length;
+                    };
+                    /**
+                     * Get movinig median.
+                     */
+                    MovingAverageQueue.prototype.getMedian = function () {
+                        var temp = this.valArray.sort(function (a, b) { return a - b; });
+                        var length = temp.length;
+                        var half = (temp.length / 2) | 0;
+                        if (length === 0)
+                            return 1;
+                        if (length % 2)
+                            return temp[half];
+                        else
+                            return (temp[half - 1] + temp[half]) / 2;
+                    };
+                    return MovingAverageQueue;
+                }());
+            })(Interpolation || (Interpolation = {}));
         })(communication = lib.communication || (lib.communication = {}));
     })(lib = webSocketGauge.lib || (webSocketGauge.lib = {}));
 })(webSocketGauge || (webSocketGauge = {}));

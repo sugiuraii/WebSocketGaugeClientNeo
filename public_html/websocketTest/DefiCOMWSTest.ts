@@ -35,7 +35,7 @@ window.onload = function()
 
 class DefiCOMWSTest
 {    
-    private static defiWS : DefiCOMWebsocket;
+    public static defiWS : DefiCOMWebsocket;
     
     public static main(): void
     {
@@ -43,6 +43,8 @@ class DefiCOMWSTest
         $('#serverURL_box').val("ws://localhost:2012/");
         this.setParameterCodeSelectBox();
         this.registerWSEvents();
+        
+        window.requestAnimationFrame(DefiCOMWSTest.showInterpolateVal);
     }
     
     private static setParameterCodeSelectBox()
@@ -51,8 +53,21 @@ class DefiCOMWSTest
             $('#deficode_select').append($('<option>').html(code).val(code));
     }
     
+    public static showInterpolateVal(timestamp : number)
+    {
+        $('#div_val_data').html("");
+        for( let key in DefiParameterCode)
+        {
+            const val:number = DefiCOMWSTest.defiWS.getVal(key, timestamp);
+            $('#div_val_data').append(key + " : " + val + "<br>" );
+        }
+        
+        window.requestAnimationFrame(DefiCOMWSTest.showInterpolateVal);
+    }
+    
     private static registerWSEvents() : void
     {
+        /*
         this.defiWS.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: number}) => 
         {
             $('#interval').text(intervalTime.toFixed(2));
@@ -63,6 +78,7 @@ class DefiCOMWSTest
                 $('#div_val_data').append(key + " : " + val[key] + "<br>" );
             }
         }
+        */
         this.defiWS.OnERRPacketReceived = (msg:string)=>
         {
             $('#div_err_data').append(msg + "<br>")
@@ -109,7 +125,9 @@ class DefiCOMWSTest
 
     public static input_DEFI_WS_SEND()
     {
-        this.defiWS.SendWSSend($('#deficode_select').val(),$('#deficode_flag').val());
+        const key : string = $('#deficode_select').val();
+        this.defiWS.SendWSSend(key, $('#deficode_flag').val());
+        this.defiWS.EnableInterpolate(key);
     };
 
     public static input_DEFI_WS_INTERVAL()

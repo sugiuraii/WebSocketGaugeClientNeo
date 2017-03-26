@@ -223,17 +223,43 @@ module webSocketGauge.lib.communication
         
         private onVALPacketReceivedByCode : {[code : string] : (val : number)=>void};
         private onVALPacketReceived : (intervalTime : number, val:{[code : string] : number}) => void;
-        
+                
         //Internal state
         private valPacketPreviousTimeStamp : number;
         private valPacketIntervalTime : number;
         
+        //Interpolate value buffer
+        private interpolateBuffers: {[code: string]: Interpolation.VALInterpolationBuffer} = {};
+                
         constructor()
         {
             super();
             this.recordIntervalTimeEnabled = true;
             this.valPacketPreviousTimeStamp = window.performance.now();
             this.valPacketIntervalTime = 0;
+        }
+        
+        public EnableInterpolate(code : string) : void
+        {
+            this.checkInterpolateBufferAndCreateIfEmpty(code);
+            this.interpolateBuffers[code].InterpolateEnabled = true;
+        }
+        public DisableInterpolate(code : string) : void
+        {
+            this.checkInterpolateBufferAndCreateIfEmpty(code);
+            this.interpolateBuffers[code].InterpolateEnabled = false;
+        }
+        
+        private checkInterpolateBufferAndCreateIfEmpty(code: string): void
+        {
+            if(!(code in this.interpolateBuffers))
+                this.interpolateBuffers[code] = new Interpolation.VALInterpolationBuffer();            
+        }
+        
+        public getVal(code : string, timestamp? : number) : number
+        {
+            this.checkInterpolateBufferAndCreateIfEmpty(code);
+            return this.interpolateBuffers[code].getVal(timestamp);
         }
         
         protected parseIncomingMessage(msg : string) : void
@@ -252,14 +278,24 @@ module webSocketGauge.lib.communication
                     };
                     
                     let receivedVALJSON: JSONFormats.VALJSONMessage = receivedJson;
+                    
+                    // Invoke VALPacketReceived Event
                     if ( typeof(this.onVALPacketReceived) !== "undefined" )
                         this.OnVALPacketReceived(this.valPacketIntervalTime, receivedVALJSON.val);
                     
-                    if (typeof (this.onVALPacketReceivedByCode) !== "undefined")
+                    for (let key in receivedVALJSON.val)
                     {
-                        for (let key in receivedVALJSON.val)
+                        const val: number = Number(receivedVALJSON.val[key]);
+                        // Register to interpolate buffer
+                        this.checkInterpolateBufferAndCreateIfEmpty(key);
+                        this.interpolateBuffers[key].setVal(val);
+                        
+                        // Invoke onVALPacketReceivedByCode event
+                        if (typeof (this.onVALPacketReceivedByCode) !== "undefined")
+                        {
                             if (key in this.onVALPacketReceivedByCode)
-                                this.OnVALPacketReceivedByCode[key](receivedVALJSON.val[key]);
+                                this.OnVALPacketReceivedByCode[key](val);
+                        }
                     }
                     break;
                 case("ERR"):
@@ -635,5 +671,161 @@ module webSocketGauge.lib.communication
         export const Time_run_with_MIL_on = "Time_run_with_MIL_on";
         export const Time_since_trouble_codes_cleared = "Time_since_trouble_codes_cleared";
         export const Ethanol_fuel_percent = "Ethanol_fuel_percent";
+    }
+    
+    namespace Interpolation
+    {
+        export enum UpdatePeriodCalcMethod
+        {
+            Direct,
+            Average,
+            Median
+        }
+        
+        export class VALInterpolationBuffer
+        {
+            public static UpdatePeriodCalcMethod: UpdatePeriodCalcMethod = UpdatePeriodCalcMethod.Median;
+            public static UpdatePeriodBufferLength : number = 4;
+            
+            private lastUpdateTimeStamp : number;
+            private lastValue : number;
+            private value : number;
+            private valUpdatePeriod : number;
+            
+            private updatePeriodAveragingQueue: MovingAverageQueue;
+            
+            private interpolateEnabled : boolean = false;
+            
+            constructor()
+            {
+                this.updatePeriodAveragingQueue = new MovingAverageQueue(VALInterpolationBuffer.UpdatePeriodBufferLength);
+            }
+            
+            /**
+             * Set value to buffer.
+             * @param value value to store.
+             * @param period value update period.
+             * @param timestamp timestamp of value update.
+             */
+            public setVal(value : number, period? : number, timestamp? : number) : void
+            {
+                //Calculate value update period
+                let currentPeriod : number;
+                if (typeof(period) === "number")
+                    currentPeriod = period;
+                else if(typeof(timestamp) === "number")
+                    currentPeriod = timestamp - this.lastUpdateTimeStamp;
+                else
+                    currentPeriod = performance.now() - this.lastUpdateTimeStamp;
+                
+                //Calculate average/median of valueUpdate period
+                switch (VALInterpolationBuffer.UpdatePeriodCalcMethod)
+                {
+                    case UpdatePeriodCalcMethod.Direct:
+                        this.valUpdatePeriod = currentPeriod;
+                        break;
+                    case UpdatePeriodCalcMethod.Median:
+                        this.updatePeriodAveragingQueue.add(currentPeriod);
+                        this.valUpdatePeriod = this.updatePeriodAveragingQueue.getMedian();
+                        break;
+                    case UpdatePeriodCalcMethod.Average:
+                        this.updatePeriodAveragingQueue.add(currentPeriod);
+                        this.valUpdatePeriod = this.updatePeriodAveragingQueue.getAverage();
+                        break;
+                }
+                    
+                // Store lastUpdateTimeStamp
+                if (typeof(timestamp) === "number" )
+                    this.lastUpdateTimeStamp = timestamp;
+                else
+                    this.lastUpdateTimeStamp = performance.now();
+
+                this.lastValue = this.value;
+                this.value = value;
+            }
+
+            public get InterpolateEnabled() {return this.interpolateEnabled;}
+            public set InterpolateEnabled(flag) {this.interpolateEnabled = flag;}
+
+            public getVal(timeStamp?: number): number
+            {
+                if (!this.InterpolateEnabled)
+                    return this.value;
+                
+                let actualTimeStamp : number
+                if(!(typeof(timeStamp) === "number"))
+                    actualTimeStamp = performance.now();
+                else
+                    actualTimeStamp = timeStamp;
+                
+                let interpolateFactor = (actualTimeStamp - this.lastUpdateTimeStamp) / this.valUpdatePeriod;
+                if(interpolateFactor > 1)
+                    interpolateFactor = 1;
+                if(interpolateFactor < 0)
+                    interpolateFactor = 0;
+                const interpolatedVal : number = this.lastValue + (this.value - this.lastValue)*interpolateFactor;
+                
+                return interpolatedVal;
+            }
+        }
+        
+        class MovingAverageQueue
+        {
+            private queueLength : number;
+            private valArray : number[];
+            
+            constructor(queueLength : number)
+            {
+                this.queueLength = queueLength;
+                this.valArray = new Array();
+            }
+            
+            /**
+             * Add value to buffer queue.
+             * @param value value to add.
+             */
+            public add(value : number) : void
+            {
+                //Discard one oldest item
+                if (this.valArray.length == this.queueLength)
+                    this.valArray.shift();
+                
+                this.valArray.push(value);
+            }
+            
+            /**
+             * Get moving average.
+             */
+            public getAverage() : number
+            {
+                const length : number = this.valArray.length;
+                let temp : number = 0;
+                for(let i = 0; i < length; i++)
+                    temp += this.valArray[i];
+
+                if (length === 0)
+                    return 1;
+
+                return temp/length;
+            }
+            
+            /**
+             * Get movinig median.
+             */
+            public getMedian() : number
+            {
+                const temp : number[] = this.valArray.sort(function(a,b){return a-b;});
+                const length = temp.length;
+                const half : number = (temp.length/2)|0;
+
+                if (length === 0)
+                    return 1;
+
+                if(length % 2)
+                    return temp[half];
+                else
+                    return (temp[half-1] + temp[half])/2;
+            }
+        }
     }
 }
