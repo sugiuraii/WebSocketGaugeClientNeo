@@ -50,15 +50,15 @@ function main()
     document.body.appendChild(app.view);
     let gaugeArray : webSocketGauge.parts.FullCircularGauge[] = new Array();
     let index = 0;
-    for (let j = 0; j < 2; j++)
+    for (let j = 0; j < 3; j++)
     {
-        for (let i = 0; i < 3 ; i++)
+        for (let i = 0; i < 4 ; i++)
         {
             gaugeArray.push(new webSocketGauge.parts.FullCircularGauge());
             gaugeArray[index].create();
-            gaugeArray[index].mainContainer.pivot = new PIXI.Point(400,400);
-            gaugeArray[index].mainContainer.scale = new PIXI.Point(0.3, 0.3);
-            gaugeArray[index].mainContainer.position = new PIXI.Point(250*i+200,250*j+200);
+            gaugeArray[index].mainContainer.pivot = new PIXI.Point(200,200);
+            gaugeArray[index].mainContainer.scale.set(0.7, 0.7);
+            gaugeArray[index].mainContainer.position = new PIXI.Point(300*i+200,300*j+200);
             app.stage.addChild(gaugeArray[index].mainContainer);
             index++;
         }
@@ -134,14 +134,14 @@ module webSocketGauge.parts
         public MasterTextStyle = new PIXI.TextStyle(
         {
             dropShadow : true,
-            dropShadowBlur: 20,
+            dropShadowBlur: 10,
             dropShadowColor: "white",
             dropShadowDistance: 0,
             fill : "white",
             fontFamily: "FreeSans-Bold"
         });
-        public TitleLabelOption = new TextOption("TURBO BOOST", new PIXI.Point(400, 740), new PIXI.Point(0.5, 0.5), "center", 75);
-        public UnitLabelOption = new TextOption("x100kpa", new PIXI.Point(400, 470), new PIXI.Point(0.5, 0.5), "center", 45);
+        public TitleLabelOption = new TextOption("TURBO BOOST", new PIXI.Point(400/2, 740/2), new PIXI.Point(0.5, 0.5), "center", 75/2);
+        public UnitLabelOption = new TextOption("x100kpa", new PIXI.Point(400/2, 470/2), new PIXI.Point(0.5, 0.5), "center", 45/2);
         
         public AxisLabelOption: TextOption[] = new Array();
 
@@ -156,21 +156,21 @@ module webSocketGauge.parts
             this.Min = -1.0;
             this.Max = 2.0;
             this.AngleStep = 0.1;
-            this.Center.set(400,400);
-            this.Radius = 300;
-            this.InnerRadius = 100;
+            this.Center.set(400/2,400/2);
+            this.Radius = 300/2;
+            this.InnerRadius = 100/2;
         }
         
         private createDefaultAxisLabel()
         {
-            const axisLabelFontSize = 55;
-            this.AxisLabelOption.push(new TextOption("-1.0", new PIXI.Point(415, 670), new PIXI.Point(0, 0.5), "left", axisLabelFontSize));
-            this.AxisLabelOption.push(new TextOption("-0.5", new PIXI.Point(180, 620), new PIXI.Point(1, 0.5), "right", axisLabelFontSize));
-            this.AxisLabelOption.push(new TextOption("0", new PIXI.Point(90, 385), new PIXI.Point(1, 0.5), "right", axisLabelFontSize));
-            this.AxisLabelOption.push(new TextOption("+0.5", new PIXI.Point(180, 150), new PIXI.Point(1, 0.5), "right", axisLabelFontSize));
-            this.AxisLabelOption.push(new TextOption("+1.0", new PIXI.Point(400, 80), new PIXI.Point(0.5, 1), "center", axisLabelFontSize));
-            this.AxisLabelOption.push(new TextOption("+1.5", new PIXI.Point(620, 150), new PIXI.Point(0, 0.5), "left", axisLabelFontSize));
-            this.AxisLabelOption.push(new TextOption("+2.0", new PIXI.Point(680, 390), new PIXI.Point(0.5, 0), "center", axisLabelFontSize));
+            const axisLabelFontSize = 55/2;
+            this.AxisLabelOption.push(new TextOption("-1.0", new PIXI.Point(415/2, 670/2), new PIXI.Point(0, 0.5), "left", axisLabelFontSize));
+            this.AxisLabelOption.push(new TextOption("-0.5", new PIXI.Point(180/2, 620/2), new PIXI.Point(1, 0.5), "right", axisLabelFontSize));
+            this.AxisLabelOption.push(new TextOption("0", new PIXI.Point(90/2, 385/2), new PIXI.Point(1, 0.5), "right", axisLabelFontSize));
+            this.AxisLabelOption.push(new TextOption("+0.5", new PIXI.Point(180/2, 150/2), new PIXI.Point(1, 0.5), "right", axisLabelFontSize));
+            this.AxisLabelOption.push(new TextOption("+1.0", new PIXI.Point(400/2, 80/2), new PIXI.Point(0.5, 1), "center", axisLabelFontSize));
+            this.AxisLabelOption.push(new TextOption("+1.5", new PIXI.Point(620/2, 150/2), new PIXI.Point(0, 0.5), "left", axisLabelFontSize));
+            this.AxisLabelOption.push(new TextOption("+2.0", new PIXI.Point(680/2, 390/2), new PIXI.Point(0.5, 0), "center", axisLabelFontSize));
         }
         
     }
@@ -208,11 +208,11 @@ module webSocketGauge.parts
             
             this.valueTextLabel = new PIXI.Text(option.Min.toFixed(option.ValueNumberRoundDigit).toString());
             this.valueTextLabel.style = option.MasterTextStyle.clone();
-            this.valueTextLabel.style.fontSize = 160;
-            this.valueTextLabel.position.set(400,370);
+            this.valueTextLabel.style.fontSize = 160/2;
+            this.valueTextLabel.position.set(400/2,370/2);
             this.valueTextLabel.anchor.set(0.5,0.5);
             this.valueTextLabel.style.align = "center";
-            this.valueTextLabel.style.letterSpacing = -6;
+            this.valueTextLabel.style.letterSpacing = -6/2;
             this.mainContainer.addChild(this.valueTextLabel);
         }
         
@@ -247,8 +247,8 @@ module webSocketGauge.parts
             redzoneBar.FullAngle = option.RedZoneBarFullAngle;
             redzoneBar.Texture = option.RedZoneBarTexture;
             redzoneBar.Value = redzoneBar.Max;
-            redzoneBar.Center.set(400,400);
-            redzoneBar.Radius = 400;
+            redzoneBar.Center.set(400/2,400/2);
+            redzoneBar.Radius = 400/2;
             redzoneBar.InnerRadius = 0;
             redzoneBar.updateForce();
             
@@ -257,8 +257,8 @@ module webSocketGauge.parts
             yellowzoneBar.FullAngle = option.YellowZoneBarFullAngle;
             yellowzoneBar.Texture = option.YellowZoneBarTexture;
             yellowzoneBar.Value = yellowzoneBar.Max;
-            yellowzoneBar.Center.set(400,400);
-            yellowzoneBar.Radius = 400;
+            yellowzoneBar.Center.set(400/2,400/2);
+            yellowzoneBar.Radius = 400/2;
             yellowzoneBar.InnerRadius = 0;
             yellowzoneBar.updateForce();
 
@@ -267,8 +267,8 @@ module webSocketGauge.parts
             greenzoneBar.FullAngle = option.GreenZoneBarFullAngle;
             greenzoneBar.Texture = option.GreenZoneBarTexture;
             greenzoneBar.Value = greenzoneBar.Max;
-            greenzoneBar.Center.set(400,400);
-            greenzoneBar.Radius = 400;
+            greenzoneBar.Center.set(400/2,400/2);
+            greenzoneBar.Radius = 400/2;
             greenzoneBar.InnerRadius = 0;
             greenzoneBar.updateForce();
             
