@@ -48,13 +48,13 @@ function main() {
     document.body.appendChild(app.view);
     var gaugeArray = new Array();
     var index = 0;
-    for (var j = 0; j < 3; j++) {
-        for (var i = 0; i < 4; i++) {
+    for (var j = 0; j < 1; j++) {
+        for (var i = 0; i < 1; i++) {
             gaugeArray.push(new webSocketGauge.parts.FullCircularGauge());
             gaugeArray[index].create();
             gaugeArray[index].mainContainer.pivot = new PIXI.Point(200, 200);
-            gaugeArray[index].mainContainer.scale.set(0.7, 0.7);
-            gaugeArray[index].mainContainer.position = new PIXI.Point(300 * i + 200, 300 * j + 200);
+            gaugeArray[index].mainContainer.scale.set(0.6, 0.6);
+            gaugeArray[index].mainContainer.position = new PIXI.Point(250 * i + 150, 250 * j + 150);
             app.stage.addChild(gaugeArray[index].mainContainer);
             index++;
         }
@@ -64,7 +64,7 @@ function main() {
             if (gaugeArray[i].getVal() + 0.01 >= 2.0)
                 gaugeArray[i].setVal(-1.0);
             else
-                gaugeArray[i].setVal(gaugeArray[i].getVal() + 0.03 * (i + 1));
+                gaugeArray[i].setVal(gaugeArray[i].getVal() + 0.1);
         }
     });
 }
@@ -120,8 +120,8 @@ var webSocketGauge;
                     fill: "white",
                     fontFamily: "FreeSans-Bold"
                 });
-                _this.TitleLabelOption = new TextOption("TURBO BOOST", new PIXI.Point(400 / 2, 740 / 2), new PIXI.Point(0.5, 0.5), "center", 75 / 2);
-                _this.UnitLabelOption = new TextOption("x100kpa", new PIXI.Point(400 / 2, 470 / 2), new PIXI.Point(0.5, 0.5), "center", 45 / 2);
+                _this.TitleLabelOption = new TextOption("TURBO BOOST", new PIXI.Point(200, 370), new PIXI.Point(0.5, 0.5), "center", 38);
+                _this.UnitLabelOption = new TextOption("x100kpa", new PIXI.Point(200, 235), new PIXI.Point(0.5, 0.5), "center", 23);
                 _this.AxisLabelOption = new Array();
                 _this.ValueNumberRoundDigit = 1;
                 _this.createDefaultAxisLabel();
@@ -130,20 +130,20 @@ var webSocketGauge;
                 _this.Min = -1.0;
                 _this.Max = 2.0;
                 _this.AngleStep = 0.1;
-                _this.Center.set(400 / 2, 400 / 2);
-                _this.Radius = 300 / 2;
-                _this.InnerRadius = 100 / 2;
+                _this.Center.set(200, 200);
+                _this.Radius = 150;
+                _this.InnerRadius = 50;
                 return _this;
             }
             FullCircularGaugeOptions.prototype.createDefaultAxisLabel = function () {
-                var axisLabelFontSize = 55 / 2;
-                this.AxisLabelOption.push(new TextOption("-1.0", new PIXI.Point(415 / 2, 670 / 2), new PIXI.Point(0, 0.5), "left", axisLabelFontSize));
-                this.AxisLabelOption.push(new TextOption("-0.5", new PIXI.Point(180 / 2, 620 / 2), new PIXI.Point(1, 0.5), "right", axisLabelFontSize));
-                this.AxisLabelOption.push(new TextOption("0", new PIXI.Point(90 / 2, 385 / 2), new PIXI.Point(1, 0.5), "right", axisLabelFontSize));
-                this.AxisLabelOption.push(new TextOption("+0.5", new PIXI.Point(180 / 2, 150 / 2), new PIXI.Point(1, 0.5), "right", axisLabelFontSize));
-                this.AxisLabelOption.push(new TextOption("+1.0", new PIXI.Point(400 / 2, 80 / 2), new PIXI.Point(0.5, 1), "center", axisLabelFontSize));
-                this.AxisLabelOption.push(new TextOption("+1.5", new PIXI.Point(620 / 2, 150 / 2), new PIXI.Point(0, 0.5), "left", axisLabelFontSize));
-                this.AxisLabelOption.push(new TextOption("+2.0", new PIXI.Point(680 / 2, 390 / 2), new PIXI.Point(0.5, 0), "center", axisLabelFontSize));
+                var axisLabelFontSize = 30;
+                this.AxisLabelOption.push(new TextOption("-1.0", new PIXI.Point(207, 335), new PIXI.Point(0, 0.5), "left", axisLabelFontSize));
+                this.AxisLabelOption.push(new TextOption("-0.5", new PIXI.Point(90, 310), new PIXI.Point(1, 0.5), "right", axisLabelFontSize));
+                this.AxisLabelOption.push(new TextOption("0", new PIXI.Point(45, 193), new PIXI.Point(1, 0.5), "right", axisLabelFontSize));
+                this.AxisLabelOption.push(new TextOption("+0.5", new PIXI.Point(90, 75), new PIXI.Point(1, 0.5), "right", axisLabelFontSize));
+                this.AxisLabelOption.push(new TextOption("+1.0", new PIXI.Point(200, 40), new PIXI.Point(0.5, 1), "center", axisLabelFontSize));
+                this.AxisLabelOption.push(new TextOption("+1.5", new PIXI.Point(310, 75), new PIXI.Point(0, 0.5), "left", axisLabelFontSize));
+                this.AxisLabelOption.push(new TextOption("+2.0", new PIXI.Point(340, 195), new PIXI.Point(0.5, 0), "center", axisLabelFontSize));
             };
             return FullCircularGaugeOptions;
         }(CircularProgressBarOptions));
@@ -170,20 +170,24 @@ var webSocketGauge;
                 this.progressBar = new CircularProgressBar(option);
                 this.progressBar.Texture = option.ValueBarTexture;
                 this.mainContainer.addChild(this.progressBar);
+                /*
                 this.valueTextLabel = new PIXI.Text(option.Min.toFixed(option.ValueNumberRoundDigit).toString());
                 this.valueTextLabel.style = option.MasterTextStyle.clone();
-                this.valueTextLabel.style.fontSize = 160 / 2;
-                this.valueTextLabel.position.set(400 / 2, 370 / 2);
-                this.valueTextLabel.anchor.set(0.5, 0.5);
+                this.valueTextLabel.style.fontSize = 80;
+                this.valueTextLabel.position.set(200,185);
+                this.valueTextLabel.anchor.set(0.5,0.5);
                 this.valueTextLabel.style.align = "center";
-                this.valueTextLabel.style.letterSpacing = -6 / 2;
+                this.valueTextLabel.style.letterSpacing = -3;
                 this.mainContainer.addChild(this.valueTextLabel);
+                */
             };
             FullCircularGauge.prototype.setVal = function (value) {
                 this.progressBar.Value = value;
                 this.progressBar.update();
-                if (value.toFixed(this.gaugeOption.ValueNumberRoundDigit).toString() !== this.valueTextLabel.text)
+                /*
+                 if (value.toFixed(this.gaugeOption.ValueNumberRoundDigit).toString() !== this.valueTextLabel.text)
                     this.valueTextLabel.text = value.toFixed(this.gaugeOption.ValueNumberRoundDigit).toString();
+                */
             };
             FullCircularGauge.prototype.getVal = function () {
                 return this.progressBar.Value;
@@ -205,8 +209,8 @@ var webSocketGauge;
                 redzoneBar.FullAngle = option.RedZoneBarFullAngle;
                 redzoneBar.Texture = option.RedZoneBarTexture;
                 redzoneBar.Value = redzoneBar.Max;
-                redzoneBar.Center.set(400 / 2, 400 / 2);
-                redzoneBar.Radius = 400 / 2;
+                redzoneBar.Center.set(200, 200);
+                redzoneBar.Radius = 200;
                 redzoneBar.InnerRadius = 0;
                 redzoneBar.updateForce();
                 var yellowzoneBar = new CircularProgressBar();
@@ -214,18 +218,18 @@ var webSocketGauge;
                 yellowzoneBar.FullAngle = option.YellowZoneBarFullAngle;
                 yellowzoneBar.Texture = option.YellowZoneBarTexture;
                 yellowzoneBar.Value = yellowzoneBar.Max;
-                yellowzoneBar.Center.set(400 / 2, 400 / 2);
-                yellowzoneBar.Radius = 400 / 2;
-                yellowzoneBar.InnerRadius = 0;
+                yellowzoneBar.Center = redzoneBar.Center.clone();
+                yellowzoneBar.Radius = redzoneBar.Radius;
+                yellowzoneBar.InnerRadius = redzoneBar.InnerRadius;
                 yellowzoneBar.updateForce();
                 var greenzoneBar = new CircularProgressBar();
                 greenzoneBar.OffsetAngle = option.GreenZoneBarOffsetAngle;
                 greenzoneBar.FullAngle = option.GreenZoneBarFullAngle;
                 greenzoneBar.Texture = option.GreenZoneBarTexture;
                 greenzoneBar.Value = greenzoneBar.Max;
-                greenzoneBar.Center.set(400 / 2, 400 / 2);
-                greenzoneBar.Radius = 400 / 2;
-                greenzoneBar.InnerRadius = 0;
+                greenzoneBar.Center = redzoneBar.Center.clone();
+                greenzoneBar.Radius = redzoneBar.Radius;
+                greenzoneBar.InnerRadius = redzoneBar.InnerRadius;
                 greenzoneBar.updateForce();
                 var backSprite = new PIXI.Sprite();
                 backSprite.texture = option.BackTexture;
