@@ -31,49 +31,6 @@
 import CircularProgressBar = webSocketGauge.lib.graphics.CircularProgressBar;
 import CircularProgressBarOptions = webSocketGauge.lib.graphics.CircularProgressBarOptions;
 
-window.onload = function()
-{
-    webSocketGauge.parts.FullCircularGauge.preloadTextures();
-    WebFont.load({        
-        custom: 
-            { 
-                families: [ 'FreeSans-Bold' ], 
-                urls: ['./font.css' ] 
-            },
-        active : function(){PIXI.loader.load(main);}
-    });
-}
-
-function main()
-{
-    const app = new PIXI.Application(1366,768);
-    document.body.appendChild(app.view);
-    let gaugeArray : webSocketGauge.parts.FullCircularGauge[] = new Array();
-    let index = 0;
-    for (let j = 0; j < 1; j++)
-    {
-        for (let i = 0; i < 1 ; i++)
-        {
-            gaugeArray.push(new webSocketGauge.parts.FullCircularGauge());
-            gaugeArray[index].create();
-            gaugeArray[index].mainContainer.pivot = new PIXI.Point(200,200);
-            gaugeArray[index].mainContainer.scale.set(0.6, 0.6);
-            gaugeArray[index].mainContainer.position = new PIXI.Point(250*i+150,250*j+150);
-            app.stage.addChild(gaugeArray[index].mainContainer);
-            index++;
-        }
-    }
-    app.ticker.add(() => {
-        for (let i = 0; i < gaugeArray.length; i++)
-        {
-            if(gaugeArray[i].getVal() + 0.01 >= 2.0)
-                gaugeArray[i].setVal(-1.0);
-            else           
-                gaugeArray[i].setVal(gaugeArray[i].getVal() + 0.1);
-        }
-        });
-}
-
 module webSocketGauge.parts
 {
     export class TextOption
@@ -205,7 +162,7 @@ module webSocketGauge.parts
             this.progressBar = new CircularProgressBar(option);
             this.progressBar.Texture = option.ValueBarTexture;
             this.mainContainer.addChild(this.progressBar);
-            /*
+           
             this.valueTextLabel = new PIXI.Text(option.Min.toFixed(option.ValueNumberRoundDigit).toString());
             this.valueTextLabel.style = option.MasterTextStyle.clone();
             this.valueTextLabel.style.fontSize = 80;
@@ -214,17 +171,17 @@ module webSocketGauge.parts
             this.valueTextLabel.style.align = "center";
             this.valueTextLabel.style.letterSpacing = -3;
             this.mainContainer.addChild(this.valueTextLabel);
-            */
+            
         }
         
         public setVal(value : number)
         {
             this.progressBar.Value = value;
             this.progressBar.update();
-            /*
+            
              if (value.toFixed(this.gaugeOption.ValueNumberRoundDigit).toString() !== this.valueTextLabel.text)
                 this.valueTextLabel.text = value.toFixed(this.gaugeOption.ValueNumberRoundDigit).toString();
-            */    
+                
         }
         public getVal():number
         {
