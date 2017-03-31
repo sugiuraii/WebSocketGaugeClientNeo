@@ -72,15 +72,6 @@ module webSocketGauge.parts
         public YellowZoneBarEnable : boolean = true;
         public GreenZoneBarEnable : boolean = true;
         
-        public RedZoneBarTexture : PIXI.Texture;
-        public GreenZoneBarTexture: PIXI.Texture;
-        public YellowZoneBarTexture: PIXI.Texture;
-        public ValueBarTexture: PIXI.Texture;
-        
-        public BackTexture: PIXI.Texture;
-        public GridTexture: PIXI.Texture;
-        public ShaftTexture: PIXI.Texture;
-        
         public RedZoneBarOffsetAngle : number = 315;
         public YellowZoneBarOffsetAngle : number = 270;
         public GreenZoneBarOffsetAngle : number = 90;
@@ -131,14 +122,12 @@ module webSocketGauge.parts
         }
         
     }
-    export class FullCircularGauge
+    export class FullCircularGauge extends PIXI.Container
     {
         private gaugeOption: FullCircularGaugeOptions = new FullCircularGaugeOptions();
-        private progressBar: CircularProgressBar;
+        private valueProgressBar: CircularProgressBar;
         private valueTextLabel: PIXI.Text;
-        public backContainer: PIXI.Container;
-        public mainContainer: PIXI.Container;
-        
+                        
         public static preloadTextures()
         {
             PIXI.loader.add("FullCircularGauge_RedZone_Bar.png")
@@ -152,16 +141,15 @@ module webSocketGauge.parts
         
         public create()
         {
-            this.mainContainer = new PIXI.Container();
-            this.createBackTexture();
-            this.mainContainer.addChild(this.backContainer);
+            const backContainer = this.createBackContainer();
+            super.addChild(backContainer);
             
             const option = this.gaugeOption; 
-            option.ValueBarTexture = PIXI.loader.resources["FullCircularGauge_ValueBar.png"].texture;
+            const valueBarTexture = PIXI.loader.resources["FullCircularGauge_ValueBar.png"].texture;
 
-            this.progressBar = new CircularProgressBar(option);
-            this.progressBar.Texture = option.ValueBarTexture;
-            this.mainContainer.addChild(this.progressBar);
+            this.valueProgressBar = new CircularProgressBar(option);
+            this.valueProgressBar.Texture = valueBarTexture;
+            super.addChild(this.valueProgressBar);
            
             this.valueTextLabel = new PIXI.Text(option.Min.toFixed(option.ValueNumberRoundDigit).toString());
             this.valueTextLabel.style = option.MasterTextStyle.clone();
@@ -170,14 +158,14 @@ module webSocketGauge.parts
             this.valueTextLabel.anchor.set(0.5,0.5);
             this.valueTextLabel.style.align = "center";
             this.valueTextLabel.style.letterSpacing = -3;
-            this.mainContainer.addChild(this.valueTextLabel);
+            super.addChild(this.valueTextLabel);
             
         }
         
         public setVal(value : number)
         {
-            this.progressBar.Value = value;
-            this.progressBar.update();
+            this.valueProgressBar.Value = value;
+            this.valueProgressBar.update();
             
              if (value.toFixed(this.gaugeOption.ValueNumberRoundDigit).toString() !== this.valueTextLabel.text)
                 this.valueTextLabel.text = value.toFixed(this.gaugeOption.ValueNumberRoundDigit).toString();
@@ -185,27 +173,27 @@ module webSocketGauge.parts
         }
         public getVal():number
         {
-            return this.progressBar.Value;
+            return this.valueProgressBar.Value;
         }
-        public createBackTexture()
+        private createBackContainer(): PIXI.Container
         {   
-            const backContainer = this.backContainer = new PIXI.Container();
+            const backContainer = new PIXI.Container();
             //Unlock baked texture
             backContainer.cacheAsBitmap = false;
 
             const option = this.gaugeOption 
             //Setup Textures
-            option.RedZoneBarTexture = PIXI.loader.resources["FullCircularGauge_RedZone_Bar.png"].texture;
-            option.GreenZoneBarTexture = PIXI.loader.resources["FullCircularGauge_GreenZone_Bar.png"].texture;
-            option.YellowZoneBarTexture = PIXI.loader.resources["FullCircularGauge_YellowZone_Bar.png"].texture;            
-            option.BackTexture = PIXI.loader.resources["FullCircularGauge_Back.png"].texture;
-            option.GridTexture = PIXI.loader.resources["FullCircularGauge_Grid.png"].texture;
-            option.ShaftTexture = PIXI.loader.resources["FullCircularGauge_Shaft.png"].texture;
+            const redZoneBarTexture = PIXI.loader.resources["FullCircularGauge_RedZone_Bar.png"].texture;
+            const greenZoneBarTexture = PIXI.loader.resources["FullCircularGauge_GreenZone_Bar.png"].texture;
+            const yellowZoneBarTexture = PIXI.loader.resources["FullCircularGauge_YellowZone_Bar.png"].texture;            
+            const backTexture = PIXI.loader.resources["FullCircularGauge_Back.png"].texture;
+            const gridTexture = PIXI.loader.resources["FullCircularGauge_Grid.png"].texture;
+            const shaftTexture = PIXI.loader.resources["FullCircularGauge_Shaft.png"].texture;
  
             const redzoneBar = new CircularProgressBar();
             redzoneBar.OffsetAngle = option.RedZoneBarOffsetAngle;
             redzoneBar.FullAngle = option.RedZoneBarFullAngle;
-            redzoneBar.Texture = option.RedZoneBarTexture;
+            redzoneBar.Texture = redZoneBarTexture;
             redzoneBar.Value = redzoneBar.Max;
             redzoneBar.Center.set(200,200);
             redzoneBar.Radius = 200;
@@ -215,7 +203,7 @@ module webSocketGauge.parts
             const yellowzoneBar = new CircularProgressBar();
             yellowzoneBar.OffsetAngle = option.YellowZoneBarOffsetAngle;
             yellowzoneBar.FullAngle = option.YellowZoneBarFullAngle;
-            yellowzoneBar.Texture = option.YellowZoneBarTexture;
+            yellowzoneBar.Texture = yellowZoneBarTexture;
             yellowzoneBar.Value = yellowzoneBar.Max;
             yellowzoneBar.Center = redzoneBar.Center.clone();
             yellowzoneBar.Radius = redzoneBar.Radius;
@@ -225,7 +213,7 @@ module webSocketGauge.parts
             const greenzoneBar = new CircularProgressBar();
             greenzoneBar.OffsetAngle = option.GreenZoneBarOffsetAngle;
             greenzoneBar.FullAngle = option.GreenZoneBarFullAngle;
-            greenzoneBar.Texture = option.GreenZoneBarTexture;
+            greenzoneBar.Texture = greenZoneBarTexture;
             greenzoneBar.Value = greenzoneBar.Max;
             greenzoneBar.Center = redzoneBar.Center.clone();
             greenzoneBar.Radius = redzoneBar.Radius;
@@ -233,12 +221,12 @@ module webSocketGauge.parts
             greenzoneBar.updateForce();
             
             const backSprite = new PIXI.Sprite();
-            backSprite.texture = option.BackTexture;
+            backSprite.texture = backTexture;
             
             const gridSprite = new PIXI.Sprite();
-            gridSprite.texture = option.GridTexture;
+            gridSprite.texture = gridTexture;
             const shaftSprite = new PIXI.Sprite();
-            shaftSprite.texture = option.ShaftTexture;
+            shaftSprite.texture = shaftTexture;
             
             //Assing container to items
             backContainer.addChild(backSprite);
@@ -283,6 +271,8 @@ module webSocketGauge.parts
             
             //Bake into texture
             backContainer.cacheAsBitmap = true;
+            
+            return backContainer;
         }
     }    
 }

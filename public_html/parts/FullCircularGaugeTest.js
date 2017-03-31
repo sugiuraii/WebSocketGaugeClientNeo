@@ -43,10 +43,10 @@ function main() {
         for (var i = 0; i < 3; i++) {
             gaugeArray.push(new webSocketGauge.parts.FullCircularGauge());
             gaugeArray[index].create();
-            gaugeArray[index].mainContainer.pivot = new PIXI.Point(200, 200);
-            gaugeArray[index].mainContainer.scale.set(0.6, 0.6);
-            gaugeArray[index].mainContainer.position = new PIXI.Point(250 * i + 150, 250 * j + 150);
-            app.stage.addChild(gaugeArray[index].mainContainer);
+            gaugeArray[index].pivot = new PIXI.Point(200, 200);
+            gaugeArray[index].scale.set(0.6, 0.6);
+            gaugeArray[index].position = new PIXI.Point(250 * i + 150, 250 * j + 150);
+            app.stage.addChild(gaugeArray[index]);
             index++;
         }
     }
