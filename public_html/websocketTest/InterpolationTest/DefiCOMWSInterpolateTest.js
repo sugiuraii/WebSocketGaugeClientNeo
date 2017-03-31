@@ -23,8 +23,8 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-/// <reference path="../script/websocket/websocketClient.ts" />
-/// <reference path="../node_modules/@types/jquery/index.d.ts" />
+/// <reference path="../../script/websocket/websocketClient.ts" />
+/// <reference path="../../node_modules/@types/jquery/index.d.ts" />
 var DefiCOMWebsocket = webSocketGauge.lib.communication.DefiCOMWebsocket;
 var DefiParameterCode = webSocketGauge.lib.communication.DefiParameterCode;
 window.onload = function () {
@@ -38,10 +38,20 @@ var DefiCOMWSTest = (function () {
         $('#serverURL_box').val("ws://localhost:2012/");
         this.setParameterCodeSelectBox();
         this.registerWSEvents();
+        window.requestAnimationFrame(DefiCOMWSTest.showInterpolateVal);
     };
     DefiCOMWSTest.setParameterCodeSelectBox = function () {
         for (var code in DefiParameterCode)
             $('#deficode_select').append($('<option>').html(code).val(code));
+    };
+    DefiCOMWSTest.showInterpolateVal = function (timestamp) {
+        $('#div_interpolated_val').html("");
+        for (var key in DefiParameterCode) {
+            var val = DefiCOMWSTest.defiWS.getVal(key, timestamp);
+            if (typeof (val) !== "undefined")
+                $('#div_interpolated_val').append(key + " : " + val + "<br>");
+        }
+        window.requestAnimationFrame(DefiCOMWSTest.showInterpolateVal);
     };
     DefiCOMWSTest.registerWSEvents = function () {
         this.defiWS.OnVALPacketReceived = function (intervalTime, val) {
@@ -86,7 +96,9 @@ var DefiCOMWSTest = (function () {
     };
     ;
     DefiCOMWSTest.input_DEFI_WS_SEND = function () {
-        this.defiWS.SendWSSend($('#deficode_select').val(), $('#deficode_flag').val());
+        var key = $('#deficode_select').val();
+        this.defiWS.SendWSSend(key, $('#deficode_flag').val());
+        this.defiWS.EnableInterpolate(key);
     };
     ;
     DefiCOMWSTest.input_DEFI_WS_INTERVAL = function () {
@@ -95,4 +107,4 @@ var DefiCOMWSTest = (function () {
     ;
     return DefiCOMWSTest;
 }());
-//# sourceMappingURL=DefiCOMWSTest.js.map
+//# sourceMappingURL=DefiCOMWSInterpolateTest.js.map
