@@ -77,7 +77,7 @@ module webSocketGauge.parts
         public GreenZoneBarOffsetAngle : number = 90;
         public RedZoneBarFullAngle : number = 40;
         public YellowZoneBarFullAngle : number = 45;
-        public GreenZoneBarFullAngle : number = 45;
+        public GreenZoneBarFullAngle : number = 90;
         
         public MasterTextStyle = new PIXI.TextStyle(
         {
@@ -180,62 +180,78 @@ module webSocketGauge.parts
             const backContainer = new PIXI.Container();
             //Unlock baked texture
             backContainer.cacheAsBitmap = false;
-
+            
+            const centerPosition = new PIXI.Point(200,200);
+            const zoneBarRadius = 200;
+            
             const option = this.gaugeOption 
-            //Setup Textures
-            const redZoneBarTexture = PIXI.loader.resources["FullCircularGauge_RedZone_Bar.png"].texture;
-            const greenZoneBarTexture = PIXI.loader.resources["FullCircularGauge_GreenZone_Bar.png"].texture;
-            const yellowZoneBarTexture = PIXI.loader.resources["FullCircularGauge_YellowZone_Bar.png"].texture;            
+            
+            //Add backSprite
             const backTexture = PIXI.loader.resources["FullCircularGauge_Back.png"].texture;
-            const gridTexture = PIXI.loader.resources["FullCircularGauge_Grid.png"].texture;
-            const shaftTexture = PIXI.loader.resources["FullCircularGauge_Shaft.png"].texture;
- 
-            const redzoneBar = new CircularProgressBar();
-            redzoneBar.OffsetAngle = option.RedZoneBarOffsetAngle;
-            redzoneBar.FullAngle = option.RedZoneBarFullAngle;
-            redzoneBar.Texture = redZoneBarTexture;
-            redzoneBar.Value = redzoneBar.Max;
-            redzoneBar.Center.set(200,200);
-            redzoneBar.Radius = 200;
-            redzoneBar.InnerRadius = 0;
-            redzoneBar.updateForce();
-            
-            const yellowzoneBar = new CircularProgressBar();
-            yellowzoneBar.OffsetAngle = option.YellowZoneBarOffsetAngle;
-            yellowzoneBar.FullAngle = option.YellowZoneBarFullAngle;
-            yellowzoneBar.Texture = yellowZoneBarTexture;
-            yellowzoneBar.Value = yellowzoneBar.Max;
-            yellowzoneBar.Center = redzoneBar.Center.clone();
-            yellowzoneBar.Radius = redzoneBar.Radius;
-            yellowzoneBar.InnerRadius = redzoneBar.InnerRadius;
-            yellowzoneBar.updateForce();
-
-            const greenzoneBar = new CircularProgressBar();
-            greenzoneBar.OffsetAngle = option.GreenZoneBarOffsetAngle;
-            greenzoneBar.FullAngle = option.GreenZoneBarFullAngle;
-            greenzoneBar.Texture = greenZoneBarTexture;
-            greenzoneBar.Value = greenzoneBar.Max;
-            greenzoneBar.Center = redzoneBar.Center.clone();
-            greenzoneBar.Radius = redzoneBar.Radius;
-            greenzoneBar.InnerRadius = redzoneBar.InnerRadius;
-            greenzoneBar.updateForce();
-            
             const backSprite = new PIXI.Sprite();
             backSprite.texture = backTexture;
+            backContainer.addChild(backSprite);
             
+            //Add redzoneBar
+            if (this.gaugeOption.RedZoneBarEnable)
+            {
+                const redZoneBarTexture = PIXI.loader.resources["FullCircularGauge_RedZone_Bar.png"].texture;
+                const redzoneBar = new CircularProgressBar();
+                redzoneBar.OffsetAngle = option.RedZoneBarOffsetAngle;
+                redzoneBar.FullAngle = option.RedZoneBarFullAngle;
+                redzoneBar.Texture = redZoneBarTexture;
+                redzoneBar.Value = redzoneBar.Max;
+                redzoneBar.Center = centerPosition;
+                redzoneBar.Radius = zoneBarRadius;
+                redzoneBar.InnerRadius = 0;
+                redzoneBar.updateForce();
+                backContainer.addChild(redzoneBar);
+            }
+            
+            //Add yellowzoneBar
+            if (this.gaugeOption.YellowZoneBarEnable)
+            {
+                const yellowZoneBarTexture = PIXI.loader.resources["FullCircularGauge_YellowZone_Bar.png"].texture;
+                const yellowzoneBar = new CircularProgressBar();
+                yellowzoneBar.OffsetAngle = option.YellowZoneBarOffsetAngle;
+                yellowzoneBar.FullAngle = option.YellowZoneBarFullAngle;
+                yellowzoneBar.Texture = yellowZoneBarTexture;
+                yellowzoneBar.Value = yellowzoneBar.Max;
+                yellowzoneBar.Center = centerPosition;
+                yellowzoneBar.Radius = zoneBarRadius;
+                yellowzoneBar.InnerRadius = 0;
+                yellowzoneBar.updateForce();
+                backContainer.addChild(yellowzoneBar);
+            }
+            
+            //Add greenZoneBar
+            if (this.gaugeOption.GreenZoneBarEnable)
+            {
+                const greenZoneBarTexture = PIXI.loader.resources["FullCircularGauge_GreenZone_Bar.png"].texture;
+                const greenzoneBar = new CircularProgressBar();
+                greenzoneBar.OffsetAngle = option.GreenZoneBarOffsetAngle;
+                greenzoneBar.FullAngle = option.GreenZoneBarFullAngle;
+                greenzoneBar.Texture = greenZoneBarTexture;
+                greenzoneBar.Value = greenzoneBar.Max;
+                greenzoneBar.Center = centerPosition;
+                greenzoneBar.Radius = zoneBarRadius;
+                greenzoneBar.InnerRadius = 0;
+                greenzoneBar.updateForce();
+                backContainer.addChild(greenzoneBar);
+            }
+            
+            //Add gridSprite
+            const gridTexture = PIXI.loader.resources["FullCircularGauge_Grid.png"].texture;
             const gridSprite = new PIXI.Sprite();
             gridSprite.texture = gridTexture;
+            backContainer.addChild(gridSprite);
+            
+            //Add shaftSprite
+            const shaftTexture = PIXI.loader.resources["FullCircularGauge_Shaft.png"].texture;
             const shaftSprite = new PIXI.Sprite();
             shaftSprite.texture = shaftTexture;
-            
-            //Assing container to items
-            backContainer.addChild(backSprite);
-            backContainer.addChild(redzoneBar);
-            backContainer.addChild(yellowzoneBar);
-            backContainer.addChild(greenzoneBar);
-            backContainer.addChild(gridSprite);
             backContainer.addChild(shaftSprite);
-            
+
             //Set Title and unit text
             const titleTextElem = new PIXI.Text(this.gaugeOption.TitleLabelOption.text);
             const titleTextOption = this.gaugeOption.TitleLabelOption;
