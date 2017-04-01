@@ -38,11 +38,9 @@ var webSocketGauge;
     var parts;
     (function (parts) {
         var TextOption = (function () {
-            function TextOption(text, position, anchor, align, fontsize) {
+            function TextOption(position, anchor, align, fontsize) {
                 this.position = new PIXI.Point(0, 0);
                 this.anchor = new PIXI.Point(0, 0);
-                if (typeof (text) !== "undefined")
-                    this.text = text;
                 if (typeof (align) !== "undefined")
                     this.align = align;
                 if (typeof (fontsize) !== "undefined")
@@ -54,7 +52,6 @@ var webSocketGauge;
             }
             TextOption.prototype.clone = function () {
                 var returnObj = new TextOption();
-                returnObj.text = this.text;
                 returnObj.position = this.position.clone();
                 returnObj.anchor = this.anchor.clone();
                 returnObj.align = this.align;
@@ -64,10 +61,25 @@ var webSocketGauge;
             return TextOption;
         }());
         parts.TextOption = TextOption;
-        var FullCircularGaugeOptions = (function (_super) {
-            __extends(FullCircularGaugeOptions, _super);
-            function FullCircularGaugeOptions() {
+        var FullCircularGaugeOption = (function (_super) {
+            __extends(FullCircularGaugeOption, _super);
+            function FullCircularGaugeOption() {
                 var _this = _super.call(this) || this;
+                _this.MasterTextStyle = new PIXI.TextStyle({
+                    dropShadow: true,
+                    dropShadowBlur: 10,
+                    dropShadowColor: "white",
+                    dropShadowDistance: 0,
+                    fill: "white",
+                    fontFamily: "FreeSans-Bold"
+                });
+                _this.TitleLabel = "TURBO BOOST";
+                _this.TitleLabelOption = new TextOption(new PIXI.Point(200, 370), new PIXI.Point(0.5, 0.5), "center", 38);
+                _this.UnitLabel = "x100kPa";
+                _this.UnitLabelOption = new TextOption(new PIXI.Point(200, 235), new PIXI.Point(0.5, 0.5), "center", 23);
+                _this.AxisLabel = new Array();
+                _this.AxisLabelOption = new Array();
+                _this.ValueNumberRoundDigit = 1;
                 _this.RedZoneBarEnable = true;
                 _this.YellowZoneBarEnable = true;
                 _this.GreenZoneBarEnable = true;
@@ -77,18 +89,6 @@ var webSocketGauge;
                 _this.RedZoneBarFullAngle = 40;
                 _this.YellowZoneBarFullAngle = 45;
                 _this.GreenZoneBarFullAngle = 90;
-                _this.MasterTextStyle = new PIXI.TextStyle({
-                    dropShadow: true,
-                    dropShadowBlur: 10,
-                    dropShadowColor: "white",
-                    dropShadowDistance: 0,
-                    fill: "white",
-                    fontFamily: "FreeSans-Bold"
-                });
-                _this.TitleLabelOption = new TextOption("TURBO BOOST", new PIXI.Point(200, 370), new PIXI.Point(0.5, 0.5), "center", 38);
-                _this.UnitLabelOption = new TextOption("x100kpa", new PIXI.Point(200, 235), new PIXI.Point(0.5, 0.5), "center", 23);
-                _this.AxisLabelOption = new Array();
-                _this.ValueNumberRoundDigit = 1;
                 _this.createDefaultAxisLabel();
                 _this.OffsetAngle = 90;
                 _this.FullAngle = 270;
@@ -100,40 +100,54 @@ var webSocketGauge;
                 _this.InnerRadius = 50;
                 return _this;
             }
-            FullCircularGaugeOptions.prototype.createDefaultAxisLabel = function () {
+            FullCircularGaugeOption.prototype.createDefaultAxisLabel = function () {
                 var axisLabelFontSize = 30;
-                this.AxisLabelOption.push(new TextOption("-1.0", new PIXI.Point(207, 335), new PIXI.Point(0, 0.5), "left", axisLabelFontSize));
-                this.AxisLabelOption.push(new TextOption("-0.5", new PIXI.Point(90, 310), new PIXI.Point(1, 0.5), "right", axisLabelFontSize));
-                this.AxisLabelOption.push(new TextOption("0", new PIXI.Point(45, 193), new PIXI.Point(1, 0.5), "right", axisLabelFontSize));
-                this.AxisLabelOption.push(new TextOption("+0.5", new PIXI.Point(90, 75), new PIXI.Point(1, 0.5), "right", axisLabelFontSize));
-                this.AxisLabelOption.push(new TextOption("+1.0", new PIXI.Point(200, 40), new PIXI.Point(0.5, 1), "center", axisLabelFontSize));
-                this.AxisLabelOption.push(new TextOption("+1.5", new PIXI.Point(310, 75), new PIXI.Point(0, 0.5), "left", axisLabelFontSize));
-                this.AxisLabelOption.push(new TextOption("+2.0", new PIXI.Point(340, 195), new PIXI.Point(0.5, 0), "center", axisLabelFontSize));
+                this.AxisLabel.push("-1.0");
+                this.AxisLabelOption.push(new TextOption(new PIXI.Point(207, 335), new PIXI.Point(0, 0.5), "left", axisLabelFontSize));
+                this.AxisLabel.push("-0.5");
+                this.AxisLabelOption.push(new TextOption(new PIXI.Point(90, 310), new PIXI.Point(1, 0.5), "right", axisLabelFontSize));
+                this.AxisLabel.push("0");
+                this.AxisLabelOption.push(new TextOption(new PIXI.Point(45, 193), new PIXI.Point(1, 0.5), "right", axisLabelFontSize));
+                this.AxisLabel.push("+0.5");
+                this.AxisLabelOption.push(new TextOption(new PIXI.Point(90, 75), new PIXI.Point(1, 0.5), "right", axisLabelFontSize));
+                this.AxisLabel.push("+1.0");
+                this.AxisLabelOption.push(new TextOption(new PIXI.Point(200, 40), new PIXI.Point(0.5, 1), "center", axisLabelFontSize));
+                this.AxisLabel.push("+1.5");
+                this.AxisLabelOption.push(new TextOption(new PIXI.Point(310, 75), new PIXI.Point(0, 0.5), "left", axisLabelFontSize));
+                this.AxisLabel.push("+2.0");
+                this.AxisLabelOption.push(new TextOption(new PIXI.Point(340, 195), new PIXI.Point(0.5, 0), "center", axisLabelFontSize));
             };
-            return FullCircularGaugeOptions;
+            return FullCircularGaugeOption;
         }(CircularProgressBarOptions));
-        parts.FullCircularGaugeOptions = FullCircularGaugeOptions;
+        FullCircularGaugeOption.RedZoneBarTexturePath = "FullCircularGauge_RedZone_Bar.png";
+        FullCircularGaugeOption.YellowZoneBarTexturePath = "FullCircularGauge_YellowZone_Bar.png";
+        FullCircularGaugeOption.GreenZoneBarTexturePath = "FullCircularGauge_GreenZone_Bar.png";
+        FullCircularGaugeOption.ValueBarTexturePath = "FullCircularGauge_ValueBar.png";
+        FullCircularGaugeOption.BackTexturePath = "FullCircularGauge_Back.png";
+        FullCircularGaugeOption.GridTexturePath = "FullCircularGauge_Grid.png";
+        FullCircularGaugeOption.ShaftTextturePath = "FullCircularGauge_Shaft.png";
+        parts.FullCircularGaugeOption = FullCircularGaugeOption;
         var FullCircularGauge = (function (_super) {
             __extends(FullCircularGauge, _super);
             function FullCircularGauge() {
                 var _this = _super !== null && _super.apply(this, arguments) || this;
-                _this.gaugeOption = new FullCircularGaugeOptions();
+                _this.gaugeOption = new FullCircularGaugeOption();
                 return _this;
             }
             FullCircularGauge.preloadTextures = function () {
-                PIXI.loader.add("FullCircularGauge_RedZone_Bar.png")
-                    .add("FullCircularGauge_GreenZone_Bar.png")
-                    .add("FullCircularGauge_YellowZone_Bar.png")
-                    .add("FullCircularGauge_Back.png")
-                    .add("FullCircularGauge_Grid.png")
-                    .add("FullCircularGauge_Shaft.png")
-                    .add("FullCircularGauge_ValueBar.png");
+                PIXI.loader.add(FullCircularGaugeOption.RedZoneBarTexturePath)
+                    .add(FullCircularGaugeOption.GreenZoneBarTexturePath)
+                    .add(FullCircularGaugeOption.YellowZoneBarTexturePath)
+                    .add(FullCircularGaugeOption.BackTexturePath)
+                    .add(FullCircularGaugeOption.GridTexturePath)
+                    .add(FullCircularGaugeOption.ShaftTextturePath)
+                    .add(FullCircularGaugeOption.ValueBarTexturePath);
             };
             FullCircularGauge.prototype.create = function () {
                 var backContainer = this.createBackContainer();
                 _super.prototype.addChild.call(this, backContainer);
                 var option = this.gaugeOption;
-                var valueBarTexture = PIXI.loader.resources["FullCircularGauge_ValueBar.png"].texture;
+                var valueBarTexture = PIXI.loader.resources[FullCircularGaugeOption.ValueBarTexturePath].texture;
                 this.valueProgressBar = new CircularProgressBar(option);
                 this.valueProgressBar.Texture = valueBarTexture;
                 _super.prototype.addChild.call(this, this.valueProgressBar);
@@ -163,13 +177,13 @@ var webSocketGauge;
                 var zoneBarRadius = 200;
                 var option = this.gaugeOption;
                 //Add backSprite
-                var backTexture = PIXI.loader.resources["FullCircularGauge_Back.png"].texture;
+                var backTexture = PIXI.loader.resources[FullCircularGaugeOption.BackTexturePath].texture;
                 var backSprite = new PIXI.Sprite();
                 backSprite.texture = backTexture;
                 backContainer.addChild(backSprite);
                 //Add redzoneBar
-                if (this.gaugeOption.RedZoneBarEnable) {
-                    var redZoneBarTexture = PIXI.loader.resources["FullCircularGauge_RedZone_Bar.png"].texture;
+                if (option.RedZoneBarEnable) {
+                    var redZoneBarTexture = PIXI.loader.resources[FullCircularGaugeOption.RedZoneBarTexturePath].texture;
                     var redzoneBar = new CircularProgressBar();
                     redzoneBar.OffsetAngle = option.RedZoneBarOffsetAngle;
                     redzoneBar.FullAngle = option.RedZoneBarFullAngle;
@@ -182,8 +196,8 @@ var webSocketGauge;
                     backContainer.addChild(redzoneBar);
                 }
                 //Add yellowzoneBar
-                if (this.gaugeOption.YellowZoneBarEnable) {
-                    var yellowZoneBarTexture = PIXI.loader.resources["FullCircularGauge_YellowZone_Bar.png"].texture;
+                if (option.YellowZoneBarEnable) {
+                    var yellowZoneBarTexture = PIXI.loader.resources[FullCircularGaugeOption.YellowZoneBarTexturePath].texture;
                     var yellowzoneBar = new CircularProgressBar();
                     yellowzoneBar.OffsetAngle = option.YellowZoneBarOffsetAngle;
                     yellowzoneBar.FullAngle = option.YellowZoneBarFullAngle;
@@ -196,8 +210,8 @@ var webSocketGauge;
                     backContainer.addChild(yellowzoneBar);
                 }
                 //Add greenZoneBar
-                if (this.gaugeOption.GreenZoneBarEnable) {
-                    var greenZoneBarTexture = PIXI.loader.resources["FullCircularGauge_GreenZone_Bar.png"].texture;
+                if (option.GreenZoneBarEnable) {
+                    var greenZoneBarTexture = PIXI.loader.resources[FullCircularGaugeOption.GreenZoneBarTexturePath].texture;
                     var greenzoneBar = new CircularProgressBar();
                     greenzoneBar.OffsetAngle = option.GreenZoneBarOffsetAngle;
                     greenzoneBar.FullAngle = option.GreenZoneBarFullAngle;
@@ -210,26 +224,26 @@ var webSocketGauge;
                     backContainer.addChild(greenzoneBar);
                 }
                 //Add gridSprite
-                var gridTexture = PIXI.loader.resources["FullCircularGauge_Grid.png"].texture;
+                var gridTexture = PIXI.loader.resources[FullCircularGaugeOption.GridTexturePath].texture;
                 var gridSprite = new PIXI.Sprite();
                 gridSprite.texture = gridTexture;
                 backContainer.addChild(gridSprite);
                 //Add shaftSprite
-                var shaftTexture = PIXI.loader.resources["FullCircularGauge_Shaft.png"].texture;
+                var shaftTexture = PIXI.loader.resources[FullCircularGaugeOption.ShaftTextturePath].texture;
                 var shaftSprite = new PIXI.Sprite();
                 shaftSprite.texture = shaftTexture;
                 backContainer.addChild(shaftSprite);
                 //Set Title and unit text
-                var titleTextElem = new PIXI.Text(this.gaugeOption.TitleLabelOption.text);
-                var titleTextOption = this.gaugeOption.TitleLabelOption;
-                titleTextElem.style = this.gaugeOption.MasterTextStyle.clone();
+                var titleTextElem = new PIXI.Text(option.TitleLabel);
+                var titleTextOption = option.TitleLabelOption;
+                titleTextElem.style = option.MasterTextStyle.clone();
                 titleTextElem.style.fontSize = titleTextOption.fontSize;
                 titleTextElem.style.align = titleTextOption.align;
                 titleTextElem.anchor.set(titleTextOption.anchor.x, titleTextOption.anchor.y);
                 titleTextElem.position.set(titleTextOption.position.x, titleTextOption.position.y);
-                var unitTextElem = new PIXI.Text(this.gaugeOption.UnitLabelOption.text);
-                var unitTextOption = this.gaugeOption.UnitLabelOption;
-                unitTextElem.style = this.gaugeOption.MasterTextStyle.clone();
+                var unitTextElem = new PIXI.Text(option.UnitLabel);
+                var unitTextOption = option.UnitLabelOption;
+                unitTextElem.style = option.MasterTextStyle.clone();
                 unitTextElem.style.fontSize = unitTextOption.fontSize;
                 unitTextElem.style.align = unitTextOption.align;
                 unitTextElem.anchor.set(unitTextOption.anchor.x, unitTextOption.anchor.y);
@@ -237,10 +251,10 @@ var webSocketGauge;
                 backContainer.addChild(titleTextElem);
                 backContainer.addChild(unitTextElem);
                 //Set axis label
-                for (var i = 0; i < this.gaugeOption.AxisLabelOption.length; i++) {
-                    var axisLabelOption = this.gaugeOption.AxisLabelOption[i];
-                    var axisLabelElem = new PIXI.Text(axisLabelOption.text);
-                    axisLabelElem.style = this.gaugeOption.MasterTextStyle.clone();
+                for (var i = 0; i < option.AxisLabelOption.length; i++) {
+                    var axisLabelOption = option.AxisLabelOption[i];
+                    var axisLabelElem = new PIXI.Text(option.AxisLabel[i]);
+                    axisLabelElem.style = option.MasterTextStyle.clone();
                     axisLabelElem.style.fontSize = axisLabelOption.fontSize;
                     axisLabelElem.style.align = axisLabelOption.align;
                     axisLabelElem.anchor.set(axisLabelOption.anchor.x, axisLabelOption.anchor.y);

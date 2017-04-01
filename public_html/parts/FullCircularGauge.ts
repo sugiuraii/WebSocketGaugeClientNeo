@@ -35,15 +35,12 @@ module webSocketGauge.parts
 {
     export class TextOption
     {
-        public text : string;
         public position = new PIXI.Point(0, 0);
         public anchor = new PIXI.Point(0, 0);
         public align : string;
         public fontSize : number;
-        constructor(text?: string, position?: PIXI.Point, anchor? :  PIXI.Point, align? : string, fontsize? : number)
+        constructor(position?: PIXI.Point, anchor? :  PIXI.Point, align? : string, fontsize? : number)
         {
-            if(typeof(text) !== "undefined")
-                this.text = text;
             if(typeof(align) !== "undefined")
                 this.align = align;
             if (typeof (fontsize) !== "undefined")
@@ -57,7 +54,6 @@ module webSocketGauge.parts
         clone() : TextOption
         {
             const returnObj = new TextOption();
-            returnObj.text = this.text;
             returnObj.position = this.position.clone();
             returnObj.anchor = this.anchor.clone();
             returnObj.align = this.align;
@@ -66,19 +62,8 @@ module webSocketGauge.parts
             return returnObj;            
         }
     }
-    export class FullCircularGaugeOptions extends CircularProgressBarOptions
+    export class FullCircularGaugeOption extends CircularProgressBarOptions
     {       
-        public RedZoneBarEnable : boolean = true;
-        public YellowZoneBarEnable : boolean = true;
-        public GreenZoneBarEnable : boolean = true;
-        
-        public RedZoneBarOffsetAngle : number = 315;
-        public YellowZoneBarOffsetAngle : number = 270;
-        public GreenZoneBarOffsetAngle : number = 90;
-        public RedZoneBarFullAngle : number = 40;
-        public YellowZoneBarFullAngle : number = 45;
-        public GreenZoneBarFullAngle : number = 90;
-        
         public MasterTextStyle = new PIXI.TextStyle(
         {
             dropShadow : true,
@@ -88,13 +73,35 @@ module webSocketGauge.parts
             fill : "white",
             fontFamily: "FreeSans-Bold"
         });
-        public TitleLabelOption = new TextOption("TURBO BOOST", new PIXI.Point(200, 370), new PIXI.Point(0.5, 0.5), "center", 38);
-        public UnitLabelOption = new TextOption("x100kpa", new PIXI.Point(200, 235), new PIXI.Point(0.5, 0.5), "center", 23);
+        public TitleLabel = "TURBO BOOST";
+        public TitleLabelOption = new TextOption(new PIXI.Point(200, 370), new PIXI.Point(0.5, 0.5), "center", 38);
+        public UnitLabel = "x100kPa";
+        public UnitLabelOption = new TextOption(new PIXI.Point(200, 235), new PIXI.Point(0.5, 0.5), "center", 23);
         
+        public AxisLabel: string[] = new Array();
         public AxisLabelOption: TextOption[] = new Array();
 
         public ValueNumberRoundDigit : number = 1;
         
+        public RedZoneBarEnable : boolean = true;
+        public YellowZoneBarEnable : boolean = true;
+        public GreenZoneBarEnable : boolean = true;
+                
+        public RedZoneBarOffsetAngle : number = 315;
+        public YellowZoneBarOffsetAngle : number = 270;
+        public GreenZoneBarOffsetAngle : number = 90;
+        public RedZoneBarFullAngle : number = 40;
+        public YellowZoneBarFullAngle : number = 45;
+        public GreenZoneBarFullAngle : number = 90;
+        
+        public static RedZoneBarTexturePath : string = "FullCircularGauge_RedZone_Bar.png";
+        public static YellowZoneBarTexturePath : string = "FullCircularGauge_YellowZone_Bar.png";
+        public static GreenZoneBarTexturePath : string = "FullCircularGauge_GreenZone_Bar.png";
+        public static ValueBarTexturePath : string = "FullCircularGauge_ValueBar.png";
+        public static BackTexturePath : string = "FullCircularGauge_Back.png";
+        public static GridTexturePath : string = "FullCircularGauge_Grid.png";
+        public static ShaftTextturePath : string = "FullCircularGauge_Shaft.png";
+                
         constructor()
         {
             super();
@@ -112,31 +119,38 @@ module webSocketGauge.parts
         private createDefaultAxisLabel()
         {
             const axisLabelFontSize = 30;
-            this.AxisLabelOption.push(new TextOption("-1.0", new PIXI.Point(207, 335), new PIXI.Point(0, 0.5), "left", axisLabelFontSize));
-            this.AxisLabelOption.push(new TextOption("-0.5", new PIXI.Point(90, 310), new PIXI.Point(1, 0.5), "right", axisLabelFontSize));
-            this.AxisLabelOption.push(new TextOption("0", new PIXI.Point(45, 193), new PIXI.Point(1, 0.5), "right", axisLabelFontSize));
-            this.AxisLabelOption.push(new TextOption("+0.5", new PIXI.Point(90, 75), new PIXI.Point(1, 0.5), "right", axisLabelFontSize));
-            this.AxisLabelOption.push(new TextOption("+1.0", new PIXI.Point(200, 40), new PIXI.Point(0.5, 1), "center", axisLabelFontSize));
-            this.AxisLabelOption.push(new TextOption("+1.5", new PIXI.Point(310, 75), new PIXI.Point(0, 0.5), "left", axisLabelFontSize));
-            this.AxisLabelOption.push(new TextOption("+2.0", new PIXI.Point(340, 195), new PIXI.Point(0.5, 0), "center", axisLabelFontSize));
+            this.AxisLabel.push("-1.0");
+            this.AxisLabelOption.push(new TextOption(new PIXI.Point(207, 335), new PIXI.Point(0, 0.5), "left", axisLabelFontSize));
+            this.AxisLabel.push("-0.5");
+            this.AxisLabelOption.push(new TextOption(new PIXI.Point(90, 310), new PIXI.Point(1, 0.5), "right", axisLabelFontSize));
+            this.AxisLabel.push("0");
+            this.AxisLabelOption.push(new TextOption(new PIXI.Point(45, 193), new PIXI.Point(1, 0.5), "right", axisLabelFontSize));
+            this.AxisLabel.push("+0.5");
+            this.AxisLabelOption.push(new TextOption(new PIXI.Point(90, 75), new PIXI.Point(1, 0.5), "right", axisLabelFontSize));
+            this.AxisLabel.push("+1.0");
+            this.AxisLabelOption.push(new TextOption(new PIXI.Point(200, 40), new PIXI.Point(0.5, 1), "center", axisLabelFontSize));
+            this.AxisLabel.push("+1.5");
+            this.AxisLabelOption.push(new TextOption(new PIXI.Point(310, 75), new PIXI.Point(0, 0.5), "left", axisLabelFontSize));
+            this.AxisLabel.push("+2.0");
+            this.AxisLabelOption.push(new TextOption(new PIXI.Point(340, 195), new PIXI.Point(0.5, 0), "center", axisLabelFontSize));
         }
-        
     }
+    
     export class FullCircularGauge extends PIXI.Container
     {
-        private gaugeOption: FullCircularGaugeOptions = new FullCircularGaugeOptions();
+        private gaugeOption: FullCircularGaugeOption = new FullCircularGaugeOption();
         private valueProgressBar: CircularProgressBar;
         private valueTextLabel: PIXI.Text;
-                        
+
         public static preloadTextures()
         {
-            PIXI.loader.add("FullCircularGauge_RedZone_Bar.png")
-            .add("FullCircularGauge_GreenZone_Bar.png")
-            .add("FullCircularGauge_YellowZone_Bar.png")
-            .add("FullCircularGauge_Back.png")
-            .add("FullCircularGauge_Grid.png")
-            .add("FullCircularGauge_Shaft.png")
-            .add("FullCircularGauge_ValueBar.png")
+            PIXI.loader.add(FullCircularGaugeOption.RedZoneBarTexturePath)
+                .add(FullCircularGaugeOption.GreenZoneBarTexturePath)
+                .add(FullCircularGaugeOption.YellowZoneBarTexturePath)
+                .add(FullCircularGaugeOption.BackTexturePath)
+                .add(FullCircularGaugeOption.GridTexturePath)
+                .add(FullCircularGaugeOption.ShaftTextturePath)
+                .add(FullCircularGaugeOption.ValueBarTexturePath);
         }
         
         public create()
@@ -145,7 +159,7 @@ module webSocketGauge.parts
             super.addChild(backContainer);
             
             const option = this.gaugeOption; 
-            const valueBarTexture = PIXI.loader.resources["FullCircularGauge_ValueBar.png"].texture;
+            const valueBarTexture = PIXI.loader.resources[FullCircularGaugeOption.ValueBarTexturePath].texture;
 
             this.valueProgressBar = new CircularProgressBar(option);
             this.valueProgressBar.Texture = valueBarTexture;
@@ -187,15 +201,15 @@ module webSocketGauge.parts
             const option = this.gaugeOption 
             
             //Add backSprite
-            const backTexture = PIXI.loader.resources["FullCircularGauge_Back.png"].texture;
+            const backTexture = PIXI.loader.resources[FullCircularGaugeOption.BackTexturePath].texture;
             const backSprite = new PIXI.Sprite();
             backSprite.texture = backTexture;
             backContainer.addChild(backSprite);
             
             //Add redzoneBar
-            if (this.gaugeOption.RedZoneBarEnable)
+            if (option.RedZoneBarEnable)
             {
-                const redZoneBarTexture = PIXI.loader.resources["FullCircularGauge_RedZone_Bar.png"].texture;
+                const redZoneBarTexture = PIXI.loader.resources[FullCircularGaugeOption.RedZoneBarTexturePath].texture;
                 const redzoneBar = new CircularProgressBar();
                 redzoneBar.OffsetAngle = option.RedZoneBarOffsetAngle;
                 redzoneBar.FullAngle = option.RedZoneBarFullAngle;
@@ -209,9 +223,9 @@ module webSocketGauge.parts
             }
             
             //Add yellowzoneBar
-            if (this.gaugeOption.YellowZoneBarEnable)
+            if (option.YellowZoneBarEnable)
             {
-                const yellowZoneBarTexture = PIXI.loader.resources["FullCircularGauge_YellowZone_Bar.png"].texture;
+                const yellowZoneBarTexture = PIXI.loader.resources[FullCircularGaugeOption.YellowZoneBarTexturePath].texture;
                 const yellowzoneBar = new CircularProgressBar();
                 yellowzoneBar.OffsetAngle = option.YellowZoneBarOffsetAngle;
                 yellowzoneBar.FullAngle = option.YellowZoneBarFullAngle;
@@ -225,9 +239,9 @@ module webSocketGauge.parts
             }
             
             //Add greenZoneBar
-            if (this.gaugeOption.GreenZoneBarEnable)
+            if (option.GreenZoneBarEnable)
             {
-                const greenZoneBarTexture = PIXI.loader.resources["FullCircularGauge_GreenZone_Bar.png"].texture;
+                const greenZoneBarTexture = PIXI.loader.resources[FullCircularGaugeOption.GreenZoneBarTexturePath].texture;
                 const greenzoneBar = new CircularProgressBar();
                 greenzoneBar.OffsetAngle = option.GreenZoneBarOffsetAngle;
                 greenzoneBar.FullAngle = option.GreenZoneBarFullAngle;
@@ -241,29 +255,29 @@ module webSocketGauge.parts
             }
             
             //Add gridSprite
-            const gridTexture = PIXI.loader.resources["FullCircularGauge_Grid.png"].texture;
+            const gridTexture = PIXI.loader.resources[FullCircularGaugeOption.GridTexturePath].texture;
             const gridSprite = new PIXI.Sprite();
             gridSprite.texture = gridTexture;
             backContainer.addChild(gridSprite);
             
             //Add shaftSprite
-            const shaftTexture = PIXI.loader.resources["FullCircularGauge_Shaft.png"].texture;
+            const shaftTexture = PIXI.loader.resources[FullCircularGaugeOption.ShaftTextturePath].texture;
             const shaftSprite = new PIXI.Sprite();
             shaftSprite.texture = shaftTexture;
             backContainer.addChild(shaftSprite);
 
             //Set Title and unit text
-            const titleTextElem = new PIXI.Text(this.gaugeOption.TitleLabelOption.text);
-            const titleTextOption = this.gaugeOption.TitleLabelOption;
-            titleTextElem.style = this.gaugeOption.MasterTextStyle.clone();
+            const titleTextElem = new PIXI.Text(option.TitleLabel);
+            const titleTextOption = option.TitleLabelOption;
+            titleTextElem.style = option.MasterTextStyle.clone();
             titleTextElem.style.fontSize = titleTextOption.fontSize;
             titleTextElem.style.align = titleTextOption.align;
             titleTextElem.anchor.set(titleTextOption.anchor.x, titleTextOption.anchor.y)
             titleTextElem.position.set(titleTextOption.position.x, titleTextOption.position.y);
             
-            const unitTextElem = new PIXI.Text(this.gaugeOption.UnitLabelOption.text);
-            const unitTextOption = this.gaugeOption.UnitLabelOption;
-            unitTextElem.style = this.gaugeOption.MasterTextStyle.clone();
+            const unitTextElem = new PIXI.Text(option.UnitLabel);
+            const unitTextOption = option.UnitLabelOption;
+            unitTextElem.style = option.MasterTextStyle.clone();
             unitTextElem.style.fontSize = unitTextOption.fontSize;
             unitTextElem.style.align = unitTextOption.align;
             unitTextElem.anchor.set(unitTextOption.anchor.x, unitTextOption.anchor.y);
@@ -273,11 +287,11 @@ module webSocketGauge.parts
             backContainer.addChild(unitTextElem);
             
             //Set axis label
-            for (let i = 0; i < this.gaugeOption.AxisLabelOption.length; i++)
+            for (let i = 0; i < option.AxisLabelOption.length; i++)
             {
-                const axisLabelOption = this.gaugeOption.AxisLabelOption[i];
-                const axisLabelElem = new PIXI.Text(axisLabelOption.text);
-                axisLabelElem.style = this.gaugeOption.MasterTextStyle.clone();
+                const axisLabelOption = option.AxisLabelOption[i];
+                const axisLabelElem = new PIXI.Text(option.AxisLabel[i]);
+                axisLabelElem.style = option.MasterTextStyle.clone();
                 axisLabelElem.style.fontSize = axisLabelOption.fontSize;
                 axisLabelElem.style.align = axisLabelOption.align;
                 axisLabelElem.anchor.set(axisLabelOption.anchor.x, axisLabelOption.anchor.y);
