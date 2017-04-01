@@ -35,12 +35,12 @@ window.onload = function () {
     });
 };
 function main() {
-    var app = new PIXI.Application(1366, 768);
+    var app = new PIXI.Application(1366, 1366);
     document.body.appendChild(app.view);
     var gaugeArray = new Array();
     var index = 0;
-    for (var j = 0; j < 3; j++) {
-        for (var i = 0; i < 3; i++) {
+    for (var j = 0; j < 6; j++) {
+        for (var i = 0; i < 6; i++) {
             gaugeArray.push(new webSocketGauge.parts.FullCircularGauge());
             gaugeArray[index].create();
             gaugeArray[index].pivot = new PIXI.Point(200, 200);

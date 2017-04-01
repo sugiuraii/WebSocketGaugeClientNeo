@@ -41,13 +41,13 @@ window.onload = function()
 
 function main()
 {
-    const app = new PIXI.Application(1366,768);
+    const app = new PIXI.Application(1366,1366);
     document.body.appendChild(app.view);
     let gaugeArray : webSocketGauge.parts.FullCircularGauge[] = new Array();
     let index = 0;
-    for (let j = 0; j < 3; j++)
+    for (let j = 0; j < 6; j++)
     {
-        for (let i = 0; i < 3 ; i++)
+        for (let i = 0; i < 6 ; i++)
         {
             gaugeArray.push(new webSocketGauge.parts.FullCircularGauge());
             gaugeArray[index].create();

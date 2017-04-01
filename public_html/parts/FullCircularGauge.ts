@@ -62,7 +62,39 @@ module webSocketGauge.parts
             return returnObj;            
         }
     }
-    export class FullCircularGaugeOption extends CircularProgressBarOptions
+    
+    export abstract class CircularGaugePanelOptionBase extends CircularProgressBarOptions
+    {
+        private titleLabel: string;
+        private titleLabelOption : TextOption;
+        private unitLabel: string;
+        private unitLabelOption: TextOption;
+        private axisLabel: string[];
+        private axisLabelOption: TextOption[];
+        
+        private valueNumberRoundDigit: number;
+        
+        private redZoneBarEnable : boolean;
+        private yellowZoneBarEnable : boolean;
+        private greenZoneBarEnable : boolean;
+        
+        private redZoneBarOffsetAngle : number;
+        private yellowZoneBarOffsetAngle : number;
+        private greenZoneBarOffsetAngle : number;
+        private redZoneBarFullAngle : number;
+        private yellowZoneBarFullAngle : number;
+        private greenZoneBarFullAngle : number;
+        
+        private static redZoneBarTexturePath : string;
+        private static tellowZoneBarTexturePath : string;
+        private static greenZoneBarTexturePath : string;
+        private static valueBarTexturePath : string;
+        private static backTexturePath : string;
+        private static gridTexturePath : string;
+        private static shaftTextturePath : string;
+    }
+    
+    export class FullCircularGaugeOption extends CircularGaugePanelOptionBase
     {       
         public MasterTextStyle = new PIXI.TextStyle(
         {

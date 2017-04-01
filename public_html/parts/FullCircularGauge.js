@@ -61,6 +61,14 @@ var webSocketGauge;
             return TextOption;
         }());
         parts.TextOption = TextOption;
+        var CircularGaugePanelOptionBase = (function (_super) {
+            __extends(CircularGaugePanelOptionBase, _super);
+            function CircularGaugePanelOptionBase() {
+                return _super !== null && _super.apply(this, arguments) || this;
+            }
+            return CircularGaugePanelOptionBase;
+        }(CircularProgressBarOptions));
+        parts.CircularGaugePanelOptionBase = CircularGaugePanelOptionBase;
         var FullCircularGaugeOption = (function (_super) {
             __extends(FullCircularGaugeOption, _super);
             function FullCircularGaugeOption() {
@@ -118,7 +126,7 @@ var webSocketGauge;
                 this.AxisLabelOption.push(new TextOption(new PIXI.Point(340, 195), new PIXI.Point(0.5, 0), "center", axisLabelFontSize));
             };
             return FullCircularGaugeOption;
-        }(CircularProgressBarOptions));
+        }(CircularGaugePanelOptionBase));
         FullCircularGaugeOption.RedZoneBarTexturePath = "FullCircularGauge_RedZone_Bar.png";
         FullCircularGaugeOption.YellowZoneBarTexturePath = "FullCircularGauge_YellowZone_Bar.png";
         FullCircularGaugeOption.GreenZoneBarTexturePath = "FullCircularGauge_GreenZone_Bar.png";
