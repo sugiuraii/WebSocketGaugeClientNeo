@@ -38,13 +38,18 @@ var webSocketGauge;
     var parts;
     (function (parts) {
         var TextOption = (function () {
-            function TextOption(position, anchor, align, fontsize) {
+            function TextOption(position, anchor, align, fontsize, letterSpacing) {
                 this.position = new PIXI.Point(0, 0);
                 this.anchor = new PIXI.Point(0, 0);
+                this.align = "left";
+                this.fontSize = 12;
+                this.letterSpaing = 0;
                 if (typeof (align) !== "undefined")
                     this.align = align;
                 if (typeof (fontsize) !== "undefined")
                     this.fontSize = fontsize;
+                if (typeof (letterSpacing) !== "undefined")
+                    this.letterSpaing = letterSpacing;
                 if (position instanceof PIXI.Point)
                     this.position = position;
                 if (anchor instanceof PIXI.Point)
@@ -56,11 +61,153 @@ var webSocketGauge;
                 returnObj.anchor = this.anchor.clone();
                 returnObj.align = this.align;
                 returnObj.fontSize = this.fontSize;
+                returnObj.letterSpaing = this.letterSpaing;
                 return returnObj;
             };
             return TextOption;
         }());
         parts.TextOption = TextOption;
+        var CircularGaugePanelBase = (function (_super) {
+            __extends(CircularGaugePanelBase, _super);
+            function CircularGaugePanelBase() {
+                var _this = _super !== null && _super.apply(this, arguments) || this;
+                _this.valueNumberRoundDigit = 1;
+                return _this;
+            }
+            Object.defineProperty(CircularGaugePanelBase.prototype, "Value", {
+                get: function () { return this.valueProgressBar.Value; },
+                set: function (value) {
+                    this.valueProgressBar.Value = value;
+                    this.valueProgressBar.update();
+                    if (value.toFixed(this.valueNumberRoundDigit).toString() !== this.valueTextLabel.text)
+                        this.valueTextLabel.text = value.toFixed(this.valueNumberRoundDigit).toString();
+                },
+                enumerable: true,
+                configurable: true
+            });
+            ;
+            CircularGaugePanelBase.prototype.createValueProgressBar = function () {
+                var valueBarTexture = PIXI.loader.resources[FullCircularGauge.ValueBarTexturePath].texture;
+                this.valueProgressBar = new CircularProgressBar();
+                this.valueProgressBar.OffsetAngle = this.offsetAngle;
+                this.valueProgressBar.FullAngle = this.fullAngle;
+                this.valueProgressBar.Min = this.min;
+                this.valueProgressBar.Max = this.max;
+                this.valueProgressBar.AngleStep = this.angleStep;
+                this.valueProgressBar.Center = this.centerPosition;
+                this.valueProgressBar.Radius = this.valueBarRadius;
+                this.valueProgressBar.InnerRadius = this.valueBarInnerRadius;
+                this.valueProgressBar.Texture = valueBarTexture;
+                _super.prototype.addChild.call(this, this.valueProgressBar);
+                this.valueTextLabel = new PIXI.Text(this.min.toFixed(this.valueNumberRoundDigit).toString());
+                this.valueTextLabel.style = this.masterTextStyle.clone();
+                var valueLabelOption = this.valueLabelOption;
+                this.valueTextLabel.style.fontSize = valueLabelOption.fontSize;
+                this.valueTextLabel.position = valueLabelOption.position;
+                this.valueTextLabel.anchor.set(valueLabelOption.anchor.x, valueLabelOption.anchor.y);
+                this.valueTextLabel.style.align = valueLabelOption.align;
+                this.valueTextLabel.style.letterSpacing = valueLabelOption.letterSpaing;
+                _super.prototype.addChild.call(this, this.valueTextLabel);
+            };
+            CircularGaugePanelBase.prototype.setDefaultAxisLabel = function (axisLabel, axisLabelOption) {
+                for (var i = void 0; i < axisLabel.length; i++) {
+                    this.axisLabel.push(axisLabel[i]);
+                    this.axisLabelOption.push(axisLabelOption[i]);
+                }
+            };
+            CircularGaugePanelBase.prototype.createBackContainer = function () {
+                var backContainer = new PIXI.Container();
+                //Unlock baked texture
+                backContainer.cacheAsBitmap = false;
+                var centerPosition = this.centerPosition;
+                var zoneBarRadius = this.zoneBarRadius;
+                //Add backSprite
+                var backTexture = PIXI.loader.resources[FullCircularGauge.BackTexturePath].texture;
+                var backSprite = new PIXI.Sprite();
+                backSprite.texture = backTexture;
+                backContainer.addChild(backSprite);
+                //Add redzoneBar
+                if (this.redZoneBarEnable) {
+                    var redZoneBarTexture = PIXI.loader.resources[FullCircularGauge.RedZoneBarTexturePath].texture;
+                    var redzoneBar = new CircularProgressBar();
+                    redzoneBar.OffsetAngle = this.redZoneBarOffsetAngle;
+                    redzoneBar.FullAngle = this.redZoneBarFullAngle;
+                    redzoneBar.Texture = redZoneBarTexture;
+                    redzoneBar.Value = redzoneBar.Max;
+                    redzoneBar.Center = centerPosition;
+                    redzoneBar.Radius = zoneBarRadius;
+                    redzoneBar.InnerRadius = 0;
+                    redzoneBar.updateForce();
+                    backContainer.addChild(redzoneBar);
+                }
+                //Add yellowzoneBar
+                if (this.yellowZoneBarEnable) {
+                    var yellowZoneBarTexture = PIXI.loader.resources[FullCircularGauge.YellowZoneBarTexturePath].texture;
+                    var yellowzoneBar = new CircularProgressBar();
+                    yellowzoneBar.OffsetAngle = this.yellowZoneBarOffsetAngle;
+                    yellowzoneBar.FullAngle = this.yellowZoneBarFullAngle;
+                    yellowzoneBar.Texture = yellowZoneBarTexture;
+                    yellowzoneBar.Value = yellowzoneBar.Max;
+                    yellowzoneBar.Center = centerPosition;
+                    yellowzoneBar.Radius = zoneBarRadius;
+                    yellowzoneBar.InnerRadius = 0;
+                    yellowzoneBar.updateForce();
+                    backContainer.addChild(yellowzoneBar);
+                }
+                //Add greenZoneBar
+                if (this.greenZoneBarEnable) {
+                    var greenZoneBarTexture = PIXI.loader.resources[FullCircularGauge.GreenZoneBarTexturePath].texture;
+                    var greenzoneBar = new CircularProgressBar();
+                    greenzoneBar.OffsetAngle = this.greenZoneBarOffsetAngle;
+                    greenzoneBar.FullAngle = this.greenZoneBarFullAngle;
+                    greenzoneBar.Texture = greenZoneBarTexture;
+                    greenzoneBar.Value = greenzoneBar.Max;
+                    greenzoneBar.Center = centerPosition;
+                    greenzoneBar.Radius = zoneBarRadius;
+                    greenzoneBar.InnerRadius = 0;
+                    greenzoneBar.updateForce();
+                    backContainer.addChild(greenzoneBar);
+                }
+                //Add gridSprite
+                var gridTexture = PIXI.loader.resources[FullCircularGauge.GridTexturePath].texture;
+                var gridSprite = new PIXI.Sprite();
+                gridSprite.texture = gridTexture;
+                backContainer.addChild(gridSprite);
+                //Set Title and unit text
+                var titleTextElem = new PIXI.Text(this.titleLabel);
+                var titleTextOption = this.titleLabelOption;
+                titleTextElem.style = this.masterTextStyle.clone();
+                titleTextElem.style.fontSize = titleTextOption.fontSize;
+                titleTextElem.style.align = titleTextOption.align;
+                titleTextElem.anchor.set(titleTextOption.anchor.x, titleTextOption.anchor.y);
+                titleTextElem.position.set(titleTextOption.position.x, titleTextOption.position.y);
+                var unitTextElem = new PIXI.Text(this.unitLabel);
+                var unitTextOption = this.unitLabelOption;
+                unitTextElem.style = this.masterTextStyle.clone();
+                unitTextElem.style.fontSize = unitTextOption.fontSize;
+                unitTextElem.style.align = unitTextOption.align;
+                unitTextElem.anchor.set(unitTextOption.anchor.x, unitTextOption.anchor.y);
+                unitTextElem.position.set(unitTextOption.position.x, unitTextOption.position.y);
+                backContainer.addChild(titleTextElem);
+                backContainer.addChild(unitTextElem);
+                //Set axis label
+                for (var i = 0; i < this.axisLabelOption.length; i++) {
+                    var axisLabelOption = this.axisLabelOption[i];
+                    var axisLabelElem = new PIXI.Text(this.axisLabel[i]);
+                    axisLabelElem.style = this.masterTextStyle.clone();
+                    axisLabelElem.style.fontSize = axisLabelOption.fontSize;
+                    axisLabelElem.style.align = axisLabelOption.align;
+                    axisLabelElem.anchor.set(axisLabelOption.anchor.x, axisLabelOption.anchor.y);
+                    axisLabelElem.position.set(axisLabelOption.position.x, axisLabelOption.position.y);
+                    backContainer.addChild(axisLabelElem);
+                }
+                //Bake into texture
+                backContainer.cacheAsBitmap = true;
+                _super.prototype.addChild.call(this, backContainer);
+            };
+            return CircularGaugePanelBase;
+        }(PIXI.Container));
+        parts.CircularGaugePanelBase = CircularGaugePanelBase;
         var FullCircularGauge = (function (_super) {
             __extends(FullCircularGauge, _super);
             function FullCircularGauge() {
@@ -103,7 +250,6 @@ var webSocketGauge;
                     .add(FullCircularGauge.YellowZoneBarTexturePath)
                     .add(FullCircularGauge.BackTexturePath)
                     .add(FullCircularGauge.GridTexturePath)
-                    .add(FullCircularGauge.ShaftTextturePath)
                     .add(FullCircularGauge.ValueBarTexturePath);
             };
             FullCircularGauge.prototype.create = function () {
@@ -197,11 +343,6 @@ var webSocketGauge;
                 var gridSprite = new PIXI.Sprite();
                 gridSprite.texture = gridTexture;
                 backContainer.addChild(gridSprite);
-                //Add shaftSprite
-                var shaftTexture = PIXI.loader.resources[FullCircularGauge.ShaftTextturePath].texture;
-                var shaftSprite = new PIXI.Sprite();
-                shaftSprite.texture = shaftTexture;
-                backContainer.addChild(shaftSprite);
                 //Set Title and unit text
                 var titleTextElem = new PIXI.Text(this.TitleLabel);
                 var titleTextOption = this.TitleLabelOption;
@@ -259,7 +400,6 @@ var webSocketGauge;
         FullCircularGauge.ValueBarTexturePath = "FullCircularGauge_ValueBar.png";
         FullCircularGauge.BackTexturePath = "FullCircularGauge_Back.png";
         FullCircularGauge.GridTexturePath = "FullCircularGauge_Grid.png";
-        FullCircularGauge.ShaftTextturePath = "FullCircularGauge_Shaft.png";
         parts.FullCircularGauge = FullCircularGauge;
     })(parts = webSocketGauge.parts || (webSocketGauge.parts = {}));
 })(webSocketGauge || (webSocketGauge = {}));
