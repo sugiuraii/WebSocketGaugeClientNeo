@@ -63,39 +63,11 @@ module webSocketGauge.parts
         }
     }
     
-    export abstract class CircularGaugePanelOptionBase extends CircularProgressBarOptions
+    export class FullCircularGauge extends PIXI.Container
     {
-        private titleLabel: string;
-        private titleLabelOption : TextOption;
-        private unitLabel: string;
-        private unitLabelOption: TextOption;
-        private axisLabel: string[];
-        private axisLabelOption: TextOption[];
+        private valueProgressBar: CircularProgressBar;
+        private valueTextLabel: PIXI.Text;
         
-        private valueNumberRoundDigit: number;
-        
-        private redZoneBarEnable : boolean;
-        private yellowZoneBarEnable : boolean;
-        private greenZoneBarEnable : boolean;
-        
-        private redZoneBarOffsetAngle : number;
-        private yellowZoneBarOffsetAngle : number;
-        private greenZoneBarOffsetAngle : number;
-        private redZoneBarFullAngle : number;
-        private yellowZoneBarFullAngle : number;
-        private greenZoneBarFullAngle : number;
-        
-        private static redZoneBarTexturePath : string;
-        private static tellowZoneBarTexturePath : string;
-        private static greenZoneBarTexturePath : string;
-        private static valueBarTexturePath : string;
-        private static backTexturePath : string;
-        private static gridTexturePath : string;
-        private static shaftTextturePath : string;
-    }
-    
-    export class FullCircularGaugeOption extends CircularGaugePanelOptionBase
-    {       
         public MasterTextStyle = new PIXI.TextStyle(
         {
             dropShadow : true,
@@ -105,6 +77,13 @@ module webSocketGauge.parts
             fill : "white",
             fontFamily: "FreeSans-Bold"
         });
+        
+        public OffsetAngle = 90;
+        public FullAngle = 270;
+        public Min = -1.0;
+        public Max = 2.0;
+        public AngleStep = 0.1;
+        
         public TitleLabel = "TURBO BOOST";
         public TitleLabelOption = new TextOption(new PIXI.Point(200, 370), new PIXI.Point(0.5, 0.5), "center", 38);
         public UnitLabel = "x100kPa";
@@ -133,19 +112,181 @@ module webSocketGauge.parts
         public static BackTexturePath : string = "FullCircularGauge_Back.png";
         public static GridTexturePath : string = "FullCircularGauge_Grid.png";
         public static ShaftTextturePath : string = "FullCircularGauge_Shaft.png";
-                
+        
+        public static preloadTextures()
+        {
+            PIXI.loader.add(FullCircularGauge.RedZoneBarTexturePath)
+                .add(FullCircularGauge.GreenZoneBarTexturePath)
+                .add(FullCircularGauge.YellowZoneBarTexturePath)
+                .add(FullCircularGauge.BackTexturePath)
+                .add(FullCircularGauge.GridTexturePath)
+                .add(FullCircularGauge.ShaftTextturePath)
+                .add(FullCircularGauge.ValueBarTexturePath);
+        }
+        
         constructor()
         {
             super();
             this.createDefaultAxisLabel();
-            this.OffsetAngle = 90;
-            this.FullAngle = 270;
-            this.Min = -1.0;
-            this.Max = 2.0;
-            this.AngleStep = 0.1;
-            this.Center.set(200,200);
-            this.Radius = 150;
-            this.InnerRadius = 50;
+        }
+        
+        public create()
+        {
+            const backContainer = this.createBackContainer();
+            super.addChild(backContainer);
+            
+            const valueBarTexture = PIXI.loader.resources[FullCircularGauge.ValueBarTexturePath].texture;
+
+            this.valueProgressBar = new CircularProgressBar();
+            this.valueProgressBar.OffsetAngle = this.OffsetAngle;
+            this.valueProgressBar.FullAngle = this.FullAngle;
+            this.valueProgressBar.Min = this.Min;
+            this.valueProgressBar.Max = this.Max;
+            this.valueProgressBar.AngleStep = this.AngleStep;
+            
+            this.valueProgressBar.Center.set(200,200);
+            this.valueProgressBar.Radius = 150;
+            this.valueProgressBar.InnerRadius = 50;
+            
+            this.valueProgressBar.Texture = valueBarTexture;
+            super.addChild(this.valueProgressBar);
+           
+            this.valueTextLabel = new PIXI.Text(this.Min.toFixed(this.ValueNumberRoundDigit).toString());
+            this.valueTextLabel.style = this.MasterTextStyle.clone();
+            this.valueTextLabel.style.fontSize = 80;
+            this.valueTextLabel.position.set(200,185);
+            this.valueTextLabel.anchor.set(0.5,0.5);
+            this.valueTextLabel.style.align = "center";
+            this.valueTextLabel.style.letterSpacing = -3;
+            super.addChild(this.valueTextLabel);
+            
+        }
+        
+        public setVal(value : number)
+        {
+            this.valueProgressBar.Value = value;
+            this.valueProgressBar.update();
+            
+             if (value.toFixed(this.ValueNumberRoundDigit).toString() !== this.valueTextLabel.text)
+                this.valueTextLabel.text = value.toFixed(this.ValueNumberRoundDigit).toString();
+                
+        }
+        public getVal():number
+        {
+            return this.valueProgressBar.Value;
+        }
+        private createBackContainer(): PIXI.Container
+        {   
+            const backContainer = new PIXI.Container();
+            //Unlock baked texture
+            backContainer.cacheAsBitmap = false;
+            
+            const centerPosition = new PIXI.Point(200,200);
+            const zoneBarRadius = 200;
+            
+            //Add backSprite
+            const backTexture = PIXI.loader.resources[FullCircularGauge.BackTexturePath].texture;
+            const backSprite = new PIXI.Sprite();
+            backSprite.texture = backTexture;
+            backContainer.addChild(backSprite);
+            
+            //Add redzoneBar
+            if (this.RedZoneBarEnable)
+            {
+                const redZoneBarTexture = PIXI.loader.resources[FullCircularGauge.RedZoneBarTexturePath].texture;
+                const redzoneBar = new CircularProgressBar();
+                redzoneBar.OffsetAngle = this.RedZoneBarOffsetAngle;
+                redzoneBar.FullAngle = this.RedZoneBarFullAngle;
+                redzoneBar.Texture = redZoneBarTexture;
+                redzoneBar.Value = redzoneBar.Max;
+                redzoneBar.Center = centerPosition;
+                redzoneBar.Radius = zoneBarRadius;
+                redzoneBar.InnerRadius = 0;
+                redzoneBar.updateForce();
+                backContainer.addChild(redzoneBar);
+            }
+            
+            //Add yellowzoneBar
+            if (this.YellowZoneBarEnable)
+            {
+                const yellowZoneBarTexture = PIXI.loader.resources[FullCircularGauge.YellowZoneBarTexturePath].texture;
+                const yellowzoneBar = new CircularProgressBar();
+                yellowzoneBar.OffsetAngle = this.YellowZoneBarOffsetAngle;
+                yellowzoneBar.FullAngle = this.YellowZoneBarFullAngle;
+                yellowzoneBar.Texture = yellowZoneBarTexture;
+                yellowzoneBar.Value = yellowzoneBar.Max;
+                yellowzoneBar.Center = centerPosition;
+                yellowzoneBar.Radius = zoneBarRadius;
+                yellowzoneBar.InnerRadius = 0;
+                yellowzoneBar.updateForce();
+                backContainer.addChild(yellowzoneBar);
+            }
+            
+            //Add greenZoneBar
+            if (this.GreenZoneBarEnable)
+            {
+                const greenZoneBarTexture = PIXI.loader.resources[FullCircularGauge.GreenZoneBarTexturePath].texture;
+                const greenzoneBar = new CircularProgressBar();
+                greenzoneBar.OffsetAngle = this.GreenZoneBarOffsetAngle;
+                greenzoneBar.FullAngle = this.GreenZoneBarFullAngle;
+                greenzoneBar.Texture = greenZoneBarTexture;
+                greenzoneBar.Value = greenzoneBar.Max;
+                greenzoneBar.Center = centerPosition;
+                greenzoneBar.Radius = zoneBarRadius;
+                greenzoneBar.InnerRadius = 0;
+                greenzoneBar.updateForce();
+                backContainer.addChild(greenzoneBar);
+            }
+            
+            //Add gridSprite
+            const gridTexture = PIXI.loader.resources[FullCircularGauge.GridTexturePath].texture;
+            const gridSprite = new PIXI.Sprite();
+            gridSprite.texture = gridTexture;
+            backContainer.addChild(gridSprite);
+            
+            //Add shaftSprite
+            const shaftTexture = PIXI.loader.resources[FullCircularGauge.ShaftTextturePath].texture;
+            const shaftSprite = new PIXI.Sprite();
+            shaftSprite.texture = shaftTexture;
+            backContainer.addChild(shaftSprite);
+
+            //Set Title and unit text
+            const titleTextElem = new PIXI.Text(this.TitleLabel);
+            const titleTextOption = this.TitleLabelOption;
+            titleTextElem.style = this.MasterTextStyle.clone();
+            titleTextElem.style.fontSize = titleTextOption.fontSize;
+            titleTextElem.style.align = titleTextOption.align;
+            titleTextElem.anchor.set(titleTextOption.anchor.x, titleTextOption.anchor.y)
+            titleTextElem.position.set(titleTextOption.position.x, titleTextOption.position.y);
+            
+            const unitTextElem = new PIXI.Text(this.UnitLabel);
+            const unitTextOption = this.UnitLabelOption;
+            unitTextElem.style = this.MasterTextStyle.clone();
+            unitTextElem.style.fontSize = unitTextOption.fontSize;
+            unitTextElem.style.align = unitTextOption.align;
+            unitTextElem.anchor.set(unitTextOption.anchor.x, unitTextOption.anchor.y);
+            unitTextElem.position.set(unitTextOption.position.x, unitTextOption.position.y );
+ 
+            backContainer.addChild(titleTextElem);
+            backContainer.addChild(unitTextElem);
+            
+            //Set axis label
+            for (let i = 0; i < this.AxisLabelOption.length; i++)
+            {
+                const axisLabelOption = this.AxisLabelOption[i];
+                const axisLabelElem = new PIXI.Text(this.AxisLabel[i]);
+                axisLabelElem.style = this.MasterTextStyle.clone();
+                axisLabelElem.style.fontSize = axisLabelOption.fontSize;
+                axisLabelElem.style.align = axisLabelOption.align;
+                axisLabelElem.anchor.set(axisLabelOption.anchor.x, axisLabelOption.anchor.y);
+                axisLabelElem.position.set(axisLabelOption.position.x, axisLabelOption.position.y);
+                backContainer.addChild(axisLabelElem);
+            }
+            
+            //Bake into texture
+            backContainer.cacheAsBitmap = true;
+            
+            return backContainer;
         }
         
         private createDefaultAxisLabel()
@@ -165,176 +306,6 @@ module webSocketGauge.parts
             this.AxisLabelOption.push(new TextOption(new PIXI.Point(310, 75), new PIXI.Point(0, 0.5), "left", axisLabelFontSize));
             this.AxisLabel.push("+2.0");
             this.AxisLabelOption.push(new TextOption(new PIXI.Point(340, 195), new PIXI.Point(0.5, 0), "center", axisLabelFontSize));
-        }
-    }
-    
-    export class FullCircularGauge extends PIXI.Container
-    {
-        private gaugeOption: FullCircularGaugeOption = new FullCircularGaugeOption();
-        private valueProgressBar: CircularProgressBar;
-        private valueTextLabel: PIXI.Text;
-
-        public static preloadTextures()
-        {
-            PIXI.loader.add(FullCircularGaugeOption.RedZoneBarTexturePath)
-                .add(FullCircularGaugeOption.GreenZoneBarTexturePath)
-                .add(FullCircularGaugeOption.YellowZoneBarTexturePath)
-                .add(FullCircularGaugeOption.BackTexturePath)
-                .add(FullCircularGaugeOption.GridTexturePath)
-                .add(FullCircularGaugeOption.ShaftTextturePath)
-                .add(FullCircularGaugeOption.ValueBarTexturePath);
-        }
-        
-        public create()
-        {
-            const backContainer = this.createBackContainer();
-            super.addChild(backContainer);
-            
-            const option = this.gaugeOption; 
-            const valueBarTexture = PIXI.loader.resources[FullCircularGaugeOption.ValueBarTexturePath].texture;
-
-            this.valueProgressBar = new CircularProgressBar(option);
-            this.valueProgressBar.Texture = valueBarTexture;
-            super.addChild(this.valueProgressBar);
-           
-            this.valueTextLabel = new PIXI.Text(option.Min.toFixed(option.ValueNumberRoundDigit).toString());
-            this.valueTextLabel.style = option.MasterTextStyle.clone();
-            this.valueTextLabel.style.fontSize = 80;
-            this.valueTextLabel.position.set(200,185);
-            this.valueTextLabel.anchor.set(0.5,0.5);
-            this.valueTextLabel.style.align = "center";
-            this.valueTextLabel.style.letterSpacing = -3;
-            super.addChild(this.valueTextLabel);
-            
-        }
-        
-        public setVal(value : number)
-        {
-            this.valueProgressBar.Value = value;
-            this.valueProgressBar.update();
-            
-             if (value.toFixed(this.gaugeOption.ValueNumberRoundDigit).toString() !== this.valueTextLabel.text)
-                this.valueTextLabel.text = value.toFixed(this.gaugeOption.ValueNumberRoundDigit).toString();
-                
-        }
-        public getVal():number
-        {
-            return this.valueProgressBar.Value;
-        }
-        private createBackContainer(): PIXI.Container
-        {   
-            const backContainer = new PIXI.Container();
-            //Unlock baked texture
-            backContainer.cacheAsBitmap = false;
-            
-            const centerPosition = new PIXI.Point(200,200);
-            const zoneBarRadius = 200;
-            
-            const option = this.gaugeOption 
-            
-            //Add backSprite
-            const backTexture = PIXI.loader.resources[FullCircularGaugeOption.BackTexturePath].texture;
-            const backSprite = new PIXI.Sprite();
-            backSprite.texture = backTexture;
-            backContainer.addChild(backSprite);
-            
-            //Add redzoneBar
-            if (option.RedZoneBarEnable)
-            {
-                const redZoneBarTexture = PIXI.loader.resources[FullCircularGaugeOption.RedZoneBarTexturePath].texture;
-                const redzoneBar = new CircularProgressBar();
-                redzoneBar.OffsetAngle = option.RedZoneBarOffsetAngle;
-                redzoneBar.FullAngle = option.RedZoneBarFullAngle;
-                redzoneBar.Texture = redZoneBarTexture;
-                redzoneBar.Value = redzoneBar.Max;
-                redzoneBar.Center = centerPosition;
-                redzoneBar.Radius = zoneBarRadius;
-                redzoneBar.InnerRadius = 0;
-                redzoneBar.updateForce();
-                backContainer.addChild(redzoneBar);
-            }
-            
-            //Add yellowzoneBar
-            if (option.YellowZoneBarEnable)
-            {
-                const yellowZoneBarTexture = PIXI.loader.resources[FullCircularGaugeOption.YellowZoneBarTexturePath].texture;
-                const yellowzoneBar = new CircularProgressBar();
-                yellowzoneBar.OffsetAngle = option.YellowZoneBarOffsetAngle;
-                yellowzoneBar.FullAngle = option.YellowZoneBarFullAngle;
-                yellowzoneBar.Texture = yellowZoneBarTexture;
-                yellowzoneBar.Value = yellowzoneBar.Max;
-                yellowzoneBar.Center = centerPosition;
-                yellowzoneBar.Radius = zoneBarRadius;
-                yellowzoneBar.InnerRadius = 0;
-                yellowzoneBar.updateForce();
-                backContainer.addChild(yellowzoneBar);
-            }
-            
-            //Add greenZoneBar
-            if (option.GreenZoneBarEnable)
-            {
-                const greenZoneBarTexture = PIXI.loader.resources[FullCircularGaugeOption.GreenZoneBarTexturePath].texture;
-                const greenzoneBar = new CircularProgressBar();
-                greenzoneBar.OffsetAngle = option.GreenZoneBarOffsetAngle;
-                greenzoneBar.FullAngle = option.GreenZoneBarFullAngle;
-                greenzoneBar.Texture = greenZoneBarTexture;
-                greenzoneBar.Value = greenzoneBar.Max;
-                greenzoneBar.Center = centerPosition;
-                greenzoneBar.Radius = zoneBarRadius;
-                greenzoneBar.InnerRadius = 0;
-                greenzoneBar.updateForce();
-                backContainer.addChild(greenzoneBar);
-            }
-            
-            //Add gridSprite
-            const gridTexture = PIXI.loader.resources[FullCircularGaugeOption.GridTexturePath].texture;
-            const gridSprite = new PIXI.Sprite();
-            gridSprite.texture = gridTexture;
-            backContainer.addChild(gridSprite);
-            
-            //Add shaftSprite
-            const shaftTexture = PIXI.loader.resources[FullCircularGaugeOption.ShaftTextturePath].texture;
-            const shaftSprite = new PIXI.Sprite();
-            shaftSprite.texture = shaftTexture;
-            backContainer.addChild(shaftSprite);
-
-            //Set Title and unit text
-            const titleTextElem = new PIXI.Text(option.TitleLabel);
-            const titleTextOption = option.TitleLabelOption;
-            titleTextElem.style = option.MasterTextStyle.clone();
-            titleTextElem.style.fontSize = titleTextOption.fontSize;
-            titleTextElem.style.align = titleTextOption.align;
-            titleTextElem.anchor.set(titleTextOption.anchor.x, titleTextOption.anchor.y)
-            titleTextElem.position.set(titleTextOption.position.x, titleTextOption.position.y);
-            
-            const unitTextElem = new PIXI.Text(option.UnitLabel);
-            const unitTextOption = option.UnitLabelOption;
-            unitTextElem.style = option.MasterTextStyle.clone();
-            unitTextElem.style.fontSize = unitTextOption.fontSize;
-            unitTextElem.style.align = unitTextOption.align;
-            unitTextElem.anchor.set(unitTextOption.anchor.x, unitTextOption.anchor.y);
-            unitTextElem.position.set(unitTextOption.position.x, unitTextOption.position.y );
- 
-            backContainer.addChild(titleTextElem);
-            backContainer.addChild(unitTextElem);
-            
-            //Set axis label
-            for (let i = 0; i < option.AxisLabelOption.length; i++)
-            {
-                const axisLabelOption = option.AxisLabelOption[i];
-                const axisLabelElem = new PIXI.Text(option.AxisLabel[i]);
-                axisLabelElem.style = option.MasterTextStyle.clone();
-                axisLabelElem.style.fontSize = axisLabelOption.fontSize;
-                axisLabelElem.style.align = axisLabelOption.align;
-                axisLabelElem.anchor.set(axisLabelOption.anchor.x, axisLabelOption.anchor.y);
-                axisLabelElem.position.set(axisLabelOption.position.x, axisLabelOption.position.y);
-                backContainer.addChild(axisLabelElem);
-            }
-            
-            //Bake into texture
-            backContainer.cacheAsBitmap = true;
-            
-            return backContainer;
         }
     }    
 }
