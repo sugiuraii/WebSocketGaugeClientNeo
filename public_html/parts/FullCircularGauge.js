@@ -117,8 +117,8 @@ var webSocketGauge;
                 this.valueTextLabel.style.letterSpacing = valueLabelOption.letterSpacing;
                 _super.prototype.addChild.call(this, this.valueTextLabel);
             };
-            CircularGaugePanelBase.prototype.setDefaultAxisLabel = function (axisLabel, axisLabelOption) {
-                for (var i = void 0; i < axisLabel.length; i++) {
+            CircularGaugePanelBase.prototype.setAxisLabel = function (axisLabel, axisLabelOption) {
+                for (var i = 0; i < axisLabel.length; i++) {
                     this.axisLabel.push(axisLabel[i]);
                     this.axisLabelOption.push(axisLabelOption[i]);
                 }
@@ -257,7 +257,23 @@ var webSocketGauge;
                 _this.redZoneBarFullAngle = 40;
                 _this.yellowZoneBarFullAngle = 45;
                 _this.greenZoneBarFullAngle = 90;
-                _this.createDefaultAxisLabel();
+                var axisLabelFontSize = 30;
+                _this.setAxisLabel(["-1.0",
+                    "-0.5",
+                    "0",
+                    "+0.5",
+                    "+1.0",
+                    "+1.5",
+                    "+2.0"
+                ], [
+                    new TextOption(new PIXI.Point(207, 335), new PIXI.Point(0, 0.5), "left", axisLabelFontSize),
+                    new TextOption(new PIXI.Point(90, 310), new PIXI.Point(1, 0.5), "right", axisLabelFontSize),
+                    new TextOption(new PIXI.Point(45, 193), new PIXI.Point(1, 0.5), "right", axisLabelFontSize),
+                    new TextOption(new PIXI.Point(90, 75), new PIXI.Point(1, 0.5), "right", axisLabelFontSize),
+                    new TextOption(new PIXI.Point(200, 40), new PIXI.Point(0.5, 1), "center", axisLabelFontSize),
+                    new TextOption(new PIXI.Point(310, 75), new PIXI.Point(0, 0.5), "left", axisLabelFontSize),
+                    new TextOption(new PIXI.Point(340, 195), new PIXI.Point(0.5, 0), "center", axisLabelFontSize)
+                ]);
                 _this.initialize();
                 return _this;
             }
@@ -268,23 +284,6 @@ var webSocketGauge;
                     .add(FullCircularGauge.BackTexturePath)
                     .add(FullCircularGauge.GridTexturePath)
                     .add(FullCircularGauge.ValueBarTexturePath);
-            };
-            FullCircularGauge.prototype.createDefaultAxisLabel = function () {
-                var axisLabelFontSize = 30;
-                this.axisLabel.push("-1.0");
-                this.axisLabelOption.push(new TextOption(new PIXI.Point(207, 335), new PIXI.Point(0, 0.5), "left", axisLabelFontSize));
-                this.axisLabel.push("-0.5");
-                this.axisLabelOption.push(new TextOption(new PIXI.Point(90, 310), new PIXI.Point(1, 0.5), "right", axisLabelFontSize));
-                this.axisLabel.push("0");
-                this.axisLabelOption.push(new TextOption(new PIXI.Point(45, 193), new PIXI.Point(1, 0.5), "right", axisLabelFontSize));
-                this.axisLabel.push("+0.5");
-                this.axisLabelOption.push(new TextOption(new PIXI.Point(90, 75), new PIXI.Point(1, 0.5), "right", axisLabelFontSize));
-                this.axisLabel.push("+1.0");
-                this.axisLabelOption.push(new TextOption(new PIXI.Point(200, 40), new PIXI.Point(0.5, 1), "center", axisLabelFontSize));
-                this.axisLabel.push("+1.5");
-                this.axisLabelOption.push(new TextOption(new PIXI.Point(310, 75), new PIXI.Point(0, 0.5), "left", axisLabelFontSize));
-                this.axisLabel.push("+2.0");
-                this.axisLabelOption.push(new TextOption(new PIXI.Point(340, 195), new PIXI.Point(0.5, 0), "center", axisLabelFontSize));
             };
             return FullCircularGauge;
         }(CircularGaugePanelBase));
