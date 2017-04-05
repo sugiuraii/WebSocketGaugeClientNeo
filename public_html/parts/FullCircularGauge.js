@@ -95,7 +95,6 @@ var webSocketGauge;
                 this.createValueProgressBar();
             };
             CircularGaugePanelBase.prototype.createValueProgressBar = function () {
-                var valueBarTexture = PIXI.loader.resources[FullCircularGauge.ValueBarTexturePath].texture;
                 this.valueProgressBar = new CircularProgressBar();
                 this.valueProgressBar.OffsetAngle = this.offsetAngle;
                 this.valueProgressBar.FullAngle = this.fullAngle;
@@ -105,7 +104,7 @@ var webSocketGauge;
                 this.valueProgressBar.Center = this.centerPosition;
                 this.valueProgressBar.Radius = this.valueBarRadius;
                 this.valueProgressBar.InnerRadius = this.valueBarInnerRadius;
-                this.valueProgressBar.Texture = valueBarTexture;
+                this.valueProgressBar.Texture = this.ValueBarTexture;
                 _super.prototype.addChild.call(this, this.valueProgressBar);
                 this.valueTextLabel = new PIXI.Text(this.min.toFixed(this.valueNumberRoundDigit).toString());
                 this.valueTextLabel.style = this.masterTextStyle.clone();
@@ -130,13 +129,13 @@ var webSocketGauge;
                 var centerPosition = this.centerPosition;
                 var zoneBarRadius = this.zoneBarRadius;
                 //Add backSprite
-                var backTexture = PIXI.loader.resources[FullCircularGauge.BackTexturePath].texture;
+                var backTexture = this.BackTexture;
                 var backSprite = new PIXI.Sprite();
                 backSprite.texture = backTexture;
                 backContainer.addChild(backSprite);
                 //Add redzoneBar
                 if (this.redZoneBarEnable) {
-                    var redZoneBarTexture = PIXI.loader.resources[FullCircularGauge.RedZoneBarTexturePath].texture;
+                    var redZoneBarTexture = this.RedZoneBarTexture;
                     var redzoneBar = new CircularProgressBar();
                     redzoneBar.OffsetAngle = this.redZoneBarOffsetAngle;
                     redzoneBar.FullAngle = this.redZoneBarFullAngle;
@@ -150,7 +149,7 @@ var webSocketGauge;
                 }
                 //Add yellowzoneBar
                 if (this.yellowZoneBarEnable) {
-                    var yellowZoneBarTexture = PIXI.loader.resources[FullCircularGauge.YellowZoneBarTexturePath].texture;
+                    var yellowZoneBarTexture = this.YellowZoneBarTexture;
                     var yellowzoneBar = new CircularProgressBar();
                     yellowzoneBar.OffsetAngle = this.yellowZoneBarOffsetAngle;
                     yellowzoneBar.FullAngle = this.yellowZoneBarFullAngle;
@@ -164,7 +163,7 @@ var webSocketGauge;
                 }
                 //Add greenZoneBar
                 if (this.greenZoneBarEnable) {
-                    var greenZoneBarTexture = PIXI.loader.resources[FullCircularGauge.GreenZoneBarTexturePath].texture;
+                    var greenZoneBarTexture = this.GreenZoneBarTexture;
                     var greenzoneBar = new CircularProgressBar();
                     greenzoneBar.OffsetAngle = this.greenZoneBarOffsetAngle;
                     greenzoneBar.FullAngle = this.greenZoneBarFullAngle;
@@ -177,7 +176,7 @@ var webSocketGauge;
                     backContainer.addChild(greenzoneBar);
                 }
                 //Add gridSprite
-                var gridTexture = PIXI.loader.resources[FullCircularGauge.GridTexturePath].texture;
+                var gridTexture = this.GridTexture;
                 var gridSprite = new PIXI.Sprite();
                 gridSprite.texture = gridTexture;
                 backContainer.addChild(gridSprite);
@@ -209,9 +208,22 @@ var webSocketGauge;
                     axisLabelElem.position.set(axisLabelOption.position.x, axisLabelOption.position.y);
                     backContainer.addChild(axisLabelElem);
                 }
-                //Bake into texture
-                backContainer.cacheAsBitmap = true;
-                _super.prototype.addChild.call(this, backContainer);
+                this.addChild(backContainer);
+                //Freeze back container and cache as bitmap texture when all texture are loaded
+                var self = this;
+                var waitTextureRead = function () {
+                    if (self.RedZoneBarTexture.baseTexture.hasLoaded
+                        && self.GreenZoneBarTexture.baseTexture.hasLoaded
+                        && self.YellowZoneBarTexture.baseTexture.hasLoaded
+                        && self.BackTexture.baseTexture.hasLoaded
+                        && self.GridTexture.baseTexture.hasLoaded) {
+                        //Bake into texture
+                        backContainer.cacheAsBitmap = true;
+                    }
+                    else
+                        window.setTimeout(waitTextureRead, 1000);
+                };
+                window.setTimeout(waitTextureRead, 1000);
             };
             return CircularGaugePanelBase;
         }(PIXI.Container));
@@ -220,6 +232,12 @@ var webSocketGauge;
             __extends(FullCircularGauge, _super);
             function FullCircularGauge() {
                 var _this = _super.call(this) || this;
+                _this.RedZoneBarTexture = PIXI.Texture.fromImage("FullCircularGauge_RedZone_Bar.png");
+                _this.YellowZoneBarTexture = PIXI.Texture.fromImage("FullCircularGauge_YellowZone_Bar.png");
+                _this.GreenZoneBarTexture = PIXI.Texture.fromImage("FullCircularGauge_GreenZone_Bar.png");
+                _this.ValueBarTexture = PIXI.Texture.fromImage("FullCircularGauge_ValueBar.png");
+                _this.BackTexture = PIXI.Texture.fromImage("FullCircularGauge_Back.png");
+                _this.GridTexture = PIXI.Texture.fromImage("FullCircularGauge_Grid.png");
                 _this.masterTextStyle = new PIXI.TextStyle({
                     dropShadow: true,
                     dropShadowBlur: 10,
@@ -277,22 +295,8 @@ var webSocketGauge;
                 _this.initialize();
                 return _this;
             }
-            FullCircularGauge.preloadTextures = function () {
-                PIXI.loader.add(FullCircularGauge.RedZoneBarTexturePath)
-                    .add(FullCircularGauge.GreenZoneBarTexturePath)
-                    .add(FullCircularGauge.YellowZoneBarTexturePath)
-                    .add(FullCircularGauge.BackTexturePath)
-                    .add(FullCircularGauge.GridTexturePath)
-                    .add(FullCircularGauge.ValueBarTexturePath);
-            };
             return FullCircularGauge;
         }(CircularGaugePanelBase));
-        FullCircularGauge.RedZoneBarTexturePath = "FullCircularGauge_RedZone_Bar.png";
-        FullCircularGauge.YellowZoneBarTexturePath = "FullCircularGauge_YellowZone_Bar.png";
-        FullCircularGauge.GreenZoneBarTexturePath = "FullCircularGauge_GreenZone_Bar.png";
-        FullCircularGauge.ValueBarTexturePath = "FullCircularGauge_ValueBar.png";
-        FullCircularGauge.BackTexturePath = "FullCircularGauge_Back.png";
-        FullCircularGauge.GridTexturePath = "FullCircularGauge_Grid.png";
         parts.FullCircularGauge = FullCircularGauge;
     })(parts = webSocketGauge.parts || (webSocketGauge.parts = {}));
 })(webSocketGauge || (webSocketGauge = {}));

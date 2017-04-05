@@ -25,13 +25,13 @@
  */
 /// <reference path="./FullCircularGauge.ts" />
 window.onload = function () {
-    webSocketGauge.parts.FullCircularGauge.preloadTextures();
+    //webSocketGauge.parts.FullCircularGauge.preloadTextures();
     WebFont.load({
         custom: {
             families: ['FreeSans-Bold'],
             urls: ['./font.css']
         },
-        active: function () { PIXI.loader.load(main); }
+        active: function () { main(); }
     });
 };
 function main() {
