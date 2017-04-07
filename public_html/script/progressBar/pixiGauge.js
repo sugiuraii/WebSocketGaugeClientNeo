@@ -72,6 +72,18 @@ var webSocketGauge;
                     enumerable: true,
                     configurable: true
                 });
+                Object.defineProperty(Gauge1D.prototype, "DrawValue", {
+                    get: function () {
+                        if (this.Value > this.Max)
+                            return this.Max;
+                        else if (this.Value < this.Min)
+                            return this.Min;
+                        else
+                            return this.Value;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
                 Object.defineProperty(Gauge1D.prototype, "InterpolatedAnimation", {
                     get: function () { return this.gauge1DOptions.InterPolationAnimation; },
                     set: function (val) { this.gauge1DOptions.InterPolationAnimation = val; },
@@ -224,7 +236,7 @@ var webSocketGauge;
                     var angleStep = this.AngleStep;
                     var valueMax = this.Max;
                     var valueMin = this.Min;
-                    var value = this.Value;
+                    var value = this.DrawValue;
                     var spriteMask = this.SpriteMask;
                     var currentAngle = this.currAngle;
                     var startAngleRad = Math.PI / 180 * offsetAngle;
@@ -320,7 +332,7 @@ var webSocketGauge;
                     var pixelStep = this.PixelStep;
                     var valueMax = this.Max;
                     var valueMin = this.Min;
-                    var value = this.Value;
+                    var value = this.DrawValue;
                     var spriteMask = this.SpriteMask;
                     var vertical = this.Vertical;
                     var invertDirection = this.InvertDirection;
@@ -477,7 +489,7 @@ var webSocketGauge;
                     var angleStep = this.AngleStep;
                     var valueMax = this.Max;
                     var valueMin = this.Min;
-                    var value = this.Value;
+                    var value = this.DrawValue;
                     var sprite = this.Sprite;
                     var currentAngle = this.currAngle;
                     var angle;

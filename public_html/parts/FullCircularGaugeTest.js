@@ -41,7 +41,7 @@ function main() {
     var index = 0;
     for (var j = 0; j < 6; j++) {
         for (var i = 0; i < 6; i++) {
-            gaugeArray.push(new webSocketGauge.parts.FullCircularGauge());
+            gaugeArray.push(new webSocketGauge.parts.AirFuelGaugePanel());
             gaugeArray[index].pivot = new PIXI.Point(200, 200);
             gaugeArray[index].scale.set(0.6, 0.6);
             gaugeArray[index].position = new PIXI.Point(250 * i + 150, 250 * j + 150);
@@ -51,10 +51,10 @@ function main() {
     }
     app.ticker.add(function () {
         for (var i = 0; i < gaugeArray.length; i++) {
-            if (gaugeArray[i].Value + 0.01 >= 2.0)
-                gaugeArray[i].Value = -1.0;
+            if (gaugeArray[i].Value + 0.1 >= 28)
+                gaugeArray[i].Value = 12;
             else
-                gaugeArray[i].Value = gaugeArray[i].Value + 0.1;
+                gaugeArray[i].Value = gaugeArray[i].Value + 0.2;
         }
     });
 }

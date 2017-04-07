@@ -123,8 +123,12 @@ module webSocketGauge.parts
                 this.valueTextLabel.text = value.toFixed(this.valueNumberRoundDigit).toString();
         }
         
-        protected initialize() : void
+        protected abstract setOption() : void;
+        
+        constructor()
         {
+            super();
+            this.setOption();
             this.createBackContainer();
             this.createValueProgressBar();
         }
@@ -156,13 +160,17 @@ module webSocketGauge.parts
             super.addChild(this.valueTextLabel);            
         }
         
-        protected setAxisLabel(axisLabel : string[], axisLabelOption : TextOption[]) : void
+        protected setAxisLabel(axisLabel : string[]) : void
         {
+            this.axisLabel = new Array();
             for (let i = 0; i < axisLabel.length; i++)
-            {
                 this.axisLabel.push(axisLabel[i]);
+        }
+        protected setAxisLabelOption(axisLabelOption : TextOption[]) : void
+        {
+            this.axisLabelOption = new Array(); 
+            for (let i = 0; i < axisLabelOption.length; i++)
                 this.axisLabelOption.push(axisLabelOption[i]);
-            }
         }
         
         private createBackContainer(): void
@@ -291,10 +299,8 @@ module webSocketGauge.parts
     
     export class FullCircularGauge extends CircularGaugePanelBase
     {
-        constructor()
-        {
-            super();
-            
+        protected setOption() : void
+        {            
             this.RedZoneBarTexture = PIXI.Texture.fromImage("FullCircularGauge_RedZone_Bar.png");
             this.YellowZoneBarTexture = PIXI.Texture.fromImage("FullCircularGauge_YellowZone_Bar.png");
             this.GreenZoneBarTexture = PIXI.Texture.fromImage("FullCircularGauge_GreenZone_Bar.png");
@@ -354,7 +360,8 @@ module webSocketGauge.parts
                 "+1.0",
                 "+1.5",
                 "+2.0"
-            ],
+            ]);
+            this.setAxisLabelOption(
             [
                 new TextOption(new PIXI.Point(207, 335), new PIXI.Point(0, 0.5), "left", axisLabelFontSize),
                 new TextOption(new PIXI.Point(90, 310), new PIXI.Point(1, 0.5), "right", axisLabelFontSize),
@@ -364,9 +371,48 @@ module webSocketGauge.parts
                 new TextOption(new PIXI.Point(310, 75), new PIXI.Point(0, 0.5), "left", axisLabelFontSize),
                 new TextOption(new PIXI.Point(340, 195), new PIXI.Point(0.5, 0), "center", axisLabelFontSize)                
             ]);
-                        
-            this.initialize();
         }
-    }    
+    }
+    
+    export class BoostGaugePanel extends FullCircularGauge
+    {
+        protected setOption() : void
+        {
+            super.setOption();
+            this.titleLabel = "TURBO BOOST";
+            this.min = -1.0;
+            this.max = 2.0;
+            this.setAxisLabel(
+            [   "-1.0",
+                "-0.5",
+                "0",
+                "+0.5",
+                "+1.0",
+                "+1.5",
+                "+2.0"
+            ]);
+        }
+    }
+    
+    export class AirFuelGaugePanel extends FullCircularGauge
+    {
+        protected setOption() : void
+        {
+            super.setOption();
+            this.titleLabel = "Air/Fuel Ratio";
+            this.min = 12;
+            this.max = 24;
+            this.setAxisLabel(
+            [   "12",
+                "14",
+                "16",
+                "18",
+                "20",
+                "22",
+                "24"
+            ]);
+        }
+    }
+
 }
 

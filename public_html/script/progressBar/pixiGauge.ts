@@ -68,6 +68,16 @@ module webSocketGauge.lib.graphics
         get Value() : number { return this.value;}
         set Value(val : number) { this.value = val;}
         
+        get DrawValue() : number
+        {
+            if( this.Value > this.Max)
+                return this.Max;
+            else if (this.Value < this.Min)
+                return this.Min;
+            else
+                return this.Value;            
+        }
+        
         get InterpolatedAnimation(): boolean {return this.gauge1DOptions.InterPolationAnimation;}
         set InterpolatedAnimation(val: boolean) {this.gauge1DOptions.InterPolationAnimation = val;}
                 
@@ -213,7 +223,7 @@ module webSocketGauge.lib.graphics
 
             const valueMax : number = this.Max;
             const valueMin : number = this.Min;
-            const value : number = this.Value;
+            const value : number = this.DrawValue;
 
             const spriteMask: PIXI.Graphics = this.SpriteMask;
 
@@ -308,7 +318,7 @@ module webSocketGauge.lib.graphics
 
             const valueMax: number = this.Max;
             const valueMin: number = this.Min;
-            const value: number = this.Value;
+            const value: number = this.DrawValue;
 
             const spriteMask: PIXI.Graphics = this.SpriteMask;
 
@@ -468,7 +478,7 @@ module webSocketGauge.lib.graphics
 
             const valueMax : number = this.Max;
             const valueMin : number = this.Min;
-            const value : number = this.Value;
+            const value : number = this.DrawValue;
 
             const sprite: PIXI.Sprite = this.Sprite;
 
