@@ -46,6 +46,7 @@ module webSocketGauge.lib.graphics
     {
         private gauge1DOptions: Gauge1DOptions;
         
+        private invertDraw : boolean;
         private value : number;
         
         constructor(options? : Gauge1DOptions)
@@ -68,14 +69,23 @@ module webSocketGauge.lib.graphics
         get Value() : number { return this.value;}
         set Value(val : number) { this.value = val;}
         
+        get InvertDraw() : boolean { return this.invertDraw; }
+        set InvertDraw(flag : boolean) { this.invertDraw = flag; }
+        
         get DrawValue() : number
         {
+            let drawVal : number;
             if( this.Value > this.Max)
-                return this.Max;
+                drawVal = this.Max;
             else if (this.Value < this.Min)
-                return this.Min;
+                drawVal = this.Min;
             else
-                return this.Value;            
+                drawVal = this.Value
+                
+            if (this.InvertDraw)
+                drawVal = this.Max - drawVal + this.Min;
+            
+            return drawVal;
         }
         
         get InterpolatedAnimation(): boolean {return this.gauge1DOptions.InterPolationAnimation;}

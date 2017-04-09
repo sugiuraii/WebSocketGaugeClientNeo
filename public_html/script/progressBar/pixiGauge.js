@@ -72,14 +72,24 @@ var webSocketGauge;
                     enumerable: true,
                     configurable: true
                 });
+                Object.defineProperty(Gauge1D.prototype, "InvertDraw", {
+                    get: function () { return this.invertDraw; },
+                    set: function (flag) { this.invertDraw = flag; },
+                    enumerable: true,
+                    configurable: true
+                });
                 Object.defineProperty(Gauge1D.prototype, "DrawValue", {
                     get: function () {
+                        var drawVal;
                         if (this.Value > this.Max)
-                            return this.Max;
+                            drawVal = this.Max;
                         else if (this.Value < this.Min)
-                            return this.Min;
+                            drawVal = this.Min;
                         else
-                            return this.Value;
+                            drawVal = this.Value;
+                        if (this.InvertDraw)
+                            drawVal = this.Max - drawVal + this.Min;
+                        return drawVal;
                     },
                     enumerable: true,
                     configurable: true
