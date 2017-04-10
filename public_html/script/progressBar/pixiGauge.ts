@@ -32,13 +32,11 @@ module webSocketGauge.lib.graphics
     {
         public Max: number;
         public Min: number;
-        public InterPolationAnimation: boolean;
         
         constructor()
         {
             this.Max = 100;
             this.Min = 0;
-            this.InterPolationAnimation = false;
         }
     }
     
@@ -87,9 +85,6 @@ module webSocketGauge.lib.graphics
             
             return drawVal;
         }
-        
-        get InterpolatedAnimation(): boolean {return this.gauge1DOptions.InterPolationAnimation;}
-        set InterpolatedAnimation(val: boolean) {this.gauge1DOptions.InterPolationAnimation = val;}
                 
         /**
          * Apply value and update gauge.
@@ -162,8 +157,8 @@ module webSocketGauge.lib.graphics
             this.sprite.texture = this.progressBarOptions.Texture;
         }
         
-        get SpriteMask(): PIXI.Graphics { return this.spriteMask; }
-        get Sprite(): PIXI.Sprite { return this.sprite; }
+        protected get SpriteMask(): PIXI.Graphics { return this.spriteMask; }
+        protected get Sprite(): PIXI.Sprite { return this.sprite; }
 
     }
     

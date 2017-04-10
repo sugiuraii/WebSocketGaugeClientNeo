@@ -39,7 +39,6 @@ var webSocketGauge;
                 function Gauge1DOptions() {
                     this.Max = 100;
                     this.Min = 0;
-                    this.InterPolationAnimation = false;
                 }
                 return Gauge1DOptions;
             }());
@@ -91,12 +90,6 @@ var webSocketGauge;
                             drawVal = this.Max - drawVal + this.Min;
                         return drawVal;
                     },
-                    enumerable: true,
-                    configurable: true
-                });
-                Object.defineProperty(Gauge1D.prototype, "InterpolatedAnimation", {
-                    get: function () { return this.gauge1DOptions.InterPolationAnimation; },
-                    set: function (val) { this.gauge1DOptions.InterPolationAnimation = val; },
                     enumerable: true,
                     configurable: true
                 });

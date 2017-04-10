@@ -30,6 +30,8 @@
 
 import CircularProgressBar = webSocketGauge.lib.graphics.CircularProgressBar;
 import CircularProgressBarOptions = webSocketGauge.lib.graphics.CircularProgressBarOptions;
+import RectangularProgressBar = webSocketGauge.lib.graphics.RectangularProgressBar;
+import RectangularProgressBarOptions = webSocketGauge.lib.graphics.RectangularProgressBarOptions;
 
 module webSocketGauge.parts
 {
@@ -301,6 +303,8 @@ module webSocketGauge.parts
         }
     }
     
+    
+    
     export class SemiCircularGauge extends CircularGaugePanelBase
     {
         protected setOption() : void
@@ -315,7 +319,7 @@ module webSocketGauge.parts
             this.masterTextStyle = new PIXI.TextStyle(
             {
                 dropShadow : true,
-                dropShadowBlur: 10,
+                dropShadowBlur: 15,
                 dropShadowColor: "white",
                 dropShadowDistance: 0,
                 fill : "white",
@@ -330,7 +334,7 @@ module webSocketGauge.parts
             this.valueBarRadius = 200;
             this.valueBarInnerRadius = 0;        
             this.valueLabelOption.position.set(200,185);
-            this.valueLabelOption.fontSize = 80;
+            this.valueLabelOption.fontSize = 90;
             this.valueLabelOption.position.set(200,185);
             this.valueLabelOption.anchor.set(0.5,0.5);
             this.valueLabelOption.align = "center";
@@ -496,6 +500,98 @@ module webSocketGauge.parts
                 "10",
                 "8"
             ]);
+        }
+    }
+    
+    export class ThrottleGaugePanel extends SemiCircularGauge
+    {
+        protected setOption() : void
+        {
+            super.setOption();
+            this.titleLabel = "THROTTLE";
+            this.min = 0;
+            this.max = 100;
+            this.unitLabel = "%"
+            this.redZoneBarEnable = false;
+            this.yellowZoneBarEnable = false;
+            this.greenZoneBarEnable = false;
+            this.setAxisLabel(["0","25","50","75","100"]);
+        }
+    }
+    
+    export class DigiTachoPanel extends PIXI.Container
+    {
+        private tachoProgressBar: RectangularProgressBar;
+        private tachoProgressBarTexture: PIXI.Texture;
+        private backTexture: PIXI.Texture;
+        
+        private speedLabel: PIXI.Text;
+        private geasposLabel: PIXI.Text;
+        
+        private speed : number = 0;
+        private tacho : number = 0;
+        private gearPos : string = "N";
+        
+        private speedLabelTextStyle = new PIXI.TextStyle(
+        {
+            dropShadow : true,
+            dropShadowBlur: 10,
+            dropShadowColor: "white",
+            dropShadowDistance: 0,
+            fill : "white",
+            fontFamily: "FreeSans-Bold",
+            fontSize: 155,
+            align:"right"
+        });
+        
+        get Speed() : number { return this.speed;}
+        set Speed(speed : number)
+        {
+            const roundedSpeed : number = Math.round(speed);
+            this.speed = roundedSpeed;
+            this.speedLabel.text = roundedSpeed.toString();
+        }
+        
+        get Tacho(): number {return this.tacho}
+        set Tacho(tacho : number)
+        {
+            this.tacho = tacho;
+            this.tachoProgressBar.Value = tacho;
+            this.tachoProgressBar.update();
+        }
+        
+        constructor()
+        {
+            super();
+            this.backTexture = PIXI.Texture.fromImage("DigiTachoBack.png");
+            this.tachoProgressBarTexture = PIXI.Texture.fromImage("DigiTachoBar.png");
+            
+            //Create background sprite
+            const backSprite = new PIXI.Sprite();
+            backSprite.texture = this.backTexture;
+            super.addChild(backSprite);
+            
+            //Create tacho progress bar
+            const tachoProgressBar = new RectangularProgressBar();
+            this.tachoProgressBar = tachoProgressBar;
+            tachoProgressBar.Texture = this.tachoProgressBarTexture;
+            tachoProgressBar.position.set(12,10);
+            tachoProgressBar.Min = 0;
+            tachoProgressBar.Max = 9000;
+            tachoProgressBar.Vertical = false;
+            tachoProgressBar.InvertDirection = false;
+            tachoProgressBar.InvertDraw = false;
+            tachoProgressBar.PixelStep = 16;
+            tachoProgressBar.MaskHeight = 246;
+            tachoProgressBar.MaskWidth = 577;
+            super.addChild(tachoProgressBar);
+            
+            const speedTextLabel = new PIXI.Text(this.speed.toString());
+            this.speedLabel = speedTextLabel;
+            speedTextLabel.style = this.speedLabelTextStyle
+            speedTextLabel.position.set(130,160);
+            speedTextLabel.anchor.set(1,1);
+            super.addChild(speedTextLabel);
         }
     }
 

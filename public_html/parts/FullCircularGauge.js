@@ -33,6 +33,8 @@ var __extends = (this && this.__extends) || function (d, b) {
 /// <reference path="../node_modules/@types/webfontloader/index.d.ts" />
 var CircularProgressBar = webSocketGauge.lib.graphics.CircularProgressBar;
 var CircularProgressBarOptions = webSocketGauge.lib.graphics.CircularProgressBarOptions;
+var RectangularProgressBar = webSocketGauge.lib.graphics.RectangularProgressBar;
+var RectangularProgressBarOptions = webSocketGauge.lib.graphics.RectangularProgressBarOptions;
 var webSocketGauge;
 (function (webSocketGauge) {
     var parts;
@@ -247,7 +249,7 @@ var webSocketGauge;
                 this.GridTexture = PIXI.Texture.fromImage("SemiCircular_Gauge1_Grid.png");
                 this.masterTextStyle = new PIXI.TextStyle({
                     dropShadow: true,
-                    dropShadowBlur: 10,
+                    dropShadowBlur: 15,
                     dropShadowColor: "white",
                     dropShadowDistance: 0,
                     fill: "white",
@@ -261,7 +263,7 @@ var webSocketGauge;
                 this.valueBarRadius = 200;
                 this.valueBarInnerRadius = 0;
                 this.valueLabelOption.position.set(200, 185);
-                this.valueLabelOption.fontSize = 80;
+                this.valueLabelOption.fontSize = 90;
                 this.valueLabelOption.position.set(200, 185);
                 this.valueLabelOption.anchor.set(0.5, 0.5);
                 this.valueLabelOption.align = "center";
@@ -423,6 +425,93 @@ var webSocketGauge;
             return AirFuelGaugePanel;
         }(FullCircularGauge));
         parts.AirFuelGaugePanel = AirFuelGaugePanel;
+        var ThrottleGaugePanel = (function (_super) {
+            __extends(ThrottleGaugePanel, _super);
+            function ThrottleGaugePanel() {
+                return _super !== null && _super.apply(this, arguments) || this;
+            }
+            ThrottleGaugePanel.prototype.setOption = function () {
+                _super.prototype.setOption.call(this);
+                this.titleLabel = "THROTTLE";
+                this.min = 0;
+                this.max = 100;
+                this.unitLabel = "%";
+                this.redZoneBarEnable = false;
+                this.yellowZoneBarEnable = false;
+                this.greenZoneBarEnable = false;
+                this.setAxisLabel(["0", "25", "50", "75", "100"]);
+            };
+            return ThrottleGaugePanel;
+        }(SemiCircularGauge));
+        parts.ThrottleGaugePanel = ThrottleGaugePanel;
+        var DigiTachoPanel = (function (_super) {
+            __extends(DigiTachoPanel, _super);
+            function DigiTachoPanel() {
+                var _this = _super.call(this) || this;
+                _this.speed = 0;
+                _this.tacho = 0;
+                _this.gearPos = "N";
+                _this.speedLabelTextStyle = new PIXI.TextStyle({
+                    dropShadow: true,
+                    dropShadowBlur: 10,
+                    dropShadowColor: "white",
+                    dropShadowDistance: 0,
+                    fill: "white",
+                    fontFamily: "FreeSans-Bold",
+                    fontSize: 155,
+                    align: "right"
+                });
+                _this.backTexture = PIXI.Texture.fromImage("DigiTachoBack.png");
+                _this.tachoProgressBarTexture = PIXI.Texture.fromImage("DigiTachoBar.png");
+                //Create background sprite
+                var backSprite = new PIXI.Sprite();
+                backSprite.texture = _this.backTexture;
+                _super.prototype.addChild.call(_this, backSprite);
+                //Create tacho progress bar
+                var tachoProgressBar = new RectangularProgressBar();
+                _this.tachoProgressBar = tachoProgressBar;
+                tachoProgressBar.Texture = _this.tachoProgressBarTexture;
+                tachoProgressBar.position.set(12, 10);
+                tachoProgressBar.Min = 0;
+                tachoProgressBar.Max = 9000;
+                tachoProgressBar.Vertical = false;
+                tachoProgressBar.InvertDirection = false;
+                tachoProgressBar.InvertDraw = false;
+                tachoProgressBar.PixelStep = 16;
+                tachoProgressBar.MaskHeight = 246;
+                tachoProgressBar.MaskWidth = 577;
+                _super.prototype.addChild.call(_this, tachoProgressBar);
+                var speedTextLabel = new PIXI.Text(_this.speed.toString());
+                _this.speedLabel = speedTextLabel;
+                speedTextLabel.style = _this.speedLabelTextStyle;
+                speedTextLabel.position.set(130, 160);
+                speedTextLabel.anchor.set(1, 1);
+                _super.prototype.addChild.call(_this, speedTextLabel);
+                return _this;
+            }
+            Object.defineProperty(DigiTachoPanel.prototype, "Speed", {
+                get: function () { return this.speed; },
+                set: function (speed) {
+                    var roundedSpeed = Math.round(speed);
+                    this.speed = roundedSpeed;
+                    this.speedLabel.text = roundedSpeed.toString();
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(DigiTachoPanel.prototype, "Tacho", {
+                get: function () { return this.tacho; },
+                set: function (tacho) {
+                    this.tacho = tacho;
+                    this.tachoProgressBar.Value = tacho;
+                    this.tachoProgressBar.update();
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return DigiTachoPanel;
+        }(PIXI.Container));
+        parts.DigiTachoPanel = DigiTachoPanel;
     })(parts = webSocketGauge.parts || (webSocketGauge.parts = {}));
 })(webSocketGauge || (webSocketGauge = {}));
 //# sourceMappingURL=FullCircularGauge.js.map
