@@ -29,9 +29,9 @@
 /// <reference path="../node_modules/@types/webfontloader/index.d.ts" />
 
 import CircularProgressBar = webSocketGauge.lib.graphics.CircularProgressBar;
-import CircularProgressBarOptions = webSocketGauge.lib.graphics.CircularProgressBarOptions;
+//import CircularProgressBarOptions = webSocketGauge.lib.graphics.CircularProgressBarOptions;
 import RectangularProgressBar = webSocketGauge.lib.graphics.RectangularProgressBar;
-import RectangularProgressBarOptions = webSocketGauge.lib.graphics.RectangularProgressBarOptions;
+//import RectangularProgressBarOptions = webSocketGauge.lib.graphics.RectangularProgressBarOptions;
 
 module webSocketGauge.parts
 {
@@ -541,7 +541,20 @@ module webSocketGauge.parts
             fill : "white",
             fontFamily: "FreeSans-Bold",
             fontSize: 155,
-            align:"right"
+            align:"right",
+            letterSpacing: -3
+        });
+        
+        private gearPosLabelTextStyle = new PIXI.TextStyle(
+        {
+            dropShadow : true,
+            dropShadowBlur: 10,
+            dropShadowColor: "white",
+            dropShadowDistance: 0,
+            fill : "white",
+            fontFamily: "AudioWide",
+            fontSize: 100,
+            align:"center"
         });
         
         get Speed() : number { return this.speed;}
@@ -575,7 +588,7 @@ module webSocketGauge.parts
             const tachoProgressBar = new RectangularProgressBar();
             this.tachoProgressBar = tachoProgressBar;
             tachoProgressBar.Texture = this.tachoProgressBarTexture;
-            tachoProgressBar.position.set(12,10);
+            tachoProgressBar.position.set(10,6);
             tachoProgressBar.Min = 0;
             tachoProgressBar.Max = 9000;
             tachoProgressBar.Vertical = false;
@@ -589,9 +602,33 @@ module webSocketGauge.parts
             const speedTextLabel = new PIXI.Text(this.speed.toString());
             this.speedLabel = speedTextLabel;
             speedTextLabel.style = this.speedLabelTextStyle
-            speedTextLabel.position.set(130,160);
+            speedTextLabel.position.set(485,320);
             speedTextLabel.anchor.set(1,1);
             super.addChild(speedTextLabel);
+            
+            const gearTextLabel = new PIXI.Text(this.gearPos);
+            this.geasposLabel = gearTextLabel;
+            gearTextLabel.style = this.gearPosLabelTextStyle;
+            gearTextLabel.position.set(64, 55);
+            gearTextLabel.anchor.set(0.5, 0.5);
+            super.addChild(gearTextLabel);
+            
+        }
+    }
+    
+    export class MilageGraphPanel extends PIXI.Container
+    {
+        private momentumGasMilageBar: RectangularProgressBar;
+        private sectGasMilageBar: RectangularProgressBar[];
+        private trapLabel: PIXI.Text;
+        private fuelLabel: PIXI.Text;
+        private gasMilageLabel: PIXI.Text;
+        
+        public get MomentumGasMilage(): number { return this.momentumGasMilageBar.Value }
+        public set MomentumGasMilage(val: number)
+        {
+            this.momentumGasMilageBar.Value = val;
+            this.momentumGasMilageBar.update();
         }
     }
 

@@ -28,6 +28,12 @@ window.onload = function () {
     //webSocketGauge.parts.FullCircularGauge.preloadTextures();
     WebFont.load({
         custom: {
+            families: ['AudioWide'],
+            urls: ['./font.css']
+        },
+    });
+    WebFont.load({
+        custom: {
             families: ['FreeSans-Bold'],
             urls: ['./font.css']
         },
@@ -44,7 +50,7 @@ function main() {
             gaugeArray.push(new webSocketGauge.parts.DigiTachoPanel);
             gaugeArray[index].pivot = new PIXI.Point(200, 200);
             gaugeArray[index].scale.set(0.6, 0.6);
-            gaugeArray[index].position = new PIXI.Point(250 * i + 150, 250 * j + 150);
+            gaugeArray[index].position = new PIXI.Point(360 * i + 150, 180 * j + 150);
             gaugeArray[index].Tacho = 0;
             app.stage.addChild(gaugeArray[index]);
             index++;
@@ -56,6 +62,10 @@ function main() {
                 gaugeArray[i].Tacho = 0;
             else
                 gaugeArray[i].Tacho = gaugeArray[i].Tacho + 100;
+            if (gaugeArray[i].Speed + 1 >= 250)
+                gaugeArray[i].Speed = 1;
+            else
+                gaugeArray[i].Speed += 1;
         }
     });
 }

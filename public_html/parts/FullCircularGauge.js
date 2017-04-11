@@ -32,9 +32,9 @@ var __extends = (this && this.__extends) || function (d, b) {
 /// <reference path="../script/progressBar/pixiGauge.ts" />
 /// <reference path="../node_modules/@types/webfontloader/index.d.ts" />
 var CircularProgressBar = webSocketGauge.lib.graphics.CircularProgressBar;
-var CircularProgressBarOptions = webSocketGauge.lib.graphics.CircularProgressBarOptions;
+//import CircularProgressBarOptions = webSocketGauge.lib.graphics.CircularProgressBarOptions;
 var RectangularProgressBar = webSocketGauge.lib.graphics.RectangularProgressBar;
-var RectangularProgressBarOptions = webSocketGauge.lib.graphics.RectangularProgressBarOptions;
+//import RectangularProgressBarOptions = webSocketGauge.lib.graphics.RectangularProgressBarOptions;
 var webSocketGauge;
 (function (webSocketGauge) {
     var parts;
@@ -459,7 +459,18 @@ var webSocketGauge;
                     fill: "white",
                     fontFamily: "FreeSans-Bold",
                     fontSize: 155,
-                    align: "right"
+                    align: "right",
+                    letterSpacing: -3
+                });
+                _this.gearPosLabelTextStyle = new PIXI.TextStyle({
+                    dropShadow: true,
+                    dropShadowBlur: 10,
+                    dropShadowColor: "white",
+                    dropShadowDistance: 0,
+                    fill: "white",
+                    fontFamily: "AudioWide",
+                    fontSize: 100,
+                    align: "center"
                 });
                 _this.backTexture = PIXI.Texture.fromImage("DigiTachoBack.png");
                 _this.tachoProgressBarTexture = PIXI.Texture.fromImage("DigiTachoBar.png");
@@ -471,7 +482,7 @@ var webSocketGauge;
                 var tachoProgressBar = new RectangularProgressBar();
                 _this.tachoProgressBar = tachoProgressBar;
                 tachoProgressBar.Texture = _this.tachoProgressBarTexture;
-                tachoProgressBar.position.set(12, 10);
+                tachoProgressBar.position.set(10, 6);
                 tachoProgressBar.Min = 0;
                 tachoProgressBar.Max = 9000;
                 tachoProgressBar.Vertical = false;
@@ -484,9 +495,15 @@ var webSocketGauge;
                 var speedTextLabel = new PIXI.Text(_this.speed.toString());
                 _this.speedLabel = speedTextLabel;
                 speedTextLabel.style = _this.speedLabelTextStyle;
-                speedTextLabel.position.set(130, 160);
+                speedTextLabel.position.set(485, 320);
                 speedTextLabel.anchor.set(1, 1);
                 _super.prototype.addChild.call(_this, speedTextLabel);
+                var gearTextLabel = new PIXI.Text(_this.gearPos);
+                _this.geasposLabel = gearTextLabel;
+                gearTextLabel.style = _this.gearPosLabelTextStyle;
+                gearTextLabel.position.set(64, 55);
+                gearTextLabel.anchor.set(0.5, 0.5);
+                _super.prototype.addChild.call(_this, gearTextLabel);
                 return _this;
             }
             Object.defineProperty(DigiTachoPanel.prototype, "Speed", {
@@ -512,6 +529,23 @@ var webSocketGauge;
             return DigiTachoPanel;
         }(PIXI.Container));
         parts.DigiTachoPanel = DigiTachoPanel;
+        var MilageGraphPanel = (function (_super) {
+            __extends(MilageGraphPanel, _super);
+            function MilageGraphPanel() {
+                return _super !== null && _super.apply(this, arguments) || this;
+            }
+            Object.defineProperty(MilageGraphPanel.prototype, "MomentumGasMilage", {
+                get: function () { return this.momentumGasMilageBar.Value; },
+                set: function (val) {
+                    this.momentumGasMilageBar.Value = val;
+                    this.momentumGasMilageBar.update();
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return MilageGraphPanel;
+        }(PIXI.Container));
+        parts.MilageGraphPanel = MilageGraphPanel;
     })(parts = webSocketGauge.parts || (webSocketGauge.parts = {}));
 })(webSocketGauge || (webSocketGauge = {}));
 //# sourceMappingURL=FullCircularGauge.js.map
