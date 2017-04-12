@@ -472,45 +472,14 @@ var webSocketGauge;
                     fontSize: 100,
                     align: "center"
                 });
-                _this.backTexture = PIXI.Texture.fromImage("DigiTachoBack.png");
-                _this.tachoProgressBarTexture = PIXI.Texture.fromImage("DigiTachoBar.png");
-                //Create background sprite
-                var backSprite = new PIXI.Sprite();
-                backSprite.texture = _this.backTexture;
-                _super.prototype.addChild.call(_this, backSprite);
-                //Create tacho progress bar
-                var tachoProgressBar = new RectangularProgressBar();
-                _this.tachoProgressBar = tachoProgressBar;
-                tachoProgressBar.Texture = _this.tachoProgressBarTexture;
-                tachoProgressBar.position.set(10, 6);
-                tachoProgressBar.Min = 0;
-                tachoProgressBar.Max = 9000;
-                tachoProgressBar.Vertical = false;
-                tachoProgressBar.InvertDirection = false;
-                tachoProgressBar.InvertDraw = false;
-                tachoProgressBar.PixelStep = 16;
-                tachoProgressBar.MaskHeight = 246;
-                tachoProgressBar.MaskWidth = 577;
-                _super.prototype.addChild.call(_this, tachoProgressBar);
-                var speedTextLabel = new PIXI.Text(_this.speed.toString());
-                _this.speedLabel = speedTextLabel;
-                speedTextLabel.style = _this.speedLabelTextStyle;
-                speedTextLabel.position.set(485, 320);
-                speedTextLabel.anchor.set(1, 1);
-                _super.prototype.addChild.call(_this, speedTextLabel);
-                var gearTextLabel = new PIXI.Text(_this.gearPos);
-                _this.geasposLabel = gearTextLabel;
-                gearTextLabel.style = _this.gearPosLabelTextStyle;
-                gearTextLabel.position.set(64, 55);
-                gearTextLabel.anchor.set(0.5, 0.5);
-                _super.prototype.addChild.call(_this, gearTextLabel);
+                _this.create();
                 return _this;
             }
             Object.defineProperty(DigiTachoPanel.prototype, "Speed", {
                 get: function () { return this.speed; },
                 set: function (speed) {
+                    this.speed = speed;
                     var roundedSpeed = Math.round(speed);
-                    this.speed = roundedSpeed;
                     this.speedLabel.text = roundedSpeed.toString();
                 },
                 enumerable: true,
@@ -526,23 +495,171 @@ var webSocketGauge;
                 enumerable: true,
                 configurable: true
             });
+            DigiTachoPanel.prototype.create = function () {
+                var backTexture = PIXI.Texture.fromImage("DigiTachoBack.png");
+                var tachoProgressBarTexture = PIXI.Texture.fromImage("DigiTachoBar.png");
+                //Create background sprite
+                var backSprite = new PIXI.Sprite();
+                backSprite.texture = backTexture;
+                _super.prototype.addChild.call(this, backSprite);
+                //Create tacho progress bar
+                var tachoProgressBar = new RectangularProgressBar();
+                this.tachoProgressBar = tachoProgressBar;
+                tachoProgressBar.Texture = tachoProgressBarTexture;
+                tachoProgressBar.position.set(10, 6);
+                tachoProgressBar.Min = 0;
+                tachoProgressBar.Max = 9000;
+                tachoProgressBar.Vertical = false;
+                tachoProgressBar.InvertDirection = false;
+                tachoProgressBar.InvertDraw = false;
+                tachoProgressBar.PixelStep = 16;
+                tachoProgressBar.MaskHeight = 246;
+                tachoProgressBar.MaskWidth = 577;
+                _super.prototype.addChild.call(this, tachoProgressBar);
+                var speedTextLabel = new PIXI.Text(this.speed.toString());
+                this.speedLabel = speedTextLabel;
+                speedTextLabel.style = this.speedLabelTextStyle;
+                speedTextLabel.position.set(485, 320);
+                speedTextLabel.anchor.set(1, 1);
+                _super.prototype.addChild.call(this, speedTextLabel);
+                var gearTextLabel = new PIXI.Text(this.gearPos);
+                this.geasposLabel = gearTextLabel;
+                gearTextLabel.style = this.gearPosLabelTextStyle;
+                gearTextLabel.position.set(64, 55);
+                gearTextLabel.anchor.set(0.5, 0.5);
+                _super.prototype.addChild.call(this, gearTextLabel);
+            };
             return DigiTachoPanel;
         }(PIXI.Container));
         parts.DigiTachoPanel = DigiTachoPanel;
         var MilageGraphPanel = (function (_super) {
             __extends(MilageGraphPanel, _super);
             function MilageGraphPanel() {
-                return _super !== null && _super.apply(this, arguments) || this;
+                var _this = _super.call(this) || this;
+                _this.momentGasMilageBar = new RectangularProgressBar();
+                _this.sectGasMilageBar = {};
+                _this.tripLabel = new PIXI.Text();
+                _this.fuelLabel = new PIXI.Text();
+                _this.gasMilageLabel = new PIXI.Text();
+                _this.momentGasMilage = 0;
+                _this.trip = 0;
+                _this.fuel = 0;
+                _this.gasMilage = 0;
+                _this.sectGasMilage = {};
+                _this.sectSpan = ["5min", "10min", "15min", "20min", "25min", "30min"];
+                _this.masterTextStyle = new PIXI.TextStyle({
+                    dropShadow: true,
+                    dropShadowBlur: 10,
+                    dropShadowColor: "white",
+                    dropShadowDistance: 0,
+                    fill: "white",
+                    fontFamily: "FreeSans-Bold",
+                    align: "right",
+                    letterSpacing: -3
+                });
+                //Initialize array fields
+                for (var span in _this.sectSpan) {
+                    _this.sectGasMilageBar[span] = new RectangularProgressBar();
+                    _this.sectGasMilage[span] = 0;
+                }
+                _this.create();
+                return _this;
             }
-            Object.defineProperty(MilageGraphPanel.prototype, "MomentumGasMilage", {
-                get: function () { return this.momentumGasMilageBar.Value; },
+            Object.defineProperty(MilageGraphPanel.prototype, "MomentGasMilage", {
+                get: function () { return this.momentGasMilage; },
                 set: function (val) {
-                    this.momentumGasMilageBar.Value = val;
-                    this.momentumGasMilageBar.update();
+                    this.momentGasMilage = val;
+                    this.momentGasMilageBar.Value = val;
+                    this.momentGasMilageBar.update();
                 },
                 enumerable: true,
                 configurable: true
             });
+            Object.defineProperty(MilageGraphPanel.prototype, "Fuel", {
+                get: function () { return this.fuel; },
+                set: function (val) {
+                    this.fuel = val;
+                    this.fuelLabel.text = this.fuel.toFixed(2);
+                },
+                enumerable: true,
+                configurable: true
+            });
+            ;
+            Object.defineProperty(MilageGraphPanel.prototype, "Trip", {
+                get: function () { return this.trip; },
+                set: function (val) {
+                    this.trip = val;
+                    this.tripLabel.text = this.trip.toFixed(1);
+                },
+                enumerable: true,
+                configurable: true
+            });
+            ;
+            Object.defineProperty(MilageGraphPanel.prototype, "GasMilage", {
+                get: function () { return this.gasMilage; },
+                set: function (val) {
+                    this.gasMilage = val;
+                    this.gasMilageLabel.text = this.gasMilage.toFixed(1);
+                },
+                enumerable: true,
+                configurable: true
+            });
+            MilageGraphPanel.prototype.setSectGasMllage = function (sectspan, gasMilage) {
+                this.sectGasMilage[sectspan] = gasMilage;
+                this.sectGasMilageBar[sectspan].Value = this.sectGasMilage[sectspan];
+                this.sectGasMilageBar[sectspan].update();
+            };
+            MilageGraphPanel.prototype.getSectGasMllage = function (sectspan) {
+                return this.sectGasMilage[sectspan];
+            };
+            MilageGraphPanel.prototype.create = function () {
+                var backTexture = PIXI.Texture.fromImage("./MilageGraph_Back.png");
+                var backSprite = new PIXI.Sprite(backTexture);
+                _super.prototype.addChild.call(this, backSprite);
+                var momentGasMilageTexture = PIXI.Texture.fromImage("./MilageGraph_valueBar2.png");
+                this.momentGasMilageBar.Texture = momentGasMilageTexture;
+                this.momentGasMilageBar.Vertical = true;
+                this.momentGasMilageBar.MaskWidth = 40;
+                this.momentGasMilageBar.MaskHeight = 240;
+                this.momentGasMilageBar.Max = 20;
+                this.momentGasMilageBar.Min = 0;
+                this.momentGasMilageBar.position.set(411, 17);
+                _super.prototype.addChild.call(this, this.momentGasMilageBar);
+                //Sect fuelTrip progressbar
+                var sectGasMilageBarTexture = PIXI.Texture.fromImage("./MilageGraph_valueBar1.png");
+                for (var i = 0; i < this.sectSpan.length; i++) {
+                    var spankey = this.sectSpan[i];
+                    this.sectGasMilageBar[spankey] = new RectangularProgressBar();
+                    this.sectGasMilageBar[spankey].Texture = sectGasMilageBarTexture;
+                    this.sectGasMilageBar[spankey].Vertical = true;
+                    this.sectGasMilageBar[spankey].MaskWidth = 30;
+                    this.sectGasMilageBar[spankey].MaskHeight = 240;
+                    this.sectGasMilageBar[spankey].Max = 20;
+                    this.sectGasMilageBar[spankey].Min = 0;
+                    _super.prototype.addChild.call(this, this.sectGasMilageBar[spankey]);
+                }
+                this.sectGasMilageBar["30min"].position.set(72, 17);
+                this.sectGasMilageBar["25min"].position.set(130, 17);
+                this.sectGasMilageBar["20min"].position.set(187, 17);
+                this.sectGasMilageBar["15min"].position.set(245, 17);
+                this.sectGasMilageBar["10min"].position.set(303, 17);
+                this.sectGasMilageBar["5min"].position.set(360, 17);
+                this.tripLabel.style = this.masterTextStyle.clone();
+                this.tripLabel.style.fontSize = 35;
+                this.tripLabel.anchor.set(1, 1);
+                this.tripLabel.position.set(600, 110);
+                _super.prototype.addChild.call(this, this.tripLabel);
+                this.fuelLabel.style = this.masterTextStyle.clone();
+                this.fuelLabel.style.fontSize = 35;
+                this.fuelLabel.anchor.set(1, 1);
+                this.fuelLabel.position.set(600, 165);
+                _super.prototype.addChild.call(this, this.fuelLabel);
+                this.gasMilageLabel.style = this.masterTextStyle.clone();
+                this.gasMilageLabel.style.fontSize = 58;
+                this.gasMilageLabel.anchor.set(1, 1);
+                this.gasMilageLabel.position.set(625, 260);
+                _super.prototype.addChild.call(this, this.gasMilageLabel);
+            };
             return MilageGraphPanel;
         }(PIXI.Container));
         parts.MilageGraphPanel = MilageGraphPanel;
