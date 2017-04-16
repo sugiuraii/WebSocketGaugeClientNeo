@@ -23,30 +23,30 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-/// <reference path="./AnalogMeterCluster.ts" />
-var AnalogMeterCluster = webSocketGauge.parts.AnalogMeterCluster;
+/// <reference path="./LEDTachoMeter.ts" />
+var LEDTachoMeter = webSocketGauge.parts.LEDTachoMeter;
 window.onload = function () {
     WebFont.load({
         custom: {
-            families: AnalogMeterCluster.RequestedFontFamily,
-            urls: AnalogMeterCluster.RequestedFontCSSURL
+            families: LEDTachoMeter.RequestedFontFamily,
+            urls: LEDTachoMeter.RequestedFontCSSURL
         },
         active: function () { preloadTexture(); }
     });
 };
 function preloadTexture() {
-    PIXI.loader.add(AnalogMeterCluster.RequestedTexturePath[0]);
-    PIXI.loader.load(main3);
+    PIXI.loader.add(LEDTachoMeter.RequestedTexturePath[0]);
+    PIXI.loader.load(main4);
 }
-function main3() {
+function main4() {
     var app = new PIXI.Application(1366, 1366);
     document.body.appendChild(app.view);
-    var meterCluster = new AnalogMeterCluster();
-    app.stage.addChild(meterCluster);
+    var meter = new LEDTachoMeter();
+    app.stage.addChild(meter);
     app.ticker.add(function () {
-        meterCluster.Speed += 1;
-        if (meterCluster.Speed > 280)
-            meterCluster.Speed = 0;
+        meter.Tacho += 100;
+        if (meter.Tacho > 9000)
+            meter.Tacho = 0;
     });
 }
-//# sourceMappingURL=AnalogMeterClusterTest.js.map
+//# sourceMappingURL=LEDDTachoMeterTest.js.map

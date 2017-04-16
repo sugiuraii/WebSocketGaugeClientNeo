@@ -24,16 +24,16 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
  
-/// <reference path="./AnalogMeterCluster.ts" />
-import AnalogMeterCluster = webSocketGauge.parts.AnalogMeterCluster;
+/// <reference path="./LEDTachoMeter.ts" />
+import LEDTachoMeter = webSocketGauge.parts.LEDTachoMeter;
 
 window.onload = function()
 {
     WebFont.load({
         custom: 
         { 
-            families: AnalogMeterCluster.RequestedFontFamily,
-            urls: AnalogMeterCluster.RequestedFontCSSURL 
+            families: LEDTachoMeter.RequestedFontFamily,
+            urls: LEDTachoMeter.RequestedFontCSSURL 
         },
         active : function(){preloadTexture();}
     });
@@ -41,21 +41,23 @@ window.onload = function()
 
 function preloadTexture()
 {
-    PIXI.loader.add(AnalogMeterCluster.RequestedTexturePath[0]);
-    PIXI.loader.load(main3);
+    PIXI.loader.add(LEDTachoMeter.RequestedTexturePath[0]);
+    PIXI.loader.load(main4);
 }
 
-function main3()
+function main4()
 {
     const app = new PIXI.Application(1366,1366);
     document.body.appendChild(app.view);
     
-    const meterCluster = new AnalogMeterCluster();
-    app.stage.addChild(meterCluster);
-        
+    const meter = new LEDTachoMeter();
+    app.stage.addChild(meter);
+    
     app.ticker.add(function(){
-        meterCluster.Speed += 1;
-        if (meterCluster.Speed > 280)
-            meterCluster.Speed = 0;
+        meter.Tacho += 100;
+        if (meter.Tacho > 9000)
+            meter.Tacho = 0;
     });
+    
 }
+
