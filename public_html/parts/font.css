@@ -39,3 +39,9 @@ POSSIBILITY OF SUCH DAMAGE.
     src: url(./AudioWide/Audiowide-Regular.ttf) format('opentype');
 }
 
+@font-face {
+    font-family: 'DSEG14ClassicItalic';
+    font-style: normal;
+    src: url(./DSEG_v030/DSEG14Classic-BoldItalic.ttf) format('opentype');
+}
+

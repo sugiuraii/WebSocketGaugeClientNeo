@@ -172,7 +172,6 @@ var webSocketGauge;
                 }
                 return CircularProgressBarOptions;
             }(ProgressBarOptions));
-            graphics.CircularProgressBarOptions = CircularProgressBarOptions;
             var CircularProgressBar = (function (_super) {
                 __extends(CircularProgressBar, _super);
                 function CircularProgressBar(options) {
@@ -283,7 +282,6 @@ var webSocketGauge;
                 }
                 return RectangularProgressBarOptions;
             }(ProgressBarOptions));
-            graphics.RectangularProgressBarOptions = RectangularProgressBarOptions;
             var RectangularProgressBar = (function (_super) {
                 __extends(RectangularProgressBar, _super);
                 function RectangularProgressBar(options) {
@@ -433,12 +431,10 @@ var webSocketGauge;
                     _this.FullAngle = 360;
                     _this.AngleStep = 0.1;
                     _this.AntiClockwise = false;
-                    _this.Pivot = new PIXI.Point(0, 0);
                     return _this;
                 }
                 return RotationNeedleGaugeOptions;
             }(NeedleGaugeOptions));
-            graphics.RotationNeedleGaugeOptions = RotationNeedleGaugeOptions;
             var RotationNeedleGauge = (function (_super) {
                 __extends(RotationNeedleGauge, _super);
                 function RotationNeedleGauge(options) {
@@ -450,8 +446,6 @@ var webSocketGauge;
                         rotationNeedleGaugeOptions = options;
                     _this = _super.call(this, rotationNeedleGaugeOptions) || this;
                     _this.rotationNeedleGaugeOptions = rotationNeedleGaugeOptions;
-                    //Set sprite pivot
-                    _this.Sprite.pivot = _this.rotationNeedleGaugeOptions.Pivot;
                     return _this;
                 }
                 Object.defineProperty(RotationNeedleGauge.prototype, "OffsetAngle", {
@@ -478,12 +472,6 @@ var webSocketGauge;
                     enumerable: true,
                     configurable: true
                 });
-                Object.defineProperty(RotationNeedleGauge.prototype, "Pivot", {
-                    get: function () { return this.rotationNeedleGaugeOptions.Pivot; },
-                    set: function (val) { this.rotationNeedleGaugeOptions.Pivot = val; },
-                    enumerable: true,
-                    configurable: true
-                });
                 RotationNeedleGauge.prototype._update = function (skipStepCheck) {
                     'use strict';
                     var anticlockwise = this.AntiClockwise;
@@ -493,7 +481,6 @@ var webSocketGauge;
                     var valueMax = this.Max;
                     var valueMin = this.Min;
                     var value = this.DrawValue;
-                    var sprite = this.Sprite;
                     var currentAngle = this.currAngle;
                     var angle;
                     if (!anticlockwise)
@@ -511,8 +498,8 @@ var webSocketGauge;
                         this.currAngle = angle;
                     }
                     var angleRad = Math.PI / 180 * angle;
-                    //Set sprite angle
-                    sprite.rotation = angleRad;
+                    //Set container angle
+                    this.rotation = angleRad;
                     return;
                 };
                 return RotationNeedleGauge;

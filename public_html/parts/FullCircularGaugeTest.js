@@ -25,16 +25,9 @@
  */
 /// <reference path="./FullCircularGauge.ts" />
 window.onload = function () {
-    //webSocketGauge.parts.FullCircularGauge.preloadTextures();
     WebFont.load({
         custom: {
-            families: ['AudioWide'],
-            urls: ['./font.css']
-        },
-    });
-    WebFont.load({
-        custom: {
-            families: ['FreeSans-Bold'],
+            families: ['AudioWide', 'FreeSans-Bold'],
             urls: ['./font.css']
         },
         active: function () { main(); }

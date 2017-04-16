@@ -31,14 +31,12 @@ var __extends = (this && this.__extends) || function (d, b) {
 /// <reference path="../script/lib/pixi.js.d.ts" />
 /// <reference path="../script/progressBar/pixiGauge.ts" />
 /// <reference path="../node_modules/@types/webfontloader/index.d.ts" />
-var CircularProgressBar = webSocketGauge.lib.graphics.CircularProgressBar;
-//import CircularProgressBarOptions = webSocketGauge.lib.graphics.CircularProgressBarOptions;
-var RectangularProgressBar = webSocketGauge.lib.graphics.RectangularProgressBar;
-//import RectangularProgressBarOptions = webSocketGauge.lib.graphics.RectangularProgressBarOptions;
 var webSocketGauge;
 (function (webSocketGauge) {
     var parts;
     (function (parts) {
+        var CircularProgressBar = webSocketGauge.lib.graphics.CircularProgressBar;
+        var RectangularProgressBar = webSocketGauge.lib.graphics.RectangularProgressBar;
         var TextOption = (function () {
             function TextOption(position, anchor, align, fontsize, letterSpacing) {
                 this.position = new PIXI.Point(0, 0);

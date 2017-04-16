@@ -28,13 +28,13 @@
 /// <reference path="../script/progressBar/pixiGauge.ts" />
 /// <reference path="../node_modules/@types/webfontloader/index.d.ts" />
 
-import CircularProgressBar = webSocketGauge.lib.graphics.CircularProgressBar;
-//import CircularProgressBarOptions = webSocketGauge.lib.graphics.CircularProgressBarOptions;
-import RectangularProgressBar = webSocketGauge.lib.graphics.RectangularProgressBar;
-//import RectangularProgressBarOptions = webSocketGauge.lib.graphics.RectangularProgressBarOptions;
+
 
 module webSocketGauge.parts
 {
+    import CircularProgressBar = webSocketGauge.lib.graphics.CircularProgressBar;
+    import RectangularProgressBar = webSocketGauge.lib.graphics.RectangularProgressBar;
+    
     export class TextOption
     {
         public position = new PIXI.Point(0, 0);
@@ -302,8 +302,6 @@ module webSocketGauge.parts
             window.setTimeout(waitTextureRead, 1000);
         }
     }
-    
-    
     
     export class SemiCircularGauge extends CircularGaugePanelBase
     {
@@ -754,6 +752,6 @@ module webSocketGauge.parts
             super.addChild(this.gasMilageLabel);
         }
     }
-
+    
 }
 

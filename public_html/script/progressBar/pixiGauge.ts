@@ -162,7 +162,7 @@ module webSocketGauge.lib.graphics
 
     }
     
-    export class CircularProgressBarOptions extends ProgressBarOptions
+    class CircularProgressBarOptions extends ProgressBarOptions
     {
         public OffsetAngle : number;
         public FullAngle : number;
@@ -266,7 +266,7 @@ module webSocketGauge.lib.graphics
         }
     }
     
-    export class RectangularProgressBarOptions extends ProgressBarOptions
+    class RectangularProgressBarOptions extends ProgressBarOptions
     {
         public Vertical : boolean;
         public InvertDirection : boolean;
@@ -424,13 +424,12 @@ module webSocketGauge.lib.graphics
         get Sprite(): PIXI.Sprite { return this.sprite; }
     }
     
-    export class RotationNeedleGaugeOptions extends NeedleGaugeOptions
+    class RotationNeedleGaugeOptions extends NeedleGaugeOptions
     {
         public OffsetAngle : number;
         public FullAngle : number;
         public AngleStep : number;
         public AntiClockwise : boolean;
-        public Pivot: PIXI.Point;
         constructor()
         {
             super();
@@ -438,7 +437,6 @@ module webSocketGauge.lib.graphics
             this.FullAngle = 360;
             this.AngleStep = 0.1;
             this.AntiClockwise = false;
-            this.Pivot = new PIXI.Point(0,0);
         }
     }
     
@@ -457,9 +455,6 @@ module webSocketGauge.lib.graphics
                 rotationNeedleGaugeOptions = options;
             super(rotationNeedleGaugeOptions);
             this.rotationNeedleGaugeOptions = rotationNeedleGaugeOptions;
-            
-            //Set sprite pivot
-            this.Sprite.pivot = this.rotationNeedleGaugeOptions.Pivot;
         }
         
         get OffsetAngle() : number { return this.rotationNeedleGaugeOptions.OffsetAngle; }
@@ -470,8 +465,6 @@ module webSocketGauge.lib.graphics
         set AngleStep(val: number) {this.rotationNeedleGaugeOptions.AngleStep = val; }
         get AntiClockwise(): boolean {return this.rotationNeedleGaugeOptions.AntiClockwise; }
         set AntiClockwise(val: boolean) {this.rotationNeedleGaugeOptions.AntiClockwise = val; }
-        get Pivot(): PIXI.Point {return this.rotationNeedleGaugeOptions.Pivot; }
-        set Pivot(val: PIXI.Point) {this.rotationNeedleGaugeOptions.Pivot = val; }
         
         protected _update(skipStepCheck: boolean): void
         {
@@ -484,8 +477,6 @@ module webSocketGauge.lib.graphics
             const valueMax : number = this.Max;
             const valueMin : number = this.Min;
             const value : number = this.DrawValue;
-
-            const sprite: PIXI.Sprite = this.Sprite;
 
             const currentAngle: number= this.currAngle;
             let angle: number;
@@ -508,8 +499,8 @@ module webSocketGauge.lib.graphics
 
             const angleRad: number = Math.PI/180*angle;
 
-            //Set sprite angle
-            sprite.rotation = angleRad;
+            //Set container angle
+            this.rotation = angleRad;
 
             return;
         }

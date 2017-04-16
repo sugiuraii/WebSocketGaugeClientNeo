@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (c) 2017, kuniaki
  * All rights reserved.
  *
@@ -23,52 +23,25 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-
-/// <reference path="./FullCircularGauge.ts" />
-
-window.onload = function()
-{
+/// <reference path="./AnalogMeterCluster.ts" />
+var AnalogMeterCluster = webSocketGauge.parts.AnalogMeterCluster;
+window.onload = function () {
     WebFont.load({
-        custom: 
-        { 
-            families: [ 'AudioWide','FreeSans-Bold' ],
-            urls: ['./font.css' ] 
+        custom: {
+            families: AnalogMeterCluster.RequestedFontFamily,
+            urls: AnalogMeterCluster.RequestedFontCSSURL
         },
-        active : function(){main();}
+        active: function () { preloadTexture(); }
     });
+};
+function preloadTexture() {
+    PIXI.loader.add(AnalogMeterCluster.RequestedTexturePath[0]);
+    PIXI.loader.load(main3);
 }
-
-function main()
-{
-    const app = new PIXI.Application(1366,1366);
+function main3() {
+    var app = new PIXI.Application(1366, 1366);
     document.body.appendChild(app.view);
-    let gaugeArray: webSocketGauge.parts.DigiTachoPanel[] = new Array();
-    let index = 0;
-    for (let j = 0; j < 6; j++)
-    {
-        for (let i = 0; i < 6 ; i++)
-        {
-            gaugeArray.push(new webSocketGauge.parts.DigiTachoPanel);
-            gaugeArray[index].pivot = new PIXI.Point(200,200);
-            gaugeArray[index].scale.set(0.6, 0.6);
-            gaugeArray[index].position = new PIXI.Point(360*i+150,180*j+150);
-            gaugeArray[index].Tacho = 0;
-            app.stage.addChild(gaugeArray[index]);
-            index++;
-        }
-    }
-    app.ticker.add(() => {
-        for (let i = 0; i < gaugeArray.length; i++)
-        {
-            if (gaugeArray[i].Tacho + 100 >= 9000)
-                gaugeArray[i].Tacho = 0;
-            else           
-                gaugeArray[i].Tacho = gaugeArray[i].Tacho + 100;
-                
-            if(gaugeArray[i].Speed + 1 >= 250)
-                gaugeArray[i].Speed = 1;
-            else
-                gaugeArray[i].Speed += 1;
-        }
-        });
+    var meterCluster = new AnalogMeterCluster();
+    app.stage.addChild(meterCluster);
 }
+//# sourceMappingURL=AnalogMeterClusterTest.js.map
