@@ -27,39 +27,50 @@
 window.onload = function () {
     WebFont.load({
         custom: {
-            families: ['AudioWide', 'FreeSans-Bold'],
-            urls: ['./font.css']
+            families: webSocketGauge.parts.BoostGaugePanel.RequestedFontFamily,
+            urls: webSocketGauge.parts.BoostGaugePanel.RequestedFontCSSURL
         },
-        active: function () { main(); }
+        active: function () { webSocketGauge.test.FullCircularGaugeTest.preloadTexture(); }
     });
 };
-function main() {
-    var app = new PIXI.Application(1366, 1366);
-    document.body.appendChild(app.view);
-    var gaugeArray = new Array();
-    var index = 0;
-    for (var j = 0; j < 6; j++) {
-        for (var i = 0; i < 6; i++) {
-            gaugeArray.push(new webSocketGauge.parts.DigiTachoPanel);
-            gaugeArray[index].pivot = new PIXI.Point(200, 200);
-            gaugeArray[index].scale.set(0.6, 0.6);
-            gaugeArray[index].position = new PIXI.Point(360 * i + 150, 180 * j + 150);
-            gaugeArray[index].Tacho = 0;
-            app.stage.addChild(gaugeArray[index]);
-            index++;
-        }
-    }
-    app.ticker.add(function () {
-        for (var i = 0; i < gaugeArray.length; i++) {
-            if (gaugeArray[i].Tacho + 100 >= 9000)
-                gaugeArray[i].Tacho = 0;
-            else
-                gaugeArray[i].Tacho = gaugeArray[i].Tacho + 100;
-            if (gaugeArray[i].Speed + 1 >= 250)
-                gaugeArray[i].Speed = 1;
-            else
-                gaugeArray[i].Speed += 1;
-        }
-    });
-}
+var webSocketGauge;
+(function (webSocketGauge) {
+    var test;
+    (function (test) {
+        var FullCircularGaugeTest;
+        (function (FullCircularGaugeTest) {
+            function preloadTexture() {
+                PIXI.loader.add(webSocketGauge.parts.BoostGaugePanel.RequestedTexturePath);
+                ;
+                PIXI.loader.load(main);
+            }
+            FullCircularGaugeTest.preloadTexture = preloadTexture;
+            function main() {
+                var app = new PIXI.Application(1366, 1366);
+                document.body.appendChild(app.view);
+                var gaugeArray = new Array();
+                var index = 0;
+                for (var j = 0; j < 6; j++) {
+                    for (var i = 0; i < 6; i++) {
+                        gaugeArray.push(new webSocketGauge.parts.BoostGaugePanel);
+                        gaugeArray[index].pivot = new PIXI.Point(200, 200);
+                        gaugeArray[index].scale.set(0.6, 0.6);
+                        gaugeArray[index].position = new PIXI.Point(240 * i + 150, 240 * j + 150);
+                        gaugeArray[index].Value = 0;
+                        app.stage.addChild(gaugeArray[index]);
+                        index++;
+                    }
+                }
+                app.ticker.add(function () {
+                    for (var i = 0; i < gaugeArray.length; i++) {
+                        if (gaugeArray[i].Value + 0.01 >= 2)
+                            gaugeArray[i].Value = -1;
+                        else
+                            gaugeArray[i].Value = gaugeArray[i].Value + 0.01;
+                    }
+                });
+            }
+        })(FullCircularGaugeTest = test.FullCircularGaugeTest || (test.FullCircularGaugeTest = {}));
+    })(test = webSocketGauge.test || (webSocketGauge.test = {}));
+})(webSocketGauge || (webSocketGauge = {}));
 //# sourceMappingURL=FullCircularGaugeTest.js.map

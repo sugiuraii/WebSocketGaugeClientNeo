@@ -378,14 +378,29 @@ module webSocketGauge.parts
     
     export class FullCircularGauge extends CircularGaugePanelBase
     {
+        static get RequestedTexturePath() : string[]
+        {
+            return ["FullCircularGaugeTexture.json"];
+        }
+        
+        static get RequestedFontFamily() : string[]
+        {
+            return ["FreeSans-Bold"]
+        }
+        
+        static get RequestedFontCSSURL() : string[]
+        {
+            return ['./font.css'];
+        }
+        
         protected setOption() : void
         {            
-            this.RedZoneBarTexture = PIXI.Texture.fromImage("FullCircularGauge_RedZone_Bar.png");
-            this.YellowZoneBarTexture = PIXI.Texture.fromImage("FullCircularGauge_YellowZone_Bar.png");
-            this.GreenZoneBarTexture = PIXI.Texture.fromImage("FullCircularGauge_GreenZone_Bar.png");
-            this.ValueBarTexture = PIXI.Texture.fromImage("FullCircularGauge_ValueBar.png");
-            this.BackTexture = PIXI.Texture.fromImage("FullCircularGauge_Back.png");
-            this.GridTexture = PIXI.Texture.fromImage("FullCircularGauge_Grid.png");
+            this.RedZoneBarTexture = PIXI.Texture.fromFrame("FullCircularGauge_RedZone_Bar");
+            this.YellowZoneBarTexture = PIXI.Texture.fromFrame("FullCircularGauge_YellowZone_Bar");
+            this.GreenZoneBarTexture = PIXI.Texture.fromFrame("FullCircularGauge_GreenZone_Bar");
+            this.ValueBarTexture = PIXI.Texture.fromFrame("FullCircularGauge_ValueBar");
+            this.BackTexture = PIXI.Texture.fromFrame("FullCircularGauge_Back");
+            this.GridTexture = PIXI.Texture.fromFrame("FullCircularGauge_Grid");
             
             this.masterTextStyle = new PIXI.TextStyle(
             {
