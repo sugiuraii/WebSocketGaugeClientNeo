@@ -31,22 +31,32 @@ window.onload = function () {
             families: AnalogMeterCluster.RequestedFontFamily,
             urls: AnalogMeterCluster.RequestedFontCSSURL
         },
-        active: function () { preloadTexture(); }
+        active: function () { webSocketGauge.test.AnalogMeterClusterTest.preloadTexture(); }
     });
 };
-function preloadTexture() {
-    PIXI.loader.add(AnalogMeterCluster.RequestedTexturePath[0]);
-    PIXI.loader.load(main3);
-}
-function main3() {
-    var app = new PIXI.Application(1366, 1366);
-    document.body.appendChild(app.view);
-    var meterCluster = new AnalogMeterCluster();
-    app.stage.addChild(meterCluster);
-    app.ticker.add(function () {
-        meterCluster.Speed += 1;
-        if (meterCluster.Speed > 280)
-            meterCluster.Speed = 0;
-    });
-}
+var webSocketGauge;
+(function (webSocketGauge) {
+    var test;
+    (function (test) {
+        var AnalogMeterClusterTest;
+        (function (AnalogMeterClusterTest) {
+            function preloadTexture() {
+                PIXI.loader.add(AnalogMeterCluster.RequestedTexturePath[0]);
+                PIXI.loader.load(main);
+            }
+            AnalogMeterClusterTest.preloadTexture = preloadTexture;
+            function main() {
+                var app = new PIXI.Application(1366, 1366);
+                document.body.appendChild(app.view);
+                var meterCluster = new AnalogMeterCluster();
+                app.stage.addChild(meterCluster);
+                app.ticker.add(function () {
+                    meterCluster.Speed += 1;
+                    if (meterCluster.Speed > 280)
+                        meterCluster.Speed = 0;
+                });
+            }
+        })(AnalogMeterClusterTest = test.AnalogMeterClusterTest || (test.AnalogMeterClusterTest = {}));
+    })(test = webSocketGauge.test || (webSocketGauge.test = {}));
+})(webSocketGauge || (webSocketGauge = {}));
 //# sourceMappingURL=AnalogMeterClusterTest.js.map

@@ -35,27 +35,29 @@ window.onload = function()
             families: AnalogMeterCluster.RequestedFontFamily,
             urls: AnalogMeterCluster.RequestedFontCSSURL 
         },
-        active : function(){preloadTexture();}
+        active: function () {webSocketGauge.test.AnalogMeterClusterTest.preloadTexture();}
     });
 }
-
-function preloadTexture()
+namespace webSocketGauge.test.AnalogMeterClusterTest
 {
-    PIXI.loader.add(AnalogMeterCluster.RequestedTexturePath[0]);
-    PIXI.loader.load(main3);
-}
+    export function preloadTexture()
+    {
+        PIXI.loader.add(AnalogMeterCluster.RequestedTexturePath[0]);
+        PIXI.loader.load(main);
+    }
 
-function main3()
-{
-    const app = new PIXI.Application(1366,1366);
-    document.body.appendChild(app.view);
-    
-    const meterCluster = new AnalogMeterCluster();
-    app.stage.addChild(meterCluster);
-        
-    app.ticker.add(function(){
-        meterCluster.Speed += 1;
-        if (meterCluster.Speed > 280)
-            meterCluster.Speed = 0;
-    });
+    function main()
+    {
+        const app = new PIXI.Application(1366,1366);
+        document.body.appendChild(app.view);
+
+        const meterCluster = new AnalogMeterCluster();
+        app.stage.addChild(meterCluster);
+
+        app.ticker.add(function(){
+            meterCluster.Speed += 1;
+            if (meterCluster.Speed > 280)
+                meterCluster.Speed = 0;
+        });
+    }
 }

@@ -196,9 +196,7 @@ module webSocketGauge.parts
                 this.tachoProgressBar.filters = [redfilter];
             }
             else
-                this.tachoProgressBar.filters = [];
-                
+                this.tachoProgressBar.filters = [];       
         }
-
     }
 }

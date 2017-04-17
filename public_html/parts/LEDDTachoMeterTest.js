@@ -31,22 +31,32 @@ window.onload = function () {
             families: LEDTachoMeter.RequestedFontFamily,
             urls: LEDTachoMeter.RequestedFontCSSURL
         },
-        active: function () { preloadTexture(); }
+        active: function () { webSocketGauge.test.LEDTachoMeterTest.preloadTexture(); }
     });
 };
-function preloadTexture() {
-    PIXI.loader.add(LEDTachoMeter.RequestedTexturePath[0]);
-    PIXI.loader.load(main4);
-}
-function main4() {
-    var app = new PIXI.Application(1366, 1366);
-    document.body.appendChild(app.view);
-    var meter = new LEDTachoMeter();
-    app.stage.addChild(meter);
-    app.ticker.add(function () {
-        meter.Tacho += 100;
-        if (meter.Tacho > 9000)
-            meter.Tacho = 0;
-    });
-}
+var webSocketGauge;
+(function (webSocketGauge) {
+    var test;
+    (function (test) {
+        var LEDTachoMeterTest;
+        (function (LEDTachoMeterTest) {
+            function preloadTexture() {
+                PIXI.loader.add(LEDTachoMeter.RequestedTexturePath[0]);
+                PIXI.loader.load(main);
+            }
+            LEDTachoMeterTest.preloadTexture = preloadTexture;
+            function main() {
+                var app = new PIXI.Application(1366, 1366);
+                document.body.appendChild(app.view);
+                var meter = new LEDTachoMeter();
+                app.stage.addChild(meter);
+                app.ticker.add(function () {
+                    meter.Tacho += 100;
+                    if (meter.Tacho > 9000)
+                        meter.Tacho = 0;
+                });
+            }
+        })(LEDTachoMeterTest = test.LEDTachoMeterTest || (test.LEDTachoMeterTest = {}));
+    })(test = webSocketGauge.test || (webSocketGauge.test = {}));
+})(webSocketGauge || (webSocketGauge = {}));
 //# sourceMappingURL=LEDDTachoMeterTest.js.map

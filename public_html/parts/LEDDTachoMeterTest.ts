@@ -35,29 +35,31 @@ window.onload = function()
             families: LEDTachoMeter.RequestedFontFamily,
             urls: LEDTachoMeter.RequestedFontCSSURL 
         },
-        active : function(){preloadTexture();}
+        active : function(){webSocketGauge.test.LEDTachoMeterTest.preloadTexture();}
     });
 }
 
-function preloadTexture()
+namespace webSocketGauge.test.LEDTachoMeterTest
 {
-    PIXI.loader.add(LEDTachoMeter.RequestedTexturePath[0]);
-    PIXI.loader.load(main4);
-}
+    export function preloadTexture()
+    {
+        PIXI.loader.add(LEDTachoMeter.RequestedTexturePath[0]);
+        PIXI.loader.load(main);
+    }
 
-function main4()
-{
-    const app = new PIXI.Application(1366,1366);
-    document.body.appendChild(app.view);
-    
-    const meter = new LEDTachoMeter();
-    app.stage.addChild(meter);
-    
-    app.ticker.add(function(){
-        meter.Tacho += 100;
-        if (meter.Tacho > 9000)
-            meter.Tacho = 0;
-    });
-    
-}
+    function main()
+    {
+        const app = new PIXI.Application(1366,1366);
+        document.body.appendChild(app.view);
 
+        const meter = new LEDTachoMeter();
+        app.stage.addChild(meter);
+
+        app.ticker.add(function(){
+            meter.Tacho += 100;
+            if (meter.Tacho > 9000)
+                meter.Tacho = 0;
+        });
+
+    }
+}
