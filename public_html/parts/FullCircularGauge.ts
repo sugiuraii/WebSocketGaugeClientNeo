@@ -279,40 +279,39 @@ module webSocketGauge.parts
                 axisLabelElem.anchor.set(axisLabelOption.anchor.x, axisLabelOption.anchor.y);
                 axisLabelElem.position.set(axisLabelOption.position.x, axisLabelOption.position.y);
                 backContainer.addChild(axisLabelElem);
-            }
-            
+            }            
             this.addChild(backContainer);
             
-            //Freeze back container and cache as bitmap texture when all texture are loaded
-            const self = this;            
-            const waitTextureRead = function()
-            {
-                if(self.RedZoneBarTexture.baseTexture.hasLoaded
-                && self.GreenZoneBarTexture.baseTexture.hasLoaded
-                && self.YellowZoneBarTexture.baseTexture.hasLoaded
-                && self.BackTexture.baseTexture.hasLoaded
-                && self.GridTexture.baseTexture.hasLoaded)
-                {
-                    //Bake into texture
-                    backContainer.cacheAsBitmap = true;
-                }
-                else
-                    window.setTimeout(waitTextureRead,1000);
-            }
-            window.setTimeout(waitTextureRead, 1000);
+            //Bake into texture
+            backContainer.cacheAsBitmap = true;            
         }
     }
     
     export class SemiCircularGauge extends CircularGaugePanelBase
     {
+        static get RequestedTexturePath() : string[]
+        {
+            return ["SemiCircularGaugeTexture.json"];
+        }
+        
+        static get RequestedFontFamily() : string[]
+        {
+            return ["FreeSans-Bold"]
+        }
+        
+        static get RequestedFontCSSURL() : string[]
+        {
+            return ['./font.css'];
+        }
+        
         protected setOption() : void
         {
-            this.RedZoneBarTexture = PIXI.Texture.fromImage("SemiCircular_Gauge1_Redzone_Bar.png");
-            this.YellowZoneBarTexture = PIXI.Texture.fromImage("SemiCircular_Gauge1_Yellowzone_Bar.png");
-            this.GreenZoneBarTexture = PIXI.Texture.fromImage("SemiCircular_Gauge1_Greenzone_Bar.png");
-            this.ValueBarTexture = PIXI.Texture.fromImage("SemiCircular_Gauge1_Value_Bar.png");
-            this.BackTexture = PIXI.Texture.fromImage("SemiCircular_Gauge1_Back.png");
-            this.GridTexture = PIXI.Texture.fromImage("SemiCircular_Gauge1_Grid.png");
+            this.RedZoneBarTexture = PIXI.Texture.fromFrame("SemiCircular_Gauge1_Redzone_Bar");
+            this.YellowZoneBarTexture = PIXI.Texture.fromFrame("SemiCircular_Gauge1_Yellowzone_Bar");
+            this.GreenZoneBarTexture = PIXI.Texture.fromFrame("SemiCircular_Gauge1_Greenzone_Bar");
+            this.ValueBarTexture = PIXI.Texture.fromFrame("SemiCircular_Gauge1_Value_Bar");
+            this.BackTexture = PIXI.Texture.fromFrame("SemiCircular_Gauge1_Back");
+            this.GridTexture = PIXI.Texture.fromFrame("SemiCircular_Gauge1_Grid");
             
             this.masterTextStyle = new PIXI.TextStyle(
             {
@@ -543,6 +542,21 @@ module webSocketGauge.parts
         private tacho : number = 0;
         private gearPos : string = "N";
         
+        static get RequestedTexturePath() : string[]
+        {
+            return ["DigiTachoTexture.json"];
+        }
+        
+        static get RequestedFontFamily() : string[]
+        {
+            return ["FreeSans-Bold", "AudioWide"]
+        }
+        
+        static get RequestedFontCSSURL() : string[]
+        {
+            return ['./font.css'];
+        }
+        
         private speedLabelTextStyle = new PIXI.TextStyle(
         {
             dropShadow : true,
@@ -592,8 +606,8 @@ module webSocketGauge.parts
         
         private create() : void
         {
-            const backTexture = PIXI.Texture.fromImage("DigiTachoBack.png");
-            const tachoProgressBarTexture = PIXI.Texture.fromImage("DigiTachoBar.png");
+            const backTexture = PIXI.Texture.fromFrame("DigiTachoBack");
+            const tachoProgressBarTexture = PIXI.Texture.fromFrame("DigiTachoBar");
             
             //Create background sprite
             const backSprite = new PIXI.Sprite();
@@ -646,6 +660,22 @@ module webSocketGauge.parts
         private sectGasMilage : {[spankey : string] : number } = {};
         
         private sectSpan : string[] = ["5min","10min","15min", "20min", "25min", "30min"];
+        
+        static get RequestedTexturePath() : string[]
+        {
+            return ["MilageGraphTexture.json"];
+        }
+        
+        static get RequestedFontFamily() : string[]
+        {
+            return ["FreeSans-Bold"]
+        }
+        
+        static get RequestedFontCSSURL() : string[]
+        {
+            return ['./font.css'];
+        }
+        
         
         private masterTextStyle = new PIXI.TextStyle(
         {
@@ -713,11 +743,11 @@ module webSocketGauge.parts
         
         private create()
         {
-            const backTexture = PIXI.Texture.fromImage("./MilageGraph_Back.png");
+            const backTexture = PIXI.Texture.fromFrame("MilageGraph_Back");
             const backSprite = new PIXI.Sprite(backTexture);
             super.addChild(backSprite);
             
-            const momentGasMilageTexture = PIXI.Texture.fromImage("./MilageGraph_valueBar2.png");
+            const momentGasMilageTexture = PIXI.Texture.fromFrame("MilageGraph_valueBar2");
             this.momentGasMilageBar.Texture = momentGasMilageTexture;
             this.momentGasMilageBar.Vertical = true;
             this.momentGasMilageBar.MaskWidth = 40;
@@ -728,7 +758,7 @@ module webSocketGauge.parts
             super.addChild(this.momentGasMilageBar);
             
             //Sect fuelTrip progressbar
-            const sectGasMilageBarTexture = PIXI.Texture.fromImage("./MilageGraph_valueBar1.png");
+            const sectGasMilageBarTexture = PIXI.Texture.fromFrame("MilageGraph_valueBar1");
             for (let i = 0; i < this.sectSpan.length; i++)
             {
                 const spankey: string = this.sectSpan[i];

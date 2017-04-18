@@ -214,21 +214,8 @@ var webSocketGauge;
                     backContainer.addChild(axisLabelElem);
                 }
                 this.addChild(backContainer);
-                //Freeze back container and cache as bitmap texture when all texture are loaded
-                var self = this;
-                var waitTextureRead = function () {
-                    if (self.RedZoneBarTexture.baseTexture.hasLoaded
-                        && self.GreenZoneBarTexture.baseTexture.hasLoaded
-                        && self.YellowZoneBarTexture.baseTexture.hasLoaded
-                        && self.BackTexture.baseTexture.hasLoaded
-                        && self.GridTexture.baseTexture.hasLoaded) {
-                        //Bake into texture
-                        backContainer.cacheAsBitmap = true;
-                    }
-                    else
-                        window.setTimeout(waitTextureRead, 1000);
-                };
-                window.setTimeout(waitTextureRead, 1000);
+                //Bake into texture
+                backContainer.cacheAsBitmap = true;
             };
             return CircularGaugePanelBase;
         }(PIXI.Container));
@@ -238,13 +225,34 @@ var webSocketGauge;
             function SemiCircularGauge() {
                 return _super !== null && _super.apply(this, arguments) || this;
             }
+            Object.defineProperty(SemiCircularGauge, "RequestedTexturePath", {
+                get: function () {
+                    return ["SemiCircularGaugeTexture.json"];
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(SemiCircularGauge, "RequestedFontFamily", {
+                get: function () {
+                    return ["FreeSans-Bold"];
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(SemiCircularGauge, "RequestedFontCSSURL", {
+                get: function () {
+                    return ['./font.css'];
+                },
+                enumerable: true,
+                configurable: true
+            });
             SemiCircularGauge.prototype.setOption = function () {
-                this.RedZoneBarTexture = PIXI.Texture.fromImage("SemiCircular_Gauge1_Redzone_Bar.png");
-                this.YellowZoneBarTexture = PIXI.Texture.fromImage("SemiCircular_Gauge1_Yellowzone_Bar.png");
-                this.GreenZoneBarTexture = PIXI.Texture.fromImage("SemiCircular_Gauge1_Greenzone_Bar.png");
-                this.ValueBarTexture = PIXI.Texture.fromImage("SemiCircular_Gauge1_Value_Bar.png");
-                this.BackTexture = PIXI.Texture.fromImage("SemiCircular_Gauge1_Back.png");
-                this.GridTexture = PIXI.Texture.fromImage("SemiCircular_Gauge1_Grid.png");
+                this.RedZoneBarTexture = PIXI.Texture.fromFrame("SemiCircular_Gauge1_Redzone_Bar");
+                this.YellowZoneBarTexture = PIXI.Texture.fromFrame("SemiCircular_Gauge1_Yellowzone_Bar");
+                this.GreenZoneBarTexture = PIXI.Texture.fromFrame("SemiCircular_Gauge1_Greenzone_Bar");
+                this.ValueBarTexture = PIXI.Texture.fromFrame("SemiCircular_Gauge1_Value_Bar");
+                this.BackTexture = PIXI.Texture.fromFrame("SemiCircular_Gauge1_Back");
+                this.GridTexture = PIXI.Texture.fromFrame("SemiCircular_Gauge1_Grid");
                 this.masterTextStyle = new PIXI.TextStyle({
                     dropShadow: true,
                     dropShadowBlur: 15,
@@ -494,6 +502,27 @@ var webSocketGauge;
                 _this.create();
                 return _this;
             }
+            Object.defineProperty(DigiTachoPanel, "RequestedTexturePath", {
+                get: function () {
+                    return ["DigiTachoTexture.json"];
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(DigiTachoPanel, "RequestedFontFamily", {
+                get: function () {
+                    return ["FreeSans-Bold", "AudioWide"];
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(DigiTachoPanel, "RequestedFontCSSURL", {
+                get: function () {
+                    return ['./font.css'];
+                },
+                enumerable: true,
+                configurable: true
+            });
             Object.defineProperty(DigiTachoPanel.prototype, "Speed", {
                 get: function () { return this.speed; },
                 set: function (speed) {
@@ -515,8 +544,8 @@ var webSocketGauge;
                 configurable: true
             });
             DigiTachoPanel.prototype.create = function () {
-                var backTexture = PIXI.Texture.fromImage("DigiTachoBack.png");
-                var tachoProgressBarTexture = PIXI.Texture.fromImage("DigiTachoBar.png");
+                var backTexture = PIXI.Texture.fromFrame("DigiTachoBack");
+                var tachoProgressBarTexture = PIXI.Texture.fromFrame("DigiTachoBar");
                 //Create background sprite
                 var backSprite = new PIXI.Sprite();
                 backSprite.texture = backTexture;
@@ -584,6 +613,27 @@ var webSocketGauge;
                 _this.create();
                 return _this;
             }
+            Object.defineProperty(MilageGraphPanel, "RequestedTexturePath", {
+                get: function () {
+                    return ["MilageGraphTexture.json"];
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(MilageGraphPanel, "RequestedFontFamily", {
+                get: function () {
+                    return ["FreeSans-Bold"];
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(MilageGraphPanel, "RequestedFontCSSURL", {
+                get: function () {
+                    return ['./font.css'];
+                },
+                enumerable: true,
+                configurable: true
+            });
             Object.defineProperty(MilageGraphPanel.prototype, "MomentGasMilage", {
                 get: function () { return this.momentGasMilage; },
                 set: function (val) {
@@ -632,10 +682,10 @@ var webSocketGauge;
                 return this.sectGasMilage[sectspan];
             };
             MilageGraphPanel.prototype.create = function () {
-                var backTexture = PIXI.Texture.fromImage("./MilageGraph_Back.png");
+                var backTexture = PIXI.Texture.fromFrame("MilageGraph_Back");
                 var backSprite = new PIXI.Sprite(backTexture);
                 _super.prototype.addChild.call(this, backSprite);
-                var momentGasMilageTexture = PIXI.Texture.fromImage("./MilageGraph_valueBar2.png");
+                var momentGasMilageTexture = PIXI.Texture.fromFrame("MilageGraph_valueBar2");
                 this.momentGasMilageBar.Texture = momentGasMilageTexture;
                 this.momentGasMilageBar.Vertical = true;
                 this.momentGasMilageBar.MaskWidth = 40;
@@ -645,7 +695,7 @@ var webSocketGauge;
                 this.momentGasMilageBar.position.set(411, 17);
                 _super.prototype.addChild.call(this, this.momentGasMilageBar);
                 //Sect fuelTrip progressbar
-                var sectGasMilageBarTexture = PIXI.Texture.fromImage("./MilageGraph_valueBar1.png");
+                var sectGasMilageBarTexture = PIXI.Texture.fromFrame("MilageGraph_valueBar1");
                 for (var i = 0; i < this.sectSpan.length; i++) {
                     var spankey = this.sectSpan[i];
                     this.sectGasMilageBar[spankey] = new RectangularProgressBar();
