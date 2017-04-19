@@ -24,7 +24,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
  
-/// <reference path="./FullCircularGauge.ts" />
+/// <reference path="../DigiTachoPanel/DigiTachoPanel.ts" />
 
 window.onload = function()
 {
@@ -57,7 +57,7 @@ namespace webSocketGauge.test.DigiTachoTest
             {
                 gaugeArray.push(new webSocketGauge.parts.DigiTachoPanel);
                 gaugeArray[index].pivot = new PIXI.Point(300,200);
-                gaugeArray[index].scale.set(0.6, 0.6);
+                gaugeArray[index].scale.set(0.65, 0.65);
                 gaugeArray[index].position = new PIXI.Point(400*i+150,240*j+150);
                 gaugeArray[index].Tacho = 0;
                 app.stage.addChild(gaugeArray[index]);

@@ -23,28 +23,28 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-/// <reference path="./FullCircularGauge.ts" />
+/// <reference path="../GasMilageGraph/MilageGraph.ts" />
 window.onload = function () {
+    //webSocketGauge.parts.FullCircularGauge.preloadTextures();
     WebFont.load({
         custom: {
-            families: webSocketGauge.parts.BoostGaugePanel.RequestedFontFamily,
-            urls: webSocketGauge.parts.BoostGaugePanel.RequestedFontCSSURL
+            families: webSocketGauge.parts.MilageGraphPanel.RequestedFontFamily,
+            urls: webSocketGauge.parts.MilageGraphPanel.RequestedFontCSSURL
         },
-        active: function () { webSocketGauge.test.FullCircularGaugeTest.preloadTexture(); }
+        active: function () { webSocketGauge.test.MilageBarTest.preloadTexture(); }
     });
 };
 var webSocketGauge;
 (function (webSocketGauge) {
     var test;
     (function (test) {
-        var FullCircularGaugeTest;
-        (function (FullCircularGaugeTest) {
+        var MilageBarTest;
+        (function (MilageBarTest) {
             function preloadTexture() {
-                PIXI.loader.add(webSocketGauge.parts.BoostGaugePanel.RequestedTexturePath);
-                ;
+                PIXI.loader.add(webSocketGauge.parts.MilageGraphPanel.RequestedTexturePath);
                 PIXI.loader.load(main);
             }
-            FullCircularGaugeTest.preloadTexture = preloadTexture;
+            MilageBarTest.preloadTexture = preloadTexture;
             function main() {
                 var app = new PIXI.Application(1366, 1366);
                 document.body.appendChild(app.view);
@@ -52,25 +52,24 @@ var webSocketGauge;
                 var index = 0;
                 for (var j = 0; j < 6; j++) {
                     for (var i = 0; i < 6; i++) {
-                        gaugeArray.push(new webSocketGauge.parts.BoostGaugePanel);
+                        gaugeArray.push(new webSocketGauge.parts.MilageGraphPanel);
                         gaugeArray[index].pivot = new PIXI.Point(200, 200);
                         gaugeArray[index].scale.set(0.6, 0.6);
-                        gaugeArray[index].position = new PIXI.Point(240 * i + 150, 240 * j + 150);
-                        gaugeArray[index].Value = 0;
+                        gaugeArray[index].position = new PIXI.Point(400 * i + 150, 200 * j + 150);
+                        gaugeArray[index].Trip = 130.0;
+                        gaugeArray[index].MomentGasMilage = 20.0;
+                        gaugeArray[index].Fuel = 35.0;
+                        gaugeArray[index].GasMilage = 23.5;
+                        gaugeArray[index].setSectGasMllage("5min", 12.0);
+                        gaugeArray[index].setSectGasMllage("25min", 7.0);
                         app.stage.addChild(gaugeArray[index]);
                         index++;
                     }
                 }
                 app.ticker.add(function () {
-                    for (var i = 0; i < gaugeArray.length; i++) {
-                        if (gaugeArray[i].Value + 0.01 >= 2)
-                            gaugeArray[i].Value = -1;
-                        else
-                            gaugeArray[i].Value = gaugeArray[i].Value + 0.01;
-                    }
                 });
             }
-        })(FullCircularGaugeTest = test.FullCircularGaugeTest || (test.FullCircularGaugeTest = {}));
+        })(MilageBarTest = test.MilageBarTest || (test.MilageBarTest = {}));
     })(test = webSocketGauge.test || (webSocketGauge.test = {}));
 })(webSocketGauge || (webSocketGauge = {}));
-//# sourceMappingURL=FullCircularGaugeTest.js.map
+//# sourceMappingURL=MilageBarTest.js.map

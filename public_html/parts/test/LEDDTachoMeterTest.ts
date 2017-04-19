@@ -23,56 +23,43 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-
-/// <reference path="./FullCircularGauge.ts" />
+ 
+/// <reference path="../LEDTachoMeter/LEDTachoMeter.ts" />
+import LEDTachoMeter = webSocketGauge.parts.LEDTachoMeter;
 
 window.onload = function()
 {
     WebFont.load({
         custom: 
         { 
-            families: webSocketGauge.parts.ThrottleGaugePanel.RequestedFontFamily,
-            urls: webSocketGauge.parts.ThrottleGaugePanel.RequestedFontCSSURL 
+            families: LEDTachoMeter.RequestedFontFamily,
+            urls: LEDTachoMeter.RequestedFontCSSURL 
         },
-        active : function(){webSocketGauge.test.SemiCircularGaugeTest.preloadTexture();}
+        active : function(){webSocketGauge.test.LEDTachoMeterTest.preloadTexture();}
     });
 }
 
-namespace webSocketGauge.test.SemiCircularGaugeTest
+namespace webSocketGauge.test.LEDTachoMeterTest
 {
     export function preloadTexture()
     {
-        PIXI.loader.add(webSocketGauge.parts.ThrottleGaugePanel.RequestedTexturePath);;
+        PIXI.loader.add(LEDTachoMeter.RequestedTexturePath[0]);
         PIXI.loader.load(main);
     }
+
     function main()
     {
         const app = new PIXI.Application(1366,1366);
         document.body.appendChild(app.view);
-        let gaugeArray: webSocketGauge.parts.ThrottleGaugePanel[] = new Array();
-        let index = 0;
-        for (let j = 0; j < 6; j++)
-        {
-            for (let i = 0; i < 6 ; i++)
-            {
-                gaugeArray.push(new webSocketGauge.parts.ThrottleGaugePanel);
-                gaugeArray[index].pivot = new PIXI.Point(200,200);
-                gaugeArray[index].scale.set(0.6, 0.6);
-                gaugeArray[index].position = new PIXI.Point(240*i+150,200*j+150);
-                gaugeArray[index].Value = 0;
-                app.stage.addChild(gaugeArray[index]);
-                index++;
-            }
-        }
-        app.ticker.add(() => {
-            for (let i = 0; i < gaugeArray.length; i++)
-            {
-                if (gaugeArray[i].Value + 1 >= 100)
-                    gaugeArray[i].Value = 0;
-                else           
-                    gaugeArray[i].Value += 1;
-            }
-            });
+
+        const meter = new LEDTachoMeter();
+        app.stage.addChild(meter);
+
+        app.ticker.add(function(){
+            meter.Tacho += 100;
+            if (meter.Tacho > 9000)
+                meter.Tacho = 0;
+        });
+
     }
 }
-

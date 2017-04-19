@@ -61,7 +61,7 @@ module webSocketGauge.parts
         
         static get RequestedTexturePath() : string[]
         {
-            return ["./LEDTachoMeterTexture.json"];
+            return ["/parts/LEDTachoMeter/LEDTachoMeterTexture.json"];
         }
         
         static get RequestedFontFamily() : string[]
@@ -71,7 +71,7 @@ module webSocketGauge.parts
         
         static get RequestedFontCSSURL() : string[]
         {
-            return ['./font.css'];
+            return ['/parts/fonts/font.css'];
         }
         
         get Tacho() : number { return this.tacho; }

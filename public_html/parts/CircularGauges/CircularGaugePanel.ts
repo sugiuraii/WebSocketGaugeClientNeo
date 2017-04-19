@@ -292,7 +292,7 @@ module webSocketGauge.parts.CircularGaugePanel.SemiCircularGaugePanel
     {
         static get RequestedTexturePath() : string[]
         {
-            return ["SemiCircularGaugeTexture.json"];
+            return ["/parts/CirCularGauges/SemiCircularGaugeTexture.json"];
         }
         
         static get RequestedFontFamily() : string[]
@@ -302,7 +302,7 @@ module webSocketGauge.parts.CircularGaugePanel.SemiCircularGaugePanel
         
         static get RequestedFontCSSURL() : string[]
         {
-            return ['./font.css'];
+            return ['/parts/fonts/font.css'];
         }
         
         protected setOption() : void
@@ -400,7 +400,7 @@ module webSocketGauge.parts.CircularGaugePanel.FullCircularGaugePanel
     {
         static get RequestedTexturePath() : string[]
         {
-            return ["FullCircularGaugeTexture.json"];
+            return ["/parts/CirCularGauges/FullCircularGaugeTexture.json"];
         }
         
         static get RequestedFontFamily() : string[]
@@ -410,7 +410,7 @@ module webSocketGauge.parts.CircularGaugePanel.FullCircularGaugePanel
         
         static get RequestedFontCSSURL() : string[]
         {
-            return ['./font.css'];
+            return ['/parts/fonts/font.css'];
         }
         
         protected setOption() : void

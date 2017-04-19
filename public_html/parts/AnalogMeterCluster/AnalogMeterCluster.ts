@@ -124,7 +124,7 @@ module webSocketGauge.parts.AnalogMeterCluster
         
         static get RequestedTexturePath() : string[]
         {
-            return [window.location. + "/parts/AnalogMeterCluster/AnalogMeterClusterTexture.json"];
+            return ["/parts/AnalogMeterCluster/AnalogMeterClusterTexture.json"];
         }
         
         static get RequestedFontFamily() : string[]
@@ -134,7 +134,7 @@ module webSocketGauge.parts.AnalogMeterCluster
         
         static get RequestedFontCSSURL() : string[]
         {
-            return [window.location.hostname + '/parts/fonts/font.css'];
+            return ['/parts/fonts/font.css'];
         }
         
         constructor()

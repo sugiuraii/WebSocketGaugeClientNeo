@@ -165,7 +165,7 @@ var webSocketGauge;
                 });
                 Object.defineProperty(AnalogMeterCluster, "RequestedTexturePath", {
                     get: function () {
-                        return [window.location. + "/parts/AnalogMeterCluster/AnalogMeterClusterTexture.json"];
+                        return ["/parts/AnalogMeterCluster/AnalogMeterClusterTexture.json"];
                     },
                     enumerable: true,
                     configurable: true
@@ -179,7 +179,7 @@ var webSocketGauge;
                 });
                 Object.defineProperty(AnalogMeterCluster, "RequestedFontCSSURL", {
                     get: function () {
-                        return [window.location.hostname + '/parts/fonts/font.css'];
+                        return ['/parts/fonts/font.css'];
                     },
                     enumerable: true,
                     configurable: true

@@ -23,28 +23,28 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-/// <reference path="./FullCircularGauge.ts" />
+/// <reference path="../DigiTachoPanel/DigiTachoPanel.ts" />
 window.onload = function () {
     WebFont.load({
         custom: {
-            families: webSocketGauge.parts.ThrottleGaugePanel.RequestedFontFamily,
-            urls: webSocketGauge.parts.ThrottleGaugePanel.RequestedFontCSSURL
+            families: webSocketGauge.parts.DigiTachoPanel.RequestedFontFamily,
+            urls: webSocketGauge.parts.DigiTachoPanel.RequestedFontCSSURL
         },
-        active: function () { webSocketGauge.test.SemiCircularGaugeTest.preloadTexture(); }
+        active: function () { webSocketGauge.test.DigiTachoTest.preloadTexture(); }
     });
 };
 var webSocketGauge;
 (function (webSocketGauge) {
     var test;
     (function (test) {
-        var SemiCircularGaugeTest;
-        (function (SemiCircularGaugeTest) {
+        var DigiTachoTest;
+        (function (DigiTachoTest) {
             function preloadTexture() {
-                PIXI.loader.add(webSocketGauge.parts.ThrottleGaugePanel.RequestedTexturePath);
+                PIXI.loader.add(webSocketGauge.parts.DigiTachoPanel.RequestedTexturePath);
                 ;
                 PIXI.loader.load(main);
             }
-            SemiCircularGaugeTest.preloadTexture = preloadTexture;
+            DigiTachoTest.preloadTexture = preloadTexture;
             function main() {
                 var app = new PIXI.Application(1366, 1366);
                 document.body.appendChild(app.view);
@@ -52,25 +52,25 @@ var webSocketGauge;
                 var index = 0;
                 for (var j = 0; j < 6; j++) {
                     for (var i = 0; i < 6; i++) {
-                        gaugeArray.push(new webSocketGauge.parts.ThrottleGaugePanel);
-                        gaugeArray[index].pivot = new PIXI.Point(200, 200);
-                        gaugeArray[index].scale.set(0.6, 0.6);
-                        gaugeArray[index].position = new PIXI.Point(240 * i + 150, 200 * j + 150);
-                        gaugeArray[index].Value = 0;
+                        gaugeArray.push(new webSocketGauge.parts.DigiTachoPanel);
+                        gaugeArray[index].pivot = new PIXI.Point(300, 200);
+                        gaugeArray[index].scale.set(0.65, 0.65);
+                        gaugeArray[index].position = new PIXI.Point(400 * i + 150, 240 * j + 150);
+                        gaugeArray[index].Tacho = 0;
                         app.stage.addChild(gaugeArray[index]);
                         index++;
                     }
                 }
                 app.ticker.add(function () {
                     for (var i = 0; i < gaugeArray.length; i++) {
-                        if (gaugeArray[i].Value + 1 >= 100)
-                            gaugeArray[i].Value = 0;
+                        if (gaugeArray[i].Tacho + 100 >= 9000)
+                            gaugeArray[i].Tacho = 0;
                         else
-                            gaugeArray[i].Value += 1;
+                            gaugeArray[i].Tacho += 100;
                     }
                 });
             }
-        })(SemiCircularGaugeTest = test.SemiCircularGaugeTest || (test.SemiCircularGaugeTest = {}));
+        })(DigiTachoTest = test.DigiTachoTest || (test.DigiTachoTest = {}));
     })(test = webSocketGauge.test || (webSocketGauge.test = {}));
 })(webSocketGauge || (webSocketGauge = {}));
-//# sourceMappingURL=SemicircularGaugeTest.js.map
+//# sourceMappingURL=DigiTachoTest.js.map

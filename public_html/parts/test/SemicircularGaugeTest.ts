@@ -24,41 +24,42 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/// <reference path="./FullCircularGauge.ts" />
-
+/// <reference path="../CircularGauges/CircularGaugePanel.ts" />
+import ThrottleGaugePanel = webSocketGauge.parts.CircularGaugePanel.SemiCircularGaugePanel.ThrottleGaugePanel;
 window.onload = function()
 {
+   
     WebFont.load({
         custom: 
         { 
-            families: webSocketGauge.parts.BoostGaugePanel.RequestedFontFamily,
-            urls: webSocketGauge.parts.BoostGaugePanel.RequestedFontCSSURL 
+            families: ThrottleGaugePanel.RequestedFontFamily,
+            urls: ThrottleGaugePanel.RequestedFontCSSURL 
         },
-        active : function(){webSocketGauge.test.FullCircularGaugeTest.preloadTexture();}
+        active : function(){webSocketGauge.test.SemiCircularGaugeTest.preloadTexture();}
     });
 }
 
-namespace webSocketGauge.test.FullCircularGaugeTest
+namespace webSocketGauge.test.SemiCircularGaugeTest
 {
     export function preloadTexture()
     {
-        PIXI.loader.add(webSocketGauge.parts.BoostGaugePanel.RequestedTexturePath);;
+        PIXI.loader.add(ThrottleGaugePanel.RequestedTexturePath);;
         PIXI.loader.load(main);
     }
     function main()
     {
         const app = new PIXI.Application(1366,1366);
         document.body.appendChild(app.view);
-        let gaugeArray: webSocketGauge.parts.BoostGaugePanel[] = new Array();
+        let gaugeArray: ThrottleGaugePanel[] = new Array();
         let index = 0;
         for (let j = 0; j < 6; j++)
         {
             for (let i = 0; i < 6 ; i++)
             {
-                gaugeArray.push(new webSocketGauge.parts.BoostGaugePanel);
+                gaugeArray.push(new ThrottleGaugePanel());
                 gaugeArray[index].pivot = new PIXI.Point(200,200);
                 gaugeArray[index].scale.set(0.6, 0.6);
-                gaugeArray[index].position = new PIXI.Point(240*i+150,240*j+150);
+                gaugeArray[index].position = new PIXI.Point(240*i+150,200*j+150);
                 gaugeArray[index].Value = 0;
                 app.stage.addChild(gaugeArray[index]);
                 index++;
@@ -67,11 +68,12 @@ namespace webSocketGauge.test.FullCircularGaugeTest
         app.ticker.add(() => {
             for (let i = 0; i < gaugeArray.length; i++)
             {
-                if (gaugeArray[i].Value + 0.01 >= 2)
-                    gaugeArray[i].Value = -1;
+                if (gaugeArray[i].Value + 1 >= 100)
+                    gaugeArray[i].Value = 0;
                 else           
-                    gaugeArray[i].Value = gaugeArray[i].Value + 0.01;
+                    gaugeArray[i].Value += 1;
             }
             });
     }
 }
+

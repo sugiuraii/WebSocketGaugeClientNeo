@@ -23,7 +23,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-/// <reference path="./LEDTachoMeter.ts" />
+/// <reference path="../LEDTachoMeter/LEDTachoMeter.ts" />
 var LEDTachoMeter = webSocketGauge.parts.LEDTachoMeter;
 window.onload = function () {
     WebFont.load({

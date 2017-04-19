@@ -124,7 +124,7 @@ var webSocketGauge;
             }
             Object.defineProperty(LEDTachoMeter, "RequestedTexturePath", {
                 get: function () {
-                    return ["./LEDTachoMeterTexture.json"];
+                    return ["/parts/LEDTachoMeter/LEDTachoMeterTexture.json"];
                 },
                 enumerable: true,
                 configurable: true
@@ -138,7 +138,7 @@ var webSocketGauge;
             });
             Object.defineProperty(LEDTachoMeter, "RequestedFontCSSURL", {
                 get: function () {
-                    return ['./font.css'];
+                    return ['/parts/fonts/font.css'];
                 },
                 enumerable: true,
                 configurable: true
