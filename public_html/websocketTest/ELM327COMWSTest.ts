@@ -24,103 +24,101 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 /// <reference path="../script/websocket/websocketClient.ts" />
-/// <reference path="../node_modules/@types/jquery/index.d.ts" />
-import ELM327COMWebsocket = webSocketGauge.lib.communication.ELM327COMWebsocket;
-import OBDIIParameterCode = webSocketGauge.lib.communication.OBDIIParameterCode;
+
+
 
 window.onload = function()
 {
-    ELM327COMWSTest.main();
+    webSocketGauge.test.ELM327COMWSTest.main();
 }
 
-class ELM327COMWSTest
-{    
-    private static elm327WS : ELM327COMWebsocket;
-    
-    public static main(): void
-    {
-        this.elm327WS = new ELM327COMWebsocket();
-        $('#serverURL_box').val("ws://localhost:2013/");
-        this.setParameterCodeSelectBox();
-        this.registerWSEvents();
-    }
-    
-    private static setParameterCodeSelectBox()
-    {
-        for (let code in OBDIIParameterCode)
-            $('#ssmcomcode_select').append($('<option>').html(code).val(code));
-    }
-    
-    private static registerWSEvents() : void
-    {
-        this.elm327WS.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: number}) => 
+namespace webSocketGauge.test
+{
+    import ELM327COMWebsocket = webSocketGauge.lib.communication.ELM327COMWebsocket;
+    import OBDIIParameterCode = webSocketGauge.lib.communication.OBDIIParameterCode;
+
+    export class ELM327COMWSTest
+    {    
+        private static elm327WS : ELM327COMWebsocket;
+
+        public static main(): void
         {
-            $('#interval').text(intervalTime.toFixed(2));
-             //clear
-            $('#div_val_data').html("");
-            for (var key in val)
-            {
-                $('#div_val_data').append(key + " : " + val[key] + "<br>" );
-            }
+            this.elm327WS = new ELM327COMWebsocket();
+            $('#serverURL_box').val("ws://localhost:2013/");
+            this.setParameterCodeSelectBox();
+            this.registerWSEvents();
         }
-        this.elm327WS.OnERRPacketReceived = (msg:string)=>
+
+        private static setParameterCodeSelectBox()
         {
-            $('#div_err_data').append(msg + "<br>")
-        };
-        
-        this.elm327WS.OnRESPacketReceived = (msg : string) =>
+            for (let code in OBDIIParameterCode)
+                $('#ssmcomcode_select').append($('<option>').html(code).val(code));
+        }
+
+        private static registerWSEvents() : void
         {
-            $('#div_res_data').append(msg + "<br>");
-        };
-        this.elm327WS.OnWebsocketError = (msg : string) =>
+            this.elm327WS.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: number}) => 
+            {
+                $('#interval').text(intervalTime.toFixed(2));
+                 //clear
+                $('#div_val_data').html("");
+                for (var key in val)
+                {
+                    $('#div_val_data').append(key + " : " + val[key] + "<br>" );
+                }
+            }
+            this.elm327WS.OnERRPacketReceived = (msg:string)=>
+            {
+                $('#div_err_data').append(msg + "<br>")
+            };
+
+            this.elm327WS.OnRESPacketReceived = (msg : string) =>
+            {
+                $('#div_res_data').append(msg + "<br>");
+            };
+            this.elm327WS.OnWebsocketError = (msg : string) =>
+            {
+                $('#div_ws_message').append(msg + "<br>");
+            };
+            this.elm327WS.OnWebsocketOpen = () =>
+            {
+                $('#div_ws_message').append('* Connection open<br/>');
+
+                $('#sendmessagecontent_box').removeAttr("disabled");
+                $('#sendButton').removeAttr("disabled");
+                $('#connectButton').attr("disabled", "disabled");
+                $('#disconnectButton').removeAttr("disabled");  
+            };
+            this.elm327WS.OnWebsocketClose = () =>
+            {
+                $('#div_ws_message').append('* Connection closed<br/>');
+
+                $('#sendmessagecontent_box').attr("disabled", "disabled");
+                $('#sendButton').attr("disabled", "disabled");
+                $('#connectButton').removeAttr("disabled");
+                $('#disconnectButton').attr("disabled", "disabled");
+            };
+        }
+
+        public static connectWebSocket() : void
         {
-            $('#div_ws_message').append(msg + "<br>");
+            this.elm327WS.URL = $("#serverURL_box").val();
+            this.elm327WS.Connect();
         };
-        this.elm327WS.OnWebsocketOpen = () =>
+
+        public static disconnectWebSocket()
         {
-            $('#div_ws_message').append('* Connection open<br/>');
-
-            $('#sendmessagecontent_box').removeAttr("disabled");
-            $('#sendButton').removeAttr("disabled");
-            $('#connectButton').attr("disabled", "disabled");
-            $('#disconnectButton').removeAttr("disabled");  
+            this.elm327WS.Close();
         };
-        this.elm327WS.OnWebsocketClose = () =>
+
+        public static input_SSM_COM_READ()
         {
-            $('#div_ws_message').append('* Connection closed<br/>');
-
-            $('#sendmessagecontent_box').attr("disabled", "disabled");
-            $('#sendButton').attr("disabled", "disabled");
-            $('#connectButton').removeAttr("disabled");
-            $('#disconnectButton').attr("disabled", "disabled");
+            this.elm327WS.SendCOMRead($('#ssmcomcode_select').val(), $('#ssmcode_readmode').val(), $('#ssmcode_flag').val());
         };
-    }
-    
-    public static connectWebSocket() : void
-    {
-        this.elm327WS.URL = $("#serverURL_box").val();
-        this.elm327WS.Connect();
-    };
-    
-    public static disconnectWebSocket()
-    {
-        this.elm327WS.Close();
-    };
 
-    public static input_SSM_COM_READ()
-    {
-        this.elm327WS.SendCOMRead($('#ssmcomcode_select').val(), $('#ssmcode_readmode').val(), $('#ssmcode_flag').val());
-    };
-
-    public static input_SSMCOM_SLOWREAD_INTERVAL()
-    {
-        this.elm327WS.SendSlowreadInterval(($('#interval_SSMCOM_SLOWREAD_INTERVAL').val()));
-    };
-} 
-
-
-
-
-
-
-
+        public static input_SSMCOM_SLOWREAD_INTERVAL()
+        {
+            this.elm327WS.SendSlowreadInterval(($('#interval_SSMCOM_SLOWREAD_INTERVAL').val()));
+        };
+    } 
+}

@@ -24,103 +24,99 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 /// <reference path="../script/websocket/websocketClient.ts" />
-/// <reference path="../node_modules/@types/jquery/index.d.ts" />
-import ArduinoCOMWebsocket = webSocketGauge.lib.communication.ArduinoCOMWebsocket;
-import ArduinoParameterCode = webSocketGauge.lib.communication.ArduinoParameterCode;
 
 window.onload = function()
 {
-    ArduinoCOMWSTest.main();
+    webSocketGauge.test.ArduinoCOMWSTest.main();
 }
 
-class ArduinoCOMWSTest
-{    
-    private static arduinoWS : ArduinoCOMWebsocket;
+namespace webSocketGauge.test
+{
+    import ArduinoCOMWebsocket = webSocketGauge.lib.communication.ArduinoCOMWebsocket;
+    import ArduinoParameterCode = webSocketGauge.lib.communication.ArduinoParameterCode;
     
-    public static main(): void
-    {
-        this.arduinoWS = new ArduinoCOMWebsocket();
-        $('#serverURL_box').val("ws://localhost:2012/");
-        this.setParameterCodeSelectBox();
-        this.registerWSEvents();
-    }
-    
-    private static setParameterCodeSelectBox()
-    {
-        for (let code in ArduinoParameterCode)
-            $('#deficode_select').append($('<option>').html(code).val(code));
-    }
-    
-    private static registerWSEvents() : void
-    {
-        this.arduinoWS.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: number}) => 
+    export class ArduinoCOMWSTest
+    {    
+        private static arduinoWS : ArduinoCOMWebsocket;
+
+        public static main(): void
         {
-            $('#interval').text(intervalTime.toFixed(2));
-             //clear
-            $('#div_val_data').html("");
-            for (var key in val)
-            {
-                $('#div_val_data').append(key + " : " + val[key] + "<br>" );
-            }
+            this.arduinoWS = new ArduinoCOMWebsocket();
+            $('#serverURL_box').val("ws://localhost:2012/");
+            this.setParameterCodeSelectBox();
+            this.registerWSEvents();
         }
-        this.arduinoWS.OnERRPacketReceived = (msg:string)=>
+
+        private static setParameterCodeSelectBox()
         {
-            $('#div_err_data').append(msg + "<br>")
-        };
-        
-        this.arduinoWS.OnRESPacketReceived = (msg : string) =>
+            for (let code in ArduinoParameterCode)
+                $('#deficode_select').append($('<option>').html(code).val(code));
+        }
+
+        private static registerWSEvents() : void
         {
-            $('#div_res_data').append(msg + "<br>");
-        };
-        this.arduinoWS.OnWebsocketError = (msg : string) =>
+            this.arduinoWS.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: number}) => 
+            {
+                $('#interval').text(intervalTime.toFixed(2));
+                 //clear
+                $('#div_val_data').html("");
+                for (var key in val)
+                {
+                    $('#div_val_data').append(key + " : " + val[key] + "<br>" );
+                }
+            }
+            this.arduinoWS.OnERRPacketReceived = (msg:string)=>
+            {
+                $('#div_err_data').append(msg + "<br>")
+            };
+
+            this.arduinoWS.OnRESPacketReceived = (msg : string) =>
+            {
+                $('#div_res_data').append(msg + "<br>");
+            };
+            this.arduinoWS.OnWebsocketError = (msg : string) =>
+            {
+                $('#div_ws_message').append(msg + "<br>");
+            };
+            this.arduinoWS.OnWebsocketOpen = () =>
+            {
+                $('#div_ws_message').append('* Connection open<br/>');
+
+                $('#sendmessagecontent_box').removeAttr("disabled");
+                $('#sendButton').removeAttr("disabled");
+                $('#connectButton').attr("disabled", "disabled");
+                $('#disconnectButton').removeAttr("disabled");  
+            };
+            this.arduinoWS.OnWebsocketClose = () =>
+            {
+                $('#div_ws_message').append('* Connection closed<br/>');
+
+                $('#sendmessagecontent_box').attr("disabled", "disabled");
+                $('#sendButton').attr("disabled", "disabled");
+                $('#connectButton').removeAttr("disabled");
+                $('#disconnectButton').attr("disabled", "disabled");
+            };
+        }
+
+        public static connectWebSocket() : void
         {
-            $('#div_ws_message').append(msg + "<br>");
+            this.arduinoWS.URL = $("#serverURL_box").val();
+            this.arduinoWS.Connect();
         };
-        this.arduinoWS.OnWebsocketOpen = () =>
+
+        public static disconnectWebSocket()
         {
-            $('#div_ws_message').append('* Connection open<br/>');
-
-            $('#sendmessagecontent_box').removeAttr("disabled");
-            $('#sendButton').removeAttr("disabled");
-            $('#connectButton').attr("disabled", "disabled");
-            $('#disconnectButton').removeAttr("disabled");  
+            this.arduinoWS.Close();
         };
-        this.arduinoWS.OnWebsocketClose = () =>
+
+        public static input_ARDUINO_WS_SEND()
         {
-            $('#div_ws_message').append('* Connection closed<br/>');
-
-            $('#sendmessagecontent_box').attr("disabled", "disabled");
-            $('#sendButton').attr("disabled", "disabled");
-            $('#connectButton').removeAttr("disabled");
-            $('#disconnectButton').attr("disabled", "disabled");
+            this.arduinoWS.SendWSSend($('#deficode_select').val(),$('#deficode_flag').val());
         };
-    }
-    
-    public static connectWebSocket() : void
-    {
-        this.arduinoWS.URL = $("#serverURL_box").val();
-        this.arduinoWS.Connect();
-    };
-    
-    public static disconnectWebSocket()
-    {
-        this.arduinoWS.Close();
-    };
 
-    public static input_ARDUINO_WS_SEND()
-    {
-        this.arduinoWS.SendWSSend($('#deficode_select').val(),$('#deficode_flag').val());
-    };
-
-    public static input_ARDUINO_WS_INTERVAL()
-    {
-        this.arduinoWS.SendWSInterval($('#interval_DEFI_WS_INTERVAL').val());
-    };
-} 
-
-
-
-
-
-
-
+        public static input_ARDUINO_WS_INTERVAL()
+        {
+            this.arduinoWS.SendWSInterval($('#interval_DEFI_WS_INTERVAL').val());
+        };
+    } 
+}

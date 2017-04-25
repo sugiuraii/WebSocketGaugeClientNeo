@@ -23,104 +23,99 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-/// <reference path="../script/websocket/websocketClient.ts" />
-/// <reference path="../node_modules/@types/jquery/index.d.ts" />
-import SSMWebsocket = webSocketGauge.lib.communication.SSMWebsocket;
-import SSMParameterCode = webSocketGauge.lib.communication.SSMParameterCode;
 
 window.onload = function()
 {
-    SSMCOMWSTest.main();
+    webSocketGauge.test.SSMCOMWSTest.main();
 }
 
-class SSMCOMWSTest
-{    
-    private static ssmWS : ELM327COMWebsocket;
-    
-    public static main(): void
-    {
-        this.ssmWS = new ELM327COMWebsocket();
-        $('#serverURL_box').val("ws://localhost:2013/");
-        this.setParameterCodeSelectBox();
-        this.registerWSEvents();
-    }
-    
-    private static setParameterCodeSelectBox()
-    {
-        for (let code in OBDIIParameterCode)
-            $('#ssmcomcode_select').append($('<option>').html(code).val(code));
-    }
-    
-    private static registerWSEvents() : void
-    {
-        this.ssmWS.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: number}) => 
+namespace webSocketGauge.test
+{
+    import SSMWebsocket = webSocketGauge.lib.communication.SSMWebsocket;
+    import SSMParameterCode = webSocketGauge.lib.communication.SSMParameterCode;
+
+    export class SSMCOMWSTest
+    {    
+        private static ssmWS : SSMWebsocket;
+
+        public static main(): void
         {
-            $('#interval').text(intervalTime.toFixed(2));
-             //clear
-            $('#div_val_data').html("");
-            for (var key in val)
-            {
-                $('#div_val_data').append(key + " : " + val[key] + "<br>" );
-            }
+            this.ssmWS = new SSMWebsocket();
+            $('#serverURL_box').val("ws://localhost:2013/");
+            this.setParameterCodeSelectBox();
+            this.registerWSEvents();
         }
-        this.ssmWS.OnERRPacketReceived = (msg:string)=>
+
+        private static setParameterCodeSelectBox()
         {
-            $('#div_err_data').append(msg + "<br>")
-        };
-        
-        this.ssmWS.OnRESPacketReceived = (msg : string) =>
+            for (let code in SSMParameterCode)
+                $('#ssmcomcode_select').append($('<option>').html(code).val(code));
+        }
+
+        private static registerWSEvents() : void
         {
-            $('#div_res_data').append(msg + "<br>");
-        };
-        this.ssmWS.OnWebsocketError = (msg : string) =>
+            this.ssmWS.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: number}) => 
+            {
+                $('#interval').text(intervalTime.toFixed(2));
+                 //clear
+                $('#div_val_data').html("");
+                for (var key in val)
+                {
+                    $('#div_val_data').append(key + " : " + val[key] + "<br>" );
+                }
+            }
+            this.ssmWS.OnERRPacketReceived = (msg:string)=>
+            {
+                $('#div_err_data').append(msg + "<br>")
+            };
+
+            this.ssmWS.OnRESPacketReceived = (msg : string) =>
+            {
+                $('#div_res_data').append(msg + "<br>");
+            };
+            this.ssmWS.OnWebsocketError = (msg : string) =>
+            {
+                $('#div_ws_message').append(msg + "<br>");
+            };
+            this.ssmWS.OnWebsocketOpen = () =>
+            {
+                $('#div_ws_message').append('* Connection open<br/>');
+
+                $('#sendmessagecontent_box').removeAttr("disabled");
+                $('#sendButton').removeAttr("disabled");
+                $('#connectButton').attr("disabled", "disabled");
+                $('#disconnectButton').removeAttr("disabled");  
+            };
+            this.ssmWS.OnWebsocketClose = () =>
+            {
+                $('#div_ws_message').append('* Connection closed<br/>');
+
+                $('#sendmessagecontent_box').attr("disabled", "disabled");
+                $('#sendButton').attr("disabled", "disabled");
+                $('#connectButton').removeAttr("disabled");
+                $('#disconnectButton').attr("disabled", "disabled");
+            };
+        }
+
+        public static connectWebSocket() : void
         {
-            $('#div_ws_message').append(msg + "<br>");
+            this.ssmWS.URL = $("#serverURL_box").val();
+            this.ssmWS.Connect();
         };
-        this.ssmWS.OnWebsocketOpen = () =>
+
+        public static disconnectWebSocket()
         {
-            $('#div_ws_message').append('* Connection open<br/>');
-
-            $('#sendmessagecontent_box').removeAttr("disabled");
-            $('#sendButton').removeAttr("disabled");
-            $('#connectButton').attr("disabled", "disabled");
-            $('#disconnectButton').removeAttr("disabled");  
+            this.ssmWS.Close();
         };
-        this.ssmWS.OnWebsocketClose = () =>
+
+        public static input_SSM_COM_READ()
         {
-            $('#div_ws_message').append('* Connection closed<br/>');
-
-            $('#sendmessagecontent_box').attr("disabled", "disabled");
-            $('#sendButton').attr("disabled", "disabled");
-            $('#connectButton').removeAttr("disabled");
-            $('#disconnectButton').attr("disabled", "disabled");
+            this.ssmWS.SendCOMRead($('#ssmcomcode_select').val(), $('#ssmcode_readmode').val(), $('#ssmcode_flag').val());
         };
-    }
-    
-    public static connectWebSocket() : void
-    {
-        this.ssmWS.URL = $("#serverURL_box").val();
-        this.ssmWS.Connect();
-    };
-    
-    public static disconnectWebSocket()
-    {
-        this.ssmWS.Close();
-    };
 
-    public static input_SSM_COM_READ()
-    {
-        this.ssmWS.SendCOMRead($('#ssmcomcode_select').val(), $('#ssmcode_readmode').val(), $('#ssmcode_flag').val());
-    };
-
-    public static input_SSMCOM_SLOWREAD_INTERVAL()
-    {
-        this.ssmWS.SendSlowreadInterval(($('#interval_SSMCOM_SLOWREAD_INTERVAL').val()));
-    };
-} 
-
-
-
-
-
-
-
+        public static input_SSMCOM_SLOWREAD_INTERVAL()
+        {
+            this.ssmWS.SendSlowreadInterval(($('#interval_SSMCOM_SLOWREAD_INTERVAL').val()));
+        };
+    } 
+}

@@ -23,103 +23,103 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-/// <reference path="../script/websocket/websocketClient.ts" />
-/// <reference path="../node_modules/@types/jquery/index.d.ts" />
-import FUELTRIPWebsocket = webSocketGauge.lib.communication.FUELTRIPWebsocket;
 
 window.onload = function()
 {
-    FUELTRIPWSTest.main();
+    webSocketGauge.test.FUELTRIPWSTest.main();
 }
 
-class FUELTRIPWSTest
+namespace webSocketGauge.test
 {
-    private static fueltripWS : FUELTRIPWebsocket;
-    
-    public static main() : void
+    import FUELTRIPWebsocket = webSocketGauge.lib.communication.FUELTRIPWebsocket;
+    export class FUELTRIPWSTest
     {
-        this.fueltripWS = new FUELTRIPWebsocket();
-        $('#serverURL_box').val("ws://localhost:2014/");
-        this.registerWSEvents();
-    }
-    
-    private static registerWSEvents() : void
-    {
-        this.fueltripWS.OnMomentFUELTRIPPacketReceived = (moment_gasmilage : number, total_gas : number, total_trip : number, total_gasmilage : number)=>
-        {
-            //clear
-            $('#div_moment_fueltrip_data').html("");
+        private static fueltripWS : FUELTRIPWebsocket;
 
-            $('#div_moment_fueltrip_data').append("Moment GasMilage : " + moment_gasmilage + "<br>" );
-            $('#div_moment_fueltrip_data').append("Total Gas : " + total_gas + "<br>" );
-            $('#div_moment_fueltrip_data').append("Total Trip : " + total_trip + "<br>" );
-            $('#div_moment_fueltrip_data').append("Total GasMilage : " + total_gasmilage + "<br>" );
+        public static main() : void
+        {
+            this.fueltripWS = new FUELTRIPWebsocket();
+            $('#serverURL_box').val("ws://localhost:2014/");
+            this.registerWSEvents();
         }
-        this.fueltripWS.OnSectFUELTRIPPacketReceived = (sect_span: number, sect_trip: number[], sect_gas: number[], sect_gasmilage: number[]) =>
-        {
-            //clear
-            $('#div_sect_fueltrip_data').html("");
 
-            $('#div_sect_fueltrip_data').append("Sect Span : " + sect_span + "<br>" );
-            $('#div_sect_fueltrip_data').append("Sect Trip : " + sect_trip + "<br>" );
-            $('#div_sect_fueltrip_data').append("Sect Gas : " + sect_gas + "<br>" );
-            $('#div_sect_fueltrip_data').append("Sect GasMilage : " + sect_gasmilage + "<br>" );
+        private static registerWSEvents() : void
+        {
+            this.fueltripWS.OnMomentFUELTRIPPacketReceived = (moment_gasmilage : number, total_gas : number, total_trip : number, total_gasmilage : number)=>
+            {
+                //clear
+                $('#div_moment_fueltrip_data').html("");
+
+                $('#div_moment_fueltrip_data').append("Moment GasMilage : " + moment_gasmilage + "<br>" );
+                $('#div_moment_fueltrip_data').append("Total Gas : " + total_gas + "<br>" );
+                $('#div_moment_fueltrip_data').append("Total Trip : " + total_trip + "<br>" );
+                $('#div_moment_fueltrip_data').append("Total GasMilage : " + total_gasmilage + "<br>" );
+            }
+            this.fueltripWS.OnSectFUELTRIPPacketReceived = (sect_span: number, sect_trip: number[], sect_gas: number[], sect_gasmilage: number[]) =>
+            {
+                //clear
+                $('#div_sect_fueltrip_data').html("");
+
+                $('#div_sect_fueltrip_data').append("Sect Span : " + sect_span + "<br>" );
+                $('#div_sect_fueltrip_data').append("Sect Trip : " + sect_trip + "<br>" );
+                $('#div_sect_fueltrip_data').append("Sect Gas : " + sect_gas + "<br>" );
+                $('#div_sect_fueltrip_data').append("Sect GasMilage : " + sect_gasmilage + "<br>" );
+            }
+
+            this.fueltripWS.OnERRPacketReceived = (msg : string) =>
+            {
+                $('#div_err_data').append(msg + "<br>");
+            };
+            this.fueltripWS.OnRESPacketReceived = (msg : string) =>
+            {
+                $('#div_res_data').append(msg + "<br>");
+            };
+            this.fueltripWS.OnWebsocketError = (msg : string) =>
+            {
+                $('#div_ws_message').append(msg + "<br>");
+            };
+            this.fueltripWS.OnWebsocketOpen = () =>
+            {
+                $('#div_ws_message').append('* Connection open<br/>');
+
+                $('#sendmessagecontent_box').removeAttr("disabled");
+                $('#sendButton').removeAttr("disabled");
+                $('#connectButton').attr("disabled", "disabled");
+                $('#disconnectButton').removeAttr("disabled");  
+            };
+            this.fueltripWS.OnWebsocketClose = () =>
+            {
+                $('#div_ws_message').append('* Connection closed<br/>');
+
+                $('#sendmessagecontent_box').attr("disabled", "disabled");
+                $('#sendButton').attr("disabled", "disabled");
+                $('#connectButton').removeAttr("disabled");
+                $('#disconnectButton').attr("disabled", "disabled");
+            };
         }
-        
-        this.fueltripWS.OnERRPacketReceived = (msg : string) =>
-        {
-            $('#div_err_data').append(msg + "<br>");
-        };
-        this.fueltripWS.OnRESPacketReceived = (msg : string) =>
-        {
-            $('#div_res_data').append(msg + "<br>");
-        };
-        this.fueltripWS.OnWebsocketError = (msg : string) =>
-        {
-            $('#div_ws_message').append(msg + "<br>");
-        };
-        this.fueltripWS.OnWebsocketOpen = () =>
-        {
-            $('#div_ws_message').append('* Connection open<br/>');
 
-            $('#sendmessagecontent_box').removeAttr("disabled");
-            $('#sendButton').removeAttr("disabled");
-            $('#connectButton').attr("disabled", "disabled");
-            $('#disconnectButton').removeAttr("disabled");  
-        };
-        this.fueltripWS.OnWebsocketClose = () =>
+        private static connectWebSocket()
         {
-            $('#div_ws_message').append('* Connection closed<br/>');
+            this.fueltripWS.URL = $("#serverURL_box").val();
+            this.fueltripWS.Connect();
+        };
 
-            $('#sendmessagecontent_box').attr("disabled", "disabled");
-            $('#sendButton').attr("disabled", "disabled");
-            $('#connectButton').removeAttr("disabled");
-            $('#disconnectButton').attr("disabled", "disabled");
+        private static disconnectWebSocket()
+        {
+            this.fueltripWS.Close();
+        };
+
+        private static input_SECT_SPAN()
+        {
+            this.fueltripWS.SendSectSpan($('#span_SECT_SPAN').val());
+        };
+
+        private static input_SECT_STOREMAX()
+        {
+            this.fueltripWS.SendSectStoreMax($('#storemax_SECT_STOREMAX').val());
         };
     }
-
-    private static connectWebSocket()
-    {
-        this.fueltripWS.URL = $("#serverURL_box").val();
-        this.fueltripWS.Connect();
-    };
-
-    private static disconnectWebSocket()
-    {
-        this.fueltripWS.Close();
-    };
-
-    private static input_SECT_SPAN()
-    {
-        this.fueltripWS.SendSectSpan($('#span_SECT_SPAN').val());
-    };
-
-    private static input_SECT_STOREMAX()
-    {
-        this.fueltripWS.SendSectStoreMax($('#storemax_SECT_STOREMAX').val());
-    };
 }
-
 
 
 

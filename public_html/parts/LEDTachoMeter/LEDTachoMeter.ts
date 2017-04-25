@@ -23,11 +23,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-
-/// <reference path="../../script/lib/pixi.js.d.ts" />
-/// <reference path="../../script/progressBar/pixiGauge.ts" />
-/// <reference path="../../node_modules/@types/webfontloader/index.d.ts" />
-
+ 
 module webSocketGauge.parts
 {
     import CircularProgressBar = webSocketGauge.lib.graphics.CircularProgressBar;

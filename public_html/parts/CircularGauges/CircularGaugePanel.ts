@@ -24,10 +24,6 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/// <reference path="../../script/lib/pixi.js.d.ts" />
-/// <reference path="../../script/progressBar/pixiGauge.ts" />
-/// <reference path="../../node_modules/@types/webfontloader/index.d.ts" />
-
 module webSocketGauge.parts.CircularGaugePanel
 {
     import CircularProgressBar = webSocketGauge.lib.graphics.CircularProgressBar;

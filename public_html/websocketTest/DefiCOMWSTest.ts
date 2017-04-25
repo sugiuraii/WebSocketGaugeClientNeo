@@ -24,103 +24,100 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 /// <reference path="../script/websocket/websocketClient.ts" />
-/// <reference path="../node_modules/@types/jquery/index.d.ts" />
-import DefiCOMWebsocket = webSocketGauge.lib.communication.DefiCOMWebsocket;
-import DefiParameterCode = webSocketGauge.lib.communication.DefiParameterCode;
+
+
 
 window.onload = function()
 {
-    DefiCOMWSTest.main();
+    webSocketGauge.test.DefiCOMWSTest.main();
 }
 
-class DefiCOMWSTest
-{    
-    private static defiWS : DefiCOMWebsocket;
-    
-    public static main(): void
-    {
-        this.defiWS = new DefiCOMWebsocket();
-        $('#serverURL_box').val("ws://localhost:2012/");
-        this.setParameterCodeSelectBox();
-        this.registerWSEvents();
-    }
-    
-    private static setParameterCodeSelectBox()
-    {
-        for (let code in DefiParameterCode)
-            $('#deficode_select').append($('<option>').html(code).val(code));
-    }
-    
-    private static registerWSEvents() : void
-    {
-        this.defiWS.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: number}) => 
+namespace webSocketGauge.test
+{
+    import DefiCOMWebsocket = webSocketGauge.lib.communication.DefiCOMWebsocket;
+    import DefiParameterCode = webSocketGauge.lib.communication.DefiParameterCode;
+    export class DefiCOMWSTest
+    {    
+        private static defiWS : DefiCOMWebsocket;
+
+        public static main(): void
         {
-            $('#interval').text(intervalTime.toFixed(2));
-             //clear
-            $('#div_val_data').html("");
-            for (var key in val)
-            {
-                $('#div_val_data').append(key + " : " + val[key] + "<br>" );
-            }
+            this.defiWS = new DefiCOMWebsocket();
+            $('#serverURL_box').val("ws://localhost:2012/");
+            this.setParameterCodeSelectBox();
+            this.registerWSEvents();
         }
-        this.defiWS.OnERRPacketReceived = (msg:string)=>
+
+        private static setParameterCodeSelectBox()
         {
-            $('#div_err_data').append(msg + "<br>")
-        };
-        
-        this.defiWS.OnRESPacketReceived = (msg : string) =>
+            for (let code in DefiParameterCode)
+                $('#deficode_select').append($('<option>').html(code).val(code));
+        }
+
+        private static registerWSEvents() : void
         {
-            $('#div_res_data').append(msg + "<br>");
-        };
-        this.defiWS.OnWebsocketError = (msg : string) =>
+            this.defiWS.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: number}) => 
+            {
+                $('#interval').text(intervalTime.toFixed(2));
+                 //clear
+                $('#div_val_data').html("");
+                for (var key in val)
+                {
+                    $('#div_val_data').append(key + " : " + val[key] + "<br>" );
+                }
+            }
+            this.defiWS.OnERRPacketReceived = (msg:string)=>
+            {
+                $('#div_err_data').append(msg + "<br>")
+            };
+
+            this.defiWS.OnRESPacketReceived = (msg : string) =>
+            {
+                $('#div_res_data').append(msg + "<br>");
+            };
+            this.defiWS.OnWebsocketError = (msg : string) =>
+            {
+                $('#div_ws_message').append(msg + "<br>");
+            };
+            this.defiWS.OnWebsocketOpen = () =>
+            {
+                $('#div_ws_message').append('* Connection open<br/>');
+
+                $('#sendmessagecontent_box').removeAttr("disabled");
+                $('#sendButton').removeAttr("disabled");
+                $('#connectButton').attr("disabled", "disabled");
+                $('#disconnectButton').removeAttr("disabled");  
+            };
+            this.defiWS.OnWebsocketClose = () =>
+            {
+                $('#div_ws_message').append('* Connection closed<br/>');
+
+                $('#sendmessagecontent_box').attr("disabled", "disabled");
+                $('#sendButton').attr("disabled", "disabled");
+                $('#connectButton').removeAttr("disabled");
+                $('#disconnectButton').attr("disabled", "disabled");
+            };
+        }
+
+        public static connectWebSocket() : void
         {
-            $('#div_ws_message').append(msg + "<br>");
+            this.defiWS.URL = $("#serverURL_box").val();
+            this.defiWS.Connect();
         };
-        this.defiWS.OnWebsocketOpen = () =>
+
+        public static disconnectWebSocket()
         {
-            $('#div_ws_message').append('* Connection open<br/>');
-
-            $('#sendmessagecontent_box').removeAttr("disabled");
-            $('#sendButton').removeAttr("disabled");
-            $('#connectButton').attr("disabled", "disabled");
-            $('#disconnectButton').removeAttr("disabled");  
+            this.defiWS.Close();
         };
-        this.defiWS.OnWebsocketClose = () =>
+
+        public static input_DEFI_WS_SEND()
         {
-            $('#div_ws_message').append('* Connection closed<br/>');
-
-            $('#sendmessagecontent_box').attr("disabled", "disabled");
-            $('#sendButton').attr("disabled", "disabled");
-            $('#connectButton').removeAttr("disabled");
-            $('#disconnectButton').attr("disabled", "disabled");
+            this.defiWS.SendWSSend($('#deficode_select').val(),$('#deficode_flag').val());
         };
-    }
-    
-    public static connectWebSocket() : void
-    {
-        this.defiWS.URL = $("#serverURL_box").val();
-        this.defiWS.Connect();
-    };
-    
-    public static disconnectWebSocket()
-    {
-        this.defiWS.Close();
-    };
 
-    public static input_DEFI_WS_SEND()
-    {
-        this.defiWS.SendWSSend($('#deficode_select').val(),$('#deficode_flag').val());
-    };
-
-    public static input_DEFI_WS_INTERVAL()
-    {
-        this.defiWS.SendWSInterval($('#interval_DEFI_WS_INTERVAL').val());
-    };
-} 
-
-
-
-
-
-
-
+        public static input_DEFI_WS_INTERVAL()
+        {
+            this.defiWS.SendWSInterval($('#interval_DEFI_WS_INTERVAL').val());
+        };
+    } 
+}
