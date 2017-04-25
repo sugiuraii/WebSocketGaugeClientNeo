@@ -23,18 +23,43 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+ 
+/// <reference path="../LEDTachoMeter/LEDTachoMeter.ts" />
+import LEDTachoMeter = webSocketGauge.parts.LEDTachoMeter;
 
-/// <reference path="../script/lib/pixi.js.d.ts" />
-/// <reference path="../script/progressBar/pixiGauge.ts" />
-
-module webSocketGauge.parts
+window.onload = function()
 {
-    export class FullCircularGauge
-    {
-    }
-    
-    
-    
-    
+    WebFont.load({
+        custom: 
+        { 
+            families: LEDTachoMeter.RequestedFontFamily,
+            urls: LEDTachoMeter.RequestedFontCSSURL 
+        },
+        active : function(){webSocketGauge.test.LEDTachoMeterTest.preloadTexture();}
+    });
 }
 
+namespace webSocketGauge.test.LEDTachoMeterTest
+{
+    export function preloadTexture()
+    {
+        PIXI.loader.add(LEDTachoMeter.RequestedTexturePath[0]);
+        PIXI.loader.load(main);
+    }
+
+    function main()
+    {
+        const app = new PIXI.Application(1366,1366);
+        document.body.appendChild(app.view);
+
+        const meter = new LEDTachoMeter();
+        app.stage.addChild(meter);
+
+        app.ticker.add(function(){
+            meter.Tacho += 100;
+            if (meter.Tacho > 9000)
+                meter.Tacho = 0;
+        });
+
+    }
+}

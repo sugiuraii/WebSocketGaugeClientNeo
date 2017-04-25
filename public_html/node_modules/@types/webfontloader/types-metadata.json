@@ -1,0 +1,29 @@
+{
+    "name": "webfontloader",
+    "libraryName": "typekit-webfontloader",
+    "sourceRepoURL": "https://www.github.com/DefinitelyTyped/DefinitelyTyped",
+    "data": {
+        "authors": "doskallemaskin <https://github.com/doskallemaskin/>",
+        "dependencies": {},
+        "pathMappings": {},
+        "libraryMajorVersion": 1,
+        "libraryMinorVersion": 6,
+        "typeScriptVersion": "2.0",
+        "libraryName": "typekit-webfontloader",
+        "typingsPackageName": "webfontloader",
+        "projectName": "https://github.com/typekit/webfontloader",
+        "sourceRepoURL": "https://www.github.com/DefinitelyTyped/DefinitelyTyped",
+        "globals": [
+            "WebFont"
+        ],
+        "declaredModules": [
+            "webfontloader/."
+        ],
+        "files": [
+            "index.d.ts"
+        ],
+        "hasPackageJson": false,
+        "contentHash": "a0d5c8af88d6acf9c687122e9b8c67c084f60e670b78b00dbf51039cfad20029"
+    },
+    "isLatest": true
+}

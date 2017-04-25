@@ -28,44 +28,64 @@
 
 module webSocketGauge.lib.graphics
 {
-    abstract class Gauge1D
+    class Gauge1DOptions
     {
-        private max : number;
-        private min : number;
-        private value : number;
-        private interPolationAnimaton : boolean;
-        private container : PIXI.Container;
+        public Max: number;
+        public Min: number;
+        
         constructor()
         {
-            this.container = new PIXI.Container();
-            this.max = 100;
-            this.min = 0;
+            this.Max = 100;
+            this.Min = 0;
+        }
+    }
+    
+    abstract class Gauge1D extends PIXI.Container
+    {
+        private gauge1DOptions: Gauge1DOptions;
+        
+        private invertDraw : boolean;
+        private value : number;
+        
+        constructor(options? : Gauge1DOptions)
+        {
+            super();
+            if (!(options instanceof Gauge1DOptions))
+                this.gauge1DOptions = new Gauge1DOptions();
+            else
+                this.gauge1DOptions = options;
+                
             this.value = 0;
         }
         
-        get Max() : number {return this.max;}      
-        set Max(val : number) { this.max = val}
+        get Max(): number {return this.gauge1DOptions.Max;}      
+        set Max(val : number) { this.gauge1DOptions.Max = val;}
         
-        get Min() : number { return this.min;}
-        set Min(val : number) { this.min = val}
+        get Min() : number { return this.gauge1DOptions.Min;}
+        set Min(val : number) { this.gauge1DOptions.Min = val;}
         
         get Value() : number { return this.value;}
         set Value(val : number) { this.value = val;}
         
-        get InterpolatedAnimation(): boolean {return this.interPolationAnimaton;}
-        set InterpolatedAnimation(val: boolean) {this.interPolationAnimaton = val;}
+        get InvertDraw() : boolean { return this.invertDraw; }
+        set InvertDraw(flag : boolean) { this.invertDraw = flag; }
         
-        get Container(): PIXI.Container { return this.container;};
-        
-        /**
-         * Get container.
-         * @return {PIXI.Container} container.
-         */
-        public getContainer(): PIXI.Container
+        get DrawValue() : number
         {
-            return this.Container;
+            let drawVal : number;
+            if( this.Value > this.Max)
+                drawVal = this.Max;
+            else if (this.Value < this.Min)
+                drawVal = this.Min;
+            else
+                drawVal = this.Value
+                
+            if (this.InvertDraw)
+                drawVal = this.Max - drawVal + this.Min;
+            
+            return drawVal;
         }
-        
+                
         /**
          * Apply value and update gauge.
          */
@@ -88,85 +108,129 @@ module webSocketGauge.lib.graphics
         protected abstract _update(skipStepCheck : boolean) : void;
     }
     
-    abstract class ProgressBar extends Gauge1D
+    class ProgressBarOptions extends Gauge1DOptions
     {
-        private sprite : PIXI.Sprite;
-        private mask : PIXI.Graphics;
-        
+        public Texture: PIXI.Texture;
         constructor()
         {
             super();
+        }
+    }
+    
+    abstract class ProgressBar extends Gauge1D
+    {
+        private progressBarOptions: ProgressBarOptions;
+        private sprite : PIXI.Sprite;
+        private spriteMask : PIXI.Graphics;
+        
+        constructor(options?: ProgressBarOptions)
+        {
+            let progressBarOptions: ProgressBarOptions;
+            if (!(options instanceof ProgressBarOptions))
+            {
+                progressBarOptions = new ProgressBarOptions();
+            }
+            else
+            {
+                progressBarOptions = options;
+            }
+            super(progressBarOptions);
+            this.progressBarOptions = progressBarOptions;
+            
             this.sprite = new PIXI.Sprite();
-            this.mask = new PIXI.Graphics();
+            this.spriteMask = new PIXI.Graphics();
             
             //Assign mask to sprite
-            this.sprite.mask = this.mask;            
+            this.sprite.mask = this.spriteMask;            
+            //Assign texture to sprite
+            this.sprite.texture = this.progressBarOptions.Texture;
+
             //Assign spirite and mask to container
-            this.Container.addChild(this.sprite);
-            this.Container.addChild(this.mask);
+            super.addChild(this.sprite);
+            super.addChild(this.spriteMask);
         }
         
-        get Texture(): PIXI.Texture {return this.sprite.texture; }
-        set Texture(val: PIXI.Texture) {this.sprite.texture = val;}
+        get Texture(): PIXI.Texture {return this.progressBarOptions.Texture; }
+        set Texture(val: PIXI.Texture) 
+        {
+            this.progressBarOptions.Texture = val;
+            this.sprite.texture = this.progressBarOptions.Texture;
+        }
         
-        get Mask(): PIXI.Graphics { return this.mask; }
-        get Sprite(): PIXI.Sprite { return this.sprite; }
+        protected get SpriteMask(): PIXI.Graphics { return this.spriteMask; }
+        protected get Sprite(): PIXI.Sprite { return this.sprite; }
 
+    }
+    
+    class CircularProgressBarOptions extends ProgressBarOptions
+    {
+        public OffsetAngle : number;
+        public FullAngle : number;
+        public AngleStep : number;
+        public AntiClockwise : boolean;
+        public Center : PIXI.Point;
+        public Radius : number;
+        public InnerRadius : number;
+        constructor()
+        {
+            super();
+            this.OffsetAngle = 0;
+            this.FullAngle = 360;
+            this.AngleStep = 0.1;
+            this.AntiClockwise = false;
+            this.Center = new PIXI.Point(0,0);
+        }
     }
     
     export class CircularProgressBar extends ProgressBar
     {
-        private offsetAngle : number;
-        private fullAngle : number;
-        private angleStep : number;
-        private antiClockwise : boolean;
-        private center : PIXI.Point;
-        private radius : number;
-        private innerRadius : number;
+        private circularProgressBarOptions: CircularProgressBarOptions;
 
         private currAngle : number;
         
-        constructor()
+        constructor(options?: CircularProgressBarOptions)
         {
-            super();
-            this.offsetAngle = 0;
-            this.fullAngle = 360;
-            this.angleStep = 0.1;
-            this.antiClockwise = false;
-            this.center = new PIXI.Point(0,0);
+            let circularProgressBarOptions: CircularProgressBarOptions;
+            if (!(options instanceof CircularProgressBarOptions))
+                circularProgressBarOptions = new CircularProgressBarOptions();
+            else
+                circularProgressBarOptions = options;
+            
+            super(circularProgressBarOptions);
+            this.circularProgressBarOptions = circularProgressBarOptions;
         }
         
-        get OffsetAngle() : number { return this.offsetAngle; }
-        set OffsetAngle(val: number) { this.offsetAngle = val; }
-        get FullAngle() : number { return this.fullAngle; }
-        set FullAngle(val: number) { this.fullAngle = val; }
-        get AngleStep(): number {return this.angleStep; }
-        set AngleStep(val: number) {this.angleStep = val; }
-        get AntiClockwise(): boolean {return this.antiClockwise; }
-        set AntiClockwise(val: boolean) {this.antiClockwise = val; }
-        get Center() : PIXI.Point { return this.center; }
-        set Center(val: PIXI.Point) { this.center = val; }
-        get Radius() : number { return this.radius; }
-        set Radius(val: number) { this.radius = val; }
-        get InnerRadius(): number {return this.innerRadius; }
-        set InnerRadius(val: number) {this.innerRadius = val; }
+        get OffsetAngle(): number {return this.circularProgressBarOptions.OffsetAngle; }
+        set OffsetAngle(val: number) {this.circularProgressBarOptions.OffsetAngle = val; }
+        get FullAngle(): number {return this.circularProgressBarOptions.FullAngle; }
+        set FullAngle(val: number) {this.circularProgressBarOptions.FullAngle = val; }
+        get AngleStep(): number {return this.circularProgressBarOptions.AngleStep; }
+        set AngleStep(val: number) {this.circularProgressBarOptions.AngleStep = val; }
+        get AntiClockwise(): boolean {return this.circularProgressBarOptions.AntiClockwise; }
+        set AntiClockwise(val: boolean) {this.circularProgressBarOptions.AntiClockwise = val; }
+        get Center(): PIXI.Point {return this.circularProgressBarOptions.Center; }
+        set Center(val: PIXI.Point) {this.circularProgressBarOptions.Center = val; }
+        get Radius(): number {return this.circularProgressBarOptions.Radius; }
+        set Radius(val: number) {this.circularProgressBarOptions.Radius = val; }
+        get InnerRadius(): number {return this.circularProgressBarOptions.InnerRadius; }
+        set InnerRadius(val: number) {this.circularProgressBarOptions.InnerRadius = val; }
         
         protected _update(skipStepCheck : boolean): void
         {
             'use strict';
-            const centerPos: PIXI.Point = this.center;
-            const radius : number = this.radius;
-            const innerRadius : number = this.innerRadius;
-            const anticlockwise: boolean = this.antiClockwise;
-            const offsetAngle : number = this.offsetAngle;
-            const fullAngle : number = this.fullAngle;
-            const angleStep : number = this.angleStep;
+            const centerPos: PIXI.Point = this.Center;
+            const radius : number = this.Radius;
+            const innerRadius : number = this.InnerRadius;
+            const anticlockwise: boolean = this.AntiClockwise;
+            const offsetAngle : number = this.OffsetAngle;
+            const fullAngle : number = this.FullAngle;
+            const angleStep : number = this.AngleStep;
 
             const valueMax : number = this.Max;
             const valueMin : number = this.Min;
-            const value : number = this.Value;
+            const value : number = this.DrawValue;
 
-            const mask: PIXI.Graphics = this.Mask;
+            const spriteMask: PIXI.Graphics = this.SpriteMask;
 
             const currentAngle : number = this.currAngle;
             const startAngleRad : number = Math.PI/180*offsetAngle;
@@ -192,69 +256,85 @@ module webSocketGauge.lib.graphics
             const endAngleRad: number = Math.PI/180*endAngle;
 
             // Draw pie-shaped mask
-            mask.clear();
-            mask.beginFill(0x000000, 1);
-            mask.arc(centerPos.x, centerPos.y, radius ,startAngleRad, endAngleRad, anticlockwise);
-            mask.arc(centerPos.x, centerPos.y, innerRadius , endAngleRad, startAngleRad, !anticlockwise);    
-            mask.endFill();
+            spriteMask.clear();
+            spriteMask.beginFill(0x000000, 1);
+            spriteMask.arc(centerPos.x, centerPos.y, radius ,startAngleRad, endAngleRad, anticlockwise);
+            spriteMask.arc(centerPos.x, centerPos.y, innerRadius , endAngleRad, startAngleRad, !anticlockwise);    
+            spriteMask.endFill();
 
             return;
         }
     }
     
-    export class RectangularProgressBar extends ProgressBar
+    class RectangularProgressBarOptions extends ProgressBarOptions
     {
-        private currBarPixel : number;
-        
-        private vertical : boolean;
-        private invertDirection : boolean;
-        private width : number;
-        private height : number;
-        private pixelStep : number;
+        public Vertical : boolean;
+        public InvertDirection : boolean;
+        public MaskWidth : number;
+        public MaskHeight : number;
+        public PixelStep : number;
         
         constructor()
         {
             super();
-            this.vertical = false;
-            this.invertDirection = false;
-            this.width = 100;
-            this.height = 100;
-            this.pixelStep = 1;
+            this.Vertical = false;
+            this.InvertDirection = false;
+            this.MaskWidth = 100;
+            this.MaskHeight = 100;
+            this.PixelStep = 1;
+        }
+    }
+    
+    export class RectangularProgressBar extends ProgressBar
+    {
+        private rectangularProgressBarOptions: RectangularProgressBarOptions;
+        
+        private currBarPixel : number;
+                
+        constructor(options?: RectangularProgressBarOptions)
+        {
+            let rectangularProgressBarOptions: RectangularProgressBarOptions;
+            if (!(options instanceof RectangularProgressBarOptions))
+                rectangularProgressBarOptions = new RectangularProgressBarOptions();
+            else
+                rectangularProgressBarOptions = options;
+            super(rectangularProgressBarOptions);
+            this.rectangularProgressBarOptions = rectangularProgressBarOptions;
         }
         
-        get Vertical() : boolean { return this.vertical; }
-        set Vertical(val : boolean) { this.vertical = val; }
-        get InvertDirection(): boolean {return this.invertDirection; }
-        set InvertDirection(val : boolean) { this.invertDirection = val; }
-        get Width(): number {return this.width; }
-        set Width(val: number) {this.width = val; }
-        get Height(): number {return this.height; }
-        set Height(val: number) {this.height = val; }
-        get PixelStep(): number {return this.pixelStep; }
-        set PixelStep(val: number) {this.pixelStep = val; }
+        get Vertical() : boolean { return this.rectangularProgressBarOptions.Vertical; }
+        set Vertical(val : boolean) { this.rectangularProgressBarOptions.Vertical = val; }
+        get InvertDirection(): boolean {return this.rectangularProgressBarOptions.InvertDirection; }
+        set InvertDirection(val : boolean) { this.rectangularProgressBarOptions.InvertDirection = val; }
+        get MaskWidth(): number {return this.rectangularProgressBarOptions.MaskWidth; }
+        set MaskWidth(val: number) {this.rectangularProgressBarOptions.MaskWidth = val; }
+        get MaskHeight(): number {return this.rectangularProgressBarOptions.MaskHeight; }
+        set MaskHeight(val: number) {this.rectangularProgressBarOptions.MaskHeight = val; }
+        get PixelStep(): number {return this.rectangularProgressBarOptions.PixelStep; }
+        set PixelStep(val: number) {this.rectangularProgressBarOptions.PixelStep = val; }
         
         protected _update(skipStepCheck : boolean) : void
         {
             'use strict';
-            const height: number = this.height;
-            const width: number = this.width;
+            const maskHeight: number = this.MaskHeight;
+            const maskWidth: number = this.MaskWidth;
             const currBarPixel: number = this.currBarPixel;
-            const pixelStep: number = this.pixelStep;
+            const pixelStep: number = this.PixelStep;
 
             const valueMax: number = this.Max;
             const valueMin: number = this.Min;
-            const value: number = this.Value;
+            const value: number = this.DrawValue;
 
-            const mask: PIXI.Graphics = this.Mask;
+            const spriteMask: PIXI.Graphics = this.SpriteMask;
 
-            const vertical: boolean = this.vertical;
-            const invertDirection: boolean = this.invertDirection;
+            const vertical: boolean = this.Vertical;
+            const invertDirection: boolean = this.InvertDirection;
 
             let pixelRange: number;
             if(vertical)
-                pixelRange = height;
+                pixelRange = maskHeight;
             else
-                pixelRange = width;
+                pixelRange = maskWidth;
 
             let barPixel = (value - valueMin)/(valueMax - valueMin)*pixelRange;
 
@@ -270,100 +350,133 @@ module webSocketGauge.lib.graphics
             }
 
             //Define mask rectangle parameters
-            let maskX: number, maskY: number;
-            let maskHeight: number, maskWidth: number;
+            let drawMaskX: number, drawMaskY: number;
+            let drawMaskHeight: number, drawMaskWidth: number;
             if(vertical)
             {
-                maskX = 0;
-                maskWidth = width;
-                maskHeight = barPixel;
+                drawMaskX = 0;
+                drawMaskWidth = maskWidth;
+                drawMaskHeight = barPixel;
                 if(invertDirection) //Up to down
-                    maskY = 0;
+                    drawMaskY = 0;
                 else //Down to Up
-                    maskY = height - barPixel;
+                    drawMaskY = maskHeight - barPixel;
             }
             else
             {
-                maskY = 0;
-                maskHeight = height;
-                maskWidth = barPixel;
+                drawMaskY = 0;
+                drawMaskHeight = maskHeight;
+                drawMaskWidth = barPixel;
                 if(invertDirection) //Right to left
-                    maskX = width - barPixel;
+                    drawMaskX = maskWidth - barPixel;
                 else //Left to right
-                    maskX = 0;
+                    drawMaskX = 0;
             }
 
             //Define mask
-            mask.clear();
-            mask.beginFill(0x000000, 1);
-            mask.drawRect(maskX, maskY, maskWidth, maskHeight);
-            mask.endFill();
+            spriteMask.clear();
+            spriteMask.beginFill(0x000000, 1);
+            spriteMask.drawRect(drawMaskX, drawMaskY, drawMaskWidth, drawMaskHeight);
+            spriteMask.endFill();
 
             return;
         }
     }
     
-    abstract class NeedleGauge extends Gauge1D
+    class NeedleGaugeOptions extends Gauge1DOptions
     {
-        private sprite : PIXI.Sprite;
-        
+        public Texture: PIXI.Texture;
         constructor()
         {
             super();
+        }
+    }
+    abstract class NeedleGauge extends Gauge1D
+    {
+        private needleGaugeOptions: NeedleGaugeOptions;
+        
+        private sprite : PIXI.Sprite;
+        
+        constructor(options?: NeedleGaugeOptions)
+        {
+            let needleGaugeOptions: NeedleGaugeOptions;
+            if (!(options instanceof NeedleGaugeOptions))
+                needleGaugeOptions = new NeedleGaugeOptions();
+            else
+                needleGaugeOptions = options;
+            super(needleGaugeOptions);
+            this.needleGaugeOptions = needleGaugeOptions;
+            
             this.sprite = new PIXI.Sprite();
+            this.sprite.texture = this.needleGaugeOptions.Texture;
                         
             //Assign spirite and mask to container
-            this.Container.addChild(this.sprite);
+            this.addChild(this.sprite);
         }
         
-        get Texture(): PIXI.Texture {return this.sprite.texture; }
-        set Texture(val: PIXI.Texture) {this.sprite.texture = val;}
+        get Texture(): PIXI.Texture {return this.needleGaugeOptions.Texture; }
+        set Texture(val: PIXI.Texture) 
+        {
+            this.needleGaugeOptions.Texture = val;
+            this.sprite.texture = this.needleGaugeOptions.Texture;
+        }
         
         get Sprite(): PIXI.Sprite { return this.sprite; }
     }
     
-    export class RotationNeedleGauge extends NeedleGauge
+    class RotationNeedleGaugeOptions extends NeedleGaugeOptions
     {
-        private offsetAngle : number;
-        private fullAngle : number;
-        private angleStep : number;
-        private antiClockwise : boolean;
-        
-        private currAngle : number;
-        
+        public OffsetAngle : number;
+        public FullAngle : number;
+        public AngleStep : number;
+        public AntiClockwise : boolean;
         constructor()
         {
             super();
-            this.offsetAngle = 0;
-            this.fullAngle = 360;
-            this.angleStep = 0.1;
-            this.antiClockwise = false;
+            this.OffsetAngle = 0;
+            this.FullAngle = 360;
+            this.AngleStep = 0.1;
+            this.AntiClockwise = false;
+        }
+    }
+    
+    export class RotationNeedleGauge extends NeedleGauge
+    {
+        private rotationNeedleGaugeOptions: RotationNeedleGaugeOptions;
+        
+        private currAngle : number;
+        
+        constructor(options?: RotationNeedleGaugeOptions)
+        {
+            let rotationNeedleGaugeOptions: RotationNeedleGaugeOptions;
+            if (!(options instanceof RotationNeedleGaugeOptions))
+                rotationNeedleGaugeOptions = new RotationNeedleGaugeOptions();
+            else
+                rotationNeedleGaugeOptions = options;
+            super(rotationNeedleGaugeOptions);
+            this.rotationNeedleGaugeOptions = rotationNeedleGaugeOptions;
         }
         
-        get OffsetAngle() : number { return this.offsetAngle; }
-        set OffsetAngle(val: number) { this.offsetAngle = val; }
-        get FullAngle() : number { return this.fullAngle; }
-        set FullAngle(val: number) { this.fullAngle = val; }
-        get AngleStep(): number {return this.angleStep; }
-        set AngleStep(val: number) {this.angleStep = val; }
-        get AntiClockwise(): boolean {return this.antiClockwise; }
-        set AntiClockwise(val: boolean) {this.antiClockwise = val; }
-        get Pivot(): PIXI.Point {return this.Sprite.pivot; }
-        set Pivot(val: PIXI.Point) {this.Sprite.pivot = val; }
+        get OffsetAngle() : number { return this.rotationNeedleGaugeOptions.OffsetAngle; }
+        set OffsetAngle(val: number) { this.rotationNeedleGaugeOptions.OffsetAngle = val; }
+        get FullAngle() : number { return this.rotationNeedleGaugeOptions.FullAngle; }
+        set FullAngle(val: number) { this.rotationNeedleGaugeOptions.FullAngle = val; }
+        get AngleStep(): number {return this.rotationNeedleGaugeOptions.AngleStep; }
+        set AngleStep(val: number) {this.rotationNeedleGaugeOptions.AngleStep = val; }
+        get AntiClockwise(): boolean {return this.rotationNeedleGaugeOptions.AntiClockwise; }
+        set AntiClockwise(val: boolean) {this.rotationNeedleGaugeOptions.AntiClockwise = val; }
         
         protected _update(skipStepCheck: boolean): void
         {
             'use strict';
-            const anticlockwise : boolean = this.antiClockwise;
-            const offsetAngle : number = this.offsetAngle;
-            const fullAngle : number = this.fullAngle;
-            const angleStep : number = this.angleStep;
+            const anticlockwise : boolean = this.AntiClockwise;
+            const offsetAngle : number = this.OffsetAngle;
+            const fullAngle : number = this.FullAngle;
+            const angleStep : number = this.AngleStep;
 
             const valueMax : number = this.Max;
             const valueMin : number = this.Min;
-            const value : number = this.Value;
-
-            const sprite: PIXI.Sprite = this.Sprite;
+            const value : number = this.DrawValue;
 
             const currentAngle: number= this.currAngle;
             let angle: number;
@@ -386,8 +499,8 @@ module webSocketGauge.lib.graphics
 
             const angleRad: number = Math.PI/180*angle;
 
-            //Set sprite angle
-            sprite.rotation = angleRad;
+            //Set container angle
+            this.rotation = angleRad;
 
             return;
         }

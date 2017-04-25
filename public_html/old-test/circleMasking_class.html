@@ -38,51 +38,52 @@ POSSIBILITY OF SUCH DAMAGE.
     <script type="text/javascript" src="script/lib/pixi.min.js"></script>
     <script type="text/javascript" src="script/progressBar/pixiGauge.js"></script>
     <script type="text/javascript">
-        var MainClass = function()
+        var MaskingClass = function()
         {
             'use strict';
             this.Value = 0;
-            this.needleObj = new webSocketGauge.lib.graphics.RotationNeedleGauge();
+            this.progressBarObj = new webSocketGauge.lib.graphics.CircularProgressBar();
             this.renderer = PIXI.autoDetectRenderer(800, 600);
             document.body.appendChild(this.renderer.view);
             this.stage;
         };
         
-        MainClass.prototype.main = function()
+        MaskingClass.prototype.main = function()
         {
             'use strict';
 
-            var needleObj = this.needleObj;
-            needleObj.Pivot = new PIXI.Point(20,10);
-            needleObj.Max = 100;
-            needleObj.Min = 0;
-            needleObj.OffsetAngle = 0;
-            needleObj.FullAngle = 360;
-            needleObj.AngleStep = 0.1;
-            needleObj.AntiClockwise = true;
+            var progressBarObj = this.progressBarObj;
+            progressBarObj.Center = new PIXI.Point(200,200);
+            progressBarObj.Max = 100;
+            progressBarObj.Min = 0;
+            progressBarObj.OffsetAngle = 90;
+            progressBarObj.AngleStep = 0.1;
+            progressBarObj.AntiClockwise = true;
+            progressBarObj.Radius = 200;
+            progressBarObj.InnerRadius = 50;
             
-            var texture = PIXI.Texture.fromImage("./img/Needle.png");
-            needleObj.Texture = texture;
+            var texture = PIXI.Texture.fromImage("./img/back1.jpg");
+            progressBarObj.Texture = texture;
             
-            this.container = needleObj.Container;
-            this.container.x = 400;
-            this.container.y = 300;
-            this.stage = new PIXI.Stage(0x66FF99);
-            this.stage.addChild(this.container);
-
-            needleObj.updateForce();
+            this.stage = new PIXI.Stage();
+            this.stage.addChild(progressBarObj);
+            progressBarObj.x = 100;
+            progressBarObj.y = 100;
+            progressBarObj.AngleStep = 0.1;
+            
+            progressBarObj.updateForce();
             var self = this;
             function frame()
             {
                 'use strict';
-                self.needleObj.Value = self.Value;
-                self.needleObj.update();
+                self.progressBarObj.Value = self.Value;
+                self.progressBarObj.update();
 
                 self.renderer.render(self.stage);
 
                 self.Value += 1;
-                if(self.Value >= self.needleObj.Max)
-                    self.Value = self.needleObj.Min;
+                if(self.Value >= self.progressBarObj.Max)
+                    self.Value = self.progressBarObj.Min;
                 
                 window.requestAnimationFrame(frame);
             };
@@ -93,7 +94,7 @@ POSSIBILITY OF SUCH DAMAGE.
         window.onload = function()
         {
             'use strict';
-            var mainClass = new MainClass();
+            var mainClass = new MaskingClass();
             mainClass.main();
         };
     
