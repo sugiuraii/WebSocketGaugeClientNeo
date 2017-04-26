@@ -25,10 +25,10 @@
  */
  
  /// <reference path="../script/websocket/websocketClient.ts" />
-import * as comm from "./websocket/webSocketClient";
     
 module webSocketGauge.meterpanelCommon
 {
+    import comm = webSocketGauge.lib.communication;
 /**
  * Unified gauge control class. Frontend of Defi/SSM/Arduino/ELM327 websocket.<br>
  * ゲージコントロール用クラス。Defi/SSM/Arduino/ELM327 websocketのフロントエンド.
@@ -39,186 +39,227 @@ export class GaugeControl
     /**
      * DefiWS reference.
      */
-    private _Defi_WS: comm.webSocketGauge.lib.communication.DefiCOMWebsocket = null;
+    private _Defi_WS: comm.DefiCOMWebsocket = null;
     /**
      * SSMWS reference.
      */
-    private _SSM_WS = null;
+    private _SSM_WS: comm.SSMWebsocket = null;
     /**
      * ArduinoWS reference.
-     * @private
      */
-    this._Arduino_WS = null;
+    private _Arduino_WS: comm.ArduinoCOMWebsocket = null;
     /**
-     * ELM327WS reference.
-     * @private
+     * ELM327WS reference
      */
-    this._ELM327_WS = null;
+    private _ELM327_WS: comm.ELM327COMWebsocket = null;
     /**
      * FUELTRIPWS reference.
-     * @private
      */
-    this._FUELTRIP_WS = null;
+    private _FUELTRIP_WS: comm.FUELTRIPWebsocket = null;
     
     /**
      * URL of Defi Websocket server.
      * @default ws://location.hostname:2012/
      */
-    this.Defi_WS_URL = "ws://"+location.hostname+":2012/";
+    private Defi_WS_URL = "ws://"+location.hostname+":2012/";
     /**
      * URL of SSM Websocket server.
      * @default ws://location.hostname:2013/
      */
-    this.SSM_WS_URL =  "ws://"+location.hostname+":2013/";
+    private SSM_WS_URL =  "ws://"+location.hostname+":2013/";
     /**
      * URL of Arduino Websocket server.
      * @default ws://location.hostname:2015/
      */
-    this.Arduino_WS_URL = "ws://"+location.hostname+":2015/";
+    private Arduino_WS_URL = "ws://"+location.hostname+":2015/";
     /**
      * URL of ELM327 Websocket server.
      * @default ws://location.hostname:2016/
      */
-    this.ELM327_WS_URL = "ws://"+location.hostname+":2016/";
+    private ELM327_WS_URL = "ws://"+location.hostname+":2016/";
     /**
      * URL of FUELTRIP Websocket server.
      * @default ws://location.hostname:2014/
      */
-    this.FUELTRIP_WS_URL = "ws://"+location.hostname+":2014/";
+    private FUELTRIP_WS_URL = "ws://"+location.hostname+":2014/";
     
     /**
      * List of SSM Slow/Fast/Slow+Fast read flag list.
-     * @private
      */
-    this._SSM_SlowFastReadFlagList = {};
+    private _SSM_SlowFastReadFlagList = {};
     /**
      * List of ELM327 Slow/Fast/Slow+Fast read flag list.
-     * @private
      */
-    this._ELM327_SlowFastReadFlagList = {};
+    private _ELM327_SlowFastReadFlagList = {};
     
     /**
      * HTML element ID of debug message window.<br>
      * デバッグメッセージウインドウのHTMLエレメントID.
      * @default #div_message
      */
-    this.MessageWindowID = '#div_message';
+    private MessageWindowID = '#div_message';
     /**
      * HTML element ID of DefiCOM_Websocket status indicator.<br>
      * DefiCOM_Websocket ステータスインジケータのHTMLエレメントID.
      * @default #defi_status
      */
-    this.Defi_StatusIndicatorID = "#defi_status";
+    private Defi_StatusIndicatorID = "#defi_status";
     /**
      * HTML element ID of SSMCOM_Websocket status indicator.<br>
      * SSMCOM_Websocket ステータスインジケータのHTMLエレメントID.
      * @default #ssm_status
      */
-    this.SSM_StatusIndicatorID = "#ssm_status";
+    private SSM_StatusIndicatorID = "#ssm_status";
     /**
      * HTML element ID of ArduinoCOM_Websocket status indicator.<br>
      * ArduinoCOM_Websocket ステータスインジケータのHTMLエレメントID.
      * @default #arduino_status
      */
-    this.Arduino_StatusIndicatorID = "#arduino_status";
+    private Arduino_StatusIndicatorID = "#arduino_status";
     /**
      * HTML element ID of ELM327COM_Websocket status indicator.<br>
      * ELM327COM_Websocket ステータスインジケータのHTMLエレメントID.
      * @default #elm327_status
      */
-    this.ELM327_StatusIndicatorID = "#elm327_status";
+    private ELM327_StatusIndicatorID = "#elm327_status";
     /**
      * HTML element ID of FUELTRIP_Websocket status indicator.<br>
      * FUELTRIP_Websocket ステータスインジケータのHTMLエレメントID.
      * @default #fueltrip_status
      */
-    this.FUELTRIP_StatusIndicatorID = "#fueltrip_status";
+    private FUELTRIP_StatusIndicatorID = "#fueltrip_status";
     
     /**
      * HTML element ID of the spinner to set DefiCOM/ArduinoCOM send interval.<br>
      * Defi/Arduinoのwebsocket通信インターバルを設定するスピナーのHTMLID
      * @default #spinner_defiWSinterval
      */
-    this.DEFIARDUINOWSInverval_SpinnerID = "#spinner_defiWSinterval";
+    private DEFIARDUINOWSInverval_SpinnerID = "#spinner_defiWSinterval";
     
     /**
      * WaitTime after websocket Open or websocket Close (msec)<br>
      * WebSocketオープンまたはクローズ後の待ち時間(ミリ秒)
      * @default 5000
      */
-    this.WaitTimeAfterWebSocketOpenClose = 5000;
-};
-
-/**
- * Enable DefiWebSocket.<br>
- * DefiWebSocketを有効化する
- */
-GaugeControl.prototype.EnableDefiWebSocket = function()
-{
-    'use strict';
-    this._Defi_WS = new DefiCOM_Websocket();
-    this._initializeWebSocket(this._Defi_WS);
-};
+    private WaitTimeAfterWebSocketOpenClose = 5000;
     
-/**
- * Enable SSMWebSocket.<br>
- * SSMWebSocketを有効化する
- */
-GaugeControl.prototype.EnableSSMWebSocket = function()
-{
-    'use strict';
-    this._SSM_WS = new SSMCOM_Websocket();
-    this._initializeWebSocket(this._SSM_WS);
+    constructor()
+    {
+        
+    }
+    
+    /**
+    * Enable DefiWebSocket.<br>
+    * DefiWebSocketを有効化する
+    */
+    public enableDefiWebSocket() : void
+    {
+        this._Defi_WS = new comm.DefiCOMWebsocket();
+        this._initializeWebSocket(this._Defi_WS);
+    }
+
+    /**
+    * Enable SSMWebSocket.<br>
+    * SSMWebSocketを有効化する
+    */
+   public EnableSSMWebSocket() : void
+   {
+       this._SSM_WS = new comm.SSMWebsocket();
+       this._initializeWebSocket(this._SSM_WS);
+   };
+
+   /**
+    * Enable ArduinoWebSocket.<br>
+    * ArduinoWebSocketを有効化する
+    */
+   public EnableArduinoWebSocket() : void
+   {
+       this._Arduino_WS = new comm.ArduinoCOMWebsocket();
+       this._initializeWebSocket(this._Arduino_WS);
+   };
+
+   /**
+    * Enable ELM327WebSocket.<br>
+    * ELM327WebSocketを有効化する
+    */
+   public EnableELM327WebSocket() : void
+   {
+       this._ELM327_WS = new comm.ELM327COMWebsocket();
+       this._initializeWebSocket(this._ELM327_WS);
+   };
+
+   /**
+    * Enable FUELTRIPWebSocket.<br>
+    * FUELTRIPWebSocketを有効化する
+    */
+   public EnableFUELTRIPWebSocket() : void
+   {
+       this._FUELTRIP_WS = new comm.FUELTRIPWebsocket();
+       this._initializeWebSocket(this._FUELTRIP_WS);
+   };
+   
+   /**
+    * Initialize websocket obj.
+    * @param {Defi/SSM/Arduino/ELM327/FUELTRIP_Websocket} webSocketObj to initialize.
+    * @private
+    */
+   private _initializeWebSocket(webSocketObj: comm.WebsocketCommon) : void
+   {
+       var self = this;
+       webSocketObj.OnERRPacketReceived = function(msg)
+       {
+           self._appendDebugMessage(webSocketObj.ModePrefix, msg);
+       };
+       webSocketObj.OnRESPacketReceived = function(msg)
+       {
+           self._appendDebugMessage(webSocketObj.ModePrefix, msg);
+       };
+       webSocketObj.OnWebsocketError = function(msg)
+       {
+           self._appendDebugMessage(webSocketObj.ModePrefix, msg);
+       };
+       webSocketObj.OnWebsocketOpen = function()
+       {
+           self._appendDebugMessage(webSocketObj.ModePrefix, "Connection started");
+           // call _websocketCommunicationOnOpen(webSocketObj) 5(changeable by WaitTimeAfterWebSocketOpenClose) sec after websocket open.
+           setTimeout(self._websocketCommunicationOnOpen(webSocketObj), self.WaitTimeAfterWebSocketOpenClose);
+       };  
+       webSocketObj.OnWebsocketClose = function()
+       {
+           self._appendDebugMessage(webSocketObj.ModePrefix, "Connection closed");
+           self._appendDebugMessage(webSocketObj.ModePrefix, "Reconnect after 5sec...");
+           setTimeout(
+           function(){
+               webSocketObj.Connect();
+           }, self.WaitTimeAfterWebSocketOpenClose);                
+       };
+   };
+   
+   
+   /**
+    * Register defi parameter code and register event called when corresponding VAL packet is received. <br>
+    * 読み出すDefiパラメータコードと、VALパケット到着時のイベント処理ルーチンの登録
+    * @param {String} code Defi parameter code.<br> 登録するDefiParameterコード名。 
+    * @param {function(var)} receivedEventHandler Event called when corresponding VAL packet is received.<br>
+    * 対応するVALパケットを受信したときに呼び出されるイベント。
+    */
+    public RegisterDefiParameterCode(code : string, receivedEventHandler : (val : number)=>void)
+    {
+        'use strict';
+        if(this._Defi_WS !== null)
+            this._Defi_WS.OnVALPacketReceived[code] = receivedEventHandler;
+        else
+            this._appendDebugMessage("DEFI", "ParameterCode Register is required. But Websocket is not enabled.");
+    };
+   
 };
 
-/**
- * Enable ArduinoWebSocket.<br>
- * ArduinoWebSocketを有効化する
- */
-GaugeControl.prototype.EnableArduinoWebSocket = function()
-{
-    'use strict';
-    this._Arduino_WS = new ArduinoCOM_Websocket();
-    this._initializeWebSocket(this._Arduino_WS);
-};
 
-/**
- * Enable ELM327WebSocket.<br>
- * ELM327WebSocketを有効化する
- */
-GaugeControl.prototype.EnableELM327WebSocket = function()
-{
-    'use strict';
-    this._ELM327_WS = new ELM327COM_Websocket();
-    this._initializeWebSocket(this._ELM327_WS);
-};
 
-/**
- * Enable FUELTRIPWebSocket.<br>
- * FUELTRIPWebSocketを有効化する
- */
-GaugeControl.prototype.EnableFUELTRIPWebSocket = function()
-{
-    'use strict';
-    this._FUELTRIP_WS = new FUELTRIP_Websocket();
-    this._initializeWebSocket(this._FUELTRIP_WS);
-};
+    
 
-/**
- * Register defi parameter code and register event called when corresponding VAL packet is received. <br>
- * 読み出すDefiパラメータコードと、VALパケット到着時のイベント処理ルーチンの登録
- * @param {String} code Defi parameter code.<br> 登録するDefiParameterコード名。 
- * @param {function(var)} receivedEventHandler Event called when corresponding VAL packet is received.<br>
- * 対応するVALパケットを受信したときに呼び出されるイベント。
- */
-GaugeControl.prototype.RegisterDefiParameterCode = function(code, receivedEventHandler)
-{
-    'use strict';
-    if(this._Defi_WS !== null)
-        this._Defi_WS.onVALpacketReceived[code] = receivedEventHandler;
-    else
-        this._appendDebugMessage("DEFI", "ParameterCode Register is required. But Websocket is not enabled.");
-};
+
+
 
 /**
  * Register arduino parameter code and register event called when corresponding VAL packet is received. <br>
@@ -548,43 +589,7 @@ GaugeControl.prototype.addControlPanel = function()
     });
 };
 
-/**
- * Initialize websocket obj.
- * @param {Defi/SSM/Arduino/ELM327/FUELTRIP_Websocket} webSocketObj to initialize.
- * @private
- */
-GaugeControl.prototype._initializeWebSocket = function(webSocketObj)
-{
-    'use strict';
-    var self = this;
-    webSocketObj.onERRpacketReceived = function(msg)
-    {
-        self._appendDebugMessage(webSocketObj.ModePrefix, msg);
-    };
-    webSocketObj.onRESpacketReceived = function(msg)
-    {
-        self._appendDebugMessage(webSocketObj.ModePrefix, msg);
-    };
-    webSocketObj.onWebsocketError = function(msg)
-    {
-        self._appendDebugMessage(webSocketObj.ModePrefix, msg);
-    };
-    webSocketObj.onWebsocketOpen = function()
-    {
-        self._appendDebugMessage(webSocketObj.ModePrefix, "Connection started");
-        // call _websocketCommunicationOnOpen(webSocketObj) 5(changeable by WaitTimeAfterWebSocketOpenClose) sec after websocket open.
-        setTimeout(self._websocketCommunicationOnOpen(webSocketObj), self.WaitTimeAfterWebSocketOpenClose);
-    };  
-    webSocketObj.onWebsocketClose = function()
-    {
-        self._appendDebugMessage(webSocketObj.ModePrefix, "Connection closed");
-        self._appendDebugMessage(webSocketObj.ModePrefix, "Reconnect after 5sec...");
-        setTimeout(
-        function(){
-            webSocketObj.Connect();
-        }, self.WaitTimeAfterWebSocketOpenClose);                
-    };
-};
+
 
 /**
  * Append message to debug messsage window.

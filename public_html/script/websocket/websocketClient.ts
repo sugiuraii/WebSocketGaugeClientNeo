@@ -111,7 +111,7 @@ module webSocketGauge.lib.communication
         }
     }
     
-    abstract class WebsocketCommon
+    export abstract class WebsocketCommon
     {
         private websocket: WebSocket;
         private isConnetced : boolean = false;
