@@ -113,6 +113,7 @@ module webSocketGauge.lib.communication
     
     export abstract class WebsocketCommon
     {
+        protected modePrefix: string;
         private websocket: WebSocket;
         private isConnetced : boolean = false;
         private url : string;
@@ -196,6 +197,7 @@ module webSocketGauge.lib.communication
                 return this.websocket.readyState;
         }
         
+        public get ModePrefix() : string {return this.modePrefix;}
         protected get WebSocket() : WebSocket { return this.websocket; }
         public get URL(): string { return this.url; }
         public set URL(val : string) { this.url = val; }
@@ -218,7 +220,6 @@ module webSocketGauge.lib.communication
     */
     abstract class DefiSSMWebsocketCommon extends WebsocketCommon
     {
-        protected ModePrefix: string;
         private recordIntervalTimeEnabled : boolean;
         
         private onVALPacketReceivedByCode : {[code : string] : (val : number)=>void};
@@ -331,7 +332,7 @@ module webSocketGauge.lib.communication
         constructor()
         {
             super();
-            this.ModePrefix = "DEFI";
+            this.modePrefix = "DEFI";
         }
         
         public SendWSSend(code : string, flag : boolean) : void
@@ -340,7 +341,7 @@ module webSocketGauge.lib.communication
                 return;
 
             let sendWSSendObj = new JSONFormats.SendWSSendJSONMessage();          
-            sendWSSendObj.mode = this.ModePrefix + "_WS_SEND";
+            sendWSSendObj.mode = this.modePrefix + "_WS_SEND";
             sendWSSendObj.code = code;
             sendWSSendObj.flag = flag;
             let jsonstr: string = JSON.stringify(sendWSSendObj);
@@ -353,7 +354,7 @@ module webSocketGauge.lib.communication
                 return;
             
             let sendWSIntervalObj = new JSONFormats.SendWSIntervalJSONMessage();
-            sendWSIntervalObj.mode = this.ModePrefix + "_WS_INTERVAL";
+            sendWSIntervalObj.mode = this.modePrefix + "_WS_INTERVAL";
             sendWSIntervalObj.interval = interval;           
             var jsonstr = JSON.stringify(sendWSIntervalObj);
             this.WebSocket.send(jsonstr);
@@ -369,7 +370,7 @@ module webSocketGauge.lib.communication
         constructor()
         {
             super();
-            this.ModePrefix = "ARDUINO";
+            this.modePrefix = "ARDUINO";
         }
     }
     
@@ -378,7 +379,7 @@ module webSocketGauge.lib.communication
         constructor()
         {
             super();
-            this.ModePrefix = "SSM";
+            this.modePrefix = "SSM";
         }
         
         public SendCOMRead(code: string, readmode: string, flag: boolean): void
@@ -387,7 +388,7 @@ module webSocketGauge.lib.communication
                 return;
             
             let sendCOMReadObj = new JSONFormats.SendCOMReadJSONMessage();
-            sendCOMReadObj.mode = this.ModePrefix + "_COM_READ";
+            sendCOMReadObj.mode = this.modePrefix + "_COM_READ";
             sendCOMReadObj.code = code;
             sendCOMReadObj.read_mode = readmode;
             sendCOMReadObj.flag = flag;
@@ -401,7 +402,7 @@ module webSocketGauge.lib.communication
                 return;
 
             let sendSlowreadIntervalObj = new JSONFormats.SendSlowReadIntervalJSONMessage();
-            sendSlowreadIntervalObj.mode = this.ModePrefix + "_SLOWREAD_INTERVAL";
+            sendSlowreadIntervalObj.mode = this.modePrefix + "_SLOWREAD_INTERVAL";
             sendSlowreadIntervalObj.interval = interval;
             const jsonstr = JSON.stringify(sendSlowreadIntervalObj);
             this.WebSocket.send(jsonstr);
@@ -413,13 +414,13 @@ module webSocketGauge.lib.communication
         constructor()
         {
             super();
-            this.ModePrefix = "ELM327";
+            this.modePrefix = "ELM327";
         }
     }
     
     export class FUELTRIPWebsocket extends WebsocketCommon
     {
-        //private ModePrefix = "FUELTRIP";
+        //private modePrefix = "FUELTRIP";
         private onMomentFUELTRIPPacketReceived: (momentGasMilage : number, totalGas : number, totalTrip : number, totalGasMilage : number)=>void;
         private onSectFUELTRIPPacketReceived: (sectSpan : number, sectTrip : number[], sectGas : number[], sectGasMilage: number[])=>void;
         

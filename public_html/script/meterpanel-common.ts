@@ -155,7 +155,7 @@ export class GaugeControl
     public enableDefiWebSocket() : void
     {
         this._Defi_WS = new comm.DefiCOMWebsocket();
-        this._initializeWebSocket(this._Defi_WS);
+        this.initializeWebSocket(this._Defi_WS);
     }
 
     /**
@@ -165,7 +165,7 @@ export class GaugeControl
    public EnableSSMWebSocket() : void
    {
        this._SSM_WS = new comm.SSMWebsocket();
-       this._initializeWebSocket(this._SSM_WS);
+       this.initializeWebSocket(this._SSM_WS);
    };
 
    /**
@@ -175,7 +175,7 @@ export class GaugeControl
    public EnableArduinoWebSocket() : void
    {
        this._Arduino_WS = new comm.ArduinoCOMWebsocket();
-       this._initializeWebSocket(this._Arduino_WS);
+       this.initializeWebSocket(this._Arduino_WS);
    };
 
    /**
@@ -185,7 +185,7 @@ export class GaugeControl
    public EnableELM327WebSocket() : void
    {
        this._ELM327_WS = new comm.ELM327COMWebsocket();
-       this._initializeWebSocket(this._ELM327_WS);
+       this.initializeWebSocket(this._ELM327_WS);
    };
 
    /**
@@ -195,7 +195,7 @@ export class GaugeControl
    public EnableFUELTRIPWebSocket() : void
    {
        this._FUELTRIP_WS = new comm.FUELTRIPWebsocket();
-       this._initializeWebSocket(this._FUELTRIP_WS);
+       this.initializeWebSocket(this._FUELTRIP_WS);
    };
    
    /**
@@ -203,31 +203,31 @@ export class GaugeControl
     * @param {Defi/SSM/Arduino/ELM327/FUELTRIP_Websocket} webSocketObj to initialize.
     * @private
     */
-   private _initializeWebSocket(webSocketObj: comm.WebsocketCommon) : void
+   private initializeWebSocket(webSocketObj: comm.WebsocketCommon) : void
    {
-       var self = this;
-       webSocketObj.OnERRPacketReceived = function(msg)
+       const self = this;
+       webSocketObj.OnERRPacketReceived = function(msg : string)
        {
-           self._appendDebugMessage(webSocketObj.ModePrefix, msg);
+           self.appendDebugMessage(webSocketObj.ModePrefix, msg);
        };
-       webSocketObj.OnRESPacketReceived = function(msg)
+       webSocketObj.OnRESPacketReceived = function(msg : string)
        {
-           self._appendDebugMessage(webSocketObj.ModePrefix, msg);
+           self.appendDebugMessage(webSocketObj.ModePrefix, msg);
        };
-       webSocketObj.OnWebsocketError = function(msg)
+       webSocketObj.OnWebsocketError = function(msg : string)
        {
-           self._appendDebugMessage(webSocketObj.ModePrefix, msg);
+           self.appendDebugMessage(webSocketObj.ModePrefix, msg);
        };
        webSocketObj.OnWebsocketOpen = function()
        {
-           self._appendDebugMessage(webSocketObj.ModePrefix, "Connection started");
+           self.appendDebugMessage(webSocketObj.ModePrefix, "Connection started");
            // call _websocketCommunicationOnOpen(webSocketObj) 5(changeable by WaitTimeAfterWebSocketOpenClose) sec after websocket open.
            setTimeout(self._websocketCommunicationOnOpen(webSocketObj), self.WaitTimeAfterWebSocketOpenClose);
        };  
        webSocketObj.OnWebsocketClose = function()
        {
-           self._appendDebugMessage(webSocketObj.ModePrefix, "Connection closed");
-           self._appendDebugMessage(webSocketObj.ModePrefix, "Reconnect after 5sec...");
+           self.appendDebugMessage(webSocketObj.ModePrefix, "Connection closed");
+           self.appendDebugMessage(webSocketObj.ModePrefix, "Reconnect after 5sec...");
            setTimeout(
            function(){
                webSocketObj.Connect();
@@ -249,9 +249,20 @@ export class GaugeControl
         if(this._Defi_WS !== null)
             this._Defi_WS.OnVALPacketReceived[code] = receivedEventHandler;
         else
-            this._appendDebugMessage("DEFI", "ParameterCode Register is required. But Websocket is not enabled.");
+            this.appendDebugMessage("DEFI", "ParameterCode Register is required. But Websocket is not enabled.");
     };
-   
+    
+    /**
+    * Append message to debug messsage window.
+    * @param {String} prefix Message prefix
+    * @param {String} message debug message
+    */
+   private appendDebugMessage(prefix : string, message:string ) : void
+   {
+       const output_message : string = prefix + " : "  + message;
+       $(this.MessageWindowID).append(output_message + '<br/>');
+   };
+
 };
 
 
@@ -591,18 +602,7 @@ GaugeControl.prototype.addControlPanel = function()
 
 
 
-/**
- * Append message to debug messsage window.
- * @param {String} prefix Message prefix
- * @param {String} message debug message
- * @private
- */
-GaugeControl.prototype._appendDebugMessage = function(prefix,message)
-{
-    'use strict';
-    var output_message = prefix + " : "  + message;
-    $(this.MessageWindowID).append(output_message + '<br/>');
-};
+
 
 /**
  * Check websocket status
