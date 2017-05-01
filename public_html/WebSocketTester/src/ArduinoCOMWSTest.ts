@@ -23,41 +23,44 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-/// <reference path="../script/websocket/websocketClient.ts" />
-
-
 
 window.onload = function()
 {
-    webSocketGauge.test.ELM327COMWSTest.main();
+    webSocketGauge.test.ArduinoCOMWSTest.main();
 }
+
+import comm = require('../../script/websocket/websocketClient');
+import $ = require("jquery");
 
 namespace webSocketGauge.test
 {
-    import ELM327COMWebsocket = webSocketGauge.lib.communication.ELM327COMWebsocket;
-    import OBDIIParameterCode = webSocketGauge.lib.communication.OBDIIParameterCode;
-
-    export class ELM327COMWSTest
+    import ArduinoCOMWebsocket = comm.webSocketGauge.lib.communication.ArduinoCOMWebsocket;
+    import ArduinoParameterCode = comm.webSocketGauge.lib.communication.ArduinoParameterCode;
+    
+    export class ArduinoCOMWSTest
     {    
-        private static elm327WS : ELM327COMWebsocket;
+        private static arduinoWS : ArduinoCOMWebsocket;
 
         public static main(): void
         {
-            this.elm327WS = new ELM327COMWebsocket();
-            $('#serverURL_box').val("ws://localhost:2013/");
+            this.arduinoWS = new ArduinoCOMWebsocket();
+            $('#serverURLBox').val("ws://localhost:2012/");
+            $("#connectButton").click(()=>{this.connectWebSocket()});
+            $("#disconnectButton").click(() => {this.disconnectWebSocket()});
+            $("#buttonWSSend").click(() => {this.input_WS_SEND()});
             this.setParameterCodeSelectBox();
             this.registerWSEvents();
         }
 
         private static setParameterCodeSelectBox()
         {
-            for (let code in OBDIIParameterCode)
-                $('#ssmcomcode_select').append($('<option>').html(code).val(code));
+            for (let code in ArduinoParameterCode)
+                $('#codeSelect').append($('<option>').html(code).val(code));
         }
 
         private static registerWSEvents() : void
         {
-            this.elm327WS.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: number}) => 
+            this.arduinoWS.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: number}) => 
             {
                 $('#interval').text(intervalTime.toFixed(2));
                  //clear
@@ -67,20 +70,20 @@ namespace webSocketGauge.test
                     $('#div_val_data').append(key + " : " + val[key] + "<br>" );
                 }
             }
-            this.elm327WS.OnERRPacketReceived = (msg:string)=>
+            this.arduinoWS.OnERRPacketReceived = (msg:string)=>
             {
                 $('#div_err_data').append(msg + "<br>")
             };
 
-            this.elm327WS.OnRESPacketReceived = (msg : string) =>
+            this.arduinoWS.OnRESPacketReceived = (msg : string) =>
             {
                 $('#div_res_data').append(msg + "<br>");
             };
-            this.elm327WS.OnWebsocketError = (msg : string) =>
+            this.arduinoWS.OnWebsocketError = (msg : string) =>
             {
                 $('#div_ws_message').append(msg + "<br>");
             };
-            this.elm327WS.OnWebsocketOpen = () =>
+            this.arduinoWS.OnWebsocketOpen = () =>
             {
                 $('#div_ws_message').append('* Connection open<br/>');
 
@@ -89,7 +92,7 @@ namespace webSocketGauge.test
                 $('#connectButton').attr("disabled", "disabled");
                 $('#disconnectButton').removeAttr("disabled");  
             };
-            this.elm327WS.OnWebsocketClose = () =>
+            this.arduinoWS.OnWebsocketClose = () =>
             {
                 $('#div_ws_message').append('* Connection closed<br/>');
 
@@ -102,23 +105,23 @@ namespace webSocketGauge.test
 
         public static connectWebSocket() : void
         {
-            this.elm327WS.URL = $("#serverURL_box").val();
-            this.elm327WS.Connect();
+            this.arduinoWS.URL = $("#serverURLBox").val();
+            this.arduinoWS.Connect();
         };
 
         public static disconnectWebSocket()
         {
-            this.elm327WS.Close();
+            this.arduinoWS.Close();
         };
 
-        public static input_SSM_COM_READ()
+        public static inputWSSend()
         {
-            this.elm327WS.SendCOMRead($('#ssmcomcode_select').val(), $('#ssmcode_readmode').val(), $('#ssmcode_flag').val());
+            this.arduinoWS.SendWSSend($('#codeSelect').val(),$('#codeFlag').val());
         };
 
-        public static input_SSMCOM_SLOWREAD_INTERVAL()
+        public static inputWSInterval()
         {
-            this.elm327WS.SendSlowreadInterval(($('#interval_SSMCOM_SLOWREAD_INTERVAL').val()));
+            this.arduinoWS.SendWSInterval($('#WSInterval').val());
         };
     } 
 }

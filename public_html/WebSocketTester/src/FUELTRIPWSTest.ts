@@ -24,6 +24,9 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+import comm = require('../../script/websocket/websocketClient');
+import $ = require("jquery");
+
 window.onload = function()
 {
     webSocketGauge.test.FUELTRIPWSTest.main();
@@ -31,7 +34,7 @@ window.onload = function()
 
 namespace webSocketGauge.test
 {
-    import FUELTRIPWebsocket = webSocketGauge.lib.communication.FUELTRIPWebsocket;
+    import FUELTRIPWebsocket = comm.webSocketGauge.lib.communication.FUELTRIPWebsocket;
     export class FUELTRIPWSTest
     {
         private static fueltripWS : FUELTRIPWebsocket;

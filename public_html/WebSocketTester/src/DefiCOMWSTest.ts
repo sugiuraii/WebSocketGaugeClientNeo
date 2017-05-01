@@ -24,7 +24,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import comm = require('../script/websocket/websocketClient');
+import comm = require('../../script/websocket/websocketClient');
+import $ = require("jquery");
 
 window.onload = function()
 {

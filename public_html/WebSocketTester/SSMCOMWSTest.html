@@ -26,26 +26,23 @@ POSSIBILITY OF SUCH DAMAGE.
 -->
 <html>
     <head>
-        <title>ELM327COM WebSocket Test</title>
+        <title>SSMCOM WebSocket Test</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
-        <script src="../script/lib/jquery-3.1.1.min.js"></script>
-        <script src="../script/websocket/websocketClient.js"></script>
-        <script src="ELM327COMWSTest.js"></script>
+        <script src="src/SSMCOMWSTest.js"></script>
     </head>
     <body>
-        <div><h2>ELM327COM WebSocket Test</h2></div>
+        <div><h2>DefiSSMCOM WebSocket Test</h2></div>
         <hr>
         Server URL : <input type="text" required="required" id="serverURL_box" /> 
-         <input type="button" id="connectButton" value="Connect" onclick="ELM327COMWSTest.connectWebSocket()"/>
-         <input type="button" id="disconnectButton" value="Disconnect" onclick="ELM327COMWSTest.disconnectWebSocket()"/><br>
+         <input type="button" id="connectButton" value="Connect" onclick="SSMCOMWSTest.connectWebSocket()"/>
+         <input type="button" id="disconnectButton" value="Disconnect" onclick="SSMCOMWSTest.disconnectWebSocket()"/><br>
          <hr>
         
-         <h4>ELM327_COM_READ</h4>
+         <h4>SSM_COM_READ</h4>
          <ul>
-             <li>OBDIICode<br>
-                <select id="ssmcomcode_select">
-                </select>
+             <li>SSMCode<br>
+                <select id="ssmcomcode_select"></select>
              </li>
              <li>Read_mode<br>
                 <select id="ssmcode_readmode">
@@ -60,17 +57,17 @@ POSSIBILITY OF SUCH DAMAGE.
                 </select>
              </li>
              <li>
-                 <input type="button" id="button_SSM_COM_READ" value="input ELM327_COM_READ" onclick="ELM327COMWSTest.input_SSM_COM_READ()"/>
+                 <input type="button" id="button_SSM_COM_READ" value="input SSM_COM_READ" onclick="SSMCOMWSTest.input_SSM_COM_READ()"/>
              </li>
          </ul>
          
-        <h4>ELM327COM_SLOWREAD_INTERVAL</h4>
+        <h4>SSMCOM_SLOWREAD_INTERVAL</h4>
          <ul>
              <li>
                 <input type="number"  id="interval_SSMCOM_SLOWREAD_INTERVAL">
              </li>
             <li>
-                 <input type="button" id="button_SSMCOM_SLOWREAD_INTERVAL" value="input ELM327COM_SLOWREAD_INTERVAL" onclick="ELM327COMWSTest.input_SSMCOM_SLOWREAD_INTERVAL()"/>
+                 <input type="button" id="button_SSMCOM_SLOWREAD_INTERVAL" value="input SSMCOM_SLOWREAD_INTERVAL" onclick="SSMCOMWSTest.input_SSMCOM_SLOWREAD_INTERVAL()"/>
              </li>
          </ul>
                   

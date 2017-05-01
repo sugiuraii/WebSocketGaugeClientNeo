@@ -23,39 +23,41 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-/// <reference path="../script/websocket/websocketClient.ts" />
+
+import comm = require('../../script/websocket/websocketClient');
+import $ = require("jquery");
 
 window.onload = function()
 {
-    webSocketGauge.test.ArduinoCOMWSTest.main();
+    webSocketGauge.test.SSMCOMWSTest.main();
 }
 
 namespace webSocketGauge.test
 {
-    import ArduinoCOMWebsocket = webSocketGauge.lib.communication.ArduinoCOMWebsocket;
-    import ArduinoParameterCode = webSocketGauge.lib.communication.ArduinoParameterCode;
-    
-    export class ArduinoCOMWSTest
+    import SSMWebsocket = comm.webSocketGauge.lib.communication.SSMWebsocket;
+    import SSMParameterCode = comm.webSocketGauge.lib.communication.SSMParameterCode;
+
+    export class SSMCOMWSTest
     {    
-        private static arduinoWS : ArduinoCOMWebsocket;
+        private static ssmWS : SSMWebsocket;
 
         public static main(): void
         {
-            this.arduinoWS = new ArduinoCOMWebsocket();
-            $('#serverURL_box').val("ws://localhost:2012/");
+            this.ssmWS = new SSMWebsocket();
+            $('#serverURL_box').val("ws://localhost:2013/");
             this.setParameterCodeSelectBox();
             this.registerWSEvents();
         }
 
         private static setParameterCodeSelectBox()
         {
-            for (let code in ArduinoParameterCode)
-                $('#deficode_select').append($('<option>').html(code).val(code));
+            for (let code in SSMParameterCode)
+                $('#ssmcomcode_select').append($('<option>').html(code).val(code));
         }
 
         private static registerWSEvents() : void
         {
-            this.arduinoWS.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: number}) => 
+            this.ssmWS.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: number}) => 
             {
                 $('#interval').text(intervalTime.toFixed(2));
                  //clear
@@ -65,20 +67,20 @@ namespace webSocketGauge.test
                     $('#div_val_data').append(key + " : " + val[key] + "<br>" );
                 }
             }
-            this.arduinoWS.OnERRPacketReceived = (msg:string)=>
+            this.ssmWS.OnERRPacketReceived = (msg:string)=>
             {
                 $('#div_err_data').append(msg + "<br>")
             };
 
-            this.arduinoWS.OnRESPacketReceived = (msg : string) =>
+            this.ssmWS.OnRESPacketReceived = (msg : string) =>
             {
                 $('#div_res_data').append(msg + "<br>");
             };
-            this.arduinoWS.OnWebsocketError = (msg : string) =>
+            this.ssmWS.OnWebsocketError = (msg : string) =>
             {
                 $('#div_ws_message').append(msg + "<br>");
             };
-            this.arduinoWS.OnWebsocketOpen = () =>
+            this.ssmWS.OnWebsocketOpen = () =>
             {
                 $('#div_ws_message').append('* Connection open<br/>');
 
@@ -87,7 +89,7 @@ namespace webSocketGauge.test
                 $('#connectButton').attr("disabled", "disabled");
                 $('#disconnectButton').removeAttr("disabled");  
             };
-            this.arduinoWS.OnWebsocketClose = () =>
+            this.ssmWS.OnWebsocketClose = () =>
             {
                 $('#div_ws_message').append('* Connection closed<br/>');
 
@@ -100,23 +102,23 @@ namespace webSocketGauge.test
 
         public static connectWebSocket() : void
         {
-            this.arduinoWS.URL = $("#serverURL_box").val();
-            this.arduinoWS.Connect();
+            this.ssmWS.URL = $("#serverURL_box").val();
+            this.ssmWS.Connect();
         };
 
         public static disconnectWebSocket()
         {
-            this.arduinoWS.Close();
+            this.ssmWS.Close();
         };
 
-        public static input_ARDUINO_WS_SEND()
+        public static input_SSM_COM_READ()
         {
-            this.arduinoWS.SendWSSend($('#deficode_select').val(),$('#deficode_flag').val());
+            this.ssmWS.SendCOMRead($('#ssmcomcode_select').val(), $('#ssmcode_readmode').val(), $('#ssmcode_flag').val());
         };
 
-        public static input_ARDUINO_WS_INTERVAL()
+        public static input_SSMCOM_SLOWREAD_INTERVAL()
         {
-            this.arduinoWS.SendWSInterval($('#interval_DEFI_WS_INTERVAL').val());
+            this.ssmWS.SendSlowreadInterval(($('#interval_SSMCOM_SLOWREAD_INTERVAL').val()));
         };
     } 
 }
