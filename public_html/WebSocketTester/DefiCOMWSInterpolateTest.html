@@ -29,60 +29,58 @@ POSSIBILITY OF SUCH DAMAGE.
         <title>DefiCOM WebSocket Test</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
-        <script type="text/javascript" src="../../script/lib/jquery-3.1.1.min.js"></script>
-        <script type="text/javascript" src="../../script/websocket/websocketClient.js"></script>
-        <script type="text/javascript" src="DefiCOMWSInterpolateTest.js"></script>
+        <script type="text/javascript" src="js/DefiCOMWSInterpolateTest.js"></script>
     </head>
     <body>
         <div><h2>DefiSSMCOM WebSocket Test</h2></div>
         <hr>
-        Server URL : <input type="text" required="required" id="serverURL_box" /> 
-         <input type="button" id="connectButton" value="Connect" onclick="DefiCOMWSTest.connectWebSocket()"/>
-         <input type="button" id="disconnectButton" value="Disconnect" onclick="DefiCOMWSTest.disconnectWebSocket()"/><br>
+        Server URL : <input type="text" required="required" id="serverURLBox" /> 
+         <input type="button" id="connectButton" value="Connect"/>
+         <input type="button" id="disconnectButton" value="Disconnect"/><br>
          <hr>
         
          <h4>DEFI_WS_SEND</h4>
          <ul>
              <li>DefiCode<br>
-                <select id="deficode_select"></select>
+                <select id="codeSelect"></select>
              </li>
              <li>Flag<br>
-                <select id="deficode_flag">
+                <select id="codeFlag">
                     <option value="true">true</option>
                     <option value="false">false</option>
                 </select>
              </li>
              <li>
-                 <input type="button" id="button_DEFI_WS_SEND" value="input DEFI_WS_SEND" onclick="DefiCOMWSTest.input_DEFI_WS_SEND()"/>
+                 <input type="button" id="buttonWSSend" value="input DEFI_WS_SEND"/>
              </li>
          </ul>
          
          <h4>DEFI_WS_INTERVAL</h4>
          <ul>
              <li>
-                <input type="number"  id="interval_DEFI_WS_INTERVAL">
+                <input type="number"  id="WSInterval">
              </li>
             <li>
-                 <input type="button" id="button_DEFI_WS_INTERVAL" value="input DEFI_WS_INTERVAL" onclick="DefiCOMWSTest.input_DEFI_WS_INTERVAL()"/>
+                 <input type="button" id="buttonWSInterval" value="input DEFI_WS_INTERVAL"/>
              </li>
          </ul>
                   
          <hr>
          
          <h3>VAL packet</h3>
-         <p><b>Interval time: </b><span id="interval">0</span> msec</p>         
-         <div id="div_val_data"></div>
+         <p><b>Interval time: </b><span id="spanInterval">0</span> msec</p>         
+         <div id="divVAL"></div>
          <h4> Interpolated val</h4>
-         <div style="width:600px;height:200px;overflow:scroll;font-size:small" id="div_interpolated_val"></div>
+         <div style="width:600px;height:200px;overflow:scroll;font-size:small" id="divInterpolatedVAL"></div>
          <hr>
          <h3>ERR packet</h3>
-         <div id="div_err_data"></div>
+         <div id="divERR"></div>
          <hr>
          <h3>RES packet</h3>
-         <div id="div_res_data"></div>
+         <div id="divRES"></div>
          <hr>
          <h3>Websocket message</h3>
-         <div id="div_ws_message"></div>
+         <div id="divWSMsg"></div>
          <hr>
     </body>
 </html>

@@ -31,7 +31,8 @@ module.exports = {
         "DefiCOMWSTest" : './src/DefiCOMWSTest.ts',
         "ELM327COMWSTest" : './src/ELM327COMWSTest.ts',
         "SSMCOMWSTest" : './src/SSMCOMWSTest.ts',
-        "FUELTRIPWSTest" : './src/FUELTRIPWSTest.ts'
+        "FUELTRIPWSTest" : './src/FUELTRIPWSTest.ts',
+        "DefiCOMWSInterpolateTest" : './src/DefiCOMWSInterpolateTest.ts'
     },
     devtool: "source-map",
     output: 

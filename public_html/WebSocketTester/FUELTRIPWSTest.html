@@ -29,51 +29,51 @@ POSSIBILITY OF SUCH DAMAGE.
         <title>FUELTRIP WebSocket Test</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
-        <script type="text/javascript" src="src/FUELTRIPWSTest.js"></script>
+        <script type="text/javascript" src="js/FUELTRIPWSTest.js"></script>
     </head>
     <body>
         <div><h2>FUELTRIP WebSocket Test</h2></div>
         <hr>
-        Server URL : <input type="text" required="required" id="serverURL_box" /> 
-         <input type="button" id="connectButton" value="Connect" onclick="FUELTRIPWSTest.connectWebSocket()"/>
-         <input type="button" id="disconnectButton" value="Disconnect" onclick="FUELTRIPWSTest.disconnectWebSocket()"/><br>
+        Server URL : <input type="text" required="required" id="serverURLBox" /> 
+         <input type="button" id="connectButton" value="Connect"/>
+         <input type="button" id="disconnectButton" value="Disconnect"/><br>
          <hr>
         
         <h4>SECT SPAN</h4>
         <ul>
              <li>
-                <input type="number"  id="span_SECT_SPAN">
+                <input type="number"  id="sectSPANBox">
              </li>
             <li>
-                 <input type="button" id="button_SECT_SPAN" value="send SECT_SPAN" onclick="FUELTRIPWSTest.input_SECT_SPAN()"/>
+                 <input type="button" id="buttonSECTSPAN" value="send SECT_SPAN"/>
              </li>
          </ul>
         <h4>SECT STOREMAX</h4>
         <ul>
              <li>
-                <input type="number"  id="storemax_SECT_STOREMAX">
+                <input type="number"  id="sectStoreMaxBox">
              </li>
             <li>
-                 <input type="button" id="button_SECT_STOREMAX" value="send SECT_STOREMAX" onclick="FUELTRIPWSTest.input_SECT_STOREMAX()"/>
+                 <input type="button" id="buttonSECTSTOREMAX" value="send SECT_STOREMAX"/>
              </li>
         </ul>
         
         <hr>
 
         <h3>MOMENT FUELTRIP packet</h3>
-        <div id="div_moment_fueltrip_data"></div>
+        <div id="divMomentFuelTrip"></div>
         <hr>
         <h3>SECT FUELTRIP packet</h3>
-        <div id="div_sect_fueltrip_data"></div>
+        <div id="divSectFuelTrip"></div>
         <hr>
         <h3>ERR packet</h3>
-        <div id="div_err_data"></div>
+        <div id="divERR"></div>
         <hr>
         <h3>RES packet</h3>
-        <div id="div_res_data"></div>
+        <div id="divRES"></div>
         <hr>
         <h3>Websocket message</h3>
-        <div id="div_ws_message"></div>
+        <div id="divWSMsg"></div>
         <hr>
     </body>
 </html>
