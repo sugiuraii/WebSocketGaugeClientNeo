@@ -25,15 +25,21 @@
  */
 
 import comm = require('../script/websocket/websocketClient');
+import $ = require('jquery');
 
 window.onload = function()
 {
     webSocketGauge.test.DefiCOMWSTest.main();
+    $("#connectButton").click(webSocketGauge.test.DefiCOMWSTest.connectWebSocket);
 }
 
-namespace webSocketGauge.test
+function click()
 {
+    webSocketGauge.test.DefiCOMWSTest.connectWebSocket();
+}
 
+export module webSocketGauge.test
+{
     import DefiCOMWebsocket = comm.webSocketGauge.lib.communication.DefiCOMWebsocket;
     import DefiParameterCode = comm.webSocketGauge.lib.communication.DefiParameterCode;
     export class DefiCOMWSTest
@@ -101,8 +107,8 @@ namespace webSocketGauge.test
 
         public static connectWebSocket() : void
         {
-            this.defiWS.URL = $("#serverURL_box").val();
-            this.defiWS.Connect();
+            DefiCOMWSTest.defiWS.URL = $("#serverURL_box").val();
+            DefiCOMWSTest.defiWS.Connect();
         };
 
         public static disconnectWebSocket()

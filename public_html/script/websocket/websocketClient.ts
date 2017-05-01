@@ -24,7 +24,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-module webSocketGauge.lib.communication
+export module webSocketGauge.lib.communication
 {
     namespace JSONFormats
     {
