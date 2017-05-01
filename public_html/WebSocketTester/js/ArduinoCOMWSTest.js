@@ -11191,51 +11191,48 @@ var webSocketGauge;
             ArduinoCOMWSTest.main = function () {
                 var _this = this;
                 this.arduinoWS = new ArduinoCOMWebsocket();
-                $('#serverURL_box').val("ws://localhost:2012/");
+                $('#serverURLBox').val("ws://localhost:2012/");
                 $("#connectButton").click(function () { _this.connectWebSocket(); });
                 $("#disconnectButton").click(function () { _this.disconnectWebSocket(); });
+                $("#buttonWSSend").click(function () { _this.inputWSSend(); });
                 this.setParameterCodeSelectBox();
                 this.registerWSEvents();
             };
             ArduinoCOMWSTest.setParameterCodeSelectBox = function () {
                 for (var code in ArduinoParameterCode)
-                    $('#deficode_select').append($('<option>').html(code).val(code));
+                    $('#codeSelect').append($('<option>').html(code).val(code));
             };
             ArduinoCOMWSTest.registerWSEvents = function () {
                 this.arduinoWS.OnVALPacketReceived = function (intervalTime, val) {
-                    $('#interval').text(intervalTime.toFixed(2));
+                    $('#spanInterval').text(intervalTime.toFixed(2));
                     //clear
-                    $('#div_val_data').html("");
+                    $('#divVAL').html("");
                     for (var key in val) {
-                        $('#div_val_data').append(key + " : " + val[key] + "<br>");
+                        $('#divVAL').append(key + " : " + val[key] + "<br>");
                     }
                 };
                 this.arduinoWS.OnERRPacketReceived = function (msg) {
-                    $('#div_err_data').append(msg + "<br>");
+                    $('#divERR').append(msg + "<br>");
                 };
                 this.arduinoWS.OnRESPacketReceived = function (msg) {
-                    $('#div_res_data').append(msg + "<br>");
+                    $('#divRES').append(msg + "<br>");
                 };
                 this.arduinoWS.OnWebsocketError = function (msg) {
-                    $('#div_ws_message').append(msg + "<br>");
+                    $('#divWSMsg').append(msg + "<br>");
                 };
                 this.arduinoWS.OnWebsocketOpen = function () {
-                    $('#div_ws_message').append('* Connection open<br/>');
-                    $('#sendmessagecontent_box').removeAttr("disabled");
-                    $('#sendButton').removeAttr("disabled");
+                    $('#divWSMsg').append('* Connection open<br/>');
                     $('#connectButton').attr("disabled", "disabled");
                     $('#disconnectButton').removeAttr("disabled");
                 };
                 this.arduinoWS.OnWebsocketClose = function () {
-                    $('#div_ws_message').append('* Connection closed<br/>');
-                    $('#sendmessagecontent_box').attr("disabled", "disabled");
-                    $('#sendButton').attr("disabled", "disabled");
+                    $('#divWSMsg').append('* Connection closed<br/>');
                     $('#connectButton').removeAttr("disabled");
                     $('#disconnectButton').attr("disabled", "disabled");
                 };
             };
             ArduinoCOMWSTest.connectWebSocket = function () {
-                this.arduinoWS.URL = $("#serverURL_box").val();
+                this.arduinoWS.URL = $("#serverURLBox").val();
                 this.arduinoWS.Connect();
             };
             ;
@@ -11243,12 +11240,12 @@ var webSocketGauge;
                 this.arduinoWS.Close();
             };
             ;
-            ArduinoCOMWSTest.input_ARDUINO_WS_SEND = function () {
-                this.arduinoWS.SendWSSend($('#deficode_select').val(), $('#deficode_flag').val());
+            ArduinoCOMWSTest.inputWSSend = function () {
+                this.arduinoWS.SendWSSend($('#codeSelect').val(), $('#codeFlag').val());
             };
             ;
-            ArduinoCOMWSTest.input_ARDUINO_WS_INTERVAL = function () {
-                this.arduinoWS.SendWSInterval($('#interval_DEFI_WS_INTERVAL').val());
+            ArduinoCOMWSTest.inputWSInterval = function () {
+                this.arduinoWS.SendWSInterval($('#WSInterval').val());
             };
             ;
             return ArduinoCOMWSTest;

@@ -47,7 +47,7 @@ namespace webSocketGauge.test
             $('#serverURLBox').val("ws://localhost:2012/");
             $("#connectButton").click(()=>{this.connectWebSocket()});
             $("#disconnectButton").click(() => {this.disconnectWebSocket()});
-            $("#buttonWSSend").click(() => {this.input_WS_SEND()});
+            $("#buttonWSSend").click(() => {this.inputWSSend()});
             this.setParameterCodeSelectBox();
             this.registerWSEvents();
         }
@@ -62,42 +62,36 @@ namespace webSocketGauge.test
         {
             this.arduinoWS.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: number}) => 
             {
-                $('#interval').text(intervalTime.toFixed(2));
+                $('#spanInterval').text(intervalTime.toFixed(2));
                  //clear
-                $('#div_val_data').html("");
+                $('#divVAL').html("");
                 for (var key in val)
                 {
-                    $('#div_val_data').append(key + " : " + val[key] + "<br>" );
+                    $('#divVAL').append(key + " : " + val[key] + "<br>" );
                 }
             }
             this.arduinoWS.OnERRPacketReceived = (msg:string)=>
             {
-                $('#div_err_data').append(msg + "<br>")
+                $('#divERR').append(msg + "<br>")
             };
 
             this.arduinoWS.OnRESPacketReceived = (msg : string) =>
             {
-                $('#div_res_data').append(msg + "<br>");
+                $('#divRES').append(msg + "<br>");
             };
             this.arduinoWS.OnWebsocketError = (msg : string) =>
             {
-                $('#div_ws_message').append(msg + "<br>");
+                $('#divWSMsg').append(msg + "<br>");
             };
             this.arduinoWS.OnWebsocketOpen = () =>
             {
-                $('#div_ws_message').append('* Connection open<br/>');
-
-                $('#sendmessagecontent_box').removeAttr("disabled");
-                $('#sendButton').removeAttr("disabled");
+                $('#divWSMsg').append('* Connection open<br/>');
                 $('#connectButton').attr("disabled", "disabled");
                 $('#disconnectButton').removeAttr("disabled");  
             };
             this.arduinoWS.OnWebsocketClose = () =>
             {
-                $('#div_ws_message').append('* Connection closed<br/>');
-
-                $('#sendmessagecontent_box').attr("disabled", "disabled");
-                $('#sendButton').attr("disabled", "disabled");
+                $('#divWSMsg').append('* Connection closed<br/>');
                 $('#connectButton').removeAttr("disabled");
                 $('#disconnectButton').attr("disabled", "disabled");
             };

@@ -51,7 +51,7 @@ POSSIBILITY OF SUCH DAMAGE.
                 </select>
              </li>
              <li>
-                 <input type="button" id="buttonWSSend" value="input ARDUINO_WS_SEND" onclick="ArduinoCOMWSTest.input_ARDUINO_WS_SEND()"/>
+                 <input type="button" id="buttonWSSend" value="input ARDUINO_WS_SEND"/>
              </li>
          </ul>
          
@@ -61,24 +61,24 @@ POSSIBILITY OF SUCH DAMAGE.
                 <input type="number" id="WSinterval">
              </li>
             <li>
-                <input type="button" id="buttonWSInterval" value="input ARDUINO_WS_INTERVAL" onclick="ArduinoCOMWSTest.input_ARDUINO_WS_INTERVAL()"/>
+                <input type="button" id="buttonWSInterval" value="input ARDUINO_WS_INTERVAL" />
              </li>
          </ul>
                   
          <hr>
          
          <h3>VAL packet</h3>
-         <p><b>Interval time: </b><span id="interval">0</span> msec</p>
-         <div id="div_val_data"></div>
+         <p><b>Interval time: </b><span id="spanInterval">0</span> msec</p>
+         <div id="divVAL"></div>
          <hr>
          <h3>ERR packet</h3>
-         <div id="div_err_data"></div>
+         <div id="divERR"></div>
          <hr>
          <h3>RES packet</h3>
-         <div id="div_res_data"></div>
+         <div id="divRES"></div>
          <hr>
          <h3>Websocket message</h3>
-         <div id="div_ws_message"></div>
+         <div id="divWSMsg"></div>
          <hr>
     </body>
 </html>
