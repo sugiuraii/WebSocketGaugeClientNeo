@@ -29,7 +29,8 @@ import $ = require("jquery");
 
 window.onload = function()
 {
-    webSocketGauge.test.SSMCOMWSTest.main();
+    let wsTest = new webSocketGauge.test.SSMCOMWSTest();
+    wsTest.main();
 }
 
 namespace webSocketGauge.test
@@ -39,86 +40,89 @@ namespace webSocketGauge.test
 
     export class SSMCOMWSTest
     {    
-        private static ssmWS : SSMWebsocket;
+        private webSocket : SSMWebsocket;
 
-        public static main(): void
+        public main(): void
         {
-            this.ssmWS = new SSMWebsocket();
-            $('#serverURL_box').val("ws://localhost:2013/");
+            this.webSocket = new SSMWebsocket();
+            $('#serverURLBox').val("ws://localhost:2013/");
+            this.assignButtonEvents();
             this.setParameterCodeSelectBox();
             this.registerWSEvents();
         }
-
-        private static setParameterCodeSelectBox()
+        
+        protected assignButtonEvents() : void
         {
-            for (let code in SSMParameterCode)
-                $('#ssmcomcode_select').append($('<option>').html(code).val(code));
+            $("#connectButton").click(()=> this.connectWebSocket());
+            $("#disconnectButton").click(() => this.disconnectWebSocket());
+            $("#buttonWSSend").click(() => this.inputWSSend());
+            $("#buttonWSInterval").click(() => this.inputWSInterval());
         }
 
-        private static registerWSEvents() : void
+        private setParameterCodeSelectBox()
         {
-            this.ssmWS.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: number}) => 
+            for (let code in SSMParameterCode)
+                $('#codeSelect').append($('<option>').html(code).val(code));
+        }
+
+        private registerWSEvents() : void
+        {
+            this.webSocket.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: number}) => 
             {
-                $('#interval').text(intervalTime.toFixed(2));
+                $('#spanInterval').text(intervalTime.toFixed(2));
                  //clear
-                $('#div_val_data').html("");
+                $('#divVAL').html("");
                 for (var key in val)
                 {
-                    $('#div_val_data').append(key + " : " + val[key] + "<br>" );
+                    $('#divVAL').append(key + " : " + val[key] + "<br>" );
                 }
             }
-            this.ssmWS.OnERRPacketReceived = (msg:string)=>
+            this.webSocket.OnERRPacketReceived = (msg:string)=>
             {
-                $('#div_err_data').append(msg + "<br>")
+                $('#divERR').append(msg + "<br>")
             };
 
-            this.ssmWS.OnRESPacketReceived = (msg : string) =>
+            this.webSocket.OnRESPacketReceived = (msg : string) =>
             {
-                $('#div_res_data').append(msg + "<br>");
+                $('#divRES').append(msg + "<br>");
             };
-            this.ssmWS.OnWebsocketError = (msg : string) =>
+            this.webSocket.OnWebsocketError = (msg : string) =>
             {
-                $('#div_ws_message').append(msg + "<br>");
+                $('#divWSMsg').append(msg + "<br>");
             };
-            this.ssmWS.OnWebsocketOpen = () =>
+            this.webSocket.OnWebsocketOpen = () =>
             {
-                $('#div_ws_message').append('* Connection open<br/>');
-
-                $('#sendmessagecontent_box').removeAttr("disabled");
-                $('#sendButton').removeAttr("disabled");
+                $('#divWSMsg').append('* Connection open<br/>');
                 $('#connectButton').attr("disabled", "disabled");
                 $('#disconnectButton').removeAttr("disabled");  
             };
-            this.ssmWS.OnWebsocketClose = () =>
+            this.webSocket.OnWebsocketClose = () =>
             {
-                $('#div_ws_message').append('* Connection closed<br/>');
-
-                $('#sendmessagecontent_box').attr("disabled", "disabled");
-                $('#sendButton').attr("disabled", "disabled");
+                $('#divWSMsg').append('* Connection closed<br/>');
                 $('#connectButton').removeAttr("disabled");
                 $('#disconnectButton').attr("disabled", "disabled");
             };
         }
 
-        public static connectWebSocket() : void
+        public connectWebSocket() : void
         {
-            this.ssmWS.URL = $("#serverURL_box").val();
-            this.ssmWS.Connect();
+            this.webSocket.URL = $("#serverURLBox").val();
+            this.webSocket.Connect();
         };
 
-        public static disconnectWebSocket()
+        public disconnectWebSocket()
         {
-            this.ssmWS.Close();
+            this.webSocket.Close();
         };
 
-        public static input_SSM_COM_READ()
+        public inputWSSend()
         {
-            this.ssmWS.SendCOMRead($('#ssmcomcode_select').val(), $('#ssmcode_readmode').val(), $('#ssmcode_flag').val());
+            this.webSocket.SendCOMRead($('#codeSelect').val(), $('#codeReadmode').val(), $('#codeFlag').val());
         };
 
-        public static input_SSMCOM_SLOWREAD_INTERVAL()
+        public inputWSInterval()
         {
-            this.ssmWS.SendSlowreadInterval(($('#interval_SSMCOM_SLOWREAD_INTERVAL').val()));
+            this.webSocket.SendSlowreadInterval(($('#WSInterval').val()));
         };
     } 
 }
