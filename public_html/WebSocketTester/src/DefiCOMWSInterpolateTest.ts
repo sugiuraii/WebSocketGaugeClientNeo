@@ -132,12 +132,20 @@ namespace webSocketGauge.test
         {
             const code : string = $('#codeSelect').val();
             const flag : string = $('#codeFlag').val();
-            this.webSocket.SendWSSend(code,flag);
-            
-            if(flag === "true")
-                this.webSocket.EnableInterpolate(code);
-            else
-                this.webSocket.DisableInterpolate(code);
+            switch(flag)
+            {
+                case "true":
+                    this.webSocket.SendWSSend(code,true);
+                    this.webSocket.EnableInterpolate(code);
+                break;
+                case "false":
+                    this.webSocket.SendWSSend(code,false);
+                    this.webSocket.DisableInterpolate(code);
+                break;
+                default:
+                    console.log("Error : #codeflag is nether true or false.");
+                break;
+            }
         };
 
         public inputWSInterval()

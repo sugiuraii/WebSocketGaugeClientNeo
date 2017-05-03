@@ -10,18 +10,18 @@
   ],
   "author": "kuniaki",
   "contributors": [],
-  "dependencies": {
-    "@types/jquery": "^2.0.41",
+  "dependencies": {"@types\/jquery":"^2.0.41",
+    "@types/jquery": "^2.0.42",
     "@types/webfontloader": "^1.6.28",
     "jquery": "3.2.1",
-    "pixi.js": "4.4.3",
+    "pixi.js": "4.4.4",
     "ts-loader": "2.0.3",
-    "typescript": "2.2.2",
+    "typescript": "2.3.2",
     "webfontloader": "1.6.27",
     "webpack": "2.4.1",
     "webpack-dev-server": "2.4.5"
   },
-  "devDependencies": {
-    "@types/pixi.js": "^4.4.3"
+  "devDependencies": {"@types\/pixi.js":"^4.4.3",
+    "@types/pixi.js": "^4.4.4"
   }
 }
