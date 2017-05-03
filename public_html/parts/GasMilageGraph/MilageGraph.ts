@@ -24,9 +24,12 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+import gauge = require("../../lib/progressBar/pixiGauge");
+import PIXI = require('pixi.js');
+
 module webSocketGauge.parts
 {
-    import RectangularProgressBar = webSocketGauge.lib.graphics.RectangularProgressBar;
+    import RectangularProgressBar = gauge.webSocketGauge.lib.graphics.RectangularProgressBar;
     
     export class MilageGraphPanel extends PIXI.Container
     {

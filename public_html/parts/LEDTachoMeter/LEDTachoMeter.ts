@@ -23,10 +23,12 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
- 
+import gauge = require("../../lib/progressBar/pixiGauge");
+import PIXI = require('pixi.js');
+
 module webSocketGauge.parts
 {
-    import CircularProgressBar = webSocketGauge.lib.graphics.CircularProgressBar;
+    import CircularProgressBar = gauge.webSocketGauge.lib.graphics.CircularProgressBar;
     
     export class LEDTachoMeter extends PIXI.Container
     {

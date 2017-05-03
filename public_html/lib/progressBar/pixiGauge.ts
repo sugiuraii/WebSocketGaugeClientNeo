@@ -24,7 +24,9 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-module webSocketGauge.lib.graphics
+import PIXI = require('pixi.js');
+
+export module webSocketGauge.lib.graphics
 {
     class Gauge1DOptions
     {

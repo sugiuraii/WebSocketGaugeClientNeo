@@ -30,7 +30,7 @@ window.onload = function()
     wsTest.main();
 }
 
-import comm = require('../../script/websocket/websocketClient');
+import comm = require('../../lib/websocket/websocketClient');
 import $ = require("jquery");
 
 export module webSocketGauge.test

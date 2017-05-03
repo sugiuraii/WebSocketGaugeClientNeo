@@ -24,10 +24,13 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-module webSocketGauge.parts.AnalogMeterCluster
+import gauge = require("../../lib/progressBar/pixiGauge");
+import PIXI = require('pixi.js');
+ 
+export module webSocketGauge.parts.AnalogMeterCluster
 {
-    import CircularProgressBar = webSocketGauge.lib.graphics.CircularProgressBar;
-    import RotationNeedleGauge = webSocketGauge.lib.graphics.RotationNeedleGauge;
+    import CircularProgressBar = gauge.webSocketGauge.lib.graphics.CircularProgressBar;
+    import RotationNeedleGauge = gauge.webSocketGauge.lib.graphics.RotationNeedleGauge;
 
     export class AnalogMeterCluster extends PIXI.Container
     {

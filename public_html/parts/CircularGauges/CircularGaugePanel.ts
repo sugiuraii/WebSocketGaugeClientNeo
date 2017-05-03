@@ -24,9 +24,12 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+import gauge = require("../../lib/progressBar/pixiGauge");
+import PIXI = require('pixi.js');
+
 module webSocketGauge.parts.CircularGaugePanel
 {
-    import CircularProgressBar = webSocketGauge.lib.graphics.CircularProgressBar;
+    import CircularProgressBar = gauge.webSocketGauge.lib.graphics.CircularProgressBar;
     
     export class TextOption
     {
