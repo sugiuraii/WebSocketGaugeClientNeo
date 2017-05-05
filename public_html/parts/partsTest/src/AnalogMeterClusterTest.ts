@@ -23,11 +23,18 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+ 
+/// <reference path="../../../lib/webpackRequire.ts" />
 
 import parts = require("../../AnalogMeterCluster/AnalogMeterCluster");
 import WebFont = require("webfontloader");
 
 import AnalogMeterCluster = parts.webSocketGauge.parts.AnalogMeterCluster.AnalogMeterCluster;
+
+const json = require("../../AnalogMeterCluster/AnalogMeterClusterTexture.json");
+const png = require("../../AnalogMeterCluster/AnalogMeterClusterTexture.png");
+const html = require("../AnalogMeterClusterTest.html");
+const css = require("../../fonts/font.css");
 
 window.onload = function()
 {
