@@ -37,7 +37,8 @@ module.exports = {
     devtool: "source-map",
     output: 
     {
-        filename: "./js/[name].js"
+        path: __dirname + "/build",
+        filename: "js/[name].js"
     },
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.
@@ -46,7 +47,8 @@ module.exports = {
   module: {
     loaders: [
       // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-      { test: /\.tsx?$/, loader: 'ts-loader' }
+        { test: /\.tsx?$/, loader: 'ts-loader' },
+        { test: /\.html$/, loader: "file-loader?name=[name].[ext]" }
     ]
   }
 };

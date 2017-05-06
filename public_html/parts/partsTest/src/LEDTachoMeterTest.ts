@@ -23,62 +23,49 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-
+ 
 /// <reference path="../../../lib/webpackRequire.ts" />
 
-import parts = require("../../CircularGauges/CircularGaugePanel");
+import parts = require("../../LEDTachoMeter/LEDTachoMeter");
 import WebFont = require("webfontloader");
 
-require("../FullCircularGaugeTest.html");
+import LEDTachoMeter = parts.webSocketGauge.parts.LEDTachoMeter;
 
-import BoostGaugePanel = parts.webSocketGauge.parts.CircularGaugePanel.FullCircularGaugePanel.BoostGaugePanel;
+require("../LEDTachoMeterTest.html");
 
 window.onload = function()
 {
     WebFont.load({
         custom: 
         { 
-            families: BoostGaugePanel.RequestedFontFamily,
-            urls: BoostGaugePanel.RequestedFontCSSURL 
+            families: LEDTachoMeter.RequestedFontFamily,
+            urls: LEDTachoMeter.RequestedFontCSSURL 
         },
-        active : function(){webSocketGauge.test.FullCircularGaugeTest.preloadTexture();}
+        active : function(){webSocketGauge.test.LEDTachoMeterTest.preloadTexture();}
     });
 }
 
-namespace webSocketGauge.test.FullCircularGaugeTest
+namespace webSocketGauge.test.LEDTachoMeterTest
 {
     export function preloadTexture()
     {
-        PIXI.loader.add(BoostGaugePanel.RequestedTexturePath);;
+        PIXI.loader.add(LEDTachoMeter.RequestedTexturePath[0]);
         PIXI.loader.load(main);
     }
+
     function main()
     {
         const app = new PIXI.Application(1366,1366);
         document.body.appendChild(app.view);
-        let gaugeArray: BoostGaugePanel[] = new Array();
-        let index = 0;
-        for (let j = 0; j < 6; j++)
-        {
-            for (let i = 0; i < 6 ; i++)
-            {
-                gaugeArray.push(new BoostGaugePanel);
-                gaugeArray[index].pivot = new PIXI.Point(200,200);
-                gaugeArray[index].scale.set(0.6, 0.6);
-                gaugeArray[index].position = new PIXI.Point(240*i+150,240*j+150);
-                gaugeArray[index].Value = 0;
-                app.stage.addChild(gaugeArray[index]);
-                index++;
-            }
-        }
-        app.ticker.add(() => {
-            for (let i = 0; i < gaugeArray.length; i++)
-            {
-                if (gaugeArray[i].Value + 0.01 >= 2)
-                    gaugeArray[i].Value = -1;
-                else           
-                    gaugeArray[i].Value = gaugeArray[i].Value + 0.01;
-            }
-            });
+
+        const meter = new LEDTachoMeter();
+        app.stage.addChild(meter);
+
+        app.ticker.add(function(){
+            meter.Tacho += 100;
+            if (meter.Tacho > 9000)
+                meter.Tacho = 0;
+        });
+
     }
 }

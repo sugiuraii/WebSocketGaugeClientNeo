@@ -27,7 +27,12 @@
 module.exports = {
     entry: 
     {
-        "AnalogMeterClusterTest" : './src/AnalogMeterClusterTest.ts'
+        "AnalogMeterClusterTest" : './src/AnalogMeterClusterTest.ts',
+        "DigiTachoTest" : './src/DigiTachoTest.ts',
+        "FullCircularGaugeTest" : './src/FullCircularGaugeTest.ts',
+        "LEDTachoMeterTest" : './src/LEDTachoMeterTest.ts',
+        "MilageBarTest" : './src/MilageBarTest.ts',
+        "SemiCircularGaugeTest" : './src/SemiCircularGaugeTest.ts'
     },
     devtool: "source-map",
     output: 
@@ -45,7 +50,8 @@ module.exports = {
         { test: /\.png$/, loader: "file-loader?name=img/[name].[ext]" },
         { test: /\.json$/, loader: "file-loader?name=img/[name].[ext]" },
         { test: /\.html$/, loader: "file-loader?name=[name].[ext]" },
-        { test: /\.css$/, loader: "file-loader?name=css/[name].[ext]" }
+        { test: /\.css$/, loader: "file-loader?name=[name].[ext]" },
+        { test: /\.(ttf|otf)$/, loader: "file-loader?name=fonts/[name].[ext]" }
     ]
   }
 };

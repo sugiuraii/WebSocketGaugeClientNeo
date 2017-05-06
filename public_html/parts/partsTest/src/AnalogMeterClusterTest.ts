@@ -31,10 +31,7 @@ import WebFont = require("webfontloader");
 
 import AnalogMeterCluster = parts.webSocketGauge.parts.AnalogMeterCluster.AnalogMeterCluster;
 
-const json = require("../../AnalogMeterCluster/AnalogMeterClusterTexture.json");
-const png = require("../../AnalogMeterCluster/AnalogMeterClusterTexture.png");
-const html = require("../AnalogMeterClusterTest.html");
-const css = require("../../fonts/font.css");
+require("../AnalogMeterClusterTest.html");
 
 window.onload = function()
 {

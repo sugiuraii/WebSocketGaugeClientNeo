@@ -24,6 +24,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+/// <reference path="../../lib/webpackRequire.ts" />
+
 window.onload = function()
 {
     let wsTest = new webSocketGauge.test.DefiCOMWSTest();
@@ -32,6 +34,7 @@ window.onload = function()
 
 import comm = require('../../lib/websocket/websocketClient');
 import $ = require("jquery");
+require('../DefiCOMWSTest.html');
 
 export module webSocketGauge.test
 {

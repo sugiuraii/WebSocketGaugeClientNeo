@@ -24,12 +24,19 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+ /// <reference path="../../lib/webpackRequire.ts" />
+ 
 import gauge = require("../../lib/progressBar/pixiGauge");
 import PIXI = require('pixi.js');
 
 export module webSocketGauge.parts
 {
     import RectangularProgressBar = gauge.webSocketGauge.lib.graphics.RectangularProgressBar;
+    require("./DigiTachoTexture.json");
+    require("./DigiTachoTexture.png");
+    require("../fonts/font.css");
+    require("../fonts/GNU-Freefonts/FreeSansBold.otf");
+    require("../fonts/AudioWide/Audiowide-Regular.ttf");
     
     export class DigiTachoPanel extends PIXI.Container
     {
@@ -44,7 +51,7 @@ export module webSocketGauge.parts
 
         static get RequestedTexturePath() : string[]
         {
-            return ["/parts/DigiTachoPanel/DigiTachoTexture.json"];
+            return ["img/DigiTachoTexture.json"];
         }
 
         static get RequestedFontFamily() : string[]
@@ -54,7 +61,7 @@ export module webSocketGauge.parts
 
         static get RequestedFontCSSURL() : string[]
         {
-            return ['/parts/fonts/font.css'];
+            return ['font.css'];
         }
 
         private speedLabelTextStyle = new PIXI.TextStyle(

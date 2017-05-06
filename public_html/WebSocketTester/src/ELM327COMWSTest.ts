@@ -24,8 +24,11 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+/// <reference path="../../lib/webpackRequire.ts" />
+
 import comm = require('../../lib/websocket/websocketClient');
 import $ = require("jquery");
+require('../ELM327COMWSTest.html');
 
 window.onload = function()
 {

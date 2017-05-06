@@ -30,18 +30,18 @@ POSSIBILITY OF SUCH DAMAGE.
 @font-face {
     font-family: 'FreeSans-Bold';
     font-style: normal;
-    src: url(./GNU-Freefonts/FreeSansBold.otf) format('opentype');
+    src: url(./fonts/FreeSansBold.otf) format('opentype');
 }
 
 @font-face {
     font-family: 'AudioWide';
     font-style: normal;
-    src: url(./AudioWide/Audiowide-Regular.ttf) format('opentype');
+    src: url(./fonts/Audiowide-Regular.ttf) format('opentype');
 }
 
 @font-face {
     font-family: 'DSEG14ClassicItalic';
     font-style: normal;
-    src: url(./DSEG_v030/DSEG14Classic-BoldItalic.ttf) format('opentype');
+    src: url(./fonts/DSEG14Classic-BoldItalic.ttf) format('opentype');
 }
 

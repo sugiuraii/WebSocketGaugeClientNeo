@@ -23,6 +23,8 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+ 
+/// <reference path="../../lib/webpackRequire.ts" />
 
 window.onload = function()
 {
@@ -32,6 +34,7 @@ window.onload = function()
 
 import comm = require('../../lib/websocket/websocketClient');
 import $ = require("jquery");
+require('../ArduinoCOMWSTest.html');
 
 export module webSocketGauge.test
 {

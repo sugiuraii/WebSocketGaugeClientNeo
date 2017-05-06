@@ -23,6 +23,8 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+ 
+ /// <reference path="../../lib/webpackRequire.ts" />
 
 import gauge = require("../../lib/progressBar/pixiGauge");
 import PIXI = require('pixi.js');
@@ -31,6 +33,10 @@ export module webSocketGauge.parts.AnalogMeterCluster
 {
     import CircularProgressBar = gauge.webSocketGauge.lib.graphics.CircularProgressBar;
     import RotationNeedleGauge = gauge.webSocketGauge.lib.graphics.RotationNeedleGauge;
+    require("./AnalogMeterClusterTexture.json");
+    require("./AnalogMeterClusterTexture.png");
+    require("../fonts/font.css");
+    require("../fonts/DSEG_v030/DSEG14Classic-BoldItalic.ttf");
 
     export class AnalogMeterCluster extends PIXI.Container
     {
@@ -133,7 +139,7 @@ export module webSocketGauge.parts.AnalogMeterCluster
         
         static get RequestedFontCSSURL() : string[]
         {
-            return ['css/font.css'];
+            return ['font.css'];
         }
         
         constructor()

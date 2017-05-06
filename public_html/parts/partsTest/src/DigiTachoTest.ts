@@ -24,9 +24,12 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
  
+/// <reference path="../../../lib/webpackRequire.ts" />
+ 
 import parts = require("../../DigiTachoPanel/DigiTachoPanel");
 import WebFont = require("webfontloader");
 
+require("../DigiTachoTest.html");
 
 window.onload = function()
 {

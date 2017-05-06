@@ -24,7 +24,14 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/// <reference path="../GasMilageGraph/MilageGraph.ts" />
+/// <reference path="../../../lib/webpackRequire.ts" />
+
+import parts = require("../../GasMilageGraph/MilageGraph");
+import WebFont = require("webfontloader");
+
+import MilageGraphPanel = parts.webSocketGauge.parts.MilageGraphPanel;
+
+require("../MilageBarTest.html");
 
 window.onload = function()
 {
@@ -32,8 +39,8 @@ window.onload = function()
     WebFont.load({
         custom: 
         { 
-            families: webSocketGauge.parts.MilageGraphPanel.RequestedFontFamily,
-            urls: webSocketGauge.parts.MilageGraphPanel.RequestedFontCSSURL 
+            families: MilageGraphPanel.RequestedFontFamily,
+            urls: MilageGraphPanel.RequestedFontCSSURL 
         },    
         active: function () {webSocketGauge.test.MilageBarTest.preloadTexture();}
     });
@@ -43,20 +50,20 @@ namespace webSocketGauge.test.MilageBarTest
 {
     export function preloadTexture()
     {
-        PIXI.loader.add(webSocketGauge.parts.MilageGraphPanel.RequestedTexturePath);
+        PIXI.loader.add(MilageGraphPanel.RequestedTexturePath);
         PIXI.loader.load(main);
     }
     function main()
     {
         const app = new PIXI.Application(1366,1366);
         document.body.appendChild(app.view);
-        let gaugeArray: webSocketGauge.parts.MilageGraphPanel[] = new Array();
+        let gaugeArray: MilageGraphPanel[] = new Array();
         let index = 0;
         for (let j = 0; j < 6; j++)
         {
             for (let i = 0; i < 6 ; i++)
             {
-                gaugeArray.push(new webSocketGauge.parts.MilageGraphPanel);
+                gaugeArray.push(new MilageGraphPanel);
                 gaugeArray[index].pivot = new PIXI.Point(200,200);
                 gaugeArray[index].scale.set(0.6, 0.6);
                 gaugeArray[index].position = new PIXI.Point(400*i+150,200*j+150);

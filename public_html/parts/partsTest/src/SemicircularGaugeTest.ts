@@ -23,9 +23,15 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+ 
+/// <reference path="../../../lib/webpackRequire.ts" />
+ 
+import parts = require("../../CircularGauges/CircularGaugePanel");
+import WebFont = require("webfontloader");
 
-/// <reference path="../CircularGauges/CircularGaugePanel.ts" />
-import ThrottleGaugePanel = webSocketGauge.parts.CircularGaugePanel.SemiCircularGaugePanel.ThrottleGaugePanel;
+require("../SemiCircularGaugeTest.html");
+
+import ThrottleGaugePanel = parts.webSocketGauge.parts.CircularGaugePanel.SemiCircularGaugePanel.ThrottleGaugePanel;
 window.onload = function()
 {
    
