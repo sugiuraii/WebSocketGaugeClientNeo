@@ -3,22 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/WebSocketTester/src/DefiCOMWSInterpolateTest.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/WebSocketTester/webpack.config.js</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/WebSocketTester/src/DefiCOMWSTest.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/WebSocketTester/DefiCOMWSTest.html</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/parts/partsTest/src/DigiTachoTest.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/WebSocketTester/src/ArduinoCOMWSTest.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/WebSocketTester/src/SSMCOMWSTest.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/parts/AnalogMeterCluster/AnalogMeterCluster.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/WebSocketTester/src/ELM327COMWSTest.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/parts/partsTest/src/FullCircularGaugeTest.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/parts/CircularGauges/CircularGaugePanel.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/WebSocketTester/src/FUELTRIPWSTest.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/parts/LEDTachoMeter/LEDTachoMeter.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/parts/partsTest/webpack.config.js</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/parts/DigiTachoPanel/DigiTachoPanel.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/parts/fonts/font.css</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/lib/webpackRequire.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/lib/meterpanel-common.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/lib/websocket/websocketClient.ts</file>
         </group>
     </open-files>
 </project-private>

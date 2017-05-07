@@ -24,11 +24,11 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
  
- /// <reference path="../script/websocket/websocketClient.ts" />
+import ws = require('./websocket/websocketClient');
+import comm = ws.webSocketGauge.lib.communication;
     
 module webSocketGauge.meterpanelCommon
 {
-    import comm = webSocketGauge.lib.communication;
 /**
  * Unified gauge control class. Frontend of Defi/SSM/Arduino/ELM327 websocket.<br>
  * ゲージコントロール用クラス。Defi/SSM/Arduino/ELM327 websocketのフロントエンド.
@@ -203,65 +203,113 @@ export class GaugeControl
     * @param {Defi/SSM/Arduino/ELM327/FUELTRIP_Websocket} webSocketObj to initialize.
     * @private
     */
-   private initializeWebSocket(webSocketObj: comm.WebsocketCommon) : void
-   {
-       const self = this;
-       webSocketObj.OnERRPacketReceived = function(msg : string)
-       {
-           self.appendDebugMessage(webSocketObj.ModePrefix, msg);
-       };
-       webSocketObj.OnRESPacketReceived = function(msg : string)
-       {
-           self.appendDebugMessage(webSocketObj.ModePrefix, msg);
-       };
-       webSocketObj.OnWebsocketError = function(msg : string)
-       {
-           self.appendDebugMessage(webSocketObj.ModePrefix, msg);
-       };
-       webSocketObj.OnWebsocketOpen = function()
-       {
-           self.appendDebugMessage(webSocketObj.ModePrefix, "Connection started");
-           // call _websocketCommunicationOnOpen(webSocketObj) 5(changeable by WaitTimeAfterWebSocketOpenClose) sec after websocket open.
-           setTimeout(self._websocketCommunicationOnOpen(webSocketObj), self.WaitTimeAfterWebSocketOpenClose);
-       };  
-       webSocketObj.OnWebsocketClose = function()
-       {
-           self.appendDebugMessage(webSocketObj.ModePrefix, "Connection closed");
-           self.appendDebugMessage(webSocketObj.ModePrefix, "Reconnect after 5sec...");
-           setTimeout(
-           function(){
-               webSocketObj.Connect();
-           }, self.WaitTimeAfterWebSocketOpenClose);                
-       };
-   };
-   
-   
-   /**
-    * Register defi parameter code and register event called when corresponding VAL packet is received. <br>
-    * 読み出すDefiパラメータコードと、VALパケット到着時のイベント処理ルーチンの登録
-    * @param {String} code Defi parameter code.<br> 登録するDefiParameterコード名。 
-    * @param {function(var)} receivedEventHandler Event called when corresponding VAL packet is received.<br>
-    * 対応するVALパケットを受信したときに呼び出されるイベント。
-    */
-    public RegisterDefiParameterCode(code : string, receivedEventHandler : (val : number)=>void)
+    private initializeWebSocket(webSocketObj: comm.WebsocketCommon) : void
     {
-        'use strict';
-        if(this._Defi_WS !== null)
-            this._Defi_WS.OnVALPacketReceived[code] = receivedEventHandler;
-        else
-            this.appendDebugMessage("DEFI", "ParameterCode Register is required. But Websocket is not enabled.");
+        const self = this;
+        webSocketObj.OnERRPacketReceived = function(msg : string)
+        {
+            self.appendDebugMessage(webSocketObj.ModePrefix, msg);
+        };
+        webSocketObj.OnRESPacketReceived = function(msg : string)
+        {
+            self.appendDebugMessage(webSocketObj.ModePrefix, msg);
+        };
+        webSocketObj.OnWebsocketError = function(msg : string)
+        {
+            self.appendDebugMessage(webSocketObj.ModePrefix, msg);
+        };
+        webSocketObj.OnWebsocketOpen = function()
+        {
+            self.appendDebugMessage(webSocketObj.ModePrefix, "Connection started");
+            // call _websocketCommunicationOnOpen(webSocketObj) 5(changeable by WaitTimeAfterWebSocketOpenClose) sec after websocket open.
+            window.setTimeout(self.WebsocketCommunicationOnOpen(webSocketObj), self.WaitTimeAfterWebSocketOpenClose);
+        };  
+        webSocketObj.OnWebsocketClose = function()
+        {
+            self.appendDebugMessage(webSocketObj.ModePrefix, "Connection closed");
+            self.appendDebugMessage(webSocketObj.ModePrefix, "Reconnect after 5sec...");
+            setTimeout(
+            function(){
+                webSocketObj.Connect();
+            }, self.WaitTimeAfterWebSocketOpenClose);                
+        };
     };
     
     /**
-    * Append message to debug messsage window.
-    * @param {String} prefix Message prefix
-    * @param {String} message debug message
+    * Initial communication on Websocket open
+    * @param {type} webSocketObj
     */
-   private appendDebugMessage(prefix : string, message:string ) : void
-   {
-       const output_message : string = prefix + " : "  + message;
-       $(this.MessageWindowID).append(output_message + '<br/>');
-   };
+    private WebsocketCommunicationOnOpen(webSocketObj : comm.WebsocketCommon) : void
+    {
+        if(webSocketObj.ModePrefix === "DEFI" || webSocketObj.ModePrefix === "ARDUINO")
+        {
+            for(var paramCodekey in webSocketObj.OnVALpacketReceived)
+                webSocketObj.SendWSSend(paramCodekey, "true");
+            webSocketObj.SendWSInterval(localStorage.WSInterval);
+            $(this.DEFIARDUINOWSInverval_SpinnerID).val(localStorage.WSInterval);
+        }
+        else if (webSocketObj.ModePrefix === "SSM" || webSocketObj.ModePrefix === "ELM327" )
+        {
+            for(var paramCodekey in webSocketObj.onVALpacketReceived)
+            {
+                var readMode;
+                var convertedParamCodeKey;
+                if(webSocketObj.ModePrefix === "SSM")
+                {
+                    convertedParamCodeKey = this._convertSSMSwitchCodeToNumericCode(paramCodekey);
+                    readMode = this._SSM_SlowFastReadFlagList[convertedParamCodeKey];
+                }
+                else if(webSocketObj.ModePrefix === "ELM327")
+                {
+                    convertedParamCodeKey = paramCodekey;
+                    readMode = this._ELM327_SlowFastReadFlagList[paramCodekey];
+                }
+
+                if(readMode === "Slow")
+                    webSocketObj.SendCOMRead(convertedParamCodeKey, "SLOW", "true");
+                else if(readMode === "Fast")
+                    webSocketObj.SendCOMRead(convertedParamCodeKey, "FAST", "true");
+                else if(readMode === "Slow+Fast")
+                {
+                    webSocketObj.SendCOMRead(convertedParamCodeKey, "SLOW", "true");
+                    webSocketObj.SendCOMRead(convertedParamCodeKey, "FAST", "true");
+                }
+                else
+                    this._appendDebugMessage(convertedParamCodeKey.ModePrefix, "Bug: readMode property is wrong.");
+            }
+        }
+        else if (webSocketObj.ModePrefix === "FUELTRIP")
+        {
+            //Do nothing.
+        }
+    };
+
+    /**
+     * Register defi parameter code and register event called when corresponding VAL packet is received. <br>
+     * 読み出すDefiパラメータコードと、VALパケット到着時のイベント処理ルーチンの登録
+     * @param {String} code Defi parameter code.<br> 登録するDefiParameterコード名。 
+     * @param {function(var)} receivedEventHandler Event called when corresponding VAL packet is received.<br>
+     * 対応するVALパケットを受信したときに呼び出されるイベント。
+     */
+     public RegisterDefiParameterCode(code : string, receivedEventHandler : (val : number)=>void)
+     {
+         'use strict';
+         if(this._Defi_WS !== null)
+             this._Defi_WS.OnVALPacketReceived[code] = receivedEventHandler;
+         else
+             this.appendDebugMessage("DEFI", "ParameterCode Register is required. But Websocket is not enabled.");
+     };
+
+     /**
+     * Append message to debug messsage window.
+     * @param {String} prefix Message prefix
+     * @param {String} message debug message
+     */
+    private appendDebugMessage(prefix : string, message:string ) : void
+    {
+        const output_message : string = prefix + " : "  + message;
+        $(this.MessageWindowID).append(output_message + '<br/>');
+    };
 
 };
 
@@ -645,56 +693,7 @@ GaugeControl.prototype._changeWebSocketIndicator = function(webSocketObj, indica
     }
 };
 
-/**
- * Initial communication on Websocket open
- * @param {type} webSocketObj
- * @private
- */
-GaugeControl.prototype._websocketCommunicationOnOpen = function(webSocketObj)
-{
-    'use strict';
-    if(webSocketObj.ModePrefix === "DEFI" || webSocketObj.ModePrefix === "ARDUINO")
-    {
-        for(var paramCodekey in webSocketObj.onVALpacketReceived)
-            webSocketObj.SendWSSend(paramCodekey, "true");
-        webSocketObj.SendWSInterval(localStorage.WSInterval);
-        $(this.DEFIARDUINOWSInverval_SpinnerID).val(localStorage.WSInterval);
-    }
-    else if (webSocketObj.ModePrefix === "SSM" || webSocketObj.ModePrefix === "ELM327" )
-    {
-        for(var paramCodekey in webSocketObj.onVALpacketReceived)
-        {
-            var readMode;
-            var convertedParamCodeKey;
-            if(webSocketObj.ModePrefix === "SSM")
-            {
-                convertedParamCodeKey = this._convertSSMSwitchCodeToNumericCode(paramCodekey);
-                readMode = this._SSM_SlowFastReadFlagList[convertedParamCodeKey];
-            }
-            else if(webSocketObj.ModePrefix === "ELM327")
-            {
-                convertedParamCodeKey = paramCodekey;
-                readMode = this._ELM327_SlowFastReadFlagList[paramCodekey];
-            }
 
-            if(readMode === "Slow")
-                webSocketObj.SendCOMRead(convertedParamCodeKey, "SLOW", "true");
-            else if(readMode === "Fast")
-                webSocketObj.SendCOMRead(convertedParamCodeKey, "FAST", "true");
-            else if(readMode === "Slow+Fast")
-            {
-                webSocketObj.SendCOMRead(convertedParamCodeKey, "SLOW", "true");
-                webSocketObj.SendCOMRead(convertedParamCodeKey, "FAST", "true");
-            }
-            else
-                this._appendDebugMessage(convertedParamCodeKey.ModePrefix, "Bug: readMode property is wrong.");
-        }
-    }
-    else if (webSocketObj.ModePrefix === "FUELTRIP")
-    {
-        //Do nothing.
-    }
-};
 
 /**
  * Convert SSM switch code to numeric code.
