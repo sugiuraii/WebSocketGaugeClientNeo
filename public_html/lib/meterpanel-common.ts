@@ -152,7 +152,7 @@ export class GaugeControl
     * Enable DefiWebSocket.<br>
     * DefiWebSocketを有効化する
     */
-    public enableDefiWebSocket() : void
+    public EnableDefiWebSocket() : void
     {
         this._Defi_WS = new comm.DefiCOMWebsocket();
         this.initializeWebSocket(this._Defi_WS);
@@ -243,6 +243,7 @@ export class GaugeControl
     {
         if(webSocketObj.ModePrefix === "DEFI" || webSocketObj.ModePrefix === "ARDUINO")
         {
+            
             for(var paramCodekey in webSocketObj.OnVALpacketReceived)
                 webSocketObj.SendWSSend(paramCodekey, "true");
             webSocketObj.SendWSInterval(localStorage.WSInterval);
