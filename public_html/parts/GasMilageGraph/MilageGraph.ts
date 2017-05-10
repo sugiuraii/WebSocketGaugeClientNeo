@@ -24,9 +24,19 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-module webSocketGauge.parts
-{
-    import RectangularProgressBar = webSocketGauge.lib.graphics.RectangularProgressBar;
+ /// <reference path="../../lib/webpackRequire.ts" />
+ 
+import gauge = require("../../lib/progressBar/pixiGauge");
+import PIXI = require('pixi.js');
+
+export module webSocketGauge.parts
+{  
+    require("./MilageGraphTexture.json");
+    require("./MilageGraphTexture.png");
+    require("../fonts/font.css");
+    require("../fonts/GNU-Freefonts/FreeSansBold.otf");
+    
+    import RectangularProgressBar = gauge.webSocketGauge.lib.graphics.RectangularProgressBar;
     
     export class MilageGraphPanel extends PIXI.Container
     {
@@ -46,7 +56,7 @@ module webSocketGauge.parts
         
         static get RequestedTexturePath() : string[]
         {
-            return ["/parts/GasMilageGraph/MilageGraphTexture.json"];
+            return ["img/MilageGraphTexture.json"];
         }
         
         static get RequestedFontFamily() : string[]
@@ -56,7 +66,7 @@ module webSocketGauge.parts
         
         static get RequestedFontCSSURL() : string[]
         {
-            return ['/parts/fonts/font.css'];
+            return ['font.css'];
         }
         
         

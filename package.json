@@ -1,0 +1,30 @@
+{
+  "name": "PixiJSTest",
+  "version": "0.0.0",
+  "keywords": [
+    "util",
+    "functional",
+    "server",
+    "client",
+    "browser"
+  ],
+  "author": "kuniaki",
+  "contributors": [],
+  "dependencies": {
+    "@types/jquery": "^2.0.42",
+    "@types/webfontloader": "^1.6.28",
+    "css-loader": "0.28.1",
+    "file-loader": "0.11.1",
+    "jquery": "3.2.1",
+    "pixi.js": "4.4.4",
+    "ts-loader": "2.0.3",
+    "typescript": "2.3.2",
+    "url-loader": "0.5.8",
+    "webfontloader": "1.6.27",
+    "webpack": "2.4.1",
+    "webpack-dev-server": "2.4.5"
+  },
+  "devDependencies": {
+    "@types/pixi.js": "^4.4.4"
+  }
+}

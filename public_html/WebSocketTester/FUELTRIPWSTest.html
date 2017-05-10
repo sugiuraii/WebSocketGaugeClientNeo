@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--
+Copyright (c) 2017, Sugiura K.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.
+-->
+<html>
+    <head>
+        <title>FUELTRIP WebSocket Test</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script type="text/javascript" src="js/FUELTRIPWSTest.js"></script>
+    </head>
+    <body>
+        <div><h2>FUELTRIP WebSocket Test</h2></div>
+        <hr>
+        Server URL : <input type="text" required="required" id="serverURLBox" /> 
+         <input type="button" id="connectButton" value="Connect"/>
+         <input type="button" id="disconnectButton" value="Disconnect"/><br>
+         <hr>
+        
+        <h4>SECT SPAN</h4>
+        <ul>
+             <li>
+                <input type="number"  id="sectSPANBox">
+             </li>
+            <li>
+                 <input type="button" id="buttonSECTSPAN" value="send SECT_SPAN"/>
+             </li>
+         </ul>
+        <h4>SECT STOREMAX</h4>
+        <ul>
+             <li>
+                <input type="number"  id="sectStoreMaxBox">
+             </li>
+            <li>
+                 <input type="button" id="buttonSECTSTOREMAX" value="send SECT_STOREMAX"/>
+             </li>
+        </ul>
+        
+        <hr>
+
+        <h3>MOMENT FUELTRIP packet</h3>
+        <div id="divMomentFuelTrip"></div>
+        <hr>
+        <h3>SECT FUELTRIP packet</h3>
+        <div id="divSectFuelTrip"></div>
+        <hr>
+        <h3>ERR packet</h3>
+        <div id="divERR"></div>
+        <hr>
+        <h3>RES packet</h3>
+        <div id="divRES"></div>
+        <hr>
+        <h3>Websocket message</h3>
+        <div id="divWSMsg"></div>
+        <hr>
+    </body>
+</html>

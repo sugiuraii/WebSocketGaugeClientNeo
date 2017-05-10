@@ -23,14 +23,20 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+ 
+/// <reference path="../../lib/webpackRequire.ts" />
+ 
+import gauge = require("../../lib/progressBar/pixiGauge");
+import PIXI = require('pixi.js');
 
-/// <reference path="../../script/lib/pixi.js.d.ts" />
-/// <reference path="../../script/progressBar/pixiGauge.ts" />
-/// <reference path="../../node_modules/@types/webfontloader/index.d.ts" />
-
-module webSocketGauge.parts
+export module webSocketGauge.parts
 {
-    import CircularProgressBar = webSocketGauge.lib.graphics.CircularProgressBar;
+    require("./LEDTachoMeterTexture.json");
+    require("./LEDTachoMeterTexture.png");
+    require("../fonts/font.css");
+    require("../fonts/DSEG_v030/DSEG14Classic-BoldItalic.ttf");
+
+    import CircularProgressBar = gauge.webSocketGauge.lib.graphics.CircularProgressBar;
     
     export class LEDTachoMeter extends PIXI.Container
     {
@@ -61,7 +67,7 @@ module webSocketGauge.parts
         
         static get RequestedTexturePath() : string[]
         {
-            return ["/parts/LEDTachoMeter/LEDTachoMeterTexture.json"];
+            return ["img/LEDTachoMeterTexture.json"];
         }
         
         static get RequestedFontFamily() : string[]
@@ -71,7 +77,7 @@ module webSocketGauge.parts
         
         static get RequestedFontCSSURL() : string[]
         {
-            return ['/parts/fonts/font.css'];
+            return ['font.css'];
         }
         
         get Tacho() : number { return this.tacho; }

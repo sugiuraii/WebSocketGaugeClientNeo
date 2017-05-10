@@ -24,13 +24,19 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/// <reference path="../../script/lib/pixi.js.d.ts" />
-/// <reference path="../../script/progressBar/pixiGauge.ts" />
-/// <reference path="../../node_modules/@types/webfontloader/index.d.ts" />
+ /// <reference path="../../lib/webpackRequire.ts" />
+ 
+import gauge = require("../../lib/progressBar/pixiGauge");
+import PIXI = require('pixi.js');
 
-module webSocketGauge.parts
+export module webSocketGauge.parts
 {
-    import RectangularProgressBar = webSocketGauge.lib.graphics.RectangularProgressBar;
+    import RectangularProgressBar = gauge.webSocketGauge.lib.graphics.RectangularProgressBar;
+    require("./DigiTachoTexture.json");
+    require("./DigiTachoTexture.png");
+    require("../fonts/font.css");
+    require("../fonts/GNU-Freefonts/FreeSansBold.otf");
+    require("../fonts/AudioWide/Audiowide-Regular.ttf");
     
     export class DigiTachoPanel extends PIXI.Container
     {
@@ -45,7 +51,7 @@ module webSocketGauge.parts
 
         static get RequestedTexturePath() : string[]
         {
-            return ["/parts/DigiTachoPanel/DigiTachoTexture.json"];
+            return ["img/DigiTachoTexture.json"];
         }
 
         static get RequestedFontFamily() : string[]
@@ -55,7 +61,7 @@ module webSocketGauge.parts
 
         static get RequestedFontCSSURL() : string[]
         {
-            return ['/parts/fonts/font.css'];
+            return ['font.css'];
         }
 
         private speedLabelTextStyle = new PIXI.TextStyle(

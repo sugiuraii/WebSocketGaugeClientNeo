@@ -24,14 +24,19 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
  
-/// <reference path="../../script/lib/pixi.js.d.ts" />
-/// <reference path="../../script/progressBar/pixiGauge.ts" />
-/// <reference path="../../node_modules/@types/webfontloader/index.d.ts" />
+ /// <reference path="../../lib/webpackRequire.ts" />
 
-module webSocketGauge.parts.AnalogMeterCluster
+import gauge = require("../../lib/progressBar/pixiGauge");
+import PIXI = require('pixi.js');
+ 
+export module webSocketGauge.parts.AnalogMeterCluster
 {
-    import CircularProgressBar = webSocketGauge.lib.graphics.CircularProgressBar;
-    import RotationNeedleGauge = webSocketGauge.lib.graphics.RotationNeedleGauge;
+    import CircularProgressBar = gauge.webSocketGauge.lib.graphics.CircularProgressBar;
+    import RotationNeedleGauge = gauge.webSocketGauge.lib.graphics.RotationNeedleGauge;
+    require("./AnalogMeterClusterTexture.json");
+    require("./AnalogMeterClusterTexture.png");
+    require("../fonts/font.css");
+    require("../fonts/DSEG_v030/DSEG14Classic-BoldItalic.ttf");
 
     export class AnalogMeterCluster extends PIXI.Container
     {
@@ -124,7 +129,7 @@ module webSocketGauge.parts.AnalogMeterCluster
         
         static get RequestedTexturePath() : string[]
         {
-            return ["/parts/AnalogMeterCluster/AnalogMeterClusterTexture.json"];
+            return ["img/AnalogMeterClusterTexture.json"];
         }
         
         static get RequestedFontFamily() : string[]
@@ -134,7 +139,7 @@ module webSocketGauge.parts.AnalogMeterCluster
         
         static get RequestedFontCSSURL() : string[]
         {
-            return ['/parts/fonts/font.css'];
+            return ['font.css'];
         }
         
         constructor()

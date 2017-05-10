@@ -24,13 +24,20 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/// <reference path="../../script/lib/pixi.js.d.ts" />
-/// <reference path="../../script/progressBar/pixiGauge.ts" />
-/// <reference path="../../node_modules/@types/webfontloader/index.d.ts" />
+ /// <reference path="../../lib/webpackRequire.ts" />
+ 
+import gauge = require("../../lib/progressBar/pixiGauge");
+import PIXI = require('pixi.js');
 
-module webSocketGauge.parts.CircularGaugePanel
+export module webSocketGauge.parts.CircularGaugePanel
 {
-    import CircularProgressBar = webSocketGauge.lib.graphics.CircularProgressBar;
+    import CircularProgressBar = gauge.webSocketGauge.lib.graphics.CircularProgressBar;
+    require("./FullCircularGaugeTexture.json");
+    require("./FullCircularGaugeTexture.png");
+    require("./SemiCircularGaugeTexture.json");
+    require("./SemiCircularGaugeTexture.png");
+    require("../fonts/font.css");
+    require("../fonts/GNU-Freefonts/FreeSansBold.otf");
     
     export class TextOption
     {
@@ -285,14 +292,14 @@ module webSocketGauge.parts.CircularGaugePanel
     }
 };
 
-module webSocketGauge.parts.CircularGaugePanel.SemiCircularGaugePanel
+export module webSocketGauge.parts.CircularGaugePanel.SemiCircularGaugePanel
 {
     import CircularGaugePanelBase = webSocketGauge.parts.CircularGaugePanel.CircularGaugePanelBase;
     export class SemiCircularGaugePanel extends CircularGaugePanelBase
     {
         static get RequestedTexturePath() : string[]
         {
-            return ["/parts/CirCularGauges/SemiCircularGaugeTexture.json"];
+            return ["img/SemiCircularGaugeTexture.json"];
         }
         
         static get RequestedFontFamily() : string[]
@@ -302,7 +309,7 @@ module webSocketGauge.parts.CircularGaugePanel.SemiCircularGaugePanel
         
         static get RequestedFontCSSURL() : string[]
         {
-            return ['/parts/fonts/font.css'];
+            return ['font.css'];
         }
         
         protected setOption() : void
@@ -393,14 +400,14 @@ module webSocketGauge.parts.CircularGaugePanel.SemiCircularGaugePanel
     } 
 }
 
-module webSocketGauge.parts.CircularGaugePanel.FullCircularGaugePanel
+export module webSocketGauge.parts.CircularGaugePanel.FullCircularGaugePanel
 {
     import CircularGaugePanelBase = webSocketGauge.parts.CircularGaugePanel.CircularGaugePanelBase;
     export class FullCircularGaugePanel extends CircularGaugePanelBase
     {
         static get RequestedTexturePath() : string[]
         {
-            return ["/parts/CirCularGauges/FullCircularGaugeTexture.json"];
+            return ["img/FullCircularGaugeTexture.json"];
         }
         
         static get RequestedFontFamily() : string[]
@@ -410,7 +417,7 @@ module webSocketGauge.parts.CircularGaugePanel.FullCircularGaugePanel
         
         static get RequestedFontCSSURL() : string[]
         {
-            return ['/parts/fonts/font.css'];
+            return ['font.css'];
         }
         
         protected setOption() : void
