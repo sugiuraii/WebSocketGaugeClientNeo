@@ -44,11 +44,16 @@ export module webSocketGauge.parts
             document.body.appendChild(this.controlPanelElement);
         }
         
+        public setOnLogButtonClicked(handler: (this: Element, ev: MouseEvent) => void) {this.logButtonElement.onclick = handler}
+        public setOnResetButtonClicked(handler: (this: Element, ev: MouseEvent) => void) {this.resetButtonElement.onclick = handler}
+        public setOnWebSocketIntervalSpinnerChanged(handler: (this: Element, ev: MouseEvent) => void) {this.websocketIntervalSpinner.onchange = handler}   
         public setDefiIndicatorStatus(status : number) {this.changeIndicatorColor(this.defiCOMIndicator, status)};
         public setSSMIndicatorStatus(status : number) {this.changeIndicatorColor(this.ssmCOMIndicator, status)};
         public setArduinoIndicatorStatus(status : number) {this.changeIndicatorColor(this.arduinoCOMIndicator, status)};
         public setELM327IndicatorStatus(status : number) {this.changeIndicatorColor(this.elm327COMIndicator, status)};
         public setFUELTRIPIndicatorStatus(status : number) {this.changeIndicatorColor(this.fueltripIndicator, status)};
+        
+        public get WebSocketInterval(): number {return parseInt(this.websocketIntervalSpinner.value) };
         
         private changeIndicatorColor(indicator : HTMLDivElement, status : number)
         {
@@ -129,7 +134,7 @@ export module webSocketGauge.parts
                 style.top = "150px";
                 style.left = "20px";
                 style.background = "black";
-                style.color = "white";
+                style.color = "grey";
                 style.fontSize = "1em";
                 style.fontWeight = "bold";
             };
@@ -150,6 +155,7 @@ export module webSocketGauge.parts
             
             const titleElem = document.createElement('div');
             titleElem.innerText = "Websocket Status";
+            titleElem.style.color = "white";
             
             indicatorElem.appendChild(titleElem);
             indicatorElem.appendChild(this.defiCOMIndicator);

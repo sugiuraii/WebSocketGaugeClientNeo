@@ -52,7 +52,11 @@ export module webSocketGauge.parts
             style.zIndex = "10"
             
             this.setPosition(50,50);
-            this.setSize(80, 80, "vw", "vh");            
+            this.setSize(80, 80, "vw", "vh");    
+            
+            //Change opacity when mouse is over
+            this.windowElement.onmouseenter = () => {style.opacity = "0.9"};
+            this.windowElement.onmouseleave = () => {style.opacity = "0.2"};        
         }
         
         private getTimeString() : string

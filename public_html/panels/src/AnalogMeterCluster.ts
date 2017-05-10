@@ -29,46 +29,91 @@
 import parts = require("../../parts/AnalogMeterCluster/AnalogMeterCluster");
 import WebFont = require("webfontloader");
 import comm = require("../../lib/websocket/websocketClient");
-import AnalogMeterCluster = parts.webSocketGauge.parts.AnalogMeterCluster.AnalogMeterCluster;
-import $ = require("jquery");
-
+import cpanel = require("../../lib/ControlPanel");
+import logwin = require("../../lib/LogWindow");
 require("../AnalogMeterCluster.html");
-
-import DefiCOMWebsocket = comm.webSocketGauge.lib.communication.DefiCOMWebsocket;
-import SSMWebsocket = comm.webSocketGauge.lib.communication.SSMWebsocket;
-import FUELTRIPWebsocket = comm.webSocketGauge.lib.communication.FUELTRIPWebsocket;
 
 window.onload = function()
 {
-    WebFont.load({
-        custom: 
-        { 
-            families: AnalogMeterCluster.RequestedFontFamily,
-            urls: AnalogMeterCluster.RequestedFontCSSURL 
-        },
-        active: function () {webSocketGauge.test.AnalogMeterClusterTest.preloadTexture();}
-    });
+    webSocketGauge.test.AnalogMeterClusterPanel.preloadFont();
 }
-namespace webSocketGauge.test.AnalogMeterClusterTest
+
+namespace webSocketGauge.test.AnalogMeterClusterPanel
 {
+    import AnalogMeterCluster = parts.webSocketGauge.parts.AnalogMeterCluster.AnalogMeterCluster;
+    import DefiCOMWebsocket = comm.webSocketGauge.lib.communication.DefiCOMWebsocket;
+    import SSMWebsocket = comm.webSocketGauge.lib.communication.SSMWebsocket;
+    import FUELTRIPWebsocket = comm.webSocketGauge.lib.communication.FUELTRIPWebsocket;
+    import ControlPanel = cpanel.webSocketGauge.parts.ControlPanel;
+    import LogWindow = logwin.webSocketGauge.parts.LogWindow;
+
     const defiWS = new DefiCOMWebsocket();
     const ssmWS = new SSMWebsocket();
     const fuelTripWS = new FUELTRIPWebsocket();
+    const controlPanel = new ControlPanel();
+    const logWindow = new LogWindow();
     
-    export function preloadTexture()
+    export function preloadFont()
+    {
+        WebFont.load(
+            {
+                custom: 
+                { 
+                    families: AnalogMeterCluster.RequestedFontFamily,
+                    urls: AnalogMeterCluster.RequestedFontCSSURL 
+                },
+                active: ()=> { preloadTexture(); }
+            }
+        );
+    }
+    
+    function preloadTexture()
     {
         PIXI.loader.add(AnalogMeterCluster.RequestedTexturePath[0]);
         PIXI.loader.load(main);
     }
     
+    function setupControlPanelEvents(cpanel : ControlPanel, logwin : LogWindow)
+    {
+        //Set Debug button
+        cpanel.setOnLogButtonClicked( () => { logwin.Visible = !logwin.Visible; });
+        //Set Reset button event
+        controlPanel.setOnResetButtonClicked( () =>
+        {
+            if(window.confirm("Reset Trip and fuel consumption data?"))
+                fuelTripWS.SendReset();
+        });   
+    }
+    
+    function connectWS()
+    {
+        logWindow.appendLog("DefiWS start to connect..");
+        defiWS.Connect();
+        defiWS.OnWebsocketClose = () => {
+            logWindow.appendLog("DefiWS is disconnected.");
+            controlPanel.setDefiIndicatorStatus(defiWS.getReadyState());
+        }
+        defiWS.OnWebsocketError = (message : string) => {
+            logWindow.appendLog("DefiWS websocket error : " + message);
+        }
+        defiWS.OnRESPacketReceived = (message : string) => {
+            logWindow.appendLog("DefiWS RES message : " + message);
+        }
+        defiWS.OnERRPacketReceived = (message : string) =>
+        {
+            logWindow.appendLog("DefiWS ERR message : " + message);
+        }
+    }    
     function main()
     {
-        
         defiWS.URL = "ws://"+location.hostname+":2012/";
         ssmWS.URL = "ws://"+location.hostname+":2013/";
         fuelTripWS.URL = "ws://"+location.hostname+":2014/";
-                
-        const app = new PIXI.Application(1366,1366);
+        
+        setupControlPanelEvents(controlPanel, logWindow);        
+        connectWS();
+        
+        const app = new PIXI.Application(1366,768);
         document.body.appendChild(app.view);
 
         const meterCluster = new AnalogMeterCluster();

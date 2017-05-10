@@ -23,20 +23,30 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
- 
-import ControlPanel = require("../lib/ControlPanel");
-import LogWindow = require("../lib/LogWindow");
-window.onload = () =>
-{
-    const cpanel = new ControlPanel.webSocketGauge.parts.ControlPanel();
-    const logpanel = new LogWindow.webSocketGauge.parts.LogWindow();
-    
-    logpanel.Visible = true;
-    cpanel.setOnLogButtonClicked(() => {logpanel.appendLog("LogButton is clicked.")});
-    cpanel.setOnResetButtonClicked(() => {logpanel.appendLog("ResetButton is clicked.")});
-    cpanel.setOnWebSocketIntervalSpinnerChanged(() => {logpanel.appendLog("Websocket interval is changed to " + cpanel.WebSocketInterval.toString())});
-    cpanel.setDefiIndicatorStatus(1);
-    
-}
 
-
+module.exports = {
+    entry: 
+    {
+        "AnalogMeterCluster" : './src/AnalogMeterCluster.ts'
+    },
+    devtool: "source-map",
+    output: 
+    {
+        path: __dirname + "/build",
+        filename: "./js/[name].js"
+    },
+    resolve: {
+        // Add `.ts` and `.tsx` as a resolvable extension.
+        extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
+    },
+  module: {
+    loaders: [
+        { test: /\.tsx?$/, loader: 'ts-loader' },
+        { test: /\.png$/, loader: "file-loader?name=img/[name].[ext]" },
+        { test: /\.json$/, loader: "file-loader?name=img/[name].[ext]" },
+        { test: /\.html$/, loader: "file-loader?name=[name].[ext]" },
+        { test: /\.css$/, loader: "file-loader?name=[name].[ext]" },
+        { test: /\.(ttf|otf)$/, loader: "file-loader?name=fonts/[name].[ext]" }
+    ]
+  }
+};
