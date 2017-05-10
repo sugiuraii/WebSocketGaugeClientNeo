@@ -86,7 +86,7 @@ export module webSocketGauge.parts.AnalogMeterCluster
             this.speedLabel.text = val.toFixed(0);
         }
         get Boost() { return this.boost; }
-        set Boosr(val : number)
+        set Boost(val : number)
         {
             this.boost = val;
             this.boostNeedleGauge.Value = val;

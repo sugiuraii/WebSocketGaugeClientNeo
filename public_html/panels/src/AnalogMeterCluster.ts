@@ -46,7 +46,10 @@ namespace webSocketGauge.test.AnalogMeterClusterPanel
     import FUELTRIPWebsocket = comm.webSocketGauge.lib.communication.FUELTRIPWebsocket;
     import ControlPanel = cpanel.webSocketGauge.parts.ControlPanel;
     import LogWindow = logwin.webSocketGauge.parts.LogWindow;
-
+    
+    import DefiParameterCode = comm.webSocketGauge.lib.communication.DefiParameterCode;
+    import SSMParameterCode = comm.webSocketGauge.lib.communication.SSMParameterCode;
+    
     const defiWS = new DefiCOMWebsocket();
     const ssmWS = new SSMWebsocket();
     const fuelTripWS = new FUELTRIPWebsocket();
@@ -103,13 +106,22 @@ namespace webSocketGauge.test.AnalogMeterClusterPanel
         {
             logWindow.appendLog("DefiWS ERR message : " + message);
         }
+        defiWS.OnWebsocketOpen = () =>
+        {
+            logWindow.appendLog("DefiWS is connected.");
+            controlPanel.setDefiIndicatorStatus(defiWS.getReadyState());
+            defiWS.SendWSSend(DefiParameterCode.Manifold_Absolute_Pressure, true);
+            defiWS.EnableInterpolate(DefiParameterCode.Manifold_Absolute_Pressure);
+            defiWS.SendWSSend(DefiParameterCode.Engine_Speed, true);
+            defiWS.EnableInterpolate(DefiParameterCode.Engine_Speed);
+        }
     }    
     function main()
     {
         defiWS.URL = "ws://"+location.hostname+":2012/";
         ssmWS.URL = "ws://"+location.hostname+":2013/";
         fuelTripWS.URL = "ws://"+location.hostname+":2014/";
-        
+
         setupControlPanelEvents(controlPanel, logWindow);        
         connectWS();
         
@@ -119,10 +131,9 @@ namespace webSocketGauge.test.AnalogMeterClusterPanel
         const meterCluster = new AnalogMeterCluster();
         app.stage.addChild(meterCluster);
 
-        app.ticker.add(function(){
-            meterCluster.Speed += 1;
-            if (meterCluster.Speed > 280)
-                meterCluster.Speed = 0;
+        app.ticker.add((timestamp : number) => {
+            meterCluster.Tacho = defiWS.getVal(DefiParameterCode.Engine_Speed, timestamp);
+            meterCluster.Boost = defiWS.getVal(DefiParameterCode.Manifold_Absolute_Pressure, timestamp); 
         });
     }
 }
