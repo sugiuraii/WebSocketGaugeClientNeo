@@ -257,10 +257,16 @@ export module webSocketGauge.lib.communication
                 this.interpolateBuffers[code] = new Interpolation.VALInterpolationBuffer();            
         }
         
-        public getVal(code : string, timestamp? : number) : number
+        public getVal(code : string, timestamp : number) : number
         {
             this.checkInterpolateBufferAndCreateIfEmpty(code);
             return this.interpolateBuffers[code].getVal(timestamp);
+        }
+        
+        public getRawVal(code : string) : number
+        {
+            this.checkInterpolateBufferAndCreateIfEmpty(code);
+            return this.interpolateBuffers[code].getRawVal();
         }
         
         protected parseIncomingMessage(msg : string) : void
@@ -674,6 +680,12 @@ export module webSocketGauge.lib.communication
         export const Ethanol_fuel_percent = "Ethanol_fuel_percent";
     }
     
+    export namespace ReadModeCode
+    {
+        export const SLOW = "SLOW";
+        export const FAST = "FAST";
+    }
+    
     namespace Interpolation
     {
         export enum UpdatePeriodCalcMethod
@@ -699,6 +711,12 @@ export module webSocketGauge.lib.communication
             
             constructor()
             {
+                //Set default value to avoid return "undefined" on getVal
+                this.lastUpdateTimeStamp = performance.now();
+                this.valUpdatePeriod = 0.03; //temporally set to 30ms
+                this.lastValue = 0; 
+                this.value = 0;
+                
                 this.updatePeriodAveragingQueue = new MovingAverageQueue(VALInterpolationBuffer.UpdatePeriodBufferLength);
             }
             
@@ -767,6 +785,11 @@ export module webSocketGauge.lib.communication
                 const interpolatedVal : number = this.lastValue + (this.value - this.lastValue)*interpolateFactor;
                 
                 return interpolatedVal;
+            }
+            
+            public getRawVal() : number
+            {
+                return this.value;
             }
         }
         

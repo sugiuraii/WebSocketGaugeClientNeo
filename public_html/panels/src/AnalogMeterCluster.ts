@@ -49,6 +49,7 @@ namespace webSocketGauge.test.AnalogMeterClusterPanel
     
     import DefiParameterCode = comm.webSocketGauge.lib.communication.DefiParameterCode;
     import SSMParameterCode = comm.webSocketGauge.lib.communication.SSMParameterCode;
+    import ReadModeCode = comm.webSocketGauge.lib.communication.ReadModeCode;
     
     const defiWS = new DefiCOMWebsocket();
     const ssmWS = new SSMWebsocket();
@@ -88,13 +89,15 @@ namespace webSocketGauge.test.AnalogMeterClusterPanel
         });   
     }
     
-    function connectWS()
+    function connectDefiWS()
     {
         logWindow.appendLog("DefiWS start to connect..");
         defiWS.Connect();
         defiWS.OnWebsocketClose = () => {
             logWindow.appendLog("DefiWS is disconnected.");
             controlPanel.setDefiIndicatorStatus(defiWS.getReadyState());
+            
+            window.setTimeout(() => defiWS.Connect(), 5000);
         }
         defiWS.OnWebsocketError = (message : string) => {
             logWindow.appendLog("DefiWS websocket error : " + message);
@@ -115,7 +118,38 @@ namespace webSocketGauge.test.AnalogMeterClusterPanel
             defiWS.SendWSSend(DefiParameterCode.Engine_Speed, true);
             defiWS.EnableInterpolate(DefiParameterCode.Engine_Speed);
         }
-    }    
+    }
+    
+    function connectSSMWS()
+    {
+        logWindow.appendLog("SSMWS start to connect..");
+        ssmWS.Connect();
+        ssmWS.OnWebsocketClose = () => {
+            logWindow.appendLog("SSMWS is disconnected.");
+            controlPanel.setSSMIndicatorStatus(ssmWS.getReadyState());
+            window.setTimeout(() => ssmWS.Connect(), 5000);
+        }
+        ssmWS.OnWebsocketError = (message : string) => {
+            logWindow.appendLog("SSMWS websocket error : " + message);
+        }
+        ssmWS.OnRESPacketReceived = (message : string) => {
+            logWindow.appendLog("SSMWS RES message : " + message);
+        }
+        ssmWS.OnERRPacketReceived = (message : string) =>
+        {
+            logWindow.appendLog("SSMWS ERR message : " + message);
+        }
+        ssmWS.OnWebsocketOpen = () =>
+        {
+            logWindow.appendLog("SSMWS is connected.");
+            controlPanel.setSSMIndicatorStatus(ssmWS.getReadyState());
+            ssmWS.SendCOMRead(SSMParameterCode.Vehicle_Speed, ReadModeCode.FAST, true);
+            ssmWS.SendCOMRead(SSMParameterCode.Vehicle_Speed, ReadModeCode.SLOW, true);
+            ssmWS.EnableInterpolate(SSMParameterCode.Vehicle_Speed);
+            ssmWS.SendCOMRead(SSMParameterCode.Coolant_Temperature, ReadModeCode.SLOW, true);
+            ssmWS.EnableInterpolate(SSMParameterCode.Vehicle_Speed);
+        }
+    }
     function main()
     {
         defiWS.URL = "ws://"+location.hostname+":2012/";
@@ -123,7 +157,8 @@ namespace webSocketGauge.test.AnalogMeterClusterPanel
         fuelTripWS.URL = "ws://"+location.hostname+":2014/";
 
         setupControlPanelEvents(controlPanel, logWindow);        
-        connectWS();
+        connectDefiWS();
+        connectSSMWS();
         
         const app = new PIXI.Application(1366,768);
         document.body.appendChild(app.view);
@@ -131,9 +166,12 @@ namespace webSocketGauge.test.AnalogMeterClusterPanel
         const meterCluster = new AnalogMeterCluster();
         app.stage.addChild(meterCluster);
 
-        app.ticker.add((timestamp : number) => {
+        app.ticker.add(() => {
+            const timestamp = PIXI.ticker.shared.lastTime;
             meterCluster.Tacho = defiWS.getVal(DefiParameterCode.Engine_Speed, timestamp);
             meterCluster.Boost = defiWS.getVal(DefiParameterCode.Manifold_Absolute_Pressure, timestamp); 
+            meterCluster.Speed = ssmWS.getVal(SSMParameterCode.Vehicle_Speed,timestamp);
+            meterCluster.WaterTemp = ssmWS.getRawVal(SSMParameterCode.Coolant_Temperature);
         });
     }
 }
