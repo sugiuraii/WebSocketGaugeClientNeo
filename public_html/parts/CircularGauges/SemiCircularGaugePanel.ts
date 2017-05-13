@@ -24,103 +24,9 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import {CircularGaugePanelBase} from './CircularGaugePanelBase';
-import {TextOption} from './CircularGaugePanelBase';
+import {SemiCircularGaugePanelBase} from "./private/SemiCircularGaugePanelBase"
 
-require("./SemiCircularGaugeTexture.json");
-require("./SemiCircularGaugeTexture.png");
-require("../fonts/font.css");
-require("../fonts/GNU-Freefonts/FreeSansBold.otf");
-
-export class SemiCircularGaugePanel extends CircularGaugePanelBase
-{
-    static get RequestedTexturePath() : string[]
-    {
-        return ["img/SemiCircularGaugeTexture.json"];
-    }
-
-    static get RequestedFontFamily() : string[]
-    {
-        return ["FreeSans-Bold"]
-    }
-
-    static get RequestedFontCSSURL() : string[]
-    {
-        return ['font.css'];
-    }
-
-    protected setOption() : void
-    {
-        this.RedZoneBarTexture = PIXI.Texture.fromFrame("SemiCircular_Gauge1_Redzone_Bar");
-        this.YellowZoneBarTexture = PIXI.Texture.fromFrame("SemiCircular_Gauge1_Yellowzone_Bar");
-        this.GreenZoneBarTexture = PIXI.Texture.fromFrame("SemiCircular_Gauge1_Greenzone_Bar");
-        this.ValueBarTexture = PIXI.Texture.fromFrame("SemiCircular_Gauge1_Value_Bar");
-        this.BackTexture = PIXI.Texture.fromFrame("SemiCircular_Gauge1_Back");
-        this.GridTexture = PIXI.Texture.fromFrame("SemiCircular_Gauge1_Grid");
-
-        this.masterTextStyle = new PIXI.TextStyle(
-        {
-            dropShadow : true,
-            dropShadowBlur: 15,
-            dropShadowColor: "white",
-            dropShadowDistance: 0,
-            fill : "white",
-            fontFamily: "FreeSans-Bold"
-        });
-        this.offsetAngle = 180;
-        this.fullAngle = 180;
-        this.min = 0;
-        this.max = 100;
-        this.angleStep = 0.1;
-
-        this.valueBarRadius = 200;
-        this.valueBarInnerRadius = 0;        
-        this.valueLabelOption.position.set(200,185);
-        this.valueLabelOption.fontSize = 90;
-        this.valueLabelOption.position.set(200,185);
-        this.valueLabelOption.anchor.set(0.5,0.5);
-        this.valueLabelOption.align = "center";
-        this.valueLabelOption.letterSpacing = -3;
-
-        this.zoneBarRadius = 200;        
-        this.centerPosition.set(200,195);
-
-        this.titleLabel = "THROTTLE";
-        this.titleLabelOption = new TextOption(new PIXI.Point(200, 266), new PIXI.Point(0.5, 0.5), "center", 42);
-        this.unitLabel = "%";
-        this.unitLabelOption = new TextOption(new PIXI.Point(200, 235), new PIXI.Point(0.5, 0.5), "center", 23);
-        this.valueNumberRoundDigit = 0;
-
-        this.redZoneBarEnable = true;
-        this.yellowZoneBarEnable = true;
-        this.greenZoneBarEnable = true;
-        this.redZoneBarOffsetAngle = 315;
-        this.redZoneBarFullAngle = 45;
-        this.yellowZoneBarOffsetAngle = 270;
-        this.yellowZoneBarFullAngle = 45;
-        this.greenZoneBarOffsetAngle = 180;
-        this.greenZoneBarFullAngle = 45;
-
-        const axisLabelFontSize = 38;
-        this.setAxisLabel(
-        [   "0",
-            "25",
-            "50",
-            "75",
-            "100",
-        ]);
-        this.setAxisLabelOption(
-        [
-            new TextOption(new PIXI.Point(60, 195), new PIXI.Point(0.5, 0), "center", axisLabelFontSize),
-            new TextOption(new PIXI.Point(90, 75), new PIXI.Point(1, 0.5), "right", axisLabelFontSize),
-            new TextOption(new PIXI.Point(200, 40), new PIXI.Point(0.5, 1), "center", axisLabelFontSize),
-            new TextOption(new PIXI.Point(310, 75), new PIXI.Point(0, 0.5), "left", axisLabelFontSize),
-            new TextOption(new PIXI.Point(340, 195), new PIXI.Point(0.5, 0), "center", axisLabelFontSize)                
-        ]);
-    }
-}
-
-export class ThrottleGaugePanel extends SemiCircularGaugePanel
+export class ThrottleGaugePanel extends SemiCircularGaugePanelBase
 {
     protected setOption() : void
     {
@@ -133,5 +39,42 @@ export class ThrottleGaugePanel extends SemiCircularGaugePanel
         this.yellowZoneBarEnable = false;
         this.greenZoneBarEnable = false;
         this.setAxisLabel(["0","25","50","75","100"]);
+    }
+}
+
+export class WaterTempGaugePanel extends SemiCircularGaugePanelBase
+{
+    protected setOption() : void
+    {
+        super.setOption();
+        this.titleLabel = "WATER TEMP";
+        this.min = 50;
+        this.max = 150;
+        this.unitLabel = "degC"
+        this.redZoneBarEnable = true;
+        this.redZoneBarOffsetAngle = 315;
+        this.redZoneBarFullAngle = 45;
+        this.yellowZoneBarEnable = true;
+        this.yellowZoneBarOffsetAngle = 270;
+        this.yellowZoneBarFullAngle = 45;
+        this.greenZoneBarEnable = false;
+        this.setAxisLabel(["50","75","100","125","150"]);
+    }
+}
+
+export class BatteryVoltageGaugePanel extends SemiCircularGaugePanelBase
+{
+    protected setOption() : void
+    {
+        super.setOption();
+        this.titleLabel = "BATTERY VOLT";
+        this.min = 11;
+        this.max = 15;
+        this.unitLabel = "V"
+        this.redZoneBarEnable = false;
+        this.yellowZoneBarEnable = false;
+        this.greenZoneBarEnable = false;
+        this.setAxisLabel(["11","12","13","14","15"]);
+        this.valueNumberRoundDigit = 1;
     }
 }

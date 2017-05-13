@@ -24,7 +24,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
  
-import {CircularProgressBar} from  '../../lib/Graphics/PIXIGauge';
+import {CircularProgressBar} from  '../../../lib/Graphics/PIXIGauge';
 import * as PIXI from 'pixi.js';
 
 export class TextOption
