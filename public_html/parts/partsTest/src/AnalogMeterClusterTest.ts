@@ -26,10 +26,8 @@
  
 /// <reference path="../../../lib/webpackRequire.ts" />
 
-import parts = require("../../AnalogMeterCluster/AnalogMeterCluster");
-import WebFont = require("webfontloader");
-
-import AnalogMeterCluster = parts.webSocketGauge.parts.AnalogMeterCluster.AnalogMeterCluster;
+import * as WebFont from "webfontloader";
+import {AnalogMeterCluster} from '../../AnalogMeterCluster/AnalogMeterCluster';
 
 require("../AnalogMeterClusterTest.html");
 
@@ -41,10 +39,10 @@ window.onload = function()
             families: AnalogMeterCluster.RequestedFontFamily,
             urls: AnalogMeterCluster.RequestedFontCSSURL 
         },
-        active: function () {webSocketGauge.test.AnalogMeterClusterTest.preloadTexture();}
+        active: function () {AnalogMeterClusterTest.preloadTexture();}
     });
 }
-namespace webSocketGauge.test.AnalogMeterClusterTest
+namespace AnalogMeterClusterTest
 {
     export function preloadTexture()
     {

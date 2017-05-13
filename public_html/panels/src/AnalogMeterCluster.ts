@@ -26,31 +26,28 @@
  
 /// <reference path="../../lib/webpackRequire.ts" />
 
-import parts = require("../../parts/AnalogMeterCluster/AnalogMeterCluster");
-import WebFont = require("webfontloader");
-import comm = require("../../lib/websocket/websocketClient");
-import cpanel = require("../../lib/ControlPanel");
-import logwin = require("../../lib/LogWindow");
+import {AnalogMeterCluster} from "../../parts/AnalogMeterCluster/AnalogMeterCluster";
+import * as WebFont from "webfontloader";
+import {ControlPanel} from "../../lib/ControlPanel";
+import {LogWindow} from "../../lib/LogWindow";
+
+import {DefiCOMWebsocket} from "../../lib/WebSocket/WebSocketCommunication";
+import {SSMWebsocket} from "../../lib/WebSocket/WebSocketCommunication";
+import {FUELTRIPWebsocket} from "../../lib/WebSocket/WebSocketCommunication";
+
+import {DefiParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
+import {SSMParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
+import {ReadModeCode} from "../../lib/WebSocket/WebSocketCommunication";
+
 require("../AnalogMeterCluster.html");
 
 window.onload = function()
 {
-    webSocketGauge.test.AnalogMeterClusterPanel.preloadFont();
+    AnalogMeterClusterPanel.preloadFont();
 }
 
-namespace webSocketGauge.test.AnalogMeterClusterPanel
+namespace AnalogMeterClusterPanel
 {
-    import AnalogMeterCluster = parts.webSocketGauge.parts.AnalogMeterCluster.AnalogMeterCluster;
-    import DefiCOMWebsocket = comm.webSocketGauge.lib.communication.DefiCOMWebsocket;
-    import SSMWebsocket = comm.webSocketGauge.lib.communication.SSMWebsocket;
-    import FUELTRIPWebsocket = comm.webSocketGauge.lib.communication.FUELTRIPWebsocket;
-    import ControlPanel = cpanel.webSocketGauge.parts.ControlPanel;
-    import LogWindow = logwin.webSocketGauge.parts.LogWindow;
-    
-    import DefiParameterCode = comm.webSocketGauge.lib.communication.DefiParameterCode;
-    import SSMParameterCode = comm.webSocketGauge.lib.communication.SSMParameterCode;
-    import ReadModeCode = comm.webSocketGauge.lib.communication.ReadModeCode;
-    
     const defiWS = new DefiCOMWebsocket();
     const ssmWS = new SSMWebsocket();
     const fuelTripWS = new FUELTRIPWebsocket();

@@ -24,109 +24,106 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-export module webSocketGauge.parts
+export class LogWindow
 {
-    export class LogWindow
+    private windowElement: HTMLDivElement;
+    private writeDate : boolean;
+
+    constructor()
     {
-        private windowElement: HTMLDivElement;
-        private writeDate : boolean;
-        
-        constructor()
-        {
-            this.windowElement = document.createElement('div');
-            document.body.appendChild(this.windowElement);
-            this.setDefaultStyle();
-            this.writeDate = false;
-        }
-        
-        private setDefaultStyle() : void
-        {
-            const style = this.windowElement.style;
-            style.position = "fixed";
-            style.background = "#000000";
-            style.display = "none";
-            style.color = "white";
-            style.overflow = "scroll";
-            style.opacity = "0.2";
-            style.transition = "all 0.5s ease";
-            style.zIndex = "10"
-            
-            this.setPosition(50,50);
-            this.setSize(80, 80, "vw", "vh");    
-            
-            //Change opacity when mouse is over
-            this.windowElement.onmouseenter = () => {style.opacity = "0.9"};
-            this.windowElement.onmouseleave = () => {style.opacity = "0.2"};        
-        }
-        
-        private getTimeString() : string
-        {
-            return new Date().toLocaleString();
-        }
-
-        public clearLog() : void
-        {
-            this.windowElement.innerHTML = "";
-        }
-        
-        public appendLog(message : string) : void
-        {
-            let strToAppend : string;
-            if (this.writeDate)
-                strToAppend = this.getTimeString() + "<br>";
-            else
-                strToAppend = "";
-            
-            strToAppend += (message + "<br>");
-            
-            this.windowElement.innerHTML += strToAppend;
-        }
-        
-        public get Style(): CSSStyleDeclaration {return this.windowElement.style}
-        public get WriteDate(): boolean {return this.writeDate}
-        public set WriteDate(flag: boolean) {this.writeDate = flag}
-       
-        public setPosition(x : number, y: number, xUnit? : string, yUnit? : string) : void
-        {            
-            if(!xUnit)
-                xUnit = "px";    
-            if(!yUnit)
-                yUnit = "px";    
-                
-            const style = this.windowElement.style;
-            style.top = x.toString() + xUnit;
-            style.left = y.toString() + yUnit;
-        }
-        
-        public setSize(width : number, height : number, widthUnit? : string, heightUnit? : string): void
-        {
-            if(!widthUnit)
-                widthUnit = "px";  
-            if(!heightUnit)
-                heightUnit = "px";  
-
-            const style = this.windowElement.style;
-            style.width = width.toString() + widthUnit;
-            style.height = height.toString() + heightUnit;
-        }
-        
-        public get Visible() : boolean
-        {
-            const style = this.windowElement.style;
-            if (style.display === "none")
-                return false;
-            else
-                return true;
-        }
-        
-        public set Visible(flag : boolean)
-        {
-            const style = this.windowElement.style;
-            if(flag)
-                style.display = "inline";
-            else
-                style.display = "none";
-        }
-        
+        this.windowElement = document.createElement('div');
+        document.body.appendChild(this.windowElement);
+        this.setDefaultStyle();
+        this.writeDate = false;
     }
+
+    private setDefaultStyle() : void
+    {
+        const style = this.windowElement.style;
+        style.position = "fixed";
+        style.background = "#000000";
+        style.display = "none";
+        style.color = "white";
+        style.overflow = "scroll";
+        style.opacity = "0.2";
+        style.transition = "all 0.5s ease";
+        style.zIndex = "10"
+
+        this.setPosition(50,50);
+        this.setSize(80, 80, "vw", "vh");    
+
+        //Change opacity when mouse is over
+        this.windowElement.onmouseenter = () => {style.opacity = "0.9"};
+        this.windowElement.onmouseleave = () => {style.opacity = "0.2"};        
+    }
+
+    private getTimeString() : string
+    {
+        return new Date().toLocaleString();
+    }
+
+    public clearLog() : void
+    {
+        this.windowElement.innerHTML = "";
+    }
+
+    public appendLog(message : string) : void
+    {
+        let strToAppend : string;
+        if (this.writeDate)
+            strToAppend = this.getTimeString() + "<br>";
+        else
+            strToAppend = "";
+
+        strToAppend += (message + "<br>");
+
+        this.windowElement.innerHTML += strToAppend;
+    }
+
+    public get Style(): CSSStyleDeclaration {return this.windowElement.style}
+    public get WriteDate(): boolean {return this.writeDate}
+    public set WriteDate(flag: boolean) {this.writeDate = flag}
+
+    public setPosition(x : number, y: number, xUnit? : string, yUnit? : string) : void
+    {            
+        if(!xUnit)
+            xUnit = "px";    
+        if(!yUnit)
+            yUnit = "px";    
+
+        const style = this.windowElement.style;
+        style.top = x.toString() + xUnit;
+        style.left = y.toString() + yUnit;
+    }
+
+    public setSize(width : number, height : number, widthUnit? : string, heightUnit? : string): void
+    {
+        if(!widthUnit)
+            widthUnit = "px";  
+        if(!heightUnit)
+            heightUnit = "px";  
+
+        const style = this.windowElement.style;
+        style.width = width.toString() + widthUnit;
+        style.height = height.toString() + heightUnit;
+    }
+
+    public get Visible() : boolean
+    {
+        const style = this.windowElement.style;
+        if (style.display === "none")
+            return false;
+        else
+            return true;
+    }
+
+    public set Visible(flag : boolean)
+    {
+        const style = this.windowElement.style;
+        if(flag)
+            style.display = "inline";
+        else
+            style.display = "none";
+    }
+
 }

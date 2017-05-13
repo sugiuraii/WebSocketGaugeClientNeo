@@ -26,8 +26,8 @@
  
 /// <reference path="../../../lib/webpackRequire.ts" />
  
-import parts = require("../../DigiTachoPanel/DigiTachoPanel");
-import WebFont = require("webfontloader");
+import {DigiTachoPanel} from "../../DigiTachoPanel/DigiTachoPanel";
+import * as WebFont from  "webfontloader";
 
 require("../DigiTachoTest.html");
 
@@ -36,8 +36,8 @@ window.onload = function()
     WebFont.load({
         custom: 
         { 
-            families: parts.webSocketGauge.parts.DigiTachoPanel.RequestedFontFamily,
-            urls: parts.webSocketGauge.parts.DigiTachoPanel.RequestedFontCSSURL 
+            families: DigiTachoPanel.RequestedFontFamily,
+            urls: DigiTachoPanel.RequestedFontCSSURL 
         },
         active: function () {webSocketGauge.test.DigiTachoTest.preloadTexture();}
     });
@@ -47,20 +47,20 @@ namespace webSocketGauge.test.DigiTachoTest
 {
     export function preloadTexture()
     {
-        PIXI.loader.add(parts.webSocketGauge.parts.DigiTachoPanel.RequestedTexturePath);;
+        PIXI.loader.add(DigiTachoPanel.RequestedTexturePath);;
         PIXI.loader.load(main);
     }
     function main()
     {
         const app = new PIXI.Application(1366,1366);
         document.body.appendChild(app.view);
-        let gaugeArray: parts.webSocketGauge.parts.DigiTachoPanel[] = new Array();
+        let gaugeArray: DigiTachoPanel[] = new Array();
         let index = 0;
         for (let j = 0; j < 6; j++)
         {
             for (let i = 0; i < 6 ; i++)
             {
-                gaugeArray.push(new parts.webSocketGauge.parts.DigiTachoPanel);
+                gaugeArray.push(new DigiTachoPanel());
                 gaugeArray[index].pivot = new PIXI.Point(300,200);
                 gaugeArray[index].scale.set(0.65, 0.65);
                 gaugeArray[index].position = new PIXI.Point(400*i+150,240*j+150);

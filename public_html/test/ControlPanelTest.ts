@@ -24,12 +24,12 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
  
-import ControlPanel = require("../lib/ControlPanel");
-import LogWindow = require("../lib/LogWindow");
+import {ControlPanel} from "../lib/ControlPanel";
+import {LogWindow} from "../lib/LogWindow";
 window.onload = () =>
 {
-    const cpanel = new ControlPanel.webSocketGauge.parts.ControlPanel();
-    const logpanel = new LogWindow.webSocketGauge.parts.LogWindow();
+    const cpanel = new ControlPanel();
+    const logpanel = new LogWindow();
     
     logpanel.Visible = true;
     cpanel.setOnLogButtonClicked(() => {logpanel.appendLog("LogButton is clicked.")});

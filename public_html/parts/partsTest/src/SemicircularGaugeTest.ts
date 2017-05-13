@@ -26,12 +26,11 @@
  
 /// <reference path="../../../lib/webpackRequire.ts" />
  
-import parts = require("../../CircularGauges/CircularGaugePanel");
-import WebFont = require("webfontloader");
+import {ThrottleGaugePanel} from "../../CircularGauges/SemiCircularGaugePanel";
+import * as WebFont from "webfontloader";
 
 require("../SemiCircularGaugeTest.html");
 
-import ThrottleGaugePanel = parts.webSocketGauge.parts.CircularGaugePanel.SemiCircularGaugePanel.ThrottleGaugePanel;
 window.onload = function()
 {
    
@@ -41,11 +40,11 @@ window.onload = function()
             families: ThrottleGaugePanel.RequestedFontFamily,
             urls: ThrottleGaugePanel.RequestedFontCSSURL 
         },
-        active : function(){webSocketGauge.test.SemiCircularGaugeTest.preloadTexture();}
+        active : function(){SemiCircularGaugeTest.preloadTexture();}
     });
 }
 
-namespace webSocketGauge.test.SemiCircularGaugeTest
+namespace SemiCircularGaugeTest
 {
     export function preloadTexture()
     {

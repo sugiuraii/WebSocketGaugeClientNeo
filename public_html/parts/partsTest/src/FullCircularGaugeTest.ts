@@ -26,12 +26,10 @@
 
 /// <reference path="../../../lib/webpackRequire.ts" />
 
-import parts = require("../../CircularGauges/CircularGaugePanel");
-import WebFont = require("webfontloader");
+import {BoostGaugePanel} from "../../CircularGauges/FullCircularGaugePanel";
+import * as WebFont from "webfontloader";
 
 require("../FullCircularGaugeTest.html");
-
-import BoostGaugePanel = parts.webSocketGauge.parts.CircularGaugePanel.FullCircularGaugePanel.BoostGaugePanel;
 
 window.onload = function()
 {
@@ -41,11 +39,11 @@ window.onload = function()
             families: BoostGaugePanel.RequestedFontFamily,
             urls: BoostGaugePanel.RequestedFontCSSURL 
         },
-        active : function(){webSocketGauge.test.FullCircularGaugeTest.preloadTexture();}
+        active : function(){FullCircularGaugeTest.preloadTexture();}
     });
 }
 
-namespace webSocketGauge.test.FullCircularGaugeTest
+namespace FullCircularGaugeTest
 {
     export function preloadTexture()
     {

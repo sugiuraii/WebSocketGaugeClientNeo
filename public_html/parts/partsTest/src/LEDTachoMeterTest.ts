@@ -26,10 +26,8 @@
  
 /// <reference path="../../../lib/webpackRequire.ts" />
 
-import parts = require("../../LEDTachoMeter/LEDTachoMeter");
-import WebFont = require("webfontloader");
-
-import LEDTachoMeter = parts.webSocketGauge.parts.LEDTachoMeter;
+import {LEDTachoMeter} from "../../LEDTachoMeter/LEDTachoMeter";
+import * as WebFont from "webfontloader";
 
 require("../LEDTachoMeterTest.html");
 
@@ -41,11 +39,11 @@ window.onload = function()
             families: LEDTachoMeter.RequestedFontFamily,
             urls: LEDTachoMeter.RequestedFontCSSURL 
         },
-        active : function(){webSocketGauge.test.LEDTachoMeterTest.preloadTexture();}
+        active : function(){LEDTachoMeterTest.preloadTexture();}
     });
 }
 
-namespace webSocketGauge.test.LEDTachoMeterTest
+namespace LEDTachoMeterTest
 {
     export function preloadTexture()
     {

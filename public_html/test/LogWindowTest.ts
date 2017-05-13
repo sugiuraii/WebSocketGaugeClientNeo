@@ -24,11 +24,11 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
  
-import LogWindow = require("../lib/LogWindow");
+import {LogWindow} from "../lib/LogWindow";
 
 window.onload = () =>
 {
-    const logWindow = new LogWindow.webSocketGauge.parts.LogWindow();
+    const logWindow = new LogWindow();
     logWindow.appendLog("aaa");
     logWindow.Visible = true;
 }

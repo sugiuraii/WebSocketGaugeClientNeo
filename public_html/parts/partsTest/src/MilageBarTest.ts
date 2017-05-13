@@ -26,10 +26,8 @@
 
 /// <reference path="../../../lib/webpackRequire.ts" />
 
-import parts = require("../../GasMilageGraph/MilageGraph");
-import WebFont = require("webfontloader");
-
-import MilageGraphPanel = parts.webSocketGauge.parts.MilageGraphPanel;
+import {MilageGraphPanel} from "../../GasMilageGraph/MilageGraph";
+import * as WebFont from "webfontloader";
 
 require("../MilageBarTest.html");
 
@@ -42,11 +40,11 @@ window.onload = function()
             families: MilageGraphPanel.RequestedFontFamily,
             urls: MilageGraphPanel.RequestedFontCSSURL 
         },    
-        active: function () {webSocketGauge.test.MilageBarTest.preloadTexture();}
+        active: function () {MilageBarTest.preloadTexture();}
     });
 }
 
-namespace webSocketGauge.test.MilageBarTest
+namespace MilageBarTest
 {
     export function preloadTexture()
     {
