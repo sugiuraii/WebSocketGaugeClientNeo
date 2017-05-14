@@ -38,6 +38,8 @@ const FUELTRIP_WS_PORT = 2014;
 
 export class MeterApplication
 {
+    private webSocketServerName : string;
+    
     private controlPanel = new ControlPanel();
     private logWindow = new LogWindow();
     
@@ -46,6 +48,31 @@ export class MeterApplication
     private arduinoWS = new WebSocketCommunication.ArduinoCOMWebsocket();
     private elm327WS = new WebSocketCommunication.ELM327COMWebsocket();
     private fueltripWS = new WebSocketCommunication.FUELTRIPWebsocket();
+    
+    constructor(webSocketServerName? : string)
+    {
+        if (typeof (webSocketServerName) === "undefined")
+            this.webSocketServerName = location.hostname;
+        else
+            this.webSocketServerName = webSocketServerName;
+            
+        this.setWSURL(this.webSocketServerName);
+        
+        this.registerWebSocketCommonEvents("DEFI", this.defiWS);
+        this.registerWebSocketCommonEvents("SSM", this.ssmWS);
+        this.registerWebSocketCommonEvents("ARDUINO", this.arduinoWS);
+        this.registerWebSocketCommonEvents("ELM327", this.elm327WS);
+        this.registerWebSocketCommonEvents("FUELTRIP", this.fueltripWS);
+    }
+    
+    private setWSURL(webSocketServerName : string)
+    {
+        this.defiWS.URL = "ws://" + webSocketServerName + ":" + DEFICOM_WS_PORT.toString() + "/"; 
+        this.ssmWS.URL = "ws://" + webSocketServerName + ":" + SSMCOM_WS_PORT.toString() + "/"; 
+        this.arduinoWS.URL = "ws://" + webSocketServerName + ":" + ARDUINOCOM_WS_PORT.toString() + "/"; 
+        this.elm327WS.URL = "ws://" + webSocketServerName + ":" + ELM327COM_WS_PORT.toString() + "/"; 
+        this.fueltripWS.URL = "ws://" + webSocketServerName + ":" + FUELTRIP_WS_PORT.toString() + "/"; 
+    }
     
     private registerWebSocketCommonEvents(logPrefix : string, wsObj: WebSocketCommunication.WebsocketCommon)
     {
