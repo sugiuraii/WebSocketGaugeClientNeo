@@ -35,9 +35,9 @@ import {DefiCOMWebsocket} from "../../lib/WebSocket/WebSocketCommunication";
 import {SSMWebsocket} from "../../lib/WebSocket/WebSocketCommunication";
 import {FUELTRIPWebsocket} from "../../lib/WebSocket/WebSocketCommunication";
 
-import {DefiParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
-import {SSMParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
-import {ReadModeCode} from "../../lib/WebSocket/WebSocketCommunication";
+import {DefiParameterCode} from "../../lib/WebSocket/ParameterCode";
+import {SSMParameterCode} from "../../lib/WebSocket/ParameterCode";
+import {ReadModeCode} from "../../lib/WebSocket/ParameterCode";
 
 require("../AnalogMeterCluster.html");
 

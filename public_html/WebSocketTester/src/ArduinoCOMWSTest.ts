@@ -32,15 +32,14 @@ window.onload = function()
     wsTest.main();
 }
 
-import * as WebSocketCommunication from '../../lib/WebSocket/WebSocketCommunication';
+import {ArduinoCOMWebsocket} from '../../lib/WebSocket/WebSocketCommunication';
+import {ArduinoParameterCode} from '../../lib/WebSocket/ParameterCode'
 import * as $ from "jquery";
 
 require('../ArduinoCOMWSTest.html');
 
 export namespace webSocketGauge.test
 {
-    import ArduinoCOMWebsocket = WebSocketCommunication.ArduinoCOMWebsocket;
-    import ArduinoParameterCode = WebSocketCommunication.ArduinoParameterCode;
     
     export class ArduinoCOMWSTest
     {    

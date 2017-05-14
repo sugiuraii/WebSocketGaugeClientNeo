@@ -200,12 +200,13 @@ abstract class DefiSSMWebsocketCommon extends WebsocketCommon
                     this.valPacketPreviousTimeStamp = nowTime;
                 };
 
-                let receivedVALJSON: JSONFormats.VALJSONMessage = receivedJson;
+                const receivedVALJSON: JSONFormats.VALJSONMessage = receivedJson;
 
                 // Invoke VALPacketReceived Event
                 if ( typeof(this.onVALPacketReceived) !== "undefined" )
                     this.OnVALPacketReceived(this.valPacketIntervalTime, receivedVALJSON.val);
-
+                
+                    // Store value into interpolation buffers
                 for (let key in receivedVALJSON.val)
                 {
                     const val: number = Number(receivedVALJSON.val[key]);
@@ -345,12 +346,83 @@ export class FUELTRIPWebsocket extends WebsocketCommon
     //private modePrefix = "FUELTRIP";
     private onMomentFUELTRIPPacketReceived: (momentGasMilage : number, totalGas : number, totalTrip : number, totalGasMilage : number)=>void;
     private onSectFUELTRIPPacketReceived: (sectSpan : number, sectTrip : number[], sectGas : number[], sectGasMilage: number[])=>void;
+        
+    private recordIntervalTimeEnabled : boolean;
+    //Internal state
+    private momentFUELTripPacketPreviousTimeStamp : number;
+    private momentFUELTripPacketIntervalTime : number;
 
+    //Interpolate value buffer (Momnt fuel trip only)
+    private momentGasMilageInterpolateBuffer = new Interpolation.VALInterpolationBuffer();
+    private totalGas = 0;
+    private totalTrip = 0;
+    private totalGasMilage = 0;
+    //Stored sect fuelTrip data
+    private sectSpan : number = 0;
+    private sectTrip : number[] = new Array();
+    private sectGas : number[] = new Array();
+    private sectGasMilage : number[] = new Array();
+    
+    get RecordIntervalTimeEnabled(): boolean { return this.recordIntervalTimeEnabled;}
+    set RecordIntervalTimeEnabled(val : boolean) { this.recordIntervalTimeEnabled = val;}
     get OnMomentFUELTRIPPacketReceived() { return this.onMomentFUELTRIPPacketReceived;}
     set OnMomentFUELTRIPPacketReceived(func) { this.onMomentFUELTRIPPacketReceived = func; }
     get OnSectFUELTRIPPacketReceived() { return this.onSectFUELTRIPPacketReceived;}
     set OnSectFUELTRIPPacketReceived(func) { this.onSectFUELTRIPPacketReceived = func; }        
-
+    
+    constructor()
+    {
+        super();
+        this.recordIntervalTimeEnabled = true;
+        this.momentFUELTripPacketPreviousTimeStamp = window.performance.now();
+        this.momentFUELTripPacketIntervalTime = 0;
+    }
+    
+    public EnableInterpolate() : void
+    {
+        this.momentGasMilageInterpolateBuffer.InterpolateEnabled = true;
+    }
+    public DisableInterpolate() : void
+    {
+        this.momentGasMilageInterpolateBuffer.InterpolateEnabled = false;
+    }
+    public getMomentGasMilage(timestamp : number) : number
+    {
+        return this.momentGasMilageInterpolateBuffer.getVal(timestamp);
+    }
+    public getRawMomentGasMilage() : number
+    {
+        return this.momentGasMilageInterpolateBuffer.getRawVal();
+    }
+    public getTotalTrip() : number
+    {
+        return this.totalTrip;
+    }
+    public getTotalGas() : number
+    {
+        return this.totalGas;
+    }
+    public getTotalGasMilage() : number
+    {
+        return this.totalGasMilage;
+    }
+    public getSectSpan() : number
+    {
+        return this.sectSpan;
+    }
+    public getSectTrip() : number[]
+    {
+        return this.sectTrip;
+    }
+    public getSectGas() : number[]
+    {
+        return this.sectGas;
+    }
+    public getSectGasMilage() : number[]
+    {
+        return this.sectGasMilage;
+    }
+    
     public SendSectStoreMax(storeMax : number): void
     {
         if (!this.IsConnetced)
@@ -379,7 +451,17 @@ export class FUELTRIPWebsocket extends WebsocketCommon
         {
             case ("MOMENT_FUELTRIP") :
             {
+                if (this.recordIntervalTimeEnabled)
+                {
+                    //Update interval time
+                    var nowTime = window.performance.now();
+                    this.momentFUELTripPacketIntervalTime = nowTime - this.momentFUELTripPacketPreviousTimeStamp;
+                    this.momentFUELTripPacketPreviousTimeStamp = nowTime;
+                }
+                
                 const jsonObj: JSONFormats.MomentFuelTripJSONMessage = JSON.parse(msg);
+                
+                // Invoke MomentFUELTRIPPacketReceived Event
                 if (typeof (this.onMomentFUELTRIPPacketReceived) !== "undefined")
                 {
                     this.onMomentFUELTRIPPacketReceived(jsonObj.moment_gasmilage,
@@ -387,11 +469,19 @@ export class FUELTRIPWebsocket extends WebsocketCommon
                     jsonObj.total_trip,
                     jsonObj.total_gasmilage);
                 }
+                
+                //Store buffers
+                this.momentGasMilageInterpolateBuffer.setVal(jsonObj.moment_gasmilage);
+                this.totalGas = jsonObj.total_gas;
+                this.totalTrip = jsonObj.total_trip;
+                this.totalGasMilage = jsonObj.total_gasmilage;
+                
                 break;
             }
             case ("SECT_FUELTRIP") :
             {
                 const jsonObj: JSONFormats.SectFuelTripJSONMessage = JSON.parse(msg);
+                // Invoke SECTFUELTRIPPacketReceived Event
                 if (typeof (this.onSectFUELTRIPPacketReceived) !== "undefined")
                 {
                     this.onSectFUELTRIPPacketReceived(jsonObj.sect_span,
@@ -399,6 +489,13 @@ export class FUELTRIPWebsocket extends WebsocketCommon
                     jsonObj.sect_gas,
                     jsonObj.sect_gasmilage);
                 }
+                
+                //Store values to buffer
+                this.sectSpan = jsonObj.sect_span;
+                this.sectTrip = jsonObj.sect_trip;
+                this.sectGas = jsonObj.sect_gas;
+                this.sectGasMilage = jsonObj.sect_gasmilage;
+                
                 break;
             }
             case("ERR"):
@@ -420,186 +517,3 @@ export class FUELTRIPWebsocket extends WebsocketCommon
         }
     }
 }
-
-//Define string based enum of ParameterCode
-export namespace DefiParameterCode
-{
-    export const Manifold_Absolute_Pressure = "Manifold_Absolute_Pressure";
-    export const Engine_Speed = "Engine_Speed";
-    export const Oil_Pressure = "Oil_Pressure";
-    export const Fuel_Rail_Pressure = "Fuel_Rail_Pressure";
-    export const Exhaust_Gas_Temperature = "Exhaust_Gas_Temperature";
-    export const Oil_Temperature = "Oil_Temperature";
-    export const Coolant_Temperature = "Coolant_Temperature";
-}
-
-export namespace ArduinoParameterCode
-{
-    export const Engine_Speed = "Engine_Speed";
-    export const Vehicle_Speed = "Vehicle_Speed";
-    export const Manifold_Absolute_Pressure = "Manifold_Absolute_Pressure";
-    export const Coolant_Temperature = "Coolant_Temperature";
-    export const Oil_Temperature = "Oil_Temperature";
-    export const Oil_Temperature2 = "Oil_Temperature2";
-    export const Oil_Pressure = "Oil_Pressure";
-    export const Fuel_Rail_Pressure = "Fuel_Rail_Pressure";
-}
-
-export namespace SSMParameterCode
-{
-    export const Engine_Load = "Engine_Load";
-    export const Coolant_Temperature = "Coolant_Temperature";
-    export const Air_Fuel_Correction_1 = "Air_Fuel_Correction_1";
-    export const Air_Fuel_Learning_1 = "Air_Fuel_Learning_1";
-    export const Air_Fuel_Correction_2 = "Air_Fuel_Correction_2";
-    export const Air_Fuel_Learning_2 = "Air_Fuel_Learning_2";
-    export const Manifold_Absolute_Pressure = "Manifold_Absolute_Pressure";
-    export const Engine_Speed = "Engine_Speed";
-    export const Vehicle_Speed = "Vehicle_Speed";
-    export const Ignition_Timing = "Ignition_Timing";
-    export const Intake_Air_Temperature = "Intake_Air_Temperature";
-    export const Mass_Air_Flow = "Mass_Air_Flow";
-    export const Throttle_Opening_Angle = "Throttle_Opening_Angle";
-    export const Front_O2_Sensor_1 = "Front_O2_Sensor_1";
-    export const Rear_O2_Sensor = "Rear_O2_Sensor";
-    export const Front_O2_Sensor_2 = "Front_O2_Sensor_2";
-    export const Battery_Voltage = "Battery_Voltage";
-    export const Air_Flow_Sensor_Voltage = "Air_Flow_Sensor_Voltage";
-    export const Throttle_Sensor_Voltage = "Throttle_Sensor_Voltage";
-    export const Differential_Pressure_Sensor_Voltage = "Differential_Pressure_Sensor_Voltage";
-    export const Fuel_Injection_1_Pulse_Width = "Fuel_Injection_1_Pulse_Width";
-    export const Fuel_Injection_2_Pulse_Width = "Fuel_Injection_2_Pulse_Width";
-    export const Knock_Correction = "Knock_Correction";
-    export const Atmospheric_Pressure = "Atmospheric_Pressure";
-    export const Manifold_Relative_Pressure = "Manifold_Relative_Pressure";
-    export const Pressure_Differential_Sensor = "Pressure_Differential_Sensor";
-    export const Fuel_Tank_Pressure = "Fuel_Tank_Pressure";
-    export const CO_Adjustment = "CO_Adjustment";
-    export const Learned_Ignition_Timing = "Learned_Ignition_Timing";
-    export const Accelerator_Opening_Angle = "Accelerator_Opening_Angle";
-    export const Fuel_Temperature = "Fuel_Temperature";
-    export const Front_O2_Heater_1 = "Front_O2_Heater_1";
-    export const Rear_O2_Heater_Current = "Rear_O2_Heater_Current";
-    export const Front_O2_Heater_2 = "Front_O2_Heater_2";
-    export const Fuel_Level = "Fuel_Level";
-    export const Primary_Wastegate_Duty_Cycle = "Primary_Wastegate_Duty_Cycle";
-    export const Secondary_Wastegate_Duty_Cycle = "Secondary_Wastegate_Duty_Cycle";
-    export const CPC_Valve_Duty_Ratio = "CPC_Valve_Duty_Ratio";
-    export const Tumble_Valve_Position_Sensor_Right = "Tumble_Valve_Position_Sensor_Right";
-    export const Tumble_Valve_Position_Sensor_Left = "Tumble_Valve_Position_Sensor_Left";
-    export const Idle_Speed_Control_Valve_Duty_Ratio = "Idle_Speed_Control_Valve_Duty_Ratio";
-    export const Air_Fuel_Lean_Correction = "Air_Fuel_Lean_Correction";
-    export const Air_Fuel_Heater_Duty = "Air_Fuel_Heater_Duty";
-    export const Idle_Speed_Control_Valve_Step = "Idle_Speed_Control_Valve_Step";
-    export const Number_of_Ex_Gas_Recirc_Steps = "Number_of_Ex_Gas_Recirc_Steps";
-    export const Alternator_Duty = "Alternator_Duty";
-    export const Fuel_Pump_Duty = "Fuel_Pump_Duty";
-    export const Intake_VVT_Advance_Angle_Right = "Intake_VVT_Advance_Angle_Right";
-    export const Intake_VVT_Advance_Angle_Left = "Intake_VVT_Advance_Angle_Left";
-    export const Intake_OCV_Duty_Right = "Intake_OCV_Duty_Right";
-    export const Intake_OCV_Duty_Left = "Intake_OCV_Duty_Left";
-    export const Intake_OCV_Current_Right = "Intake_OCV_Current_Right";
-    export const Intake_OCV_Current_Left = "Intake_OCV_Current_Left";
-    export const Air_Fuel_Sensor_1_Current = "Air_Fuel_Sensor_1_Current";
-    export const Air_Fuel_Sensor_2_Current = "Air_Fuel_Sensor_2_Current";
-    export const Air_Fuel_Sensor_1_Resistance = "Air_Fuel_Sensor_1_Resistance";
-    export const Air_Fuel_Sensor_2_Resistance = "Air_Fuel_Sensor_2_Resistance";
-    export const Air_Fuel_Sensor_1 = "Air_Fuel_Sensor_1";
-    export const Air_Fuel_Sensor_2 = "Air_Fuel_Sensor_2";
-    export const Gear_Position = "Gear_Position";
-    export const A_F_Sensor_1_Heater_Current = "A_F_Sensor_1_Heater_Current";
-    export const A_F_Sensor_2_Heater_Current = "A_F_Sensor_2_Heater_Current";
-    export const Roughness_Monitor_Cylinder_1 = "Roughness_Monitor_Cylinder_1";
-    export const Roughness_Monitor_Cylinder_2 = "Roughness_Monitor_Cylinder_2";
-    export const Air_Fuel_Correction_3 = "Air_Fuel_Correction_3";
-    export const Air_Fuel_Learning_3 = "Air_Fuel_Learning_3";
-    export const Rear_O2_Heater_Voltage = "Rear_O2_Heater_Voltage";
-    export const Air_Fuel_Adjustment_Voltage = "Air_Fuel_Adjustment_Voltage";
-    export const Roughness_Monitor_Cylinder_3 = "Roughness_Monitor_Cylinder_3";
-    export const Roughness_Monitor_Cylinder_4 = "Roughness_Monitor_Cylinder_4";
-    export const Throttle_Motor_Duty = "Throttle_Motor_Duty";
-    export const Throttle_Motor_Voltage = "Throttle_Motor_Voltage";
-    export const Sub_Throttle_Sensor = "Sub_Throttle_Sensor";
-    export const Main_Throttle_Sensor = "Main_Throttle_Sensor";
-    export const Sub_Accelerator_Sensor = "Sub_Accelerator_Sensor";
-    export const Main_Accelerator_Sensor = "Main_Accelerator_Sensor";
-    export const Brake_Booster_Pressure = "Brake_Booster_Pressure";
-    export const Fuel_Rail_Pressure = "Fuel_Rail_Pressure";
-    export const Exhaust_Gas_Temperature = "Exhaust_Gas_Temperature";
-    export const Cold_Start_Injector = "Cold_Start_Injector";
-    export const SCV_Step = "SCV_Step";
-    export const Memorised_Cruise_Speed = "Memorised_Cruise_Speed";
-    export const Exhaust_VVT_Advance_Angle_Right = "Exhaust_VVT_Advance_Angle_Right";
-    export const Exhaust_VVT_Advance_Angle_Left = "Exhaust_VVT_Advance_Angle_Left";
-    export const Exhaust_OCV_Duty_Right = "Exhaust_OCV_Duty_Right";
-    export const Exhaust_OCV_Duty_Left = "Exhaust_OCV_Duty_Left";
-    export const Exhaust_OCV_Current_Right = "Exhaust_OCV_Current_Right";
-    export const Exhaust_OCV_Current_Left = "Exhaust_OCV_Current_Left";
-    export const Switch_P0x061 = "Switch_P0x061";
-    export const Switch_P0x062 = "Switch_P0x062";
-    export const Switch_P0x063 = "Switch_P0x063";
-    export const Switch_P0x064 = "Switch_P0x064";
-    export const Switch_P0x065 = "Switch_P0x065";
-    export const Switch_P0x066 = "Switch_P0x066";
-    export const Switch_P0x067 = "Switch_P0x067";
-    export const Switch_P0x068 = "Switch_P0x068";
-    export const Switch_P0x069 = "Switch_P0x069";
-    export const Switch_P0x120 = "Switch_P0x120";
-    export const Switch_P0x121 = "Switch_P0x121";
-}
-
-export namespace OBDIIParameterCode
-{
-    export const Engine_Load = "Engine_Load";
-    export const Coolant_Temperature = "Coolant_Temperature";
-    export const Air_Fuel_Correction_1 = "Air_Fuel_Correction_1";
-    export const Air_Fuel_Learning_1 = "Air_Fuel_Learning_1";
-    export const Air_Fuel_Correction_2 = "Air_Fuel_Correction_2";
-    export const Air_Fuel_Learning_2 = "Air_Fuel_Learning_2";
-    export const Fuel_Tank_Pressure = "Fuel_Tank_Pressure";
-    export const Manifold_Absolute_Pressure = "Manifold_Absolute_Pressure";
-    export const Engine_Speed = "Engine_Speed";
-    export const Vehicle_Speed = "Vehicle_Speed";
-    export const Ignition_Timing = "Ignition_Timing";
-    export const Intake_Air_Temperature = "Intake_Air_Temperature";
-    export const Mass_Air_Flow = "Mass_Air_Flow";
-    export const Throttle_Opening_Angle = "Throttle_Opening_Angle";
-    export const Run_time_since_engine_start = "Run_time_since_engine_start";
-    export const Distance_traveled_with_MIL_on = "Distance_traveled_with_MIL_on";
-    export const Fuel_Rail_Pressure = "Fuel_Rail_Pressure";
-    export const Fuel_Rail_Pressure_diesel = "Fuel_Rail_Pressure_diesel";
-    export const Commanded_EGR = "Commanded_EGR";
-    export const EGR_Error = "EGR_Error";
-    export const Commanded_evaporative_purge = "Commanded_evaporative_purge";
-    export const Fuel_Level_Input = "Fuel_Level_Input";
-    export const Number_of_warmups_since_codes_cleared = "Number_of_warmups_since_codes_cleared";
-    export const Distance_traveled_since_codes_cleared = "Distance_traveled_since_codes_cleared";
-    export const Evap_System_Vapor_Pressure = "Evap_System_Vapor_Pressure";
-    export const Atmospheric_Pressure = "Atmospheric_Pressure";
-    export const Catalyst_TemperatureBank_1_Sensor_1 = "Catalyst_TemperatureBank_1_Sensor_1";
-    export const Catalyst_TemperatureBank_2_Sensor_1 = "Catalyst_TemperatureBank_2_Sensor_1";
-    export const Catalyst_TemperatureBank_1_Sensor_2 = "Catalyst_TemperatureBank_1_Sensor_2";
-    export const Catalyst_TemperatureBank_2_Sensor_2 = "Catalyst_TemperatureBank_2_Sensor_2";
-    export const Battery_Voltage = "Battery_Voltage";
-    export const Absolute_load_value = "Absolute_load_value";
-    export const Command_equivalence_ratio = "Command_equivalence_ratio";
-    export const Relative_throttle_position = "Relative_throttle_position";
-    export const Ambient_air_temperature = "Ambient_air_temperature";
-    export const Absolute_throttle_position_B = "Absolute_throttle_position_B";
-    export const Absolute_throttle_position_C = "Absolute_throttle_position_C";
-    export const Accelerator_pedal_position_D = "Accelerator_pedal_position_D";
-    export const Accelerator_pedal_position_E = "Accelerator_pedal_position_E";
-    export const Accelerator_pedal_position_F = "Accelerator_pedal_position_F";
-    export const Commanded_throttle_actuator = "Commanded_throttle_actuator";
-    export const Time_run_with_MIL_on = "Time_run_with_MIL_on";
-    export const Time_since_trouble_codes_cleared = "Time_since_trouble_codes_cleared";
-    export const Ethanol_fuel_percent = "Ethanol_fuel_percent";
-}
-
-export namespace ReadModeCode
-{
-    export const SLOW = "SLOW";
-    export const FAST = "FAST";
-}
-
-

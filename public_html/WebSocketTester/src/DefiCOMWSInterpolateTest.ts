@@ -26,7 +26,9 @@
 
 /// <reference path="../../lib/webpackRequire.ts" />
  
-import * as WebSocketCommunication from '../../lib/WebSocket/WebSocketCommunication';
+import {DefiCOMWebsocket} from '../../lib/WebSocket/WebSocketCommunication';
+import {DefiParameterCode} from '../../lib/WebSocket/ParameterCode';
+
 import * as $ from "jquery";
 require('../DefiCOMWSInterpolateTest.html');
 
@@ -38,8 +40,6 @@ window.onload = () =>
 
 namespace webSocketGauge.test
 {
-    import DefiCOMWebsocket = WebSocketCommunication.DefiCOMWebsocket;
-    import DefiParameterCode = WebSocketCommunication.DefiParameterCode;
     export class DefiCOMWSTestInterpolate
     {    
         public webSocket : DefiCOMWebsocket;

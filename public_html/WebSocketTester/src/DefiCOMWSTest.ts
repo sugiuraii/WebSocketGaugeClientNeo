@@ -31,15 +31,14 @@ window.onload = function()
     let wsTest = new webSocketGauge.test.DefiCOMWSTest();
     wsTest.main();
 }
+import {DefiCOMWebsocket} from '../../lib/WebSocket/WebSocketCommunication';
+import {DefiParameterCode} from '../../lib/WebSocket/ParameterCode';
 
-import * as WebSocketCommunication from '../../lib/WebSocket/WebSocketCommunication';
 import * as $ from "jquery";
 require('../DefiCOMWSTest.html');
 
 export module webSocketGauge.test
 {
-    import DefiCOMWebsocket = WebSocketCommunication.DefiCOMWebsocket;
-    import DefiParameterCode = WebSocketCommunication.DefiParameterCode;
     
     export class DefiCOMWSTest
     {    

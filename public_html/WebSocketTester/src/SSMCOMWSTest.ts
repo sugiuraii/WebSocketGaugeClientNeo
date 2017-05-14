@@ -26,7 +26,8 @@
  
  /// <reference path="../../lib/webpackRequire.ts" />
 
-import * as WebSocketCommunication from '../../lib/WebSocket/WebSocketCommunication';
+import {SSMWebsocket} from "../../lib/WebSocket/WebSocketCommunication";
+import {SSMParameterCode} from "../../lib/WebSocket/ParameterCode";
 import * as $ from "jquery";
 require('../SSMCOMWSTest.html');
 
@@ -38,9 +39,6 @@ window.onload = function()
 
 namespace webSocketGauge.test
 {
-    import SSMWebsocket = WebSocketCommunication.SSMWebsocket;
-    import SSMParameterCode = WebSocketCommunication.SSMParameterCode;
-
     export class SSMCOMWSTest
     {    
         private webSocket : SSMWebsocket;

@@ -26,7 +26,8 @@
 
 /// <reference path="../../lib/webpackRequire.ts" />
 
-import * as WebSocketCommunication from '../../lib/WebSocket/WebSocketCommunication';
+import {ELM327COMWebsocket} from "../../lib/WebSocket/WebSocketCommunication";
+import {OBDIIParameterCode} from "../../lib/WebSocket/ParameterCode";
 import * as $ from "jquery";
 require('../ELM327COMWSTest.html');
 
@@ -38,9 +39,6 @@ window.onload = function()
 
 namespace webSocketGauge.test
 {
-    import ELM327COMWebsocket = WebSocketCommunication.ELM327COMWebsocket;
-    import OBDIIParameterCode = WebSocketCommunication.OBDIIParameterCode;
-
     export class ELM327COMWSTest
     {    
         private webSocket : ELM327COMWebsocket;

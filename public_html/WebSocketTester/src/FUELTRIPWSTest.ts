@@ -26,7 +26,7 @@
  
  /// <reference path="../../lib/webpackRequire.ts" />
 
-import * as WebSocketCommunication from '../../lib/WebSocket/WebSocketCommunication';
+import {FUELTRIPWebsocket} from '../../lib/WebSocket/WebSocketCommunication';
 import * as $ from "jquery";
 require('../FUELTRIPWSTest.html');
 
@@ -38,7 +38,6 @@ window.onload = function()
 
 namespace webSocketGauge.test
 {
-    import FUELTRIPWebsocket = WebSocketCommunication.FUELTRIPWebsocket;
     export class FUELTRIPWSTest
     {
         private webSocket : FUELTRIPWebsocket;
