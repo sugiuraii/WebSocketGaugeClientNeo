@@ -32,7 +32,7 @@ window.onload = function()
     wsTest.main();
 }
 import {DefiCOMWebsocket} from '../../lib/WebSocket/WebSocketCommunication';
-import {DefiParameterCode} from '../../lib/WebSocket/ParameterCode';
+import {DefiParameterCode} from '../../lib/WebSocket/WebSocketCommunication';
 
 import * as $ from "jquery";
 require('../DefiCOMWSTest.html');

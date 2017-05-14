@@ -27,7 +27,7 @@
  /// <reference path="../../lib/webpackRequire.ts" />
 
 import {SSMWebsocket} from "../../lib/WebSocket/WebSocketCommunication";
-import {SSMParameterCode} from "../../lib/WebSocket/ParameterCode";
+import {SSMParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
 import * as $ from "jquery";
 require('../SSMCOMWSTest.html');
 

@@ -33,7 +33,7 @@ window.onload = function()
 }
 
 import {ArduinoCOMWebsocket} from '../../lib/WebSocket/WebSocketCommunication';
-import {ArduinoParameterCode} from '../../lib/WebSocket/ParameterCode'
+import {ArduinoParameterCode} from '../../lib/WebSocket/WebSocketCommunication';
 import * as $ from "jquery";
 
 require('../ArduinoCOMWSTest.html');

@@ -27,7 +27,7 @@
 /// <reference path="../../lib/webpackRequire.ts" />
  
 import {DefiCOMWebsocket} from '../../lib/WebSocket/WebSocketCommunication';
-import {DefiParameterCode} from '../../lib/WebSocket/ParameterCode';
+import {DefiParameterCode} from '../../lib/WebSocket/WebSocketCommunication';
 
 import * as $ from "jquery";
 require('../DefiCOMWSInterpolateTest.html');

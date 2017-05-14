@@ -27,7 +27,7 @@
 /// <reference path="../../lib/webpackRequire.ts" />
 
 import {ELM327COMWebsocket} from "../../lib/WebSocket/WebSocketCommunication";
-import {OBDIIParameterCode} from "../../lib/WebSocket/ParameterCode";
+import {OBDIIParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
 import * as $ from "jquery";
 require('../ELM327COMWSTest.html');
 
