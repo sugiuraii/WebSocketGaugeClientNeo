@@ -36,6 +36,8 @@ const SSMCOM_WS_PORT = 2013;
 const ELM327COM_WS_PORT = 2016;
 const FUELTRIP_WS_PORT = 2014;
 
+const WEBSOCKET_CHECK_INTERVAL = 1000;
+
 export class MeterApplication
 {
     private webSocketServerName : string;
@@ -47,7 +49,151 @@ export class MeterApplication
     private ssmWS = new WebSocketCommunication.SSMWebsocket();
     private arduinoWS = new WebSocketCommunication.ArduinoCOMWebsocket();
     private elm327WS = new WebSocketCommunication.ELM327COMWebsocket();
-    private fueltripWS = new WebSocketCommunication.FUELTRIPWebsocket();
+    private fueltripWS = new WebSocketCommunication.FUELTRIPWebsocket();    
+    get DefiWS() {return this.defiWS}
+    get SSMWS() {return this.ssmWS}
+    get ArduinoWS() {return this.arduinoWS}
+    get ELM327WS() { return this.elm327WS}
+    get FUELTRIPWS() {return this.fueltripWS}
+    public IsDefiWSEnabled = false;
+    public IsSSMWSEnabled = false;
+    public IsArudinoWSEnabled = false;
+    public IsELM327WSEnabled = false;
+    public IsFUELTRIPWSEnabled = false;
+
+    public PreloadWebFontFamiliy : string[] = new Array();
+    public PreloadWebFontCSSURL : string[] = new Array();
+    public PreloadTexturePath : string[] = new Array();
+        
+    private defiParameterCodeList: {code: string, interpolate : boolean}[] = new Array();
+    private arduinoParameterCodeList : {code : string, interpolate : boolean}[] = new Array(); 
+    private ssmParameterCodeList : {code : string, readMode : string, interpolate : boolean}[] = new Array();
+    private elm327ParameterCodeList : {code : string, readMode : string, interpolate : boolean}[] = new Array();
+    
+    public registerDefiParameterCode(code : string, interpolate : boolean)
+    {
+        this.defiParameterCodeList.push({code, interpolate});
+    }
+    public registerArduinoParameterCode(code : string, interpolate : boolean)
+    {
+        this.arduinoParameterCodeList.push({code, interpolate});
+    }
+    public registerSSMParameterCode(code : string, readMode : string, interpolate : boolean)
+    {
+        this.ssmParameterCodeList.push({code, readMode, interpolate});
+    }
+    public registerELM327ParameterCode(code : string, readMode : string, interpolate : boolean)
+    {
+        this.elm327ParameterCodeList.push({code, readMode, interpolate});
+    }
+    
+    public run()
+    {
+        // Check websocket staus every 1sec
+        window.setInterval(this.checkWebSocketStatus(), WEBSOCKET_CHECK_INTERVAL);
+        
+        // Preload fonts and textures
+        this.preloadFonts();
+    }
+    
+    private checkWebSocketStatus()
+    {
+        this.controlPanel.setDefiIndicatorStatus(this.defiWS.getReadyState());
+        this.controlPanel.setSSMIndicatorStatus(this.ssmWS.getReadyState());
+        this.controlPanel.setArduinoIndicatorStatus(this.arduinoWS.getReadyState());
+        this.controlPanel.setELM327IndicatorStatus(this.elm327WS.getReadyState());
+        this.controlPanel.setFUELTRIPIndicatorStatus(this.fueltripWS.getReadyState());
+    }
+    
+    private preloadFonts()
+    {
+        WebFont.load(
+            {
+                custom: 
+                { 
+                    families: this.PreloadWebFontFamiliy,
+                    urls: this.PreloadWebFontCSSURL 
+                },
+                active: () => {this.preloadTextures}
+            }
+        );
+    }
+    
+    private preloadTextures()
+    {
+        for( let texturePath of this.PreloadTexturePath)
+            PIXI.loader.add(texturePath);
+            
+        PIXI.loader.load(this.connectWebSocket);
+    }
+
+    private connectWebSocket()
+    {
+        if (this.IsDefiWSEnabled)
+            this.connectDefiArduinoWebSocket("DefiWS", this.defiParameterCodeList, this.defiWS);
+        if (this.IsArudinoWSEnabled)
+            this.connectDefiArduinoWebSocket("ArduinoWS", this.arduinoParameterCodeList, this.arduinoWS);
+        if (this.IsSSMWSEnabled)
+            this.connectSSMELM327WebSocket("SSMWS", this.ssmParameterCodeList, this.ssmWS);
+        if (this.IsELM327WSEnabled)
+            this.connectSSMELM327WebSocket("ELM327WS", this.elm327ParameterCodeList, this.elm327WS);
+        if (this.IsFUELTRIPWSEnabled
+            this.connectFUELTRIPWebSocket();
+    }
+    
+    private connectDefiArduinoWebSocket(logPrefix : string, parameterCodeList : {code: string, interpolate : boolean}[] , webSocketObj: WebSocketCommunication.DefiCOMWebsocket)
+    {
+        webSocketObj.OnWebsocketOpen = () =>
+        {
+            this.logWindow.appendLog(logPrefix + " is connected. SendWSSend after 3sec");
+            window.setTimeout( () => 
+            {
+                for (let item of parameterCodeList)
+                {
+                    webSocketObj.SendWSSend(item.code, true);
+                    if (item.interpolate)
+                        webSocketObj.EnableInterpolate(item.code)
+                    else
+                        webSocketObj.DisableInterpolate(item.code)
+                }
+            });
+        }
+        webSocketObj.OnWebsocketClose = () =>
+        {
+            this.logWindow.appendLog(logPrefix + " is disconnected. Reconnect after 5sec...");                
+            window.setTimeout(() => webSocketObj.Connect(), 5000);
+        }
+
+        this.logWindow.appendLog(logPrefix + " connect...");
+        webSocketObj.Connect();
+    }
+    
+    private connectSSMELM327WebSocket(logPrefix : string, parameterCodeList : {code: string, readMode: string, interpolate : boolean}[] , webSocketObj: WebSocketCommunication.SSMWebsocket)
+    {
+        webSocketObj.OnWebsocketOpen = () =>
+        {
+            this.logWindow.appendLog(logPrefix + " is connected. SendWSSend after 3sec");
+            window.setTimeout( () => 
+            {
+                for (let item of parameterCodeList)
+                {
+                    webSocketObj.SendCOMRead(item.code, item.readMode, true);
+                    if (item.interpolate)
+                        webSocketObj.EnableInterpolate(item.code)
+                    else
+                        webSocketObj.DisableInterpolate(item.code)
+                }
+            });
+        }
+        webSocketObj.OnWebsocketClose = () =>
+        {
+            this.logWindow.appendLog(logPrefix + " is disconnected. Reconnect after 5sec...");                
+            window.setTimeout(() => webSocketObj.Connect(), 5000);
+        }
+
+        this.logWindow.appendLog(logPrefix + " connect...");
+        webSocketObj.Connect();
+    }    
     
     constructor(webSocketServerName? : string)
     {
