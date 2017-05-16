@@ -58,20 +58,17 @@ export class ControlPanel
         const style = indicator.style;
         switch (status)
         {
-            case -1: //Websocket obj is undefined
-                style.color = "gray";
-                break;
-            case 0://CONNECTING
+            case WebSocket.CONNECTING://CONNECTING
                 style.color = "blue";
                 break;
-            case 1://OPEN
+            case WebSocket.OPEN://OPEN
                 style.color = "green";
                 break;
-            case 2://CLOSING
+            case WebSocket.CLOSING://CLOSING
                 style.color = "orange";
                 break;
-            case 3://CLOSED
-                style.color = "red";
+            case WebSocket.CLOSED://CLOSED
+                style.color = "grey";
                 break;
             default:
                 // this never happens
