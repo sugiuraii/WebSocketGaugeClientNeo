@@ -93,7 +93,9 @@ export class MeterApplication
     {
         this.elm327ParameterCodeList.push({code, readMode, interpolate});
     }
-         
+    
+    protected CreateMainPanel : () => void;
+    
     constructor(webSocketServerName? : string)
     {
         //Set url of websocket
@@ -111,8 +113,7 @@ export class MeterApplication
         this.registerWebSocketCommonEvents("SSM", this.ssmWS);
         this.registerWebSocketCommonEvents("ARDUINO", this.arduinoWS);
         this.registerWebSocketCommonEvents("ELM327", this.elm327WS);
-        this.registerWebSocketCommonEvents("FUELTRIP", this.fueltripWS);
-        
+        this.registerWebSocketCommonEvents("FUELTRIP", this.fueltripWS); 
     }
     
     private setWSURL(webSocketServerName : string)
@@ -199,6 +200,7 @@ export class MeterApplication
     
     private preloadFonts()
     {
+        console.debug("called preloadFonts");
         WebFont.load(
             {
                 custom: 
@@ -213,6 +215,7 @@ export class MeterApplication
     
     private preloadTextures()
     {
+        console.debug("called preloadTextures");
         for( let texturePath of this.PreloadTexturePath)
             PIXI.loader.add(texturePath);
             
@@ -221,6 +224,7 @@ export class MeterApplication
 
     private connectWebSocket()
     {
+        console.debug("called connectWebSocket");
         if (this.IsDefiWSEnabled)
             this.connectDefiArduinoWebSocket("DefiWS", this.defiParameterCodeList, this.defiWS);
         if (this.IsArudinoWSEnabled)
@@ -231,6 +235,8 @@ export class MeterApplication
             this.connectSSMELM327WebSocket("ELM327WS", this.elm327ParameterCodeList, this.SSMELM327SlowReadInterval, this.elm327WS);
         if (this.IsFUELTRIPWSEnabled)
             this.connectFUELTRIPWebSocket("FUELTRIPWS",  this.FUELTRIPSectSpan, this.FUELTRIPSectStoreMax, this.fueltripWS);
+            
+        this.CreateMainPanel();
     }
     
     private connectFUELTRIPWebSocket(logPrefix: string, sectSpan : number, sectStoreMax : number, webSocketObj: WebSocketCommunication.FUELTRIPWebsocket)

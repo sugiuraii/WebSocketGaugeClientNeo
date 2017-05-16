@@ -118,7 +118,7 @@ export class AnalogMeterCluster extends PIXI.Container
     }
 
     get GearPos() { return this.gearPos }
-    set GeasPos(val : string)
+    set GearPos(val : string)
     {
         this.gearPos = val;
         this.gearPosLabel.text = val;

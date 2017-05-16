@@ -28,6 +28,7 @@
 
 import {AnalogMeterCluster} from "../../parts/AnalogMeterCluster/AnalogMeterCluster";
 import * as WebFont from "webfontloader";
+import * as PIXI from "pixi.js";
 import {ControlPanel} from "../../lib/ControlPanel";
 import {LogWindow} from "../../lib/LogWindow";
 
@@ -39,13 +40,57 @@ import {DefiParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
 import {SSMParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
 import {ReadModeCode} from "../../lib/WebSocket/WebSocketCommunication";
 
+import {MeterApplication} from "../../lib/MeterApplication";
+
 require("../AnalogMeterCluster.html");
 
 window.onload = function()
 {
-    AnalogMeterClusterPanel.preloadFont();
+    const meterapp = new AnalogMeterClusterApp();
+    meterapp.run();
 }
 
+class AnalogMeterClusterApp extends MeterApplication
+{
+    public run()
+    {
+        this.IsDefiWSEnabled = true;
+        this.IsSSMWSEnabled = true;
+        this.IsFUELTRIPWSEnabled = true;
+        
+        this.registerDefiParameterCode(DefiParameterCode.Engine_Speed, true);
+        this.registerDefiParameterCode(DefiParameterCode.Manifold_Absolute_Pressure, true);
+        this.registerSSMParameterCode(SSMParameterCode.Vehicle_Speed, ReadModeCode.FAST, true);
+        this.registerSSMParameterCode(SSMParameterCode.Vehicle_Speed, ReadModeCode.SLOW, true);
+        this.registerSSMParameterCode(SSMParameterCode.Coolant_Temperature, ReadModeCode.SLOW, false);
+        
+        this.PreloadWebFontFamiliy = AnalogMeterCluster.RequestedFontFamily;
+        this.PreloadWebFontCSSURL = AnalogMeterCluster.RequestedFontCSSURL;
+        this.CreateMainPanel = () =>
+        {
+            const app = new PIXI.Application(1366,768);
+            document.body.appendChild(app.view);
+
+            const meterCluster = new AnalogMeterCluster();
+            app.stage.addChild(meterCluster);
+
+            app.ticker.add(() => {
+                const timestamp = PIXI.ticker.shared.lastTime;
+                meterCluster.Tacho = this.DefiWS.getVal(DefiParameterCode.Engine_Speed, timestamp);
+                meterCluster.Boost = this.DefiWS.getVal(DefiParameterCode.Manifold_Absolute_Pressure, timestamp); 
+                meterCluster.Speed = this.SSMWS.getVal(SSMParameterCode.Vehicle_Speed,timestamp);
+                meterCluster.WaterTemp = this.SSMWS.getRawVal(SSMParameterCode.Coolant_Temperature);
+                
+                meterCluster.Trip = this.FUELTRIPWS.getTotalTrip();
+                meterCluster.Fuel = this.FUELTRIPWS.getTotalGas();
+                meterCluster.GasMilage = this.FUELTRIPWS.getMomentGasMilage(timestamp);
+            });
+        }
+        
+        super.run();
+    }
+}
+/*
 namespace AnalogMeterClusterPanel
 {
     const defiWS = new DefiCOMWebsocket();
@@ -147,6 +192,7 @@ namespace AnalogMeterClusterPanel
             ssmWS.EnableInterpolate(SSMParameterCode.Vehicle_Speed);
         }
     }
+    
     function main()
     {
         defiWS.URL = "ws://"+location.hostname+":2012/";
@@ -172,3 +218,4 @@ namespace AnalogMeterClusterPanel
         });
     }
 }
+*/
