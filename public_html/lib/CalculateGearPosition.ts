@@ -23,5 +23,33 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+ 
+export function calcGearPos(rev : number, speed : number, neutralSw : boolean) : string
+{
+    if (neutralSw)
+        return "N";
 
+    //0除算防止（車両停止時）
+    if (speed <= 0)
+        return "-";
+
+    var gear_ratio = 1 / 3.9 * rev * 60 * 0.001992 / speed;
+
+    if (gear_ratio > 4.27)
+        return "-";
+    else if (gear_ratio > 3.01)
+        return "1";
+    else if (gear_ratio > 2.07)
+        return "2";
+    else if (gear_ratio > 1.55)
+        return "3";
+    else if (gear_ratio > 1.2)
+        return "4";
+    else if (gear_ratio > 0.95)
+        return "5";
+    else if (gear_ratio > 0.73)
+        return "6";
+    else
+        return "-";  
+}
 

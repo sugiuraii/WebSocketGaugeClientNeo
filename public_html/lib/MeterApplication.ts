@@ -28,6 +28,7 @@ import {LogWindow} from "./LogWindow";
 import {ControlPanel} from "./ControlPanel";
 import * as WebFont from "webfontloader";
 import * as WebSocketCommunication from "./WebSocket/WebSocketCommunication";
+import {calcGearPos} from "./CalculateGearPosition";
 export {DefiParameterCode} from "./WebSocket/WebSocketCommunication";
 
 const DEFICOM_WS_PORT = 2012;
@@ -40,7 +41,7 @@ const WEBSOCKET_CHECK_INTERVAL = 1000;
 const WAITTIME_BEFORE_SENDWSSEND = 3000;
 const WAITTIME_BEFORE_RECONNECT = 5000;
 
-export class MeterApplication
+export abstract class MeterApplication
 {
     private webSocketServerName : string;
     
@@ -94,7 +95,7 @@ export class MeterApplication
         this.elm327ParameterCodeList.push({code, readMode, interpolate});
     }
     
-    protected CreateMainPanel : () => void;
+    protected abstract CreateMainPanel() : void;
     
     constructor(webSocketServerName? : string)
     {
@@ -191,16 +192,26 @@ export class MeterApplication
     
     public run()
     {
+        this.setIndicatorEnabled();
+        
         // Check websocket staus every 1sec
-        window.setInterval(this.checkWebSocketStatus(), WEBSOCKET_CHECK_INTERVAL);
+        window.setInterval(() => this.checkWebSocketStatus(), WEBSOCKET_CHECK_INTERVAL);
         
         // Preload fonts and textures
         this.preloadFonts();
     }
     
+    private setIndicatorEnabled()
+    {
+        this.controlPanel.IsDefiInidicatorEnabled = this.IsDefiWSEnabled;
+        this.controlPanel.IsSSMInidicatorEnabled = this.IsSSMWSEnabled;
+        this.controlPanel.IsArduinoInidicatorEnabled = this.IsArudinoWSEnabled;
+        this.controlPanel.IsELM327InidicatorEnabled = this.IsELM327WSEnabled;
+        this.controlPanel.IsFUELTRIPInidicatorEnabled = this.IsFUELTRIPWSEnabled;
+    }
+    
     private preloadFonts()
     {
-        console.debug("called preloadFonts");
         WebFont.load(
             {
                 custom: 
@@ -208,18 +219,24 @@ export class MeterApplication
                     families: this.PreloadWebFontFamiliy,
                     urls: this.PreloadWebFontCSSURL 
                 },
-                active: () => {this.preloadTextures}
+                active: () => {this.preloadTextures()}
             }
         );
     }
     
     private preloadTextures()
     {
-        console.debug("called preloadTextures");
-        for( let texturePath of this.PreloadTexturePath)
+        for (let i = 0; i < this.PreloadTexturePath.length; i++)
+        {
+            const texturePath = this.PreloadTexturePath[i];
             PIXI.loader.add(texturePath);
-            
-        PIXI.loader.load(this.connectWebSocket);
+        }
+
+        PIXI.loader.load(() => 
+        {
+            this.connectWebSocket()
+        }
+        );
     }
 
     private connectWebSocket()
@@ -251,6 +268,16 @@ export class MeterApplication
                 
             }, WAITTIME_BEFORE_SENDWSSEND);
         }
+        
+        webSocketObj.OnWebsocketClose = () =>
+        {
+            this.logWindow.appendLog(logPrefix + " is disconnected. Reconnect after " + WAITTIME_BEFORE_RECONNECT.toString() + "msec...");                
+            window.setTimeout(() => webSocketObj.Connect(), WAITTIME_BEFORE_RECONNECT);
+        }
+        
+        this.logWindow.appendLog(logPrefix + " connect...");
+        webSocketObj.Connect();
+        
     }
     
     private connectDefiArduinoWebSocket(logPrefix : string, parameterCodeList : {code: string, interpolate : boolean}[] , webSocketObj: WebSocketCommunication.DefiCOMWebsocket)
@@ -307,5 +334,10 @@ export class MeterApplication
 
         this.logWindow.appendLog(logPrefix + " connect...");
         webSocketObj.Connect();
-    }    
+    }
+    
+    protected calcGearPosition(rev : number, speed : number, neutralSw : boolean) : string
+    {
+        return calcGearPos(rev, speed, neutralSw);
+    }
 }

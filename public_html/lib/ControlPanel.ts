@@ -40,6 +40,11 @@ export class ControlPanel
     {
         this.controlPanelElement = this.createControlPanel();
         document.body.appendChild(this.controlPanelElement);
+        this.IsDefiInidicatorEnabled = false;
+        this.IsSSMInidicatorEnabled = false;
+        this.IsArduinoInidicatorEnabled = false;
+        this.IsELM327InidicatorEnabled = false;
+        this.IsFUELTRIPInidicatorEnabled = false;
     }
 
     public setOnLogButtonClicked(handler: (this: Element, ev: MouseEvent) => void) {this.logButtonElement.onclick = handler}
@@ -52,7 +57,18 @@ export class ControlPanel
     public setFUELTRIPIndicatorStatus(status : number) {this.changeIndicatorColor(this.fueltripIndicator, status)};
 
     public get WebSocketInterval(): number {return parseInt(this.websocketIntervalSpinner.value) };
-
+    
+    public get IsDefiInidicatorEnabled() { return !this.defiCOMIndicator.hidden }
+    public set IsDefiInidicatorEnabled(flag : boolean) { this.defiCOMIndicator.hidden = !flag }
+    public get IsSSMInidicatorEnabled() { return !this.ssmCOMIndicator.hidden }
+    public set IsSSMInidicatorEnabled(flag : boolean) { this.ssmCOMIndicator.hidden = !flag }
+    public get IsArduinoInidicatorEnabled() { return !this.arduinoCOMIndicator.hidden }
+    public set IsArduinoInidicatorEnabled(flag : boolean) { this.arduinoCOMIndicator.hidden = !flag }
+    public get IsELM327InidicatorEnabled() { return !this.elm327COMIndicator.hidden }
+    public set IsELM327InidicatorEnabled(flag : boolean) { this.elm327COMIndicator.hidden = !flag }
+    public get IsFUELTRIPInidicatorEnabled() { return !this.fueltripIndicator.hidden }
+    public set IsFUELTRIPInidicatorEnabled(flag : boolean) { this.fueltripIndicator.hidden = !flag }
+    
     private changeIndicatorColor(indicator : HTMLDivElement, status : number)
     {
         const style = indicator.style;
