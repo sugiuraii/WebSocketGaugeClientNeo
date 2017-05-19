@@ -41,6 +41,13 @@ export class VALJSONMessage implements IJSONMessage
     public val : {[key : string] : number;};
 }
 
+export class StringVALJSONMessage implements IJSONMessage
+{
+    public mode:string = "VAL";
+    public val : {[key : string] : string;}; 
+}
+
+
 export class ErrorJSONMessage implements IJSONMessage
 {
     public mode: string = "ERR";

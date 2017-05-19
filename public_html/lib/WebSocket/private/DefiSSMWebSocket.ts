@@ -35,8 +35,8 @@ abstract class DefiSSMWebsocketCommon extends WebsocketCommon
 {
     private recordIntervalTimeEnabled : boolean;
 
-    private onVALPacketReceivedByCode : {[code : string] : (val : number)=>void};
-    private onVALPacketReceived : (intervalTime : number, val:{[code : string] : number}) => void;
+    private onVALPacketReceivedByCode : {[code : string] : (val : string)=>void};
+    private onVALPacketReceived : (intervalTime : number, val:{[code : string] : string}) => void;
 
     //Internal state
     private valPacketPreviousTimeStamp : number;
@@ -44,6 +44,8 @@ abstract class DefiSSMWebsocketCommon extends WebsocketCommon
 
     //Interpolate value buffer
     private interpolateBuffers: {[code: string]: Interpolation.VALInterpolationBuffer} = {};
+    
+    private switchFlagBuffers: {[code: string] : boolean} = {};
 
     constructor()
     {
@@ -69,7 +71,7 @@ abstract class DefiSSMWebsocketCommon extends WebsocketCommon
         if(!(code in this.interpolateBuffers))
             this.interpolateBuffers[code] = new Interpolation.VALInterpolationBuffer();            
     }
-
+    
     public getVal(code : string, timestamp : number) : number
     {
         this.checkInterpolateBufferAndCreateIfEmpty(code);
@@ -81,53 +83,85 @@ abstract class DefiSSMWebsocketCommon extends WebsocketCommon
         this.checkInterpolateBufferAndCreateIfEmpty(code);
         return this.interpolateBuffers[code].getRawVal();
     }
+    
+    public getSwitchFlag(code : string) : boolean
+    {
+        return this.switchFlagBuffers[code];
+    }
+    
+    private processVALJSONMessage(receivedJson: JSONFormats.StringVALJSONMessage) : void
+    {
+        if(this.recordIntervalTimeEnabled)
+        {
+            //Update interval time
+            var nowTime = window.performance.now();
+            this.valPacketIntervalTime = nowTime - this.valPacketPreviousTimeStamp;
+            this.valPacketPreviousTimeStamp = nowTime;
+        };
 
+        // Invoke VALPacketReceived Event
+        if ( typeof(this.onVALPacketReceived) !== "undefined" )
+            this.OnVALPacketReceived(this.valPacketIntervalTime, receivedJson.val);
+        
+        // Store value into interpolation buffers
+        for (let key in receivedJson.val)
+        {            
+            const valStr : string = receivedJson.val[key];
+                        
+            // Invoke onVALPacketReceivedByCode event
+            if (typeof (this.onVALPacketReceivedByCode) !== "undefined")
+            {
+                if (key in this.onVALPacketReceivedByCode)
+                    this.OnVALPacketReceivedByCode[key](valStr);
+            }
+
+            // Store into interpolation(or value) buffer.
+            if (valStr.toLowerCase() === "true" || valStr.toLowerCase() === "false") //Val is boolean (ex. SSMSwitchCode)
+            {
+                let valFlag : boolean;
+                if(valStr.toLowerCase() === "true")
+                    valFlag = true;
+                else
+                    valFlag = false;
+                
+                this.switchFlagBuffers[key] = valFlag;                   
+            }
+            else // Val is number
+            {
+                const val: number = Number(receivedJson.val[key]);
+                // Register to interpolate buffer
+                this.checkInterpolateBufferAndCreateIfEmpty(key);
+                this.interpolateBuffers[key].setVal(val);
+            }
+        }
+    }
+    
+    private processERRJSONMessage(receivedJson: JSONFormats.ErrorJSONMessage)
+    {
+        if (typeof (this.OnERRPacketReceived) !== "undefined")
+            this.OnERRPacketReceived(receivedJson.msg);
+    }
+    
+    private processRESJSONMessage(receivedJson: JSONFormats.ResponseJSONMessage)
+    {
+        if(typeof (this.OnRESPacketReceived) !== "undefined")
+            this.OnRESPacketReceived(receivedJson.msg);
+    }
+    
     protected parseIncomingMessage(msg : string) : void
     {
-        let receivedJson : any = JSON.parse(msg);    
-        let receivedJSONIface: JSONFormats.IJSONMessage = receivedJson;
-        switch (receivedJSONIface.mode)
+        const receivedJson : any = JSON.parse(msg);
+        const modeCode : string = (<JSONFormats.IJSONMessage>receivedJson).mode;
+        switch (modeCode)
         {
             case ("VAL") :
-                if(this.recordIntervalTimeEnabled)
-                {
-                    //Update interval time
-                    var nowTime = window.performance.now();
-                    this.valPacketIntervalTime = nowTime - this.valPacketPreviousTimeStamp;
-                    this.valPacketPreviousTimeStamp = nowTime;
-                };
-
-                const receivedVALJSON: JSONFormats.VALJSONMessage = receivedJson;
-
-                // Invoke VALPacketReceived Event
-                if ( typeof(this.onVALPacketReceived) !== "undefined" )
-                    this.OnVALPacketReceived(this.valPacketIntervalTime, receivedVALJSON.val);
-                
-                    // Store value into interpolation buffers
-                for (let key in receivedVALJSON.val)
-                {
-                    const val: number = Number(receivedVALJSON.val[key]);
-                    // Register to interpolate buffer
-                    this.checkInterpolateBufferAndCreateIfEmpty(key);
-                    this.interpolateBuffers[key].setVal(val);
-
-                    // Invoke onVALPacketReceivedByCode event
-                    if (typeof (this.onVALPacketReceivedByCode) !== "undefined")
-                    {
-                        if (key in this.onVALPacketReceivedByCode)
-                            this.OnVALPacketReceivedByCode[key](val);
-                    }
-                }
+                this.processVALJSONMessage(<JSONFormats.StringVALJSONMessage>receivedJson);
                 break;
             case("ERR"):
-                let receivedERRJSON: JSONFormats.ErrorJSONMessage = receivedJson;
-                if (typeof (this.OnERRPacketReceived) !== "undefined")
-                    this.OnERRPacketReceived(receivedERRJSON.msg);
+                this.processERRJSONMessage(<JSONFormats.ErrorJSONMessage>receivedJson);
                 break;
             case("RES"):
-                let receivedRESJSON: JSONFormats.ResponseJSONMessage = receivedJson;
-                if(typeof (this.OnRESPacketReceived) !== "undefined")
-                    this.OnRESPacketReceived(receivedRESJSON.msg);
+                this.processRESJSONMessage(<JSONFormats.ResponseJSONMessage>receivedJson);
                 break;
             default:
                 this.OnWebsocketError("Unknown mode packet received. " + msg);

@@ -33,6 +33,7 @@ export {FUELTRIPWebsocket} from "./private/FUELTRIPWebsocket";
 export {DefiParameterCode} from "./private/ParameterCode";
 export {ArduinoParameterCode} from "./private/ParameterCode";
 export {SSMParameterCode} from "./private/ParameterCode";
+export {SSMSwitchCode} from "./private/ParameterCode";
 export {OBDIIParameterCode} from "./private/ParameterCode";
 export {ReadModeCode} from "./private/ParameterCode";
 

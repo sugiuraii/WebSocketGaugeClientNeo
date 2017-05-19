@@ -70,7 +70,7 @@ export namespace webSocketGauge.test
 
         protected registerWSEvents() : void
         {
-            this.webSocket.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: number}) => 
+            this.webSocket.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: string}) => 
             {
                 $('#spanInterval').text(intervalTime.toFixed(2));
                  //clear

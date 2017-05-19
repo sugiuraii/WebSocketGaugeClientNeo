@@ -31,6 +31,7 @@ import * as PIXI from "pixi.js";
 
 import {DefiParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
 import {SSMParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
+import {SSMSwitchCode} from "../../lib/WebSocket/WebSocketCommunication";
 import {ReadModeCode} from "../../lib/WebSocket/WebSocketCommunication";
 
 import {MeterApplication} from "../../lib/MeterApplication";
@@ -63,7 +64,7 @@ class AnalogMeterClusterApp extends MeterApplication
             meterCluster.Trip = this.FUELTRIPWS.getTotalTrip();
             meterCluster.Fuel = this.FUELTRIPWS.getTotalGas();
             meterCluster.GasMilage = this.FUELTRIPWS.getMomentGasMilage(timestamp);
-            
+                        
         });
     }
     
@@ -77,7 +78,9 @@ class AnalogMeterClusterApp extends MeterApplication
         this.registerDefiParameterCode(DefiParameterCode.Manifold_Absolute_Pressure, true);
         this.registerSSMParameterCode(SSMParameterCode.Vehicle_Speed, ReadModeCode.FAST, true);
         this.registerSSMParameterCode(SSMParameterCode.Vehicle_Speed, ReadModeCode.SLOW, true);
-        this.registerSSMParameterCode(SSMParameterCode.Coolant_Temperature, ReadModeCode.SLOW, false);
+        this.registerSSMParameterCode(SSMParameterCode.Coolant_Temperature, ReadModeCode.SLOW, true);
+        this.registerSSMParameterCode(SSMSwitchCode.getNumericCodeFromSwitchCode(SSMSwitchCode.Neutral_Position_Switch), ReadModeCode.FAST, true);
+        this.registerSSMParameterCode(SSMSwitchCode.getNumericCodeFromSwitchCode(SSMSwitchCode.Neutral_Position_Switch), ReadModeCode.SLOW, true);
         
         this.PreloadWebFontFamiliy = this.PreloadWebFontFamiliy.concat(AnalogMeterCluster.RequestedFontFamily);
         this.PreloadWebFontCSSURL = this.PreloadWebFontCSSURL.concat(AnalogMeterCluster.RequestedFontCSSURL);
