@@ -10,8 +10,8 @@
   ],
   "author": "kuniaki",
   "contributors": [],
-  "dependencies": {
-    "@types/jquery": "^2.0.42",
+  "dependencies": {"@types\/jquery": "^2.0.42",
+    "@types/jquery": "^2.0.45",
     "@types/webfontloader": "^1.6.28",
     "css-loader": "0.28.1",
     "file-loader": "0.11.1",

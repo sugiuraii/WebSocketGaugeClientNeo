@@ -46,7 +46,29 @@ window.onload = function()
 
 class AnalogMeterClusterApp extends MeterApplication
 {
-    protected CreateMainPanel() : void
+    protected setWebSocketOptions()
+    {
+        this.IsDefiWSEnabled = true;
+        this.IsSSMWSEnabled = true;
+        this.IsFUELTRIPWSEnabled = true;
+        
+        this.registerDefiParameterCode(DefiParameterCode.Engine_Speed, true);
+        this.registerDefiParameterCode(DefiParameterCode.Manifold_Absolute_Pressure, true);
+        this.registerSSMParameterCode(SSMParameterCode.Vehicle_Speed, ReadModeCode.FAST, true);
+        this.registerSSMParameterCode(SSMParameterCode.Vehicle_Speed, ReadModeCode.SLOW, true);
+        this.registerSSMParameterCode(SSMParameterCode.Coolant_Temperature, ReadModeCode.SLOW, true);
+        this.registerSSMParameterCode(SSMSwitchCode.getNumericCodeFromSwitchCode(SSMSwitchCode.Neutral_Position_Switch), ReadModeCode.FAST, true);
+        this.registerSSMParameterCode(SSMSwitchCode.getNumericCodeFromSwitchCode(SSMSwitchCode.Neutral_Position_Switch), ReadModeCode.SLOW, true);
+    }
+    
+    protected setTextureFontPreloadOptions()
+    {
+        this.WebFontFamiliyNameToPreload = this.WebFontFamiliyNameToPreload.concat(AnalogMeterCluster.RequestedFontFamily);
+        this.WebFontCSSURLToPreload = this.WebFontCSSURLToPreload.concat(AnalogMeterCluster.RequestedFontCSSURL);
+        this.TexturePathToPreload = this.TexturePathToPreload.concat(AnalogMeterCluster.RequestedTexturePath);
+    }
+    
+    protected setPIXIMeterPanel() : void
     {
         const app = new PIXI.Application(1366,768);
         document.body.appendChild(app.view);
@@ -76,25 +98,5 @@ class AnalogMeterClusterApp extends MeterApplication
             meterCluster.Fuel = fuel;
             meterCluster.GasMilage = gasMilage;
         });
-    }
-    
-    public run()
-    {
-        this.IsDefiWSEnabled = true;
-        this.IsSSMWSEnabled = true;
-        this.IsFUELTRIPWSEnabled = true;
-        
-        this.registerDefiParameterCode(DefiParameterCode.Engine_Speed, true);
-        this.registerDefiParameterCode(DefiParameterCode.Manifold_Absolute_Pressure, true);
-        this.registerSSMParameterCode(SSMParameterCode.Vehicle_Speed, ReadModeCode.FAST, true);
-        this.registerSSMParameterCode(SSMParameterCode.Vehicle_Speed, ReadModeCode.SLOW, true);
-        this.registerSSMParameterCode(SSMParameterCode.Coolant_Temperature, ReadModeCode.SLOW, true);
-        this.registerSSMParameterCode(SSMSwitchCode.getNumericCodeFromSwitchCode(SSMSwitchCode.Neutral_Position_Switch), ReadModeCode.FAST, true);
-        this.registerSSMParameterCode(SSMSwitchCode.getNumericCodeFromSwitchCode(SSMSwitchCode.Neutral_Position_Switch), ReadModeCode.SLOW, true);
-        
-        this.PreloadWebFontFamiliy = this.PreloadWebFontFamiliy.concat(AnalogMeterCluster.RequestedFontFamily);
-        this.PreloadWebFontCSSURL = this.PreloadWebFontCSSURL.concat(AnalogMeterCluster.RequestedFontCSSURL);
-        this.PreloadTexturePath = this.PreloadTexturePath.concat(AnalogMeterCluster.RequestedTexturePath);
-        super.run();
     }
 }

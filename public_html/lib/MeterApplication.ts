@@ -66,9 +66,9 @@ export abstract class MeterApplication
     
     public SSMELM327SlowReadInterval : number = 10;
     
-    public PreloadWebFontFamiliy : string[] = new Array();
-    public PreloadWebFontCSSURL : string[] = new Array();
-    public PreloadTexturePath : string[] = new Array();
+    public WebFontFamiliyNameToPreload : string[] = new Array();
+    public WebFontCSSURLToPreload : string[] = new Array();
+    public TexturePathToPreload : string[] = new Array();
         
     private defiParameterCodeList: {code: string, interpolate : boolean}[] = new Array();
     private arduinoParameterCodeList : {code : string, interpolate : boolean}[] = new Array(); 
@@ -95,7 +95,10 @@ export abstract class MeterApplication
         this.elm327ParameterCodeList.push({code, readMode, interpolate});
     }
     
-    protected abstract CreateMainPanel() : void;
+    protected abstract setWebSocketOptions() : void;
+    protected abstract setTextureFontPreloadOptions() : void;
+    
+    protected abstract setPIXIMeterPanel() : void;
     
     constructor(webSocketServerName? : string)
     {
@@ -115,6 +118,18 @@ export abstract class MeterApplication
         this.registerWebSocketCommonEvents("ARDUINO", this.arduinoWS);
         this.registerWebSocketCommonEvents("ELM327", this.elm327WS);
         this.registerWebSocketCommonEvents("FUELTRIP", this.fueltripWS); 
+        
+        // Set websocket options
+        // Code list, etc...
+        this.setWebSocketOptions();
+        
+        //Setup websocket indicator.
+        this.setWebsocketIndicator();
+        // Set texture, font preload options
+        this.setTextureFontPreloadOptions();
+        
+        // Preload Fonts -> textures-> parts
+        this.preloadFonts( () => this.preloadTextures( () => this.setPIXIMeterPanel()));        
     }
     
     private setWSURL(webSocketServerName : string)
@@ -176,8 +191,6 @@ export abstract class MeterApplication
                 this.arduinoWS.SendWSInterval(this.controlPanel.WebSocketInterval);
                 wsIntervalSent = true;
             }
-            //if (!wsIntervalSent)
-            //    this.logWindow.appendLog("Websocket interval spinner is changed. But neither defiWS nor arduinoWS are active.");
         });
     }
     
@@ -192,49 +205,46 @@ export abstract class MeterApplication
     
     public run()
     {
-        this.setIndicatorEnabled();
-        
-        // Check websocket staus every 1sec
-        window.setInterval(() => this.checkWebSocketStatus(), WEBSOCKET_CHECK_INTERVAL);
-        
-        // Preload fonts and textures
-        this.preloadFonts();
+        this.connectWebSocket();
     }
     
-    private setIndicatorEnabled()
+    private setWebsocketIndicator()
     {
         this.controlPanel.IsDefiInidicatorEnabled = this.IsDefiWSEnabled;
         this.controlPanel.IsSSMInidicatorEnabled = this.IsSSMWSEnabled;
         this.controlPanel.IsArduinoInidicatorEnabled = this.IsArudinoWSEnabled;
         this.controlPanel.IsELM327InidicatorEnabled = this.IsELM327WSEnabled;
         this.controlPanel.IsFUELTRIPInidicatorEnabled = this.IsFUELTRIPWSEnabled;
+        
+        // Check websocket staus every 1sec
+        window.setInterval(() => this.checkWebSocketStatus(), WEBSOCKET_CHECK_INTERVAL);
     }
     
-    private preloadFonts()
+    private preloadFonts(callBack : ()=> void)
     {
         WebFont.load(
             {
                 custom: 
                 { 
-                    families: this.PreloadWebFontFamiliy,
-                    urls: this.PreloadWebFontCSSURL 
+                    families: this.WebFontFamiliyNameToPreload,
+                    urls: this.WebFontCSSURLToPreload 
                 },
-                active: () => {this.preloadTextures()}
+                active: () => { callBack(); }
             }
         );
     }
     
-    private preloadTextures()
+    private preloadTextures(callBack : ()=> void)
     {
-        for (let i = 0; i < this.PreloadTexturePath.length; i++)
+        for (let i = 0; i < this.TexturePathToPreload.length; i++)
         {
-            const texturePath = this.PreloadTexturePath[i];
+            const texturePath = this.TexturePathToPreload[i];
             PIXI.loader.add(texturePath);
         }
 
         PIXI.loader.load(() => 
         {
-            this.connectWebSocket()
+            callBack();
         }
         );
     }
@@ -252,8 +262,6 @@ export abstract class MeterApplication
             this.connectSSMELM327WebSocket("ELM327WS", this.elm327ParameterCodeList, this.SSMELM327SlowReadInterval, this.elm327WS);
         if (this.IsFUELTRIPWSEnabled)
             this.connectFUELTRIPWebSocket("FUELTRIPWS",  this.FUELTRIPSectSpan, this.FUELTRIPSectStoreMax, this.fueltripWS);
-            
-        this.CreateMainPanel();
     }
     
     private connectFUELTRIPWebSocket(logPrefix: string, sectSpan : number, sectStoreMax : number, webSocketObj: WebSocketCommunication.FUELTRIPWebsocket)
