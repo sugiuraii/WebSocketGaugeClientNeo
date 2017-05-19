@@ -56,15 +56,25 @@ class AnalogMeterClusterApp extends MeterApplication
 
         app.ticker.add(() => {
             const timestamp = PIXI.ticker.shared.lastTime;
-            meterCluster.Tacho = this.DefiWS.getVal(DefiParameterCode.Engine_Speed, timestamp);
-            meterCluster.Boost = this.DefiWS.getVal(DefiParameterCode.Manifold_Absolute_Pressure, timestamp); 
-            meterCluster.Speed = this.SSMWS.getVal(SSMParameterCode.Vehicle_Speed,timestamp);
-            meterCluster.WaterTemp = this.SSMWS.getRawVal(SSMParameterCode.Coolant_Temperature);
-
-            meterCluster.Trip = this.FUELTRIPWS.getTotalTrip();
-            meterCluster.Fuel = this.FUELTRIPWS.getTotalGas();
-            meterCluster.GasMilage = this.FUELTRIPWS.getMomentGasMilage(timestamp);
-                        
+            const tacho = this.DefiWS.getVal(DefiParameterCode.Engine_Speed, timestamp);
+            const boost = this.DefiWS.getVal(DefiParameterCode.Manifold_Absolute_Pressure, timestamp);
+            const speed = this.SSMWS.getVal(SSMParameterCode.Vehicle_Speed,timestamp);
+            const waterTemp = this.SSMWS.getRawVal(SSMParameterCode.Coolant_Temperature);
+            const trip = this.FUELTRIPWS.getTotalTrip();
+            const fuel = this.FUELTRIPWS.getTotalGas();
+            const gasMilage = this.FUELTRIPWS.getMomentGasMilage(timestamp);
+            const neutralSw = this.SSMWS.getSwitchFlag(SSMSwitchCode.Neutral_Position_Switch);
+            
+            const geasPos = this.calcGearPosition(tacho, speed, neutralSw);
+            
+            meterCluster.Tacho = tacho;
+            meterCluster.Boost = boost; 
+            meterCluster.Speed = speed;
+            meterCluster.WaterTemp = waterTemp;
+            meterCluster.GearPos = geasPos;
+            meterCluster.Trip = trip;
+            meterCluster.Fuel = fuel;
+            meterCluster.GasMilage = gasMilage;
         });
     }
     
