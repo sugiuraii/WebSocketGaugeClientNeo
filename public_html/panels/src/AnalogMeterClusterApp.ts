@@ -63,9 +63,9 @@ class AnalogMeterClusterApp extends MeterApplication
     
     protected setTextureFontPreloadOptions()
     {
-        this.WebFontFamiliyNameToPreload = this.WebFontFamiliyNameToPreload.concat(AnalogMeterCluster.RequestedFontFamily);
-        this.WebFontCSSURLToPreload = this.WebFontCSSURLToPreload.concat(AnalogMeterCluster.RequestedFontCSSURL);
-        this.TexturePathToPreload = this.TexturePathToPreload.concat(AnalogMeterCluster.RequestedTexturePath);
+        this.registerWebFontFamilyNameToPreload(AnalogMeterCluster.RequestedFontFamily);
+        this.registerWebFontCSSURLToPreload(AnalogMeterCluster.RequestedFontCSSURL);
+        this.registerTexturePathToPreload(AnalogMeterCluster.RequestedTexturePath);
     }
     
     protected setPIXIMeterPanel() : void

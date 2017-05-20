@@ -66,17 +66,51 @@ export abstract class MeterApplication
     
     public SSMELM327SlowReadInterval : number = 10;
     
-    public WebFontFamiliyNameToPreload : string[] = new Array();
-    public WebFontCSSURLToPreload : string[] = new Array();
-    public TexturePathToPreload : string[] = new Array();
-        
+    private webFontFamiliyNameToPreload : string[] = new Array();
+    private webFontCSSURLToPreload : string[] = new Array();
+    private texturePathToPreload : string[] = new Array();
+    
+    public registerWebFontFamilyNameToPreload(target : string[]) : void;
+    public registerWebFontFamilyNameToPreload(target : string) : void;
+    public registerWebFontFamilyNameToPreload(target : any) : void
+    {
+        if(typeof target === "string")
+        {
+            const targetArray : string[] = [target];
+            this.registerWebFontFamilyNameToPreload(targetArray);
+        }
+        else if (target instanceof Array)
+             this.webFontFamiliyNameToPreload = this.webFontFamiliyNameToPreload.concat(target);
+    }
+    public registerWebFontCSSURLToPreload(target : string[]) : void;
+    public registerWebFontCSSURLToPreload(target : string) : void;
+    public registerWebFontCSSURLToPreload(target : any) : void
+    {
+        if(typeof target === "string")
+        {
+            const targetArray : string[] = [target];
+            this.registerWebFontCSSURLToPreload(targetArray);
+        }
+        else if (target instanceof Array)
+             this.webFontCSSURLToPreload = this.webFontCSSURLToPreload.concat(target);
+    }
+    public registerTexturePathToPreload(target : string[]) : void;
+    public registerTexturePathToPreload(target : string) : void;
+    public registerTexturePathToPreload(target : any) : void
+    {
+        if(typeof target === "string")
+        {
+            const targetArray : string[] = [target];
+            this.registerTexturePathToPreload(targetArray);
+        }
+        else if (target instanceof Array)
+            this.texturePathToPreload = this.texturePathToPreload.concat(target);
+    }
+    
     private defiParameterCodeList: {code: string, interpolate : boolean}[] = new Array();
     private arduinoParameterCodeList : {code : string, interpolate : boolean}[] = new Array(); 
     private ssmParameterCodeList : {code : string, readMode : string, interpolate : boolean}[] = new Array();
     private elm327ParameterCodeList : {code : string, readMode : string, interpolate : boolean}[] = new Array();
-    
-    public FUELTRIPSectSpan : number = 300;
-    public FUELTRIPSectStoreMax : number = 5;
     
     public registerDefiParameterCode(code : string, interpolate : boolean)
     {
@@ -94,6 +128,9 @@ export abstract class MeterApplication
     {
         this.elm327ParameterCodeList.push({code, readMode, interpolate});
     }
+    
+    public FUELTRIPSectSpan : number = 300;
+    public FUELTRIPSectStoreMax : number = 5;
     
     protected abstract setWebSocketOptions() : void;
     protected abstract setTextureFontPreloadOptions() : void;
@@ -226,8 +263,8 @@ export abstract class MeterApplication
             {
                 custom: 
                 { 
-                    families: this.WebFontFamiliyNameToPreload,
-                    urls: this.WebFontCSSURLToPreload 
+                    families: this.webFontFamiliyNameToPreload,
+                    urls: this.webFontCSSURLToPreload 
                 },
                 active: () => { callBack(); }
             }
@@ -236,9 +273,9 @@ export abstract class MeterApplication
     
     private preloadTextures(callBack : ()=> void)
     {
-        for (let i = 0; i < this.TexturePathToPreload.length; i++)
+        for (let i = 0; i < this.texturePathToPreload.length; i++)
         {
-            const texturePath = this.TexturePathToPreload[i];
+            const texturePath = this.texturePathToPreload[i];
             PIXI.loader.add(texturePath);
         }
 
