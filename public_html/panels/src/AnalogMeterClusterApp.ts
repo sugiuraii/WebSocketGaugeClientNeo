@@ -25,16 +25,14 @@
  */
  
 /// <reference path="../../lib/webpackRequire.ts" />
+import {MeterApplication} from "../../lib/MeterApplication";
 
 import {AnalogMeterCluster} from "../../parts/AnalogMeterCluster/AnalogMeterCluster";
-import * as PIXI from "pixi.js";
 
 import {DefiParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
 import {SSMParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
 import {SSMSwitchCode} from "../../lib/WebSocket/WebSocketCommunication";
 import {ReadModeCode} from "../../lib/WebSocket/WebSocketCommunication";
-
-import {MeterApplication} from "../../lib/MeterApplication";
 
 require("../AnalogMeterClusterApp.html");
 
