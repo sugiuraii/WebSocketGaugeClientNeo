@@ -84,7 +84,7 @@ class AnalogMeterClusterApp extends MeterApplication
             const waterTemp = this.SSMWS.getRawVal(SSMParameterCode.Coolant_Temperature);
             const trip = this.FUELTRIPWS.getTotalTrip();
             const fuel = this.FUELTRIPWS.getTotalGas();
-            const gasMilage = this.FUELTRIPWS.getMomentGasMilage(timestamp);
+            const gasMilage = this.FUELTRIPWS.getTotalGasMilage();
             const neutralSw = this.SSMWS.getSwitchFlag(SSMSwitchCode.Neutral_Position_Switch);
             
             const geasPos = this.calcGearPosition(tacho, speed, neutralSw);
