@@ -3,8 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/WebSocketTester/src/SSMCOMWSTest.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/WebSocketTester/src/DefiCOMWSInterpolateTest.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/panels/AnalogMeterClusterApp.html</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/lib/WebSocket/private/WebsocketCommon.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/panels/webpack.config.js</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/lib/WebSocket/WebSocketCommunication.ts</file>
             <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/panels/src/AnalogMeterClusterApp.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/lib/MeterApplication.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/lib/WebSocket/private/DefiSSMWebSocket.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/lib/WebSocket/private/JSONFormats.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/lib/WebSocket/private/ParameterCode.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/WebSocketTester/src/ArduinoCOMWSTest.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/WebSocketTester/src/ELM327COMWSTest.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/WebSocketTester/src/DefiCOMWSTest.ts</file>
         </group>
     </open-files>
 </project-private>

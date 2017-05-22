@@ -28,6 +28,8 @@ import * as Interpolation from "./Interpolation";
 import * as JSONFormats from "./JSONFormats";
 import {WebsocketCommon} from "./WebsocketCommon";
 
+const ReturnValueOnSectGasMilageUndefined = 0;
+
 export class FUELTRIPWebsocket extends WebsocketCommon
 {
     //private modePrefix = "FUELTRIP";
@@ -97,17 +99,26 @@ export class FUELTRIPWebsocket extends WebsocketCommon
     {
         return this.sectSpan;
     }
-    public getSectTrip() : number[]
+    public getSectTrip(sectIndex : number) : number
     {
-        return this.sectTrip;
+        if (sectIndex > this.sectTrip.length)
+            return ReturnValueOnSectGasMilageUndefined;
+        else           
+            return this.sectTrip[sectIndex];
     }
-    public getSectGas() : number[]
+    public getSectGas(sectIndex : number) : number
     {
-        return this.sectGas;
+        if (sectIndex > this.sectGas.length)
+            return ReturnValueOnSectGasMilageUndefined;
+        else
+            return this.sectGas[sectIndex];
     }
-    public getSectGasMilage() : number[]
+    public getSectGasMilage(sectIndex : number)
     {
-        return this.sectGasMilage;
+        if (sectIndex > this.sectGasMilage.length)
+            return ReturnValueOnSectGasMilageUndefined;
+        else
+            return this.sectGasMilage[sectIndex];
     }
     
     public SendSectStoreMax(storeMax : number): void

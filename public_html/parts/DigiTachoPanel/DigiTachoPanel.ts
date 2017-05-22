@@ -65,6 +65,7 @@ export class DigiTachoPanel extends PIXI.Container
     {
         dropShadow : true,
         dropShadowBlur: 10,
+        padding: 15,
         dropShadowColor: "white",
         dropShadowDistance: 0,
         fill : "white",
@@ -78,6 +79,7 @@ export class DigiTachoPanel extends PIXI.Container
     {
         dropShadow : true,
         dropShadowBlur: 10,
+        padding: 15,
         dropShadowColor: "white",
         dropShadowDistance: 0,
         fill : "white",
@@ -100,6 +102,13 @@ export class DigiTachoPanel extends PIXI.Container
         this.tacho = tacho;
         this.tachoProgressBar.Value = tacho;
         this.tachoProgressBar.update();
+    }
+    
+    get GearPos(): string { return this.gearPos}
+    set GearPos(gearPos : string)
+    {
+        this.gearPos = gearPos;
+        this.geasposLabel.text = gearPos;
     }
 
     constructor()
@@ -128,7 +137,7 @@ export class DigiTachoPanel extends PIXI.Container
         tachoProgressBar.Vertical = false;
         tachoProgressBar.InvertDirection = false;
         tachoProgressBar.InvertDraw = false;
-        tachoProgressBar.PixelStep = 16;
+        tachoProgressBar.PixelStep = 8;
         tachoProgressBar.MaskHeight = 246;
         tachoProgressBar.MaskWidth = 577;
         super.addChild(tachoProgressBar);

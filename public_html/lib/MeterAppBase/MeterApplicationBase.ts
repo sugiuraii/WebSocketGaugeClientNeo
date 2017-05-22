@@ -27,9 +27,9 @@
 import {LogWindow} from "./LogWindow";
 import {ControlPanel} from "./ControlPanel";
 import * as WebFont from "webfontloader";
-import * as WebSocketCommunication from "./WebSocket/WebSocketCommunication";
-import {calcGearPos} from "./CalculateGearPosition";
-export {DefiParameterCode} from "./WebSocket/WebSocketCommunication";
+import * as WebSocketCommunication from "../WebSocket/WebSocketCommunication";
+import {calculateGearPosition} from "./CalculateGearPosition";
+export {DefiParameterCode} from "../WebSocket/WebSocketCommunication";
 
 const DEFICOM_WS_PORT = 2012;
 const ARDUINOCOM_WS_PORT = 2015;
@@ -41,7 +41,7 @@ const WEBSOCKET_CHECK_INTERVAL = 1000;
 const WAITTIME_BEFORE_SENDWSSEND = 3000;
 const WAITTIME_BEFORE_RECONNECT = 5000;
 
-export abstract class MeterApplication
+export abstract class MeterApplicationBase
 {
     private webSocketServerName : string;
     
@@ -363,7 +363,14 @@ export abstract class MeterApplication
                 
                 for (let item of parameterCodeList)
                 {
-                    webSocketObj.SendCOMRead(item.code, item.readMode, true);
+                    if (item.readMode === WebSocketCommunication.ReadModeCode.SLOWandFAST)
+                    {
+                        webSocketObj.SendCOMRead(item.code, WebSocketCommunication.ReadModeCode.SLOW, true);
+                        webSocketObj.SendCOMRead(item.code, WebSocketCommunication.ReadModeCode.FAST, true);
+                    }
+                    else
+                        webSocketObj.SendCOMRead(item.code, item.readMode, true);
+                    
                     if (item.interpolate)
                         webSocketObj.EnableInterpolate(item.code)
                     else
@@ -381,8 +388,8 @@ export abstract class MeterApplication
         webSocketObj.Connect();
     }
     
-    protected calcGearPosition(rev : number, speed : number, neutralSw : boolean) : string
+    protected calculateGearPosition(rev : number, speed : number, neutralSw : boolean) : string
     {
-        return calcGearPos(rev, speed, neutralSw);
+        return calculateGearPosition(rev, speed, neutralSw);
     }
 }

@@ -24,7 +24,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
  
-export function calcGearPos(rev : number, speed : number, neutralSw : boolean) : string
+export function calculateGearPosition(rev : number, speed : number, neutralSw : boolean) : string
 {
     if (neutralSw)
         return "N";

@@ -373,6 +373,7 @@ export namespace ReadModeCode
 {
     export const SLOW = "SLOW";
     export const FAST = "FAST";
+    export const SLOWandFAST = "SLOWandFast";
 }
 
 

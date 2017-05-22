@@ -62,6 +62,7 @@ export class SemiCircularGaugePanelBase extends CircularGaugePanelBase
         {
             dropShadow : true,
             dropShadowBlur: 15,
+            padding : 15,
             dropShadowColor: "white",
             dropShadowDistance: 0,
             fill : "white",
@@ -76,7 +77,7 @@ export class SemiCircularGaugePanelBase extends CircularGaugePanelBase
         this.valueBarRadius = 200;
         this.valueBarInnerRadius = 0;        
         this.valueLabelOption.position.set(200,185);
-        this.valueLabelOption.fontSize = 90;
+        this.valueLabelOption.fontSize = 80;
         this.valueLabelOption.position.set(200,185);
         this.valueLabelOption.anchor.set(0.5,0.5);
         this.valueLabelOption.align = "center";

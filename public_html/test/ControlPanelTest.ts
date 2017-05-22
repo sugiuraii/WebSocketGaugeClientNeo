@@ -24,8 +24,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
  
-import {ControlPanel} from "../lib/ControlPanel";
-import {LogWindow} from "../lib/LogWindow";
+import {ControlPanel} from "../lib/MeterAppBase//ControlPanel";
+import {LogWindow} from "../lib/MeterAppBase/LogWindow";
 window.onload = () =>
 {
     const cpanel = new ControlPanel();

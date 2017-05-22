@@ -27,7 +27,8 @@
 module.exports = {
     entry: 
     {
-        "AnalogMeterClusterApp" : './src/AnalogMeterClusterApp.ts'
+        "AnalogMeterClusterApp" : './src/AnalogMeterClusterApp.ts',
+        "DigitalMFDApp" : './src/DigitalMFDApp.ts'
     },
     devtool: "source-map",
     output: 

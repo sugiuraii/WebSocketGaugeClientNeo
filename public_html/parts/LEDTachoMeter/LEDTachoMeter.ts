@@ -54,6 +54,7 @@ export class LEDTachoMeter extends PIXI.Container
     {       
         dropShadow : true,
         dropShadowBlur: 15,
+        padding: 15,
         dropShadowColor: "white",
         dropShadowDistance: 0,
         align : "right",

@@ -23,17 +23,22 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
- 
+// This is required to webpack font/texture/html files 
 /// <reference path="../../lib/webpackRequire.ts" />
-import {MeterApplication} from "../../lib/MeterApplication";
 
+//Import application base class
+import {MeterApplicationBase} from "../../lib/MeterAppBase/MeterApplicationBase";
+
+//Import meter parts
 import {AnalogMeterCluster} from "../../parts/AnalogMeterCluster/AnalogMeterCluster";
 
+//Import enumuator of parameter code
 import {DefiParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
 import {SSMParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
 import {SSMSwitchCode} from "../../lib/WebSocket/WebSocketCommunication";
 import {ReadModeCode} from "../../lib/WebSocket/WebSocketCommunication";
 
+//For including entry point html file in webpack
 require("../AnalogMeterClusterApp.html");
 
 window.onload = function()
@@ -42,7 +47,7 @@ window.onload = function()
     meterapp.run();
 }
 
-class AnalogMeterClusterApp extends MeterApplication
+class AnalogMeterClusterApp extends MeterApplicationBase
 {
     protected setWebSocketOptions()
     {
@@ -52,11 +57,9 @@ class AnalogMeterClusterApp extends MeterApplication
         
         this.registerDefiParameterCode(DefiParameterCode.Engine_Speed, true);
         this.registerDefiParameterCode(DefiParameterCode.Manifold_Absolute_Pressure, true);
-        this.registerSSMParameterCode(SSMParameterCode.Vehicle_Speed, ReadModeCode.FAST, true);
-        this.registerSSMParameterCode(SSMParameterCode.Vehicle_Speed, ReadModeCode.SLOW, true);
-        this.registerSSMParameterCode(SSMParameterCode.Coolant_Temperature, ReadModeCode.SLOW, true);
-        this.registerSSMParameterCode(SSMSwitchCode.getNumericCodeFromSwitchCode(SSMSwitchCode.Neutral_Position_Switch), ReadModeCode.FAST, true);
-        this.registerSSMParameterCode(SSMSwitchCode.getNumericCodeFromSwitchCode(SSMSwitchCode.Neutral_Position_Switch), ReadModeCode.SLOW, true);
+        this.registerSSMParameterCode(SSMParameterCode.Vehicle_Speed, ReadModeCode.SLOWandFAST, true);
+        this.registerSSMParameterCode(SSMParameterCode.Coolant_Temperature, ReadModeCode.SLOW, false);
+        this.registerSSMParameterCode(SSMSwitchCode.getNumericCodeFromSwitchCode(SSMSwitchCode.Neutral_Position_Switch), ReadModeCode.SLOWandFAST, false);
     }
     
     protected setTextureFontPreloadOptions()
@@ -85,7 +88,7 @@ class AnalogMeterClusterApp extends MeterApplication
             const gasMilage = this.FUELTRIPWS.getTotalGasMilage();
             const neutralSw = this.SSMWS.getSwitchFlag(SSMSwitchCode.Neutral_Position_Switch);
             
-            const geasPos = this.calcGearPosition(tacho, speed, neutralSw);
+            const geasPos = this.calculateGearPosition(tacho, speed, neutralSw);
             
             meterCluster.Tacho = tacho;
             meterCluster.Boost = boost; 

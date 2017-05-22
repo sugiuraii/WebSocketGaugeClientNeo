@@ -24,7 +24,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
  
-import {LogWindow} from "../lib/LogWindow";
+import {LogWindow} from "../lib/MeterAppBase//LogWindow";
 
 window.onload = () =>
 {

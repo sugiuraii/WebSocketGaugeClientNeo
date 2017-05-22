@@ -70,6 +70,7 @@ export class MilageGraphPanel extends PIXI.Container
     {
         dropShadow : true,
         dropShadowBlur: 10,
+        padding: 15,
         dropShadowColor: "white",
         dropShadowDistance: 0,
         fill : "white",
