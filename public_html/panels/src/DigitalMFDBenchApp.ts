@@ -39,40 +39,20 @@ import {ThrottleGaugePanel} from "../../parts/CircularGauges/SemiCircularGaugePa
 import {DigiTachoPanel} from "../../parts/DigiTachoPanel/DigiTachoPanel";
 import {MilageGraphPanel} from "../../parts/GasMilageGraph/MilageGraph";
 
-//Import enumuator of parameter code
-import {DefiParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
-import {SSMParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
-import {SSMSwitchCode} from "../../lib/WebSocket/WebSocketCommunication";
-import {ReadModeCode} from "../../lib/WebSocket/WebSocketCommunication";
-
 //For including entry point html file in webpack
-require("../DigitalMFDApp.html");
+require("../DigitalMFDBenchApp.html");
 
 window.onload = function()
 {
-    const meterapp = new DigitalMFDApp();
+    const meterapp = new DigitalMFDBenchApp();
     meterapp.run();
 }
 
-class DigitalMFDApp extends MeterApplicationBase
+class DigitalMFDBenchApp extends MeterApplicationBase
 {
     protected setWebSocketOptions()
     {
-        this.IsDefiWSEnabled = true;
-        this.IsSSMWSEnabled = true;
-        this.IsFUELTRIPWSEnabled = true;
-        
-        this.registerDefiParameterCode(DefiParameterCode.Engine_Speed, true);
-        this.registerDefiParameterCode(DefiParameterCode.Manifold_Absolute_Pressure, true);
-        this.registerSSMParameterCode(SSMParameterCode.Vehicle_Speed, ReadModeCode.SLOWandFAST, false);
-        this.registerSSMParameterCode(SSMParameterCode.Coolant_Temperature, ReadModeCode.SLOW, false);
-        this.registerSSMParameterCode(SSMParameterCode.Battery_Voltage, ReadModeCode.SLOW, false);
-        this.registerSSMParameterCode(SSMParameterCode.Throttle_Opening_Angle, ReadModeCode.SLOWandFAST, true);
-        this.registerSSMParameterCode(SSMParameterCode.Air_Fuel_Sensor_1, ReadModeCode.SLOWandFAST, true);
-        this.registerSSMParameterCode(SSMSwitchCode.getNumericCodeFromSwitchCode(SSMSwitchCode.Neutral_Position_Switch), ReadModeCode.SLOWandFAST, false);
-        
-        this.FUELTRIPSectSpan = 300;
-        this.FUELTRIPSectStoreMax = 6;
+        //For graphic benchmark. Do nothing for websocket.
     }
     
     protected setTextureFontPreloadOptions()
@@ -133,31 +113,69 @@ class DigitalMFDApp extends MeterApplicationBase
         app.stage.addChild(voltagePanel);
         app.stage.addChild(throttlePanel);
         
+        let tacho = 0;
+        let speed = 0;
+        const gearPos = "1";
+
+        let momentGasMilage = 2.0;
+        const gasMilage5min = 3.0;
+        const gasMilage10min = 5.0;
+        const gasMilage15min = 7.0;
+        const gasMilage20min = 9.0;;
+        const gasMilage25min = 12.0;
+        const gasMilage30min = 15.0;
+        const totalGasMilage = 12.0;
+        const totalFuel = 20.0;
+        const totalTrip = 356.0;
+
+        let boost = -1.0;
+        let airFuelRatio = 8.0;
+        let waterTemp = 50.0;
+        let batteryVolt = 11.0;
+        let throttle = 0.0;
+
+        
         app.ticker.add(() => 
         {
-            const timestamp = PIXI.ticker.shared.lastTime;
-            const tacho = this.DefiWS.getVal(DefiParameterCode.Engine_Speed, timestamp);
-            const speed = this.SSMWS.getVal(SSMParameterCode.Vehicle_Speed, timestamp);
-            const neutralSw = this.SSMWS.getSwitchFlag(SSMSwitchCode.Neutral_Position_Switch);
-            const gearPos = this.calculateGearPosition(tacho, speed, neutralSw);
+            if(tacho > 9000)
+                tacho = 0;
+            else
+                tacho += 200;
             
-            const momentGasMilage = this.FUELTRIPWS.getMomentGasMilage(timestamp);
-            const gasMilage5min : number = this.FUELTRIPWS.getSectGasMilage(0);
-            const gasMilage10min : number = this.FUELTRIPWS.getSectGasMilage(1);
-            const gasMilage15min : number = this.FUELTRIPWS.getSectGasMilage(2);
-            const gasMilage20min : number = this.FUELTRIPWS.getSectGasMilage(3);
-            const gasMilage25min : number = this.FUELTRIPWS.getSectGasMilage(4);
-            const gasMilage30min : number = this.FUELTRIPWS.getSectGasMilage(5);
-            const totalGasMilage = this.FUELTRIPWS.getTotalGasMilage();
-            const totalFuel = this.FUELTRIPWS.getTotalGas();
-            const totalTrip = this.FUELTRIPWS.getTotalTrip();
+            if(speed > 280)
+                speed = 0;
+            else
+                speed += 0.1;
             
-            const boost = this.DefiWS.getVal(DefiParameterCode.Manifold_Absolute_Pressure, timestamp);
-            const airFuelRatio = this.SSMWS.getVal(SSMParameterCode.Air_Fuel_Sensor_1, timestamp)*14;
-            const waterTemp = this.SSMWS.getRawVal(SSMParameterCode.Coolant_Temperature);
-            const batteryVolt = this.SSMWS.getRawVal(SSMParameterCode.Battery_Voltage);
-            const throttle = this.SSMWS.getVal(SSMParameterCode.Throttle_Opening_Angle, timestamp);
+            if(boost > 2.0)
+                boost = -1.0;
+            else
+                boost += 0.05;
             
+            if (airFuelRatio > 20)
+                airFuelRatio = 8.0;
+            else
+                airFuelRatio += 0.1;
+            
+            if (batteryVolt > 15.0)
+                batteryVolt = 11.0;
+            else
+                batteryVolt += 0.005;
+                
+            if (waterTemp > 150)
+                waterTemp = 50.0;
+            else
+                waterTemp += 0.02;
+            
+            if(throttle > 100)
+                throttle = 0;
+            else
+                throttle += 1;
+            
+            if (momentGasMilage > 20.0)
+                momentGasMilage = 1.0;
+            else
+                momentGasMilage += 0.5;
             digiTachoPanel.Speed = speed;
             digiTachoPanel.Tacho = tacho;
             digiTachoPanel.GearPos = gearPos;
