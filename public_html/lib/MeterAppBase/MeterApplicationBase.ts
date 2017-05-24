@@ -41,6 +41,8 @@ const WEBSOCKET_CHECK_INTERVAL = 1000;
 const WAITTIME_BEFORE_SENDWSSEND = 3000;
 const WAITTIME_BEFORE_RECONNECT = 5000;
 
+const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui";
+
 export abstract class MeterApplicationBase
 {
     private webSocketServerName : string;
@@ -148,6 +150,9 @@ export abstract class MeterApplicationBase
         
         // Register control panel events (buttons and spinner)
         this.registerControlPanelEvents();
+        
+        // Set viewport meta-tag
+        this.setViewPortMetaTag();
             
         // Set common websocket events (OnClose, OnError, OnRESPacketReceived, OnERRPacketReceived)
         this.registerWebSocketCommonEvents("DEFI", this.defiWS);
@@ -167,6 +172,30 @@ export abstract class MeterApplicationBase
         
         // Preload Fonts -> textures-> parts
         this.preloadFonts( () => this.preloadTextures( () => this.setPIXIMeterPanel()));        
+    }
+    
+    private setViewPortMetaTag()
+    {
+        let metalist = document.getElementsByTagName('meta');
+        let hasMeta = false;
+        
+        for(let i = 0; i < metalist.length; i++) 
+        {
+            let name = metalist[i].getAttribute('name');
+            if(name && name.toLowerCase() === 'viewport') 
+            {
+                metalist[i].setAttribute('content', VIEWPORT_ATTRIBUTE);
+                hasMeta = true;
+                break;
+            }
+        }
+        if(!hasMeta) 
+        {
+            let meta = document.createElement('meta');
+            meta.setAttribute('name', 'viewport');
+            meta.setAttribute('content', VIEWPORT_ATTRIBUTE);
+            document.getElementsByTagName('head')[0].appendChild(meta);
+        }
     }
     
     private setWSURL(webSocketServerName : string)

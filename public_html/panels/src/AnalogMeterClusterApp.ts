@@ -71,8 +71,9 @@ class AnalogMeterClusterApp extends MeterApplicationBase
     
     protected setPIXIMeterPanel() : void
     {
-        const app = new PIXI.Application(1366,768);
+        const app = new PIXI.Application(1100,600);
         document.body.appendChild(app.view);
+        app.view.style.height = "100vh";
 
         const meterCluster = new AnalogMeterCluster();
         app.stage.addChild(meterCluster);

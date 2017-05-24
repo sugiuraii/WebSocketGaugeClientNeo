@@ -95,8 +95,9 @@ class DigitalMFDApp extends MeterApplicationBase
     
     protected setPIXIMeterPanel()
     {
-        const app = new PIXI.Application(1366, 768);
+        const app = new PIXI.Application(1200, 600);
         document.body.appendChild(app.view);
+        app.view.style.width = "100vw";
         
         const digiTachoPanel = new DigiTachoPanel();
         digiTachoPanel.position.set(0,0);
