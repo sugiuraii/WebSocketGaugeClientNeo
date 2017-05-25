@@ -31,16 +31,21 @@ import * as PIXI from 'pixi.js';
 
 require("./DigiTachoTexture.json");
 require("./DigiTachoTexture.png");
-require("../fonts/font.css");
-require("../fonts/GNU-Freefonts/FreeSansBold.otf");
-require("../fonts/AudioWide/Audiowide-Regular.ttf");
+//require("../fonts/font.css");
+//require("../fonts/GNU-Freefonts/FreeSansBold.otf");
+//require("../fonts/AudioWide/Audiowide-Regular.ttf");
+
+require("./SpeedMeterFont.fnt");
+require("./SpeedMeterFont_0.png");
+require("./GearPosFont.fnt");
+require ("./GearPosFont_0.png");
 
 export class DigiTachoPanel extends PIXI.Container
 {
     private tachoProgressBar: RectangularProgressBar;
 
-    private speedLabel: PIXI.Text;
-    private geasposLabel: PIXI.Text;
+    private speedLabel: PIXI.extras.BitmapText;
+    private geasposLabel: PIXI.extras.BitmapText;
 
     private speed : number = 0;
     private tacho : number = 0;
@@ -48,45 +53,18 @@ export class DigiTachoPanel extends PIXI.Container
 
     static get RequestedTexturePath() : string[]
     {
-        return ["img/DigiTachoTexture.json"];
+        return ["img/DigiTachoTexture.json", "img/GearPosFont.fnt", "img/SpeedMeterFont.fnt"];
     }
 
     static get RequestedFontFamily() : string[]
     {
-        return ["FreeSans-Bold", "AudioWide"]
+        return [];
     }
 
     static get RequestedFontCSSURL() : string[]
     {
-        return ['font.css'];
+        return [];
     }
-
-    private speedLabelTextStyle = new PIXI.TextStyle(
-    {
-        dropShadow : true,
-        dropShadowBlur: 10,
-        padding: 15,
-        dropShadowColor: "white",
-        dropShadowDistance: 0,
-        fill : "white",
-        fontFamily: "FreeSans-Bold",
-        fontSize: 155,
-        align:"right",
-        letterSpacing: -3
-    });
-
-    private gearPosLabelTextStyle = new PIXI.TextStyle(
-    {
-        dropShadow : true,
-        dropShadowBlur: 10,
-        padding: 15,
-        dropShadowColor: "white",
-        dropShadowDistance: 0,
-        fill : "white",
-        fontFamily: "AudioWide",
-        fontSize: 100,
-        align:"center"
-    });
 
     get Speed() : number { return this.speed;}
     set Speed(speed : number)
@@ -142,18 +120,16 @@ export class DigiTachoPanel extends PIXI.Container
         tachoProgressBar.MaskWidth = 577;
         super.addChild(tachoProgressBar);
 
-        const speedTextLabel = new PIXI.Text(this.speed.toString());
+        const speedTextLabel = new PIXI.extras.BitmapText(this.speed.toString(), {font : "FreeSans", align : "right"});
         this.speedLabel = speedTextLabel;
-        speedTextLabel.style = this.speedLabelTextStyle
         speedTextLabel.position.set(485,320);
-        speedTextLabel.anchor.set(1,1);
+        speedTextLabel.anchor = new PIXI.Point(1,1);
         super.addChild(speedTextLabel);
 
-        const gearTextLabel = new PIXI.Text(this.gearPos);
+        const gearTextLabel = new PIXI.extras.BitmapText(this.gearPos,{font : "Audiowide", align : "center"});
         this.geasposLabel = gearTextLabel;
-        gearTextLabel.style = this.gearPosLabelTextStyle;
-        gearTextLabel.position.set(64, 55);
-        gearTextLabel.anchor.set(0.5, 0.5);
+        gearTextLabel.position.set(66, 62);
+        gearTextLabel.anchor = new PIXI.Point(0.5, 0.5);
         super.addChild(gearTextLabel);
     }
 }
