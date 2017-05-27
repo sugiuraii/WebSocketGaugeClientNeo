@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<font>
+  <info face="FreeSans" size="185" bold="1" italic="0" charset="" unicode="1" stretchH="100" smooth="1" aa="4" padding="10,10,10,10" spacing="10,10" outline="0"/>
+  <common lineHeight="185" base="139" scaleW="512" scaleH="512" pages="1" packed="0" alphaChnl="0" redChnl="4" greenChnl="4" blueChnl="4"/>
+  <pages>
+    <page id="0" file="SpeedMeterFont_0.png" />
+  </pages>
+  <chars count="10">
+    <char id="48" x="108" y="0" width="95" height="136" xoffset="-6" yoffset="17" xadvance="78" page="0" chnl="15" />
+    <char id="49" x="423" y="0" width="68" height="130" xoffset="0" yoffset="19" xadvance="78" page="0" chnl="15" />
+    <char id="50" x="211" y="146" width="95" height="132" xoffset="-6" yoffset="17" xadvance="78" page="0" chnl="15" />
+    <char id="51" x="213" y="0" width="95" height="136" xoffset="-6" yoffset="17" xadvance="78" page="0" chnl="15" />
+    <char id="52" x="316" y="146" width="97" height="130" xoffset="-7" yoffset="19" xadvance="78" page="0" chnl="15" />
+    <char id="53" x="105" y="146" width="96" height="134" xoffset="-6" yoffset="19" xadvance="78" page="0" chnl="15" />
+    <char id="54" x="318" y="0" width="95" height="136" xoffset="-5" yoffset="17" xadvance="78" page="0" chnl="15" />
+    <char id="55" x="0" y="292" width="97" height="130" xoffset="-6" yoffset="19" xadvance="78" page="0" chnl="15" />
+    <char id="56" x="0" y="0" width="98" height="136" xoffset="-7" yoffset="17" xadvance="78" page="0" chnl="15" />
+    <char id="57" x="0" y="146" width="95" height="136" xoffset="-6" yoffset="17" xadvance="78" page="0" chnl="15" />
+  </chars>
+</font>

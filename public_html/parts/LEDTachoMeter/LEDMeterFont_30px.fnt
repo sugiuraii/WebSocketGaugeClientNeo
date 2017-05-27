@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<font>
+  <info face="DSEG14_Classic_30px" size="30" bold="1" italic="0" charset="" unicode="1" stretchH="100" smooth="1" aa="4" padding="10,10,10,10" spacing="10,10" outline="0"/>
+  <common lineHeight="30" base="30" scaleW="256" scaleH="256" pages="1" packed="0" alphaChnl="0" redChnl="4" greenChnl="4" blueChnl="4"/>
+  <pages>
+    <page id="0" file="LEDMeterFont_30px_0.png" />
+  </pages>
+  <chars count="13">
+    <char id="43" x="0" y="120" width="34" height="42" xoffset="-5" yoffset="-6" xadvance="24" page="0" chnl="15" />
+    <char id="45" x="44" y="120" width="34" height="24" xoffset="-5" yoffset="3" xadvance="24" page="0" chnl="15" />
+    <char id="46" x="88" y="120" width="24" height="24" xoffset="-13" yoffset="16" xadvance="0" page="0" chnl="15" />
+    <char id="48" x="0" y="0" width="41" height="50" xoffset="-9" yoffset="-10" xadvance="24" page="0" chnl="15" />
+    <char id="49" x="199" y="60" width="26" height="48" xoffset="6" yoffset="-9" xadvance="24" page="0" chnl="15" />
+    <char id="50" x="51" y="0" width="41" height="50" xoffset="-9" yoffset="-10" xadvance="24" page="0" chnl="15" />
+    <char id="51" x="153" y="0" width="40" height="50" xoffset="-7" yoffset="-10" xadvance="24" page="0" chnl="15" />
+    <char id="52" x="149" y="60" width="40" height="48" xoffset="-8" yoffset="-9" xadvance="24" page="0" chnl="15" />
+    <char id="53" x="50" y="60" width="39" height="50" xoffset="-8" yoffset="-10" xadvance="24" page="0" chnl="15" />
+    <char id="54" x="203" y="0" width="40" height="50" xoffset="-9" yoffset="-10" xadvance="24" page="0" chnl="15" />
+    <char id="55" x="99" y="60" width="40" height="49" xoffset="-8" yoffset="-10" xadvance="24" page="0" chnl="15" />
+    <char id="56" x="102" y="0" width="41" height="50" xoffset="-9" yoffset="-10" xadvance="24" page="0" chnl="15" />
+    <char id="57" x="0" y="60" width="40" height="50" xoffset="-8" yoffset="-10" xadvance="24" page="0" chnl="15" />
+  </chars>
+</font>

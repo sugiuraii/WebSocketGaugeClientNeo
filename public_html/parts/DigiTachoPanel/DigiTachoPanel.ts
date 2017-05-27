@@ -24,125 +24,112 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/// <reference path="../../script/lib/pixi.js.d.ts" />
-/// <reference path="../../script/progressBar/pixiGauge.ts" />
-/// <reference path="../../node_modules/@types/webfontloader/index.d.ts" />
+ /// <reference path="../../lib/webpackRequire.ts" />
+ 
+import {RectangularProgressBar} from '../../lib/Graphics/PIXIGauge';
+import * as PIXI from 'pixi.js';
 
-module webSocketGauge.parts
+require("./DigiTachoTexture.json");
+require("./DigiTachoTexture.png");
+//require("../fonts/font.css");
+//require("../fonts/GNU-Freefonts/FreeSansBold.otf");
+//require("../fonts/AudioWide/Audiowide-Regular.ttf");
+
+require("./SpeedMeterFont.fnt");
+require("./SpeedMeterFont_0.png");
+require("./GearPosFont.fnt");
+require ("./GearPosFont_0.png");
+
+export class DigiTachoPanel extends PIXI.Container
 {
-    import RectangularProgressBar = webSocketGauge.lib.graphics.RectangularProgressBar;
-    
-    export class DigiTachoPanel extends PIXI.Container
+    private tachoProgressBar: RectangularProgressBar;
+
+    private speedLabel: PIXI.extras.BitmapText;
+    private geasposLabel: PIXI.extras.BitmapText;
+
+    private speed : number = 0;
+    private tacho : number = 0;
+    private gearPos : string = "N";
+
+    static get RequestedTexturePath() : string[]
     {
-        private tachoProgressBar: RectangularProgressBar;
+        return ["img/DigiTachoTexture.json", "img/GearPosFont.fnt", "img/SpeedMeterFont.fnt"];
+    }
 
-        private speedLabel: PIXI.Text;
-        private geasposLabel: PIXI.Text;
+    static get RequestedFontFamily() : string[]
+    {
+        return [];
+    }
 
-        private speed : number = 0;
-        private tacho : number = 0;
-        private gearPos : string = "N";
+    static get RequestedFontCSSURL() : string[]
+    {
+        return [];
+    }
 
-        static get RequestedTexturePath() : string[]
-        {
-            return ["/parts/DigiTachoPanel/DigiTachoTexture.json"];
-        }
+    get Speed() : number { return this.speed;}
+    set Speed(speed : number)
+    {
+        this.speed = speed;
+        const roundedSpeed : number = Math.round(speed);
+        this.speedLabel.text = roundedSpeed.toString();
+    }
 
-        static get RequestedFontFamily() : string[]
-        {
-            return ["FreeSans-Bold", "AudioWide"]
-        }
+    get Tacho(): number {return this.tacho}
+    set Tacho(tacho : number)
+    {
+        this.tacho = tacho;
+        this.tachoProgressBar.Value = tacho;
+        this.tachoProgressBar.update();
+    }
+    
+    get GearPos(): string { return this.gearPos}
+    set GearPos(gearPos : string)
+    {
+        this.gearPos = gearPos;
+        this.geasposLabel.text = gearPos;
+    }
 
-        static get RequestedFontCSSURL() : string[]
-        {
-            return ['/parts/fonts/font.css'];
-        }
+    constructor()
+    {
+        super();
+        this.create();
+    }
 
-        private speedLabelTextStyle = new PIXI.TextStyle(
-        {
-            dropShadow : true,
-            dropShadowBlur: 10,
-            dropShadowColor: "white",
-            dropShadowDistance: 0,
-            fill : "white",
-            fontFamily: "FreeSans-Bold",
-            fontSize: 155,
-            align:"right",
-            letterSpacing: -3
-        });
+    private create() : void
+    {
+        const backTexture = PIXI.Texture.fromFrame("DigiTachoBack");
+        const tachoProgressBarTexture = PIXI.Texture.fromFrame("DigiTachoBar");
 
-        private gearPosLabelTextStyle = new PIXI.TextStyle(
-        {
-            dropShadow : true,
-            dropShadowBlur: 10,
-            dropShadowColor: "white",
-            dropShadowDistance: 0,
-            fill : "white",
-            fontFamily: "AudioWide",
-            fontSize: 100,
-            align:"center"
-        });
+        //Create background sprite
+        const backSprite = new PIXI.Sprite();
+        backSprite.texture = backTexture;
+        super.addChild(backSprite);
 
-        get Speed() : number { return this.speed;}
-        set Speed(speed : number)
-        {
-            this.speed = speed;
-            const roundedSpeed : number = Math.round(speed);
-            this.speedLabel.text = roundedSpeed.toString();
-        }
+        //Create tacho progress bar
+        const tachoProgressBar = new RectangularProgressBar();
+        this.tachoProgressBar = tachoProgressBar;
+        tachoProgressBar.Texture = tachoProgressBarTexture;
+        tachoProgressBar.position.set(10,6);
+        tachoProgressBar.Min = 0;
+        tachoProgressBar.Max = 9000;
+        tachoProgressBar.Vertical = false;
+        tachoProgressBar.InvertDirection = false;
+        tachoProgressBar.InvertDraw = false;
+        tachoProgressBar.PixelStep = 8;
+        tachoProgressBar.MaskHeight = 246;
+        tachoProgressBar.MaskWidth = 577;
+        super.addChild(tachoProgressBar);
 
-        get Tacho(): number {return this.tacho}
-        set Tacho(tacho : number)
-        {
-            this.tacho = tacho;
-            this.tachoProgressBar.Value = tacho;
-            this.tachoProgressBar.update();
-        }
+        const speedTextLabel = new PIXI.extras.BitmapText(this.speed.toString(), {font : "FreeSans", align : "right"});
+        this.speedLabel = speedTextLabel;
+        speedTextLabel.position.set(485,320);
+        speedTextLabel.anchor = new PIXI.Point(1,1);
+        super.addChild(speedTextLabel);
 
-        constructor()
-        {
-            super();
-            this.create();
-        }
-
-        private create() : void
-        {
-            const backTexture = PIXI.Texture.fromFrame("DigiTachoBack");
-            const tachoProgressBarTexture = PIXI.Texture.fromFrame("DigiTachoBar");
-
-            //Create background sprite
-            const backSprite = new PIXI.Sprite();
-            backSprite.texture = backTexture;
-            super.addChild(backSprite);
-
-            //Create tacho progress bar
-            const tachoProgressBar = new RectangularProgressBar();
-            this.tachoProgressBar = tachoProgressBar;
-            tachoProgressBar.Texture = tachoProgressBarTexture;
-            tachoProgressBar.position.set(10,6);
-            tachoProgressBar.Min = 0;
-            tachoProgressBar.Max = 9000;
-            tachoProgressBar.Vertical = false;
-            tachoProgressBar.InvertDirection = false;
-            tachoProgressBar.InvertDraw = false;
-            tachoProgressBar.PixelStep = 16;
-            tachoProgressBar.MaskHeight = 246;
-            tachoProgressBar.MaskWidth = 577;
-            super.addChild(tachoProgressBar);
-
-            const speedTextLabel = new PIXI.Text(this.speed.toString());
-            this.speedLabel = speedTextLabel;
-            speedTextLabel.style = this.speedLabelTextStyle
-            speedTextLabel.position.set(485,320);
-            speedTextLabel.anchor.set(1,1);
-            super.addChild(speedTextLabel);
-
-            const gearTextLabel = new PIXI.Text(this.gearPos);
-            this.geasposLabel = gearTextLabel;
-            gearTextLabel.style = this.gearPosLabelTextStyle;
-            gearTextLabel.position.set(64, 55);
-            gearTextLabel.anchor.set(0.5, 0.5);
-            super.addChild(gearTextLabel);
-        }
+        const gearTextLabel = new PIXI.extras.BitmapText(this.gearPos,{font : "Audiowide", align : "center"});
+        this.geasposLabel = gearTextLabel;
+        gearTextLabel.position.set(66, 62);
+        gearTextLabel.anchor = new PIXI.Point(0.5, 0.5);
+        super.addChild(gearTextLabel);
     }
 }
