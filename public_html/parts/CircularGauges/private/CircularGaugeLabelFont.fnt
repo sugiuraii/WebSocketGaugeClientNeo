@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<font>
+  <info face="FreeSans_90px" size="90" bold="1" italic="0" charset="" unicode="1" stretchH="100" smooth="1" aa="4" padding="10,10,10,10" spacing="10,10" outline="0"/>
+  <common lineHeight="90" base="68" scaleW="384" scaleH="384" pages="1" packed="0" alphaChnl="0" redChnl="4" greenChnl="4" blueChnl="4"/>
+  <pages>
+    <page id="0" file="CircularGaugeLabelFont_0.png" />
+  </pages>
+  <chars count="13">
+    <char id="43" x="0" y="173" width="57" height="57" xoffset="-7" yoffset="22" xadvance="33" page="0" chnl="15" />
+    <char id="45" x="324" y="87" width="41" height="31" xoffset="-9" yoffset="31" xadvance="25" page="0" chnl="15" />
+    <char id="46" x="336" y="0" width="32" height="32" xoffset="-3" yoffset="46" xadvance="20" page="0" chnl="15" />
+    <char id="48" x="68" y="0" width="57" height="77" xoffset="-8" yoffset="3" xadvance="37" page="0" chnl="15" />
+    <char id="49" x="270" y="87" width="44" height="74" xoffset="-5" yoffset="4" xadvance="37" page="0" chnl="15" />
+    <char id="50" x="67" y="87" width="57" height="75" xoffset="-8" yoffset="3" xadvance="37" page="0" chnl="15" />
+    <char id="51" x="135" y="0" width="57" height="77" xoffset="-8" yoffset="3" xadvance="37" page="0" chnl="15" />
+    <char id="52" x="134" y="87" width="58" height="74" xoffset="-9" yoffset="4" xadvance="37" page="0" chnl="15" />
+    <char id="53" x="0" y="87" width="57" height="76" xoffset="-8" yoffset="4" xadvance="37" page="0" chnl="15" />
+    <char id="54" x="202" y="0" width="57" height="77" xoffset="-8" yoffset="3" xadvance="37" page="0" chnl="15" />
+    <char id="55" x="202" y="87" width="58" height="74" xoffset="-8" yoffset="4" xadvance="37" page="0" chnl="15" />
+    <char id="56" x="0" y="0" width="58" height="77" xoffset="-9" yoffset="3" xadvance="37" page="0" chnl="15" />
+    <char id="57" x="269" y="0" width="57" height="77" xoffset="-8" yoffset="3" xadvance="37" page="0" chnl="15" />
+  </chars>
+</font>

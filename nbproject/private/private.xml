@@ -5,22 +5,6 @@
         <group>
             <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/parts/CircularGauges/private/CircularGaugePanelBase.ts</file>
             <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/parts/CircularGauges/private/FullCircularGaugePanelBase.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/parts/CircularGauges/FullCircularGaugePanel.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/lib/MeterAppBase/MeterApplicationBase.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/parts/partsTest/src/MilageBarTest.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/parts/DigiTachoPanel/DigiTachoPanel.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/panels/DigitalMFDApp.html</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/parts/GasMilageGraph/MilageGraph.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/lib/WebSocket/private/WebsocketCommon.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/parts/CircularGauges/private/SemiCircularGaugePanelBase.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/panels/webpack.config.js</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/lib/WebSocket/private/Interpolation.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/lib/WebSocket/private/FUELTRIPWebsocket.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/panels/src/AnalogMeterClusterApp.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/lib/WebSocket/private/DefiSSMWebSocket.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/panels/src/DigitalMFDApp.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/lib/WebSocket/private/ParameterCode.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/PixiJS-Websocket-typescriptStudy/public_html/parts/LEDTachoMeter/LEDTachoMeter.ts</file>
         </group>
     </open-files>
 </project-private>

@@ -34,6 +34,15 @@ require("./AnalogMeterClusterTexture.json");
 require("./AnalogMeterClusterTexture.png");
 require("../fonts/font.css");
 require("../fonts/DSEG_v030/DSEG14Classic-BoldItalic.ttf");
+require("./AnalogMeterFont_115px.fnt");
+require("./AnalogMeterFont_45px.fnt");
+require("./AnalogMeterFont_40px.fnt");
+require("./AnalogMeterFont_60px.fnt");
+
+require("./AnalogMeterFont_115px_0.png");
+require("./AnalogMeterFont_45px_0.png");
+require("./AnalogMeterFont_40px_0.png");
+require("./AnalogMeterFont_60px_0.png");
 
 export class AnalogMeterCluster extends PIXI.Container
 {
@@ -43,11 +52,11 @@ export class AnalogMeterCluster extends PIXI.Container
     private speedNeedleGauge = new RotationNeedleGauge();
     private boostNeedleGauge = new RotationNeedleGauge();
 
-    private speedLabel = new PIXI.Text();
-    private gasMilageLabel = new PIXI.Text();
-    private tripLabel = new PIXI.Text();
-    private fuelLabel = new PIXI.Text();
-    private gearPosLabel = new PIXI.Text();
+    private speedLabel: PIXI.extras.BitmapText;
+    private gasMilageLabel: PIXI.extras.BitmapText;
+    private tripLabel: PIXI.extras.BitmapText;
+    private fuelLabel: PIXI.extras.BitmapText;
+    private gearPosLabel: PIXI.extras.BitmapText;
 
     private tacho = 0;
     private speed = 0;
@@ -57,13 +66,6 @@ export class AnalogMeterCluster extends PIXI.Container
     private trip = 0;
     private fuel = 0;
     private gearPos : string = "";
-
-    private masterTextStyle = new PIXI.TextStyle(
-    {
-        fill : "black",
-        align : "right",
-        fontFamily: "DSEG14ClassicItalic"
-    });
 
     get Tacho() : number { return this.tacho; }
     set Tacho(val : number)
@@ -126,7 +128,7 @@ export class AnalogMeterCluster extends PIXI.Container
 
     static get RequestedTexturePath() : string[]
     {
-        return ["img/AnalogMeterClusterTexture.json"];
+        return ["img/AnalogMeterClusterTexture.json", "img/AnalogMeterFont_115px.fnt",  "img/AnalogMeterFont_45px.fnt", "img/AnalogMeterFont_40px.fnt", "img/AnalogMeterFont_60px.fnt"];
     }
 
     static get RequestedFontFamily() : string[]
@@ -195,36 +197,31 @@ export class AnalogMeterCluster extends PIXI.Container
         shaftSprite.position.set(300,300);
         tachoContainer.addChild(shaftSprite);
 
-        const gasMilageLabel = this.gasMilageLabel;
-        gasMilageLabel.style = this.masterTextStyle.clone();
-        gasMilageLabel.style.fontSize = 35;
-        gasMilageLabel.anchor.set(1,0.5);
-        gasMilageLabel.position.set(490,335);
-        gasMilageLabel.text = "12.00";
+        const gasMilageLabel = this.gasMilageLabel = new PIXI.extras.BitmapText("12.00", {font : "DSEG14_Classic_45px", align : "right"});
+        gasMilageLabel.anchor = new PIXI.Point(1,0.5);
+        gasMilageLabel.position.set(495,335);
+        gasMilageLabel.scale.set(0.9);
         tachoContainer.addChild(gasMilageLabel);
 
-        const tripLabel = this.tripLabel;
-        tripLabel.style = this.masterTextStyle.clone();
-        tripLabel.style.fontSize = 30;
-        tripLabel.anchor.set(1,0.5);
-        tripLabel.position.set(505,380);
+        const tripLabel = this.tripLabel = new PIXI.extras.BitmapText("125.0", {font : "DSEG14_Classic_40px", align : "right"});
+        tripLabel.anchor = new PIXI.Point(1,0.5);
+        tripLabel.position = new PIXI.Point(505,378);
         tripLabel.text = "125.0";
+        tripLabel.scale.set(0.9);
         tachoContainer.addChild(tripLabel);
 
-        const fuelLabel = this.fuelLabel;
-        fuelLabel.style = this.masterTextStyle.clone();
-        fuelLabel.style.fontSize = 30;
-        fuelLabel.anchor.set(1,0.5);
-        fuelLabel.position.set(505,418);
+        const fuelLabel = this.fuelLabel = new PIXI.extras.BitmapText("25.00", {font : "DSEG14_Classic_40px", align : "right"});
+        fuelLabel.anchor = new PIXI.Point(1,0.5);
+        fuelLabel.position = new PIXI.Point(505,420);
         fuelLabel.text = "25.00";
+        fuelLabel.scale.set(0.9);
         tachoContainer.addChild(fuelLabel);
 
-        const gearPosLabel = this.gearPosLabel;
-        gearPosLabel.style = this.masterTextStyle.clone();
-        gearPosLabel.style.fontSize = 105;
-        gearPosLabel.anchor.set(0.5,0.5);
-        gearPosLabel.position.set(358,493);
+        const gearPosLabel = this.gearPosLabel = new PIXI.extras.BitmapText("6", {font : "DSEG14_Classic_115px", align : "center"});
+        gearPosLabel.anchor = new PIXI.Point(0.5,0.5);
+        gearPosLabel.position = new PIXI.Point(358,493);
         gearPosLabel.text = "6";
+        gearPosLabel.scale.set(0.9);
         tachoContainer.addChild(gearPosLabel);
 
         return tachoContainer;
@@ -244,12 +241,10 @@ export class AnalogMeterCluster extends PIXI.Container
         const backSprite = PIXI.Sprite.fromFrame("AnalogSpeedMeter_Base");
         speedMeterContainer.addChild(backSprite);
 
-        const speedLabel = this.speedLabel;
-        speedLabel.style = this.masterTextStyle.clone();
-        speedLabel.style.fontSize = 50;
-        speedLabel.text = speedValDefault.toFixed(0);
-        speedLabel.anchor.set(1,0.5);
+        const speedLabel = this.speedLabel = new PIXI.extras.BitmapText(speedValDefault.toFixed(0), {font : "DSEG14_Classic_60px", align : "center"});
+        speedLabel.anchor = new PIXI.Point(1,0.5);
         speedLabel.position.set(355,407);
+        speedLabel.scale.set(0.9);
         speedMeterContainer.addChild(speedLabel);
 
         const waterTempProgressBar = this.waterTempProgressBar;

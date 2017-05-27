@@ -48,6 +48,7 @@ module.exports = {
     loaders: [
         { test: /\.tsx?$/, loader: 'ts-loader' },
         { test: /\.png$/, loader: "file-loader?name=img/[name].[ext]" },
+        { test: /\.fnt$/, loader: "file-loader?name=img/[name].[ext]" }, // Bitmap font setting files
         { test: /\.json$/, loader: "file-loader?name=img/[name].[ext]" },
         { test: /\.html$/, loader: "file-loader?name=[name].[ext]" },
         { test: /\.css$/, loader: "file-loader?name=[name].[ext]" },

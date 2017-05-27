@@ -33,15 +33,23 @@ require("./LEDTachoMeterTexture.json");
 require("./LEDTachoMeterTexture.png");
 require("../fonts/font.css");
 require("../fonts/DSEG_v030/DSEG14Classic-BoldItalic.ttf");
+require("./LEDMeterFont_100px.fnt");
+require("./LEDMeterFont_88px.fnt");
+require("./LEDMeterFont_45px.fnt");
+require("./LEDMeterFont_30px.fnt");
+require("./LEDMeterFont_100px_0.png");
+require("./LEDMeterFont_88px_0.png");
+require("./LEDMeterFont_45px_0.png");
+require("./LEDMeterFont_30px_0.png");
 
 export class LEDTachoMeter extends PIXI.Container
 {
     private tachoProgressBar = new CircularProgressBar();
-    private speedLabel = new PIXI.Text();
-    private gasMilageLabel = new PIXI.Text();
-    private tripLabel = new PIXI.Text();
-    private fuelLabel = new PIXI.Text();
-    private gearPosLabel = new PIXI.Text();
+    private speedLabel : PIXI.extras.BitmapText;
+    private gasMilageLabel : PIXI.extras.BitmapText;
+    private tripLabel : PIXI.extras.BitmapText;
+    private fuelLabel : PIXI.extras.BitmapText;
+    private gearPosLabel : PIXI.extras.BitmapText;
 
     private tacho = 0;
     private speed = 0;
@@ -50,21 +58,9 @@ export class LEDTachoMeter extends PIXI.Container
     private fuel = 0;
     private gearPos : string = "";
 
-    private masterTextStyle = new PIXI.TextStyle(
-    {       
-        dropShadow : true,
-        dropShadowBlur: 15,
-        padding: 15,
-        dropShadowColor: "white",
-        dropShadowDistance: 0,
-        align : "right",
-        fill : "white",
-        fontFamily: "DSEG14ClassicItalic"
-    });
-
     static get RequestedTexturePath() : string[]
     {
-        return ["img/LEDTachoMeterTexture.json"];
+        return ["img/LEDTachoMeterTexture.json", "img/LEDMeterFont_100px.fnt", "img/LEDMeterFont_88px.fnt", "img/LEDMeterFont_45px.fnt", "img/LEDMeterFont_30px.fnt"];
     }
 
     static get RequestedFontFamily() : string[]
@@ -148,42 +144,28 @@ export class LEDTachoMeter extends PIXI.Container
         tachoProgressBar.updateForce();
         super.addChild(tachoProgressBar);
 
-        const speedLabel = this.speedLabel;
-        speedLabel.style = this.masterTextStyle.clone();
-        speedLabel.style.fontSize = 88;
-        speedLabel.anchor.set(1,0.5);
-        speedLabel.text = speedValDefault.toFixed(0);
+        const speedLabel = this.speedLabel = new PIXI.extras.BitmapText(speedValDefault.toFixed(0), {font: "DSEG14_Classic_88px", align : "right"});
+        speedLabel.anchor = new PIXI.Point(1,0.5);
         speedLabel.position.set(410,230);
         super.addChild(speedLabel);
 
-        const gasMilageLabel = this.gasMilageLabel;
-        gasMilageLabel.style = this.masterTextStyle.clone();
-        gasMilageLabel.style.fontSize = 45;
-        gasMilageLabel.anchor.set(1,0.5);
-        gasMilageLabel.text = gasMilageValDefault.toFixed(2);
+        const gasMilageLabel = this.gasMilageLabel = new PIXI.extras.BitmapText(gasMilageValDefault.toFixed(2), {font: "DSEG14_Classic_45px", align : "right"});
+        gasMilageLabel.anchor = new PIXI.Point(1,0.5);
         gasMilageLabel.position.set(310,360);
         super.addChild(gasMilageLabel);
 
-        const tripLabel = this.tripLabel;
-        tripLabel.style = this.masterTextStyle.clone();
-        tripLabel.style.fontSize = 30;
-        tripLabel.anchor.set(1,0.5);
-        tripLabel.text = tripValDefault.toFixed(1);
+        const tripLabel = this.tripLabel = this.gasMilageLabel = new PIXI.extras.BitmapText(tripValDefault.toFixed(1), {font: "DSEG14_Classic_30px", align : "right"});
+        tripLabel.anchor = new PIXI.Point(1,0.5);
         tripLabel.position.set(510,355);
         super.addChild(tripLabel);
 
-        const fuelLabel = this.fuelLabel;
-        fuelLabel.style = this.masterTextStyle.clone();
-        fuelLabel.style.fontSize = 30;
-        fuelLabel.anchor.set(1,0.5);
-        fuelLabel.text = fuelValDefault.toFixed(2);
+        const fuelLabel = this.fuelLabel = this.gasMilageLabel = new PIXI.extras.BitmapText(fuelValDefault.toFixed(2), {font: "DSEG14_Classic_30px", align : "right"});
+        fuelLabel.anchor = new PIXI.Point(1,0.5);
         fuelLabel.position.set(510,395);
         super.addChild(fuelLabel);
 
-        const gearPosLabel = this.gearPosLabel;
-        gearPosLabel.style = this.masterTextStyle.clone();
-        gearPosLabel.style.fontSize = 100;
-        gearPosLabel.anchor.set(1,0.5);
+        const gearPosLabel = this.gearPosLabel = this.gasMilageLabel = new PIXI.extras.BitmapText("N", {font: "DSEG14_Classic_100px", align : "right"});
+        gearPosLabel.anchor = new PIXI.Point(1,0.5);
         gearPosLabel.text = "N";
         gearPosLabel.position.set(410,495);
         super.addChild(gearPosLabel);

@@ -34,13 +34,18 @@ require("./MilageGraphTexture.png");
 require("../fonts/font.css");
 require("../fonts/GNU-Freefonts/FreeSansBold.otf");
 
+require("./MilageGraphFont_45px.fnt");
+require("./MilageGraphFont_45px_0.png");
+require("./MilageGraphFont_68px.fnt");
+require("./MilageGraphFont_68px_0.png");
+
 export class MilageGraphPanel extends PIXI.Container
 {
     private momentGasMilageBar: RectangularProgressBar = new RectangularProgressBar();
     private sectGasMilageBar: {[spankey : string] : RectangularProgressBar } = {};
-    private tripLabel = new PIXI.Text();
-    private fuelLabel = new PIXI.Text();
-    private gasMilageLabel = new PIXI.Text();
+    private tripLabel: PIXI.extras.BitmapText;
+    private fuelLabel: PIXI.extras.BitmapText;
+    private gasMilageLabel: PIXI.extras.BitmapText;
 
     private momentGasMilage : number = 0;
     private trip : number = 0;
@@ -52,7 +57,7 @@ export class MilageGraphPanel extends PIXI.Container
 
     static get RequestedTexturePath() : string[]
     {
-        return ["img/MilageGraphTexture.json"];
+        return ["img/MilageGraphTexture.json", "img/MilageGraphFont_45px.fnt", "img/MilageGraphFont_68px.fnt"];
     }
 
     static get RequestedFontFamily() : string[]
@@ -64,20 +69,6 @@ export class MilageGraphPanel extends PIXI.Container
     {
         return ['font.css'];
     }
-
-
-    private masterTextStyle = new PIXI.TextStyle(
-    {
-        dropShadow : true,
-        dropShadowBlur: 10,
-        padding: 15,
-        dropShadowColor: "white",
-        dropShadowDistance: 0,
-        fill : "white",
-        fontFamily: "FreeSans-Bold",
-        align:"right",
-        letterSpacing: -3
-    });
 
     public get MomentGasMilage(): number { return this.momentGasMilage }
     public set MomentGasMilage(val: number)
@@ -167,23 +158,20 @@ export class MilageGraphPanel extends PIXI.Container
         this.sectGasMilageBar["15min"].position.set(245,17);
         this.sectGasMilageBar["10min"].position.set(303,17);
         this.sectGasMilageBar["5min"].position.set(360,17);
-
-        this.tripLabel.style = this.masterTextStyle.clone();
-        this.tripLabel.style.fontSize = 35;
-        this.tripLabel.anchor.set(1,1);
-        this.tripLabel.position.set(600,110);
+        
+        this.tripLabel = new PIXI.extras.BitmapText("0.0", { font : "FreeSans_45px", align : "right"});
+        this.tripLabel.anchor = new PIXI.Point(1,1);
+        this.tripLabel.position.set(610,115);
         super.addChild(this.tripLabel);
 
-        this.fuelLabel.style = this.masterTextStyle.clone();
-        this.fuelLabel.style.fontSize = 35;
-        this.fuelLabel.anchor.set(1,1);
-        this.fuelLabel.position.set(600,165);
+        this.fuelLabel = new PIXI.extras.BitmapText("0.00", { font : "FreeSans_45px", align : "right"});
+        this.fuelLabel.anchor = new PIXI.Point(1,1);
+        this.fuelLabel.position.set(610,170);
         super.addChild(this.fuelLabel);
 
-        this.gasMilageLabel.style = this.masterTextStyle.clone();
-        this.gasMilageLabel.style.fontSize = 58;
-        this.gasMilageLabel.anchor.set(1,1);
-        this.gasMilageLabel.position.set(625, 260); 
+        this.gasMilageLabel = new PIXI.extras.BitmapText("0.00", { font : "FreeSans_68px", align : "right"});
+        this.gasMilageLabel.anchor = new PIXI.Point(1,1);
+        this.gasMilageLabel.position.set(625, 270); 
         super.addChild(this.gasMilageLabel);
     }
 }

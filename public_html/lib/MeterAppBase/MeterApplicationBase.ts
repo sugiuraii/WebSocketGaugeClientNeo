@@ -288,12 +288,25 @@ export abstract class MeterApplicationBase
     
     private preloadFonts(callBack : ()=> void)
     {
+        const webFontFamilyWithoutOverlap = this.webFontFamiliyNameToPreload.filter(
+            (x, i, self) => 
+            {
+                return self.indexOf(x) === i;
+            }
+        );
+        const webFontCSSURLWithoutOverlap = this.webFontCSSURLToPreload.filter(
+            (x, i, self) => 
+            {
+                return self.indexOf(x) === i;
+            }
+        );
+        
         WebFont.load(
             {
                 custom: 
                 { 
-                    families: this.webFontFamiliyNameToPreload,
-                    urls: this.webFontCSSURLToPreload 
+                    families: webFontFamilyWithoutOverlap,
+                    urls: webFontCSSURLWithoutOverlap 
                 },
                 active: () => { callBack(); }
             }
@@ -302,9 +315,16 @@ export abstract class MeterApplicationBase
     
     private preloadTextures(callBack : ()=> void)
     {
-        for (let i = 0; i < this.texturePathToPreload.length; i++)
+        const texturePathWithoutOverlap = this.texturePathToPreload.filter(
+            (x, i, self) => 
+            {
+                return self.indexOf(x) === i;
+            }
+        );
+        
+        for (let i = 0; i < texturePathWithoutOverlap.length; i++)
         {
-            const texturePath = this.texturePathToPreload[i];
+            const texturePath = texturePathWithoutOverlap[i];
             PIXI.loader.add(texturePath);
         }
 

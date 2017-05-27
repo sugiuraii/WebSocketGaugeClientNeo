@@ -32,11 +32,14 @@ require("./FullCircularGaugeTexture.png");
 require("../../fonts/font.css");
 require("../../fonts/GNU-Freefonts/FreeSansBold.otf");
 
+require("./CircularGaugeLabelFont.fnt");
+require("./CircularGaugeLabelFont_0.png");
+
 export class FullCircularGaugePanelBase extends CircularGaugePanelBase
 {
     static get RequestedTexturePath() : string[]
     {
-        return ["img/FullCircularGaugeTexture.json"];
+        return ["img/FullCircularGaugeTexture.json", "img/CircularGaugeLabelFont.fnt"];
     }
 
     static get RequestedFontFamily() : string[]
@@ -76,12 +79,10 @@ export class FullCircularGaugePanelBase extends CircularGaugePanelBase
 
         this.valueBarRadius = 150;
         this.valueBarInnerRadius = 50;        
-        this.valueLabelOption.position.set(200,185);
-        this.valueLabelOption.fontSize = 80;
-        this.valueLabelOption.position.set(200,185);
-        this.valueLabelOption.anchor.set(0.5,0.5);
-        this.valueLabelOption.align = "center";
-        this.valueLabelOption.letterSpacing = -3;
+        this.valueTextLabelOption.position.set(200,185);
+        this.valueTextLabelOption.position.set(200,185);
+        this.valueTextLabelOption.anchor.set(0.5,0.5);
+        this.valueTextLabelOption.align = "center";
 
         this.zoneBarRadius = 200;        
         this.centerPosition.set(200,200);

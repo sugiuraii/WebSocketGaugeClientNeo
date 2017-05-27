@@ -27,6 +27,34 @@
 import {CircularProgressBar} from  '../../../lib/Graphics/PIXIGauge';
 import * as PIXI from 'pixi.js';
 
+export class BitmapTextOption
+{
+    public position = new PIXI.Point(0, 0);
+    public anchor = new PIXI.Point(0, 0);
+    public align : string = "left";
+    public fontName = "FreeSans_90px";
+
+    constructor(position?: PIXI.Point, anchor? :  PIXI.Point, align? : string)
+    {
+        if(typeof(align) !== "undefined")
+            this.align = align;
+        if (position instanceof PIXI.Point)
+            this.position = position;
+        if (anchor instanceof PIXI.Point)
+            this.anchor = anchor;
+    }
+
+    clone() : TextOption
+    {
+        const returnObj = new TextOption();
+        returnObj.position = this.position.clone();
+        returnObj.anchor = this.anchor.clone();
+        returnObj.align = this.align;
+
+        return returnObj;            
+    }    
+}
+
 export class TextOption
 {
     public position = new PIXI.Point(0, 0);
@@ -64,7 +92,10 @@ export class TextOption
 export abstract class CircularGaugePanelBase extends PIXI.Container
 {
     private valueProgressBar: CircularProgressBar;
-    protected valueTextLabel: PIXI.Text;
+    protected valueTextLabel: PIXI.extras.BitmapText;
+    protected valueTextLabelOption: BitmapTextOption = new BitmapTextOption();
+    protected valueNumberRoundDigit : number = 1;
+    
     protected masterTextStyle : PIXI.TextStyle;
 
     protected offsetAngle : number;
@@ -76,7 +107,6 @@ export abstract class CircularGaugePanelBase extends PIXI.Container
     protected angleStep : number;
     protected valueBarRadius : number;
     protected valueBarInnerRadius : number;        
-    protected valueLabelOption = new TextOption();
 
     protected titleLabel : string;
     protected titleLabelOption : TextOption;
@@ -86,7 +116,6 @@ export abstract class CircularGaugePanelBase extends PIXI.Container
     protected axisLabel: string[] = new Array();
     protected axisLabelOption: TextOption[] = new Array();
 
-    protected valueNumberRoundDigit : number = 1;
 
     protected redZoneBarEnable : boolean;
     protected yellowZoneBarEnable : boolean;
@@ -146,15 +175,15 @@ export abstract class CircularGaugePanelBase extends PIXI.Container
 
         this.valueProgressBar.Texture = this.ValueBarTexture;
         super.addChild(this.valueProgressBar);
-
-        this.valueTextLabel = new PIXI.Text(this.min.toFixed(this.valueNumberRoundDigit).toString());
-        this.valueTextLabel.style = this.masterTextStyle.clone();
-        const valueLabelOption = this.valueLabelOption;
-        this.valueTextLabel.style.fontSize = valueLabelOption.fontSize;
-        this.valueTextLabel.position = valueLabelOption.position;
-        this.valueTextLabel.anchor.set(valueLabelOption.anchor.x, valueLabelOption.anchor.y);
-        this.valueTextLabel.style.align = valueLabelOption.align;
-        this.valueTextLabel.style.letterSpacing = valueLabelOption.letterSpacing;
+        
+        const valueTextLabelOption = this.valueTextLabelOption;
+        const valueTextLabelStyle: PIXI.extras.IBitmapTextStyle = {
+            font: valueTextLabelOption.fontName,
+            align: valueTextLabelOption.align
+        };
+        this.valueTextLabel = new PIXI.extras.BitmapText(this.min.toFixed(this.valueNumberRoundDigit).toString(), valueTextLabelStyle);
+        this.valueTextLabel.position = valueTextLabelOption.position;
+        this.valueTextLabel.anchor = new PIXI.Point(valueTextLabelOption.anchor.x, valueTextLabelOption.anchor.y);
         super.addChild(this.valueTextLabel);            
     }
 

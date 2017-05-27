@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<font>
+  <info face="FreeSans_68px" size="68" bold="1" italic="0" charset="" unicode="1" stretchH="100" smooth="1" aa="4" padding="10,10,10,10" spacing="10,10" outline="0"/>
+  <common lineHeight="68" base="51" scaleW="256" scaleH="256" pages="1" packed="0" alphaChnl="0" redChnl="4" greenChnl="4" blueChnl="4"/>
+  <pages>
+    <page id="0" file="MilageGraphFont_68px_0.png" />
+  </pages>
+  <chars count="13">
+    <char id="43" x="107" y="147" width="48" height="48" xoffset="-8" yoffset="14" xadvance="33" page="0" chnl="15" />
+    <char id="45" x="165" y="146" width="36" height="29" xoffset="-9" yoffset="21" xadvance="19" page="0" chnl="15" />
+    <char id="46" x="211" y="145" width="29" height="29" xoffset="-7" yoffset="32" xadvance="15" page="0" chnl="15" />
+    <char id="48" x="59" y="0" width="48" height="64" xoffset="-9" yoffset="-1" xadvance="28" page="0" chnl="15" />
+    <char id="49" x="59" y="147" width="38" height="61" xoffset="-7" yoffset="0" xadvance="28" page="0" chnl="15" />
+    <char id="50" x="116" y="74" width="48" height="62" xoffset="-9" yoffset="-1" xadvance="28" page="0" chnl="15" />
+    <char id="51" x="117" y="0" width="48" height="64" xoffset="-9" yoffset="-1" xadvance="28" page="0" chnl="15" />
+    <char id="52" x="174" y="74" width="49" height="61" xoffset="-9" yoffset="0" xadvance="28" page="0" chnl="15" />
+    <char id="53" x="58" y="74" width="48" height="63" xoffset="-9" yoffset="0" xadvance="28" page="0" chnl="15" />
+    <char id="54" x="175" y="0" width="48" height="64" xoffset="-9" yoffset="-1" xadvance="28" page="0" chnl="15" />
+    <char id="55" x="0" y="148" width="49" height="61" xoffset="-9" yoffset="0" xadvance="28" page="0" chnl="15" />
+    <char id="56" x="0" y="0" width="49" height="64" xoffset="-9" yoffset="-1" xadvance="28" page="0" chnl="15" />
+    <char id="57" x="0" y="74" width="48" height="64" xoffset="-9" yoffset="-1" xadvance="28" page="0" chnl="15" />
+  </chars>
+</font>

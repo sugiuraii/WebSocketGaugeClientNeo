@@ -47,7 +47,7 @@ namespace LEDTachoMeterTest
 {
     export function preloadTexture()
     {
-        PIXI.loader.add(LEDTachoMeter.RequestedTexturePath[0]);
+        PIXI.loader.add(LEDTachoMeter.RequestedTexturePath);
         PIXI.loader.load(main);
     }
 

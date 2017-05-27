@@ -46,7 +46,7 @@ namespace AnalogMeterClusterTest
 {
     export function preloadTexture()
     {
-        PIXI.loader.add(AnalogMeterCluster.RequestedTexturePath[0]);
+        PIXI.loader.add(AnalogMeterCluster.RequestedTexturePath);
         PIXI.loader.load(main);
     }
 
