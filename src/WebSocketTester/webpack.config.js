@@ -27,17 +27,17 @@
 module.exports = {
     entry: 
     {
-        "ArduinoCOMWSTest" : './src/ArduinoCOMWSTest.ts',
-        "DefiCOMWSTest" : './src/DefiCOMWSTest.ts',
-        "ELM327COMWSTest" : './src/ELM327COMWSTest.ts',
-        "SSMCOMWSTest" : './src/SSMCOMWSTest.ts',
-        "FUELTRIPWSTest" : './src/FUELTRIPWSTest.ts',
-        "DefiCOMWSInterpolateTest" : './src/DefiCOMWSInterpolateTest.ts'
+        "ArduinoCOMWSTest" : './ArduinoCOMWSTest.ts',
+        "DefiCOMWSTest" : './DefiCOMWSTest.ts',
+        "ELM327COMWSTest" : './ELM327COMWSTest.ts',
+        "SSMCOMWSTest" : './SSMCOMWSTest.ts',
+        "FUELTRIPWSTest" : './FUELTRIPWSTest.ts',
+        "DefiCOMWSInterpolateTest" : './DefiCOMWSInterpolateTest.ts'
     },
     devtool: "source-map",
     output: 
     {
-        path: __dirname + "/build",
+        path: __dirname + "/../../public_html/WebSocketTester/",
         filename: "js/[name].js"
     },
     resolve: {

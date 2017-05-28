@@ -24,29 +24,31 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
  
- /// <reference path="../../lib/webpackRequire.ts" />
+ /// <reference path="../lib/webpackRequire.ts" />
 
-import {FUELTRIPWebsocket} from '../../lib/WebSocket/WebSocketCommunication';
+import {SSMWebsocket} from "../lib/WebSocket/WebSocketCommunication";
+import {SSMParameterCode} from "../lib/WebSocket/WebSocketCommunication";
 import * as $ from "jquery";
-require('../FUELTRIPWSTest.html');
+require('./SSMCOMWSTest.html');
 
 window.onload = function()
 {
-    let wsTest = new webSocketGauge.test.FUELTRIPWSTest();
+    let wsTest = new webSocketGauge.test.SSMCOMWSTest();
     wsTest.main();
 }
 
 namespace webSocketGauge.test
 {
-    export class FUELTRIPWSTest
-    {
-        private webSocket : FUELTRIPWebsocket;
+    export class SSMCOMWSTest
+    {    
+        private webSocket : SSMWebsocket;
 
-        public main() : void
+        public main(): void
         {
-            this.webSocket = new FUELTRIPWebsocket();
-            $('#serverURLBox').val("ws://localhost:2014/");
+            this.webSocket = new SSMWebsocket();
+            $('#serverURLBox').val("ws://localhost:2013/");
             this.assignButtonEvents();
+            this.setParameterCodeSelectBox();
             this.registerWSEvents();
         }
         
@@ -54,37 +56,33 @@ namespace webSocketGauge.test
         {
             $("#connectButton").click(()=> this.connectWebSocket());
             $("#disconnectButton").click(() => this.disconnectWebSocket());
-            $("#buttonSECTSPAN").click(() => this.inputSECTSPAN());
-            $("#buttonSECTSTOREMAX").click(() => this.inputSECTSTOREMAX());
+            $("#buttonWSSend").click(() => this.inputWSSend());
+            $("#buttonWSInterval").click(() => this.inputWSInterval());
+        }
+
+        private setParameterCodeSelectBox()
+        {
+            for (let code in SSMParameterCode)
+                $('#codeSelect').append($('<option>').html(code).val(code));
         }
 
         private registerWSEvents() : void
         {
-            this.webSocket.OnMomentFUELTRIPPacketReceived = (moment_gasmilage : number, total_gas : number, total_trip : number, total_gasmilage : number)=>
+            this.webSocket.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: string}) => 
             {
-                //clear
-                $('#divMomentFuelTrip').html("");
-
-                $('#divMomentFuelTrip').append("Moment GasMilage : " + moment_gasmilage + "<br>" );
-                $('#divMomentFuelTrip').append("Total Gas : " + total_gas + "<br>" );
-                $('#divMomentFuelTrip').append("Total Trip : " + total_trip + "<br>" );
-                $('#divMomentFuelTrip').append("Total GasMilage : " + total_gasmilage + "<br>" );
+                $('#spanInterval').text(intervalTime.toFixed(2));
+                 //clear
+                $('#divVAL').html("");
+                for (var key in val)
+                {
+                    $('#divVAL').append(key + " : " + val[key] + "<br>" );
+                }
             }
-            this.webSocket.OnSectFUELTRIPPacketReceived = (sect_span: number, sect_trip: number[], sect_gas: number[], sect_gasmilage: number[]) =>
+            this.webSocket.OnERRPacketReceived = (msg:string)=>
             {
-                //clear
-                $('#divSectFuelTrip').html("");
-
-                $('#divSectFuelTrip').append("Sect Span : " + sect_span + "<br>" );
-                $('#divSectFuelTrip').append("Sect Trip : " + sect_trip + "<br>" );
-                $('#divSectFuelTrip').append("Sect Gas : " + sect_gas + "<br>" );
-                $('#divSectFuelTrip').append("Sect GasMilage : " + sect_gasmilage + "<br>" );
-            }
-
-            this.webSocket.OnERRPacketReceived = (msg : string) =>
-            {
-                $('#divERR').append(msg + "<br>");
+                $('#divERR').append(msg + "<br>")
             };
+
             this.webSocket.OnRESPacketReceived = (msg : string) =>
             {
                 $('#divRES').append(msg + "<br>");
@@ -97,38 +95,35 @@ namespace webSocketGauge.test
             {
                 $('#divWSMsg').append('* Connection open<br/>');
                 $('#connectButton').attr("disabled", "disabled");
-                $('#disconnectButton').removeAttr("disabled");
+                $('#disconnectButton').removeAttr("disabled");  
             };
             this.webSocket.OnWebsocketClose = () =>
             {
-                $('#div_ws_message').append('* Connection closed<br/>');
+                $('#divWSMsg').append('* Connection closed<br/>');
                 $('#connectButton').removeAttr("disabled");
                 $('#disconnectButton').attr("disabled", "disabled");
             };
         }
 
-        private connectWebSocket()
+        public connectWebSocket() : void
         {
             this.webSocket.URL = $("#serverURLBox").val();
             this.webSocket.Connect();
         };
 
-        private disconnectWebSocket()
+        public disconnectWebSocket()
         {
             this.webSocket.Close();
         };
 
-        private inputSECTSPAN()
+        public inputWSSend()
         {
-            this.webSocket.SendSectSpan($('#sectSPANBox').val());
+            this.webSocket.SendCOMRead($('#codeSelect').val(), $('#codeReadmode').val(), $('#codeFlag').val());
         };
 
-        private inputSECTSTOREMAX()
+        public inputWSInterval()
         {
-            this.webSocket.SendSectStoreMax($('#sectStoreMaxBox').val());
+            this.webSocket.SendSlowreadInterval(($('#WSInterval').val()));
         };
-    }
+    } 
 }
-
-
-

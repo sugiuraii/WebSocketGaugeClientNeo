@@ -5,3 +5,6 @@
 /public_html/parts/partsTest/build/
 /public_html/test/js/
 /public_html/panels/build/
+/src/npm-debug.log
+/public_html/WebSocketTester/
+/public_html/application/

@@ -24,30 +24,29 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/// <reference path="../../lib/webpackRequire.ts" />
+/// <reference path="../lib/webpackRequire.ts" />
+
+import {ELM327COMWebsocket} from "../lib/WebSocket/WebSocketCommunication";
+import {OBDIIParameterCode} from "../lib/WebSocket/WebSocketCommunication";
+import * as $ from "jquery";
+require('./ELM327COMWSTest.html');
 
 window.onload = function()
 {
-    let wsTest = new webSocketGauge.test.DefiCOMWSTest();
+    let wsTest = new webSocketGauge.test.ELM327COMWSTest();
     wsTest.main();
 }
-import {DefiCOMWebsocket} from '../../lib/WebSocket/WebSocketCommunication';
-import {DefiParameterCode} from '../../lib/WebSocket/WebSocketCommunication';
 
-import * as $ from "jquery";
-require('../DefiCOMWSTest.html');
-
-export module webSocketGauge.test
+namespace webSocketGauge.test
 {
-    
-    export class DefiCOMWSTest
+    export class ELM327COMWSTest
     {    
-        protected webSocket : DefiCOMWebsocket;
-        
+        private webSocket : ELM327COMWebsocket;
+
         public main(): void
         {
-            this.webSocket = new DefiCOMWebsocket();
-            $('#serverURLBox').val("ws://localhost:2012/");
+            this.webSocket = new ELM327COMWebsocket();
+            $('#serverURLBox').val("ws://localhost:2013/");
             this.assignButtonEvents();
             this.setParameterCodeSelectBox();
             this.registerWSEvents();
@@ -61,13 +60,13 @@ export module webSocketGauge.test
             $("#buttonWSInterval").click(() => this.inputWSInterval());
         }
 
-        protected setParameterCodeSelectBox() : void
+        private setParameterCodeSelectBox()
         {
-            for (let code in DefiParameterCode)
+            for (let code in OBDIIParameterCode)
                 $('#codeSelect').append($('<option>').html(code).val(code));
         }
 
-        protected registerWSEvents() : void
+        private registerWSEvents() : void
         {
             this.webSocket.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: string}) => 
             {
@@ -119,12 +118,12 @@ export module webSocketGauge.test
 
         public inputWSSend()
         {
-            this.webSocket.SendWSSend($('#codeSelect').val(),$('#codeFlag').val());
+            this.webSocket.SendCOMRead($('#codeSelect').val(), $('#codeReadmode').val(), $('#codeFlag').val());
         };
 
         public inputWSInterval()
         {
-            this.webSocket.SendWSInterval($('#WSInterval').val());
+            this.webSocket.SendSlowreadInterval(($('#WSInterval').val()));
         };
-    }
+    } 
 }

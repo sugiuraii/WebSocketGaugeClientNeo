@@ -27,14 +27,14 @@
 module.exports = {
     entry: 
     {
-        "AnalogMeterClusterApp" : './src/AnalogMeterClusterApp.ts',
-        "DigitalMFDApp" : './src/DigitalMFDApp.ts',
-        "DigitalMFDBenchApp" : './src/DigitalMFDBenchApp.ts'       
+        "AnalogMeterClusterApp" : './AnalogMeterClusterApp.ts',
+        "DigitalMFDApp" : './DigitalMFDApp.ts',
+        "DigitalMFDBenchApp" : './DigitalMFDBenchApp.ts'       
     },
     devtool: "source-map",
     output: 
     {
-        path: __dirname + "/build",
+        path: __dirname + "/../../public_html/application",
         filename: "./js/[name].js"
     },
     resolve: {

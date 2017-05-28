@@ -24,13 +24,13 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/// <reference path="../../lib/webpackRequire.ts" />
+/// <reference path="../lib/webpackRequire.ts" />
  
-import {DefiCOMWebsocket} from '../../lib/WebSocket/WebSocketCommunication';
-import {DefiParameterCode} from '../../lib/WebSocket/WebSocketCommunication';
+import {DefiCOMWebsocket} from '../lib/WebSocket/WebSocketCommunication';
+import {DefiParameterCode} from '../lib/WebSocket/WebSocketCommunication';
 
 import * as $ from "jquery";
-require('../DefiCOMWSInterpolateTest.html');
+require('./DefiCOMWSInterpolateTest.html');
 
 window.onload = () =>
 {

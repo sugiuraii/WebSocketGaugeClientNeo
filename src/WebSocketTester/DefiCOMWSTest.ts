@@ -23,31 +23,30 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
- 
-/// <reference path="../../lib/webpackRequire.ts" />
+
+/// <reference path="../lib/webpackRequire.ts" />
 
 window.onload = function()
 {
-    let wsTest = new webSocketGauge.test.ArduinoCOMWSTest();
+    let wsTest = new webSocketGauge.test.DefiCOMWSTest();
     wsTest.main();
 }
+import {DefiCOMWebsocket} from '../lib/WebSocket/WebSocketCommunication';
+import {DefiParameterCode} from '../lib/WebSocket/WebSocketCommunication';
 
-import {ArduinoCOMWebsocket} from '../../lib/WebSocket/WebSocketCommunication';
-import {ArduinoParameterCode} from '../../lib/WebSocket/WebSocketCommunication';
 import * as $ from "jquery";
+require('./DefiCOMWSTest.html');
 
-require('../ArduinoCOMWSTest.html');
-
-export namespace webSocketGauge.test
+export module webSocketGauge.test
 {
     
-    export class ArduinoCOMWSTest
+    export class DefiCOMWSTest
     {    
-        protected webSocket : ArduinoCOMWebsocket;
+        protected webSocket : DefiCOMWebsocket;
         
         public main(): void
         {
-            this.webSocket = new ArduinoCOMWebsocket();
+            this.webSocket = new DefiCOMWebsocket();
             $('#serverURLBox').val("ws://localhost:2012/");
             this.assignButtonEvents();
             this.setParameterCodeSelectBox();
@@ -64,7 +63,7 @@ export namespace webSocketGauge.test
 
         protected setParameterCodeSelectBox() : void
         {
-            for (let code in ArduinoParameterCode)
+            for (let code in DefiParameterCode)
                 $('#codeSelect').append($('<option>').html(code).val(code));
         }
 
