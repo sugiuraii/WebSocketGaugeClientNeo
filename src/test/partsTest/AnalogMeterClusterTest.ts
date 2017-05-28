@@ -23,36 +23,45 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+ 
+/// <reference path="../../lib/webpackRequire.ts" />
 
-module.exports = {
-    entry: 
+import * as WebFont from "webfontloader";
+import {AnalogMeterCluster} from '../../parts/AnalogMeterCluster/AnalogMeterCluster';
+
+require("./AnalogMeterClusterTest.html");
+
+window.onload = function()
+{
+    WebFont.load({
+        custom: 
+        { 
+            families: AnalogMeterCluster.RequestedFontFamily,
+            urls: AnalogMeterCluster.RequestedFontCSSURL 
+        },
+        active: function () {AnalogMeterClusterTest.preloadTexture();}
+    });
+}
+namespace AnalogMeterClusterTest
+{
+    export function preloadTexture()
     {
-        "AnalogMeterClusterTest" : './src/AnalogMeterClusterTest.ts',
-        "DigiTachoTest" : './src/DigiTachoTest.ts',
-        "FullCircularGaugeTest" : './src/FullCircularGaugeTest.ts',
-        "LEDTachoMeterTest" : './src/LEDTachoMeterTest.ts',
-        "MilageBarTest" : './src/MilageBarTest.ts',
-        "SemiCircularGaugeTest" : './src/SemiCircularGaugeTest.ts'
-    },
-    devtool: "source-map",
-    output: 
+        PIXI.loader.add(AnalogMeterCluster.RequestedTexturePath);
+        PIXI.loader.load(main);
+    }
+
+    function main()
     {
-        path: __dirname + "/build",
-        filename: "./js/[name].js"
-    },
-    resolve: {
-        // Add `.ts` and `.tsx` as a resolvable extension.
-        extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
-    },
-  module: {
-    loaders: [
-        { test: /\.tsx?$/, loader: 'ts-loader' },
-        { test: /\.png$/, loader: "file-loader?name=img/[name].[ext]" },
-        { test: /\.fnt$/, loader: "file-loader?name=img/[name].[ext]" }, // Bitmap font setting files
-        { test: /\.json$/, loader: "file-loader?name=img/[name].[ext]" },
-        { test: /\.html$/, loader: "file-loader?name=[name].[ext]" },
-        { test: /\.css$/, loader: "file-loader?name=[name].[ext]" },
-        { test: /\.(ttf|otf)$/, loader: "file-loader?name=fonts/[name].[ext]" }
-    ]
-  }
-};
+        const app = new PIXI.Application(1366,1366);
+        document.body.appendChild(app.view);
+
+        const meterCluster = new AnalogMeterCluster();
+        app.stage.addChild(meterCluster);
+
+        app.ticker.add(function(){
+            meterCluster.Speed += 1;
+            if (meterCluster.Speed > 280)
+                meterCluster.Speed = 0;
+        });
+    }
+}

@@ -23,48 +23,48 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
- 
-/// <reference path="../../../lib/webpackRequire.ts" />
- 
-import {DigiTachoPanel} from "../../DigiTachoPanel/DigiTachoPanel";
-import * as WebFont from  "webfontloader";
 
-require("../DigiTachoTest.html");
+/// <reference path="../../lib/webpackRequire.ts" />
+
+import {BoostGaugePanel} from "../../parts/CircularGauges/FullCircularGaugePanel";
+import * as WebFont from "webfontloader";
+
+require("./FullCircularGaugeTest.html");
 
 window.onload = function()
 {
     WebFont.load({
         custom: 
         { 
-            families: DigiTachoPanel.RequestedFontFamily,
-            urls: DigiTachoPanel.RequestedFontCSSURL 
+            families: BoostGaugePanel.RequestedFontFamily,
+            urls: BoostGaugePanel.RequestedFontCSSURL 
         },
-        active: function () {webSocketGauge.test.DigiTachoTest.preloadTexture();}
+        active : function(){FullCircularGaugeTest.preloadTexture();}
     });
 }
 
-namespace webSocketGauge.test.DigiTachoTest
+namespace FullCircularGaugeTest
 {
     export function preloadTexture()
     {
-        PIXI.loader.add(DigiTachoPanel.RequestedTexturePath);;
+        PIXI.loader.add(BoostGaugePanel.RequestedTexturePath);;
         PIXI.loader.load(main);
     }
     function main()
     {
         const app = new PIXI.Application(1366,1366);
         document.body.appendChild(app.view);
-        let gaugeArray: DigiTachoPanel[] = new Array();
+        let gaugeArray: BoostGaugePanel[] = new Array();
         let index = 0;
         for (let j = 0; j < 6; j++)
         {
             for (let i = 0; i < 6 ; i++)
             {
-                gaugeArray.push(new DigiTachoPanel());
-                gaugeArray[index].pivot = new PIXI.Point(300,200);
-                gaugeArray[index].scale.set(0.65, 0.65);
-                gaugeArray[index].position = new PIXI.Point(400*i+150,240*j+150);
-                gaugeArray[index].Tacho = 0;
+                gaugeArray.push(new BoostGaugePanel);
+                gaugeArray[index].pivot = new PIXI.Point(200,200);
+                gaugeArray[index].scale.set(0.6, 0.6);
+                gaugeArray[index].position = new PIXI.Point(240*i+150,240*j+150);
+                gaugeArray[index].Value = 0;
                 app.stage.addChild(gaugeArray[index]);
                 index++;
             }
@@ -72,11 +72,11 @@ namespace webSocketGauge.test.DigiTachoTest
         app.ticker.add(() => {
             for (let i = 0; i < gaugeArray.length; i++)
             {
-                if (gaugeArray[i].Tacho + 100 >= 9000)
-                    gaugeArray[i].Tacho = 0;
+                if (gaugeArray[i].Value + 0.01 >= 2)
+                    gaugeArray[i].Value = -1;
                 else           
-                    gaugeArray[i].Tacho+=100;
+                    gaugeArray[i].Value = gaugeArray[i].Value + 0.01;
             }
-        });
+            });
     }
 }

@@ -23,47 +23,31 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
- 
-/// <reference path="../../../lib/webpackRequire.ts" />
 
-import {LEDTachoMeter} from "../../LEDTachoMeter/LEDTachoMeter";
-import * as WebFont from "webfontloader";
-
-require("../LEDTachoMeterTest.html");
-
-window.onload = function()
-{
-    WebFont.load({
-        custom: 
-        { 
-            families: LEDTachoMeter.RequestedFontFamily,
-            urls: LEDTachoMeter.RequestedFontCSSURL 
-        },
-        active : function(){LEDTachoMeterTest.preloadTexture();}
-    });
-}
-
-namespace LEDTachoMeterTest
-{
-    export function preloadTexture()
+module.exports = {
+    entry: 
     {
-        PIXI.loader.add(LEDTachoMeter.RequestedTexturePath);
-        PIXI.loader.load(main);
-    }
-
-    function main()
+        "DigitalMFDBenchApp" : './DigitalMFDBenchApp.ts'
+    },
+    devtool: "source-map",
+    output: 
     {
-        const app = new PIXI.Application(1366,1366);
-        document.body.appendChild(app.view);
-
-        const meter = new LEDTachoMeter();
-        app.stage.addChild(meter);
-
-        app.ticker.add(function(){
-            meter.Tacho += 100;
-            if (meter.Tacho > 9000)
-                meter.Tacho = 0;
-        });
-
-    }
-}
+        path: __dirname + "/../../public_html/benchmark",
+        filename: "./js/[name].js"
+    },
+    resolve: {
+        // Add `.ts` and `.tsx` as a resolvable extension.
+        extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
+    },
+  module: {
+    loaders: [
+        { test: /\.tsx?$/, loader: 'ts-loader' },
+        { test: /\.png$/, loader: "file-loader?name=img/[name].[ext]" },
+        { test: /\.fnt$/, loader: "file-loader?name=img/[name].[ext]" }, // Bitmap font setting files
+        { test: /\.json$/, loader: "file-loader?name=img/[name].[ext]" },
+        { test: /\.html$/, loader: "file-loader?name=[name].[ext]" },
+        { test: /\.css$/, loader: "file-loader?name=[name].[ext]" },
+        { test: /\.(ttf|otf)$/, loader: "file-loader?name=fonts/[name].[ext]" }
+    ]
+  }
+};

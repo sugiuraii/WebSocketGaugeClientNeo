@@ -23,59 +23,47 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+ 
+/// <reference path="../../lib/webpackRequire.ts" />
 
-/// <reference path="../../../lib/webpackRequire.ts" />
-
-import {MilageGraphPanel} from "../../GasMilageGraph/MilageGraph";
+import {LEDTachoMeter} from "../../parts/LEDTachoMeter/LEDTachoMeter";
 import * as WebFont from "webfontloader";
 
-require("../MilageBarTest.html");
+require("./LEDTachoMeterTest.html");
 
 window.onload = function()
 {
-    //webSocketGauge.parts.FullCircularGauge.preloadTextures();
     WebFont.load({
         custom: 
         { 
-            families: MilageGraphPanel.RequestedFontFamily,
-            urls: MilageGraphPanel.RequestedFontCSSURL 
-        },    
-        active: function () {MilageBarTest.preloadTexture();}
+            families: LEDTachoMeter.RequestedFontFamily,
+            urls: LEDTachoMeter.RequestedFontCSSURL 
+        },
+        active : function(){LEDTachoMeterTest.preloadTexture();}
     });
 }
 
-namespace MilageBarTest
+namespace LEDTachoMeterTest
 {
     export function preloadTexture()
     {
-        PIXI.loader.add(MilageGraphPanel.RequestedTexturePath);
+        PIXI.loader.add(LEDTachoMeter.RequestedTexturePath);
         PIXI.loader.load(main);
     }
+
     function main()
     {
         const app = new PIXI.Application(1366,1366);
         document.body.appendChild(app.view);
-        let gaugeArray: MilageGraphPanel[] = new Array();
-        let index = 0;
-        for (let j = 0; j < 6; j++)
-        {
-            for (let i = 0; i < 6 ; i++)
-            {
-                gaugeArray.push(new MilageGraphPanel);
-                gaugeArray[index].pivot = new PIXI.Point(200,200);
-                gaugeArray[index].scale.set(0.6, 0.6);
-                gaugeArray[index].position = new PIXI.Point(400*i+150,200*j+150);
-                gaugeArray[index].Trip = 130.0;
-                gaugeArray[index].MomentGasMilage = 20.0;
-                gaugeArray[index].Fuel = 35.0;
-                gaugeArray[index].GasMilage = 23.5;
-                gaugeArray[index].setSectGasMllage("5min", 12.0);
-                gaugeArray[index].setSectGasMllage("25min", 7.0);
-                app.stage.addChild(gaugeArray[index]);
-                index++;
-            }
-        }
-        app.ticker.add(() => {
-            });
+
+        const meter = new LEDTachoMeter();
+        app.stage.addChild(meter);
+
+        app.ticker.add(function(){
+            meter.Tacho += 100;
+            if (meter.Tacho > 9000)
+                meter.Tacho = 0;
+        });
+
     }
 }

@@ -1,6 +1,6 @@
 {
   "name": "PixiJSTest",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "keywords": [
     "util",
     "functional",
@@ -8,7 +8,7 @@
     "client",
     "browser"
   ],
-  "author": "kuniaki",
+  "author": "K. Sugiura",
   "contributors": [],
   "dependencies": {"@types\/jquery": "^2.0.42",
     "@types/jquery": "^2.0.45",

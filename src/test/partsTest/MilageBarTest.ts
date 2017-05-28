@@ -23,45 +23,59 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
- 
-/// <reference path="../../../lib/webpackRequire.ts" />
 
+/// <reference path="../../lib/webpackRequire.ts" />
+
+import {MilageGraphPanel} from "../../parts/GasMilageGraph/MilageGraph";
 import * as WebFont from "webfontloader";
-import {AnalogMeterCluster} from '../../AnalogMeterCluster/AnalogMeterCluster';
 
-require("../AnalogMeterClusterTest.html");
+require("./MilageBarTest.html");
 
 window.onload = function()
 {
+    //webSocketGauge.parts.FullCircularGauge.preloadTextures();
     WebFont.load({
         custom: 
         { 
-            families: AnalogMeterCluster.RequestedFontFamily,
-            urls: AnalogMeterCluster.RequestedFontCSSURL 
-        },
-        active: function () {AnalogMeterClusterTest.preloadTexture();}
+            families: MilageGraphPanel.RequestedFontFamily,
+            urls: MilageGraphPanel.RequestedFontCSSURL 
+        },    
+        active: function () {MilageBarTest.preloadTexture();}
     });
 }
-namespace AnalogMeterClusterTest
+
+namespace MilageBarTest
 {
     export function preloadTexture()
     {
-        PIXI.loader.add(AnalogMeterCluster.RequestedTexturePath);
+        PIXI.loader.add(MilageGraphPanel.RequestedTexturePath);
         PIXI.loader.load(main);
     }
-
     function main()
     {
         const app = new PIXI.Application(1366,1366);
         document.body.appendChild(app.view);
-
-        const meterCluster = new AnalogMeterCluster();
-        app.stage.addChild(meterCluster);
-
-        app.ticker.add(function(){
-            meterCluster.Speed += 1;
-            if (meterCluster.Speed > 280)
-                meterCluster.Speed = 0;
-        });
+        let gaugeArray: MilageGraphPanel[] = new Array();
+        let index = 0;
+        for (let j = 0; j < 6; j++)
+        {
+            for (let i = 0; i < 6 ; i++)
+            {
+                gaugeArray.push(new MilageGraphPanel);
+                gaugeArray[index].pivot = new PIXI.Point(200,200);
+                gaugeArray[index].scale.set(0.6, 0.6);
+                gaugeArray[index].position = new PIXI.Point(400*i+150,200*j+150);
+                gaugeArray[index].Trip = 130.0;
+                gaugeArray[index].MomentGasMilage = 20.0;
+                gaugeArray[index].Fuel = 35.0;
+                gaugeArray[index].GasMilage = 23.5;
+                gaugeArray[index].setSectGasMllage("5min", 12.0);
+                gaugeArray[index].setSectGasMllage("25min", 7.0);
+                app.stage.addChild(gaugeArray[index]);
+                index++;
+            }
+        }
+        app.ticker.add(() => {
+            });
     }
 }

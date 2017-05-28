@@ -27,13 +27,17 @@
 module.exports = {
     entry: 
     {
-        "AnalogMeterClusterApp" : './AnalogMeterClusterApp.ts',
-        "DigitalMFDApp" : './DigitalMFDApp.ts' 
+        "AnalogMeterClusterTest" : './AnalogMeterClusterTest.ts',
+        "DigiTachoTest" : './DigiTachoTest.ts',
+        "FullCircularGaugeTest" : './FullCircularGaugeTest.ts',
+        "LEDTachoMeterTest" : './LEDTachoMeterTest.ts',
+        "MilageBarTest" : './MilageBarTest.ts',
+        "SemiCircularGaugeTest" : './SemiCircularGaugeTest.ts'
     },
     devtool: "source-map",
     output: 
     {
-        path: __dirname + "/../../public_html/application",
+        path: __dirname + "/../../../public_html/partsTest",
         filename: "./js/[name].js"
     },
     resolve: {

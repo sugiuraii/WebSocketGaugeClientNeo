@@ -24,48 +24,47 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
  
-/// <reference path="../../../lib/webpackRequire.ts" />
+/// <reference path="../../lib/webpackRequire.ts" />
  
-import {ThrottleGaugePanel} from "../../CircularGauges/SemiCircularGaugePanel";
-import * as WebFont from "webfontloader";
+import {DigiTachoPanel} from "../../parts/DigiTachoPanel/DigiTachoPanel";
+import * as WebFont from  "webfontloader";
 
-require("../SemiCircularGaugeTest.html");
+require("./DigiTachoTest.html");
 
 window.onload = function()
 {
-   
     WebFont.load({
         custom: 
         { 
-            families: ThrottleGaugePanel.RequestedFontFamily,
-            urls: ThrottleGaugePanel.RequestedFontCSSURL 
+            families: DigiTachoPanel.RequestedFontFamily,
+            urls: DigiTachoPanel.RequestedFontCSSURL 
         },
-        active : function(){SemiCircularGaugeTest.preloadTexture();}
+        active: function () {DigiTachoTest.preloadTexture();}
     });
 }
 
-namespace SemiCircularGaugeTest
+namespace DigiTachoTest
 {
     export function preloadTexture()
     {
-        PIXI.loader.add(ThrottleGaugePanel.RequestedTexturePath);;
+        PIXI.loader.add(DigiTachoPanel.RequestedTexturePath);
         PIXI.loader.load(main);
     }
     function main()
     {
         const app = new PIXI.Application(1366,1366);
         document.body.appendChild(app.view);
-        let gaugeArray: ThrottleGaugePanel[] = new Array();
+        let gaugeArray: DigiTachoPanel[] = new Array();
         let index = 0;
         for (let j = 0; j < 6; j++)
         {
             for (let i = 0; i < 6 ; i++)
             {
-                gaugeArray.push(new ThrottleGaugePanel());
-                gaugeArray[index].pivot = new PIXI.Point(200,200);
-                gaugeArray[index].scale.set(0.6, 0.6);
-                gaugeArray[index].position = new PIXI.Point(240*i+150,200*j+150);
-                gaugeArray[index].Value = 0;
+                gaugeArray.push(new DigiTachoPanel());
+                gaugeArray[index].pivot = new PIXI.Point(300,200);
+                gaugeArray[index].scale.set(0.65, 0.65);
+                gaugeArray[index].position = new PIXI.Point(400*i+150,240*j+150);
+                gaugeArray[index].Tacho = 0;
                 app.stage.addChild(gaugeArray[index]);
                 index++;
             }
@@ -73,12 +72,11 @@ namespace SemiCircularGaugeTest
         app.ticker.add(() => {
             for (let i = 0; i < gaugeArray.length; i++)
             {
-                if (gaugeArray[i].Value + 1 >= 100)
-                    gaugeArray[i].Value = 0;
+                if (gaugeArray[i].Tacho + 100 >= 9000)
+                    gaugeArray[i].Tacho = 0;
                 else           
-                    gaugeArray[i].Value += 1;
+                    gaugeArray[i].Tacho+=100;
             }
-            });
+        });
     }
 }
-
