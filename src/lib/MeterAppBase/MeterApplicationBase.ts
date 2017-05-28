@@ -301,6 +301,10 @@ export abstract class MeterApplicationBase
             }
         );
         
+        // call callBack() without loading fonts if the webFontFamily and webFoutCSSURL contains no elements.
+        if (webFontFamilyWithoutOverlap.length === 0 && webFontCSSURLWithoutOverlap.length === 0)
+            callBack();
+        
         WebFont.load(
             {
                 custom: 

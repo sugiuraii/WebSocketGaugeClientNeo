@@ -33,14 +33,7 @@ require("./DigiTachoTest.html");
 
 window.onload = function()
 {
-    WebFont.load({
-        custom: 
-        { 
-            families: DigiTachoPanel.RequestedFontFamily,
-            urls: DigiTachoPanel.RequestedFontCSSURL 
-        },
-        active: function () {DigiTachoTest.preloadTexture();}
-    });
+    DigiTachoTest.preloadTexture();
 }
 
 namespace DigiTachoTest
