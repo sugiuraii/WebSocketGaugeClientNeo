@@ -153,7 +153,10 @@ export abstract class MeterApplicationBase
         
         // Set viewport meta-tag
         this.setViewPortMetaTag();
-            
+        
+        // Set fullscreen tag for android and ios
+        this.setWebAppCapable();
+        
         // Set common websocket events (OnClose, OnError, OnRESPacketReceived, OnERRPacketReceived)
         this.registerWebSocketCommonEvents("DEFI", this.defiWS);
         this.registerWebSocketCommonEvents("SSM", this.ssmWS);
@@ -194,6 +197,22 @@ export abstract class MeterApplicationBase
             let meta = document.createElement('meta');
             meta.setAttribute('name', 'viewport');
             meta.setAttribute('content', VIEWPORT_ATTRIBUTE);
+            document.getElementsByTagName('head')[0].appendChild(meta);
+        }
+    }
+    
+    private setWebAppCapable() : void
+    {
+        {
+            const meta = document.createElement('meta');
+            meta.setAttribute('name', 'apple-mobile-web-app-capable');
+            meta.setAttribute('content', 'yes');
+            document.getElementsByTagName('head')[0].appendChild(meta);
+        }
+        {
+            const meta = document.createElement('meta');
+            meta.setAttribute('name', 'mobile-web-app-capable');
+            meta.setAttribute('content', 'yes');
             document.getElementsByTagName('head')[0].appendChild(meta);
         }
     }
