@@ -39,6 +39,8 @@ import {ThrottleGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel
 import {DigiTachoPanel} from "../parts/DigiTachoPanel/DigiTachoPanel";
 import {MilageGraphPanel} from "../parts/GasMilageGraph/MilageGraph";
 
+import {FPSCounter} from "../parts/FPSIndicator/FPSCounter";
+
 //For including entry point html file in webpack
 require("./DigitalMFDBenchApp.html");
 
@@ -71,6 +73,8 @@ class DigitalMFDBenchApp extends MeterApplicationBase
         this.registerTexturePathToPreload(WaterTempGaugePanel.RequestedTexturePath);
         this.registerTexturePathToPreload(DigiTachoPanel.RequestedTexturePath);
         this.registerTexturePathToPreload(MilageGraphPanel.RequestedTexturePath);
+        
+        this.registerTexturePathToPreload(FPSCounter.RequestedTexturePath);
     }
     
     protected setPIXIMeterPanel()
@@ -128,6 +132,10 @@ class DigitalMFDBenchApp extends MeterApplicationBase
         const totalFuel = 20.0;
         const totalTrip = 356.0;
 
+        const fpsCounter = new FPSCounter();
+        fpsCounter.position.set(0,0);
+        app.stage.addChild(fpsCounter);
+
         let boost = -1.0;
         let airFuelRatio = 8.0;
         let waterTemp = 50.0;
@@ -137,6 +145,8 @@ class DigitalMFDBenchApp extends MeterApplicationBase
         
         app.ticker.add(() => 
         {
+            fpsCounter.setFPS(app.ticker.FPS);
+                        
             if(tacho > 9000)
                 tacho = 0;
             else
