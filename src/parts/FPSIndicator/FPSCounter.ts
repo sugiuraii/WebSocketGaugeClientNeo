@@ -28,9 +28,13 @@ import * as PIXI from 'pixi.js';
 require("./fpsCounterFont.fnt");
 require("./fpsCounterFont_0.png");
 
+const FPSBUFFER_LENGTH = 5;
+
 export class FPSCounter extends PIXI.Container
 {
     private fpsText: PIXI.extras.BitmapText;
+    private fpsbuffer : number[] = new Array();
+    
     static get RequestedTexturePath() : string[]
     {
         return ["img/fpsCounterFont.fnt"];
@@ -45,6 +49,24 @@ export class FPSCounter extends PIXI.Container
     
     public setFPS(fps : number) : void
     {
-        this.fpsText.text = fps.toFixed(0) + "fps";
+        this.pushFPSBuffer(fps);
+        const avgFPS = this.calcAverageFPS();
+        this.fpsText.text = avgFPS.toFixed(0) + "fps";
+    }
+    
+    private pushFPSBuffer(fps : number) : void
+    {
+        this.fpsbuffer.push(fps);
+        if (this.fpsbuffer.length > FPSBUFFER_LENGTH)
+            this.fpsbuffer.shift();
+    }
+    
+    private calcAverageFPS() : number
+    {
+        let sum = 0;
+        for (let i = 0; i < this.fpsbuffer.length; i++)
+            sum += this.fpsbuffer[i];
+            
+        return sum / this.fpsbuffer.length;
     }
 }
