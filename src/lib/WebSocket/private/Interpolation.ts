@@ -34,7 +34,7 @@ export enum UpdatePeriodCalcMethod
 export class VALInterpolationBuffer
 {
     public static UpdatePeriodCalcMethod: UpdatePeriodCalcMethod = UpdatePeriodCalcMethod.Median;
-    public static UpdatePeriodBufferLength : number = 4;
+    public static UpdatePeriodBufferLength : number = 10;
 
     private lastUpdateTimeStamp : number;
     private lastValue : number;
@@ -131,7 +131,7 @@ export class VALInterpolationBuffer
 
 class MovingAverageQueue
 {
-    private queueLength : number;
+    private readonly queueLength : number;
     private valArray : number[];
 
     constructor(queueLength : number)
@@ -174,7 +174,14 @@ class MovingAverageQueue
      */
     public getMedian() : number
     {
-        const temp : number[] = this.valArray.sort(function(a,b){return a-b;});
+        // Copy to temporary array
+        const temp : number[] = new Array(this.valArray.length);
+        for (let i = 0; i < this.valArray.length; i++)
+            temp[i] = this.valArray[i];
+        
+        // perform sort
+        temp.sort(function(a,b){return a-b;});
+        
         const length = temp.length;
         const half : number = (temp.length/2)|0;
 
