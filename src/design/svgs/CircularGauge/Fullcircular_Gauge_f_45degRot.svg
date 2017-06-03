@@ -1,0 +1,2080 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="Semicircular_Gauge_f.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\WpfApplication1\描画SVG\Digi_Tacho\DigiTachi_Back.png"
+   inkscape:export-xdpi="58.349998"
+   inkscape:export-ydpi="58.349998"
+   version="1.1">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient3203">
+      <stop
+         style="stop-color:#131a20;stop-opacity:1;"
+         offset="0"
+         id="stop3205" />
+      <stop
+         id="stop3215"
+         offset="0.15031824"
+         style="stop-color:#232c32;stop-opacity:1;" />
+      <stop
+         id="stop3211"
+         offset="0.28092229"
+         style="stop-color:#bdd6ec;stop-opacity:1;" />
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0.49269104"
+         id="stop3213" />
+      <stop
+         style="stop-color:#cbdff0;stop-opacity:1;"
+         offset="0.75805265"
+         id="stop3272" />
+      <stop
+         style="stop-color:#1a1a1a;stop-opacity:1;"
+         offset="1"
+         id="stop3207" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient4089">
+      <stop
+         style="stop-color:#00fff0;stop-opacity:1;"
+         offset="0"
+         id="stop4091" />
+      <stop
+         id="stop4105"
+         offset="0.19933924"
+         style="stop-color:#00ff00;stop-opacity:0.99607843;" />
+      <stop
+         id="stop4097"
+         offset="0.43343624"
+         style="stop-color:#ffff00;stop-opacity:0.99215686;" />
+      <stop
+         style="stop-color:#ffff00;stop-opacity:0.99215686;"
+         offset="0.85758197"
+         id="stop4103" />
+      <stop
+         style="stop-color:#ff0000;stop-opacity:0.99607843;"
+         offset="0.87810516"
+         id="stop4101" />
+      <stop
+         style="stop-color:#ff0000;stop-opacity:1;"
+         offset="1"
+         id="stop4093" />
+    </linearGradient>
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect3538"
+       prop_scale="1"
+       pattern="M -62,-3 L -61,-3 " />
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective10" />
+    <filter
+       height="2.7497319"
+       y="-0.87486597"
+       width="1.7087522"
+       x="-0.35437608"
+       id="filter3516"
+       inkscape:collect="always">
+      <feGaussianBlur
+         id="feGaussianBlur3518"
+         stdDeviation="66.656451"
+         inkscape:collect="always" />
+    </filter>
+    <inkscape:perspective
+       id="perspective3503"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <linearGradient
+       id="linearGradient3164">
+      <stop
+         id="stop3166"
+         offset="0"
+         style="stop-color:#f8f8f8;stop-opacity:1;" />
+      <stop
+         id="stop3168"
+         offset="1"
+         style="stop-color:#f1fff1;stop-opacity:0;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3522">
+      <stop
+         id="stop3524"
+         offset="0"
+         style="stop-color:#182e38;stop-opacity:1;" />
+      <stop
+         id="stop3526"
+         offset="1"
+         style="stop-color:#000000;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3271"
+       inkscape:collect="always">
+      <stop
+         id="stop3273"
+         offset="0"
+         style="stop-color:#000000;stop-opacity:1;" />
+      <stop
+         id="stop3275"
+         offset="1"
+         style="stop-color:#000000;stop-opacity:0;" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3522"
+       id="linearGradient3521"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.2417441,0,0,1.9202943,-1.884189,-945.461)"
+       x1="230"
+       y1="791.86218"
+       x2="234"
+       y2="597.86218" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3271"
+       id="linearGradient3523"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.2417441,0,0,1.9202943,-1.884189,-945.461)"
+       x1="252.5"
+       y1="465.86218"
+       x2="259.5"
+       y2="1202.8622" />
+    <inkscape:perspective
+       id="perspective2926"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <filter
+       inkscape:collect="always"
+       id="filter3836"
+       x="-0.11459862"
+       width="1.2291972"
+       y="-0.12553553"
+       height="1.2510711">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="2.1895912"
+         id="feGaussianBlur3838" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter3840"
+       x="-0.11725651"
+       width="1.234513"
+       y="-0.12853216"
+       height="1.2570643">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="2.1895912"
+         id="feGaussianBlur3842" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter3844"
+       x="-0.11557857"
+       width="1.2311571"
+       y="-0.13145972"
+       height="1.2629194">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="2.1895912"
+         id="feGaussianBlur3846" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter3848"
+       x="-0.11557857"
+       width="1.2311571"
+       y="-0.12553553"
+       height="1.2510711">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="2.1895912"
+         id="feGaussianBlur3850" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter3852"
+       x="-0.11427237"
+       width="1.2285447"
+       y="-0.12553553"
+       height="1.2510711">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="2.1895912"
+         id="feGaussianBlur3854" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter3856"
+       x="-0.016817541"
+       width="1.0336351"
+       y="-0.14095957"
+       height="1.2819191">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="2.4658747"
+         id="feGaussianBlur3858" />
+    </filter>
+    <filter
+       color-interpolation-filters="sRGB"
+       inkscape:collect="always"
+       id="filter3250-2"
+       x="-0.32293564"
+       width="1.6458713"
+       y="-0.32293564"
+       height="1.6458713">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="3.4252497"
+         id="feGaussianBlur3252-4" />
+    </filter>
+    <filter
+       color-interpolation-filters="sRGB"
+       inkscape:collect="always"
+       id="filter3246-5"
+       x="-0.32293564"
+       width="1.6458713"
+       y="-0.32293564"
+       height="1.6458713">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="3.4252497"
+         id="feGaussianBlur3248-5" />
+    </filter>
+    <filter
+       color-interpolation-filters="sRGB"
+       inkscape:collect="always"
+       id="filter3242-1"
+       x="-1.6441199"
+       width="4.28824"
+       y="-0.26518062"
+       height="1.5303613">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="3.4252498"
+         id="feGaussianBlur3244-7" />
+    </filter>
+    <filter
+       color-interpolation-filters="sRGB"
+       inkscape:collect="always"
+       id="filter3238-1"
+       x="-0.26518062"
+       width="1.5303613"
+       y="-1.6441199"
+       height="4.28824">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="3.4252498"
+         id="feGaussianBlur3240-1" />
+    </filter>
+    <filter
+       color-interpolation-filters="sRGB"
+       inkscape:collect="always"
+       id="filter3234-5"
+       x="-0.26518062"
+       width="1.5303613"
+       y="-1.6441199"
+       height="4.28824">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="3.4252498"
+         id="feGaussianBlur3236-2" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3203-6"
+       id="linearGradient3352-7"
+       x1="72.738014"
+       y1="484.46875"
+       x2="529.26196"
+       y2="484.46875"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       id="linearGradient3203-6">
+      <stop
+         style="stop-color:#131a20;stop-opacity:1;"
+         offset="0"
+         id="stop3205-1" />
+      <stop
+         id="stop3215-4"
+         offset="0.15031824"
+         style="stop-color:#232c32;stop-opacity:1;" />
+      <stop
+         id="stop3211-2"
+         offset="0.28092229"
+         style="stop-color:#bdd6ec;stop-opacity:1;" />
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0.49269104"
+         id="stop3213-3" />
+      <stop
+         style="stop-color:#cbdff0;stop-opacity:1;"
+         offset="0.75805265"
+         id="stop3272-2" />
+      <stop
+         style="stop-color:#1a1a1a;stop-opacity:1;"
+         offset="1"
+         id="stop3207-2" />
+    </linearGradient>
+    <linearGradient
+       gradientTransform="translate(3.8146973e-7,-3.8344255e-6)"
+       y2="484.46875"
+       x2="529.26196"
+       y1="484.46875"
+       x1="72.738014"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient3183"
+       xlink:href="#linearGradient3203-6"
+       inkscape:collect="always" />
+    <linearGradient
+       gradientTransform="translate(3.8146973e-7,-3.8344255e-6)"
+       y2="484.46875"
+       x2="529.26196"
+       y1="484.46875"
+       x1="72.738014"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient3183-4"
+       xlink:href="#linearGradient3203-6-2"
+       inkscape:collect="always" />
+    <linearGradient
+       id="linearGradient3203-6-2">
+      <stop
+         style="stop-color:#131a20;stop-opacity:1;"
+         offset="0"
+         id="stop3205-1-3" />
+      <stop
+         id="stop3215-4-2"
+         offset="0.15031824"
+         style="stop-color:#232c32;stop-opacity:1;" />
+      <stop
+         id="stop3211-2-2"
+         offset="0.28092229"
+         style="stop-color:#bdd6ec;stop-opacity:1;" />
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0.49269104"
+         id="stop3213-3-1" />
+      <stop
+         style="stop-color:#cbdff0;stop-opacity:1;"
+         offset="0.75805265"
+         id="stop3272-2-6" />
+      <stop
+         style="stop-color:#1a1a1a;stop-opacity:1;"
+         offset="1"
+         id="stop3207-2-8" />
+    </linearGradient>
+    <filter
+       color-interpolation-filters="sRGB"
+       inkscape:collect="always"
+       id="filter3234-5-5"
+       x="-0.26518062"
+       width="1.5303613"
+       y="-1.6441199"
+       height="4.28824">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="3.4252498"
+         id="feGaussianBlur3236-2-7" />
+    </filter>
+    <filter
+       color-interpolation-filters="sRGB"
+       inkscape:collect="always"
+       id="filter3238-1-6"
+       x="-0.26518062"
+       width="1.5303613"
+       y="-1.6441199"
+       height="4.28824">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="3.4252498"
+         id="feGaussianBlur3240-1-1" />
+    </filter>
+    <filter
+       color-interpolation-filters="sRGB"
+       inkscape:collect="always"
+       id="filter3242-1-8"
+       x="-1.6441199"
+       width="4.28824"
+       y="-0.26518062"
+       height="1.5303613">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="3.4252498"
+         id="feGaussianBlur3244-7-9" />
+    </filter>
+    <filter
+       color-interpolation-filters="sRGB"
+       inkscape:collect="always"
+       id="filter3246-5-2"
+       x="-0.32293564"
+       width="1.6458713"
+       y="-0.32293564"
+       height="1.6458713">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="3.4252497"
+         id="feGaussianBlur3248-5-7" />
+    </filter>
+    <filter
+       color-interpolation-filters="sRGB"
+       inkscape:collect="always"
+       id="filter3250-2-9"
+       x="-0.32293564"
+       width="1.6458713"
+       y="-0.32293564"
+       height="1.6458713">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="3.4252497"
+         id="feGaussianBlur3252-4-5" />
+    </filter>
+    <filter
+       color-interpolation-filters="sRGB"
+       inkscape:collect="always"
+       id="filter3254-8-4"
+       x="-0.53229982"
+       width="2.0645995"
+       y="-0.98672146"
+       height="2.9734428">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="3.4252499"
+         id="feGaussianBlur3256-8-3" />
+    </filter>
+    <filter
+       color-interpolation-filters="sRGB"
+       inkscape:collect="always"
+       id="filter3258-9-1"
+       x="-0.98672152"
+       width="2.973443"
+       y="-0.53229982"
+       height="2.0645995">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="3.4252499"
+         id="feGaussianBlur3260-4-2" />
+    </filter>
+    <filter
+       color-interpolation-filters="sRGB"
+       inkscape:collect="always"
+       id="filter3262-4-3"
+       x="-0.98672152"
+       width="2.973443"
+       y="-0.53229982"
+       height="2.0645995">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="3.4252499"
+         id="feGaussianBlur3264-0-3" />
+    </filter>
+    <filter
+       color-interpolation-filters="sRGB"
+       inkscape:collect="always"
+       id="filter3266-1-4"
+       x="-0.53229982"
+       width="2.0645995"
+       y="-0.98672152"
+       height="2.973443">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="3.4252499"
+         id="feGaussianBlur3268-7-1" />
+    </filter>
+    <linearGradient
+       y2="484.46875"
+       x2="529.26196"
+       y1="484.46875"
+       x1="72.738014"
+       gradientTransform="translate(3.8146973e-7,4.0936976e-6)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient13062"
+       xlink:href="#linearGradient3203-6-2"
+       inkscape:collect="always" />
+    <linearGradient
+       id="linearGradient3203-6-2-5">
+      <stop
+         style="stop-color:#131a20;stop-opacity:1;"
+         offset="0"
+         id="stop3205-1-3-0" />
+      <stop
+         id="stop3215-4-2-9"
+         offset="0.15031824"
+         style="stop-color:#232c32;stop-opacity:1;" />
+      <stop
+         id="stop3211-2-2-0"
+         offset="0.28092229"
+         style="stop-color:#bdd6ec;stop-opacity:1;" />
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0.49269104"
+         id="stop3213-3-1-0" />
+      <stop
+         style="stop-color:#cbdff0;stop-opacity:1;"
+         offset="0.75805265"
+         id="stop3272-2-6-6" />
+      <stop
+         style="stop-color:#1a1a1a;stop-opacity:1;"
+         offset="1"
+         id="stop3207-2-8-1" />
+    </linearGradient>
+    <filter
+       color-interpolation-filters="sRGB"
+       inkscape:collect="always"
+       id="filter3234-5-5-3"
+       x="-0.26518062"
+       width="1.5303613"
+       y="-1.6441199"
+       height="4.28824">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="3.4252498"
+         id="feGaussianBlur3236-2-7-8" />
+    </filter>
+    <filter
+       color-interpolation-filters="sRGB"
+       inkscape:collect="always"
+       id="filter3250-2-9-6"
+       x="-0.32293564"
+       width="1.6458713"
+       y="-0.32293564"
+       height="1.6458713">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="3.4252497"
+         id="feGaussianBlur3252-4-5-6" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3203-6-2-5"
+       id="linearGradient13387"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0,-1,1,0,-297.6298,901.1298)"
+       x1="72.738014"
+       y1="484.46875"
+       x2="529.26196"
+       y2="484.46875" />
+    <radialGradient
+       r="201"
+       fy="435.36218"
+       fx="502"
+       cy="435.36218"
+       cx="502"
+       gradientUnits="userSpaceOnUse"
+       id="radialGradient37495"
+       xlink:href="#linearGradient33859-8-1"
+       inkscape:collect="always" />
+    <linearGradient
+       id="linearGradient33859-8-1">
+      <stop
+         id="stop33867-8-5"
+         offset="0"
+         style="stop-color:#000000;stop-opacity:0;" />
+      <stop
+         style="stop-color:#333333;stop-opacity:0;"
+         offset="0.87988079"
+         id="stop33877-2-2" />
+      <stop
+         id="stop33879-4-7"
+         offset="0.89661556"
+         style="stop-color:#999999;stop-opacity:1;" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0.93927014"
+         id="stop33875-5-6" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0.96818912"
+         id="stop33873-5-1" />
+      <stop
+         style="stop-color:#dddddd;stop-opacity:1;"
+         offset="1"
+         id="stop33863-1-4" />
+    </linearGradient>
+    <radialGradient
+       r="201"
+       fy="435.36218"
+       fx="502"
+       cy="435.36218"
+       cx="502"
+       gradientTransform="matrix(0.96268657,0,0,0.96268657,-258.42549,-196.28651)"
+       gradientUnits="userSpaceOnUse"
+       id="radialGradient37542"
+       xlink:href="#linearGradient33859-3"
+       inkscape:collect="always" />
+    <linearGradient
+       id="linearGradient33859-3">
+      <stop
+         id="stop33867-2"
+         offset="0"
+         style="stop-color:#000000;stop-opacity:0;" />
+      <stop
+         style="stop-color:#333333;stop-opacity:0;"
+         offset="0.58999997"
+         id="stop33877-21" />
+      <stop
+         id="stop33879-6"
+         offset="0.60000002"
+         style="stop-color:#999999;stop-opacity:1;" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0.85000002"
+         id="stop33875-8" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0.89999998"
+         id="stop33873-57" />
+      <stop
+         style="stop-color:#dddddd;stop-opacity:1;"
+         offset="1"
+         id="stop33863-6" />
+    </linearGradient>
+    <radialGradient
+       r="201"
+       fy="435.36218"
+       fx="502"
+       cy="435.36218"
+       cx="502"
+       gradientUnits="userSpaceOnUse"
+       id="radialGradient3179"
+       xlink:href="#linearGradient33859-8-1"
+       inkscape:collect="always" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient33859-3"
+       id="radialGradient4055"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.96268657,0,0,0.96268657,-182.62693,179.85576)"
+       cx="502"
+       cy="435.36218"
+       fx="502"
+       fy="435.36218"
+       r="201" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient33859-3-7"
+       id="radialGradient4055-1"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.96268657,0,0,0.96268657,-182.62693,179.85576)"
+       cx="502"
+       cy="435.36218"
+       fx="502"
+       fy="435.36218"
+       r="201" />
+    <linearGradient
+       id="linearGradient33859-3-7">
+      <stop
+         id="stop33867-2-4"
+         offset="0"
+         style="stop-color:#000000;stop-opacity:0;" />
+      <stop
+         style="stop-color:#333333;stop-opacity:0;"
+         offset="0.58999997"
+         id="stop33877-21-0" />
+      <stop
+         id="stop33879-6-9"
+         offset="0.60000002"
+         style="stop-color:#999999;stop-opacity:1;" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0.85000002"
+         id="stop33875-8-4" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0.89999998"
+         id="stop33873-57-8" />
+      <stop
+         style="stop-color:#dddddd;stop-opacity:1;"
+         offset="1"
+         id="stop33863-6-8" />
+    </linearGradient>
+    <radialGradient
+       r="201"
+       fy="435.36218"
+       fx="502"
+       cy="435.36218"
+       cx="502"
+       gradientTransform="matrix(0.96268657,0,0,0.96268657,-182.62693,179.85576)"
+       gradientUnits="userSpaceOnUse"
+       id="radialGradient4076"
+       xlink:href="#linearGradient33859-3-7"
+       inkscape:collect="always" />
+    <radialGradient
+       r="201"
+       fy="435.36218"
+       fx="502"
+       cy="435.36218"
+       cx="502"
+       gradientUnits="userSpaceOnUse"
+       id="radialGradient3179-2"
+       xlink:href="#linearGradient33859-8-1-4"
+       inkscape:collect="always" />
+    <linearGradient
+       id="linearGradient33859-8-1-4">
+      <stop
+         id="stop33867-8-5-5"
+         offset="0"
+         style="stop-color:#000000;stop-opacity:0;" />
+      <stop
+         style="stop-color:#333333;stop-opacity:0;"
+         offset="0.87988079"
+         id="stop33877-2-2-5" />
+      <stop
+         id="stop33879-4-7-1"
+         offset="0.89661556"
+         style="stop-color:#999999;stop-opacity:1;" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0.93927014"
+         id="stop33875-5-6-7" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0.96818912"
+         id="stop33873-5-1-1" />
+      <stop
+         style="stop-color:#dddddd;stop-opacity:1;"
+         offset="1"
+         id="stop33863-1-4-1" />
+    </linearGradient>
+    <radialGradient
+       r="201"
+       fy="435.36218"
+       fx="502"
+       cy="435.36218"
+       cx="502"
+       gradientUnits="userSpaceOnUse"
+       id="radialGradient4123"
+       xlink:href="#linearGradient33859-8-1-4"
+       inkscape:collect="always" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3203-6-2-5"
+       id="linearGradient3379"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0,-1,1,0,-297.6298,901.1298)"
+       x1="72.738014"
+       y1="484.46875"
+       x2="529.26196"
+       y2="484.46875" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3203-6-2"
+       id="linearGradient3381"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(3.8146973e-7,4.0936976e-6)"
+       x1="72.738014"
+       y1="484.46875"
+       x2="529.26196"
+       y2="484.46875" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3203-6"
+       id="linearGradient3383"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(3.8146973e-7,-3.8344255e-6)"
+       x1="72.738014"
+       y1="484.46875"
+       x2="529.26196"
+       y2="484.46875" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     gridtolerance="10000"
+     guidetolerance="10"
+     objecttolerance="10"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="1.4812001"
+     inkscape:cy="395.16054"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer4"
+     showgrid="false"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Back"
+     style="display:inline"
+     sodipodi:insensitive="true">
+    <rect
+       style="fill:url(#linearGradient3521);fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient3523);stroke-width:7.72093678;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect3261"
+       width="597.27917"
+       height="593.37097"
+       x="0.59929651"
+       y="307.2663"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#2b76cc;fill-opacity:1;stroke:none;filter:url(#filter3516)"
+       id="path3279"
+       sodipodi:cx="240"
+       sodipodi:cy="380.93362"
+       sodipodi:rx="225.71428"
+       sodipodi:ry="91.428566"
+       d="m 465.71428,380.93362 a 225.71428,91.428566 0 1 1 -451.428559,0 225.71428,91.428566 0 1 1 451.428559,0 z"
+       transform="matrix(1.1061031,0,0,0.5342186,27.350076,559.83747)" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot2484"
+       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Subaru Meter Number;-inkscape-font-specification:Subaru Meter Number"><flowRegion
+         id="flowRegion2486"><rect
+           id="rect2488"
+           width="94"
+           height="77"
+           x="248"
+           y="619.36218" /></flowRegion><flowPara
+         id="flowPara2490" /></flowRoot>  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer6"
+     inkscape:label="Redzone_Bar"
+     style="display:inline"
+     sodipodi:insensitive="true">
+    <path
+       sodipodi:type="arc"
+       style="fill:url(#radialGradient4123);fill-opacity:1;stroke:none;display:inline"
+       id="path33085-7"
+       sodipodi:cx="502"
+       sodipodi:cy="435.36218"
+       sodipodi:rx="201"
+       sodipodi:ry="201"
+       d="m 703,435.36218 a 201,201 0 1 1 -402,0 201,201 0 1 1 402,0 z"
+       transform="matrix(1.1186226,0,0,1.1186226,-260.90684,113.97944)" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Grid"
+     style="display:inline">
+    <g
+       id="g3279"
+       transform="matrix(0.70710678,0.70710678,-0.70710678,0.70710678,509.79696,-36.231528)">
+      <path
+         inkscape:connector-curvature="0"
+         id="path2568-1-2"
+         d="m 73.46875,598.15625 c -0.006,0.65832 -0.0312,1.30912 -0.0312,1.96875 0,125.30249 101.57287,227.04216 226.8125,227.3125 l 0,-29.875 c -108.74807,-0.27073 -196.9375,-88.62641 -196.9375,-197.4375 0,-0.65715 0.0248,-1.31311 0.0312,-1.96875 l -29.875,0 z"
+         style="fill:#000000;fill-opacity:0.14492756;stroke:url(#linearGradient3379);stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:0;stroke-opacity:1;stroke-dasharray:none;display:inline" />
+      <g
+         id="g13169">
+        <path
+           style="fill:#000000;fill-opacity:0.14492756;stroke:url(#linearGradient3381);stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:0;stroke-opacity:1;stroke-dasharray:none;display:inline"
+           d="m 301,371.06251 c -125.30249,0 -227.042165,101.57286 -227.3125,226.81249 l 29.875,0 C 103.83323,489.12693 192.18891,400.93751 301,400.93751 c 108.8111,0 197.16677,88.18939 197.4375,196.93749 l 29.875,0 C 528.04217,472.63539 426.30248,371.06252 301,371.06251 z"
+           id="path2568-1"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"
+           inkscape:connector-curvature="0" />
+        <rect
+           style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline"
+           id="rect3354-3"
+           width="31"
+           height="5"
+           x="73"
+           y="593.36218"
+           ry="0"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001" />
+        <rect
+           style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline"
+           id="rect3356-8"
+           width="31"
+           height="5"
+           x="497.5"
+           y="593.36218"
+           ry="0"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001" />
+        <rect
+           style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline"
+           id="rect3360-7"
+           width="31"
+           height="5"
+           x="-399.81223"
+           y="298.25"
+           ry="0"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"
+           transform="matrix(0,-1,1,0,0,0)" />
+        <rect
+           style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline"
+           id="rect3364-4"
+           width="31"
+           height="5"
+           x="-11.92584"
+           y="631.50061"
+           ry="0"
+           transform="matrix(0.70710678,-0.70710678,0.70710678,0.70710678,0,0)"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001" />
+        <rect
+           style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline"
+           id="rect3366-2"
+           width="31"
+           height="5"
+           x="406.25058"
+           y="206.17583"
+           ry="0"
+           transform="matrix(0.70710678,0.70710678,-0.70710678,0.70710678,0,0)"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001" />
+        <rect
+           style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline"
+           id="rect3370-7"
+           width="15.669146"
+           height="2.5272818"
+           x="292.99667"
+           y="434.05356"
+           ry="0"
+           transform="matrix(0.92387954,0.38268342,-0.38268342,0.92387954,0,0)"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001" />
+        <rect
+           style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline"
+           id="rect3374-7"
+           width="15.669145"
+           height="2.5272818"
+           x="452.57492"
+           y="-51.324787"
+           ry="0"
+           transform="matrix(0.38268342,0.92387954,-0.92387954,0.38268342,0,0)"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001" />
+        <rect
+           style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline"
+           id="rect3378-9"
+           width="15.669145"
+           height="2.5272818"
+           x="222.19951"
+           y="-507.37793"
+           ry="0"
+           transform="matrix(-0.38268342,0.92387954,-0.92387954,-0.38268342,0,0)"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001" />
+        <rect
+           style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline"
+           id="rect3382-3"
+           width="15.669145"
+           height="2.5272818"
+           x="-263.1788"
+           y="-666.95624"
+           ry="0"
+           transform="matrix(-0.92387954,0.38268342,-0.38268342,-0.92387954,0,0)"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001" />
+        <rect
+           style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3234-5-5)"
+           id="rect2446-1"
+           width="31"
+           height="5"
+           x="73"
+           y="593.36218"
+           ry="0"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001" />
+        <rect
+           style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3238-1-6)"
+           id="rect2448-9"
+           width="31"
+           height="5"
+           x="497.5"
+           y="593.36218"
+           ry="0"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001" />
+        <rect
+           style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3242-1-8)"
+           id="rect2450-8"
+           width="31"
+           height="5"
+           x="-399.81223"
+           y="298.25"
+           ry="0"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"
+           transform="matrix(0,-1,1,0,3.8146973e-7,4.0936975e-6)" />
+        <rect
+           style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3246-5-2)"
+           id="rect2452-6"
+           width="31"
+           height="5"
+           x="-11.925825"
+           y="631.50055"
+           ry="0"
+           transform="matrix(0.7071068,-0.7071068,0.7071068,0.7071068,3.8146973e-7,4.0936975e-6)"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001" />
+        <rect
+           style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3250-2-9)"
+           id="rect2454-5"
+           width="31"
+           height="5"
+           x="406.25055"
+           y="206.17583"
+           ry="0"
+           transform="matrix(0.7071068,0.7071068,-0.7071068,0.7071068,3.8146973e-7,4.0936975e-6)"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001" />
+        <rect
+           style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3254-8-4)"
+           id="rect2456-0"
+           width="15.669147"
+           height="2.5272818"
+           x="292.99667"
+           y="434.05356"
+           ry="0"
+           transform="matrix(0.9238795,0.3826834,-0.3826834,0.9238795,3.8146973e-7,4.0936975e-6)"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001" />
+        <rect
+           style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3258-9-1)"
+           id="rect2458-2"
+           width="15.669146"
+           height="2.5272818"
+           x="452.57495"
+           y="-51.32478"
+           ry="0"
+           transform="matrix(0.3826834,0.9238795,-0.9238795,0.3826834,3.8146973e-7,4.0936975e-6)"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001" />
+        <rect
+           style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3262-4-3)"
+           id="rect2460-8"
+           width="15.669146"
+           height="2.5272818"
+           x="222.19952"
+           y="-507.37796"
+           ry="0"
+           transform="matrix(-0.3826834,0.9238795,-0.9238795,-0.3826834,3.8146973e-7,4.0936975e-6)"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001" />
+        <rect
+           style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3266-1-4)"
+           id="rect2462-6"
+           width="15.669146"
+           height="2.5272818"
+           x="-263.1788"
+           y="-666.95624"
+           ry="0"
+           transform="matrix(-0.9238795,0.3826834,-0.3826834,-0.9238795,3.8146973e-7,4.0936975e-6)"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001" />
+        <flowRoot
+           xml:space="preserve"
+           id="flowRoot2465-0"
+           style="font-size:45px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+           transform="translate(272.21156,-255.21497)"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2467-2"><rect
+               id="rect2469-4"
+               width="178"
+               height="121"
+               x="9"
+               y="573.36218"
+               style="font-size:45px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-family:Coolvetica;-inkscape-font-specification:Coolvetica" /></flowRegion><flowPara
+             id="flowPara2471-8"> </flowPara></flowRoot>      </g>
+      <path
+         inkscape:connector-curvature="0"
+         inkscape:export-ydpi="35.700001"
+         inkscape:export-xdpi="35.700001"
+         inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+         id="path2568"
+         d="m 301,371.0625 c -125.30249,0 -227.042165,101.57287 -227.3125,226.8125 l 29.875,0 C 103.83323,489.12693 192.18891,400.9375 301,400.9375 c 108.8111,0 197.16677,88.1894 197.4375,196.9375 l 29.875,0 C 528.04217,472.63539 426.30248,371.06251 301,371.0625 z"
+         style="fill:#000000;fill-opacity:0.14492756;stroke:url(#linearGradient3383);stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:0;stroke-opacity:1;stroke-dasharray:none;display:inline" />
+      <rect
+         inkscape:export-ydpi="35.700001"
+         inkscape:export-xdpi="35.700001"
+         inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+         ry="0"
+         y="593.36218"
+         x="73"
+         height="5"
+         width="31"
+         id="rect3354"
+         style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+      <rect
+         inkscape:export-ydpi="35.700001"
+         inkscape:export-xdpi="35.700001"
+         inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+         ry="0"
+         y="593.36218"
+         x="497.5"
+         height="5"
+         width="31"
+         id="rect3356"
+         style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+      <rect
+         inkscape:export-ydpi="35.700001"
+         inkscape:export-xdpi="35.700001"
+         inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+         transform="matrix(0,-1,1,0,0,0)"
+         ry="0"
+         y="298.25"
+         x="-399.81223"
+         height="5"
+         width="31"
+         id="rect3360"
+         style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+      <rect
+         inkscape:export-ydpi="35.700001"
+         inkscape:export-xdpi="35.700001"
+         inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+         transform="matrix(0.70710678,-0.70710678,0.70710678,0.70710678,0,0)"
+         ry="0"
+         y="631.50061"
+         x="-11.92583"
+         height="5"
+         width="31"
+         id="rect3364"
+         style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+      <rect
+         inkscape:export-ydpi="35.700001"
+         inkscape:export-xdpi="35.700001"
+         inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+         transform="matrix(0.70710678,0.70710678,-0.70710678,0.70710678,0,0)"
+         ry="0"
+         y="206.17583"
+         x="406.25058"
+         height="5"
+         width="31"
+         id="rect3366"
+         style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+      <rect
+         inkscape:export-ydpi="35.700001"
+         inkscape:export-xdpi="35.700001"
+         inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+         ry="0"
+         y="593.36218"
+         x="73"
+         height="5"
+         width="31"
+         id="rect2446"
+         style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3234-5)" />
+      <rect
+         inkscape:export-ydpi="35.700001"
+         inkscape:export-xdpi="35.700001"
+         inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+         ry="0"
+         y="593.36218"
+         x="497.5"
+         height="5"
+         width="31"
+         id="rect2448"
+         style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3238-1)" />
+      <rect
+         inkscape:export-ydpi="35.700001"
+         inkscape:export-xdpi="35.700001"
+         inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+         transform="matrix(0,-1,1,0,3.8146973e-7,-3.8344256e-6)"
+         ry="0"
+         y="298.25"
+         x="-399.81223"
+         height="5"
+         width="31"
+         id="rect2450"
+         style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3242-1)" />
+      <rect
+         inkscape:export-ydpi="35.700001"
+         inkscape:export-xdpi="35.700001"
+         inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+         transform="matrix(0.7071068,-0.7071068,0.7071068,0.7071068,3.8146973e-7,-3.8344256e-6)"
+         ry="0"
+         y="631.50055"
+         x="-11.925825"
+         height="5"
+         width="31"
+         id="rect2452"
+         style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3246-5)" />
+      <rect
+         inkscape:export-ydpi="35.700001"
+         inkscape:export-xdpi="35.700001"
+         inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+         transform="matrix(0.7071068,0.7071068,-0.7071068,0.7071068,3.8146973e-7,-3.8344256e-6)"
+         ry="0"
+         y="206.17583"
+         x="406.25055"
+         height="5"
+         width="31"
+         id="rect2454"
+         style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3250-2)" />
+      <flowRoot
+         inkscape:export-ydpi="35.700001"
+         inkscape:export-xdpi="35.700001"
+         inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+         transform="translate(272.21156,-255.21497)"
+         style="font-size:45px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+         id="flowRoot2465"
+         xml:space="preserve"><flowRegion
+           id="flowRegion2467"><rect
+             style="font-size:45px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+             y="573.36218"
+             x="9"
+             height="121"
+             width="178"
+             id="rect2469" /></flowRegion><flowPara
+           id="flowPara2471"> </flowPara></flowRoot>      <rect
+         transform="matrix(0,-1,1,0,0,0)"
+         inkscape:export-ydpi="35.700001"
+         inkscape:export-xdpi="35.700001"
+         inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+         ry="0"
+         y="295.73239"
+         x="-828.12982"
+         height="5"
+         width="31"
+         id="rect3354-3-9"
+         style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+      <rect
+         inkscape:export-ydpi="35.700001"
+         inkscape:export-xdpi="35.700001"
+         inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+         transform="matrix(0.70710678,-0.70710678,0.70710678,0.70710678,0,0)"
+         ry="0"
+         y="632.91241"
+         x="-441.40344"
+         height="5"
+         width="31"
+         id="rect3366-2-9"
+         style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+      <rect
+         transform="matrix(0,-1,1,0,-297.6298,901.1298)"
+         inkscape:export-ydpi="35.700001"
+         inkscape:export-xdpi="35.700001"
+         inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+         ry="0"
+         y="593.36218"
+         x="73"
+         height="5"
+         width="31"
+         id="rect2446-1-6"
+         style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3234-5-5-3)" />
+      <rect
+         inkscape:export-ydpi="35.700001"
+         inkscape:export-xdpi="35.700001"
+         inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+         transform="matrix(0.7071068,-0.7071068,0.7071068,0.7071068,-297.6298,901.1298)"
+         ry="0"
+         y="206.17583"
+         x="406.25055"
+         height="5"
+         width="31"
+         id="rect2454-5-5"
+         style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3250-2-9-6)" />
+      <flowRoot
+         inkscape:export-ydpi="35.700001"
+         inkscape:export-xdpi="35.700001"
+         inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+         transform="matrix(0,-1,1,0,-552.84477,628.91824)"
+         style="font-size:45px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+         id="flowRoot2465-0-7"
+         xml:space="preserve"><flowRegion
+           id="flowRegion2467-2-3"><rect
+             style="font-size:45px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+             y="573.36218"
+             x="9"
+             height="121"
+             width="178"
+             id="rect2469-4-7" /></flowRegion><flowPara
+           id="flowPara2471-8-2"> </flowPara></flowRoot>      <g
+         id="g13625">
+        <g
+           id="g13452">
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.92387954,0.38268342,-0.38268342,0.92387954,0,0)"
+             ry="0"
+             y="434.05356"
+             x="292.99667"
+             height="2.5272818"
+             width="15.669146"
+             id="rect3370"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.38268342,0.92387954,-0.92387954,0.38268342,0,0)"
+             ry="0"
+             y="-51.324783"
+             x="452.57492"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3374"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(-0.38268342,0.92387954,-0.92387954,-0.38268342,0,0)"
+             ry="0"
+             y="-507.37793"
+             x="222.19951"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3378"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(-0.92387954,0.38268342,-0.38268342,-0.92387954,0,0)"
+             ry="0"
+             y="-666.95624"
+             x="-263.1788"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3382"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.38268342,-0.92387954,0.92387954,0.38268342,0,0)"
+             ry="0"
+             y="503.92554"
+             x="-653.43451"
+             height="2.5272818"
+             width="15.669146"
+             id="rect3370-7-8"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.92387954,-0.38268342,0.38268342,0.92387954,0,0)"
+             ry="0"
+             y="667.31482"
+             x="-167.2476"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3374-7-4"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+        </g>
+        <g
+           transform="matrix(0.98078528,-0.19509032,0.19509032,0.98078528,-110.90594,69.94251)"
+           style="display:inline"
+           id="g13452-6">
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.92387954,0.38268342,-0.38268342,0.92387954,0,0)"
+             ry="0"
+             y="434.05356"
+             x="292.99667"
+             height="2.5272818"
+             width="15.669146"
+             id="rect3370-0"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.38268342,0.92387954,-0.92387954,0.38268342,0,0)"
+             ry="0"
+             y="-51.324783"
+             x="452.57492"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3374-71"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(-0.38268342,0.92387954,-0.92387954,-0.38268342,0,0)"
+             ry="0"
+             y="-507.37793"
+             x="222.19951"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3378-7"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(-0.92387954,0.38268342,-0.38268342,-0.92387954,0,0)"
+             ry="0"
+             y="-666.95624"
+             x="-263.1788"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3382-7"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.38268342,-0.92387954,0.92387954,0.38268342,0,0)"
+             ry="0"
+             y="503.92554"
+             x="-653.43451"
+             height="2.5272818"
+             width="15.669146"
+             id="rect3370-7-8-7"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.92387954,-0.38268342,0.38268342,0.92387954,0,0)"
+             ry="0"
+             y="667.31482"
+             x="-167.2476"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3374-7-4-7"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+        </g>
+        <g
+           transform="matrix(0.98078528,0.19509032,-0.19509032,0.98078528,122.42002,-46.961909)"
+           style="display:inline"
+           id="g13452-3">
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.92387954,0.38268342,-0.38268342,0.92387954,0,0)"
+             ry="0"
+             y="434.05356"
+             x="292.99667"
+             height="2.5272818"
+             width="15.669146"
+             id="rect3370-3"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.38268342,0.92387954,-0.92387954,0.38268342,0,0)"
+             ry="0"
+             y="-51.324783"
+             x="452.57492"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3374-5"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(-0.38268342,0.92387954,-0.92387954,-0.38268342,0,0)"
+             ry="0"
+             y="-507.37793"
+             x="222.19951"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3378-99"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(-0.92387954,0.38268342,-0.38268342,-0.92387954,0,0)"
+             ry="0"
+             y="-666.95624"
+             x="-263.1788"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3382-8"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.38268342,-0.92387954,0.92387954,0.38268342,0,0)"
+             ry="0"
+             y="503.92554"
+             x="-653.43451"
+             height="2.5272818"
+             width="15.669146"
+             id="rect3370-7-8-1"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.92387954,-0.38268342,0.38268342,0.92387954,0,0)"
+             ry="0"
+             y="667.31482"
+             x="-167.2476"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3374-7-4-8"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+        </g>
+        <g
+           transform="matrix(0.99518473,0.09801714,-0.09801714,0.99518473,60.056468,-26.488009)"
+           style="display:inline"
+           id="g13452-2">
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.92387954,0.38268342,-0.38268342,0.92387954,0,0)"
+             ry="0"
+             y="434.05356"
+             x="292.99667"
+             height="2.5272818"
+             width="15.669146"
+             id="rect3370-6"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.38268342,0.92387954,-0.92387954,0.38268342,0,0)"
+             ry="0"
+             y="-51.324783"
+             x="452.57492"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3374-6"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(-0.38268342,0.92387954,-0.92387954,-0.38268342,0,0)"
+             ry="0"
+             y="-507.37793"
+             x="222.19951"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3378-0"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(-0.92387954,0.38268342,-0.38268342,-0.92387954,0,0)"
+             ry="0"
+             y="-666.95624"
+             x="-263.1788"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3382-38"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.38268342,-0.92387954,0.92387954,0.38268342,0,0)"
+             ry="0"
+             y="503.92554"
+             x="-653.43451"
+             height="2.5272818"
+             width="15.669146"
+             id="rect3370-7-8-0"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.92387954,-0.38268342,0.38268342,0.92387954,0,0)"
+             ry="0"
+             y="667.31482"
+             x="-167.2476"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3374-7-4-1"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+        </g>
+        <g
+           transform="matrix(0.99518473,-0.09801714,0.09801714,0.99518473,-57.170995,32.247026)"
+           style="display:inline"
+           id="g13452-25">
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.92387954,0.38268342,-0.38268342,0.92387954,0,0)"
+             ry="0"
+             y="434.05356"
+             x="292.99667"
+             height="2.5272818"
+             width="15.669146"
+             id="rect3370-09"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.38268342,0.92387954,-0.92387954,0.38268342,0,0)"
+             ry="0"
+             y="-51.324783"
+             x="452.57492"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3374-4"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(-0.38268342,0.92387954,-0.92387954,-0.38268342,0,0)"
+             ry="0"
+             y="-507.37793"
+             x="222.19951"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3378-78"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(-0.92387954,0.38268342,-0.38268342,-0.92387954,0,0)"
+             ry="0"
+             y="-666.95624"
+             x="-263.1788"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3382-35"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.38268342,-0.92387954,0.92387954,0.38268342,0,0)"
+             ry="0"
+             y="503.92554"
+             x="-653.43451"
+             height="2.5272818"
+             width="15.669146"
+             id="rect3370-7-8-12"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.92387954,-0.38268342,0.38268342,0.92387954,0,0)"
+             ry="0"
+             y="667.31482"
+             x="-167.2476"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3374-7-4-0"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+        </g>
+        <g
+           transform="matrix(0.95694034,0.29028468,-0.29028468,0.95694034,184.95285,-61.299997)"
+           style="display:inline"
+           id="g13452-3-1">
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.92387954,0.38268342,-0.38268342,0.92387954,0,0)"
+             ry="0"
+             y="434.05356"
+             x="292.99667"
+             height="2.5272818"
+             width="15.669146"
+             id="rect3370-3-6"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.38268342,0.92387954,-0.92387954,0.38268342,0,0)"
+             ry="0"
+             y="-51.324783"
+             x="452.57492"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3374-5-4"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(-0.38268342,0.92387954,-0.92387954,-0.38268342,0,0)"
+             ry="0"
+             y="-507.37793"
+             x="222.19951"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3378-99-0"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(-0.92387954,0.38268342,-0.38268342,-0.92387954,0,0)"
+             ry="0"
+             y="-666.95624"
+             x="-263.1788"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3382-8-6"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.38268342,-0.92387954,0.92387954,0.38268342,0,0)"
+             ry="0"
+             y="503.92554"
+             x="-653.43451"
+             height="2.5272818"
+             width="15.669146"
+             id="rect3370-7-8-1-1"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.92387954,-0.38268342,0.38268342,0.92387954,0,0)"
+             ry="0"
+             y="667.31482"
+             x="-167.2476"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3374-7-4-8-8"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+        </g>
+        <g
+           transform="matrix(0.95694034,-0.29028468,0.29028468,0.95694034,-160.75832,111.27847)"
+           style="display:inline"
+           id="g13452-6-9">
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.92387954,0.38268342,-0.38268342,0.92387954,0,0)"
+             ry="0"
+             y="434.05356"
+             x="292.99667"
+             height="2.5272818"
+             width="15.669146"
+             id="rect3370-0-8"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.38268342,0.92387954,-0.92387954,0.38268342,0,0)"
+             ry="0"
+             y="-51.324783"
+             x="452.57492"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3374-71-4"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(-0.38268342,0.92387954,-0.92387954,-0.38268342,0,0)"
+             ry="0"
+             y="-507.37793"
+             x="222.19951"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3378-7-1"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(-0.92387954,0.38268342,-0.38268342,-0.92387954,0,0)"
+             ry="0"
+             y="-666.95624"
+             x="-263.1788"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3382-7-4"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.38268342,-0.92387954,0.92387954,0.38268342,0,0)"
+             ry="0"
+             y="503.92554"
+             x="-653.43451"
+             height="2.5272818"
+             width="15.669146"
+             id="rect3370-7-8-7-3"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+          <rect
+             inkscape:export-ydpi="35.700001"
+             inkscape:export-xdpi="35.700001"
+             inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+             transform="matrix(0.92387954,-0.38268342,0.38268342,0.92387954,0,0)"
+             ry="0"
+             y="667.31482"
+             x="-167.2476"
+             height="2.5272818"
+             width="15.669145"
+             id="rect3374-7-4-7-9"
+             style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline" />
+        </g>
+      </g>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Label"
+     style="display:inline"
+     sodipodi:insensitive="true">
+    <g
+       id="g2538"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001">
+      <flowRoot
+         transform="translate(53,17)"
+         style="font-size:65px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+         id="flowRoot2448"
+         xml:space="preserve"><flowRegion
+           id="flowRegion2450"><rect
+             style="font-size:65px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+             y="573.36218"
+             x="9"
+             height="121"
+             width="178"
+             id="rect2453" /></flowRegion><flowPara
+           id="flowPara2455">10</flowPara></flowRoot>      <flowRoot
+         transform="translate(80.498138,-201.21498)"
+         style="font-size:65px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+         id="flowRoot2457"
+         xml:space="preserve"><flowRegion
+           id="flowRegion2459"><rect
+             style="font-size:65px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+             y="573.36218"
+             x="9"
+             height="121"
+             width="178"
+             id="rect2461" /></flowRegion><flowPara
+           id="flowPara2463">12</flowPara></flowRoot>      <flowRoot
+         transform="translate(268.21156,-274.21497)"
+         style="font-size:65px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+         id="flowRoot2460"
+         xml:space="preserve"><flowRegion
+           id="flowRegion2462"><rect
+             style="font-size:65px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+             y="573.36218"
+             x="9"
+             height="121"
+             width="178"
+             id="rect2464" /></flowRegion><flowPara
+           id="flowPara2466">14</flowPara></flowRoot>      <flowRoot
+         transform="translate(454.81056,-205.21497)"
+         style="font-size:65px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+         id="flowRoot2468"
+         xml:space="preserve"><flowRegion
+           id="flowRegion2470"><rect
+             style="font-size:65px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+             y="573.36218"
+             x="9"
+             height="121"
+             width="178"
+             id="rect2472" /></flowRegion><flowPara
+           id="flowPara2474">16</flowPara></flowRoot>      <flowRoot
+         transform="translate(480.83852,14.78503)"
+         style="font-size:65px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+         id="flowRoot2476"
+         xml:space="preserve"><flowRegion
+           id="flowRegion2478"><rect
+             style="font-size:65px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+             y="573.36218"
+             x="9"
+             height="121"
+             width="178"
+             id="rect2480" /></flowRegion><flowPara
+           id="flowPara2482">18</flowPara></flowRoot>      <flowRoot
+         transform="matrix(0.8879572,0,0,0.8879572,137.41957,158.13712)"
+         style="font-size:64px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+         id="flowRoot2480"
+         xml:space="preserve"><flowRegion
+           id="flowRegion2482"><rect
+             style="font-size:64px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+             y="573.36218"
+             x="9"
+             height="117"
+             width="392"
+             id="rect2484" /></flowRegion><flowPara
+           id="flowPara2486">Air/Fuel RATIO</flowPara></flowRoot>    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Layer1_Glow"
+     style="display:inline"
+     sodipodi:insensitive="true">
+    <flowRoot
+       transform="translate(53,17.000004)"
+       style="font-size:65px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3836);font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+       id="flowRoot2448-0"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001"><flowRegion
+         id="flowRegion2450-1"><rect
+           style="font-size:65px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+           y="573.36218"
+           x="9"
+           height="121"
+           width="178"
+           id="rect2453-6" /></flowRegion><flowPara
+         id="flowPara2455-4">10</flowPara></flowRoot>    <flowRoot
+       transform="translate(80.498138,-201.21498)"
+       style="font-size:65px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3840);font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+       id="flowRoot2457-0"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001"><flowRegion
+         id="flowRegion2459-6"><rect
+           style="font-size:65px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+           y="573.36218"
+           x="9"
+           height="121"
+           width="178"
+           id="rect2461-1" /></flowRegion><flowPara
+         id="flowPara2463-8">12</flowPara></flowRoot>    <flowRoot
+       transform="translate(268.21156,-274.21497)"
+       style="font-size:65px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3844);font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+       id="flowRoot2460-9"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001"><flowRegion
+         id="flowRegion2462-8"><rect
+           style="font-size:65px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+           y="573.36218"
+           x="9"
+           height="121"
+           width="178"
+           id="rect2464-4" /></flowRegion><flowPara
+         id="flowPara2466-1">14</flowPara></flowRoot>    <flowRoot
+       transform="translate(454.81056,-205.21497)"
+       style="font-size:65px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3848);font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+       id="flowRoot2468-4"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001"><flowRegion
+         id="flowRegion2470-3"><rect
+           style="font-size:65px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+           y="573.36218"
+           x="9"
+           height="121"
+           width="178"
+           id="rect2472-9" /></flowRegion><flowPara
+         id="flowPara2474-8">16</flowPara></flowRoot>    <flowRoot
+       transform="translate(480.83852,14.785034)"
+       style="font-size:65px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3852);font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+       id="flowRoot2476-8"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001"><flowRegion
+         id="flowRegion2478-0"><rect
+           style="font-size:65px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+           y="573.36218"
+           x="9"
+           height="121"
+           width="178"
+           id="rect2480-8" /></flowRegion><flowPara
+         id="flowPara2482-7">18</flowPara></flowRoot>    <flowRoot
+       transform="matrix(0.8879572,0,0,0.8879572,137.41957,158.13712)"
+       style="font-size:64px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;filter:url(#filter3856);font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+       id="flowRoot2480-7"
+       xml:space="preserve"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001"><flowRegion
+         id="flowRegion2482-8"><rect
+           style="font-size:64px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-family:Coolvetica;-inkscape-font-specification:Coolvetica"
+           y="573.36218"
+           x="9"
+           height="117"
+           width="392"
+           id="rect2484-3" /></flowRegion><flowPara
+         id="flowPara2486-8">Air/Fuel RATIO</flowPara></flowRoot>  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="Value_Bar"
+     sodipodi:insensitive="true"
+     style="display:inline">
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:url(#radialGradient4076);fill-opacity:1;stroke:none;display:inline"
+       d="m 300.64172,405.48547 c -1.76131,0 -3.5278,0.0135 -5.27782,0.0603 l 3.0159,95.18173 c 0.78765,-0.0214 1.5904,-0.0273 2.38256,-0.0301 l 0,-95.21189 c -0.0402,-3e-5 -0.0804,0 -0.12064,0 z m 0.84445,0 0,95.21189 c 0.79215,0.003 1.5949,0.009 2.38256,0.0301 l 3.0159,-95.12141 c -1.79204,-0.0568 -3.59445,-0.11293 -5.39846,-0.12064 z m -6.81593,0.0904 c -1.79932,0.0545 -3.58166,0.13798 -5.3683,0.24127 l 5.97148,95.03094 c 0.80275,-0.0468 1.60493,-0.0629 2.41272,-0.0904 l -3.0159,-95.18174 z m 12.90804,0.0301 -3.01589,95.15157 c 0.80778,0.0275 1.60997,0.0436 2.41272,0.0904 l 5.97147,-94.97062 c -1.78438,-0.112 -3.57112,-0.20813 -5.3683,-0.27143 z m -18.96999,0.24127 c -1.80554,0.1108 -3.60665,0.26224 -5.39846,0.42222 l 8.95722,94.81983 c 0.80234,-0.0721 1.60496,-0.12815 2.41272,-0.18095 l -5.97148,-95.0611 z m 25.03195,0.0603 -5.97148,95.00078 c 0.80776,0.0528 1.61038,0.10884 2.41272,0.18095 l 8.95722,-94.72935 c -1.7932,-0.16913 -3.59135,-0.33253 -5.39846,-0.45238 z m -31.12407,0.42222 c -1.80913,0.16807 -3.60412,0.35549 -5.39845,0.57302 l 11.97311,94.51824 c 0.7928,-0.0963 1.58409,-0.16385 2.38256,-0.24127 l -8.95722,-94.84989 z m 37.21618,0.0904 -8.95721,94.75965 c 0.79847,0.0774 1.58976,0.14496 2.38256,0.24128 l 11.94295,-94.42776 c -1.7831,-0.22496 -3.57042,-0.39694 -5.3683,-0.57302 z m -43.30829,0.54286 c -1.77587,0.22178 -3.54741,0.48441 -5.30798,0.75398 l 14.89854,94.09601 c 0.79637,-0.12217 1.6102,-0.19856 2.41271,-0.30159 l -12.00327,-94.5484 z m 49.37025,0.12064 -11.97312,94.42776 c 0.80252,0.10303 1.61635,0.17942 2.41272,0.30159 l 14.86838,-93.94522 c -1.76065,-0.27842 -3.53187,-0.55354 -5.30798,-0.78413 z m -55.34173,0.75397 c -1.79555,0.28135 -3.58947,0.5744 -5.36829,0.90477 l 17.88427,93.61346 c 0.78189,-0.14524 1.56415,-0.29553 2.3524,-0.42222 l -14.86838,-94.09601 z m 61.3132,0.1508 -14.83821,93.94521 c 0.78824,0.12669 1.5705,0.27698 2.3524,0.42222 l 17.85411,-93.4325 c -1.77998,-0.33972 -3.57137,-0.64434 -5.3683,-0.93493 z m -67.34499,0.87461 c -1.77972,0.337 -3.54587,0.70034 -5.30798,1.08572 l 20.77953,93.04058 c 0.79076,-0.17319 1.58484,-0.35858 2.38256,-0.5127 l -17.85411,-93.61346 z m 73.37679,0.1811 -17.82396,93.4325 c 0.79773,0.15412 1.59181,0.33951 2.38256,0.5127 l 20.74938,-92.82932 c -1.76127,-0.3944 -3.52893,-0.76987 -5.30798,-1.11588 z m -79.34827,1.05556 c -1.76286,0.39208 -3.50328,0.82686 -5.24766,1.26668 L 276.9066,503.683 c 0.77563,-0.19558 1.53944,-0.36576 2.32225,-0.54286 L 258.44931,410.0997 z m 85.31975,0.21111 -20.74938,92.82933 c 0.7828,0.1771 1.54662,0.34728 2.32224,0.54286 l 23.64464,-92.10551 c -1.73363,-0.44604 -3.46542,-0.86783 -5.2175,-1.26668 z m -91.23091,1.20636 c -1.75952,0.45027 -3.50783,0.91934 -5.24766,1.41748 l 26.63038,91.56264 c 0.75403,-0.21549 1.53079,-0.43543 2.29208,-0.63334 l -23.6748,-92.34678 z m 97.11191,0.24128 -23.61448,92.1055 c 0.76129,0.19791 1.53805,0.41785 2.29208,0.63334 l 26.5399,-91.32137 c -1.727,-0.50329 -3.4709,-0.9614 -5.2175,-1.41747 z m -103.02307,1.35715 c -1.72707,0.50117 -3.45039,1.05078 -5.15718,1.59843 l 29.43516,90.68803 c 0.77422,-0.24856 1.53982,-0.49398 2.32224,-0.72381 L 246.62699,413.1156 z m 108.90407,0.27143 -26.50974,91.29122 c 0.78241,0.22983 1.54802,0.47525 2.32224,0.72381 l 29.34468,-90.4166 c -1.70457,-0.55591 -3.43216,-1.08895 -5.15718,-1.59843 z m -114.72475,1.53811 c -1.72087,0.55904 -3.42769,1.14363 -5.12703,1.74922 l 32.30027,89.72295 c 0.7605,-0.27094 1.52311,-0.53144 2.29208,-0.78414 l -29.46532,-90.68803 z m 120.54543,0.27143 -29.37484,90.4166 c 0.76897,0.2527 1.53158,0.5132 2.29208,0.78414 l 32.17963,-89.42136 c -1.69142,-0.6117 -3.3839,-1.21387 -5.09687,-1.77938 z m -126.33596,1.6889 c -1.69493,0.61097 -3.39411,1.24345 -5.0667,1.90002 l 35.13521,88.69754 c 0.7484,-0.29343 1.50474,-0.59904 2.26192,-0.87461 l -32.33043,-89.72295 z m 132.09633,0.30159 -32.20979,89.42136 c 0.75718,0.27557 1.51352,0.58118 2.26192,0.87461 l 34.98442,-88.36579 c -1.66459,-0.66226 -3.34962,-1.31318 -5.03655,-1.93018 z m -137.79637,1.86986 c -1.68977,0.67032 -3.34038,1.3648 -5.00639,2.08097 l 37.87967,87.52134 c 0.74888,-0.32149 1.50364,-0.63156 2.26193,-0.93493 l -35.13521,-88.66738 z m 143.46625,0.33175 -34.98441,88.33563 c 0.75829,0.30337 1.51304,0.61344 2.26192,0.93493 l 37.72888,-87.18959 c -1.6616,-0.72331 -3.32092,-1.40336 -5.00639,-2.08097 z m -149.10598,2.02065 c -1.65494,0.71845 -3.31554,1.43862 -4.94607,2.2016 l 40.6543,86.31499 c 0.7203,-0.33632 1.44181,-0.67593 2.17144,-0.99525 l -37.87967,-87.52134 z m 154.74571,0.33175 -37.72888,87.18959 c 0.72964,0.31932 1.45115,0.65893 2.17145,0.99525 l 40.47335,-85.95308 c -1.62073,-0.76722 -3.27084,-1.50862 -4.91592,-2.23176 z m -160.32512,2.17144 c -1.61192,0.76141 -3.20814,1.54816 -4.79528,2.3524 l 43.30829,85.01815 c 0.71106,-0.35965 1.42049,-0.71273 2.14129,-1.05556 l -40.6543,-86.31499 z m 165.87438,0.36191 -40.47335,85.95308 c 0.7208,0.34283 1.43023,0.69591 2.14128,1.05556 l 43.12734,-84.62608 c -1.58926,-0.81445 -3.1809,-1.61117 -4.79527,-2.38256 z m -171.33316,2.29208 c -1.59921,0.81799 -3.16189,1.70272 -4.73496,2.56352 l 45.93213,83.60067 c 0.71058,-0.38828 1.42024,-0.77485 2.14128,-1.14604 l -43.33845,-85.01806 z m 176.76177,0.42223 -43.12734,84.59592 c 0.72105,0.37119 1.43071,0.75776 2.14129,1.14604 l 45.72101,-83.20861 c -1.56386,-0.86468 -3.14501,-1.71109 -4.73496,-2.53335 z m -182.13006,2.47304 c -1.58014,0.87225 -3.15206,1.76939 -4.70481,2.68414 l 48.58612,82.12289 c 0.69078,-0.40609 1.37957,-0.81672 2.08097,-1.20636 l -45.96228,-83.60067 z m 187.49836,0.42222 -45.75117,83.17845 c 0.7014,0.38964 1.39019,0.80027 2.08097,1.20636 l 48.31468,-81.70066 c -1.5361,-0.9137 -3.08132,-1.81215 -4.64448,-2.68415 z m -192.80634,2.62383 c -1.54477,0.91768 -3.06752,1.84571 -4.58417,2.80479 l 51.11947,80.55462 c 0.67886,-0.4283 1.36092,-0.8546 2.05081,-1.26668 l -48.58611,-82.09273 z m 198.054,0.39207 -48.31468,81.70066 c 0.68989,0.41208 1.37195,0.83838 2.05081,1.26668 l 50.84804,-80.1324 c -1.51612,-0.96766 -3.03968,-1.90876 -4.58417,-2.83494 z m -203.24135,2.77462 c -1.51322,0.96462 -3.00948,1.95045 -4.49369,2.95558 l 53.62267,78.92604 c 0.66825,-0.45146 1.34088,-0.8916 2.02065,-1.327 L 196.7742,435.67451 z m 208.4287,0.45239 -50.8782,80.10223 c 0.67977,0.4354 1.3524,0.87554 2.02065,1.327 l 53.32107,-78.47365 c -1.47292,-1.00641 -2.96174,-1.9892 -4.46352,-2.95558 z m -213.49541,2.89526 c -1.4895,1.01653 -2.97412,2.04972 -4.43337,3.10638 l 56.0957,77.20697 c 0.64923,-0.46881 1.2994,-0.93403 1.96034,-1.38731 l -53.62267,-78.92604 z m 218.53195,0.48254 -53.32107,78.4435 c 0.66094,0.45328 1.31111,0.9185 1.96034,1.38731 l 55.76395,-76.72443 c -1.4481,-1.05763 -2.92502,-2.08839 -4.40322,-3.10638 z m -223.53834,3.07622 c -1.45062,1.05872 -2.89307,2.1293 -4.31273,3.22701 l 58.47826,75.39744 c 0.63654,-0.49097 1.28145,-0.97199 1.93017,-1.44764 l -56.0957,-77.17681 z m 228.51458,0.45238 -55.76395,76.72443 c 0.64872,0.47565 1.29363,0.95667 1.93017,1.44764 l 58.11635,-74.9149 c -1.41437,-1.10265 -2.83715,-2.19335 -4.28257,-3.25717 z m -233.37017,3.19686 c -1.42106,1.10686 -2.8333,2.23254 -4.22226,3.3778 l 60.83066,73.52758 c 0.61665,-0.5069 1.24083,-1.01583 1.86985,-1.50795 l -58.47825,-75.39743 z m 238.1956,0.48254 -58.11635,74.91489 c 0.62903,0.49212 1.25321,1.00105 1.86986,1.50795 l 60.43859,-73.04503 c -1.3784,-1.1455 -2.78177,-2.27027 -4.1921,-3.37781 z m -242.96072,3.34765 c -1.38849,1.15336 -2.74633,2.33753 -4.10163,3.5286 l 63.09259,71.56724 c 0.60902,-0.53376 1.21757,-1.04938 1.8397,-1.56827 l -60.83066,-73.52748 z m 247.69568,0.48254 -60.43859,73.04503 c 0.62212,0.51889 1.23068,1.03451 1.8397,1.56827 l 62.67035,-71.11486 c -1.34058,-1.18679 -2.6981,-2.34867 -4.07146,-3.49844 z m -252.31001,3.49844 c -1.34858,1.19358 -2.69654,2.38883 -4.01115,3.61908 l 65.2942,69.57675 c 0.59335,-0.55391 1.20265,-1.08926 1.80954,-1.62858 l -63.09259,-71.56725 z m 256.89418,0.45239 -62.67036,71.11486 c 0.60689,0.53932 1.21618,1.07467 1.80954,1.62858 l 64.8418,-69.09421 c -1.30899,-1.23387 -2.63799,-2.45185 -3.98098,-3.64923 z m -261.41803,3.64932 c -1.30698,1.23198 -2.58806,2.50231 -3.86035,3.76987 l 67.43548,67.46563 c 0.56632,-0.56246 1.16949,-1.11005 1.74922,-1.65875 l -65.32435,-69.57675 z m 265.91171,0.48255 -64.87196,69.0942 c 0.57974,0.5487 1.18291,1.09629 1.74922,1.65875 l 66.95293,-66.98308 c -1.2633,-1.26748 -2.53234,-2.53763 -3.83019,-3.76987 z m -270.28476,3.76987 c -1.27239,1.27688 -2.50317,2.57868 -3.73972,3.89051 l 69.54662,65.29417 c 0.54795,-0.57895 1.09705,-1.15349 1.65874,-1.71906 l -67.46564,-67.46562 z m 274.62766,0.48254 -66.98309,66.98308 c 0.56169,0.56557 1.11078,1.14011 1.65874,1.71906 l 69.0339,-64.81163 c -1.22655,-1.3101 -2.44737,-2.61495 -3.70955,-3.89051 z m -278.84992,3.92067 c -1.23025,1.31461 -2.4255,2.66257 -3.61908,4.01114 l 71.53711,63.09257 c 0.54123,-0.60942 1.07263,-1.21374 1.62858,-1.80953 L 159.3469,466.79867 z m 283.04201,0.48254 -69.03389,64.81164 c 0.55594,0.59579 1.08735,1.20011 1.62858,1.80953 l 70.99423,-62.64018 c -1.18039,-1.34225 -2.37233,-2.67209 -3.58892,-3.98099 z m -287.14363,4.04131 c -1.18643,1.35032 -2.37959,2.68821 -3.5286,4.07146 l 73.5276,60.83065 c 0.51178,-0.61366 1.042,-1.20862 1.56826,-1.80954 l -71.56726,-63.09257 z m 291.2151,0.48254 -71.0244,62.61003 c 0.52627,0.60092 1.05649,1.19588 1.56827,1.80954 l 72.95457,-60.34811 c -1.14031,-1.38173 -2.32091,-2.72232 -3.49844,-4.07146 z m -295.19609,4.13178 c -1.14502,1.38868 -2.27115,2.80148 -3.3778,4.22226 l 75.42761,58.5084 c 0.4926,-0.62967 0.97038,-1.28273 1.47779,-1.90001 l -73.5276,-60.83065 z m 299.14691,0.48254 -72.95456,60.34811 c 0.50741,0.61728 0.98519,1.27034 1.47779,1.90001 l 74.82442,-58.02586 c -1.09862,-1.41952 -2.21082,-2.83452 -3.34765,-4.22226 z m -302.94694,4.31274 c -1.09911,1.42179 -2.167,2.85988 -3.22701,4.31273 l 77.17684,56.09569 c 0.47868,-0.65322 0.98356,-1.2893 1.47779,-1.93017 l -75.42762,-58.47825 z m 306.68666,0.45238 -74.79427,58.02587 c 0.49422,0.64087 0.99911,1.27695 1.47779,1.93017 l 76.54349,-55.6433 c -1.05618,-1.45645 -2.13163,-2.88728 -3.22701,-4.31274 z m -310.33589,4.43337 c -1.05346,1.45509 -2.09281,2.91804 -3.10638,4.40321 l 78.8959,53.65281 c 0.45878,-0.66896 0.94278,-1.33352 1.41747,-1.99049 l -77.20699,-56.06553 z m 313.98512,0.45239 -76.57364,55.61314 c 0.47469,0.65697 0.95869,1.32153 1.41747,1.99049 l 78.23239,-53.20042 c -1.00577,-1.48267 -2.03077,-2.95033 -3.07622,-4.40321 z m -317.48357,4.52384 c -1.00461,1.48345 -1.99144,2.98127 -2.95557,4.49369 l 80.55463,51.11946 c 0.43267,-0.67488 0.84834,-1.32698 1.29684,-1.99049 l -78.8959,-53.62266 z m 320.95185,0.45239 -78.23238,53.17027 c 0.4485,0.66351 0.86416,1.31561 1.29683,1.99049 l 79.86098,-50.66707 c -0.95671,-1.5098 -1.92844,-3.01259 -2.92543,-4.49369 z m -324.26933,4.64448 c -0.96652,1.52831 -1.91046,3.08762 -2.83495,4.64448 l 82.12291,48.52579 c 0.4052,-0.67813 0.81565,-1.35318 1.23652,-2.02065 L 136.9991,495.69097 z m 327.55666,0.45238 -79.83081,50.69724 c 0.42086,0.66747 0.83132,1.34252 1.23652,2.02065 l 81.42924,-48.10356 c -0.91658,-1.55271 -1.87663,-3.08984 -2.83495,-4.61433 z m -330.75351,4.76512 c -0.91234,1.54875 -1.81411,3.09864 -2.68415,4.67463 l 83.60069,45.96229 c 0.38717,-0.69669 0.80296,-1.39477 1.20636,-2.08097 l -82.1229,-48.55595 z m 333.92021,0.42223 -81.39908,48.13372 c 0.4034,0.6862 0.81919,1.38428 1.20635,2.08097 l 82.84672,-45.54006 c -0.86383,-1.57382 -1.74805,-3.12784 -2.65399,-4.67463 z m -166.5982,0.0301 c -54.17323,0 -98.07699,43.93391 -98.07699,98.10714 0,54.05233 43.7086,97.88157 97.71509,98.077 l 0,-95.33253 c -1.37607,-0.17687 -2.44288,-1.31999 -2.44288,-2.74447 0,-1.54679 1.25799,-2.80478 2.80478,-2.80478 1.5468,0 2.80479,1.25799 2.80479,2.80478 0,1.42448 -1.06681,2.5676 -2.44288,2.74447 l 0,95.33253 c 54.00649,-0.19543 97.71509,-44.02467 97.71509,-98.077 0,-54.17323 -43.90376,-98.10714 -98.077,-98.10714 z m -170.33791,4.85559 c -0.86569,1.58193 -1.71097,3.1869 -2.53336,4.79527 l 84.98801,43.30829 c 0.37079,-0.72025 0.7582,-1.43146 1.14604,-2.14128 l -83.60069,-45.96223 z m 339.952,0.39206 -82.87687,45.57022 c 0.38784,0.70982 0.77526,1.42103 1.14604,2.14128 l 84.20387,-42.91622 c -0.81449,-1.60178 -1.61564,-3.2196 -2.47304,-4.79528 z m -342.78695,5.00639 c -0.81395,1.60573 -1.5823,3.22448 -2.3524,4.8556 l 86.28485,40.62414 c 0.34672,-0.72899 0.69165,-1.45244 1.05556,-2.17145 L 127.9514,511.61484 z m 345.56158,0.39207 -84.20387,42.91622 c 0.36392,0.71901 0.70885,1.44246 1.05557,2.17145 l 85.5007,-40.26223 c -0.76274,-1.62436 -1.5462,-3.22613 -2.3524,-4.82544 z m -348.21557,5.09687 c -0.76153,1.62832 -1.51463,3.26326 -2.23176,4.91591 l 87.52136,37.87968 c 0.32297,-0.73798 0.6549,-1.47319 0.99525,-2.20161 l -86.28485,-40.59397 z m 350.86956,0.3619 -85.5007,40.23208 c 0.34035,0.72842 0.67228,1.46363 0.99524,2.20161 l 86.73722,-37.51777 c -0.71353,-1.65387 -1.47379,-3.28629 -2.23176,-4.91592 z m -353.40291,5.18735 c -0.71051,1.65387 -1.38547,3.32911 -2.05081,5.00639 l 88.69756,35.10505 c 0.29879,-0.74598 0.58844,-1.4949 0.90477,-2.23177 l -87.55152,-37.87966 z m 355.9061,0.36191 -86.73721,37.51776 c 0.31633,0.73687 0.60597,1.48579 0.90476,2.23177 l 87.88327,-34.7733 c -0.65878,-1.66996 -1.3473,-3.32938 -2.05082,-4.97623 z m -358.19818,5.24766 c -0.66162,1.68445 -1.31482,3.38974 -1.93018,5.09687 l 89.75313,32.30026 c 0.27257,-0.7483 0.55442,-1.49203 0.84445,-2.23176 l -88.6674,-35.16537 z m 360.46011,0.33175 -87.82294,34.83362 c 0.29002,0.73973 0.57188,1.48346 0.84445,2.23176 l 88.8785,-31.99868 c -0.60844,-1.69664 -1.2459,-3.39237 -1.90001,-5.0667 z m -362.6014,5.39845 c -0.60902,1.70817 -1.18723,3.42726 -1.74922,5.15719 l 90.68806,29.43516 c 0.24997,-0.76044 0.51631,-1.50976 0.78413,-2.26192 l -89.72297,-32.33042 z m 364.74269,0.3016 -88.87851,32.02884 c 0.26782,0.75216 0.53416,1.50148 0.78413,2.26192 l 89.81344,-29.16373 c -0.55538,-1.71826 -1.1173,-3.43016 -1.71906,-5.12703 z m -366.70302,5.48894 c -0.55014,1.71366 -1.09515,3.42306 -1.59843,5.15718 l 91.56267,26.63038 c 0.22885,-0.77907 0.4764,-1.55131 0.72381,-2.32224 l -90.68805,-29.46532 z m 368.63319,0.27143 -89.81344,29.19389 c 0.24741,0.77093 0.49497,1.54317 0.72382,2.32224 l 90.65789,-26.35895 c -0.50008,-1.73247 -1.02144,-3.44506 -1.56827,-5.15718 z m -370.41257,5.57941 c -0.49268,1.72164 -0.97166,3.44642 -1.41747,5.18734 l 92.34679,23.73512 c 0.2048,-0.78864 0.40968,-1.57155 0.63334,-2.3524 l -91.56266,-26.57006 z m 372.19195,0.27143 -90.68805,26.29863 c 0.22366,0.78085 0.42855,1.56376 0.63334,2.3524 l 91.44202,-23.49385 c -0.44029,-1.72862 -0.90083,-3.44751 -1.38731,-5.15718 z m -373.76022,5.57941 c -0.44057,1.74604 -0.87393,3.51327 -1.26668,5.27782 l 93.04046,20.8097 c 0.17759,-0.78503 0.34669,-1.57459 0.54286,-2.3524 l -92.31664,-23.73512 z m 375.29833,0.24127 -91.41186,23.49385 c 0.19617,0.77781 0.36526,1.56737 0.54286,2.3524 l 92.10552,-20.62874 c -0.3864,-1.74385 -0.80343,-3.49171 -1.23652,-5.21751 z m -376.7158,5.73021 c -0.38288,1.75065 -0.72045,3.5098 -1.05557,5.27782 l 93.61348,17.88427 c 0.15194,-0.78633 0.31207,-1.57283 0.48254,-2.3524 L 111.60524,557.4565 z m 378.10311,0.21111 -92.10552,20.59858 c 0.17048,0.77957 0.3306,1.56607 0.48255,2.3524 l 92.70869,-17.70332 c -0.33195,-1.76078 -0.70641,-3.50407 -1.08572,-5.24766 z m -379.30947,5.76041 c -0.33009,1.77735 -0.62362,3.54409 -0.90477,5.33814 l 94.12618,14.89854 c 0.12842,-0.79893 0.27476,-1.59017 0.42222,-2.38256 l -93.64363,-17.85412 z m 380.51583,0.18096 -92.7087,17.67316 c 0.14747,0.79239 0.2938,1.58363 0.42223,2.38256 l 93.19124,-14.74774 c -0.2782,-1.78456 -0.57815,-3.53992 -0.90477,-5.30798 z m -381.54124,5.85084 c -0.26916,1.75973 -0.5024,3.53297 -0.72381,5.30798 l 94.51824,11.97311 c 0.10426,-0.81202 0.20789,-1.60699 0.33175,-2.41271 l -94.12618,-14.86838 z m 382.53649,0.15079 -93.16109,14.71759 c 0.12386,0.80572 0.22749,1.60069 0.33175,2.41271 l 93.55315,-11.85247 c -0.21907,-1.76509 -0.45753,-3.52781 -0.72381,-5.27783 z m -383.35078,5.85085 c -0.21631,1.78623 -0.40572,3.59756 -0.57302,5.39845 l 94.85,8.95722 c 0.0776,-0.80086 0.14461,-1.61757 0.24127,-2.41272 l -94.51825,-11.94295 z m 384.16507,0.12063 -93.55315,11.82232 c 0.0967,0.79515 0.16363,1.61186 0.24127,2.41272 l 93.8849,-8.86674 c -0.16558,-1.79139 -0.35895,-3.5914 -0.57302,-5.3683 z m -384.79841,5.97148 c -0.15953,1.78681 -0.28145,3.56784 -0.39206,5.3683 l 95.0611,5.97148 c 0.0524,-0.79783 0.10971,-1.59002 0.18096,-2.38256 l -94.85,-8.95722 z m 385.43175,0.0904 -93.8849,8.86674 c 0.0712,0.79254 0.12855,1.58473 0.18095,2.38256 l 94.09601,-5.91116 c -0.10945,-1.79047 -0.23424,-3.56116 -0.39206,-5.33814 z m -385.88413,5.97148 c -0.10362,1.7912 -0.18671,3.5945 -0.24127,5.39845 l 95.18174,3.0159 c 0.0279,-0.81836 0.073,-1.62967 0.12064,-2.44288 l -95.06111,-5.97147 z m 386.33651,0.0603 -94.09601,5.91116 c 0.0477,0.81321 0.0927,1.62452 0.12064,2.44288 l 94.21664,-2.98574 c -0.0539,-1.79381 -0.13878,-3.58708 -0.24127,-5.3683 z m -386.60794,6.0318 c -0.0467,1.74947 -0.0603,3.51707 -0.0603,5.27782 0,0.0404 -3e-5,0.0802 0,0.12064 l 95.2119,0 c 0.003,-0.79216 0.009,-1.59491 0.0301,-2.38256 l -95.18174,-3.0159 z m 386.87937,0.0301 -94.21664,2.98574 c 0.0214,0.78765 0.0273,1.5904 0.0301,2.38256 l 94.24685,9e-5 c 3e-5,-0.0404 0,-0.0802 0,-0.12063 0,-1.75065 -0.0141,-3.50816 -0.0603,-5.24766 z m -192.95714,3.58901 c -1.17126,0 -2.11112,0.97003 -2.11112,2.14129 0,1.04566 0.75321,1.90637 1.74922,2.08097 l 0,-2.08097 0.72381,0 0,2.08097 c 0.99601,-0.1746 1.74922,-1.03531 1.74922,-2.08097 0,-1.17126 -0.93987,-2.14129 -2.11113,-2.14129 z m -193.98255,2.47309 c 0.008,1.80995 0.0638,3.60057 0.12064,5.39846 l 95.12142,-2.98574 c -0.0221,-0.80631 -0.0275,-1.60169 -0.0301,-2.41272 l -95.2119,0 z m 292.75321,0 c -0.003,0.81103 -0.008,1.60641 -0.0301,2.41272 l 94.18649,2.95558 c 0.0563,-1.78757 0.083,-3.56882 0.0904,-5.3683 l -94.2468,0 z m -197.48099,3.10638 -95.15158,2.98573 c 0.0635,1.80562 0.15878,3.60576 0.27143,5.39846 l 95.00079,-5.97148 c -0.0468,-0.80011 -0.0929,-1.60759 -0.12064,-2.41271 z m 197.42067,0 c -0.0277,0.80512 -0.0738,1.6126 -0.12064,2.41271 l 94.03569,5.91116 c 0.11147,-1.78272 0.20857,-3.57281 0.27143,-5.36829 l -94.18648,-2.95558 z m -197.26988,3.10637 -94.97063,5.97148 c 0.11912,1.79321 0.25459,3.58878 0.42223,5.3683 l 94.75952,-8.95722 c -0.0713,-0.7945 -0.15874,-1.58275 -0.21112,-2.38256 z m 197.11908,0 c -0.0524,0.79981 -0.13981,1.58806 -0.21111,2.38256 l 93.79442,8.86674 c 0.16591,-1.76987 0.30432,-3.55473 0.42223,-5.33814 L 399.6838,606.0125 z m -196.84764,3.07622 -94.75952,8.95721 c 0.17571,1.79664 0.37866,3.58641 0.60318,5.3683 l 94.39761,-11.9128 c -0.0969,-0.79694 -0.1635,-1.61003 -0.24127,-2.41271 z m 196.57621,0 c -0.0778,0.80268 -0.14439,1.61577 -0.24127,2.41271 l 93.43251,11.79216 c 0.22219,-1.77215 0.42927,-3.55141 0.60318,-5.33813 l -93.79442,-8.86674 z m -196.24447,3.07621 -94.39761,11.94296 c 0.23186,1.78797 0.47366,3.56583 0.75398,5.33814 l 93.97538,-14.86838 c -0.12386,-0.80572 -0.22749,-1.60069 -0.33175,-2.41272 z m 195.91272,0 c -0.10426,0.81203 -0.20789,1.607 -0.33175,2.41272 l 93.01029,14.71758 c 0.27741,-1.76271 0.52451,-3.5298 0.75398,-5.30798 l -93.43252,-11.82232 z m -195.46033,3.10638 -93.97539,14.83821 c 0.28939,1.78889 0.59685,3.56604 0.93493,5.33814 l 93.46268,-17.82395 c -0.14507,-0.77991 -0.29559,-1.56618 -0.42222,-2.3524 z m 195.00795,0 c -0.12663,0.78622 -0.27716,1.57249 -0.42223,2.3524 l 92.52775,17.643 c 0.33465,-1.76321 0.64848,-3.52819 0.93492,-5.30798 l -93.04044,-14.68742 z m -194.46509,3.01589 -93.46268,17.85412 c 0.3435,1.76559 0.72472,3.52974 1.11588,5.27782 l 92.82934,-20.77954 c -0.17055,-0.78046 -0.33056,-1.56515 -0.48254,-2.3524 z m 193.92223,0 c -0.15199,0.78725 -0.312,1.57194 -0.48255,2.3524 l 91.92457,20.56843 c 0.38655,-1.73677 0.74619,-3.49365 1.08572,-5.24766 L 398.08538,618.2872 z m -193.28889,3.04606 -92.82934,20.77954 c 0.40101,1.7616 0.81795,3.5047 1.26667,5.24766 l 92.10553,-23.6748 c -0.1966,-0.77949 -0.36492,-1.56566 -0.54286,-2.3524 z m 192.65555,0 c -0.17794,0.78674 -0.34627,1.57291 -0.54286,2.3524 l 91.20074,23.43353 c 0.44399,-1.73384 0.8699,-3.46526 1.26668,-5.21751 l -91.92456,-20.56842 z m -191.93174,3.0159 -92.10552,23.6748 c 0.45386,1.73709 0.9169,3.46964 1.41747,5.18734 l 91.32139,-26.50974 c -0.22366,-0.78085 -0.42854,-1.56376 -0.63334,-2.3524 z m 191.20792,0 c -0.20479,0.78864 -0.40968,1.57155 -0.63334,2.3524 l 90.41662,26.26847 c 0.49847,-1.71873 0.96575,-3.44925 1.41747,-5.18735 l -91.20075,-23.43352 z m -190.39362,2.98574 -91.29124,26.5399 c 0.511,1.73012 1.04074,3.44763 1.59843,5.15718 l 90.41662,-29.37484 c -0.24741,-0.77093 -0.49496,-1.54318 -0.72381,-2.32224 z m 189.57933,0 c -0.22885,0.77906 -0.47641,1.55131 -0.72382,2.32224 l 89.54201,29.10341 c 0.55193,-1.70055 1.09267,-3.4062 1.59843,-5.12702 L 395.91393,627.3349 z m -188.6444,2.98574 -90.38647,29.37484 c 0.56316,1.70494 1.14031,3.41327 1.74922,5.09687 l 89.42138,-32.20979 c -0.26568,-0.74656 -0.53604,-1.50721 -0.78413,-2.26192 z m 187.70947,0 c -0.24809,0.75471 -0.51845,1.51536 -0.78413,2.26192 l 88.57692,31.9082 c 0.60207,-1.67346 1.16217,-3.37222 1.71906,-5.06671 L 394.979,630.32064 z m -186.68407,2.92542 -89.45154,32.17963 c 0.62408,1.70704 1.28993,3.38254 1.96034,5.0667 l 88.33565,-35.01457 c -0.29293,-0.74719 -0.56932,-1.47583 -0.84445,-2.23176 z m 185.65867,0 c -0.27513,0.75593 -0.55152,1.48457 -0.84445,2.23176 l 87.52135,34.68283 c 0.66094,-1.66958 1.28457,-3.34458 1.90001,-5.03655 L 393.9536,633.24606 z m -184.54279,2.89526 -88.36581,34.95425 c 0.6744,1.67767 1.3613,3.35237 2.08097,5.00639 l 87.18961,-37.72888 c -0.31633,-0.73686 -0.60598,-1.48579 -0.90477,-2.23176 z m 183.4269,0 c -0.29879,0.74597 -0.58843,1.4949 -0.90476,2.23176 l 86.37531,37.36698 c 0.71114,-1.64358 1.38432,-3.30941 2.05081,-4.97623 l -87.52136,-34.62251 z m -182.2507,2.8651 -87.18961,37.69872 c 0.72625,1.6536 1.49114,3.28691 2.26192,4.91592 l 85.92294,-40.41303 c -0.34035,-0.72842 -0.67228,-1.46363 -0.99525,-2.20161 z m 181.0745,0 c -0.32296,0.73798 -0.65489,1.47319 -0.99524,2.20161 l 85.13879,40.05112 c 0.76159,-1.61836 1.51409,-3.24323 2.23177,-4.88575 l -86.37532,-37.36698 z m -179.77766,2.83495 -85.92294,40.41303 c 0.77941,1.63182 1.55917,3.24942 2.38256,4.85559 l 84.59594,-43.09718 c -0.36067,-0.71249 -0.71179,-1.44915 -1.05556,-2.17144 z m 178.48083,0 c -0.34378,0.72229 -0.69489,1.45895 -1.05557,2.17144 l 83.84196,42.70511 c 0.81349,-1.59592 1.58229,-3.20431 2.3524,-4.82543 l -85.13879,-40.05112 z m -177.12368,2.77462 -84.59594,43.09718 c 0.82583,1.59717 1.66473,3.19429 2.53335,4.76512 l 83.20863,-45.72101 c -0.38828,-0.71058 -0.77485,-1.42024 -1.14604,-2.14129 z m 175.76652,0 c -0.37119,0.72105 -0.75775,1.43071 -1.14604,2.14129 l 82.45465,45.29878 c 0.85812,-1.56082 1.68727,-3.14827 2.50319,-4.73496 l -83.8118,-42.70511 z m -174.28873,2.74447 -83.17847,45.72101 c 0.87431,1.56759 1.7679,3.13427 2.68415,4.67464 l 81.70068,-48.31468 c -0.40609,-0.69078 -0.81672,-1.37957 -1.20636,-2.08097 z m 172.81094,0 c -0.38963,0.7014 -0.80027,1.39019 -1.20635,2.08097 l 80.97685,47.89245 c 0.91285,-1.54342 1.81335,-3.10404 2.68415,-4.67464 l -82.45465,-45.29878 z m -171.24267,2.68415 -81.73084,48.28452 c 0.93129,1.55357 1.89185,3.08945 2.8651,4.61432 l 80.10226,-50.84803 c -0.42558,-0.67455 -0.82696,-1.36538 -1.23652,-2.05081 z m 169.67441,0 c -0.40957,0.68543 -0.81095,1.37626 -1.23652,2.05081 l 79.40859,50.39565 c 0.96127,-1.51521 1.91502,-3.04081 2.83494,-4.58416 l -81.00701,-47.8623 z m -168.04583,2.65399 -80.10225,50.84803 c 0.96638,1.50179 1.94917,2.99061 2.95558,4.46353 l 78.44351,-53.29091 c -0.44852,-0.66356 -0.86415,-1.34574 -1.29684,-2.02065 z m 166.41724,0 c -0.42821,0.66793 -0.85311,1.33368 -1.29683,1.99049 l 77.78,52.86869 c 1.00238,-1.47589 1.99331,-2.95886 2.95558,-4.46353 L 384.33288,652.6986 z m -164.69817,2.56351 -78.44351,53.32107 c 1.0158,1.47503 2.05109,2.928 3.10637,4.37306 l 76.72445,-55.7338 c -0.46987,-0.65029 -0.93302,-1.29827 -1.38731,-1.96033 z m 162.97911,0 c -0.45429,0.66206 -0.91744,1.31004 -1.38731,1.96033 l 76.0911,55.28141 c 1.05064,-1.4475 2.09525,-2.8957 3.10637,-4.37305 l -77.81016,-52.86869 z m -161.19973,2.5032 -76.69429,55.76395 c 1.06546,1.44778 2.12258,2.89609 3.22701,4.31273 l 74.94507,-58.14651 c -0.49423,-0.64088 -0.99911,-1.27695 -1.47779,-1.93017 z m 159.42035,0 c -0.47868,0.65322 -0.98357,1.28929 -1.47779,1.93017 l 74.34188,57.66397 c 1.09544,-1.41415 2.17029,-2.83764 3.22701,-4.28258 l -76.0911,-55.31156 z m -157.52034,2.47303 -74.97523,58.14651 c 1.11126,1.41533 2.2585,2.80893 3.40797,4.1921 l 73.04505,-60.43859 c -0.50741,-0.61728 -0.98519,-1.27035 -1.47779,-1.90002 z m 155.62033,0 c -0.4926,0.62967 -0.97038,1.28274 -1.47779,1.90002 l 72.47202,59.95605 c 1.1371,-1.37724 2.24831,-2.78325 3.34765,-4.1921 l -74.34188,-57.66397 z m -153.69015,2.44288 -73.0149,60.43859 c 1.14818,1.37117 2.31336,2.73298 3.49844,4.07146 l 71.08472,-62.70051 c -0.52508,-0.59964 -1.05759,-1.19721 -1.56826,-1.80954 z m 151.75997,0 c -0.51067,0.61233 -1.04318,1.2099 -1.56827,1.80954 l 70.54185,62.21797 c 1.18122,-1.34298 2.35426,-2.69587 3.49844,-4.07146 l -72.47202,-59.95605 z m -149.73932,2.3524 -71.08472,62.67036 c 1.19426,1.33937 2.41867,2.64527 3.64923,3.95082 l 69.06407,-64.8418 c -0.55111,-0.59074 -1.09193,-1.17525 -1.62858,-1.77938 z m 147.71867,0 c -0.53666,0.60413 -1.07747,1.18864 -1.62858,1.77938 l 68.55135,64.35926 c 1.22061,-1.30386 2.43453,-2.61354 3.61908,-3.95083 L 374.9836,665.03362 z m -145.60754,2.29208 -69.06407,64.8418 c 1.23715,1.30306 2.46704,2.59213 3.73971,3.86035 l 66.9831,-66.98309 c -0.56248,-0.56636 -1.11003,-1.13926 -1.65874,-1.71906 z m 143.49641,0 c -0.54871,0.5798 -1.09626,1.1527 -1.65874,1.71906 l 66.50054,66.50055 c 1.26357,-1.26802 2.48134,-2.55786 3.70956,-3.86035 L 372.87247,667.3257 z m -141.32497,2.20161 -66.9831,66.98309 c 1.27167,1.2581 2.55437,2.51701 3.86035,3.73971 l 64.84181,-69.06406 c -0.57452,-0.54376 -1.15771,-1.10145 -1.71906,-1.65874 z m 139.15353,0 c -0.56135,0.55729 -1.14454,1.11498 -1.71907,1.65874 l 64.38942,68.58152 c 1.29639,-1.22254 2.56794,-2.48216 3.83019,-3.73972 l -66.50054,-66.50054 z m -136.92176,2.17144 -64.84182,69.0339 c 1.31931,1.22627 2.65795,2.4296 4.01115,3.61908 l 62.61005,-71.05455 c -0.59625,-0.52986 -1.19619,-1.05447 -1.77938,-1.59843 z m 134.68999,0 c -0.58319,0.54396 -1.18313,1.06857 -1.77938,1.59843 l 62.18781,70.57201 c 1.34251,-1.18901 2.67217,-2.39373 3.98099,-3.61908 l -64.38942,-68.55136 z m -132.39791,2.05081 -62.64021,71.05456 c 1.35469,1.18264 2.74424,2.32317 4.13179,3.46828 l 60.34812,-72.92441 c -0.62323,-0.51977 -1.22962,-1.06374 -1.8397,-1.59843 z m 130.10583,0 c -0.61008,0.53469 -1.21647,1.07866 -1.8397,1.59843 l 59.95605,72.44186 c 1.37756,-1.14581 2.75677,-2.28532 4.10162,-3.46828 l -62.21797,-70.57201 z m -127.72327,2.05081 -60.34812,72.89425 c 1.3868,1.13629 2.77356,2.27969 4.1921,3.37781 l 58.02587,-74.79427 c -0.6286,-0.49178 -1.25359,-0.97122 -1.86985,-1.47779 z m 125.34071,0 c -0.61627,0.50657 -1.24125,0.98601 -1.86986,1.47779 l 57.66397,74.31173 c 1.40259,-1.09472 2.79069,-2.2155 4.16194,-3.34765 l -59.95605,-72.44187 z m -122.92799,1.90002 -58.02588,74.79426 c 1.42873,1.09794 2.88304,2.16848 4.3429,3.22702 l 55.61315,-76.57365 c -0.64872,-0.47564 -1.29363,-0.95666 -1.93017,-1.44763 z m 120.51527,0 c -0.63654,0.49097 -1.28145,0.97199 -1.93017,1.44763 l 55.2814,76.12126 c 1.45465,-1.06367 2.8893,-2.15427 4.31274,-3.25717 L 361.3819,677.70039 z m -118.01208,1.86986 -55.64331,76.54348 c 1.46252,1.05282 2.94066,2.09379 4.43337,3.10638 l 53.17028,-78.26255 c -0.66094,-0.45328 -1.31111,-0.9185 -1.96034,-1.38731 z m 115.50889,0 c -0.64923,0.46881 -1.2994,0.93403 -1.96034,1.38731 l 52.86869,77.81016 c 1.48133,-1.01385 2.95189,-2.05279 4.40321,-3.10637 l -55.31156,-76.0911 z m -113.00569,1.77938 -53.14012,78.26254 c 1.48264,0.99803 2.98228,1.96775 4.49369,2.92542 l 50.66708,-79.86097 c -0.67488,-0.43267 -1.35714,-0.87849 -2.02065,-1.32699 z m 110.47233,0 c -0.65681,0.44372 -1.32256,0.89878 -1.99049,1.32699 l 50.39565,79.43875 c 1.50467,-0.96227 2.98764,-1.9532 4.46353,-2.95558 l -52.86869,-77.81016 z m -107.8485,1.6889 -50.69724,79.86097 c 1.51729,0.95397 3.03889,1.89216 4.58416,2.80479 l 48.16389,-81.39908 c -0.69174,-0.41323 -1.37017,-0.83715 -2.05081,-1.26668 z m 105.25483,0 c -0.68065,0.42953 -1.35907,0.85345 -2.05081,1.26668 l 47.89246,80.97685 c 1.5413,-0.91904 3.07095,-1.84449 4.58416,-2.80478 l -50.42581,-79.43875 z m -102.60084,1.62858 -48.16389,81.39908 c 1.53986,0.90189 3.108,1.76369 4.67464,2.62384 l 45.57022,-82.84672 c -0.6979,-0.38774 -1.39359,-0.77216 -2.08097,-1.1762 z m 99.94685,0 c -0.68738,0.40404 -1.38308,0.78846 -2.08097,1.1762 l 45.3591,82.45465 c 1.55247,-0.86126 3.08842,-1.75164 4.61433,-2.65399 l -47.89246,-80.97686 z m -97.2627,1.50795 -45.54006,82.87687 c 1.56769,0.85304 3.14144,1.69262 4.73496,2.5032 l 42.94638,-84.23403 c -0.72148,-0.37141 -1.43027,-0.75751 -2.14128,-1.14604 z m 94.57855,0 c -0.71101,0.38853 -1.41981,0.77463 -2.14129,1.14604 l 42.73527,83.84196 c 1.58567,-0.81541 3.14496,-1.6758 4.7048,-2.53335 l -45.29878,-82.45465 z m -91.80393,1.44763 -42.91622,84.26419 c 1.58412,0.79811 3.18658,1.56675 4.79527,2.32224 l 40.26224,-85.5007 c -0.72251,-0.34361 -1.42857,-0.72522 -2.14129,-1.08573 z m 89.0293,0 c -0.71271,0.36051 -1.41877,0.74212 -2.14128,1.08573 l 40.08128,85.13879 c 1.61108,-0.7654 3.20909,-1.54416 4.79528,-2.3524 l -42.73528,-83.87212 z m -86.25467,1.38732 -40.23208,85.5007 c 1.61299,0.75011 3.24901,1.46486 4.88576,2.17144 l 37.51776,-86.70706 c -0.7277,-0.31846 -1.45302,-0.62971 -2.17144,-0.96508 z m 83.48005,0 c -0.71842,0.33537 -1.44374,0.64662 -2.17145,0.96508 l 37.36698,86.37532 c 1.63526,-0.71485 3.27444,-1.44323 4.88575,-2.20161 l -40.08128,-85.13879 z m -80.67527,1.23651 -37.51776,86.73722 c 1.64366,0.70246 3.27937,1.39292 4.94607,2.05082 l 34.83362,-87.85311 c -0.75829,-0.30336 -1.51305,-0.61344 -2.26193,-0.93493 z m 77.87048,0 c -0.74888,0.32149 -1.50363,0.63157 -2.26192,0.93493 l 34.68282,87.52136 c 1.66687,-0.66683 3.30247,-1.36949 4.94608,-2.08097 L 340.0595,690.24652 z m -74.97521,1.17621 -34.80346,87.88326 c 1.66203,0.6489 3.35253,1.23579 5.03654,1.83969 l 32.02884,-88.84834 c -0.75718,-0.27558 -1.51352,-0.58118 -2.26192,-0.87461 z m 72.07995,0 c -0.7484,0.29343 -1.50474,0.59903 -2.26192,0.87461 l 31.9082,88.54675 c 1.68396,-0.61279 3.37478,-1.212 5.03655,-1.86985 l -34.68283,-87.55151 z m -69.18469,1.08572 -31.99868,88.87851 c 1.68803,0.59834 3.38767,1.16661 5.09687,1.71906 l 29.19389,-89.81344 c -0.76897,-0.2527 -1.53158,-0.51319 -2.29208,-0.78413 z m 66.28943,0 c -0.7605,0.27094 -1.52311,0.53143 -2.29208,0.78413 l 29.10341,89.54201 c 1.70134,-0.55887 3.38656,-1.14482 5.06671,-1.74922 l -31.87804,-88.57692 z m -63.36401,0.99524 -29.16373,89.81344 c 1.70472,0.54418 3.43229,1.07043 5.15718,1.56827 l 26.32879,-90.65789 c -0.78242,-0.22984 -1.54802,-0.47526 -2.32224,-0.72382 z m 60.43859,0 c -0.77422,0.24856 -1.53983,0.49398 -2.32224,0.72382 l 26.23831,90.41661 c 1.72561,-0.50687 3.45196,-1.04512 5.15718,-1.59842 l -29.07325,-89.54201 z m -57.42269,0.90477 -26.35895,90.68805 c 1.71976,0.48963 3.44841,0.97459 5.18734,1.41747 l 23.46369,-91.47218 c -0.76129,-0.19791 -1.53805,-0.41784 -2.29208,-0.63334 z m 54.40679,0 c -0.75403,0.2155 -1.53079,0.43543 -2.29208,0.63334 l 23.40337,91.23091 c 1.72901,-0.44935 3.44733,-0.95202 5.15718,-1.44763 l -26.26847,-90.41662 z m -51.42106,0.8143 -23.49384,91.44202 c 1.74197,0.43707 3.48731,0.81688 5.24766,1.20636 l 20.56843,-92.07536 c -0.78362,-0.17728 -1.54582,-0.37724 -2.32225,-0.57302 z m 48.43532,0 c -0.77642,0.19578 -1.53863,0.39574 -2.32224,0.57302 l 20.53827,91.8944 c 1.75215,-0.39677 3.48375,-0.79256 5.2175,-1.23652 l -23.43353,-91.2309 z m -45.44958,0.72381 -20.56842,92.07536 c 1.75322,0.3814 3.50721,0.7522 5.27782,1.08572 l 17.67316,-92.67853 c -0.79678,-0.15395 -1.59272,-0.30959 -2.38256,-0.48255 z m 42.46384,0 c -0.78983,0.17296 -1.58577,0.3286 -2.38256,0.48255 l 17.64301,92.49758 c 1.76996,-0.34249 3.52542,-0.7255 5.27782,-1.11588 l -20.53827,-91.86425 z m -39.38762,0.60318 -17.70332,92.67854 c 1.76943,0.32687 3.55218,0.65655 5.33814,0.93493 l 14.71758,-93.19124 c -0.78825,-0.1267 -1.57051,-0.27699 -2.3524,-0.42223 z m 36.31141,0 c -0.7819,0.14524 -1.56416,0.29553 -2.3524,0.42223 l 14.68742,93.01028 c 1.786,-0.28739 3.56884,-0.599 5.33814,-0.93492 l -17.67316,-92.49759 z m -33.26535,0.54286 -14.74774,93.16108 c 1.75121,0.26675 3.51149,0.50435 5.27782,0.72382 l 11.88263,-93.58331 c -0.80251,-0.10303 -1.61634,-0.17942 -2.41271,-0.30159 z m 30.15897,0 c -0.77692,0.11871 -1.56962,0.2011 -2.3524,0.30159 l 11.85248,93.46267 c 1.76618,-0.22819 3.52691,-0.47849 5.27782,-0.75397 l -14.71758,-93.01029 c -0.0196,0.003 -0.0407,-0.003 -0.0603,0 z m -27.08276,0.39207 -11.85248,93.58331 c 1.78358,0.21508 3.57012,0.37664 5.3683,0.54286 l 8.86674,-93.85474 c -0.79895,-0.0775 -1.5893,-0.17505 -2.38256,-0.27143 z m 24.06687,0 c -0.79327,0.0964 -1.58362,0.19397 -2.38256,0.27143 l 8.86674,93.76426 c 1.78806,-0.17427 3.56467,-0.3504 5.33813,-0.57302 L 313.1577,697.48468 z m -20.99065,0.33175 -8.86674,93.85474 c 1.78191,0.15826 3.57283,0.31259 5.3683,0.42222 l 5.91116,-94.09601 c -0.80827,-0.0529 -1.60989,-0.10878 -2.41272,-0.18095 z m 17.91443,0 c -0.80284,0.0722 -1.60446,0.12811 -2.41272,0.18095 l 5.91116,94.03569 c 1.79613,-0.11857 3.58591,-0.25496 5.3683,-0.42222 l -8.86674,-93.79442 z m -14.80806,0.24127 -5.91116,94.06585 c 1.77681,0.10218 3.5488,0.18737 5.33814,0.24127 l 2.98574,-94.21664 c -0.80779,-0.0275 -1.60997,-0.0436 -2.41272,-0.0904 z m 11.70169,0 c -0.80275,0.0468 -1.60494,0.0629 -2.41272,0.0904 l 2.98574,94.18649 c 1.78721,-0.0626 3.56357,-0.1606 5.33813,-0.27143 l -5.91115,-94.00554 z m -8.59531,0.12064 -2.98574,94.21664 c 1.73998,0.0462 3.49652,0.0904 5.24766,0.0904 0.0402,0 0.0804,3e-5 0.12064,0 l 0,-94.27696 c -0.79216,-0.003 -1.59491,-0.009 -2.38256,-0.0301 z m 5.30798,0 c -0.72757,0.0184 -1.47021,0.0275 -2.20161,0.0301 l 0,94.2468 c 1.79336,-0.008 3.58678,-0.0344 5.3683,-0.0904 l -2.98574,-94.18648 c -0.0604,0.002 -0.12052,-0.002 -0.18095,0 z"
+       id="path33085" />
+  </g>
+</svg>
