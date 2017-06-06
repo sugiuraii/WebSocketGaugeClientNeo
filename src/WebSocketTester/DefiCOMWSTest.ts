@@ -28,103 +28,98 @@
 
 window.onload = function()
 {
-    let wsTest = new webSocketGauge.test.DefiCOMWSTest();
+    let wsTest = new DefiCOMWSTest();
     wsTest.main();
 }
 import {DefiCOMWebsocket} from '../lib/WebSocket/WebSocketCommunication';
 import {DefiParameterCode} from '../lib/WebSocket/WebSocketCommunication';
 
+import {WebSocketTesterBase} from './base/WebSocketTesterBase';
+
 import * as $ from "jquery";
 require('./DefiCOMWSTest.html');
-
-export module webSocketGauge.test
+  
+export abstract class DefiArduinoCOMWSTestBase extends WebSocketTesterBase
 {
+    protected webSocket: DefiCOMWebsocket;
     
-    export class DefiCOMWSTest
-    {    
-        protected webSocket : DefiCOMWebsocket;
-        
-        public main(): void
-        {
-            this.webSocket = new DefiCOMWebsocket();
-            $('#serverURLBox').val("ws://localhost:2012/");
-            this.assignButtonEvents();
-            this.setParameterCodeSelectBox();
-            this.registerWSEvents();
-        }
-        
-        protected assignButtonEvents() : void
-        {
-            $("#connectButton").click(()=> this.connectWebSocket());
-            $("#disconnectButton").click(() => this.disconnectWebSocket());
-            $("#buttonWSSend").click(() => this.inputWSSend());
-            $("#buttonWSInterval").click(() => this.inputWSInterval());
-        }
+    constructor()
+    {
+        super();
+        this.defaultPortNo = 2012;
+        this.WebSocketBase = this.webSocket;
+    }
+    
+    protected assignButtonEvents() : void
+    {
+        super.assignButtonEvents();
+        $("#buttonWSSend").click(() => this.inputWSSend());
+        $("#buttonWSInterval").click(() => this.inputWSInterval());
+    }
 
-        protected setParameterCodeSelectBox() : void
+    protected registerWSEvents() : void
+    {
+        this.webSocket.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: string}) => 
         {
-            for (let code in DefiParameterCode)
-                $('#codeSelect').append($('<option>').html(code).val(code));
-        }
-
-        protected registerWSEvents() : void
-        {
-            this.webSocket.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: string}) => 
+            $('#spanInterval').text(intervalTime.toFixed(2));
+             //clear
+            $('#divVAL').html("");
+            for (var key in val)
             {
-                $('#spanInterval').text(intervalTime.toFixed(2));
-                 //clear
-                $('#divVAL').html("");
-                for (var key in val)
-                {
-                    $('#divVAL').append(key + " : " + val[key] + "<br>" );
-                }
+                $('#divVAL').append(key + " : " + val[key] + "<br>" );
             }
-            this.webSocket.OnERRPacketReceived = (msg:string)=>
-            {
-                $('#divERR').append(msg + "<br>")
-            };
-
-            this.webSocket.OnRESPacketReceived = (msg : string) =>
-            {
-                $('#divRES').append(msg + "<br>");
-            };
-            this.webSocket.OnWebsocketError = (msg : string) =>
-            {
-                $('#divWSMsg').append(msg + "<br>");
-            };
-            this.webSocket.OnWebsocketOpen = () =>
-            {
-                $('#divWSMsg').append('* Connection open<br/>');
-                $('#connectButton').attr("disabled", "disabled");
-                $('#disconnectButton').removeAttr("disabled");  
-            };
-            this.webSocket.OnWebsocketClose = () =>
-            {
-                $('#divWSMsg').append('* Connection closed<br/>');
-                $('#connectButton').removeAttr("disabled");
-                $('#disconnectButton').attr("disabled", "disabled");
-            };
         }
-
-        public connectWebSocket() : void
+        this.webSocket.OnERRPacketReceived = (msg:string)=>
         {
-            this.webSocket.URL = $("#serverURLBox").val();
-            this.webSocket.Connect();
+            $('#divERR').append(msg + "<br>")
         };
 
-        public disconnectWebSocket()
+        this.webSocket.OnRESPacketReceived = (msg : string) =>
         {
-            this.webSocket.Close();
+            $('#divRES').append(msg + "<br>");
         };
-
-        public inputWSSend()
+        this.webSocket.OnWebsocketError = (msg : string) =>
         {
-            this.webSocket.SendWSSend($('#codeSelect').val(),$('#codeFlag').val());
+            $('#divWSMsg').append(msg + "<br>");
         };
-
-        public inputWSInterval()
+        this.webSocket.OnWebsocketOpen = () =>
         {
-            this.webSocket.SendWSInterval($('#WSInterval').val());
+            $('#divWSMsg').append('* Connection open<br/>');
+            $('#connectButton').attr("disabled", "disabled");
+            $('#disconnectButton').removeAttr("disabled");  
+        };
+        this.webSocket.OnWebsocketClose = () =>
+        {
+            $('#divWSMsg').append('* Connection closed<br/>');
+            $('#connectButton').removeAttr("disabled");
+            $('#disconnectButton').attr("disabled", "disabled");
         };
     }
+
+    public inputWSSend()
+    {
+        this.webSocket.SendWSSend($('#codeSelect').val(),$('#codeFlag').val());
+    };
+
+    public inputWSInterval()
+    {
+        this.webSocket.SendWSInterval($('#WSInterval').val());
+    };
+}
+
+class DefiCOMWSTest extends DefiArduinoCOMWSTestBase
+{        
+    constructor()
+    {
+        super();
+        this.webSocket = new DefiCOMWebsocket();
+        this.WebSocketBase = this.webSocket;
+    }
+    
+    protected setParameterCodeSelectBox() : void
+    {
+        for (let code in DefiParameterCode)
+            $('#codeSelect').append($('<option>').html(code).val(code));
+    }
+    
 }
