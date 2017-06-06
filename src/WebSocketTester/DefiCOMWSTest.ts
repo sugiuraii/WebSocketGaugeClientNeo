@@ -26,85 +26,17 @@
 
 /// <reference path="../lib/webpackRequire.ts" />
 
+import {DefiCOMWebsocket} from '../lib/WebSocket/WebSocketCommunication';
+import {DefiParameterCode} from '../lib/WebSocket/WebSocketCommunication';
+import {DefiArduinoCOMWSTestBase} from './base/DefiArduinoWSTestBase'
+
+import * as $ from "jquery";
+require('./DefiCOMWSTest.html');
+
 window.onload = function()
 {
     let wsTest = new DefiCOMWSTest();
     wsTest.main();
-}
-import {DefiCOMWebsocket} from '../lib/WebSocket/WebSocketCommunication';
-import {DefiParameterCode} from '../lib/WebSocket/WebSocketCommunication';
-
-import {WebSocketTesterBase} from './base/WebSocketTesterBase';
-
-import * as $ from "jquery";
-require('./DefiCOMWSTest.html');
-  
-export abstract class DefiArduinoCOMWSTestBase extends WebSocketTesterBase
-{
-    protected webSocket: DefiCOMWebsocket;
-    
-    constructor()
-    {
-        super();
-        this.defaultPortNo = 2012;
-        this.WebSocketBase = this.webSocket;
-    }
-    
-    protected assignButtonEvents() : void
-    {
-        super.assignButtonEvents();
-        $("#buttonWSSend").click(() => this.inputWSSend());
-        $("#buttonWSInterval").click(() => this.inputWSInterval());
-    }
-
-    protected registerWSEvents() : void
-    {
-        this.webSocket.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: string}) => 
-        {
-            $('#spanInterval').text(intervalTime.toFixed(2));
-             //clear
-            $('#divVAL').html("");
-            for (var key in val)
-            {
-                $('#divVAL').append(key + " : " + val[key] + "<br>" );
-            }
-        }
-        this.webSocket.OnERRPacketReceived = (msg:string)=>
-        {
-            $('#divERR').append(msg + "<br>")
-        };
-
-        this.webSocket.OnRESPacketReceived = (msg : string) =>
-        {
-            $('#divRES').append(msg + "<br>");
-        };
-        this.webSocket.OnWebsocketError = (msg : string) =>
-        {
-            $('#divWSMsg').append(msg + "<br>");
-        };
-        this.webSocket.OnWebsocketOpen = () =>
-        {
-            $('#divWSMsg').append('* Connection open<br/>');
-            $('#connectButton').attr("disabled", "disabled");
-            $('#disconnectButton').removeAttr("disabled");  
-        };
-        this.webSocket.OnWebsocketClose = () =>
-        {
-            $('#divWSMsg').append('* Connection closed<br/>');
-            $('#connectButton').removeAttr("disabled");
-            $('#disconnectButton').attr("disabled", "disabled");
-        };
-    }
-
-    public inputWSSend()
-    {
-        this.webSocket.SendWSSend($('#codeSelect').val(),$('#codeFlag').val());
-    };
-
-    public inputWSInterval()
-    {
-        this.webSocket.SendWSInterval($('#WSInterval').val());
-    };
 }
 
 class DefiCOMWSTest extends DefiArduinoCOMWSTestBase

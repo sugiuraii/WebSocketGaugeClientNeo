@@ -26,19 +26,18 @@
  
 /// <reference path="../lib/webpackRequire.ts" />
 
+import {ArduinoCOMWebsocket} from '../lib/WebSocket/WebSocketCommunication';
+import {ArduinoParameterCode} from '../lib/WebSocket/WebSocketCommunication';
+import {DefiArduinoCOMWSTestBase} from './base/DefiArduinoWSTestBase';
+
+import * as $ from "jquery";
+require('./ArduinoCOMWSTest.html');
+
 window.onload = function()
 {
     let wsTest = new ArduinoCOMWSTest();
     wsTest.main();
 }
-
-import {ArduinoCOMWebsocket} from '../lib/WebSocket/WebSocketCommunication';
-import {ArduinoParameterCode} from '../lib/WebSocket/WebSocketCommunication';
-import {DefiArduinoCOMWSTestBase} from './DefiCOMWSTest';
-
-import * as $ from "jquery";
-
-require('./ArduinoCOMWSTest.html');
 
 class ArduinoCOMWSTest extends DefiArduinoCOMWSTestBase
 {    
@@ -46,6 +45,7 @@ class ArduinoCOMWSTest extends DefiArduinoCOMWSTestBase
     {
         super();
         this.webSocket = new ArduinoCOMWebsocket();
+        this.WebSocketBase = this.webSocket;
     }
 
     protected setParameterCodeSelectBox() : void
