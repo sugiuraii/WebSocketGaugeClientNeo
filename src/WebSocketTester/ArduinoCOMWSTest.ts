@@ -43,9 +43,8 @@ class ArduinoCOMWSTest extends DefiArduinoCOMWSTestBase
 {    
     constructor()
     {
-        super();
-        this.webSocket = new ArduinoCOMWebsocket();
-        this.WebSocketBase = this.webSocket;
+        const webSocket = new ArduinoCOMWebsocket();
+        super(webSocket);
     }
 
     protected setParameterCodeSelectBox() : void

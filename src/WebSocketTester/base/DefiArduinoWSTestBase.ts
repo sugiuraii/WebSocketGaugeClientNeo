@@ -32,13 +32,13 @@ import * as $ from "jquery";
   
 export abstract class DefiArduinoCOMWSTestBase extends WebSocketTesterBase
 {
-    protected webSocket: DefiCOMWebsocket;
+    private webSocket: DefiCOMWebsocket;
     
-    constructor()
+    constructor(websocket: DefiCOMWebsocket)
     {
-        super();
+        super(websocket);
+        this.webSocket = websocket;
         this.defaultPortNo = 2012;
-        this.WebSocketBase = this.webSocket;
     }
     
     protected assignButtonEvents() : void

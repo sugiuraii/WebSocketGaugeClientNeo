@@ -30,14 +30,13 @@ import {WebsocketCommon} from '../../lib/WebSocket/WebSocketCommunication';
 export abstract class WebSocketTesterBase
 {
     private webSocketBase: WebsocketCommon;
-    protected set WebSocketBase(obj: WebsocketCommon) { this.webSocketBase = obj};
-    protected get WebSocketBase() { return this.webSocketBase };
     
     protected defaultPortNo = 2012;
     protected readonly defaultSeverAddress = location.hostname;
     
-    constructor()
+    constructor(webSocketBase: WebsocketCommon)
     {
+        this.webSocketBase = webSocketBase;
     }
         
     public main(): void

@@ -43,9 +43,8 @@ class DefiCOMWSTest extends DefiArduinoCOMWSTestBase
 {        
     constructor()
     {
-        super();
-        this.webSocket = new DefiCOMWebsocket();
-        this.WebSocketBase = this.webSocket;
+        const webSocket = new DefiCOMWebsocket();
+        super(webSocket);
     }
     
     protected setParameterCodeSelectBox() : void
