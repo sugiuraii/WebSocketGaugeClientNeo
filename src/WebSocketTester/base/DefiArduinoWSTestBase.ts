@@ -33,6 +33,7 @@ import * as $ from "jquery";
 export abstract class DefiArduinoCOMWSTestBase extends WebSocketTesterBase
 {
     private webSocket: DefiCOMWebsocket;
+    get WebSocket() {return this.webSocket};
     
     constructor(websocket: DefiCOMWebsocket)
     {

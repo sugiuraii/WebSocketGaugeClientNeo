@@ -25,135 +25,64 @@
  */
 
 /// <reference path="../lib/webpackRequire.ts" />
- 
+
 import {DefiCOMWebsocket} from '../lib/WebSocket/WebSocketCommunication';
 import {DefiParameterCode} from '../lib/WebSocket/WebSocketCommunication';
+import {DefiArduinoCOMWSTestBase} from './base/DefiArduinoWSTestBase';
 
 import * as $ from "jquery";
 require('./DefiCOMWSInterpolateTest.html');
 
-window.onload = () =>
-{
-    let wsTest = new webSocketGauge.test.DefiCOMWSTestInterpolate();
+window.onload = () => {
+    let wsTest = new DefiCOMWSTestInterpolate();
     wsTest.main();
 }
 
-namespace webSocketGauge.test
-{
-    export class DefiCOMWSTestInterpolate
-    {    
-        public webSocket : DefiCOMWebsocket;
+class DefiCOMWSTestInterpolate extends DefiArduinoCOMWSTestBase{
+    
+    constructor()
+    {
+        const webSocket = new DefiCOMWebsocket();
+        super(webSocket);
+    }
 
-        public main(): void
-        {
-            this.webSocket = new DefiCOMWebsocket();
-            $('#serverURLBox').val("ws://localhost:2012/");
-            this.assignButtonEvents();
-            this.setParameterCodeSelectBox();
-            this.registerWSEvents();
-            
-            window.requestAnimationFrame((timestamp: number) => this.showInterpolateVal(timestamp));
+    public main(): void {
+        super.main();
+        window.requestAnimationFrame((timestamp: number) => this.showInterpolateVal(timestamp));
+    }
+
+    protected setParameterCodeSelectBox() {
+        for (let code in DefiParameterCode)
+            $('#codeSelect').append($('<option>').html(code).val(code));
+    }
+
+    public showInterpolateVal(timestamp: number) {
+        $('#divInterpolatedVAL').html("");
+        for (let key in DefiParameterCode) {
+            const val: number = this.WebSocket.getVal(key, timestamp);
+            if (typeof (val) !== "undefined")
+                $('#divInterpolatedVAL').append(key + " : " + val + "<br>");
         }
+        window.requestAnimationFrame((timestamp: number) => this.showInterpolateVal(timestamp));
+    }
+    
+    public inputWSSend() {
+        super.inputWSSend();
         
-        protected assignButtonEvents() : void
-        {
-            $("#connectButton").click(()=> this.connectWebSocket());
-            $("#disconnectButton").click(() => this.disconnectWebSocket());
-            $("#buttonWSSend").click(() => this.inputWSSend());
-            $("#buttonWSInterval").click(() => this.inputWSInterval());
-        }
-
-        private setParameterCodeSelectBox()
-        {
-            for (let code in DefiParameterCode)
-                $('#codeSelect').append($('<option>').html(code).val(code));
-        }
-
-        public showInterpolateVal(timestamp : number)
-        {
-            $('#divInterpolatedVAL').html("");
-            for( let key in DefiParameterCode)
-            {
-                const val: number = this.webSocket.getVal(key, timestamp);
-                if(typeof(val) !== "undefined")
-                    $('#divInterpolatedVAL').append(key + " : " + val + "<br>" );
-            }
-            window.requestAnimationFrame((timestamp: number) => this.showInterpolateVal(timestamp));
-        }
-
-        private registerWSEvents() : void
-        {
-            this.webSocket.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: string}) => 
-            {
-                $('#spanInterval').text(intervalTime.toFixed(2));
-                 //clear
-                $('#divVAL').html("");
-                for (var key in val)
-                {
-                    $('#divVAL').append(key + " : " + val[key] + "<br>" );
-                }
-            }
-            this.webSocket.OnERRPacketReceived = (msg:string)=>
-            {
-                $('#divERR').append(msg + "<br>")
-            };
-
-            this.webSocket.OnRESPacketReceived = (msg : string) =>
-            {
-                $('#divRES').append(msg + "<br>");
-            };
-            this.webSocket.OnWebsocketError = (msg : string) =>
-            {
-                $('#divWSMsg').append(msg + "<br>");
-            };
-            this.webSocket.OnWebsocketOpen = () =>
-            {
-                $('#divWSMsg').append('* Connection open<br/>');
-                $('#connectButton').attr("disabled", "disabled");
-                $('#disconnectButton').removeAttr("disabled");  
-            };
-            this.webSocket.OnWebsocketClose = () =>
-            {
-                $('#divWSMsg').append('* Connection closed<br/>');
-                $('#connectButton').removeAttr("disabled");
-                $('#disconnectButton').attr("disabled", "disabled");
-            };
-        }
-
-        public connectWebSocket() : void
-        {
-            this.webSocket.URL = $("#serverURLBox").val();
-            this.webSocket.Connect();
-        };
-
-        public disconnectWebSocket()
-        {
-            this.webSocket.Close();
-        };
-        
-        public inputWSSend()
-        {
-            const code : string = $('#codeSelect').val();
-            const flag : string = $('#codeFlag').val();
-            switch(flag)
-            {
-                case "true":
-                    this.webSocket.SendWSSend(code,true);
-                    this.webSocket.EnableInterpolate(code);
+        //Set interpolation flag.
+        const code: string = $('#codeSelect').val();
+        const flag: string = $('#codeFlag').val();
+        switch (flag) {
+            case "true":
+                this.WebSocket.EnableInterpolate(code);
                 break;
-                case "false":
-                    this.webSocket.SendWSSend(code,false);
-                    this.webSocket.DisableInterpolate(code);
+            case "false":
+                this.WebSocket.DisableInterpolate(code);
                 break;
-                default:
-                    console.log("Error : #codeflag is nether true or false.");
+            default:
+                console.log("Error : #codeflag is nether true or false.");
                 break;
-            }
-        };
+        }
+    };
 
-        public inputWSInterval()
-        {
-            this.webSocket.SendWSInterval($('#WSInterval').val());
-        };
-    } 
-}
+} 

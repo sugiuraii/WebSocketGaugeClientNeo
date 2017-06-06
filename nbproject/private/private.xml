@@ -6,10 +6,12 @@
             <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/lib/WebSocket/private/DefiSSMWebSocket.ts</file>
             <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/WebSocketTester/webpack.config.js</file>
             <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/lib/WebSocket/private/Interpolation.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/WebSocketTester/DefiCOMWSInterpolateTest.ts</file>
             <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/WebSocketTester/ArduinoCOMWSTest.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/WebSocketTester/DefiCOMWSTest.ts</file>
             <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/WebSocketTester/base/WebSocketTesterBase.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/WebSocketTester/DefiCOMWSTest.ts</file>
             <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/WebSocketTester/base/DefiArduinoWSTestBase.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/WebSocketTester/ELM327COMWSTest.ts</file>
         </group>
     </open-files>
 </project-private>
