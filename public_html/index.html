@@ -27,60 +27,53 @@ THE SOFTWARE.
         <title>WebSocketGaugeClientNeo</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="indexmenu.css">
     </head>
     <body>
         <h1>WebSocketGaugeClientNeo Menu</h1>
-        <ul>
-            <li>
-                Gauge Panel Sample
-                <ul>
-                    <li>
-                        <a href="application/AnalogMeterClusterApp.html">AnalogMeterCluster</a>
-                    </li>
-                    <li>
-                        <a href="application/DigitalMFDApp.html">DigitalMFD</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                Graphic Benchmark
-                <ul>
-                    <li>
-                        <a href="benchmark/AnalogMeterClusterBenchApp.html">AnalogMeterCluster Benchmark</a>
-                    </li>
-                    <li>
-                        <a href="benchmark/DigitalMFDBenchApp.html">DigitalMFD Benchmark</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                WebSocket communication tester
-                <ul>
-                    <li>
-                        <a href="WebSocketTester/DefiCOMWSTest.html">Defi</a>
-                    </li>
-                    <li>
-                        <a href="WebSocketTester/SSMCOMWSTest.html">SSM</a>
-                    </li>
-                    <li>
-                        <a href="WebSocketTester/ArduinoCOMWSTest.html">Arduino</a>
-                    </li>
-                    <li>
-                        <a href="WebSocketTester/ELM327COMWSTest.html">ELM327</a>
-                    </li>
-                    <li>
-                        <a href="WebSocketTester/FUELTRIPWSTest.html">FUELTRIPLogger</a>
-                    </li>
-                    <li>
-                        Special Test
-                        <ul>
-                            <li>
-                                <a href="WebSocketTester/DefiCOMWSInterpolateTest.html">Defi with interpolation</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+        <div class="menu">
+            <label for="ApplicationMenuBar">Gauge Panel Application Sample</label>
+            <input type="checkbox" id="ApplicationMenuBar" class="accordion" />
+            <ul id="ApplicationSubMenu">
+                <li>
+                    <a href="application/AnalogMeterClusterApp.html">AnalogMeterCluster</a>
+                </li>
+                <li>
+                    <a href="application/DigitalMFDApp.html">DigitalMFD</a>
+                </li>
+            </ul>
+            <label for="BenchmarkMenuBar">Graphic Benchmark</label>
+            <input type="checkbox" id="BenchmarkMenuBar" class="accordion" />
+            <ul id="BenchmarkSubMenu">
+                <li>
+                    <a href="benchmark/AnalogMeterClusterBenchApp.html">AnalogMeterCluster Benchmark</a>
+                </li>
+                <li>
+                    <a href="benchmark/DigitalMFDBenchApp.html">DigitalMFD Benchmark</a>
+                </li>
+            </ul>
+            <label for="WSTestMenuBar">WebSocket communication tester</label>
+            <input type="checkbox" id="WSTestMenuBar" class="accordion"/>
+            <ul id="WSTestSubmenu">
+                <li>
+                    <a href="WebSocketTester/DefiCOMWSTest.html">Defi</a>
+                </li>
+                <li>
+                    <a href="WebSocketTester/DefiCOMWSInterpolateTest.html">Defi with interpolation</a>
+                </li>
+                <li>
+                    <a href="WebSocketTester/SSMCOMWSTest.html">SSM</a>
+                </li>
+                <li>
+                    <a href="WebSocketTester/ArduinoCOMWSTest.html">Arduino</a>
+                </li>
+                <li>
+                    <a href="WebSocketTester/ELM327COMWSTest.html">ELM327</a>
+                </li>
+                <li>
+                    <a href="WebSocketTester/FUELTRIPWSTest.html">FUELTRIPLogger</a>
+                </li>
+            </ul>
+        </div>
     </body>
 </html>
