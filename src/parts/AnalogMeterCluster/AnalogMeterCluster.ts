@@ -159,7 +159,7 @@ export class AnalogMeterCluster extends PIXI.Container
     {
         const tachoMax = 9000;
         const tachoMin = 0;
-        const tachoValDefalut = 4500;
+        const tachoValDefalut = 0;
 
         const tachoContainer = new PIXI.Container();
         const backSprite = PIXI.Sprite.fromFrame("AnalogTachoMeter_Base");
@@ -197,30 +197,30 @@ export class AnalogMeterCluster extends PIXI.Container
         shaftSprite.position.set(300,300);
         tachoContainer.addChild(shaftSprite);
 
-        const gasMilageLabel = this.gasMilageLabel = new PIXI.extras.BitmapText("12.00", {font : "DSEG14_Classic_45px", align : "right"});
+        const gasMilageLabel = this.gasMilageLabel = new PIXI.extras.BitmapText("0.00", {font : "DSEG14_Classic_45px", align : "right"});
         gasMilageLabel.anchor = new PIXI.Point(1,0.5);
         gasMilageLabel.position.set(495,335);
         gasMilageLabel.scale.set(0.9);
         tachoContainer.addChild(gasMilageLabel);
 
-        const tripLabel = this.tripLabel = new PIXI.extras.BitmapText("125.0", {font : "DSEG14_Classic_40px", align : "right"});
+        const tripLabel = this.tripLabel = new PIXI.extras.BitmapText("0.0", {font : "DSEG14_Classic_40px", align : "right"});
         tripLabel.anchor = new PIXI.Point(1,0.5);
         tripLabel.position = new PIXI.Point(505,378);
-        tripLabel.text = "125.0";
+        tripLabel.text = "0.0";
         tripLabel.scale.set(0.9);
         tachoContainer.addChild(tripLabel);
 
-        const fuelLabel = this.fuelLabel = new PIXI.extras.BitmapText("25.00", {font : "DSEG14_Classic_40px", align : "right"});
+        const fuelLabel = this.fuelLabel = new PIXI.extras.BitmapText("0.00", {font : "DSEG14_Classic_40px", align : "right"});
         fuelLabel.anchor = new PIXI.Point(1,0.5);
         fuelLabel.position = new PIXI.Point(505,420);
-        fuelLabel.text = "25.00";
+        fuelLabel.text = "0.00";
         fuelLabel.scale.set(0.9);
         tachoContainer.addChild(fuelLabel);
 
-        const gearPosLabel = this.gearPosLabel = new PIXI.extras.BitmapText("6", {font : "DSEG14_Classic_115px", align : "center"});
+        const gearPosLabel = this.gearPosLabel = new PIXI.extras.BitmapText("N", {font : "DSEG14_Classic_115px", align : "center"});
         gearPosLabel.anchor = new PIXI.Point(0.5,0.5);
         gearPosLabel.position = new PIXI.Point(358,493);
-        gearPosLabel.text = "6";
+        gearPosLabel.text = "N";
         gearPosLabel.scale.set(0.9);
         tachoContainer.addChild(gearPosLabel);
 
@@ -231,10 +231,10 @@ export class AnalogMeterCluster extends PIXI.Container
     {
         const speedMax = 280;
         const speedMin = 0;
-        const speedValDefault = 90;
+        const speedValDefault = 0;
         const waterTempMax = 140;
         const waterTempMin = 60;
-        const waterTempValDefault = 90;
+        const waterTempValDefault = 0;
 
         const speedMeterContainer = new PIXI.Container();            
 
