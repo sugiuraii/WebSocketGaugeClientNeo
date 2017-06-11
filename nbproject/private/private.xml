@@ -3,10 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/lib/WebSocket/private/Interpolation.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/parts/AnalogMeterCluster/AnalogMeterClusterTexture.png</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/lib/WebSocket/WebSocketCommunication.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/WebSocketTester/ArduinoCOMWSTest.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/public_html/application/AnalogMeterClusterApp.html</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/parts/AnalogMeterCluster/AnalogMeterCluster.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/public_html/index.html</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/lib/MeterAppBase/MeterApplicationBase.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/WebSocketTester/SSMCOMWSTest.html</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/public_html/application/DigitalMFDApp.html</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/WebSocketTester/DefiCOMWSInterpolateTest.html</file>
         </group>
     </open-files>
 </project-private>
