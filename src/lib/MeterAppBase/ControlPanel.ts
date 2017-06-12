@@ -121,12 +121,8 @@ export class ControlPanel
         setControlPanelStyle(container);
 
         this.logButtonElement = this.createButton("Debug");
-        this.logButtonElement.style.top = "80px";
-        this.logButtonElement.style.right = "3px";
-
         this.resetButtonElement = this.createButton("Reset");
-        this.resetButtonElement.style.top = "10px";
-        this.resetButtonElement.style.left = "12px";
+        
         container.appendChild(this.resetButtonElement);
         container.appendChild(this.logButtonElement);
 
@@ -141,12 +137,15 @@ export class ControlPanel
         const setIndicatorStyle = (divElem: HTMLDivElement) =>
         {
             const style = divElem.style;
-            style.position = "absolute";
-            style.top = "150px";
-            style.left = "20px";
+            style.position = "relative";
+            style.width = "90%";
+            style.marginLeft = "auto";
+            style.marginRight = "auto";
+            style.marginTop = "1vh";
+            style.marginBottom = "1vh";
             style.background = "black";
             style.color = "grey";
-            style.fontSize = "1em";
+            style.fontSize = "1vm";
             style.fontWeight = "bold";
         };
 
@@ -190,10 +189,16 @@ export class ControlPanel
         const setContainerStyle = (container: HTMLDivElement) =>
         {
             const style = container.style;
-            style.position = "absolute";
-            style.left = "20px";
-            style.top = "300px";
-
+            style.position = "relative";
+            style.width = "90%";
+            style.marginLeft = "auto";
+            style.marginRight = "auto";
+            style.marginTop = "1vh";
+            style.marginBottom = "1vh";
+            style.background = "black";
+            style.color = "grey";
+            style.fontSize = "1vm";
+            style.fontWeight = "bold";
         }
 
         const titleElem = document.createElement('div');
@@ -221,10 +226,16 @@ export class ControlPanel
         const setButtonStyle = (buttonElem: HTMLButtonElement) =>
         {
             const style = buttonElem.style;
-            style.position = "absolute";
-            style.fontSize = "3em";
-            style.fontWeight = "bold";
-            style.padding = "3px 12px";
+            style.position = "relative";
+            style.textAlign = "center";
+            style.display = "block";
+            style.fontSize = "6vmin";
+            style.width = "90%";
+            style.marginLeft = "auto";
+            style.marginRight = "auto";
+            style.marginTop = "1vh";
+            style.marginBottom = "1vh";
+            style.padding = "3px";
             style.color = "white";
             style.borderStyle = "none";
             style.boxShadow = "2px 2px 3px 1px #666";

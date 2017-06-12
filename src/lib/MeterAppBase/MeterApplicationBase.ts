@@ -45,6 +45,8 @@ const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui";
 
 export abstract class MeterApplicationBase
 {
+    protected pixiApp : PIXI.Application;
+    
     private webSocketServerName : string;
     
     private controlPanel = new ControlPanel();
@@ -464,4 +466,19 @@ export abstract class MeterApplicationBase
     {
         return calculateGearPosition(rev, speed, neutralSw);
     }
+    
+    public setBlurOnAppStage(amount : number)
+    {
+        const stage = this.pixiApp.stage;
+        const filter = new PIXI.filters.BlurFilter();
+        filter.blur = amount;
+        stage.filters = [filter];
+    }
+    
+    public unsetBlurOnAppStage()
+    {
+        const stage = this.pixiApp.stage;
+        stage.filters = [];        
+    }
+    
 }
