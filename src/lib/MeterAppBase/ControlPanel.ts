@@ -152,12 +152,16 @@ export class ControlPanel extends HTMLDivContainer
             style.background = "#666666";
             style.borderRadius = "5px";
             style.boxSizing = "border-box";
+            style.transition = "0.5s";
+            style.opacity = "0.4";
         }
         
         const elem = document.createElement('button');
         elem.innerText = buttonText;
         setButtonStyle(elem);
-
+        
+        elem.onmouseenter = () => elem.style.opacity = "1";
+        elem.onmouseleave = () => elem.style.opacity = "0.4";
         return elem;
     }
 }
