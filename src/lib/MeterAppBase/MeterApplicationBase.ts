@@ -150,7 +150,10 @@ export abstract class MeterApplicationBase
         this.setWSURL(this.webSocketServerName);
         
         //Set controlPanel
-        document.body.appendChild(this.controlPanel.Container);        
+        document.body.appendChild(this.controlPanel.Container);   
+        //Add controlPanel open button
+        document.body.appendChild(this.controlPanel.OpenButton);
+        
         // Register control panel events (buttons and spinner)
         this.registerControlPanelEvents();
         
