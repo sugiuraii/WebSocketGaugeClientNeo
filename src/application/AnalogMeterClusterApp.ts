@@ -74,7 +74,9 @@ class AnalogMeterClusterApp extends MeterApplicationBase
         this.pixiApp = new PIXI.Application(1100,600);
         const app = this.pixiApp;
         document.body.appendChild(app.view);
-        app.view.style.height = "100vh";
+        app.view.style.width = "100vw";
+        app.view.style.touchAction = "auto";
+
 
         const meterCluster = new AnalogMeterCluster();
         app.stage.addChild(meterCluster);
