@@ -48,19 +48,14 @@ export class ControlPanel extends HTMLDivContainer
         
         this.isControlPanelOpen = true;
         const style = this.Container.style;
-        if (window.screen.width > 600)
-            style.width = "40vw";
-        else
-            style.width = "320px";
-        
-        style.height = "100vh";
+        style.transform = "scale(1.0)";
+
     }
     private closeControlPanel()
     {
         this.isControlPanelOpen = false;
         const style = this.Container.style;
-        style.width = "0px";
-        style.height = "0px";
+        style.transform = "scale(0)";
         
         this.openButtonElement.style.visibility = "visible";
     }
@@ -108,7 +103,15 @@ export class ControlPanel extends HTMLDivContainer
         style.overflow = "hidden";
         style.transition = "0.5s";
         style.zIndex = "2";
-        this.closeControlPanel();
+        
+        if (window.screen.width > 600)
+            style.width = "40vw";
+        else
+            style.width = "320px";
+        style.height = "100vh";
+        
+        style.transformOrigin = "100% 0%";
+        style.transform = "scale(0)";
     }
     
     private createButton(buttonText : string) : HTMLButtonElement
