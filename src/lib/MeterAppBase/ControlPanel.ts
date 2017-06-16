@@ -25,6 +25,7 @@
  */
 
 import {HTMLDivContainer} from './ControlPanelParts/HTMLDivContainer';
+import {ButtonStyle} from './ControlPanelParts/ButtonStyle';
 
 import {WebSocketIndicator} from './ControlPanelParts/WebSocketIndicator';
 import {IntervalController} from './ControlPanelParts/IntervalController';
@@ -43,6 +44,8 @@ export class ControlPanel extends HTMLDivContainer
     
     private openControlPanel()
     {
+        this.openButtonElement.style.visibility = "hidden";
+        
         this.isControlPanelOpen = true;
         const style = this.Container.style;
         if (window.screen.width > 600)
@@ -51,8 +54,6 @@ export class ControlPanel extends HTMLDivContainer
             style.width = "320px";
         
         style.height = "100vh";
-        
-        this.openButtonElement.style.visibility = "hidden";
     }
     private closeControlPanel()
     {
@@ -68,14 +69,14 @@ export class ControlPanel extends HTMLDivContainer
     {
         super();
         this.resetButtonElement = this.createButton("ResetTRIP");
-        this.closeButtonElement = this.createButton("Close→");
+        this.closeButtonElement = this.createButton("Close");
         this.resetButtonElement.style.width = "80%";
         this.closeButtonElement.style.width = "20%";
         this.webSocketIndicator = new WebSocketIndicator();
         this.intervalController = new IntervalController();
         this.logWindow = new InlineLogWindow();
         
-        this.openButtonElement = this.createOpenButton("←Control");
+        this.openButtonElement = this.createOpenButton("Control");
         
         const container = this.Container;
         this.setContainerStyle();
@@ -104,61 +105,37 @@ export class ControlPanel extends HTMLDivContainer
         style.top = "0px";
         style.right = "10px";
         style.opacity = "0.9";
-        style.overflow = "auto";
+        style.overflow = "hidden";
         style.transition = "0.5s";
-        
+        style.zIndex = "2";
         this.closeControlPanel();
     }
     
     private createButton(buttonText : string) : HTMLButtonElement
     {
-        const setButtonStyle = (buttonElem: HTMLButtonElement) =>
-        {
-            const style = buttonElem.style;
-            style.position = "relative";
-            style.textAlign = "center";
-            style.height = "32px";
-            style.fontSize = "7vm";
-            style.fontWeight = "bold";
-            style.padding = "3px";
-            style.color = "white";
-            style.background = "#666666";
-            style.borderRadius = "5px";
-            style.boxSizing = "border-box";
-        }
-
         const elem = document.createElement('button');
         elem.innerText = buttonText;
-        setButtonStyle(elem);
+        ButtonStyle.setButtonStyle(elem);
 
         return elem;
     }
     
     private createOpenButton(buttonText: string): HTMLButtonElement
     {
-        const setButtonStyle = (buttonElem: HTMLButtonElement) =>
-        {
-            const style = buttonElem.style;
-            style.position = "fixed";
-            style.top = "0px";
-            style.right = "10px";
-            style.height = "32px";
-            style.width = "72px";
-            style.fontWeight = "bold";
-            style.textAlign = "center";
-            style.fontSize = "7vm";
-            style.padding = "3px";
-            style.color = "white";
-            style.background = "#666666";
-            style.borderRadius = "5px";
-            style.boxSizing = "border-box";
-            style.transition = "0.5s";
-            style.opacity = "0.4";
-        }
-        
         const elem = document.createElement('button');
         elem.innerText = buttonText;
-        setButtonStyle(elem);
+        
+        ButtonStyle.setButtonStyle(elem);
+        //Overrride default button style
+        const style = elem.style;
+        style.position = "fixed";
+        style.transition = "0.5s";
+        style.opacity = "0.4";
+        style.zIndex = "1";
+        style.top = "0px";
+        style.right = "10px";
+        style.height = "32px";
+        style.width = "72px";
         
         elem.onmouseenter = () => elem.style.opacity = "1";
         elem.onmouseleave = () => elem.style.opacity = "0.4";

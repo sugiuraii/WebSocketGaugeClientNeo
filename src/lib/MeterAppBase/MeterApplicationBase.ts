@@ -176,6 +176,10 @@ export abstract class MeterApplicationBase
         
         //Setup websocket indicator.
         this.setWebsocketIndicator();
+        
+        //Load WSInterval from localstorage and set to spinner.
+        this.setWSIntervalSpinner();
+        
         // Set texture, font preload options
         this.setTextureFontPreloadOptions();
         
@@ -235,12 +239,7 @@ export abstract class MeterApplicationBase
     private registerWebSocketCommonEvents(logPrefix : string, wsObj: WebSocketCommunication.WebsocketCommon)
     {
         const logWindow = this.controlPanel.LogWindow;
-        /*
-        wsObj.OnWebsocketClose = () => {
-            logWindow.appendLog(logPrefix + " is disconnected. Reconnect after 5sec.");
-            window.setTimeout(() => wsObj.Connect(), 5000);
-        }
-        */
+
         wsObj.OnWebsocketError = (message: string) => {
             logWindow.appendLog(logPrefix + " websocket error : " + message);
         }
@@ -275,16 +274,26 @@ export abstract class MeterApplicationBase
         {
             let wsIntervalSent = false;
             
+            //Save to local storage
+            this.setWSIntervalToLocalStorage(IntervalController.WebSocketInterval);
+            
             if (this.defiWS.getReadyState() === WebSocket.OPEN)
             {
                 this.defiWS.SendWSInterval(IntervalController.WebSocketInterval);
                 wsIntervalSent = true;
             }
-            if (this.arduinoWS.getReadyState())
+            if (this.arduinoWS.getReadyState()  === WebSocket.OPEN)
             {
                 this.arduinoWS.SendWSInterval(IntervalController.WebSocketInterval);
                 wsIntervalSent = true;
             }
+            
+            if (!wsIntervalSent)
+            {
+                this.controlPanel.LogWindow.appendLog("WSInterval spinner is changed. However, neither DefiWS nor ArduinoWS are active.");
+            }
+            
+            
         });
     }
     
@@ -314,6 +323,12 @@ export abstract class MeterApplicationBase
         
         // Check websocket staus every 1sec
         window.setInterval(() => this.checkWebSocketStatus(), WEBSOCKET_CHECK_INTERVAL);
+    }
+    
+    private setWSIntervalSpinner()
+    {
+        const interval = this.getWSIntervalFromLocalStorage();
+        this.controlPanel.IntervalController.WebSocketInterval = interval;
     }
     
     private preloadFonts(callBack : ()=> void)
@@ -414,9 +429,10 @@ export abstract class MeterApplicationBase
         const LogWindow = this.controlPanel.LogWindow;
         webSocketObj.OnWebsocketOpen = () =>
         {
-            LogWindow.appendLog(logPrefix + " is connected. SendWSSend after "  + WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
+            LogWindow.appendLog(logPrefix + " is connected. SendWSSend/Interval after "  + WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
             window.setTimeout( () => 
             {
+                //SendWSSend
                 for (let item of parameterCodeList)
                 {
                     webSocketObj.SendWSSend(item.code, true);
@@ -425,6 +441,10 @@ export abstract class MeterApplicationBase
                     else
                         webSocketObj.DisableInterpolate(item.code)
                 }
+                
+                //SendWSInterval from spinner
+                webSocketObj.SendWSInterval(this.controlPanel.IntervalController.WebSocketInterval);
+                
             }, WAITTIME_BEFORE_SENDWSSEND);
         }
         webSocketObj.OnWebsocketClose = () =>
@@ -472,6 +492,23 @@ export abstract class MeterApplicationBase
 
         LogWindow.appendLog(logPrefix + " connect...");
         webSocketObj.Connect();
+    }
+    
+    private setWSIntervalToLocalStorage(interval: number)
+    {
+        localStorage.setItem("WSInterval", interval.toString());
+    }
+    
+    private getWSIntervalFromLocalStorage() : number
+    {
+        if (localStorage.getItem("WSInterval") === null)
+            return 0;
+        else
+        {
+            const interval = parseInt(localStorage.getItem("WSInterval"));
+            return interval;    
+        }
+        
     }
     
     protected calculateGearPosition(rev : number, speed : number, neutralSw : boolean) : string
