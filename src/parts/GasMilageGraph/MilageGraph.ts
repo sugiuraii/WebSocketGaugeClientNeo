@@ -96,7 +96,10 @@ export class MilageGraphPanel extends PIXI.Container
     public set GasMilage(val : number)
     {
         this.gasMilage = val;
-        this.gasMilageLabel.text = this.gasMilage.toFixed(1);
+        if(val > 99)
+            this.gasMilageLabel.text = "--.-";
+        else
+            this.gasMilageLabel.text = this.gasMilage.toFixed(1);
     }
 
     public setSectGasMllage(sectspan : string, gasMilage : number) : void

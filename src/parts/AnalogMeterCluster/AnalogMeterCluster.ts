@@ -104,7 +104,10 @@ export class AnalogMeterCluster extends PIXI.Container
     set GasMilage(val : number)
     {
         this.gasMilage = val;
-        this.gasMilageLabel.text = val.toFixed(2);
+        if(val > 99)
+            this.gasMilageLabel.text = "--.--";
+        else
+            this.gasMilageLabel.text = val.toFixed(2);
     }
     get Trip() { return this.trip }
     set Trip(val : number)
