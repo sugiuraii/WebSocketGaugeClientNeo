@@ -23,107 +23,32 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
- 
- /// <reference path="../lib/webpackRequire.ts" />
+
+/// <reference path="../lib/webpackRequire.ts" />
 
 import {SSMWebsocket} from "../lib/WebSocket/WebSocketCommunication";
 import {SSMParameterCode} from "../lib/WebSocket/WebSocketCommunication";
+import {SSMELM327COMWSTestBase} from "./base/SSMELM327WSTestBase";
+
 import * as $ from "jquery";
 require('./SSMCOMWSTest.html');
 
-window.onload = function()
-{
-    let wsTest = new webSocketGauge.test.SSMCOMWSTest();
+window.onload = function () {
+    let wsTest = new SSMCOMWSTest();
     wsTest.main();
 }
 
-namespace webSocketGauge.test
+export class SSMCOMWSTest extends SSMELM327COMWSTestBase
 {
-    export class SSMCOMWSTest
-    {    
-        private webSocket : SSMWebsocket;
+    constructor()
+    {
+        const webSocket = new SSMWebsocket();
+        super(webSocket);
+    }
 
-        public main(): void
-        {
-            this.webSocket = new SSMWebsocket();
-            $('#serverURLBox').val("ws://localhost:2013/");
-            this.assignButtonEvents();
-            this.setParameterCodeSelectBox();
-            this.registerWSEvents();
-        }
-        
-        protected assignButtonEvents() : void
-        {
-            $("#connectButton").click(()=> this.connectWebSocket());
-            $("#disconnectButton").click(() => this.disconnectWebSocket());
-            $("#buttonWSSend").click(() => this.inputWSSend());
-            $("#buttonWSInterval").click(() => this.inputWSInterval());
-        }
-
-        private setParameterCodeSelectBox()
-        {
-            for (let code in SSMParameterCode)
-                $('#codeSelect').append($('<option>').html(code).val(code));
-        }
-
-        private registerWSEvents() : void
-        {
-            this.webSocket.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: string}) => 
-            {
-                $('#spanInterval').text(intervalTime.toFixed(2));
-                 //clear
-                $('#divVAL').html("");
-                for (var key in val)
-                {
-                    $('#divVAL').append(key + " : " + val[key] + "<br>" );
-                }
-            }
-            this.webSocket.OnERRPacketReceived = (msg:string)=>
-            {
-                $('#divERR').append(msg + "<br>")
-            };
-
-            this.webSocket.OnRESPacketReceived = (msg : string) =>
-            {
-                $('#divRES').append(msg + "<br>");
-            };
-            this.webSocket.OnWebsocketError = (msg : string) =>
-            {
-                $('#divWSMsg').append(msg + "<br>");
-            };
-            this.webSocket.OnWebsocketOpen = () =>
-            {
-                $('#divWSMsg').append('* Connection open<br/>');
-                $('#connectButton').attr("disabled", "disabled");
-                $('#disconnectButton').removeAttr("disabled");  
-            };
-            this.webSocket.OnWebsocketClose = () =>
-            {
-                $('#divWSMsg').append('* Connection closed<br/>');
-                $('#connectButton').removeAttr("disabled");
-                $('#disconnectButton').attr("disabled", "disabled");
-            };
-        }
-
-        public connectWebSocket() : void
-        {
-            this.webSocket.URL = $("#serverURLBox").val();
-            this.webSocket.Connect();
-        };
-
-        public disconnectWebSocket()
-        {
-            this.webSocket.Close();
-        };
-
-        public inputWSSend()
-        {
-            this.webSocket.SendCOMRead($('#codeSelect').val(), $('#codeReadmode').val(), $('#codeFlag').val());
-        };
-
-        public inputWSInterval()
-        {
-            this.webSocket.SendSlowreadInterval(($('#WSInterval').val()));
-        };
-    } 
+    protected setParameterCodeSelectBox() {
+        for (let code in SSMParameterCode)
+            $('#codeSelect').append($('<option>').html(code).val(code));
+    }
 }
+
