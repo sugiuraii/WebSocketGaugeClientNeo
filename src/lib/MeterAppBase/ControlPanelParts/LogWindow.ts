@@ -24,11 +24,19 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-export class LogWindow
+export interface ILogWindow
+{
+    clearLog() : void;
+    appendLog(message : string) : void;
+}
+
+export class LogWindow implements ILogWindow
 {
     private windowElement: HTMLDivElement;
     private writeDate : boolean;
-
+    
+    public get Element() { return this.windowElement };
+    
     constructor()
     {
         this.windowElement = document.createElement('div');
@@ -40,17 +48,13 @@ export class LogWindow
     private setDefaultStyle() : void
     {
         const style = this.windowElement.style;
-        style.position = "fixed";
+        style.position = "relative";
         style.background = "#000000";
-        style.display = "none";
+        style.display = "block";
         style.color = "white";
         style.overflow = "scroll";
-        style.opacity = "0.2";
-        style.transition = "all 0.5s ease";
-        style.zIndex = "10"
-
-        this.setPosition(50,50);
-        this.setSize(80, 80, "vw", "vh");    
+        style.width = "100%";
+        style.fontSize = "14px";
 
         //Change opacity when mouse is over
         this.windowElement.onmouseenter = () => {style.opacity = "0.9"};

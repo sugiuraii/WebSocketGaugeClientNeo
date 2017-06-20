@@ -24,7 +24,6 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import {LogWindow} from "./LogWindow";
 import {ControlPanel} from "./ControlPanel";
 import * as WebFont from "webfontloader";
 import * as WebSocketCommunication from "../WebSocket/WebSocketCommunication";
@@ -41,14 +40,16 @@ const WEBSOCKET_CHECK_INTERVAL = 1000;
 const WAITTIME_BEFORE_SENDWSSEND = 3000;
 const WAITTIME_BEFORE_RECONNECT = 5000;
 
-const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui";
+const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
+//const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui";
 
 export abstract class MeterApplicationBase
 {
+    protected pixiApp : PIXI.Application;
+    
     private webSocketServerName : string;
     
     private controlPanel = new ControlPanel();
-    private logWindow = new LogWindow();
     
     private defiWS = new WebSocketCommunication.DefiCOMWebsocket();
     private ssmWS = new WebSocketCommunication.SSMWebsocket();
@@ -148,6 +149,11 @@ export abstract class MeterApplicationBase
             this.webSocketServerName = webSocketServerName;
         this.setWSURL(this.webSocketServerName);
         
+        //Set controlPanel
+        document.body.appendChild(this.controlPanel.Container);   
+        //Add controlPanel open button
+        document.body.appendChild(this.controlPanel.OpenButton);
+        
         // Register control panel events (buttons and spinner)
         this.registerControlPanelEvents();
         
@@ -170,6 +176,10 @@ export abstract class MeterApplicationBase
         
         //Setup websocket indicator.
         this.setWebsocketIndicator();
+        
+        //Load WSInterval from localstorage and set to spinner.
+        this.setWSIntervalSpinner();
+        
         // Set texture, font preload options
         this.setTextureFontPreloadOptions();
         
@@ -228,64 +238,73 @@ export abstract class MeterApplicationBase
     
     private registerWebSocketCommonEvents(logPrefix : string, wsObj: WebSocketCommunication.WebsocketCommon)
     {
-        wsObj.OnWebsocketClose = () => {
-        this.logWindow.appendLog(logPrefix + " is disconnected.");
-        this.controlPanel.setDefiIndicatorStatus(wsObj.getReadyState());
+        const logWindow = this.controlPanel.LogWindow;
 
-        window.setTimeout(() => wsObj.Connect(), 5000);
+        wsObj.OnWebsocketError = (message: string) => {
+            logWindow.appendLog(logPrefix + " websocket error : " + message);
         }
-        wsObj.OnWebsocketError = (message : string) => {
-            this.logWindow.appendLog(logPrefix + " websocket error : " + message);
+        wsObj.OnRESPacketReceived = (message: string) => {
+            logWindow.appendLog(logPrefix + " RES message : " + message);
         }
-        wsObj.OnRESPacketReceived = (message : string) => {
-            this.logWindow.appendLog(logPrefix + " RES message : " + message);
-        }
-        wsObj.OnERRPacketReceived = (message : string) =>
-        {
-            this.logWindow.appendLog(logPrefix + " ERR message : " + message);
+        wsObj.OnERRPacketReceived = (message: string) => {
+            logWindow.appendLog(logPrefix + " ERR message : " + message);
         }
     }
     
     private registerControlPanelEvents()
     {
-        this.controlPanel.setOnLogButtonClicked(() => this.logWindow.Visible = !this.logWindow.Visible);
-        this.controlPanel.setOnResetButtonClicked( () => 
+        const ResetButton = this.controlPanel.ResetButton;
+        const LogWindow = this.controlPanel.LogWindow;
+        const IntervalController = this.controlPanel.IntervalController;
+        
+        ResetButton.onclick =  () => 
         {
             if (window.confirm("Reset FUELTRIP logger?"))
             {
                 if (this.fueltripWS.getReadyState() === WebSocket.OPEN)
                 {
-                    this.logWindow.appendLog("FUELTRIP send RESET..");
+                    LogWindow.appendLog("FUELTRIP send RESET..");
                     this.fueltripWS.SendReset();
                 }
                 else
-                    this.logWindow.appendLog("FUELTRIP RESET is requested. However, fueltripWS is not active.");
+                    LogWindow.appendLog("FUELTRIP RESET is requested. However, fueltripWS is not active.");
             }
-        });
-        this.controlPanel.setOnWebSocketIntervalSpinnerChanged( () =>
+        };
+        IntervalController.setOnWebSocketIntervalSpinnerChanged( () =>
         {
             let wsIntervalSent = false;
             
+            //Save to local storage
+            this.setWSIntervalToLocalStorage(IntervalController.WebSocketInterval);
+            
             if (this.defiWS.getReadyState() === WebSocket.OPEN)
             {
-                this.defiWS.SendWSInterval(this.controlPanel.WebSocketInterval);
+                this.defiWS.SendWSInterval(IntervalController.WebSocketInterval);
                 wsIntervalSent = true;
             }
-            if (this.arduinoWS.getReadyState())
+            if (this.arduinoWS.getReadyState()  === WebSocket.OPEN)
             {
-                this.arduinoWS.SendWSInterval(this.controlPanel.WebSocketInterval);
+                this.arduinoWS.SendWSInterval(IntervalController.WebSocketInterval);
                 wsIntervalSent = true;
             }
+            
+            if (!wsIntervalSent)
+            {
+                this.controlPanel.LogWindow.appendLog("WSInterval spinner is changed. However, neither DefiWS nor ArduinoWS are active.");
+            }
+            
+            
         });
     }
     
     private checkWebSocketStatus()
     {
-        this.controlPanel.setDefiIndicatorStatus(this.defiWS.getReadyState());
-        this.controlPanel.setSSMIndicatorStatus(this.ssmWS.getReadyState());
-        this.controlPanel.setArduinoIndicatorStatus(this.arduinoWS.getReadyState());
-        this.controlPanel.setELM327IndicatorStatus(this.elm327WS.getReadyState());
-        this.controlPanel.setFUELTRIPIndicatorStatus(this.fueltripWS.getReadyState());
+        const Indicator = this.controlPanel.WebSocketIndicator;
+        Indicator.setDefiIndicatorStatus(this.defiWS.getReadyState());
+        Indicator.setSSMIndicatorStatus(this.ssmWS.getReadyState());
+        Indicator.setArduinoIndicatorStatus(this.arduinoWS.getReadyState());
+        Indicator.setELM327IndicatorStatus(this.elm327WS.getReadyState());
+        Indicator.setFUELTRIPIndicatorStatus(this.fueltripWS.getReadyState());
     }
     
     public run()
@@ -295,14 +314,21 @@ export abstract class MeterApplicationBase
     
     private setWebsocketIndicator()
     {
-        this.controlPanel.IsDefiInidicatorEnabled = this.IsDefiWSEnabled;
-        this.controlPanel.IsSSMInidicatorEnabled = this.IsSSMWSEnabled;
-        this.controlPanel.IsArduinoInidicatorEnabled = this.IsArudinoWSEnabled;
-        this.controlPanel.IsELM327InidicatorEnabled = this.IsELM327WSEnabled;
-        this.controlPanel.IsFUELTRIPInidicatorEnabled = this.IsFUELTRIPWSEnabled;
+        const Indicator = this.controlPanel.WebSocketIndicator;
+        Indicator.IsDefiInidicatorEnabled = this.IsDefiWSEnabled;
+        Indicator.IsSSMInidicatorEnabled = this.IsSSMWSEnabled;
+        Indicator.IsArduinoInidicatorEnabled = this.IsArudinoWSEnabled;
+        Indicator.IsELM327InidicatorEnabled = this.IsELM327WSEnabled;
+        Indicator.IsFUELTRIPInidicatorEnabled = this.IsFUELTRIPWSEnabled;
         
         // Check websocket staus every 1sec
         window.setInterval(() => this.checkWebSocketStatus(), WEBSOCKET_CHECK_INTERVAL);
+    }
+    
+    private setWSIntervalSpinner()
+    {
+        const interval = this.getWSIntervalFromLocalStorage();
+        this.controlPanel.IntervalController.WebSocketInterval = interval;
     }
     
     private preloadFonts(callBack : ()=> void)
@@ -375,9 +401,10 @@ export abstract class MeterApplicationBase
     
     private connectFUELTRIPWebSocket(logPrefix: string, sectSpan : number, sectStoreMax : number, webSocketObj: WebSocketCommunication.FUELTRIPWebsocket)
     {
+        const LogWindow = this.controlPanel.LogWindow;
         webSocketObj.OnWebsocketOpen = () =>
         {
-            this.logWindow.appendLog(logPrefix + " is connected. Send SECT_SPAN and SECT_STOREMAX after " + WAITTIME_BEFORE_SENDWSSEND.toString() + " ms.");
+            LogWindow.appendLog(logPrefix + " is connected. Send SECT_SPAN and SECT_STOREMAX after " + WAITTIME_BEFORE_SENDWSSEND.toString() + " ms.");
             window.setTimeout( () => 
             {
                 webSocketObj.SendSectSpan(sectSpan);
@@ -388,22 +415,24 @@ export abstract class MeterApplicationBase
         
         webSocketObj.OnWebsocketClose = () =>
         {
-            this.logWindow.appendLog(logPrefix + " is disconnected. Reconnect after " + WAITTIME_BEFORE_RECONNECT.toString() + "msec...");                
+            LogWindow.appendLog(logPrefix + " is disconnected. Reconnect after " + WAITTIME_BEFORE_RECONNECT.toString() + "msec...");                
             window.setTimeout(() => webSocketObj.Connect(), WAITTIME_BEFORE_RECONNECT);
         }
         
-        this.logWindow.appendLog(logPrefix + " connect...");
+        LogWindow.appendLog(logPrefix + " connect...");
         webSocketObj.Connect();
         
     }
     
     private connectDefiArduinoWebSocket(logPrefix : string, parameterCodeList : {code: string, interpolate : boolean}[] , webSocketObj: WebSocketCommunication.DefiCOMWebsocket)
     {
+        const LogWindow = this.controlPanel.LogWindow;
         webSocketObj.OnWebsocketOpen = () =>
         {
-            this.logWindow.appendLog(logPrefix + " is connected. SendWSSend after "  + WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
+            LogWindow.appendLog(logPrefix + " is connected. SendWSSend/Interval after "  + WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
             window.setTimeout( () => 
             {
+                //SendWSSend
                 for (let item of parameterCodeList)
                 {
                     webSocketObj.SendWSSend(item.code, true);
@@ -412,23 +441,28 @@ export abstract class MeterApplicationBase
                     else
                         webSocketObj.DisableInterpolate(item.code)
                 }
+                
+                //SendWSInterval from spinner
+                webSocketObj.SendWSInterval(this.controlPanel.IntervalController.WebSocketInterval);
+                
             }, WAITTIME_BEFORE_SENDWSSEND);
         }
         webSocketObj.OnWebsocketClose = () =>
         {
-            this.logWindow.appendLog(logPrefix + " is disconnected. Reconnect after " + WAITTIME_BEFORE_RECONNECT.toString() + "msec...");                
+            LogWindow.appendLog(logPrefix + " is disconnected. Reconnect after " + WAITTIME_BEFORE_RECONNECT.toString() + "msec...");                
             window.setTimeout(() => webSocketObj.Connect(), WAITTIME_BEFORE_RECONNECT);
         }
 
-        this.logWindow.appendLog(logPrefix + " connect...");
+        LogWindow.appendLog(logPrefix + " connect...");
         webSocketObj.Connect();
     }
     
     private connectSSMELM327WebSocket(logPrefix : string, parameterCodeList : {code: string, readMode: string, interpolate : boolean}[] , slowReadInterval : number, webSocketObj: WebSocketCommunication.SSMWebsocket)
     {
+        const LogWindow = this.controlPanel.LogWindow;
         webSocketObj.OnWebsocketOpen = () =>
         {
-            this.logWindow.appendLog(logPrefix + " is connected. SendWSSend after "  + WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
+            LogWindow.appendLog(logPrefix + " is connected. SendWSSend after "  + WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
             window.setTimeout( () => 
             {
                 webSocketObj.SendSlowreadInterval(slowReadInterval);
@@ -452,16 +486,48 @@ export abstract class MeterApplicationBase
         }
         webSocketObj.OnWebsocketClose = () =>
         {
-            this.logWindow.appendLog(logPrefix + " is disconnected. Reconnect after " + WAITTIME_BEFORE_RECONNECT.toString() + "msec...");                
+            LogWindow.appendLog(logPrefix + " is disconnected. Reconnect after " + WAITTIME_BEFORE_RECONNECT.toString() + "msec...");                
             window.setTimeout(() => webSocketObj.Connect(), WAITTIME_BEFORE_RECONNECT);
         }
 
-        this.logWindow.appendLog(logPrefix + " connect...");
+        LogWindow.appendLog(logPrefix + " connect...");
         webSocketObj.Connect();
+    }
+    
+    private setWSIntervalToLocalStorage(interval: number)
+    {
+        localStorage.setItem("WSInterval", interval.toString());
+    }
+    
+    private getWSIntervalFromLocalStorage() : number
+    {
+        if (localStorage.getItem("WSInterval") === null)
+            return 0;
+        else
+        {
+            const interval = parseInt(localStorage.getItem("WSInterval"));
+            return interval;    
+        }
+        
     }
     
     protected calculateGearPosition(rev : number, speed : number, neutralSw : boolean) : string
     {
         return calculateGearPosition(rev, speed, neutralSw);
     }
+    
+    public setBlurOnAppStage(amount : number)
+    {
+        const stage = this.pixiApp.stage;
+        const filter = new PIXI.filters.BlurFilter();
+        filter.blur = amount;
+        stage.filters = [filter];
+    }
+    
+    public unsetBlurOnAppStage()
+    {
+        const stage = this.pixiApp.stage;
+        stage.filters = [];        
+    }
+    
 }

@@ -61,9 +61,11 @@ class AnalogMeterClusterBenchApp extends MeterApplicationBase
     
     protected setPIXIMeterPanel()
     {
-        const app = new PIXI.Application(1100,600);
+        this.pixiApp = new PIXI.Application(1100,600);
+        const app = this.pixiApp;
         document.body.appendChild(app.view);
-        app.view.style.height = "100vh";
+        app.view.style.width = "100vw";
+        app.view.style.touchAction = "auto";
 
         const meterCluster = new AnalogMeterCluster();
         app.stage.addChild(meterCluster);
@@ -82,7 +84,7 @@ class AnalogMeterClusterBenchApp extends MeterApplicationBase
 
         let boost = -1.0;
         let waterTemp = 50.0;
-        
+                
         app.ticker.add(() => 
         {
             fpsCounter.setFPS(app.ticker.FPS);
