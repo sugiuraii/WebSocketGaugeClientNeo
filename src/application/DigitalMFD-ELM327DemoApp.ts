@@ -34,6 +34,7 @@ import {MeterApplicationBase} from "../lib/MeterAppBase/MeterApplicationBase";
 import {WaterTempGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel";
 import {ThrottleGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel";
 import {DigiTachoPanel} from "../parts/DigiTachoPanel/DigiTachoPanel";
+import {BoostGaugePanel} from "../parts/CircularGauges/FullCircularGaugePanel";
 
 //Import enumuator of parameter code
 import {OBDIIParameterCode} from "../lib/WebSocket/WebSocketCommunication";
@@ -57,24 +58,28 @@ class DigitalMFD_ELM327DemoApp extends MeterApplicationBase
         this.registerELM327ParameterCode(OBDIIParameterCode.Engine_Speed, ReadModeCode.SLOWandFAST, true);        
         this.registerELM327ParameterCode(OBDIIParameterCode.Vehicle_Speed, ReadModeCode.SLOWandFAST, true);        
         this.registerELM327ParameterCode(OBDIIParameterCode.Throttle_Opening_Angle, ReadModeCode.SLOWandFAST, true);        
-        this.registerELM327ParameterCode(OBDIIParameterCode.Coolant_Temperature, ReadModeCode.SLOW, true);        
+        this.registerELM327ParameterCode(OBDIIParameterCode.Coolant_Temperature, ReadModeCode.SLOW, true); 
+        this.registerELM327ParameterCode(OBDIIParameterCode.Manifold_Absolute_Pressure, ReadModeCode.SLOWandFAST, true);       
     }
     
     protected setTextureFontPreloadOptions()
     {
         this.registerWebFontFamilyNameToPreload(WaterTempGaugePanel.RequestedFontFamily);
         this.registerWebFontFamilyNameToPreload(DigiTachoPanel.RequestedFontFamily);
-        
+        this.registerWebFontFamilyNameToPreload(BoostGaugePanel.RequestedFontFamily);
+    
         this.registerWebFontCSSURLToPreload(WaterTempGaugePanel.RequestedFontCSSURL);
         this.registerWebFontCSSURLToPreload(DigiTachoPanel.RequestedFontCSSURL);
+        this.registerWebFontCSSURLToPreload(BoostGaugePanel.RequestedFontCSSURL);
         
         this.registerTexturePathToPreload(WaterTempGaugePanel.RequestedTexturePath);
         this.registerTexturePathToPreload(DigiTachoPanel.RequestedTexturePath);
+        this.registerTexturePathToPreload(BoostGaugePanel.RequestedTexturePath);
     }
     
     protected setPIXIMeterPanel()
     {
-        this.pixiApp = new PIXI.Application(1200, 600);
+        this.pixiApp = new PIXI.Application(720, 1280);
         const app = this.pixiApp;
         document.body.appendChild(app.view);
         app.view.style.width = "100vw";
@@ -82,16 +87,24 @@ class DigitalMFD_ELM327DemoApp extends MeterApplicationBase
         
         const digiTachoPanel = new DigiTachoPanel();
         digiTachoPanel.position.set(0,0);
-                
+        digiTachoPanel.scale.set(1.15);
+        
+        const boostPanel = new BoostGaugePanel();
+        boostPanel.position.set(90,360);
+        boostPanel.scale.set(1.3);                
+        
         const waterTempPanel = new WaterTempGaugePanel();
-        waterTempPanel.position.set(600,0);
-        waterTempPanel.scale.set(0.68);
+        waterTempPanel.position.set(0,890);
+        waterTempPanel.scale.set(0.85);
                 
         const throttlePanel = new ThrottleGaugePanel();
-        throttlePanel.position.set(600,200);
-        throttlePanel.scale.set(0.68);
+        throttlePanel.position.set(360,890);
+        throttlePanel.scale.set(0.85);
+        
+
         
         app.stage.addChild(digiTachoPanel);
+        app.stage.addChild(boostPanel);
         app.stage.addChild(waterTempPanel);
         app.stage.addChild(throttlePanel);
         
@@ -102,6 +115,7 @@ class DigitalMFD_ELM327DemoApp extends MeterApplicationBase
             const speed = this.ELM327WS.getVal(OBDIIParameterCode.Vehicle_Speed, timestamp);
             const neutralSw = false;
             const gearPos = this.calculateGearPosition(tacho, speed, neutralSw);
+            const boost = this.ELM327WS.getVal(OBDIIParameterCode.Manifold_Absolute_Pressure, timestamp);
             
             const waterTemp = this.ELM327WS.getRawVal(OBDIIParameterCode.Coolant_Temperature);
             const throttle = this.ELM327WS.getVal(OBDIIParameterCode.Throttle_Opening_Angle, timestamp);
@@ -111,6 +125,7 @@ class DigitalMFD_ELM327DemoApp extends MeterApplicationBase
             digiTachoPanel.GearPos = gearPos;
             waterTempPanel.Value = waterTemp;
             throttlePanel.Value = throttle;
+            boostPanel.Value = boost;
        });
     }
 }

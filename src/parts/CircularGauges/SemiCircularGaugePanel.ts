@@ -48,6 +48,26 @@ export class WaterTempGaugePanel extends SemiCircularGaugePanelBase
     {
         super.setOption();
         this.titleLabel = "WATER TEMP";
+        this.min = 40;
+        this.max = 120;
+        this.unitLabel = "degC"
+        this.redZoneBarEnable = true;
+        this.redZoneBarOffsetAngle = 315;
+        this.redZoneBarFullAngle = 45;
+        this.yellowZoneBarEnable = true;
+        this.yellowZoneBarOffsetAngle = 292.5;
+        this.yellowZoneBarFullAngle = 22.5;
+        this.greenZoneBarEnable = false;
+        this.setAxisLabel(["40","60","80","100","120"]);
+    }
+}
+
+export class EngineOilTempGaugePanel extends SemiCircularGaugePanelBase
+{
+    protected setOption() : void
+    {
+        super.setOption();
+        this.titleLabel = "ENG. OIL TEMP";
         this.min = 50;
         this.max = 150;
         this.unitLabel = "degC"
@@ -55,8 +75,8 @@ export class WaterTempGaugePanel extends SemiCircularGaugePanelBase
         this.redZoneBarOffsetAngle = 315;
         this.redZoneBarFullAngle = 45;
         this.yellowZoneBarEnable = true;
-        this.yellowZoneBarOffsetAngle = 270;
-        this.yellowZoneBarFullAngle = 45;
+        this.yellowZoneBarOffsetAngle = 292.5;
+        this.yellowZoneBarFullAngle = 22.5;
         this.greenZoneBarEnable = false;
         this.setAxisLabel(["50","75","100","125","150"]);
     }
