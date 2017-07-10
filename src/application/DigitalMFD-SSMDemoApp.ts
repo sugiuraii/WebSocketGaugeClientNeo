@@ -37,30 +37,35 @@ import {DigiTachoPanel} from "../parts/DigiTachoPanel/DigiTachoPanel";
 import {BoostGaugePanel} from "../parts/CircularGauges/FullCircularGaugePanel";
 
 //Import enumuator of parameter code
-import {OBDIIParameterCode} from "../lib/WebSocket/WebSocketCommunication";
+import {SSMParameterCode} from "../lib/WebSocket/WebSocketCommunication";
+import {SSMSwitchCode} from "../lib/WebSocket/WebSocketCommunication";
+
 import {ReadModeCode} from "../lib/WebSocket/WebSocketCommunication";
 
 //For including entry point html file in webpack
-require("./DigitalMFD-ELM327DemoApp.html");
+require("./DigitalMFD-SSMDemoApp.html");
 
 window.onload = function()
 {
-    const meterapp = new DigitalMFD_ELM327DemoApp();
+    const meterapp = new DigitalMFD_SSMDemoApp();
     meterapp.run();
 }
 
-class DigitalMFD_ELM327DemoApp extends MeterApplicationBase
+class DigitalMFD_SSMDemoApp extends MeterApplicationBase
 {
     protected setWebSocketOptions()
     {
-        //Enable ELM327 websocket client
-        this.IsELM327WSEnabled = true;
+        //Enable SSM websocket client
+        this.IsSSMWSEnabled = true;
         
-        this.registerELM327ParameterCode(OBDIIParameterCode.Engine_Speed, ReadModeCode.SLOWandFAST, true);        
-        this.registerELM327ParameterCode(OBDIIParameterCode.Vehicle_Speed, ReadModeCode.SLOWandFAST, true);        
-        this.registerELM327ParameterCode(OBDIIParameterCode.Throttle_Opening_Angle, ReadModeCode.SLOWandFAST, true);        
-        this.registerELM327ParameterCode(OBDIIParameterCode.Coolant_Temperature, ReadModeCode.SLOW, true); 
-        this.registerELM327ParameterCode(OBDIIParameterCode.Manifold_Absolute_Pressure, ReadModeCode.SLOWandFAST, true);       
+        this.registerSSMParameterCode(SSMParameterCode.Engine_Speed, ReadModeCode.SLOWandFAST, true);        
+        this.registerSSMParameterCode(SSMParameterCode.Vehicle_Speed, ReadModeCode.SLOWandFAST, true);        
+        this.registerSSMParameterCode(SSMParameterCode.Throttle_Opening_Angle, ReadModeCode.SLOWandFAST, true);        
+        this.registerSSMParameterCode(SSMParameterCode.Coolant_Temperature, ReadModeCode.SLOW, true); 
+        this.registerSSMParameterCode(SSMParameterCode.Manifold_Absolute_Pressure, ReadModeCode.SLOWandFAST, true);
+        // Neutral position
+        this.registerSSMParameterCode(SSMSwitchCode.getNumericCodeFromSwitchCode(SSMSwitchCode.Neutral_Position_Switch), ReadModeCode.SLOWandFAST, false);
+
     }
     
     protected setTextureFontPreloadOptions()
@@ -112,14 +117,14 @@ class DigitalMFD_ELM327DemoApp extends MeterApplicationBase
         app.ticker.add(() => 
         {
             const timestamp = PIXI.ticker.shared.lastTime;
-            const tacho = this.ELM327WS.getVal(OBDIIParameterCode.Engine_Speed, timestamp);
-            const speed = this.ELM327WS.getVal(OBDIIParameterCode.Vehicle_Speed, timestamp);
-            const neutralSw = false;
+            const tacho = this.SSMWS.getVal(SSMParameterCode.Engine_Speed, timestamp);
+            const speed = this.SSMWS.getVal(SSMParameterCode.Vehicle_Speed, timestamp);
+            const neutralSw = this.SSMWS.getSwitchFlag(SSMSwitchCode.Neutral_Position_Switch);
             const gearPos = this.calculateGearPosition(tacho, speed, neutralSw);
-            const boost = this.ELM327WS.getVal(OBDIIParameterCode.Manifold_Absolute_Pressure, timestamp)  * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
+            const boost = this.SSMWS.getVal(SSMParameterCode.Manifold_Absolute_Pressure, timestamp)  * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
             
-            const waterTemp = this.ELM327WS.getRawVal(OBDIIParameterCode.Coolant_Temperature);
-            const throttle = this.ELM327WS.getVal(OBDIIParameterCode.Throttle_Opening_Angle, timestamp);
+            const waterTemp = this.SSMWS.getRawVal(SSMParameterCode.Coolant_Temperature);
+            const throttle = this.SSMWS.getVal(SSMParameterCode.Throttle_Opening_Angle, timestamp);
             
             digiTachoPanel.Speed = speed;
             digiTachoPanel.Tacho = tacho;

@@ -30,7 +30,8 @@ module.exports = {
         "AnalogMeterClusterApp" : './AnalogMeterClusterApp.ts',
         "DigitalMFDApp" : './DigitalMFDApp.ts',
         "DigitalMFD-ELM327DemoApp" : './DigitalMFD-ELM327DemoApp.ts',
-        "DigitalMFD-ArduinoDemoApp" : './DigitalMFD-ArduinoDemoApp.ts'
+        "DigitalMFD-ArduinoDemoApp" : './DigitalMFD-ArduinoDemoApp.ts',
+        "DigitalMFD-SSMDemoApp" : './DigitalMFD-SSMDemoApp.ts'
     },
     devtool: "source-map",
     output: 

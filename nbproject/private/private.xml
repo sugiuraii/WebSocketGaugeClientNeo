@@ -5,8 +5,8 @@
         <group>
             <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/application/DigitalMFD-ArduinoDemoApp.ts</file>
             <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/public_html/index.html</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/application/DigitalMFD-ArduinoDemoApp.html</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/application/webpack.config.js</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/application/DigitalMFD-ELM327DemoApp.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/parts/CircularGauges/SemiCircularGaugePanel.ts</file>
         </group>
     </open-files>
 </project-private>

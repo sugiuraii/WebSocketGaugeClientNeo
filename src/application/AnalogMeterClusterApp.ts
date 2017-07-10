@@ -84,7 +84,7 @@ class AnalogMeterClusterApp extends MeterApplicationBase
         app.ticker.add(() => {
             const timestamp = PIXI.ticker.shared.lastTime;
             const tacho = this.DefiWS.getVal(DefiParameterCode.Engine_Speed, timestamp);
-            const boost = this.DefiWS.getVal(DefiParameterCode.Manifold_Absolute_Pressure, timestamp);
+            const boost = this.DefiWS.getVal(DefiParameterCode.Manifold_Absolute_Pressure, timestamp) * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
             const speed = this.SSMWS.getVal(SSMParameterCode.Vehicle_Speed,timestamp);
             const waterTemp = this.SSMWS.getRawVal(SSMParameterCode.Coolant_Temperature);
             const trip = this.FUELTRIPWS.getTotalTrip();

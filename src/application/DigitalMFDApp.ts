@@ -155,7 +155,7 @@ class DigitalMFDApp extends MeterApplicationBase
             const totalFuel = this.FUELTRIPWS.getTotalGas();
             const totalTrip = this.FUELTRIPWS.getTotalTrip();
             
-            const boost = this.DefiWS.getVal(DefiParameterCode.Manifold_Absolute_Pressure, timestamp);
+            const boost = this.DefiWS.getVal(DefiParameterCode.Manifold_Absolute_Pressure, timestamp)  * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
             const airFuelRatio = this.SSMWS.getVal(SSMParameterCode.Air_Fuel_Sensor_1, timestamp)*14;
             const waterTemp = this.SSMWS.getRawVal(SSMParameterCode.Coolant_Temperature);
             const batteryVolt = this.SSMWS.getRawVal(SSMParameterCode.Battery_Voltage);

@@ -52,6 +52,7 @@ class DigitalMFD_ArduinoDemoApp extends MeterApplicationBase
 {
     protected setWebSocketOptions()
     {
+        //Enable Arduino websocket clent
         this.IsArudinoWSEnabled = true;
         
         this.registerArduinoParameterCode(ArduinoParameterCode.Engine_Speed, true);
@@ -114,7 +115,7 @@ class DigitalMFD_ArduinoDemoApp extends MeterApplicationBase
             const gearPos = this.calculateGearPosition(tacho, speed, neutralSw);
             const engineOilTemp = this.ArduinoWS.getVal(ArduinoParameterCode.Oil_Temperature, timestamp);
                         
-            const boost = this.ArduinoWS.getVal(ArduinoParameterCode.Manifold_Absolute_Pressure, timestamp);
+            const boost = this.ArduinoWS.getVal(ArduinoParameterCode.Manifold_Absolute_Pressure, timestamp) * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
             const waterTemp = this.ArduinoWS.getRawVal(ArduinoParameterCode.Coolant_Temperature);
             
             digiTachoPanel.Speed = speed;
