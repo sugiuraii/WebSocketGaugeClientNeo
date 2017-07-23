@@ -40,7 +40,7 @@ You can make your custom gauges by modifying the source code. Please see []().
 	* On Firefox, program works well, but performance is worse than Chrome.
 
 ## <a name="dependency">Dependency</a>
-* [Node.js (Version.6)](https://nodejs.org/)
+* [Node.js (Version.8.2.1)](https://nodejs.org/)
 * [jQuery](https://jquery.com/)
 * [PIXI.js](http://www.pixijs.com/)
 * [webpack](https://webpack.github.io/)
