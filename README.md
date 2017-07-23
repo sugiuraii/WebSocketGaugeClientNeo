@@ -11,26 +11,48 @@
 * [License](#license)
 
 ## <a name="description">Description</a>
-This program is graphical dashboard gauge 
+This program is graphical dashboard gauge, web-based client for [DefiSSMCOM_WebsocketServer](https://github.com/sugiuraii/DefiSSMCOM_WebsocketServer).
+
+This program receive car sensor information from the websocket server programs, and show sensor data by WebGL(or Canvas) based graphical gauges.
+
+The graphical part of this program depends on [PIXI.js](http://www.pixijs.com/). Thanks to PIXI.js, this program can show the gauge in HTML5 Canvas if the browser does not support WebGL (However performance (fps) is degraded compared to WebGL).
+
+You can make your custom gauges by modifying the source code. Please see []().
 
 ## <a name="system_diagram">System diagram</a>
 
 ## <a name="requirement">Requirement</a>
 * Web server PC or appliance to distribute html and javascript files to browsers.
 * Web browser to view dashboard gauges.
-	* Thanks to PIXI.js, graphical gauge can work both on WebGL and Canvas enviromment. However, to get sufficient performance (over 30fps), WebGL capable browser is recommended.
-		* If you want to check the operation of your browser, please try []().
-	* Operation is tested mainly on Google Chrome (on Windows and Android).
-	* And unfortunatelly, some part of graphical gauge cannot work well on Microsoft Edge (Gliches sometimes occurs on circular progressbar type gauges).
+	* Web browser capable of WebGL or Canvas
+		* To get sufficient performance (over 30fps), currenly Chrome + WebGL is recomended.
+		* You can check the operation of gauges by [this demonstration page](https://sugiuraii.github.io/).
+	* Operation is tested follwoing platforms.
+		| Browser |	 OS	 | Hardware | fps | comment |
+		|--------|--------|--------|--------|--------|
+		| Google Chrome 59.0| Windows 10 | PC Core i5-560M | 60fps | OK |
+        | Firefox 54.0.1| Windows 10| PC Core i5-560M | 20-27fps | Slow |
+        | Microsoft Edge| Windows 10| PC Core i5-560M | - | Some of sprites are missing.|
+        | Google Chrome 59.0| Android 6.0.1 | ASUS Zenfone2 (ZE551ML) | 60fps | OK |
+        | Google Chrome 59.0| Android 4.1.2| Sharp 203SH (Spandragon S4 Pro) | 48-60fps | OK |
+        
+	* Unfortunatelly, some part of graphical gauge cannot work well on Microsoft Edge (Gliches sometimes occurs on circular progressbar type gauges).
 	* On Firefox, program works well, but performance is worse than Chrome.
-	* On Safari/iOS, the program seems to works well (But I don't test on Safari so much because I only have very old iPhone4s).
 
 ## <a name="dependency">Dependency</a>
-* jQuery
-* 
+* [Node.js (Version.6)](https://nodejs.org/)
+* [jQuery](https://jquery.com/)
+* [PIXI.js](http://www.pixijs.com/)
+* [webpack](https://webpack.github.io/)
+* [TypeScript](https://www.typescriptlang.org/)
+
 ## <a name="install">Install</a>
 
 ## <a name="build">Build</a>
+This program coded by typescript. And this program uses webpack for deployment. Before modifying the source code, node.js and related packages need to be installed.
+
+### Install node.js
+Install node.js. On windows, you can find the installer on [official node.js site](https://nodejs.org/).
 
 ## <a name="license">License</a>
 [MIT License](./LICENSE)
