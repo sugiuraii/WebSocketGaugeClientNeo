@@ -60,7 +60,13 @@ export abstract class WebsocketCommon
         var self = this;
         // when data is comming from the server, this metod is called
         this.websocket.onmessage = function (evt) {
-            self.parseIncomingMessage(evt.data);
+
+            const msg = evt.data;
+            //Ignore "DMY" message. (DMY message is sent from server in order to keep-alive wifi connection (to prevent wifi low-power(high latency) mode).
+            if(msg === "DMY")
+                return;
+            
+            self.parseIncomingMessage(msg);
         };
         // when the connection is established, this method is called
         this.websocket.onopen = function () {
