@@ -44,6 +44,7 @@ export class FUELTRIPWSTest extends WebSocketTesterBase {
         const webSocket = new FUELTRIPWebsocket()
         super(webSocket);
         this.webSocket = webSocket;
+        
         this.defaultPortNo = 2014;
     }
     
@@ -53,7 +54,7 @@ export class FUELTRIPWSTest extends WebSocketTesterBase {
     }
     
     public main(): void {
-        $('#serverURLBox').val("ws://localhost:2014/");
+         $('#serverURLBox').val("ws://" + this.defaultSeverAddress + ":" + this.defaultPortNo.toString() + "/");
         this.assignButtonEvents();
         this.registerWSEvents();
     }
