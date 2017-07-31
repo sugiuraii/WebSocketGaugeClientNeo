@@ -45,6 +45,7 @@ class DefiCOMWSTest extends DefiArduinoCOMWSTestBase
     {
         const webSocket = new DefiCOMWebsocket();
         super(webSocket);
+        this.defaultPortNo = 2012;
     }
     
     protected setParameterCodeSelectBox() : void

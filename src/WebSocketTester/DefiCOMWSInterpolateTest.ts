@@ -44,6 +44,7 @@ class DefiCOMWSTestInterpolate extends DefiArduinoCOMWSTestBase{
     {
         const webSocket = new DefiCOMWebsocket();
         super(webSocket);
+        this.defaultPortNo = 2012;
     }
 
     public main(): void {

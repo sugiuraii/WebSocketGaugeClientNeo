@@ -44,6 +44,7 @@ export class SSMCOMWSTest extends SSMELM327COMWSTestBase
     {
         const webSocket = new SSMWebsocket();
         super(webSocket);
+        this.defaultPortNo = 2013;
     }
 
     protected setParameterCodeSelectBox() {

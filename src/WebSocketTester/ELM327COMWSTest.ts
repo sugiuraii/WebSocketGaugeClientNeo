@@ -43,6 +43,7 @@ export class ELM327COMWSTest extends SSMELM327COMWSTestBase {
     {
         const webSocket = new ELM327COMWebsocket();
         super(webSocket);
+        this.defaultPortNo = 2016;
     }
 
     protected setParameterCodeSelectBox() {

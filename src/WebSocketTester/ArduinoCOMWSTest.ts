@@ -45,6 +45,7 @@ class ArduinoCOMWSTest extends DefiArduinoCOMWSTestBase
     {
         const webSocket = new ArduinoCOMWebsocket();
         super(webSocket);
+        this.defaultPortNo = 2015;
     }
 
     protected setParameterCodeSelectBox() : void
