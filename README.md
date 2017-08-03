@@ -32,7 +32,7 @@ You can make your custom gauges by modifying the source code. Please see []().
 	* Operation is tested follwoing platforms.
 
 		| Browser |	 OS	 | Hardware | fps(Test1) | fps(Test2) | comment |
-		|--------|--------|--------|--------|--------|
+		|--------|--------|--------|--------|--------|--------|
 		| Google Chrome 59.0 | Windows 10 | Toshiba Satellite C640<br> Core i5-560M | 60fps | 60fps | OK |
         | Firefox 54.0.1 | Windows 10| Toshiba Satellite C640<br> Core i5-560M | 27fps | 27fps | Slow |
         | Microsoft Edge | Windows 10| Toshiba Satellite C640<br> Core i5-560M | - | - | Some of sprites are missing.|
