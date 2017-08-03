@@ -26,18 +26,19 @@ You can make your custom gauges by modifying the source code. Please see []().
 * Web browser to view dashboard gauges.
 	* Web browser capable of WebGL or Canvas
 		* To get sufficient performance (over 30fps), currenly Chrome + WebGL is recomended.
-		* You can check the operation of gauges by [this demonstration page](https://sugiuraii.github.io/).
+		* You can check the operation (and grahical performance) by following demnstration pages.
+			* [Test1 (Analog 3-meter cluster test)](https://sugiuraii.github.io/benchmark/AnalogMeterClusterBenchApp.html)
+			* [Test2 (Digital multi function display test)](https://sugiuraii.github.io/benchmark/DigitalMFDBenchApp.html)
 	* Operation is tested follwoing platforms.
-		| Browser |	 OS	 | Hardware | fps | comment |
+
+		| Browser |	 OS	 | Hardware | fps(Test1) | fps(Test2) | comment |
 		|--------|--------|--------|--------|--------|
-		| Google Chrome 59.0| Windows 10 | PC Core i5-560M | 60fps | OK |
-        | Firefox 54.0.1| Windows 10| PC Core i5-560M | 20-27fps | Slow |
-        | Microsoft Edge| Windows 10| PC Core i5-560M | - | Some of sprites are missing.|
-        | Google Chrome 59.0| Android 6.0.1 | ASUS Zenfone2 (ZE551ML) | 60fps | OK |
-        | Google Chrome 59.0| Android 4.1.2| Sharp 203SH (Spandragon S4 Pro) | 48-60fps | OK |
-        
-	* Unfortunatelly, some part of graphical gauge cannot work well on Microsoft Edge (Gliches sometimes occurs on circular progressbar type gauges).
-	* On Firefox, program works well, but performance is worse than Chrome.
+		| Google Chrome 59.0 | Windows 10 | Toshiba Satellite C640<br> Core i5-560M | 60fps | 60fps | OK |
+        | Firefox 54.0.1 | Windows 10| Toshiba Satellite C640<br> Core i5-560M | 27fps | 27fps | Slow |
+        | Microsoft Edge | Windows 10| Toshiba Satellite C640<br> Core i5-560M | - | - | Some of sprites are missing.|
+        | Google Chrome 59.0 | Android 6.0.1 | ASUS Zenfone2 <br> (ZE551ML Atom Z3560) | 60fps | 60fps | OK |
+        | Google Chrome 59.0 | Android 4.1.2| Sharp 203SH <br> (Spandragon S4 Pro) | 54-60fps | 50-60fps | OK |
+        | Safari | iOS 9.3.5 | iPhone 4s <br> (Apple A5) | [54-60fps](https://www.youtube.com/watch?v=ZE71ya6LY0U) | [47fps](https://www.youtube.com/watch?v=ZE71ya6LY0U) | OK |
 
 ## <a name="dependency">Dependency</a>
 * [Node.js (Version.8.2.1)](https://nodejs.org/)
