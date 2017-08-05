@@ -20,7 +20,7 @@ The graphical part of this program depends on [PIXI.js](http://www.pixijs.com/).
 You can make your custom gauges by modifying the source code. Please see []().
 
 ## <a name="system_diagram">System diagram</a>
-
+![System diagram](./README.img/WebsocketServerDiagram.png)
 ## <a name="requirement">Requirement</a>
 * Web server PC or appliance to distribute html and javascript files to browsers.
 * Web browser to view dashboard gauges.
