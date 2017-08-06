@@ -1,30 +1,36 @@
 {
-  "name": "PixiJSTest",
-  "version": "0.0.0",
-  "keywords": [
-    "util",
-    "functional",
-    "server",
-    "client",
-    "browser"
-  ],
-  "author": "kuniaki",
-  "contributors": [],
-  "dependencies": {"@types\/jquery": "^2.0.42",
-    "@types/jquery": "^2.0.45",
-    "@types/webfontloader": "^1.6.28",
-    "css-loader": "0.28.1",
-    "file-loader": "0.11.1",
-    "jquery": "3.2.1",
-    "pixi.js": "4.4.4",
-    "ts-loader": "2.0.3",
-    "typescript": "2.3.2",
-    "url-loader": "0.5.8",
-    "webfontloader": "1.6.27",
-    "webpack": "2.4.1",
-    "webpack-dev-server": "2.4.5"
-  },
-  "devDependencies": {
-    "@types/pixi.js": "^4.4.4"
-  }
+    "name": "WebSocketGaugeClientNeo",
+    "version": "1.0.0",
+    "keywords": [
+        "util",
+        "functional",
+        "server",
+        "client",
+        "browser"
+    ],
+    "author": "K. Sugiura",
+    "contributors": [],
+    "dependencies": {
+        "@types\/jquery": "^2.0.42",
+        "@types/jquery": "^2.0.45",
+        "@types/webfontloader": "^1.6.28",
+        "css-loader": "0.28.1",
+        "file-loader": "0.11.1",
+        "jquery": "3.2.1",
+        "pixi.js": "4.4.4",
+        "ts-loader": "2.0.3",
+        "typescript": "2.3.2",
+        "url-loader": "0.5.8",
+        "webfontloader": "1.6.27",
+        "webpack": "2.4.1",
+        "webpack-dev-server": "2.4.5"
+    },
+    "devDependencies": {
+        "@types/pixi.js": "^4.4.4"
+    },
+    "scripts": {
+        "build-WebSocketTester" : "cd src/WebSocketTester && npx webpack",
+        "build-benchmark" : "cd src/benchmark && npx webpack",
+        "build-application" : "cd src/application && npx webpack"        
+    }
 }
