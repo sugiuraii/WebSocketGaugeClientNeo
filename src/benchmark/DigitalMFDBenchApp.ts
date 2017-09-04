@@ -26,7 +26,6 @@
 // This is required to webpack font/texture/html files
 /// <reference path="../lib/webpackRequire.ts" />
 
-
 //Import application base class
 import {MeterApplicationBase} from "../lib/MeterAppBase/MeterApplicationBase";
 

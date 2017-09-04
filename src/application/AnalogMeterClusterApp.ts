@@ -26,6 +26,8 @@
 // This is required to webpack font/texture/html files 
 /// <reference path="../lib/webpackRequire.ts" />
 
+import * as PIXI from "pixi.js";
+
 //Import application base class
 import {MeterApplicationBase} from "../lib/MeterAppBase/MeterApplicationBase";
 
@@ -71,10 +73,6 @@ class AnalogMeterClusterApp extends MeterApplicationBase
     
     protected setPIXIMeterPanel() : void
     {
-        document.body.appendChild(this.view);
-        this.view.style.width = "100vw";
-        this.view.style.touchAction = "auto";
-
         const meterCluster = new AnalogMeterCluster();
         this.stage.addChild(meterCluster);
 

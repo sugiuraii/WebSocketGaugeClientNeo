@@ -26,6 +26,7 @@
 // This is required to webpack font/texture/html files
 /// <reference path="../lib/webpackRequire.ts" />
 
+import * as PIXI from "pixi.js";
 
 //Import application base class
 import {MeterApplicationBase} from "../lib/MeterAppBase/MeterApplicationBase";
@@ -100,9 +101,7 @@ class DigitalMFD_SSMDemoApp extends MeterApplicationBase
         const throttlePanel = new ThrottleGaugePanel();
         throttlePanel.position.set(360,890);
         throttlePanel.scale.set(0.85);
-        
-
-        
+                
         this.stage.addChild(digiTachoPanel);
         this.stage.addChild(boostPanel);
         this.stage.addChild(waterTempPanel);
