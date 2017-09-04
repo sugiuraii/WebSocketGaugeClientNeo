@@ -39,16 +39,12 @@ require("./AnalogMeterClusterBenchApp.html");
 
 window.onload = function()
 {
-    const meterapp = new AnalogMeterClusterBenchApp();
+    const meterapp = new AnalogMeterClusterBenchApp(1100, 600);
     meterapp.run();
 }
 
 class AnalogMeterClusterBenchApp extends MeterApplicationBase
 {
-    constructor()
-    {
-        super(1100,600);
-    }
     protected setWebSocketOptions()
     {
         //For graphic benchmark. Do nothing for websocket.

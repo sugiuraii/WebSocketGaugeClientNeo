@@ -45,17 +45,12 @@ require("./DigitalMFDBenchApp.html");
 
 window.onload = function()
 {
-    const meterapp = new DigitalMFDBenchApp();
+    const meterapp = new DigitalMFDBenchApp(1200, 600);
     meterapp.run();
 }
 
 class DigitalMFDBenchApp extends MeterApplicationBase
-{
-    constructor()
-    {
-        super(1200, 600);
-    }
-    
+{    
     protected setWebSocketOptions()
     {
         //For graphic benchmark. Do nothing for websocket.
