@@ -45,6 +45,10 @@ window.onload = function()
 
 class AnalogMeterClusterBenchApp extends MeterApplicationBase
 {
+    constructor()
+    {
+        super(1100,600);
+    }
     protected setWebSocketOptions()
     {
         //For graphic benchmark. Do nothing for websocket.
@@ -61,18 +65,12 @@ class AnalogMeterClusterBenchApp extends MeterApplicationBase
     
     protected setPIXIMeterPanel()
     {
-        this.pixiApp = new PIXI.Application(1100,600);
-        const app = this.pixiApp;
-        document.body.appendChild(app.view);
-        app.view.style.width = "100vw";
-        app.view.style.touchAction = "auto";
-
         const meterCluster = new AnalogMeterCluster();
-        app.stage.addChild(meterCluster);
+        this.stage.addChild(meterCluster);
         
         const fpsCounter = new FPSCounter();
         fpsCounter.position.set(0,0);
-        app.stage.addChild(fpsCounter);
+        this.stage.addChild(fpsCounter);
         
         let tacho = 0;
         let speed = 0;
@@ -85,9 +83,9 @@ class AnalogMeterClusterBenchApp extends MeterApplicationBase
         let boost = -1.0;
         let waterTemp = 50.0;
                 
-        app.ticker.add(() => 
+        this.ticker.add(() => 
         {
-            fpsCounter.setFPS(app.ticker.FPS);
+            fpsCounter.setFPS(this.ticker.FPS);
             
             if(tacho > 9000)
                 tacho = 0;

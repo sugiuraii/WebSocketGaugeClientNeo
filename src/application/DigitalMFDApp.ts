@@ -50,7 +50,7 @@ require("./DigitalMFDApp.html");
 
 window.onload = function()
 {
-    const meterapp = new DigitalMFDApp();
+    const meterapp = new DigitalMFDApp(1200, 600);
     meterapp.run();
 }
 
@@ -94,13 +94,7 @@ class DigitalMFDApp extends MeterApplicationBase
     }
     
     protected setPIXIMeterPanel()
-    {
-        this.pixiApp = new PIXI.Application(1200, 600);
-        const app = this.pixiApp;
-        document.body.appendChild(app.view);
-        app.view.style.width = "100vw";
-        app.view.style.touchAction = "auto";
-        
+    {        
         const digiTachoPanel = new DigiTachoPanel();
         digiTachoPanel.position.set(0,0);
         
@@ -128,15 +122,15 @@ class DigitalMFDApp extends MeterApplicationBase
         throttlePanel.position.set(900,400);
         throttlePanel.scale.set(0.68);
         
-        app.stage.addChild(digiTachoPanel);
-        app.stage.addChild(milagePanel);
-        app.stage.addChild(boostPanel);
-        app.stage.addChild(airFuelPanel);
-        app.stage.addChild(waterTempPanel);
-        app.stage.addChild(voltagePanel);
-        app.stage.addChild(throttlePanel);
+        this.stage.addChild(digiTachoPanel);
+        this.stage.addChild(milagePanel);
+        this.stage.addChild(boostPanel);
+        this.stage.addChild(airFuelPanel);
+        this.stage.addChild(waterTempPanel);
+        this.stage.addChild(voltagePanel);
+        this.stage.addChild(throttlePanel);
         
-        app.ticker.add(() => 
+        this.ticker.add(() => 
         {
             const timestamp = PIXI.ticker.shared.lastTime;
             const tacho = this.DefiWS.getVal(DefiParameterCode.Engine_Speed, timestamp);

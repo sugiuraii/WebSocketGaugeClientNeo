@@ -24,6 +24,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+import * as PIXI from "pixi.js";
 import {ControlPanel} from "./ControlPanel";
 import * as WebFont from "webfontloader";
 import * as WebSocketCommunication from "../WebSocket/WebSocketCommunication";
@@ -43,10 +44,8 @@ const WAITTIME_BEFORE_RECONNECT = 5000;
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
 //const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui";
 
-export abstract class MeterApplicationBase
-{
-    protected pixiApp : PIXI.Application;
-    
+export abstract class MeterApplicationBase extends PIXI.Application
+{    
     private webSocketServerName : string;
     
     private controlPanel = new ControlPanel();
@@ -140,8 +139,14 @@ export abstract class MeterApplicationBase
     
     protected abstract setPIXIMeterPanel() : void;
     
-    constructor(webSocketServerName? : string)
+    constructor(width : number, height : number, webSocketServerName? : string)
     {
+        super(width, height);
+        // Append to document body
+        this.view.style.width = "100vw";
+        this.view.style.touchAction = "auto";
+        document.body.appendChild(this.view);
+        
         //Set url of websocket
         if (typeof (webSocketServerName) === "undefined")
             this.webSocketServerName = location.hostname;
@@ -518,7 +523,7 @@ export abstract class MeterApplicationBase
     
     public setBlurOnAppStage(amount : number)
     {
-        const stage = this.pixiApp.stage;
+        const stage = this.stage;
         const filter = new PIXI.filters.BlurFilter();
         filter.blur = amount;
         stage.filters = [filter];
@@ -526,7 +531,7 @@ export abstract class MeterApplicationBase
     
     public unsetBlurOnAppStage()
     {
-        const stage = this.pixiApp.stage;
+        const stage = this.stage;
         stage.filters = [];        
     }
     

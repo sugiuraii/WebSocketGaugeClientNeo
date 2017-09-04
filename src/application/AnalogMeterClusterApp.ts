@@ -43,7 +43,7 @@ require("./AnalogMeterClusterApp.html");
 
 window.onload = function()
 {
-    const meterapp = new AnalogMeterClusterApp();
+    const meterapp = new AnalogMeterClusterApp(1100, 600);
     meterapp.run();
 }
 
@@ -71,17 +71,14 @@ class AnalogMeterClusterApp extends MeterApplicationBase
     
     protected setPIXIMeterPanel() : void
     {
-        this.pixiApp = new PIXI.Application(1100,600);
-        const app = this.pixiApp;
-        document.body.appendChild(app.view);
-        app.view.style.width = "100vw";
-        app.view.style.touchAction = "auto";
-
+        document.body.appendChild(this.view);
+        this.view.style.width = "100vw";
+        this.view.style.touchAction = "auto";
 
         const meterCluster = new AnalogMeterCluster();
-        app.stage.addChild(meterCluster);
+        this.stage.addChild(meterCluster);
 
-        app.ticker.add(() => {
+        this.ticker.add(() => {
             const timestamp = PIXI.ticker.shared.lastTime;
             const tacho = this.DefiWS.getVal(DefiParameterCode.Engine_Speed, timestamp);
             const boost = this.DefiWS.getVal(DefiParameterCode.Manifold_Absolute_Pressure, timestamp) * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
