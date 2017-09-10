@@ -26,6 +26,7 @@
 // This is required to webpack font/texture/html files
 /// <reference path="../lib/webpackRequire.ts" />
 
+import * as PIXI from "pixi.js";
 
 //Import application base class
 import {MeterApplicationBase} from "../lib/MeterAppBase/MeterApplicationBase";
@@ -44,7 +45,7 @@ require("./DigitalMFD-ArduinoDemoApp.html");
 
 window.onload = function()
 {
-    const meterapp = new DigitalMFD_ArduinoDemoApp();
+    const meterapp = new DigitalMFD_ArduinoDemoApp(720, 1280);
     meterapp.run();
 }
 
@@ -78,13 +79,7 @@ class DigitalMFD_ArduinoDemoApp extends MeterApplicationBase
     }
     
     protected setPIXIMeterPanel()
-    {
-        this.pixiApp = new PIXI.Application(720, 1280);
-        const app = this.pixiApp;
-        document.body.appendChild(app.view);
-        app.view.style.width = "100vw";
-        app.view.style.touchAction = "auto";
-        
+    {        
         const digiTachoPanel = new DigiTachoPanel();
         digiTachoPanel.position.set(0,0);
         digiTachoPanel.scale.set(1.15);
@@ -101,12 +96,12 @@ class DigitalMFD_ArduinoDemoApp extends MeterApplicationBase
         engineOilTempPanel.position.set(360,890);
         engineOilTempPanel.scale.set(0.85);
                 
-        app.stage.addChild(digiTachoPanel);
-        app.stage.addChild(boostPanel);
-        app.stage.addChild(waterTempPanel);
-        app.stage.addChild(engineOilTempPanel);
+        this.stage.addChild(digiTachoPanel);
+        this.stage.addChild(boostPanel);
+        this.stage.addChild(waterTempPanel);
+        this.stage.addChild(engineOilTempPanel);
                 
-        app.ticker.add(() => 
+        this.ticker.add(() => 
         {
             const timestamp = PIXI.ticker.shared.lastTime;
             const tacho = this.ArduinoWS.getVal(ArduinoParameterCode.Engine_Speed, timestamp);

@@ -26,6 +26,7 @@
 // This is required to webpack font/texture/html files
 /// <reference path="../lib/webpackRequire.ts" />
 
+import * as PIXI from "pixi.js";
 
 //Import application base class
 import {MeterApplicationBase} from "../lib/MeterAppBase/MeterApplicationBase";
@@ -45,7 +46,7 @@ require("./DigitalMFD-ELM327DemoApp.html");
 
 window.onload = function()
 {
-    const meterapp = new DigitalMFD_ELM327DemoApp();
+    const meterapp = new DigitalMFD_ELM327DemoApp(720, 1280);
     meterapp.run();
 }
 
@@ -80,12 +81,6 @@ class DigitalMFD_ELM327DemoApp extends MeterApplicationBase
     
     protected setPIXIMeterPanel()
     {
-        this.pixiApp = new PIXI.Application(720, 1280);
-        const app = this.pixiApp;
-        document.body.appendChild(app.view);
-        app.view.style.width = "100vw";
-        app.view.style.touchAction = "auto";
-        
         const digiTachoPanel = new DigiTachoPanel();
         digiTachoPanel.position.set(0,0);
         digiTachoPanel.scale.set(1.15);
@@ -101,15 +96,13 @@ class DigitalMFD_ELM327DemoApp extends MeterApplicationBase
         const throttlePanel = new ThrottleGaugePanel();
         throttlePanel.position.set(360,890);
         throttlePanel.scale.set(0.85);
+                
+        this.stage.addChild(digiTachoPanel);
+        this.stage.addChild(boostPanel);
+        this.stage.addChild(waterTempPanel);
+        this.stage.addChild(throttlePanel);
         
-
-        
-        app.stage.addChild(digiTachoPanel);
-        app.stage.addChild(boostPanel);
-        app.stage.addChild(waterTempPanel);
-        app.stage.addChild(throttlePanel);
-        
-        app.ticker.add(() => 
+        this.ticker.add(() => 
         {
             const timestamp = PIXI.ticker.shared.lastTime;
             const tacho = this.ELM327WS.getVal(OBDIIParameterCode.Engine_Speed, timestamp);

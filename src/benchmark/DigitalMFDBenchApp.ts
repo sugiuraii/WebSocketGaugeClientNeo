@@ -26,7 +26,6 @@
 // This is required to webpack font/texture/html files
 /// <reference path="../lib/webpackRequire.ts" />
 
-
 //Import application base class
 import {MeterApplicationBase} from "../lib/MeterAppBase/MeterApplicationBase";
 
@@ -46,12 +45,12 @@ require("./DigitalMFDBenchApp.html");
 
 window.onload = function()
 {
-    const meterapp = new DigitalMFDBenchApp();
+    const meterapp = new DigitalMFDBenchApp(1200, 600);
     meterapp.run();
 }
 
 class DigitalMFDBenchApp extends MeterApplicationBase
-{
+{    
     protected setWebSocketOptions()
     {
         //For graphic benchmark. Do nothing for websocket.
@@ -79,11 +78,6 @@ class DigitalMFDBenchApp extends MeterApplicationBase
     
     protected setPIXIMeterPanel()
     {
-        this.pixiApp = new PIXI.Application(1200, 600);
-        const app = this.pixiApp;
-        document.body.appendChild(app.view);
-        app.view.style.width = "100vw";
-        app.view.style.touchAction = "auto";
 
         const digiTachoPanel = new DigiTachoPanel();
         digiTachoPanel.position.set(0,0);
@@ -112,13 +106,13 @@ class DigitalMFDBenchApp extends MeterApplicationBase
         throttlePanel.position.set(900,400);
         throttlePanel.scale.set(0.68);
         
-        app.stage.addChild(digiTachoPanel);
-        app.stage.addChild(milagePanel);
-        app.stage.addChild(boostPanel);
-        app.stage.addChild(airFuelPanel);
-        app.stage.addChild(waterTempPanel);
-        app.stage.addChild(voltagePanel);
-        app.stage.addChild(throttlePanel);
+        this.stage.addChild(digiTachoPanel);
+        this.stage.addChild(milagePanel);
+        this.stage.addChild(boostPanel);
+        this.stage.addChild(airFuelPanel);
+        this.stage.addChild(waterTempPanel);
+        this.stage.addChild(voltagePanel);
+        this.stage.addChild(throttlePanel);
         
         let tacho = 0;
         let speed = 0;
@@ -137,7 +131,7 @@ class DigitalMFDBenchApp extends MeterApplicationBase
 
         const fpsCounter = new FPSCounter();
         fpsCounter.position.set(0,0);
-        app.stage.addChild(fpsCounter);
+        this.stage.addChild(fpsCounter);
 
         let boost = -1.0;
         let airFuelRatio = 8.0;
@@ -146,9 +140,9 @@ class DigitalMFDBenchApp extends MeterApplicationBase
         let throttle = 0.0;
 
         
-        app.ticker.add(() => 
+        this.ticker.add(() => 
         {
-            fpsCounter.setFPS(app.ticker.FPS);
+            fpsCounter.setFPS(this.ticker.FPS);
                         
             if(tacho > 9000)
                 tacho = 0;
