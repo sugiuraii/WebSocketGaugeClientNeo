@@ -151,8 +151,6 @@ export abstract class CircularGaugePanelBase extends PIXI.Container
             this.Options.ValueTextLabel.text = value.toFixed(this.Options.ValueNumberRoundDigit).toString();
     }
 
-    protected abstract setOption() : void;
-
     constructor(options: CircularGaugePanelOptionBase)
     {
         super();
