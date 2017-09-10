@@ -29,7 +29,7 @@ export function calculateGearPosition(rev : number, speed : number, neutralSw : 
     if (neutralSw)
         return "N";
 
-    //0除算防止（車両停止時）
+    //Avoid divide by zero (on vehicle stop)
     if (speed <= 0)
         return "-";
 
