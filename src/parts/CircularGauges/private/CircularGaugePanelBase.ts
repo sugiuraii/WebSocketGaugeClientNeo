@@ -89,71 +89,72 @@ export class TextOption
     }
 }
 
+export abstract class CircularGaugePanelOptionBase
+{
+    public ValueTextLabel: PIXI.extras.BitmapText;
+    public ValueTextLabelOption: BitmapTextOption = new BitmapTextOption();
+    public ValueNumberRoundDigit : number = 1;
+    
+    public MasterTextStyle : PIXI.TextStyle;
+
+    public OffsetAngle : number;
+    public FullAngle : number;
+    public Min : number;
+    public Max : number;
+    public InvertDraw : boolean;
+    public AntiClockWise : boolean;
+    public AngleStep : number;
+    public ValueBarRadius : number;
+    public ValueBarInnerRadius : number;        
+
+    public TitleLabel : string;
+    public TitleLabelOption : TextOption;
+    public UnitLabel : string;
+    public UnitLabelOption: TextOption;
+
+    public AxisLabel: string[] = new Array();
+    public AxisLabelOption: TextOption[] = new Array();
+
+    public RedZoneBarEnable : boolean;
+    public YellowZoneBarEnable : boolean;
+    public GreenZoneBarEnable : boolean;
+    public RedZoneBarOffsetAngle : number;
+    public YellowZoneBarOffsetAngle : number;
+    public GreenZoneBarOffsetAngle : number;
+    public RedZoneBarFullAngle : number;
+    public YellowZoneBarFullAngle : number;
+    public GreenZoneBarFullAngle : number;
+    public ZoneBarRadius : number;
+
+    public CenterPosition = new PIXI.Point();
+
+    public RedZoneBarTexture : PIXI.Texture;
+    public YellowZoneBarTexture : PIXI.Texture;
+    public GreenZoneBarTexture : PIXI.Texture;
+    public ValueBarTexture : PIXI.Texture;
+    public BackTexture : PIXI.Texture;
+    public GridTexture : PIXI.Texture;
+}
+
 export abstract class CircularGaugePanelBase extends PIXI.Container
 {
     private valueProgressBar: CircularProgressBar;
-    protected valueTextLabel: PIXI.extras.BitmapText;
-    protected valueTextLabelOption: BitmapTextOption = new BitmapTextOption();
-    protected valueNumberRoundDigit : number = 1;
+    private Options: CircularGaugePanelOptionBase;
     
-    protected masterTextStyle : PIXI.TextStyle;
-
-    protected offsetAngle : number;
-    protected fullAngle : number;
-    protected min : number;
-    protected max : number;
-    protected invertDraw : boolean;
-    protected antiClockWise : boolean;
-    protected angleStep : number;
-    protected valueBarRadius : number;
-    protected valueBarInnerRadius : number;        
-
-    protected titleLabel : string;
-    protected titleLabelOption : TextOption;
-    protected unitLabel : string;
-    protected unitLabelOption: TextOption;
-
-    protected axisLabel: string[] = new Array();
-    protected axisLabelOption: TextOption[] = new Array();
-
-
-    protected redZoneBarEnable : boolean;
-    protected yellowZoneBarEnable : boolean;
-    protected greenZoneBarEnable : boolean;
-
-    protected redZoneBarOffsetAngle : number;
-    protected yellowZoneBarOffsetAngle : number;
-    protected greenZoneBarOffsetAngle : number;
-    protected redZoneBarFullAngle : number;
-    protected yellowZoneBarFullAngle : number;
-    protected greenZoneBarFullAngle : number;
-    protected zoneBarRadius : number;
-
-    protected centerPosition = new PIXI.Point();
-
-    protected RedZoneBarTexture : PIXI.Texture;
-    protected YellowZoneBarTexture : PIXI.Texture;
-    protected GreenZoneBarTexture : PIXI.Texture;
-    protected ValueBarTexture : PIXI.Texture;
-    protected BackTexture : PIXI.Texture;
-    protected GridTexture : PIXI.Texture;
-
     public get Value() : number { return this.valueProgressBar.Value};
     public set Value(value : number)
     {
         this.valueProgressBar.Value = value;
         this.valueProgressBar.update();
 
-         if (value.toFixed(this.valueNumberRoundDigit).toString() !== this.valueTextLabel.text)
-            this.valueTextLabel.text = value.toFixed(this.valueNumberRoundDigit).toString();
+        if (value.toFixed(this.Options.ValueNumberRoundDigit).toString() !== this.Options.ValueTextLabel.text)
+            this.Options.ValueTextLabel.text = value.toFixed(this.Options.ValueNumberRoundDigit).toString();
     }
 
-    protected abstract setOption() : void;
-
-    constructor()
+    constructor(options: CircularGaugePanelOptionBase)
     {
         super();
-        this.setOption();
+        this.Options = options;
         this.createBackContainer();
         this.createValueProgressBar();
     }
@@ -161,43 +162,43 @@ export abstract class CircularGaugePanelBase extends PIXI.Container
     private createValueProgressBar() : void
     {            
         this.valueProgressBar = new CircularProgressBar();
-        this.valueProgressBar.OffsetAngle = this.offsetAngle;
-        this.valueProgressBar.FullAngle = this.fullAngle;
-        this.valueProgressBar.Min = this.min;
-        this.valueProgressBar.Max = this.max;
-        this.valueProgressBar.AngleStep = this.angleStep;
-        this.valueProgressBar.InvertDraw = this.invertDraw;
-        this.valueProgressBar.AntiClockwise = this.antiClockWise;
+        this.valueProgressBar.OffsetAngle = this.Options.OffsetAngle;
+        this.valueProgressBar.FullAngle = this.Options.FullAngle;
+        this.valueProgressBar.Min = this.Options.Min;
+        this.valueProgressBar.Max = this.Options.Max;
+        this.valueProgressBar.AngleStep = this.Options.AngleStep;
+        this.valueProgressBar.InvertDraw = this.Options.InvertDraw;
+        this.valueProgressBar.AntiClockwise = this.Options.AntiClockWise;
 
-        this.valueProgressBar.Center = this.centerPosition;
-        this.valueProgressBar.Radius = this.valueBarRadius;
-        this.valueProgressBar.InnerRadius = this.valueBarInnerRadius;
+        this.valueProgressBar.Center = this.Options.CenterPosition;
+        this.valueProgressBar.Radius = this.Options.ValueBarRadius;
+        this.valueProgressBar.InnerRadius = this.Options.ValueBarInnerRadius;
 
-        this.valueProgressBar.Texture = this.ValueBarTexture;
+        this.valueProgressBar.Texture = this.Options.ValueBarTexture;
         super.addChild(this.valueProgressBar);
         
-        const valueTextLabelOption = this.valueTextLabelOption;
+        const valueTextLabelOption = this.Options.ValueTextLabelOption;
         const valueTextLabelStyle: PIXI.extras.IBitmapTextStyle = {
             font: valueTextLabelOption.fontName,
             align: valueTextLabelOption.align
         };
-        this.valueTextLabel = new PIXI.extras.BitmapText(this.min.toFixed(this.valueNumberRoundDigit).toString(), valueTextLabelStyle);
-        this.valueTextLabel.position = valueTextLabelOption.position;
-        this.valueTextLabel.anchor = new PIXI.Point(valueTextLabelOption.anchor.x, valueTextLabelOption.anchor.y);
-        super.addChild(this.valueTextLabel);            
+        this.Options.ValueTextLabel = new PIXI.extras.BitmapText(this.Options.Min.toFixed(this.Options.ValueNumberRoundDigit).toString(), valueTextLabelStyle);
+        this.Options.ValueTextLabel.position = valueTextLabelOption.position;
+        this.Options.ValueTextLabel.anchor = new PIXI.Point(valueTextLabelOption.anchor.x, valueTextLabelOption.anchor.y);
+        super.addChild(this.Options.ValueTextLabel);            
     }
 
     protected setAxisLabel(axisLabel : string[]) : void
     {
-        this.axisLabel = new Array();
+        this.Options.AxisLabel = new Array();
         for (let i = 0; i < axisLabel.length; i++)
-            this.axisLabel.push(axisLabel[i]);
+            this.Options.AxisLabel.push(axisLabel[i]);
     }
     protected setAxisLabelOption(axisLabelOption : TextOption[]) : void
     {
-        this.axisLabelOption = new Array(); 
+        this.Options.AxisLabelOption = new Array(); 
         for (let i = 0; i < axisLabelOption.length; i++)
-            this.axisLabelOption.push(axisLabelOption[i]);
+            this.Options.AxisLabelOption.push(axisLabelOption[i]);
     }
 
     private createBackContainer(): void
@@ -206,22 +207,22 @@ export abstract class CircularGaugePanelBase extends PIXI.Container
         //Unlock baked texture
         backContainer.cacheAsBitmap = false;
 
-        const centerPosition = this.centerPosition;
-        const zoneBarRadius = this.zoneBarRadius;
+        const centerPosition = this.Options.CenterPosition;
+        const zoneBarRadius = this.Options.ZoneBarRadius;
 
         //Add backSprite
-        const backTexture = this.BackTexture;
+        const backTexture = this.Options.BackTexture;
         const backSprite = new PIXI.Sprite();
         backSprite.texture = backTexture;
         backContainer.addChild(backSprite);
 
         //Add redzoneBar
-        if (this.redZoneBarEnable)
+        if (this.Options.RedZoneBarEnable)
         {
-            const redZoneBarTexture = this.RedZoneBarTexture;
+            const redZoneBarTexture = this.Options.RedZoneBarTexture;
             const redzoneBar = new CircularProgressBar();
-            redzoneBar.OffsetAngle = this.redZoneBarOffsetAngle;
-            redzoneBar.FullAngle = this.redZoneBarFullAngle;
+            redzoneBar.OffsetAngle = this.Options.RedZoneBarOffsetAngle;
+            redzoneBar.FullAngle = this.Options.RedZoneBarFullAngle;
             redzoneBar.Texture = redZoneBarTexture;
             redzoneBar.Value = redzoneBar.Max;
             redzoneBar.Center = centerPosition;
@@ -232,12 +233,12 @@ export abstract class CircularGaugePanelBase extends PIXI.Container
         }
 
         //Add yellowzoneBar
-        if (this.yellowZoneBarEnable)
+        if (this.Options.YellowZoneBarEnable)
         {
-            const yellowZoneBarTexture = this.YellowZoneBarTexture;
+            const yellowZoneBarTexture = this.Options.YellowZoneBarTexture;
             const yellowzoneBar = new CircularProgressBar();
-            yellowzoneBar.OffsetAngle = this.yellowZoneBarOffsetAngle;
-            yellowzoneBar.FullAngle = this.yellowZoneBarFullAngle;
+            yellowzoneBar.OffsetAngle = this.Options.YellowZoneBarOffsetAngle;
+            yellowzoneBar.FullAngle = this.Options.YellowZoneBarFullAngle;
             yellowzoneBar.Texture = yellowZoneBarTexture;
             yellowzoneBar.Value = yellowzoneBar.Max;
             yellowzoneBar.Center = centerPosition;
@@ -248,12 +249,12 @@ export abstract class CircularGaugePanelBase extends PIXI.Container
         }
 
         //Add greenZoneBar
-        if (this.greenZoneBarEnable)
+        if (this.Options.GreenZoneBarEnable)
         {
-            const greenZoneBarTexture = this.GreenZoneBarTexture;
+            const greenZoneBarTexture = this.Options.GreenZoneBarTexture;
             const greenzoneBar = new CircularProgressBar();
-            greenzoneBar.OffsetAngle = this.greenZoneBarOffsetAngle;
-            greenzoneBar.FullAngle = this.greenZoneBarFullAngle;
+            greenzoneBar.OffsetAngle = this.Options.GreenZoneBarOffsetAngle;
+            greenzoneBar.FullAngle = this.Options.GreenZoneBarFullAngle;
             greenzoneBar.Texture = greenZoneBarTexture;
             greenzoneBar.Value = greenzoneBar.Max;
             greenzoneBar.Center = centerPosition;
@@ -264,23 +265,23 @@ export abstract class CircularGaugePanelBase extends PIXI.Container
         }
 
         //Add gridSprite
-        const gridTexture = this.GridTexture;
+        const gridTexture = this.Options.GridTexture;
         const gridSprite = new PIXI.Sprite();
         gridSprite.texture = gridTexture;
         backContainer.addChild(gridSprite);
 
         //Set Title and unit text
-        const titleTextElem = new PIXI.Text(this.titleLabel);
-        const titleTextOption = this.titleLabelOption;
-        titleTextElem.style = this.masterTextStyle.clone();
+        const titleTextElem = new PIXI.Text(this.Options.TitleLabel);
+        const titleTextOption = this.Options.TitleLabelOption;
+        titleTextElem.style = this.Options.MasterTextStyle.clone();
         titleTextElem.style.fontSize = titleTextOption.fontSize;
         titleTextElem.style.align = titleTextOption.align;
         titleTextElem.anchor.set(titleTextOption.anchor.x, titleTextOption.anchor.y)
         titleTextElem.position.set(titleTextOption.position.x, titleTextOption.position.y);
 
-        const unitTextElem = new PIXI.Text(this.unitLabel);
-        const unitTextOption = this.unitLabelOption;
-        unitTextElem.style = this.masterTextStyle.clone();
+        const unitTextElem = new PIXI.Text(this.Options.UnitLabel);
+        const unitTextOption = this.Options.UnitLabelOption;
+        unitTextElem.style = this.Options.MasterTextStyle.clone();
         unitTextElem.style.fontSize = unitTextOption.fontSize;
         unitTextElem.style.align = unitTextOption.align;
         unitTextElem.anchor.set(unitTextOption.anchor.x, unitTextOption.anchor.y);
@@ -290,11 +291,11 @@ export abstract class CircularGaugePanelBase extends PIXI.Container
         backContainer.addChild(unitTextElem);
 
         //Set axis label
-        for (let i = 0; i < this.axisLabelOption.length; i++)
+        for (let i = 0; i < this.Options.AxisLabelOption.length; i++)
         {
-            const axisLabelOption = this.axisLabelOption[i];
-            const axisLabelElem = new PIXI.Text(this.axisLabel[i]);
-            axisLabelElem.style = this.masterTextStyle.clone();
+            const axisLabelOption = this.Options.AxisLabelOption[i];
+            const axisLabelElem = new PIXI.Text(this.Options.AxisLabel[i]);
+            axisLabelElem.style = this.Options.MasterTextStyle.clone();
             axisLabelElem.style.fontSize = axisLabelOption.fontSize;
             axisLabelElem.style.align = axisLabelOption.align;
             axisLabelElem.anchor.set(axisLabelOption.anchor.x, axisLabelOption.anchor.y);

@@ -25,76 +25,89 @@
  */
 
 import {SemiCircularGaugePanelBase} from "./private/SemiCircularGaugePanelBase"
+import {SemiCircularGaugePanelOptionBase} from "./private/SemiCircularGaugePanelBase"
 
 export class ThrottleGaugePanel extends SemiCircularGaugePanelBase
 {
-    protected setOption() : void
+    constructor()
     {
-        super.setOption();
-        this.titleLabel = "THROTTLE";
-        this.min = 0;
-        this.max = 100;
-        this.unitLabel = "%"
-        this.redZoneBarEnable = false;
-        this.yellowZoneBarEnable = false;
-        this.greenZoneBarEnable = false;
-        this.setAxisLabel(["0","25","50","75","100"]);
+        let options = new SemiCircularGaugePanelOptionBase();
+        
+        options.TitleLabel = "THROTTLE";
+        options.Min = 0;
+        options.Max = 100;
+        options.UnitLabel = "%"
+        options.RedZoneBarEnable = false;
+        options.YellowZoneBarEnable = false;
+        options.GreenZoneBarEnable = false;
+        options.AxisLabel = ["0","25","50","75","100"];
+        
+        super(options);
     }
 }
 
 export class WaterTempGaugePanel extends SemiCircularGaugePanelBase
 {
-    protected setOption() : void
+    constructor()
     {
-        super.setOption();
-        this.titleLabel = "WATER TEMP";
-        this.min = 40;
-        this.max = 120;
-        this.unitLabel = "degC"
-        this.redZoneBarEnable = true;
-        this.redZoneBarOffsetAngle = 315;
-        this.redZoneBarFullAngle = 45;
-        this.yellowZoneBarEnable = true;
-        this.yellowZoneBarOffsetAngle = 292.5;
-        this.yellowZoneBarFullAngle = 22.5;
-        this.greenZoneBarEnable = false;
-        this.setAxisLabel(["40","60","80","100","120"]);
+        let options = new SemiCircularGaugePanelOptionBase();
+        
+        options.TitleLabel = "WATER TEMP";
+        options.Min = 40;
+        options.Max = 120;
+        options.UnitLabel = "degC"
+        options.RedZoneBarEnable = true;
+        options.RedZoneBarOffsetAngle = 315;
+        options.RedZoneBarFullAngle = 45;
+        options.YellowZoneBarEnable = true;
+        options.YellowZoneBarOffsetAngle = 292.5;
+        options.YellowZoneBarFullAngle = 22.5;
+        options.GreenZoneBarEnable = false;
+        options.AxisLabel = ["40","60","80","100","120"];
+        
+        super(options);
     }
 }
 
 export class EngineOilTempGaugePanel extends SemiCircularGaugePanelBase
 {
-    protected setOption() : void
+    constructor()
     {
-        super.setOption();
-        this.titleLabel = "ENG. OIL TEMP";
-        this.min = 50;
-        this.max = 150;
-        this.unitLabel = "degC"
-        this.redZoneBarEnable = true;
-        this.redZoneBarOffsetAngle = 315;
-        this.redZoneBarFullAngle = 45;
-        this.yellowZoneBarEnable = true;
-        this.yellowZoneBarOffsetAngle = 292.5;
-        this.yellowZoneBarFullAngle = 22.5;
-        this.greenZoneBarEnable = false;
-        this.setAxisLabel(["50","75","100","125","150"]);
+        let options = new SemiCircularGaugePanelOptionBase();
+        
+        options.TitleLabel = "ENG. OIL TEMP";
+        options.Min = 50;
+        options.Max = 150;
+        options.UnitLabel = "degC"
+        options.RedZoneBarEnable = true;
+        options.RedZoneBarOffsetAngle = 315;
+        options.RedZoneBarFullAngle = 45;
+        options.YellowZoneBarEnable = true;
+        options.YellowZoneBarOffsetAngle = 292.5;
+        options.YellowZoneBarFullAngle = 22.5;
+        options.GreenZoneBarEnable = false;
+        options.AxisLabel = ["50","75","100","125","150"];
+                
+        super(options);
     }
 }
 
 export class BatteryVoltageGaugePanel extends SemiCircularGaugePanelBase
 {
-    protected setOption() : void
+    constructor()
     {
-        super.setOption();
-        this.titleLabel = "BATTERY VOLT";
-        this.min = 11;
-        this.max = 15;
-        this.unitLabel = "V"
-        this.redZoneBarEnable = false;
-        this.yellowZoneBarEnable = false;
-        this.greenZoneBarEnable = false;
-        this.setAxisLabel(["11","12","13","14","15"]);
-        this.valueNumberRoundDigit = 1;
+        let options = new SemiCircularGaugePanelOptionBase();
+        
+        options.TitleLabel = "BATTERY VOLT";
+        options.Min = 11;
+        options.Max = 15;
+        options.UnitLabel = "V"
+        options.RedZoneBarEnable = false;
+        options.YellowZoneBarEnable = false;
+        options.GreenZoneBarEnable = false;
+        options.AxisLabel = ["11","12","13","14","15"];
+        options.ValueNumberRoundDigit = 1;
+        
+        super(options);
     }
 }

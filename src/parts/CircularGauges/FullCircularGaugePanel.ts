@@ -25,28 +25,30 @@
  */
 
 import {FullCircularGaugePanelBase} from "./private/FullCircularGaugePanelBase"
+import {FullCircularGaugePanelOptionsBase} from "./private/FullCircularGaugePanelBase"
 
 export class BoostGaugePanel extends FullCircularGaugePanelBase
 {
-    protected setOption() : void
+    constructor()
     {
-        super.setOption();
-        this.titleLabel = "TURBO BOOST";
-        this.unitLabel = "x100kPa";
-        this.min = -1.0;
-        this.max = 2.0;
-        this.redZoneBarEnable = true;
-        this.yellowZoneBarEnable = true;
-        this.greenZoneBarEnable = true;
-        this.redZoneBarOffsetAngle = 315;
-        this.yellowZoneBarOffsetAngle = 270;
-        this.greenZoneBarOffsetAngle = 90;
-        this.redZoneBarFullAngle = 40;
-        this.yellowZoneBarFullAngle = 45;
-        this.greenZoneBarFullAngle = 90;
-        this.valueNumberRoundDigit = 1;
+        let options = new FullCircularGaugePanelOptionsBase();
         
-        this.setAxisLabel(
+        options.TitleLabel = "TURBO BOOST";
+        options.UnitLabel = "x100kPa";
+        options.Min = -1.0;
+        options.Max = 2.0;
+        options.RedZoneBarEnable = true;
+        options.YellowZoneBarEnable = true;
+        options.GreenZoneBarEnable = true;
+        options.RedZoneBarOffsetAngle = 315;
+        options.YellowZoneBarOffsetAngle = 270;
+        options.GreenZoneBarOffsetAngle = 90;
+        options.RedZoneBarFullAngle = 40;
+        options.YellowZoneBarFullAngle = 45;
+        options.GreenZoneBarFullAngle = 90;
+        options.ValueNumberRoundDigit = 1;
+        
+        options.AxisLabel = 
         [   "-1.0",
             "-0.5",
             "0",
@@ -54,28 +56,31 @@ export class BoostGaugePanel extends FullCircularGaugePanelBase
             "+1.0",
             "+1.5",
             "+2.0"
-        ]);
+        ];
+        
+        super(options);
     }
 }
 
 export class AirFuelGaugePanel extends FullCircularGaugePanelBase
 {
-    protected setOption() : void
+    constructor()
     {
-        super.setOption();
-        this.titleLabel = "Air/Fuel Ratio";
-        this.min = 8;
-        this.max = 20;
-        this.redZoneBarOffsetAngle = 315;
-        this.redZoneBarFullAngle = 45;
-        this.yellowZoneBarOffsetAngle = 225;
-        this.yellowZoneBarFullAngle = 90;
-        this.greenZoneBarOffsetAngle = 135;
-        this.greenZoneBarFullAngle = 90;
-        this.invertDraw = true;
-        this.unitLabel="A/F";
-        this.valueNumberRoundDigit = 1;
-        this.setAxisLabel(
+        let options = new FullCircularGaugePanelOptionsBase();
+
+        options.TitleLabel = "Air/Fuel Ratio";
+        options.Min = 8;
+        options.Max = 20;
+        options.RedZoneBarOffsetAngle = 315;
+        options.RedZoneBarFullAngle = 45;
+        options.YellowZoneBarOffsetAngle = 225;
+        options.YellowZoneBarFullAngle = 90;
+        options.GreenZoneBarOffsetAngle = 135;
+        options.GreenZoneBarFullAngle = 90;
+        options.InvertDraw = true;
+        options.UnitLabel="A/F";
+        options.ValueNumberRoundDigit = 1;
+        options.AxisLabel = 
         [   "20",
             "18",
             "16",
@@ -83,6 +88,8 @@ export class AirFuelGaugePanel extends FullCircularGaugePanelBase
             "12",
             "10",
             "8"
-        ]);
+        ];
+        
+        super(options);
     }
 }
