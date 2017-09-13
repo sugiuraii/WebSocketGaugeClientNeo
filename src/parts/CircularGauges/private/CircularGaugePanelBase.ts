@@ -178,7 +178,7 @@ export abstract class CircularGaugePanelBase extends PIXI.Container
         super.addChild(this.valueProgressBar);
         
         const valueTextLabelOption = this.Options.ValueTextLabelOption;
-        const valueTextLabelStyle: PIXI.extras.IBitmapTextStyle = {
+        const valueTextLabelStyle: PIXI.extras.BitmapTextStyle = {
             font: valueTextLabelOption.fontName,
             align: valueTextLabelOption.align
         };
