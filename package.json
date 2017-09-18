@@ -1,5 +1,10 @@
 {
     "name": "WebSocketGaugeClientNeo",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/sugiuraii/WebSocketGaugeClientNeo.git"
+    },
     "version": "1.0.0",
     "keywords": [
         "util",
