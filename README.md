@@ -47,13 +47,31 @@ You can make your custom gauges by modifying the source code. Please see []().
 * [webpack](https://webpack.github.io/)
 * [TypeScript](https://www.typescriptlang.org/)
 
-## <a name="install">Install</a>
-
 ## <a name="build">Build</a>
-This program coded by typescript. And this program uses webpack for deployment. Before modifying the source code, node.js and related packages need to be installed.
+This program coded by typescript. And this program uses webpack for deployment.
+Before modifying the source code (including makinig your custom meter panel or parts), node.js and dependent packages need to be installed.
 
 ### Install node.js
 Install node.js. On windows, you can find the installer on [official node.js site](https://nodejs.org/).
+To build sources, node.js newer than 8.x is needed.
+
+### Install dependent npm packages
+Before build, please install dependent npm packages. Dependent npm packages can be installed automatically by simply running `npm install`,
+```
+> cd WebSocketGaugeClientNeo
+> npm install
+```
+### Buidling source
+Build command is incuded in npm scirpt (please see `package.json`). To build,
+```
+> cd WebSocketGaugeClientNeo
+> npm run build-WebSocketTester
+> npm run build-benchmark
+> npm run build-application
+```
+
+## <a name="install">Install</a>
+After buiding sources, compiled htmls and javascripts will be stored in `public_html` folder. Please copy these files to your web server (e.g. nginx) export directory.
 
 ## <a name="license">License</a>
 [MIT License](./LICENSE)
