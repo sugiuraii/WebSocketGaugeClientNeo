@@ -25,6 +25,9 @@
 module.exports = {
     entry: 
     {
+        // To build add your custom meter panel application,
+        // Create "CustomMeterpanelApp.ts" and "CustomMetepanelApp.html", and add following row.
+        //"CustomMeterpanelApp" : './CustomMeterpanelApp.ts',
         "AnalogMeterClusterApp" : './AnalogMeterClusterApp.ts',
         "DigitalMFDApp" : './DigitalMFDApp.ts',
         "DigitalMFD-ELM327DemoApp" : './DigitalMFD-ELM327DemoApp.ts',

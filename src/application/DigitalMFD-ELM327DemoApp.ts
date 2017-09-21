@@ -51,6 +51,9 @@ window.onload = function()
 
 class DigitalMFD_ELM327DemoApp extends MeterApplicationBase
 {
+    /**
+     * Put code to set up websocket communication.
+     */
     protected setWebSocketOptions()
     {
         //Enable ELM327 websocket client
@@ -62,7 +65,9 @@ class DigitalMFD_ELM327DemoApp extends MeterApplicationBase
         this.registerELM327ParameterCode(OBDIIParameterCode.Coolant_Temperature, ReadModeCode.SLOW, true); 
         this.registerELM327ParameterCode(OBDIIParameterCode.Manifold_Absolute_Pressure, ReadModeCode.SLOWandFAST, true);       
     }
-    
+    /**
+     * Put code to register resources (texture image files, fonts) to preload.
+     */
     protected setTextureFontPreloadOptions()
     {
         this.registerWebFontFamilyNameToPreload(WaterTempGaugePanel.RequestedFontFamily);
@@ -78,8 +83,12 @@ class DigitalMFD_ELM327DemoApp extends MeterApplicationBase
         this.registerTexturePathToPreload(BoostGaugePanel.RequestedTexturePath);
     }
     
+    /**
+     * Put code to setup pixi.js meter panel.
+     */
     protected setPIXIMeterPanel()
     {
+        // Construct meter panel parts.
         const digiTachoPanel = new DigiTachoPanel();
         digiTachoPanel.position.set(0,0);
         digiTachoPanel.scale.set(1.15);
@@ -95,15 +104,19 @@ class DigitalMFD_ELM327DemoApp extends MeterApplicationBase
         const throttlePanel = new ThrottleGaugePanel();
         throttlePanel.position.set(360,890);
         throttlePanel.scale.set(0.85);
-                
+
+        // Put meter panel parts to stage.
         this.stage.addChild(digiTachoPanel);
         this.stage.addChild(boostPanel);
         this.stage.addChild(waterTempPanel);
         this.stage.addChild(throttlePanel);
         
+        // Define ticker method to update meter view (this ticker method will be called every frame).
         this.ticker.add(() => 
         {
+            // Take timestamp of animation frame. (This time stamp is needed to interpolate meter sensor reading).
             const timestamp = PIXI.ticker.shared.lastTime;
+            // Get sensor information from websocket communication objects.
             const tacho = this.ELM327WS.getVal(OBDIIParameterCode.Engine_Speed, timestamp);
             const speed = this.ELM327WS.getVal(OBDIIParameterCode.Vehicle_Speed, timestamp);
             const neutralSw = false;
@@ -113,6 +126,7 @@ class DigitalMFD_ELM327DemoApp extends MeterApplicationBase
             const waterTemp = this.ELM327WS.getRawVal(OBDIIParameterCode.Coolant_Temperature);
             const throttle = this.ELM327WS.getVal(OBDIIParameterCode.Throttle_Opening_Angle, timestamp);
             
+            // Update meter panel value by sensor data.
             digiTachoPanel.Speed = speed;
             digiTachoPanel.Tacho = tacho;
             digiTachoPanel.GearPos = gearPos;
