@@ -41,6 +41,9 @@ const WAITTIME_BEFORE_RECONNECT = 5000;
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
 //const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui";
 
+/**
+ * Base class to define application with meter panel and websocket clients.
+ */
 export abstract class MeterApplicationBase extends PIXI.Application
 {    
     private webSocketServerName : string;
@@ -51,24 +54,61 @@ export abstract class MeterApplicationBase extends PIXI.Application
     private ssmWS = new WebSocketCommunication.SSMWebsocket();
     private arduinoWS = new WebSocketCommunication.ArduinoCOMWebsocket();
     private elm327WS = new WebSocketCommunication.ELM327COMWebsocket();
-    private fueltripWS = new WebSocketCommunication.FUELTRIPWebsocket();    
+    private fueltripWS = new WebSocketCommunication.FUELTRIPWebsocket();   
+    /**
+     * Get DefiWS websocket client.
+     */ 
     get DefiWS() {return this.defiWS}
+    /**
+     * Get SSMWS websocket client.
+     */
     get SSMWS() {return this.ssmWS}
+    /**
+     * Get ArduinoWS websocket client.
+     */
     get ArduinoWS() {return this.arduinoWS}
+    /**
+     * Get ELM327WS websocket client..
+     */
     get ELM327WS() { return this.elm327WS}
+    /**
+     * Get FUElTRIP websocket client.
+     */
     get FUELTRIPWS() {return this.fueltripWS}
+    /**
+     * Flag to enable DefiWS client.
+     */
     public IsDefiWSEnabled = false;
+    /**
+     * Flag to enable SSMWS client.
+     */
     public IsSSMWSEnabled = false;
+    /**
+     *  Flag to enable ArduinoWS client.
+     */
     public IsArudinoWSEnabled = false;
+    /**
+     * Flag to enable ELM327WS client.
+     */
     public IsELM327WSEnabled = false;
+    /**
+     * Flag to enable FUELTRIP WS client.
+     */
     public IsFUELTRIPWSEnabled = false;
     
+    /**
+     * Slow read interval for SSM and ELM327 Websocket.
+     */
     public SSMELM327SlowReadInterval : number = 10;
     
     private webFontFamiliyNameToPreload : string[] = new Array();
     private webFontCSSURLToPreload : string[] = new Array();
     private texturePathToPreload : string[] = new Array();
     
+    /**
+     * Register WebFont family name to preload before running meter application.
+     * @param target WebFontFamily name to preload.
+     */
     public registerWebFontFamilyNameToPreload(target : string[]) : void;
     public registerWebFontFamilyNameToPreload(target : string) : void;
     public registerWebFontFamilyNameToPreload(target : any) : void
@@ -81,6 +121,10 @@ export abstract class MeterApplicationBase extends PIXI.Application
         else if (target instanceof Array)
              this.webFontFamiliyNameToPreload = this.webFontFamiliyNameToPreload.concat(target);
     }
+    /**
+     * Register WebFont CSS URL to preload before running meter application.
+     * @param target CSS URL to preload.
+     */
     public registerWebFontCSSURLToPreload(target : string[]) : void;
     public registerWebFontCSSURLToPreload(target : string) : void;
     public registerWebFontCSSURLToPreload(target : any) : void
@@ -93,6 +137,10 @@ export abstract class MeterApplicationBase extends PIXI.Application
         else if (target instanceof Array)
              this.webFontCSSURLToPreload = this.webFontCSSURLToPreload.concat(target);
     }
+    /**
+     * Register texture(sprite) image path to preload before running meter application.
+     * @param target Image (or sprite sheet json file) path to preload.
+     */
     public registerTexturePathToPreload(target : string[]) : void;
     public registerTexturePathToPreload(target : string) : void;
     public registerTexturePathToPreload(target : any) : void
@@ -111,31 +159,71 @@ export abstract class MeterApplicationBase extends PIXI.Application
     private ssmParameterCodeList : {code : string, readMode : string, interpolate : boolean}[] = new Array();
     private elm327ParameterCodeList : {code : string, readMode : string, interpolate : boolean}[] = new Array();
     
+    /**
+     * Register Defi parameter code to enable communication.
+     * @param code Parameter code name to register.
+     * @param interpolate Flag to enable or disable time domain interpolation.
+     */
     public registerDefiParameterCode(code : string, interpolate : boolean)
     {
         this.defiParameterCodeList.push({code, interpolate});
     }
+    /**
+     * Register Arduino parameter code to enable communication.
+     * @param code Parameter code name to register.
+     * @param interpolate Flag to enable or disable time domain interpolation.
+     */
     public registerArduinoParameterCode(code : string, interpolate : boolean)
     {
         this.arduinoParameterCodeList.push({code, interpolate});
     }
+    /**
+     * Register SSM parameter code to enable communication.
+     * @param code Parameter code name to register.
+     * @param interpolate Flag to enable or disable time domain interpolation.
+     */
     public registerSSMParameterCode(code : string, readMode : string, interpolate : boolean)
     {
         this.ssmParameterCodeList.push({code, readMode, interpolate});
     }
+    /**
+     * Register ELM327(OBDII PID) parameter code to enable communication.
+     * @param code Parameter code name to register.
+     * @param interpolate Flag to enable or disable time domain interpolation.
+     */
     public registerELM327ParameterCode(code : string, readMode : string, interpolate : boolean)
     {
         this.elm327ParameterCodeList.push({code, readMode, interpolate});
     }
     
+    /**
+     * Fueltrip logger section fueltrip time span (in sec).
+     */
     public FUELTRIPSectSpan : number = 300;
+    /**
+     * Number of section to store gas milage.
+     */
     public FUELTRIPSectStoreMax : number = 5;
     
+    /**
+     * Set websocket options.
+     */
     protected abstract setWebSocketOptions() : void;
+    /**
+     * Set webfont/texture preload.
+     */
     protected abstract setTextureFontPreloadOptions() : void;
-    
+    /**
+     * Set pixi.js meter panel.
+     */
     protected abstract setPIXIMeterPanel() : void;
     
+    /**
+     * Construct MeterApplicationBase.
+     * @param width Stage width in px.
+     * @param height Stage height in px.
+     * @param webSocketServerName Hostname of websocket server (default : same as webserver).s
+     */
     constructor(width : number, height : number, webSocketServerName? : string)
     {
         super(width, height);
@@ -189,6 +277,9 @@ export abstract class MeterApplicationBase extends PIXI.Application
         this.preloadFonts( () => this.preloadTextures( () => this.setPIXIMeterPanel()));        
     }
     
+    /**
+     * Set viewport meta tag.
+     */
     private setViewPortMetaTag()
     {
         let metalist = document.getElementsByTagName('meta');
@@ -213,6 +304,9 @@ export abstract class MeterApplicationBase extends PIXI.Application
         }
     }
     
+    /**
+     * Set meta tag to capable webapp.
+     */
     private setWebAppCapable() : void
     {
         {
@@ -229,6 +323,9 @@ export abstract class MeterApplicationBase extends PIXI.Application
         }
     }
     
+    /**
+     * Set websocket URL.
+     */
     private setWSURL(webSocketServerName : string)
     {
         this.defiWS.URL = "ws://" + webSocketServerName + ":" + DEFICOM_WS_PORT.toString() + "/"; 
@@ -309,6 +406,9 @@ export abstract class MeterApplicationBase extends PIXI.Application
         Indicator.setFUELTRIPIndicatorStatus(this.fueltripWS.getReadyState());
     }
     
+    /**
+     * Start application.
+     */
     public run()
     {
         this.connectWebSocket();
@@ -513,6 +613,13 @@ export abstract class MeterApplicationBase extends PIXI.Application
         
     }
     
+    /** 
+     * Calculate gear position.
+     * @param rev Engine speed in rpm.
+     * @paran speed Vehicle speelp.
+     * @param neutralSw Flag of netural.
+     * @return Calcualted gear position (number or "N" in the case of neutral).
+     */
     protected calculateGearPosition(rev : number, speed : number, neutralSw : boolean) : string
     {
         return calculateGearPosition(rev, speed, neutralSw);
