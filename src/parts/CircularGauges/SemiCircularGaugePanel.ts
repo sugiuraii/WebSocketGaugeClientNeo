@@ -109,3 +109,65 @@ export class BatteryVoltageGaugePanel extends SemiCircularGaugePanelBase
         super(options);
     }
 }
+
+export class AirFuelGaugePanel extends SemiCircularGaugePanelBase
+{
+    constructor()
+    {
+        let options = new SemiCircularGaugePanelOptionBase();
+
+        options.TitleLabel = "Air/Fuel Ratio";
+        options.Min = 10;
+        options.Max = 18;
+        options.RedZoneBarOffsetAngle = 315;
+        options.RedZoneBarFullAngle = 45;
+        options.YellowZoneBarOffsetAngle = 270;
+        options.YellowZoneBarFullAngle = 45;
+        options.GreenZoneBarOffsetAngle = 180;
+        options.GreenZoneBarFullAngle = 90;
+        options.InvertDraw = true;
+        options.UnitLabel="A/F";
+        options.ValueNumberRoundDigit = 1;
+        options.AxisLabel = 
+        [   "18",
+            "16",
+            "14",
+            "12",
+            "10"
+        ];
+        
+        super(options);
+    }
+}
+
+export class BoostGaugePanel extends SemiCircularGaugePanelBase
+{
+    constructor()
+    {
+        let options = new SemiCircularGaugePanelOptionBase();
+        
+        options.TitleLabel = "TURBO BOOST";
+        options.UnitLabel = "x100kPa";
+        options.Min = -0.5;
+        options.Max = 1.5;
+        options.RedZoneBarEnable = false;
+        options.YellowZoneBarEnable = true;
+        options.GreenZoneBarEnable = true;
+        options.YellowZoneBarOffsetAngle = 315;
+        options.YellowZoneBarFullAngle = 45;
+        options.GreenZoneBarOffsetAngle = 180;
+        options.GreenZoneBarFullAngle = 45;
+        options.ValueNumberRoundDigit = 1;
+        
+        options.AxisLabel = 
+        [   
+            "-0.5",
+            "0",
+            "+0.5",
+            "+1.0",
+            "+1.5"
+        ];
+        
+        super(options);
+    }
+}
