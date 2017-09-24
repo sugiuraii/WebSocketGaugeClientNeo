@@ -41,7 +41,7 @@ export class BoostGaugePanel extends FullCircularGaugePanelBase
         options.RedZoneBarOffsetAngle = 315;
         options.YellowZoneBarOffsetAngle = 270;
         options.GreenZoneBarOffsetAngle = 90;
-        options.RedZoneBarFullAngle = 40;
+        options.RedZoneBarFullAngle = 42;
         options.YellowZoneBarFullAngle = 45;
         options.GreenZoneBarFullAngle = 90;
         options.ValueNumberRoundDigit = 1;
@@ -86,6 +86,101 @@ export class AirFuelGaugePanel extends FullCircularGaugePanelBase
             "12",
             "10",
             "8"
+        ];
+        
+        super(options);
+    }
+}
+
+export class WaterTempGaugePanel extends FullCircularGaugePanelBase
+{
+    constructor()
+    {
+        let options = new FullCircularGaugePanelOptionsBase();
+        
+        options.TitleLabel = "WATER TEMP";
+        options.UnitLabel = "degC";
+        options.Min = 0;
+        options.Max = 120;
+        options.RedZoneBarEnable = true;
+        options.YellowZoneBarEnable = true;
+        options.GreenZoneBarEnable = false;
+        options.RedZoneBarOffsetAngle = 315;
+        options.YellowZoneBarOffsetAngle = 292.5;
+        options.RedZoneBarFullAngle = 42;
+        options.YellowZoneBarFullAngle = 22.5;
+        options.ValueNumberRoundDigit = 0;
+        
+        options.AxisLabel = 
+        [   "0",
+            "20",
+            "40",
+            "60",
+            "80",
+            "100",
+            "120"
+        ];
+        
+        super(options);
+    }
+}
+
+export class EngineOilTempGaugePanel extends FullCircularGaugePanelBase
+{
+    constructor()
+    {
+        let options = new FullCircularGaugePanelOptionsBase();
+        
+        options.TitleLabel = "ENG. OIL TEMP";
+        options.UnitLabel = "degC";
+        options.Min = 30;
+        options.Max = 150;
+        options.RedZoneBarEnable = true;
+        options.YellowZoneBarEnable = true;
+        options.GreenZoneBarEnable = false;
+        options.RedZoneBarOffsetAngle = 315;
+        options.YellowZoneBarOffsetAngle = 292.5;
+        options.RedZoneBarFullAngle = 42;
+        options.YellowZoneBarFullAngle = 22.5;
+        options.ValueNumberRoundDigit = 0;
+        
+        options.AxisLabel = 
+        [   "30",
+            "50",
+            "70",
+            "90",
+            "110",
+            "130",
+            "150"
+        ];
+        
+        super(options);
+    }
+}
+
+export class  BatteryVoltageGaugePanel extends FullCircularGaugePanelBase
+{
+    constructor()
+    {
+        let options = new FullCircularGaugePanelOptionsBase();
+        
+        options.TitleLabel = "BATTERY VOLT";
+        options.UnitLabel = "V";
+        options.Min = 9;
+        options.Max = 15;
+        options.RedZoneBarEnable = false;
+        options.YellowZoneBarEnable = false;
+        options.GreenZoneBarEnable = false;
+        options.ValueNumberRoundDigit = 1;
+        
+        options.AxisLabel = 
+        [   "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15"
         ];
         
         super(options);
