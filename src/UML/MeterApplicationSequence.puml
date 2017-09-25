@@ -1,0 +1,11 @@
+@startuml
+title Meter application sequence on connection
+participant MeterApplication
+participant WebSocketClients
+participant WebSocketServer
+participant ECUorController
+
+MeterApplication -> WebSocketClients : register code
+MeterApplication -> WebSocketClients : set interpolation flag
+WebSocketClients -> WebSocketServer : register code
+@enduml
