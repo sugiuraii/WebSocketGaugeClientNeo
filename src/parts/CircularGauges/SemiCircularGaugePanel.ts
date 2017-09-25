@@ -171,3 +171,23 @@ export class BoostGaugePanel extends SemiCircularGaugePanelBase
         super(options);
     }
 }
+
+export class MassAirFlowGaugePanel extends SemiCircularGaugePanelBase
+{
+    constructor()
+    {
+        let options = new SemiCircularGaugePanelOptionBase();
+        
+        options.TitleLabel = "MASS AIRFLOW";
+        options.Min = 0;
+        options.Max = 40;
+        options.UnitLabel = "x10g/s"
+        options.RedZoneBarEnable = false;
+        options.YellowZoneBarEnable = false;
+        options.GreenZoneBarEnable = false;
+        options.AxisLabel = ["0","10","20","30","40"];
+        options.ValueNumberRoundDigit = 0;
+        
+        super(options);
+    }
+}
