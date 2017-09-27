@@ -17,6 +17,7 @@ WebSocketGaugeClientNeo/
 ```
 
 ## Register application html and typescirpt files to webpack.
+### Copy from existing demo application sources.
 To make custom meter application, one html and one typescipt(*.ts) file is reqired.
 It is recommened to use demo application file for the template.
 
@@ -27,7 +28,8 @@ First, copy `DigitalMFD-ELM327DemoApp.html` and `DigitalMFD-ELM327DemoApp.ts` to
 > cp DigitalMFD-ELM327DemoApp.ts CustomMeterpanelApp.ts
 ```
 
-After that, modify `WebSocketGaugeClientNeo/src/application/webpack.config.js` as follows.
+### Edit webpack.config.js to register webpack build target.
+After that, open `WebSocketGaugeClientNeo/src/application/webpack.config.js`, and modify `module.exports={}` definition as ...
 
 ```js
 module.exports = {
@@ -40,33 +42,47 @@ module.exports = {
         "DigitalMFD-ArduinoDemoApp" : './DigitalMFD-ArduinoDemoApp.ts',
         "DigitalMFD-SSMDemoApp" : './DigitalMFD-SSMDemoApp.ts'
     },
-    devtool: "source-map",
-    output:
-    {
-        path: __dirname + "/../../public_html/application",
-        filename: "./js/[name].js"
-    },
-    resolve: {
-        extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
-    },
-  module: {
-    loaders: [
-        { test: /\.tsx?$/, loader: 'ts-loader' },
-        { test: /\.png$/, loader: "file-loader?name=img/[name].[ext]" },
-        { test: /\.fnt$/, loader: "file-loader?name=img/[name].[ext]" },
-        { test: /\.json$/, loader: "file-loader?name=img/[name].[ext]" },
-        { test: /\.html$/, loader: "file-loader?name=[name].[ext]" },
-        { test: /\.css$/, loader: "file-loader?name=[name].[ext]" },
-        { test: /\.(ttf|otf)$/, loader: "file-loader?name=fonts/[name].[ext]" }
-    ]
-  }
-};
+...
+```
+By this, webpack will complie `CustomMeterpanelApp.ts` and its dependent source files automatically (typescript compiler of tsc will be called inside webpack), and bundle into `CustomMeterpanelApp.js`.
+
+### Edit CustomMeterpanelApp.html
+`CustomMeterpanelApp.html`(you copied on previous section) is a entry point html file. This html file should load `CustomMeterpanelApp.js` (this file should be built by webpack).
+
+Edit `<script>` tag of `CustomMeterpanelApp.html` as follows.
+```html
+<html>
+    <head>
+    	<!-- change html titie as you like-->
+        <title>CustomMeterpanelApp</title>
+        <meta charset="UTF-8">
+
+    </head>
+    <body style="background: black">
+    	<!-- modify here to read CustomMeterpanelApp.js -->
+        <script type="text/javascript" src="js/CustomMeterpanelApp.js"></script>
+    </body>
+</html>
 ```
 
-By this, webpack can build and bundle your `CustomMeterpanelApp.html`and `CustomMeterpanelApp.ts`.
+### Edit CustomMeterpanelApp.ts
+To bundle `CustomMeterpanelApp.html` with application typescript file (`CustomMeterpanelApp.ts`), open `CustomMeterpanelApp.ts`, and edit `require()` field as below..
+
+```js
+...
+//For including entry point html file in webpack
+require("./CustomMeterpanelApp.html");
+...
+```
+
+## Try building custom meter panel application
 
 To build, run npm script at `WebSocketGaugeClientNeo/` directory, like,
 ```
+(move to the directory of WebSocketGaugeClientNeo and type)..
 > npm run build-application
 ```
 
+After the build is finished, you may find `CustomMeterpanelApp.html` and `CustomMeterpanelApp.js` in `public_html/application` directory.
+
+## Modify the contents of custom meter panel application
