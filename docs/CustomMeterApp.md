@@ -86,3 +86,36 @@ To build, run npm script at `WebSocketGaugeClientNeo/` directory, like,
 After the build is finished, you may find `CustomMeterpanelApp.html` and `CustomMeterpanelApp.js` in `public_html/application` directory.
 
 ## Modify the contents of custom meter panel application
+On this section, `CustomMeterpanelApp.ts` will be modified as the pictures below (left : before modification, right : after modification).
+* Shrink the size of "TURBO BOOST" gauge.
+* Change meter type of "WATER TEMP" (180deg gauge to 270deg gauge).
+* Add "MASS AIR FLOW" and "BATTERY VOLT" gauges.
+
+![Modify meter panel before](CustomMeterApp.img/MeterpanelModBefore.PNG)![Modify meter panel after](CustomMeterApp.img/MeterpanelModAfter.PNG)
+----
+
+Definition of meter application is done in follwoing steps in `CustomMeterpanelApp.ts`.
+* Import meter parts/paramter code class from library.
+* Define meter application class (with extending the class of MeterApplicationBase)
+	* Setup websocket communication. (by implementing `setWebSocketOptions()`)
+    * Setup texture and font pre-load. (by implementing `setTextureFontPreloadOptions()`).
+    * Setup meter panel contents (parts location is viewport) and parts operation (by implementing `setPIXIMeterPanel()`)
+
+### Import meter parts/paramter code classes from library.
+In meter application, each meter parts (water temp gauge, boost gauge, etc..) is described by typescript class (see below). 
+These parts class are written in separate type script files and need to be imported in `CustomMeterpanelApp.ts` by `import` statement.
+![Meter panel and parts classes](CustomMeterApp.img/MeterpanelMod_PartsClass.PNG)
+
+```js
+//// Import meter parts
+import {DigiTachoPanel} from "../parts/DigiTachoPanel/DigiTachoPanel";
+import {BoostGaugePanel} from "../parts/CircularGauges/FullCircularGaugePanel";
+import {ThrottleGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel";
+//// Changed from original DigitalMFD-ELM327DemoApp.ts
+//import {WaterTempGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel";
+import {WaterTempGaugePanel} from "../parts/CircularGauges/FullCircularGaugePanel";
+// Add to original DigitalMFD-ELM327DemoApp.ts
+import {MassAirFlowGaugePanel} from "../parts/CircularGauges/FullCircularGaugePanel";
+import {BatteryVoltageGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel";
+
+```

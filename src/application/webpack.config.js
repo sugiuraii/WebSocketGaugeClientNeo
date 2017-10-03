@@ -23,18 +23,19 @@
  */
 
 module.exports = {
+    cache: true,
     entry: 
     {
         // To build add your custom meter panel application,
         // Create "CustomMeterpanelApp.ts" and "CustomMetepanelApp.html", and add following row.
-        //"CustomMeterpanelApp" : './CustomMeterpanelApp.ts',
+        "CustomMeterpanelApp" : './CustomMeterpanelApp.ts',
         "AnalogMeterClusterApp" : './AnalogMeterClusterApp.ts',
         "DigitalMFDApp" : './DigitalMFDApp.ts',
         "DigitalMFD-ELM327DemoApp" : './DigitalMFD-ELM327DemoApp.ts',
         "DigitalMFD-ArduinoDemoApp" : './DigitalMFD-ArduinoDemoApp.ts',
         "DigitalMFD-SSMDemoApp" : './DigitalMFD-SSMDemoApp.ts'
     },
-    devtool: "source-map",
+    devtool: "#inline-source-map",
     output: 
     {
         path: __dirname + "/../../public_html/application",
