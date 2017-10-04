@@ -26,7 +26,6 @@ import {ControlPanel} from "./ControlPanel";
 import * as WebFont from "webfontloader";
 import * as WebSocketCommunication from "../WebSocket/WebSocketCommunication";
 import {calculateGearPosition} from "./CalculateGearPosition";
-export {DefiParameterCode} from "../WebSocket/WebSocketCommunication";
 
 const DEFICOM_WS_PORT = 2012;
 const ARDUINOCOM_WS_PORT = 2015;
