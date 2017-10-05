@@ -1,8 +1,16 @@
-# Making custom meter gauge application.
+# Meter application source code.
 
 ## Table of contents
-* Directroy map of sources
-* Register application html and typescript files to webpack.
+* Meter application source files.
+* Bundle html file with typescript file.
+* Import dependent modules
+* Application entry point
+* Define application class
+	* Setup websocket communication (by implementing `setWebSocketOptions()`)
+	* Setup picture and font preload (by implementing `setTextureFontPreloadOptions()`)
+	* Setup meter panel configuration (by implementing `setPIXIMeterPanel()`)
+* The html file
+* Build custom meter application
 
 ## Meter application source files.
 
@@ -73,7 +81,7 @@ This entry point method (`window.onload()`) is called when the browser finish lo
 (But it should be noted that browser do not wait to finish loading picture and font files. Because of that, preload setting should be defined in application class).
 Construct application class (described below), and start application class with `run()` method.
 
-## Definition of application class
+## Define application class
 `DigitalMFD-ELM327DemoApp.ts`
 ```js
 class DigitalMFD_ELM327DemoApp extends MeterApplicationBase
@@ -200,7 +208,7 @@ protected setPIXIMeterPanel()
         const neutralSw = false;
         const gearPos = this.calculateGearPosition(tacho, speed, neutralSw);
 
-        const boost = this.ELM327WS.getVal(OBDIIParameterCode.Manifold_Absolute_Pressure, timestamp)  * 0.0101972 - 1; //convert kPa to kgf/cm2 and relative pressure
+        const boost = this.ELM327WS.getVal(OBDIIParameterCode.Manifold_Absolute_Pressure, timestamp)  * 0.0101972 - 1; //convert kPa to kg[](http://)f/cm2 and relative pressure
 
         const waterTemp = this.ELM327WS.getRawVal(OBDIIParameterCode.Coolant_Temperature);
         const throttle = this.ELM327WS.getVal(OBDIIParameterCode.Throttle_Opening_Angle, timestamp);
@@ -215,112 +223,33 @@ protected setPIXIMeterPanel()
    });
 }
 ```
-The first half of above code create meter parts instances. Created instances are added to stage (after setting scale and position). Since meter parts class extends PIXI.Container, parts instances can be treated like pixi.js Container instances.
+The first half of above code create meter parts instances. Created instances are added to stage (after setting scale (by `scale.set()`) and position (by `position.set()`)).
+(Since meter parts class extends PIXI.Container class, parts instances can be treated like pixi.js Container instances.)
 
-The latter half of above code (after the row of `this.ticker.add()`) defines the ticker. This part of code will be called  every drawing frame of application (like `requestAnimationFrame()`).
+The latter half of above code (after `this.ticker.add()`) defines the ticker method. This part of code will be called  every animation frame of application (like `requestAnimationFrame()`). By using following methods, sensor data is obtaind by every animation frame, and transferred to meter parts instances.
+* `getVal(code : string, timestamp : number)`
+	* This method get the "interpolated" sensor value for smooth animation. With using this method, smooth meter animation is possble even though sensor update rate is slow.
+	  This method interpolate sensor value by using timestamp of animation frame (this can be given by `timestamp` argument) and timestamp of data receive from websocket server.
+    * To use this method, animation timestamp is needed. (On above code, animation timestamp is obtained by the static property of `PIXI.ticker.shared.lastTime`). And also, interpolation flag need to be set true on registering parameter.
+* `getRawVal(code : string)`
+	* This method gets raw value (not interpolated) of sensor.
 
-
-
-## Register application html and typescirpt files to webpack.
-### Copy from existing demo application sources.
-To make custom meter application, one html and one typescipt(*.ts) file is reqired.
-It is recommened to use demo application file for the template.
-
-First, copy `DigitalMFD-ELM327DemoApp.html` and `DigitalMFD-ELM327DemoApp.ts` to your prefer filename. (In this document, destination file name set to `CustomMeterpanelApp.html`and `CustomMeterpanelApp.ts`).
-```
-> cd WebSocketGaugeClientNeo/src/application
-> cp DigitalMFD-ELM327DemoApp.html CustomMeterpanelApp.html
-> cp DigitalMFD-ELM327DemoApp.ts CustomMeterpanelApp.ts
-```
-
-### Edit webpack.config.js to register webpack build target.
-After that, open `WebSocketGaugeClientNeo/src/application/webpack.config.js`, and modify `module.exports={}` definition as ...
-
-```js
-module.exports = {
-    entry:
-    {
-        "CustomMeterpanelApp" : './CustomMeterpanelApp.ts', // Add this line.
-        "AnalogMeterClusterApp" : './AnalogMeterClusterApp.ts',
-        "DigitalMFDApp" : './DigitalMFDApp.ts',
-        "DigitalMFD-ELM327DemoApp" : './DigitalMFD-ELM327DemoApp.ts',
-        "DigitalMFD-ArduinoDemoApp" : './DigitalMFD-ArduinoDemoApp.ts',
-        "DigitalMFD-SSMDemoApp" : './DigitalMFD-SSMDemoApp.ts'
-    },
-...
-```
-By this, webpack will complie `CustomMeterpanelApp.ts` and its dependent source files automatically (typescript compiler of tsc will be called inside webpack), and bundle into `CustomMeterpanelApp.js`.
-
-### Edit CustomMeterpanelApp.html
-`CustomMeterpanelApp.html`(you copied on previous section) is a entry point html file. This html file should load `CustomMeterpanelApp.js` (this file should be built by webpack).
-
-Edit `<script>` tag of `CustomMeterpanelApp.html` as follows.
+## The html file
+html file (in this example, `DigitalMFD-ELM327DemoApp.html`) simply calls the javascript file (this javascript file is complied and deployed by webpack).
 ```html
 <html>
     <head>
-    	<!-- change html titie as you like-->
-        <title>CustomMeterpanelApp</title>
+        <title>DigitalMFDApp</title>
         <meta charset="UTF-8">
 
     </head>
     <body style="background: black">
-    	<!-- modify here to read CustomMeterpanelApp.js -->
-        <script type="text/javascript" src="js/CustomMeterpanelApp.js"></script>
+        <script type="text/javascript" src="js/DigitalMFD-ArduinoDemoApp.js"></script>
     </body>
 </html>
 ```
 
-### Edit CustomMeterpanelApp.ts
-To bundle `CustomMeterpanelApp.html` with application typescript file (`CustomMeterpanelApp.ts`), open `CustomMeterpanelApp.ts`, and edit `require()` field as below..
-
-```js
-...
-//For including entry point html file in webpack
-require("./CustomMeterpanelApp.html");
-...
-```
-
-## Try building custom meter panel application
-
-To build, run npm script at `WebSocketGaugeClientNeo/` directory, like,
-```
-(move to the directory of WebSocketGaugeClientNeo and type)..
-> npm run build-application
-```
-
-After the build is finished, you may find `CustomMeterpanelApp.html` and `CustomMeterpanelApp.js` in `public_html/application` directory.
-
-## Modify the contents of custom meter panel application
-On this section, `CustomMeterpanelApp.ts` will be modified as the pictures below (left : before modification, right : after modification).
-* Shrink the size of "TURBO BOOST" gauge.
-* Change meter type of "WATER TEMP" (180deg gauge to 270deg gauge).
-* Add "MASS AIR FLOW" and "BATTERY VOLT" gauges.
-
-![Modify meter panel before](CustomMeterApp.img/MeterpanelModBefore.PNG)![Modify meter panel after](CustomMeterApp.img/MeterpanelModAfter.PNG)
-----
-
-Definition of meter application is done in follwoing steps in `CustomMeterpanelApp.ts`.
-* Import meter parts/paramter code class from library.
-* Define meter application class (with extending the class of MeterApplicationBase)
-	* Setup websocket communication. (by implementing `setWebSocketOptions()`)
-    * Setup texture and font pre-load. (by implementing `setTextureFontPreloadOptions()`).
-    * Setup meter panel contents (parts location is viewport) and parts operation (by implementing `setPIXIMeterPanel()`)
-
-### Import meter parts/paramter code classes from library.
-In meter application, each meter parts (water temp gauge, boost gauge, etc..) is described by typescript class (see below). 
-These parts class are written in separate type script files and need to be imported in `CustomMeterpanelApp.ts` by `import` statement.
-![Meter panel and parts classes](CustomMeterApp.img/MeterpanelMod_PartsClass.PNG)
-
-```js
-//// Import meter parts
-import {DigiTachoPanel} from "../parts/DigiTachoPanel/DigiTachoPanel";
-import {BoostGaugePanel} from "../parts/CircularGauges/FullCircularGaugePanel";
-import {ThrottleGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel";
-//// Changed from original DigitalMFD-ELM327DemoApp.ts
-//import {WaterTempGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel";
-import {WaterTempGaugePanel} from "../parts/CircularGauges/FullCircularGaugePanel";
-// Add to original DigitalMFD-ELM327DemoApp.ts
-import {MassAirFlowGaugePanel} from "../parts/CircularGauges/FullCircularGaugePanel";
-import {BatteryVoltageGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel";
-
-```
+## Build custom meter application
+By referring sample source files and this document, you can make custom meter application.
+To build your custom meter application, `webpack.config.js` need to be modified to register your custom meter application.
+Please refer [MeterAppBuild.md](./MeterAppBuild.md)

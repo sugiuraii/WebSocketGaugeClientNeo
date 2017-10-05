@@ -8,6 +8,7 @@
 * [Dependency](#dependency)
 * [Install](#install)
 * [Build](#build)
+* [Making custom meter panel](#custom)
 * [License](#license)
 
 ## <a name="description">Description</a>
@@ -53,7 +54,7 @@ Before modifying the source code (including makinig your custom meter panel or p
 
 ### Install node.js
 Install node.js. On windows, you can find the installer on [official node.js site](https://nodejs.org/).
-To build sources, node.js newer than 8.x is needed.
+To build sources, node.js newer than 8.x is needed (since build script calls `npx` comand).
 
 ### Install dependent npm packages
 Before build, please install dependent npm packages. Dependent npm packages can be installed automatically by simply running `npm install`,
@@ -69,6 +70,10 @@ Build command is incuded in npm scirpt (please see `package.json`). To build,
 > npm run build-benchmark
 > npm run build-application
 ```
+
+## <a name="custom">Making custom meter panel<a/>
+There are some sample source codes of meter application in `WebSocketGaugeClientNeo/src/application`directoy.
+To make your custom meter application, refer [CustomMeterApp.md](./docs/CustomMeterApp.md)
 
 ## <a name="install">Install</a>
 After buiding sources, compiled htmls and javascripts will be stored in `public_html` folder. Please copy these files to your web server (e.g. nginx) export directory.

@@ -25,7 +25,8 @@
 // This is required to webpack font/texture/html files
 /// <reference path="../lib/webpackRequire.ts" />
 
-import * as PIXI from "pixi.js";
+//Assign entry point html file to bundle by webpack
+require("./DigitalMFD-ArduinoDemoApp.html");
 
 //Import application base class
 import {MeterApplicationBase} from "../lib/MeterAppBase/MeterApplicationBase";
@@ -39,8 +40,6 @@ import {DigiTachoPanel} from "../parts/DigiTachoPanel/DigiTachoPanel";
 //Import enumuator of parameter code
 import {ArduinoParameterCode} from "../lib/WebSocket/WebSocketCommunication";
 
-//For including entry point html file in webpack
-require("./DigitalMFD-ArduinoDemoApp.html");
 
 window.onload = function()
 {

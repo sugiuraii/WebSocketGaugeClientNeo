@@ -25,7 +25,8 @@
 // This is required to webpack font/texture/html files
 /// <reference path="../lib/webpackRequire.ts" />
 
-import * as PIXI from "pixi.js";
+//For including entry point html file in webpack
+require("./CustomMeterpanelApp.html");
 
 //Import application base class
 import {MeterApplicationBase} from "../lib/MeterAppBase/MeterApplicationBase";
@@ -44,9 +45,6 @@ import {BatteryVoltageGaugePanel} from "../parts/CircularGauges/SemiCircularGaug
 //Import enumuator of parameter code
 import {OBDIIParameterCode} from "../lib/WebSocket/WebSocketCommunication";
 import {ReadModeCode} from "../lib/WebSocket/WebSocketCommunication";
-
-//For including entry point html file in webpack
-require("./CustomMeterpanelApp.html");
 
 window.onload = function()
 {
