@@ -25,7 +25,8 @@
 // This is required to webpack font/texture/html files
 /// <reference path="../lib/webpackRequire.ts" />
 
-import * as PIXI from "pixi.js";
+//For including entry point html file in webpack
+require("./DigitalMFD-SSMDemoApp.html");
 
 //Import application base class
 import {MeterApplicationBase} from "../lib/MeterAppBase/MeterApplicationBase";
@@ -42,8 +43,6 @@ import {SSMSwitchCode} from "../lib/WebSocket/WebSocketCommunication";
 
 import {ReadModeCode} from "../lib/WebSocket/WebSocketCommunication";
 
-//For including entry point html file in webpack
-require("./DigitalMFD-SSMDemoApp.html");
 
 window.onload = function()
 {
