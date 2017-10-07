@@ -186,3 +186,32 @@ export class  BatteryVoltageGaugePanel extends FullCircularGaugePanelBase
         super(options);
     }
 }
+
+export class  MassAirFlowGaugePanel extends FullCircularGaugePanelBase
+{
+    constructor()
+    {
+        let options = new FullCircularGaugePanelOptionsBase();
+        
+        options.TitleLabel = "MASS AIRFLOW";
+        options.UnitLabel = "x10g/s";
+        options.Min = 0;
+        options.Max = 50;
+        options.RedZoneBarEnable = false;
+        options.YellowZoneBarEnable = false;
+        options.GreenZoneBarEnable = false;
+        options.ValueNumberRoundDigit = 0;
+        
+        options.AxisLabel = 
+        [   "0",
+            "10",
+            "20",
+            "30",
+            "40",
+            "50",
+            "60"
+        ];
+        
+        super(options);
+    }
+}

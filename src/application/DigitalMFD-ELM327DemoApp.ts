@@ -21,11 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
- 
-// This is required to webpack font/texture/html files
+// This line is required to bundle font/texture/html files by webpack file-loader (do not delete)
 /// <reference path="../lib/webpackRequire.ts" />
 
-import * as PIXI from "pixi.js";
+// Set entry point html file to bundle by webpack
+require("./DigitalMFD-ELM327DemoApp.html");
 
 //Import application base class
 import {MeterApplicationBase} from "../lib/MeterAppBase/MeterApplicationBase";
@@ -40,8 +40,6 @@ import {BoostGaugePanel} from "../parts/CircularGauges/FullCircularGaugePanel";
 import {OBDIIParameterCode} from "../lib/WebSocket/WebSocketCommunication";
 import {ReadModeCode} from "../lib/WebSocket/WebSocketCommunication";
 
-//For including entry point html file in webpack
-require("./DigitalMFD-ELM327DemoApp.html");
 
 window.onload = function()
 {
@@ -73,14 +71,17 @@ class DigitalMFD_ELM327DemoApp extends MeterApplicationBase
         this.registerWebFontFamilyNameToPreload(WaterTempGaugePanel.RequestedFontFamily);
         this.registerWebFontFamilyNameToPreload(DigiTachoPanel.RequestedFontFamily);
         this.registerWebFontFamilyNameToPreload(BoostGaugePanel.RequestedFontFamily);
+        this.registerWebFontFamilyNameToPreload(ThrottleGaugePanel.RequestedFontFamily);
     
         this.registerWebFontCSSURLToPreload(WaterTempGaugePanel.RequestedFontCSSURL);
         this.registerWebFontCSSURLToPreload(DigiTachoPanel.RequestedFontCSSURL);
         this.registerWebFontCSSURLToPreload(BoostGaugePanel.RequestedFontCSSURL);
+        this.registerWebFontCSSURLToPreload(ThrottleGaugePanel.RequestedFontCSSURL);
         
         this.registerTexturePathToPreload(WaterTempGaugePanel.RequestedTexturePath);
         this.registerTexturePathToPreload(DigiTachoPanel.RequestedTexturePath);
         this.registerTexturePathToPreload(BoostGaugePanel.RequestedTexturePath);
+        this.registerTexturePathToPreload(ThrottleGaugePanel.RequestedTexturePath);
     }
     
     /**
@@ -121,8 +122,7 @@ class DigitalMFD_ELM327DemoApp extends MeterApplicationBase
             const speed = this.ELM327WS.getVal(OBDIIParameterCode.Vehicle_Speed, timestamp);
             const neutralSw = false;
             const gearPos = this.calculateGearPosition(tacho, speed, neutralSw);
-            const boost = this.ELM327WS.getVal(OBDIIParameterCode.Manifold_Absolute_Pressure, timestamp)  * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
-            
+            const boost = this.ELM327WS.getVal(OBDIIParameterCode.Manifold_Absolute_Pressure, timestamp)  * 0.0101972 - 1; //convert kPa to kgf/cm2 and relative pressure   
             const waterTemp = this.ELM327WS.getRawVal(OBDIIParameterCode.Coolant_Temperature);
             const throttle = this.ELM327WS.getVal(OBDIIParameterCode.Throttle_Opening_Angle, timestamp);
             
