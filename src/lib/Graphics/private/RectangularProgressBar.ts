@@ -25,6 +25,9 @@
 import {ProgressBarOptions} from './ProgressBarBase'
 import {ProgressBar} from './ProgressBarBase'
 
+/**
+ * Rectangular progressbar option class.
+ */
 export class RectangularProgressBarOptions extends ProgressBarOptions
 {
     /**
@@ -61,12 +64,18 @@ export class RectangularProgressBarOptions extends ProgressBarOptions
     }
 }
 
+/**
+ * REctangular progressbar class.
+ */
 export class RectangularProgressBar extends ProgressBar
 {
     private rectangularProgressBarOptions: RectangularProgressBarOptions;
 
     private currBarPixel : number;
 
+    /**
+     * @param options Option to set.
+     */
     constructor(options?: RectangularProgressBarOptions)
     {
         let rectangularProgressBarOptions: RectangularProgressBarOptions;
@@ -83,7 +92,11 @@ export class RectangularProgressBar extends ProgressBar
      * @return Options.
      */
     get Options() {return this.rectangularProgressBarOptions}
-
+    
+    /**
+     * Update progress bar.
+     * @param skipStepCheck Skip checking angle displacement over the angleStep or not.
+     */
     protected _update(skipStepCheck : boolean) : void
     {
         // Update texture reference of sprite.

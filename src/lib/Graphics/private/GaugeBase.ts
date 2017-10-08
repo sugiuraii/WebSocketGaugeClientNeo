@@ -24,6 +24,9 @@
 
 import * as PIXI from 'pixi.js';
 
+/**
+ * 1D Gauge option class.
+ */
 export class Gauge1DOptions
 {
     /**
@@ -47,12 +50,18 @@ export class Gauge1DOptions
     }
 }
 
+/**
+ * 1D gauge class.
+ */
 export abstract class Gauge1D extends PIXI.Container
 {
     private gauge1DOptions: Gauge1DOptions;
 
     private value : number;
-
+    
+    /**
+     * @param options Option to set.
+     */
     constructor(options? : Gauge1DOptions)
     {
         super();
@@ -70,9 +79,18 @@ export abstract class Gauge1D extends PIXI.Container
      */
     get Options() {return this.gauge1DOptions}
     
+    /**
+     * Get gauge value.
+     */
     get Value() : number { return this.value;}
+    /**
+     * Set gauge value.
+     */
     set Value(val : number) { this.value = val;}
     
+    /**
+     * Get actual draw value (considering InvertDraw flag).
+     */
     get DrawValue() : number
     {
         const Max = this.Options.Max;

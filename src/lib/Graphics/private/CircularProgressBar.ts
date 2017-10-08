@@ -69,6 +69,9 @@ export class CircularProgressBarOptions extends ProgressBarOptions
     }
 }
 
+/**
+ * Circular progressbar class.
+ */
 export class CircularProgressBar extends ProgressBar
 {
     private circularProgressbarOptions: CircularProgressBarOptions;

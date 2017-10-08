@@ -25,6 +25,9 @@
 import {Gauge1DOptions} from './GaugeBase'
 import {Gauge1D} from './GaugeBase'
 
+/**
+ * Progress bar option class.
+ */
 export class ProgressBarOptions extends Gauge1DOptions
 {
     /**
@@ -37,12 +40,18 @@ export class ProgressBarOptions extends Gauge1DOptions
     }
 }
 
+/**
+ * Progress bar class.
+ */
 export abstract class ProgressBar extends Gauge1D
 {
     private progressBarOptions: ProgressBarOptions;
     private sprite : PIXI.Sprite;
     private spriteMask : PIXI.Graphics;
 
+    /**
+     * @param options Option to set.
+     */
     constructor(options?: ProgressBarOptions)
     {
         let progressBarOptions: ProgressBarOptions;

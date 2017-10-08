@@ -25,6 +25,9 @@
 import {Gauge1DOptions} from './GaugeBase'
 import {Gauge1D} from './GaugeBase'
 
+/**
+ * Needle gauge option class.
+ */
 class NeedleGaugeOptions extends Gauge1DOptions
 {
     /**
@@ -37,6 +40,9 @@ class NeedleGaugeOptions extends Gauge1DOptions
     }
 }
 
+/**
+ * Needle gauge class.
+ */
 abstract class NeedleGauge extends Gauge1D
 {
     private needleGaugeOptions: NeedleGaugeOptions;
@@ -69,11 +75,27 @@ abstract class NeedleGauge extends Gauge1D
     get Sprite(): PIXI.Sprite { return this.sprite; }
 }
 
+/**
+ * Rotation needle gauge option class.
+ */
 export class RotationNeedleGaugeOptions extends NeedleGaugeOptions
 {
+    /**
+     * Offset angle (angle of value=Min)
+     */
     public OffsetAngle : number;
+    /**
+     * Angle of value=Max.
+     * (Actual rotation angle = OffsetAngle + FullAngle).
+     */
     public FullAngle : number;
+    /**
+     * Angle tick step.
+     */
     public AngleStep : number;
+    /**
+     * Rotation direction. (Anticlockwise drawing in true).
+     */
     public AntiClockwise : boolean;
     constructor()
     {
@@ -108,6 +130,10 @@ export class RotationNeedleGauge extends NeedleGauge
         this.rotationNeedleGaugeOptions = rotationNeedleGaugeOptions;
     }
 
+    /**
+     * Update gauge.
+     * @param skipStepCheck Skip checking angle displacement over the angleStep or not.
+     */
     protected _update(skipStepCheck: boolean): void
     {
         // Update texture reference of sprite.
