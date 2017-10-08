@@ -26,9 +26,20 @@ import * as PIXI from 'pixi.js';
 
 export class Gauge1DOptions
 {
+    /**
+     * Max value of gauge.
+     */
     public Max: number;
+    /**
+     * Min value of gauge.
+     */
     public Min: number;
-
+    
+    /**
+     * Flag of inverting drawing/filling direction.
+     */
+    public InvertDraw : boolean;
+    
     constructor()
     {
         this.Max = 100;
@@ -40,7 +51,6 @@ export abstract class Gauge1D extends PIXI.Container
 {
     private gauge1DOptions: Gauge1DOptions;
 
-    private invertDraw : boolean;
     private value : number;
 
     constructor(options? : Gauge1DOptions)
@@ -53,31 +63,33 @@ export abstract class Gauge1D extends PIXI.Container
 
         this.value = 0;
     }
-
-    get Max(): number {return this.gauge1DOptions.Max;}      
-    set Max(val : number) { this.gauge1DOptions.Max = val;}
-
-    get Min() : number { return this.gauge1DOptions.Min;}
-    set Min(val : number) { this.gauge1DOptions.Min = val;}
-
+    
+    /**
+     * Get Options.
+     * @return Options.
+     */
+    get Options() {return this.gauge1DOptions}
+    
     get Value() : number { return this.value;}
     set Value(val : number) { this.value = val;}
-
-    get InvertDraw() : boolean { return this.invertDraw; }
-    set InvertDraw(flag : boolean) { this.invertDraw = flag; }
-
+    
     get DrawValue() : number
     {
+        const Max = this.Options.Max;
+        const Min = this.Options.Min;
+        const Value = this.Value;
+        const InvertDraw = this.Options.InvertDraw;
+        
         let drawVal : number;
-        if( this.Value > this.Max)
-            drawVal = this.Max;
-        else if (this.Value < this.Min)
-            drawVal = this.Min;
+        if( Value > Max)
+            drawVal = Max;
+        else if (Value < Min)
+            drawVal = Min;
         else
-            drawVal = this.Value
+            drawVal = Value
 
-        if (this.InvertDraw)
-            drawVal = this.Max - drawVal + this.Min;
+        if (InvertDraw)
+            drawVal = Max - drawVal + Min;
 
         return drawVal;
     }

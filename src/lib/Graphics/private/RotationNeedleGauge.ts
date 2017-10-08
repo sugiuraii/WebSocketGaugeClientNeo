@@ -27,12 +27,16 @@ import {Gauge1D} from './GaugeBase'
 
 class NeedleGaugeOptions extends Gauge1DOptions
 {
+    /**
+     * Texture of gauge needle.
+     */
     public Texture: PIXI.Texture;
     constructor()
     {
         super();
     }
 }
+
 abstract class NeedleGauge extends Gauge1D
 {
     private needleGaugeOptions: NeedleGaugeOptions;
@@ -55,14 +59,13 @@ abstract class NeedleGauge extends Gauge1D
         //Assign spirite and mask to container
         this.addChild(this.sprite);
     }
-
-    get Texture(): PIXI.Texture {return this.needleGaugeOptions.Texture; }
-    set Texture(val: PIXI.Texture) 
-    {
-        this.needleGaugeOptions.Texture = val;
-        this.sprite.texture = this.needleGaugeOptions.Texture;
-    }
-
+    
+    /**
+     * Get Options.
+     * @return Options.
+     */
+    get Options() {return this.needleGaugeOptions}
+    
     get Sprite(): PIXI.Sprite { return this.sprite; }
 }
 
@@ -88,6 +91,12 @@ export class RotationNeedleGauge extends NeedleGauge
 
     private currAngle : number;
 
+    /**
+     * Get Options.
+     * @return Options.
+     */
+    get Options() {return this.rotationNeedleGaugeOptions}
+
     constructor(options?: RotationNeedleGaugeOptions)
     {
         let rotationNeedleGaugeOptions: RotationNeedleGaugeOptions;
@@ -99,25 +108,18 @@ export class RotationNeedleGauge extends NeedleGauge
         this.rotationNeedleGaugeOptions = rotationNeedleGaugeOptions;
     }
 
-    get OffsetAngle() : number { return this.rotationNeedleGaugeOptions.OffsetAngle; }
-    set OffsetAngle(val: number) { this.rotationNeedleGaugeOptions.OffsetAngle = val; }
-    get FullAngle() : number { return this.rotationNeedleGaugeOptions.FullAngle; }
-    set FullAngle(val: number) { this.rotationNeedleGaugeOptions.FullAngle = val; }
-    get AngleStep(): number {return this.rotationNeedleGaugeOptions.AngleStep; }
-    set AngleStep(val: number) {this.rotationNeedleGaugeOptions.AngleStep = val; }
-    get AntiClockwise(): boolean {return this.rotationNeedleGaugeOptions.AntiClockwise; }
-    set AntiClockwise(val: boolean) {this.rotationNeedleGaugeOptions.AntiClockwise = val; }
-
     protected _update(skipStepCheck: boolean): void
     {
-        'use strict';
-        const anticlockwise : boolean = this.AntiClockwise;
-        const offsetAngle : number = this.OffsetAngle;
-        const fullAngle : number = this.FullAngle;
-        const angleStep : number = this.AngleStep;
+        // Update texture reference of sprite.
+        this.Sprite.texture = this.rotationNeedleGaugeOptions.Texture;
+        
+        const anticlockwise: boolean = this.Options.AntiClockwise;
+        const offsetAngle : number = this.Options.OffsetAngle;
+        const fullAngle : number = this.Options.FullAngle;
+        const angleStep : number = this.Options.AngleStep;
 
-        const valueMax : number = this.Max;
-        const valueMin : number = this.Min;
+        const valueMax : number = this.Options.Max;
+        const valueMin : number = this.Options.Min;
         const value : number = this.DrawValue;
 
         const currentAngle: number= this.currAngle;

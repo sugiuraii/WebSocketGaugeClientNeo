@@ -24,14 +24,39 @@
 import {ProgressBarOptions} from './ProgressBarBase'
 import {ProgressBar} from './ProgressBarBase'
 
+/**
+ * Option class for CircularProgressBar.
+ */
 export class CircularProgressBarOptions extends ProgressBarOptions
 {
+    /**
+     * Offset angle (angle of value=Min)
+     */
     public OffsetAngle : number;
+    /**
+     * Drawing angle of value=Max.
+     * (Actual progress bar drawing angle = OffsetAngle + FullAngle).
+     */
     public FullAngle : number;
+    /**
+     * Angle tick step.
+     */
     public AngleStep : number;
+    /**
+     * Drawing direction. (Anticlockwise drawing in true).
+     */
     public AntiClockwise : boolean;
+    /**
+     * Center position.
+     */
     public Center : PIXI.Point;
+    /**
+     * Outer clipping radius of progress bar.
+     */
     public Radius : number;
+    /**
+     * Inner clipping radius of progress bar.
+     */
     public InnerRadius : number;
     constructor()
     {
@@ -46,10 +71,13 @@ export class CircularProgressBarOptions extends ProgressBarOptions
 
 export class CircularProgressBar extends ProgressBar
 {
-    private circularProgressBarOptions: CircularProgressBarOptions;
+    private circularProgressbarOptions: CircularProgressBarOptions;
 
     private currAngle : number;
-
+    
+    /**
+     * @param options CircularProgressBarOption to set.
+     */
     constructor(options?: CircularProgressBarOptions)
     {
         let circularProgressBarOptions: CircularProgressBarOptions;
@@ -59,37 +87,34 @@ export class CircularProgressBar extends ProgressBar
             circularProgressBarOptions = options;
 
         super(circularProgressBarOptions);
-        this.circularProgressBarOptions = circularProgressBarOptions;
+        this.circularProgressbarOptions = circularProgressBarOptions;
     }
-
-    get OffsetAngle(): number {return this.circularProgressBarOptions.OffsetAngle; }
-    set OffsetAngle(val: number) {this.circularProgressBarOptions.OffsetAngle = val; }
-    get FullAngle(): number {return this.circularProgressBarOptions.FullAngle; }
-    set FullAngle(val: number) {this.circularProgressBarOptions.FullAngle = val; }
-    get AngleStep(): number {return this.circularProgressBarOptions.AngleStep; }
-    set AngleStep(val: number) {this.circularProgressBarOptions.AngleStep = val; }
-    get AntiClockwise(): boolean {return this.circularProgressBarOptions.AntiClockwise; }
-    set AntiClockwise(val: boolean) {this.circularProgressBarOptions.AntiClockwise = val; }
-    get Center(): PIXI.Point {return this.circularProgressBarOptions.Center; }
-    set Center(val: PIXI.Point) {this.circularProgressBarOptions.Center = val; }
-    get Radius(): number {return this.circularProgressBarOptions.Radius; }
-    set Radius(val: number) {this.circularProgressBarOptions.Radius = val; }
-    get InnerRadius(): number {return this.circularProgressBarOptions.InnerRadius; }
-    set InnerRadius(val: number) {this.circularProgressBarOptions.InnerRadius = val; }
-
+    
+    /**
+     * Get Options.
+     * @return Options.
+     */
+    get Options() {return this.circularProgressbarOptions}
+    
+    /**
+     * Update progress bar.
+     * @param skipStepCheck Skip checking angle displacement over the angleStep or not.
+     */
     protected _update(skipStepCheck : boolean): void
     {
-        'use strict';
-        const centerPos: PIXI.Point = this.Center;
-        const radius : number = this.Radius;
-        const innerRadius : number = this.InnerRadius;
-        const anticlockwise: boolean = this.AntiClockwise;
-        const offsetAngle : number = this.OffsetAngle;
-        const fullAngle : number = this.FullAngle;
-        const angleStep : number = this.AngleStep;
+        // Update texture reference of sprite.
+        this.Sprite.texture = this.Options.Texture;
 
-        const valueMax : number = this.Max;
-        const valueMin : number = this.Min;
+        const centerPos: PIXI.Point = this.Options.Center;
+        const radius : number = this.Options.Radius;
+        const innerRadius : number = this.Options.InnerRadius;
+        const anticlockwise: boolean = this.Options.AntiClockwise;
+        const offsetAngle : number = this.Options.OffsetAngle;
+        const fullAngle : number = this.Options.FullAngle;
+        const angleStep : number = this.Options.AngleStep;
+
+        const valueMax: number = this.Options.Max;
+        const valueMin: number = this.Options.Min;
         const value : number = this.DrawValue;
 
         const spriteMask: PIXI.Graphics = this.SpriteMask;

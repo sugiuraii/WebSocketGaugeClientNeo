@@ -130,18 +130,18 @@ export class LEDTachoMeter extends PIXI.Container
         super.addChild(backSprite);
 
         const tachoProgressBar = this.tachoProgressBar;
-        tachoProgressBar.Texture = PIXI.Texture.fromFrame("LEDTachoMeter_LED_Yellow");
-        tachoProgressBar.Center.set(300,300);
+        tachoProgressBar.Options.Texture = PIXI.Texture.fromFrame("LEDTachoMeter_LED_Yellow");
+        tachoProgressBar.Options.Center.set(300,300);
         tachoProgressBar.pivot.set(300,300);
         tachoProgressBar.position.set(300, 300);
-        tachoProgressBar.Radius = 300;
-        tachoProgressBar.InnerRadius = 200;
-        tachoProgressBar.Max = tachoMax;
-        tachoProgressBar.Min = tachoMin;
+        tachoProgressBar.Options.Radius = 300;
+        tachoProgressBar.Options.InnerRadius = 200;
+        tachoProgressBar.Options.Max = tachoMax;
+        tachoProgressBar.Options.Min = tachoMin;
         tachoProgressBar.Value = tachoValDefault;
-        tachoProgressBar.OffsetAngle = 90;
-        tachoProgressBar.FullAngle = 270;
-        tachoProgressBar.AngleStep = 6;
+        tachoProgressBar.Options.OffsetAngle = 90;
+        tachoProgressBar.Options.FullAngle = 270;
+        tachoProgressBar.Options.AngleStep = 6;
         tachoProgressBar.updateForce();
         super.addChild(tachoProgressBar);
 

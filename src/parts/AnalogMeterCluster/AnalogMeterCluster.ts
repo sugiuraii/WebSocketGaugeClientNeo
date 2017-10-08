@@ -25,7 +25,9 @@
  /// <reference path="../../lib/webpackRequire.ts" />
 
 import {CircularProgressBar} from '../../lib/Graphics/PIXIGauge';
+import {CircularProgressBarOptions} from '../../lib/Graphics/PIXIGauge';
 import {RotationNeedleGauge} from '../../lib/Graphics/PIXIGauge';
+import {RotationNeedleGaugeOptions} from '../../lib/Graphics/PIXIGauge';
 import PIXI = require('pixi.js');
 
 require("./AnalogMeterClusterTexture.json");
@@ -44,11 +46,11 @@ require("./AnalogMeterFont_60px_0.png");
 
 export class AnalogMeterCluster extends PIXI.Container
 {
-    private tachoProgressBar = new CircularProgressBar();
-    private waterTempProgressBar = new CircularProgressBar();
-    private tachoNeedleGauge = new RotationNeedleGauge();
-    private speedNeedleGauge = new RotationNeedleGauge();
-    private boostNeedleGauge = new RotationNeedleGauge();
+    private tachoProgressBar: CircularProgressBar = new CircularProgressBar();
+    private waterTempProgressBar: CircularProgressBar = new CircularProgressBar();
+    private tachoNeedleGauge: RotationNeedleGauge = new RotationNeedleGauge();
+    private speedNeedleGauge: RotationNeedleGauge = new RotationNeedleGauge();
+    private boostNeedleGauge: RotationNeedleGauge = new RotationNeedleGauge();
 
     private speedLabel: PIXI.extras.BitmapText;
     private gasMilageLabel: PIXI.extras.BitmapText;
@@ -165,29 +167,32 @@ export class AnalogMeterCluster extends PIXI.Container
         const tachoContainer = new PIXI.Container();
         const backSprite = PIXI.Sprite.fromFrame("AnalogTachoMeter_Base");
         tachoContainer.addChild(backSprite);
-
+        
         const tachoProgressBar = this.tachoProgressBar;
-        tachoProgressBar.Texture = PIXI.Texture.fromFrame("AnalogTachoMeter_Bar");
-        tachoProgressBar.OffsetAngle = 90;
-        tachoProgressBar.FullAngle = 270;
-        tachoProgressBar.Max = tachoMax;
-        tachoProgressBar.Min = tachoMin;
-        tachoProgressBar.Value = tachoValDefalut;
-        tachoProgressBar.Radius = 193;
-        tachoProgressBar.InnerRadius = 160;
-        tachoProgressBar.Center.set(193,193);
+        tachoProgressBar.Options.Texture = PIXI.Texture.fromFrame("AnalogTachoMeter_Bar");
+        tachoProgressBar.Options.OffsetAngle = 90;
+        tachoProgressBar.Options.FullAngle = 270;
+        tachoProgressBar.Options.Max = tachoMax;
+        tachoProgressBar.Options.Min = tachoMin;
+        tachoProgressBar.Options.Radius = 193;
+        tachoProgressBar.Options.InnerRadius = 160;
+        tachoProgressBar.Options.Center.set(193,193);
         tachoProgressBar.pivot.set(193, 193);
         tachoProgressBar.position.set(300,300);
         tachoContainer.addChild(tachoProgressBar);
-        tachoProgressBar.updateForce();
 
+        tachoProgressBar.Value = tachoValDefalut;
+        tachoProgressBar.updateForce();
+        
+        tachoContainer.addChild(this.tachoProgressBar);
+        
         const tachoMeter = this.tachoNeedleGauge;
-        tachoMeter.Texture = PIXI.Texture.fromFrame("AnalogTachoMeter_Needle");
-        tachoMeter.Max = tachoMax;
-        tachoMeter.Min = tachoMin;
+        tachoMeter.Options.Texture = PIXI.Texture.fromFrame("AnalogTachoMeter_Needle");
+        tachoMeter.Options.Max = tachoMax;
+        tachoMeter.Options.Min = tachoMin;
         tachoMeter.Value = tachoValDefalut;
-        tachoMeter.OffsetAngle = 90;
-        tachoMeter.FullAngle = 270;
+        tachoMeter.Options.OffsetAngle = 90;
+        tachoMeter.Options.FullAngle = 270;
         tachoMeter.pivot.set(15,15);
         tachoMeter.position.set(300,300);
         tachoContainer.addChild(tachoMeter);
@@ -249,27 +254,27 @@ export class AnalogMeterCluster extends PIXI.Container
         speedMeterContainer.addChild(speedLabel);
 
         const waterTempProgressBar = this.waterTempProgressBar;
-        waterTempProgressBar.Texture = PIXI.Texture.fromFrame("AnalogSpeedMeter_Bar");
-        waterTempProgressBar.Max = waterTempMax;
-        waterTempProgressBar.Min = waterTempMin;
+        waterTempProgressBar.Options.Texture = PIXI.Texture.fromFrame("AnalogSpeedMeter_Bar");
+        waterTempProgressBar.Options.Max = waterTempMax;
+        waterTempProgressBar.Options.Min = waterTempMin;
         waterTempProgressBar.Value = waterTempValDefault;
-        waterTempProgressBar.Radius = 162;
-        waterTempProgressBar.InnerRadius = 120;
-        waterTempProgressBar.OffsetAngle = 165;
-        waterTempProgressBar.FullAngle = 120;
-        waterTempProgressBar.Center.set(162,162);
+        waterTempProgressBar.Options.Radius = 162;
+        waterTempProgressBar.Options.InnerRadius = 120;
+        waterTempProgressBar.Options.OffsetAngle = 165;
+        waterTempProgressBar.Options.FullAngle = 120;
+        waterTempProgressBar.Options.Center.set(162,162);
         waterTempProgressBar.pivot.set(162,162);
         waterTempProgressBar.position.set(300,300);
         waterTempProgressBar.updateForce();
         speedMeterContainer.addChild(waterTempProgressBar);
 
         const speedNeedleGauge = this.speedNeedleGauge;
-        speedNeedleGauge.Texture = PIXI.Texture.fromFrame("AnalogSpeedMeter_Needle");
-        speedNeedleGauge.Max = speedMax;
-        speedNeedleGauge.Min = speedMin;
+        speedNeedleGauge.Options.Texture = PIXI.Texture.fromFrame("AnalogSpeedMeter_Needle");
+        speedNeedleGauge.Options.Max = speedMax;
+        speedNeedleGauge.Options.Min = speedMin;
         speedNeedleGauge.Value = speedValDefault;
-        speedNeedleGauge.OffsetAngle = 75;
-        speedNeedleGauge.FullAngle = 210;
+        speedNeedleGauge.Options.OffsetAngle = 75;
+        speedNeedleGauge.Options.FullAngle = 210;
         speedNeedleGauge.pivot.set(15,15);
         speedNeedleGauge.position.set(300,300);
         speedMeterContainer.addChild(speedNeedleGauge);
@@ -295,12 +300,12 @@ export class AnalogMeterCluster extends PIXI.Container
         boostMeterContainer.addChild(backSprite);
 
         const boostNeedleGauge = this.boostNeedleGauge;
-        boostNeedleGauge.Texture = PIXI.Texture.fromFrame("BoostMeter_Needle");
-        boostNeedleGauge.OffsetAngle = 30;
-        boostNeedleGauge.FullAngle = 90;
-        boostNeedleGauge.AntiClockwise = true;
-        boostNeedleGauge.Max = boostMax;
-        boostNeedleGauge.Min = boostMin;
+        boostNeedleGauge.Options.Texture = PIXI.Texture.fromFrame("BoostMeter_Needle");
+        boostNeedleGauge.Options.OffsetAngle = 30;
+        boostNeedleGauge.Options.FullAngle = 90;
+        boostNeedleGauge.Options.AntiClockwise = true;
+        boostNeedleGauge.Options.Max = boostMax;
+        boostNeedleGauge.Options.Min = boostMin;
         boostNeedleGauge.Value = boostValDefault;
         boostNeedleGauge.pivot.set(90,15);
         boostNeedleGauge.position.set(220,220);

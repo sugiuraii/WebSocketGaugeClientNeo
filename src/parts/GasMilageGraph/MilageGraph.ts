@@ -130,12 +130,12 @@ export class MilageGraphPanel extends PIXI.Container
         super.addChild(backSprite);
 
         const momentGasMilageTexture = PIXI.Texture.fromFrame("MilageGraph_valueBar2");
-        this.momentGasMilageBar.Texture = momentGasMilageTexture;
-        this.momentGasMilageBar.Vertical = true;
-        this.momentGasMilageBar.MaskWidth = 40;
-        this.momentGasMilageBar.MaskHeight = 240;
-        this.momentGasMilageBar.Max = 20;
-        this.momentGasMilageBar.Min = 0;
+        this.momentGasMilageBar.Options.Texture = momentGasMilageTexture;
+        this.momentGasMilageBar.Options.Vertical = true;
+        this.momentGasMilageBar.Options.MaskWidth = 40;
+        this.momentGasMilageBar.Options.MaskHeight = 240;
+        this.momentGasMilageBar.Options.Max = 20;
+        this.momentGasMilageBar.Options.Min = 0;
         this.momentGasMilageBar.position.set(411,17);
         super.addChild(this.momentGasMilageBar);
 
@@ -145,12 +145,12 @@ export class MilageGraphPanel extends PIXI.Container
         {
             const spankey: string = this.sectSpan[i];
             this.sectGasMilageBar[spankey] = new RectangularProgressBar();
-            this.sectGasMilageBar[spankey].Texture = sectGasMilageBarTexture;
-            this.sectGasMilageBar[spankey].Vertical = true;
-            this.sectGasMilageBar[spankey].MaskWidth = 30;
-            this.sectGasMilageBar[spankey].MaskHeight = 240;
-            this.sectGasMilageBar[spankey].Max = 20;
-            this.sectGasMilageBar[spankey].Min = 0;
+            this.sectGasMilageBar[spankey].Options.Texture = sectGasMilageBarTexture;
+            this.sectGasMilageBar[spankey].Options.Vertical = true;
+            this.sectGasMilageBar[spankey].Options.MaskWidth = 30;
+            this.sectGasMilageBar[spankey].Options.MaskHeight = 240;
+            this.sectGasMilageBar[spankey].Options.Max = 20;
+            this.sectGasMilageBar[spankey].Options.Min = 0;
             super.addChild(this.sectGasMilageBar[spankey]);
         }
         this.sectGasMilageBar["30min"].position.set(72,17);
