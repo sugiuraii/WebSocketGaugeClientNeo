@@ -25,6 +25,8 @@
  /// <reference path="../../lib/webpackRequire.ts" />
  
 import {RectangularProgressBar} from '../../lib/Graphics/PIXIGauge';
+import {BitmapFontNumericIndicator} from '../../lib/Graphics/PIXIGauge';
+
 import * as PIXI from 'pixi.js';
 
 require("./DigiTachoTexture.json");
@@ -42,7 +44,7 @@ export class DigiTachoPanel extends PIXI.Container
 {
     private tachoProgressBar: RectangularProgressBar;
 
-    private speedLabel: PIXI.extras.BitmapText;
+    private speedLabel: BitmapFontNumericIndicator;
     private geasposLabel: PIXI.extras.BitmapText;
 
     private speed : number = 0;
@@ -68,8 +70,7 @@ export class DigiTachoPanel extends PIXI.Container
     set Speed(speed : number)
     {
         this.speed = speed;
-        const roundedSpeed : number = Math.round(speed);
-        this.speedLabel.text = roundedSpeed.toString();
+        this.speedLabel.Value = speed;
     }
 
     get Tacho(): number {return this.tacho}
@@ -118,10 +119,11 @@ export class DigiTachoPanel extends PIXI.Container
         tachoProgressBar.Options.MaskWidth = 577;
         super.addChild(tachoProgressBar);
 
-        const speedTextLabel = new PIXI.extras.BitmapText(this.speed.toString(), {font : "FreeSans", align : "right"});
+        const speedTextLabel = new BitmapFontNumericIndicator(this.speed.toString(), {font : "FreeSans", align : "right"});
         this.speedLabel = speedTextLabel;
         speedTextLabel.position.set(485,320);
         speedTextLabel.anchor = new PIXI.Point(1,1);
+        speedTextLabel.NumberOfDecimalPlace = 0;
         super.addChild(speedTextLabel);
 
         const gearTextLabel = new PIXI.extras.BitmapText(this.gearPos,{font : "Audiowide", align : "center"});
