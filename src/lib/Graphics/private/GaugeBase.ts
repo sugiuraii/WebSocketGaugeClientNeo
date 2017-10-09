@@ -39,9 +39,11 @@ export class Gauge1DOptions
     public Min: number;
     
     /**
-     * Flag of inverting drawing/filling direction.
+     * Flag to set gauge full on value min (invert the direction of gauge Max to Min)
+     * (On this flag is true, gauge move from Max to Min by increasing value)
+     * (on this flag is false(default), gauge move from Min to Max by increasing value) 
      */
-    public InvertDraw : boolean;
+    public GagueFullOnValueMin : boolean;
     
     constructor()
     {
@@ -89,14 +91,14 @@ export abstract class Gauge1D extends PIXI.Container
     set Value(val : number) { this.value = val;}
     
     /**
-     * Get actual draw value (considering InvertDraw flag).
+     * Get actual draw value (considering GaugeFullOnValueMin flag).
      */
-    get DrawValue() : number
+    protected get DrawValue() : number
     {
         const Max = this.Options.Max;
         const Min = this.Options.Min;
         const Value = this.Value;
-        const InvertDraw = this.Options.InvertDraw;
+        const GaugeFullOnValueMin = this.Options.GagueFullOnValueMin;
         
         let drawVal : number;
         if( Value > Max)
@@ -106,7 +108,7 @@ export abstract class Gauge1D extends PIXI.Container
         else
             drawVal = Value
 
-        if (InvertDraw)
+        if (GaugeFullOnValueMin)
             drawVal = Max - drawVal + Min;
 
         return drawVal;

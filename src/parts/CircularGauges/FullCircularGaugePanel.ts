@@ -75,7 +75,7 @@ export class AirFuelGaugePanel extends FullCircularGaugePanelBase
         options.YellowZoneBarFullAngle = 90;
         options.GreenZoneBarOffsetAngle = 135;
         options.GreenZoneBarFullAngle = 90;
-        options.InvertDraw = true;
+        options.GaugeFullOnValueMin = true;
         options.UnitLabel="A/F";
         options.ValueNumberRoundDigit = 1;
         options.AxisLabel = 

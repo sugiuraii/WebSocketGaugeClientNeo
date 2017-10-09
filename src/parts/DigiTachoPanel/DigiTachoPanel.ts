@@ -112,7 +112,7 @@ export class DigiTachoPanel extends PIXI.Container
         tachoProgressBar.Options.Max = 9000;
         tachoProgressBar.Options.Vertical = false;
         tachoProgressBar.Options.InvertDirection = false;
-        tachoProgressBar.Options.InvertDraw = false;
+        tachoProgressBar.Options.GagueFullOnValueMin = false;
         tachoProgressBar.Options.PixelStep = 8;
         tachoProgressBar.Options.MaskHeight = 246;
         tachoProgressBar.Options.MaskWidth = 577;

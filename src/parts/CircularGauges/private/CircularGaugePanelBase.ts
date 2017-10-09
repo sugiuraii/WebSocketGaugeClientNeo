@@ -99,7 +99,7 @@ export abstract class CircularGaugePanelOptionBase
     public FullAngle : number;
     public Min : number;
     public Max : number;
-    public InvertDraw : boolean;
+    public GaugeFullOnValueMin : boolean;
     public AntiClockWise : boolean;
     public AngleStep : number;
     public ValueBarRadius : number;
@@ -165,7 +165,7 @@ export abstract class CircularGaugePanelBase extends PIXI.Container
         this.valueProgressBar.Options.Min = this.Options.Min;
         this.valueProgressBar.Options.Max = this.Options.Max;
         this.valueProgressBar.Options.AngleStep = this.Options.AngleStep;
-        this.valueProgressBar.Options.InvertDraw = this.Options.InvertDraw;
+        this.valueProgressBar.Options.GagueFullOnValueMin = this.Options.GaugeFullOnValueMin;
         this.valueProgressBar.Options.AntiClockwise = this.Options.AntiClockWise;
 
         this.valueProgressBar.Options.Center = this.Options.CenterPosition;
