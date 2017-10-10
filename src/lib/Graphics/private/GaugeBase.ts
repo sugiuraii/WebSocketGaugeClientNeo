@@ -24,11 +24,27 @@
 
 import * as PIXI from 'pixi.js';
 
+/**
+ * 1D Gauge option class.
+ */
 export class Gauge1DOptions
 {
+    /**
+     * Max value of gauge.
+     */
     public Max: number;
+    /**
+     * Min value of gauge.
+     */
     public Min: number;
-
+    
+    /**
+     * Flag to set gauge full on value min (invert the direction of gauge Max to Min)
+     * (On this flag is true, gauge move from Max to Min by increasing value)
+     * (on this flag is false(default), gauge move from Min to Max by increasing value) 
+     */
+    public GagueFullOnValueMin : boolean;
+    
     constructor()
     {
         this.Max = 100;
@@ -36,13 +52,18 @@ export class Gauge1DOptions
     }
 }
 
+/**
+ * 1D gauge class.
+ */
 export abstract class Gauge1D extends PIXI.Container
 {
     private gauge1DOptions: Gauge1DOptions;
 
-    private invertDraw : boolean;
     private value : number;
-
+    
+    /**
+     * @param options Option to set.
+     */
     constructor(options? : Gauge1DOptions)
     {
         super();
@@ -53,31 +74,42 @@ export abstract class Gauge1D extends PIXI.Container
 
         this.value = 0;
     }
-
-    get Max(): number {return this.gauge1DOptions.Max;}      
-    set Max(val : number) { this.gauge1DOptions.Max = val;}
-
-    get Min() : number { return this.gauge1DOptions.Min;}
-    set Min(val : number) { this.gauge1DOptions.Min = val;}
-
+    
+    /**
+     * Get Options.
+     * @return Options.
+     */
+    get Options() {return this.gauge1DOptions}
+    
+    /**
+     * Get gauge value.
+     */
     get Value() : number { return this.value;}
+    /**
+     * Set gauge value.
+     */
     set Value(val : number) { this.value = val;}
-
-    get InvertDraw() : boolean { return this.invertDraw; }
-    set InvertDraw(flag : boolean) { this.invertDraw = flag; }
-
-    get DrawValue() : number
+    
+    /**
+     * Get actual draw value (considering GaugeFullOnValueMin flag).
+     */
+    protected get DrawValue() : number
     {
+        const Max = this.Options.Max;
+        const Min = this.Options.Min;
+        const Value = this.Value;
+        const GaugeFullOnValueMin = this.Options.GagueFullOnValueMin;
+        
         let drawVal : number;
-        if( this.Value > this.Max)
-            drawVal = this.Max;
-        else if (this.Value < this.Min)
-            drawVal = this.Min;
+        if( Value > Max)
+            drawVal = Max;
+        else if (Value < Min)
+            drawVal = Min;
         else
-            drawVal = this.Value
+            drawVal = Value
 
-        if (this.InvertDraw)
-            drawVal = this.Max - drawVal + this.Min;
+        if (GaugeFullOnValueMin)
+            drawVal = Max - drawVal + Min;
 
         return drawVal;
     }

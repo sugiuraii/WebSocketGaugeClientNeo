@@ -25,12 +25,32 @@
 import {ProgressBarOptions} from './ProgressBarBase'
 import {ProgressBar} from './ProgressBarBase'
 
+/**
+ * Rectangular progressbar option class.
+ */
 export class RectangularProgressBarOptions extends ProgressBarOptions
 {
+    /**
+     * Flag to fill vertical. (true : vertical fill, false : horizontal fill).
+     */
     public Vertical : boolean;
+    /**
+     * Flag to invert filling direction.
+     * (On this flag = true : fill RIGHT to LEFT (when Vertiocal = false), fill UP to DOWN (when Vertiocal = true).
+     * (On this flag = false : fill LEFT to RIGHT (when Vertiocal = false), fill DOWN to UP (when Vertiocal = true).
+     */
     public InvertDirection : boolean;
+    /**
+     * Progress bar mask width.
+     */
     public MaskWidth : number;
+    /**
+     * Progress bar mask height.
+     */
     public MaskHeight : number;
+    /**
+     * Pixel step to change progress bar. 
+     */
     public PixelStep : number;
 
     constructor()
@@ -44,12 +64,18 @@ export class RectangularProgressBarOptions extends ProgressBarOptions
     }
 }
 
+/**
+ * REctangular progressbar class.
+ */
 export class RectangularProgressBar extends ProgressBar
 {
     private rectangularProgressBarOptions: RectangularProgressBarOptions;
 
     private currBarPixel : number;
 
+    /**
+     * @param options Option to set.
+     */
     constructor(options?: RectangularProgressBarOptions)
     {
         let rectangularProgressBarOptions: RectangularProgressBarOptions;
@@ -60,34 +86,35 @@ export class RectangularProgressBar extends ProgressBar
         super(rectangularProgressBarOptions);
         this.rectangularProgressBarOptions = rectangularProgressBarOptions;
     }
-
-    get Vertical() : boolean { return this.rectangularProgressBarOptions.Vertical; }
-    set Vertical(val : boolean) { this.rectangularProgressBarOptions.Vertical = val; }
-    get InvertDirection(): boolean {return this.rectangularProgressBarOptions.InvertDirection; }
-    set InvertDirection(val : boolean) { this.rectangularProgressBarOptions.InvertDirection = val; }
-    get MaskWidth(): number {return this.rectangularProgressBarOptions.MaskWidth; }
-    set MaskWidth(val: number) {this.rectangularProgressBarOptions.MaskWidth = val; }
-    get MaskHeight(): number {return this.rectangularProgressBarOptions.MaskHeight; }
-    set MaskHeight(val: number) {this.rectangularProgressBarOptions.MaskHeight = val; }
-    get PixelStep(): number {return this.rectangularProgressBarOptions.PixelStep; }
-    set PixelStep(val: number) {this.rectangularProgressBarOptions.PixelStep = val; }
-
+    
+    /**
+     * Get Options.
+     * @return Options.
+     */
+    get Options() {return this.rectangularProgressBarOptions}
+    
+    /**
+     * Update progress bar.
+     * @param skipStepCheck Skip checking angle displacement over the angleStep or not.
+     */
     protected _update(skipStepCheck : boolean) : void
     {
-        'use strict';
-        const maskHeight: number = this.MaskHeight;
-        const maskWidth: number = this.MaskWidth;
+        // Update texture reference of sprite.
+        this.Sprite.texture = this.Options.Texture;
+        
+        const maskHeight: number = this.Options.MaskHeight;
+        const maskWidth: number = this.Options.MaskWidth;
         const currBarPixel: number = this.currBarPixel;
-        const pixelStep: number = this.PixelStep;
+        const pixelStep: number = this.Options.PixelStep;
 
-        const valueMax: number = this.Max;
-        const valueMin: number = this.Min;
+        const valueMax: number = this.Options.Max;
+        const valueMin: number = this.Options.Min;
         const value: number = this.DrawValue;
 
         const spriteMask: PIXI.Graphics = this.SpriteMask;
 
-        const vertical: boolean = this.Vertical;
-        const invertDirection: boolean = this.InvertDirection;
+        const vertical: boolean = this.Options.Vertical;
+        const invertDirection: boolean = this.Options.InvertDirection;
 
         let pixelRange: number;
         if(vertical)

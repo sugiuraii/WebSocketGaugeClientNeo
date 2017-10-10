@@ -25,8 +25,14 @@
 import {Gauge1DOptions} from './GaugeBase'
 import {Gauge1D} from './GaugeBase'
 
+/**
+ * Progress bar option class.
+ */
 export class ProgressBarOptions extends Gauge1DOptions
 {
+    /**
+     * Texture of prgress bar.
+     */
     public Texture: PIXI.Texture;
     constructor()
     {
@@ -34,12 +40,18 @@ export class ProgressBarOptions extends Gauge1DOptions
     }
 }
 
+/**
+ * Progress bar class.
+ */
 export abstract class ProgressBar extends Gauge1D
 {
     private progressBarOptions: ProgressBarOptions;
     private sprite : PIXI.Sprite;
     private spriteMask : PIXI.Graphics;
 
+    /**
+     * @param options Option to set.
+     */
     constructor(options?: ProgressBarOptions)
     {
         let progressBarOptions: ProgressBarOptions;
@@ -66,14 +78,20 @@ export abstract class ProgressBar extends Gauge1D
         super.addChild(this.sprite);
         super.addChild(this.spriteMask);
     }
-
-    get Texture(): PIXI.Texture {return this.progressBarOptions.Texture; }
-    set Texture(val: PIXI.Texture) 
-    {
-        this.progressBarOptions.Texture = val;
-        this.sprite.texture = this.progressBarOptions.Texture;
-    }
-
+    
+    /**
+     * Get Options.
+     * @return Options.
+     */
+    get Options() {return this.progressBarOptions}
+    
+    /**
+     * Get sprite mask.
+     */
     protected get SpriteMask(): PIXI.Graphics { return this.spriteMask; }
+    
+    /**
+     * Get sprite.
+     */
     protected get Sprite(): PIXI.Sprite { return this.sprite; }
 }

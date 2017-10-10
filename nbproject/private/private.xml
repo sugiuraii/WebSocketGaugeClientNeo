@@ -3,10 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/application/DigitalMFD-ArduinoDemoApp.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/application/DigitalMFD-ELM327DemoApp.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/package.json</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/application/DigitalMFD-SSMDemoApp.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/lib/Graphics/private/NumericIndicator.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/parts/DigiTachoPanel/DigiTachoPanel.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/lib/Graphics/private/GaugeBase.ts</file>
         </group>
     </open-files>
 </project-private>
