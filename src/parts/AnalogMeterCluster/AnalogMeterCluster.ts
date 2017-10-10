@@ -28,7 +28,9 @@ import {CircularProgressBar} from '../../lib/Graphics/PIXIGauge';
 import {CircularProgressBarOptions} from '../../lib/Graphics/PIXIGauge';
 import {RotationNeedleGauge} from '../../lib/Graphics/PIXIGauge';
 import {RotationNeedleGaugeOptions} from '../../lib/Graphics/PIXIGauge';
-import PIXI = require('pixi.js');
+import {BitmapFontNumericIndicator} from '../../lib/Graphics/PIXIGauge';
+
+import * as PIXI from 'pixi.js';
 
 require("./AnalogMeterClusterTexture.json");
 require("./AnalogMeterClusterTexture.png");
@@ -46,17 +48,17 @@ require("./AnalogMeterFont_60px_0.png");
 
 export class AnalogMeterCluster extends PIXI.Container
 {
-    private tachoProgressBar: CircularProgressBar = new CircularProgressBar();
-    private waterTempProgressBar: CircularProgressBar = new CircularProgressBar();
-    private tachoNeedleGauge: RotationNeedleGauge = new RotationNeedleGauge();
-    private speedNeedleGauge: RotationNeedleGauge = new RotationNeedleGauge();
-    private boostNeedleGauge: RotationNeedleGauge = new RotationNeedleGauge();
+    private tachoProgressBar: CircularProgressBar;
+    private waterTempProgressBar: CircularProgressBar;
+    private tachoNeedleGauge: RotationNeedleGauge;
+    private speedNeedleGauge: RotationNeedleGauge;
+    private boostNeedleGauge: RotationNeedleGauge;
 
-    private speedLabel: PIXI.extras.BitmapText;
-    private gasMilageLabel: PIXI.extras.BitmapText;
-    private tripLabel: PIXI.extras.BitmapText;
-    private fuelLabel: PIXI.extras.BitmapText;
-    private gearPosLabel: PIXI.extras.BitmapText;
+    private speedLabel: BitmapFontNumericIndicator;
+    private gasMilageLabel: BitmapFontNumericIndicator;
+    private tripLabel: BitmapFontNumericIndicator;
+    private fuelLabel: BitmapFontNumericIndicator;
+    private gearPosLabel: BitmapFontNumericIndicator;
 
     private tacho = 0;
     private speed = 0;
@@ -82,7 +84,7 @@ export class AnalogMeterCluster extends PIXI.Container
         this.speed = val;
         this.speedNeedleGauge.Value = val;
         this.speedNeedleGauge.update();
-        this.speedLabel.text = val.toFixed(0);
+        this.speedLabel.Value = val;
     }
     get Boost() { return this.boost; }
     set Boost(val : number)
@@ -105,21 +107,22 @@ export class AnalogMeterCluster extends PIXI.Container
     {
         this.gasMilage = val;
         if(val > 99)
+            //Override indicator with '--.--' on abnormal gas milage.
             this.gasMilageLabel.text = "--.--";
         else
-            this.gasMilageLabel.text = val.toFixed(2);
+            this.gasMilageLabel.Value = val;
     }
     get Trip() { return this.trip }
     set Trip(val : number)
     {
         this.trip = val;
-        this.tripLabel.text = val.toFixed(1);
+        this.tripLabel.Value = val;
     }
     get Fuel() { return this.fuel }
     set Fuel(val : number)
     {
         this.fuel = val;
-        this.fuelLabel.text = val.toFixed(2);
+        this.fuelLabel.Value = val;
     }
 
     get GearPos() { return this.gearPos }
@@ -168,62 +171,64 @@ export class AnalogMeterCluster extends PIXI.Container
         const backSprite = PIXI.Sprite.fromFrame("AnalogTachoMeter_Base");
         tachoContainer.addChild(backSprite);
         
-        const tachoProgressBar = this.tachoProgressBar;
-        tachoProgressBar.Options.Texture = PIXI.Texture.fromFrame("AnalogTachoMeter_Bar");
-        tachoProgressBar.Options.OffsetAngle = 90;
-        tachoProgressBar.Options.FullAngle = 270;
-        tachoProgressBar.Options.Max = tachoMax;
-        tachoProgressBar.Options.Min = tachoMin;
-        tachoProgressBar.Options.Radius = 193;
-        tachoProgressBar.Options.InnerRadius = 160;
-        tachoProgressBar.Options.Center.set(193,193);
-        tachoProgressBar.pivot.set(193, 193);
-        tachoProgressBar.position.set(300,300);
-        tachoContainer.addChild(tachoProgressBar);
-
-        tachoProgressBar.Value = tachoValDefalut;
-        tachoProgressBar.updateForce();
-        
+        const tachoProgressBarOptions = new CircularProgressBarOptions();
+        tachoProgressBarOptions.Texture = PIXI.Texture.fromFrame("AnalogTachoMeter_Bar");
+        tachoProgressBarOptions.OffsetAngle = 90;
+        tachoProgressBarOptions.FullAngle = 270;
+        tachoProgressBarOptions.Max = tachoMax;
+        tachoProgressBarOptions.Min = tachoMin;
+        tachoProgressBarOptions.Radius = 193;
+        tachoProgressBarOptions.InnerRadius = 160;
+        tachoProgressBarOptions.Center.set(193,193);
+        this.tachoProgressBar = new CircularProgressBar(tachoProgressBarOptions);
+        this.tachoProgressBar.pivot.set(193, 193);
+        this.tachoProgressBar.position.set(300,300);
         tachoContainer.addChild(this.tachoProgressBar);
-        
-        const tachoMeter = this.tachoNeedleGauge;
-        tachoMeter.Options.Texture = PIXI.Texture.fromFrame("AnalogTachoMeter_Needle");
-        tachoMeter.Options.Max = tachoMax;
-        tachoMeter.Options.Min = tachoMin;
-        tachoMeter.Value = tachoValDefalut;
-        tachoMeter.Options.OffsetAngle = 90;
-        tachoMeter.Options.FullAngle = 270;
-        tachoMeter.pivot.set(15,15);
-        tachoMeter.position.set(300,300);
-        tachoContainer.addChild(tachoMeter);
-        tachoMeter.updateForce();
+        this.tachoProgressBar.Value = tachoValDefalut;
+        this.tachoProgressBar.updateForce();
+                
+        const tachoNeedleGaugeOptions = new RotationNeedleGaugeOptions();
+        tachoNeedleGaugeOptions.Texture = PIXI.Texture.fromFrame("AnalogTachoMeter_Needle");
+        tachoNeedleGaugeOptions.Max = tachoMax;
+        tachoNeedleGaugeOptions.Min = tachoMin;
+        tachoNeedleGaugeOptions.OffsetAngle = 90;
+        tachoNeedleGaugeOptions.FullAngle = 270;
+        this.tachoNeedleGauge = new RotationNeedleGauge(tachoNeedleGaugeOptions);
+        this.tachoNeedleGauge.pivot.set(15,15);
+        this.tachoNeedleGauge.position.set(300,300);
+        tachoContainer.addChild(this.tachoNeedleGauge);
+        this.tachoNeedleGauge.Value = tachoValDefalut; 
+        this.tachoNeedleGauge.updateForce();
 
         const shaftSprite = PIXI.Sprite.fromFrame("AnalogTachoMeter_NeedleCap");
         shaftSprite.pivot.set(72,72);
         shaftSprite.position.set(300,300);
         tachoContainer.addChild(shaftSprite);
 
-        const gasMilageLabel = this.gasMilageLabel = new PIXI.extras.BitmapText("0.00", {font : "DSEG14_Classic_45px", align : "right"});
+        const gasMilageLabel = this.gasMilageLabel = new BitmapFontNumericIndicator("0.00", {font : "DSEG14_Classic_45px", align : "right"});
+        gasMilageLabel.NumberOfDecimalPlace = 2;
         gasMilageLabel.anchor = new PIXI.Point(1,0.5);
         gasMilageLabel.position.set(495,335);
         gasMilageLabel.scale.set(0.9);
         tachoContainer.addChild(gasMilageLabel);
 
-        const tripLabel = this.tripLabel = new PIXI.extras.BitmapText("0.0", {font : "DSEG14_Classic_40px", align : "right"});
+        const tripLabel = this.tripLabel = new BitmapFontNumericIndicator("0.0", {font : "DSEG14_Classic_40px", align : "right"});
+        tripLabel.NumberOfDecimalPlace = 1;
         tripLabel.anchor = new PIXI.Point(1,0.5);
         tripLabel.position = new PIXI.Point(505,378);
         tripLabel.text = "0.0";
         tripLabel.scale.set(0.9);
         tachoContainer.addChild(tripLabel);
 
-        const fuelLabel = this.fuelLabel = new PIXI.extras.BitmapText("0.00", {font : "DSEG14_Classic_40px", align : "right"});
+        const fuelLabel = this.fuelLabel = new BitmapFontNumericIndicator("0.00", {font : "DSEG14_Classic_40px", align : "right"});
+        fuelLabel.NumberOfDecimalPlace = 2;
         fuelLabel.anchor = new PIXI.Point(1,0.5);
         fuelLabel.position = new PIXI.Point(505,420);
         fuelLabel.text = "0.00";
         fuelLabel.scale.set(0.9);
         tachoContainer.addChild(fuelLabel);
 
-        const gearPosLabel = this.gearPosLabel = new PIXI.extras.BitmapText("N", {font : "DSEG14_Classic_115px", align : "center"});
+        const gearPosLabel = this.gearPosLabel = new BitmapFontNumericIndicator("N", {font : "DSEG14_Classic_115px", align : "center"});
         gearPosLabel.anchor = new PIXI.Point(0.5,0.5);
         gearPosLabel.position = new PIXI.Point(358,493);
         gearPosLabel.text = "N";
@@ -247,38 +252,42 @@ export class AnalogMeterCluster extends PIXI.Container
         const backSprite = PIXI.Sprite.fromFrame("AnalogSpeedMeter_Base");
         speedMeterContainer.addChild(backSprite);
 
-        const speedLabel = this.speedLabel = new PIXI.extras.BitmapText(speedValDefault.toFixed(0), {font : "DSEG14_Classic_60px", align : "center"});
+        const speedLabel = this.speedLabel = new BitmapFontNumericIndicator(speedValDefault.toFixed(0), {font : "DSEG14_Classic_60px", align : "center"});
+        speedLabel.NumberOfDecimalPlace = 0;
         speedLabel.anchor = new PIXI.Point(1,0.5);
         speedLabel.position.set(355,407);
         speedLabel.scale.set(0.9);
         speedMeterContainer.addChild(speedLabel);
 
-        const waterTempProgressBar = this.waterTempProgressBar;
-        waterTempProgressBar.Options.Texture = PIXI.Texture.fromFrame("AnalogSpeedMeter_Bar");
-        waterTempProgressBar.Options.Max = waterTempMax;
-        waterTempProgressBar.Options.Min = waterTempMin;
-        waterTempProgressBar.Value = waterTempValDefault;
-        waterTempProgressBar.Options.Radius = 162;
-        waterTempProgressBar.Options.InnerRadius = 120;
-        waterTempProgressBar.Options.OffsetAngle = 165;
-        waterTempProgressBar.Options.FullAngle = 120;
-        waterTempProgressBar.Options.Center.set(162,162);
-        waterTempProgressBar.pivot.set(162,162);
-        waterTempProgressBar.position.set(300,300);
-        waterTempProgressBar.updateForce();
-        speedMeterContainer.addChild(waterTempProgressBar);
+        const waterTempProgressBarOptions = new CircularProgressBarOptions();
+        waterTempProgressBarOptions.Texture = PIXI.Texture.fromFrame("AnalogSpeedMeter_Bar");
+        waterTempProgressBarOptions.Max = waterTempMax;
+        waterTempProgressBarOptions.Min = waterTempMin;
 
-        const speedNeedleGauge = this.speedNeedleGauge;
-        speedNeedleGauge.Options.Texture = PIXI.Texture.fromFrame("AnalogSpeedMeter_Needle");
-        speedNeedleGauge.Options.Max = speedMax;
-        speedNeedleGauge.Options.Min = speedMin;
-        speedNeedleGauge.Value = speedValDefault;
-        speedNeedleGauge.Options.OffsetAngle = 75;
-        speedNeedleGauge.Options.FullAngle = 210;
-        speedNeedleGauge.pivot.set(15,15);
-        speedNeedleGauge.position.set(300,300);
-        speedMeterContainer.addChild(speedNeedleGauge);
-        speedNeedleGauge.updateForce();
+        waterTempProgressBarOptions.Radius = 162;
+        waterTempProgressBarOptions.InnerRadius = 120;
+        waterTempProgressBarOptions.OffsetAngle = 165;
+        waterTempProgressBarOptions.FullAngle = 120;
+        waterTempProgressBarOptions.Center.set(162,162);
+        this.waterTempProgressBar = new CircularProgressBar(waterTempProgressBarOptions);        
+        this.waterTempProgressBar.pivot.set(162,162);
+        this.waterTempProgressBar.position.set(300,300);
+        speedMeterContainer.addChild(this.waterTempProgressBar);
+        this.waterTempProgressBar.Value = waterTempValDefault;
+        this.waterTempProgressBar.updateForce();
+ 
+        const speedNeedleGaugeOptions = new RotationNeedleGaugeOptions();
+        speedNeedleGaugeOptions.Texture = PIXI.Texture.fromFrame("AnalogSpeedMeter_Needle");
+        speedNeedleGaugeOptions.Max = speedMax;
+        speedNeedleGaugeOptions.Min = speedMin;
+        speedNeedleGaugeOptions.OffsetAngle = 75;
+        speedNeedleGaugeOptions.FullAngle = 210;
+        this.speedNeedleGauge = new RotationNeedleGauge(speedNeedleGaugeOptions);
+        this.speedNeedleGauge.pivot.set(15,15);
+        this.speedNeedleGauge.position.set(300,300);
+        speedMeterContainer.addChild(this.speedNeedleGauge);
+        this.speedNeedleGauge.Value = speedValDefault;
+        this.speedNeedleGauge.updateForce();
 
         const shaftSprite = PIXI.Sprite.fromFrame("AnalogSpeedMeter_NeedleCap");
         shaftSprite.anchor.set(0.5,0.5);
@@ -299,18 +308,19 @@ export class AnalogMeterCluster extends PIXI.Container
         const backSprite = PIXI.Sprite.fromFrame("BoostMeter_Base");
         boostMeterContainer.addChild(backSprite);
 
-        const boostNeedleGauge = this.boostNeedleGauge;
-        boostNeedleGauge.Options.Texture = PIXI.Texture.fromFrame("BoostMeter_Needle");
-        boostNeedleGauge.Options.OffsetAngle = 30;
-        boostNeedleGauge.Options.FullAngle = 90;
-        boostNeedleGauge.Options.AntiClockwise = true;
-        boostNeedleGauge.Options.Max = boostMax;
-        boostNeedleGauge.Options.Min = boostMin;
-        boostNeedleGauge.Value = boostValDefault;
-        boostNeedleGauge.pivot.set(90,15);
-        boostNeedleGauge.position.set(220,220);
-        boostNeedleGauge.updateForce();
-        boostMeterContainer.addChild(boostNeedleGauge);
+        const boostNeedleGaugeOptions = new RotationNeedleGaugeOptions();
+        boostNeedleGaugeOptions.Texture = PIXI.Texture.fromFrame("BoostMeter_Needle");
+        boostNeedleGaugeOptions.OffsetAngle = 30;
+        boostNeedleGaugeOptions.FullAngle = 90;
+        boostNeedleGaugeOptions.AntiClockwise = true;
+        boostNeedleGaugeOptions.Max = boostMax;
+        boostNeedleGaugeOptions.Min = boostMin;
+        this.boostNeedleGauge = new RotationNeedleGauge(boostNeedleGaugeOptions);
+        this.boostNeedleGauge.pivot.set(90,15);
+        this.boostNeedleGauge.position.set(220,220);
+        this.boostNeedleGauge.Value = boostValDefault;
+        this.boostNeedleGauge.updateForce();
+        boostMeterContainer.addChild(this.boostNeedleGauge);
 
         return boostMeterContainer;
     }
