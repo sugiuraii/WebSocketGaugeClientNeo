@@ -31,7 +31,7 @@ import * as PIXI from 'pixi.js';
 
 // Define texture and bitmap font files to bundle by webpack file loader
 require("./AnalogSingleMeter.json");
-require("./AnalogSingleMeter.png");
+require("./AnalogSingleMeter_0.png");
 require("./Michroma_24px_Glow.fnt");
 require("./Michroma_24px_Glow_0.png");
 require("./Michroma_48px_Glow.fnt");
@@ -88,64 +88,84 @@ export class AnalogSingleMeter extends PIXI.Container
         this.NeedleGauge.Value = val;
         this.NeedleGauge.update();
     }  
-    
+        
     constructor()
     {
         super();
+        //Create meter backplate.
+        const meterBackPlate = this.createMeterBackPlate("Boost", ["-1.0","-0.5","0.0", "0.5", "1.0", "1.5", "2.0"], "x100kPa")
         
-
+        //Create needle gauge.
+        const needleGaugeOptions = new RotationNeedleGaugeOptions();
+        needleGaugeOptions.Max = 2.0;
+        needleGaugeOptions.Min = -1.0;
+        needleGaugeOptions.OffsetAngle = 270;
+        needleGaugeOptions.FullAngle = 270;
+        needleGaugeOptions.Texture = PIXI.Texture.fromFrame("AnalogSingleMeter_Needle");
+        const needleGauge = new RotationNeedleGauge(needleGaugeOptions);
+        needleGauge.pivot.set(220, 15);
+        needleGauge.position.set(210, 210);
+        needleGauge.Value = 0;
         
-        super.addChild(this.createMeterBase("Boost", ["-1.0","-0.5","0.0", "+0.5", "+1.0", "+1.5", "+2.0"], "x100kPa"));
+        //Create needleCap
+        const needleCap = PIXI.Sprite.fromFrame("AnalogSingleMeter_NeedleCap");
+        needleCap.pivot.set(47, 47);
+        needleCap.position.set(210, 210);
         
-        this.NeedleGauge = new RotationNeedleGauge();
+        //Add each sub container to master container.
+        this.addChild(meterBackPlate);
+        this.addChild(needleGauge);
+        this.addChild(needleCap);
+        
+        //Set reference of needleGauge to this.NeedleGauge.
+        this.NeedleGauge = needleGauge;
     }
     
     /**
-     * Create text layer of gauge.
-     * @return Container of text layer.
+     * Create meter backplate (contains meter base, grid and text labels).
+     * @return Container of meter backplate.
      */
-    private createMeterBase(gaugeTitle : string, numberLabels : string[], unit : string) : PIXI.Container
-    {
-        
+    private createMeterBackPlate(gaugeTitle : string, numberLabels : string[], unit : string) : PIXI.Container
+    {  
         //Create MeterBase sprite
-        const backSprite = PIXI.Sprite.fromFrame("AnalogSingleMeter_Base.png");
+        const backSprite = PIXI.Sprite.fromFrame("AnalogSingleMeter_Base");
 
         //Create MeterGrid sprite
-        const gridSprite = PIXI.Sprite.fromFrame("AnalogSingleMeter_Grid.png");
+        const gridSprite = PIXI.Sprite.fromFrame("AnalogSingleMeter_Grid");
         
         //Create gauge title label
         const titleElem = new PIXI.extras.BitmapText(gaugeTitle, {font: {name : "Michroma", size : 48 }, align: "right"});
         titleElem.anchor = new PIXI.Point(1,0.5);
-        titleElem.position.set(360,250);
+        titleElem.position.set(370,260);
         
         //Create gauge unit label
         const unitElem = new PIXI.extras.BitmapText(unit, {font: {name : "Michroma", size : 24 }, align: "center"});
         unitElem.anchor = new PIXI.Point(0.5,0.5);
-        unitElem.position.set(200,140);
+        unitElem.position.set(210,150);
 
         //Create meter number label
         let numberElements: PIXI.extras.BitmapText[] = [];
         numberElements[0] = new PIXI.extras.BitmapText(numberLabels[0], {font: {name : "Michroma", size : 48 }, align: "center"});
         numberElements[0].anchor = new PIXI.Point(0.5,1);
-        numberElements[0].position.set(200,362);
+        numberElements[0].position.set(210,372);
         numberElements[1] = new PIXI.extras.BitmapText(numberLabels[1], {font: {name : "Michroma", size : 48 }, align: "left"});
         numberElements[1].anchor = new PIXI.Point(0,1);
-        numberElements[1].position.set(75,320);
+        numberElements[1].position.set(85,330);
         numberElements[2] = new PIXI.extras.BitmapText(numberLabels[2], {font: {name : "Michroma", size : 48 }, align: "left"});
         numberElements[2].anchor = new PIXI.Point(0,0.5);
-        numberElements[2].position.set(42,200);
+        numberElements[2].position.set(52,210);
         numberElements[3] = new PIXI.extras.BitmapText(numberLabels[3], {font: {name : "Michroma", size : 48 }, align: "left"});
         numberElements[3].anchor = new PIXI.Point(0,0);
-        numberElements[3].position.set(85, 70);
+        numberElements[3].position.set(85, 90);
         numberElements[4] = new PIXI.extras.BitmapText(numberLabels[4], {font: {name : "Michroma", size : 48 }, align: "center"});
         numberElements[4].anchor = new PIXI.Point(0.5,0);
-        numberElements[4].position.set(200,30);
+        numberElements[4].position.set(210,40);
         numberElements[5] = new PIXI.extras.BitmapText(numberLabels[5], {font: {name : "Michroma", size : 48 }, align: "right"});
         numberElements[5].anchor = new PIXI.Point(1,0);
-        numberElements[5].position.set(315,70);
+        numberElements[5].position.set(335,90);
         numberElements[6] = new PIXI.extras.BitmapText(numberLabels[6], {font: {name : "Michroma", size : 48 }, align: "right"});
         numberElements[6].anchor = new PIXI.Point(1,0.5);
-        numberElements[6].position.set(365,200);
+        numberElements[6].position.set(375,210);
 
         const baseContainer = new PIXI.Container();        
         baseContainer.addChild(backSprite);
