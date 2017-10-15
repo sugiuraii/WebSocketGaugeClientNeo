@@ -25,7 +25,6 @@
  
 import {RotationNeedleGauge} from '../../lib/Graphics/PIXIGauge';
 import {RotationNeedleGaugeOptions} from '../../lib/Graphics/PIXIGauge';
-import {NumericIndicator} from '../../lib/Graphics/PIXIGauge';
 
 import * as PIXI from 'pixi.js';
 
@@ -38,10 +37,48 @@ require("./Michroma_48px_Glow.fnt");
 require("./Michroma_48px_Glow_0.png");
 
 /**
+ * Setting option class for AnalogSingleMeter
+ */
+export class AnalogSingleMeterOption
+{
+    /**
+     * Gauge Max.
+     */
+    public Max : number;
+    /**
+     * Gauge Min.
+     */
+    public Min : number;
+    /**
+     * Gauge Title
+     */
+    public Title : string;
+    /**
+     * Gauge unit
+     */
+    public Unit : string;
+    /**
+     * Gauge scale numbers (7 ticks).
+     */
+    public ScaleLabel : string[];
+    
+    constructor()
+    {
+        this.Max = 2.0;
+        this.Min = -1.0;
+        this.Title = "Boost";
+        this.Unit = "x100kPa";
+        this.ScaleLabel = ["-1.0","-0.5","0.0", "0.5", "1.0", "1.5", "2.0"];
+    }
+}
+
+/**
  * Analog single meter gauge example class
  */
 export class AnalogSingleMeter extends PIXI.Container
 {
+    private Option : AnalogSingleMeterOption;
+    
     /**
      * Texture path required by this parts. (This static property will be refered to pre-load texture).
      */
@@ -89,23 +126,26 @@ export class AnalogSingleMeter extends PIXI.Container
         this.NeedleGauge.update();
     }  
         
-    constructor()
+    constructor(option: AnalogSingleMeterOption)
     {
         super();
+        
+        this.Option = option;
+        
         //Create meter backplate.
-        const meterBackPlate = this.createMeterBackPlate("Boost", ["-1.0","-0.5","0.0", "0.5", "1.0", "1.5", "2.0"], "x100kPa")
+        const meterBackPlate = this.createMeterBackPlate(option.Title, option.ScaleLabel, option.Unit)
         
         //Create needle gauge.
         const needleGaugeOptions = new RotationNeedleGaugeOptions();
-        needleGaugeOptions.Max = 2.0;
-        needleGaugeOptions.Min = -1.0;
+        needleGaugeOptions.Max = option.Max;
+        needleGaugeOptions.Min = option.Min;
         needleGaugeOptions.OffsetAngle = 270;
         needleGaugeOptions.FullAngle = 270;
         needleGaugeOptions.Texture = PIXI.Texture.fromFrame("AnalogSingleMeter_Needle");
         const needleGauge = new RotationNeedleGauge(needleGaugeOptions);
         needleGauge.pivot.set(220, 15);
         needleGauge.position.set(210, 210);
-        needleGauge.Value = 0;
+        needleGauge.Value = option.Min;
         
         //Create needleCap
         const needleCap = PIXI.Sprite.fromFrame("AnalogSingleMeter_NeedleCap");
@@ -178,5 +218,4 @@ export class AnalogSingleMeter extends PIXI.Container
         baseContainer.cacheAsBitmap = true;
         return baseContainer;
     }
-    
 }

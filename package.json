@@ -34,6 +34,7 @@
     "scripts": {
         "build-WebSocketTester": "cd src/WebSocketTester && npx webpack",
         "build-benchmark": "cd src/benchmark && npx webpack",
-        "build-application": "cd src/application && npx webpack"
+        "build-application": "cd src/application && npx webpack",
+        "build-partsTest": "cd src/test/partsTest && npx webpack"
     }
 }

@@ -25,6 +25,7 @@
 /// <reference path="../../lib/webpackRequire.ts" />
 
 import {AnalogSingleMeter} from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
+import {AnalogSingleMeterOption} from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
 import * as WebFont from "webfontloader";
 
 require("./AnalogSingleMeterTest.html");
@@ -51,7 +52,7 @@ namespace AnalogSingleMeterTest
         {
             for (let i = 0; i < 6 ; i++)
             {
-                gaugeArray.push(new AnalogSingleMeter());
+                gaugeArray.push(new AnalogSingleMeter(new AnalogSingleMeterOption()));
                 gaugeArray[index].pivot = new PIXI.Point(200,200);
                 gaugeArray[index].scale.set(1);
                 gaugeArray[index].position = new PIXI.Point(400*i+150,400*j+150);
