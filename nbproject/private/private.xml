@@ -3,11 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/parts/AnalogMeterCluster/AnalogMeterCluster.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/parts/CircularGauges/private/CircularGaugePanelBase.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/test/partsTest/MilageBarTest.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/lib/Graphics/private/RotationNeedleGauge.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/parts/LEDTachoMeter/LEDTachoMeter.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/lib/Graphics/private/ProgressBarBase.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/test/partsTest/LEDTachoMeterTest.ts</file>
             <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/parts/AnalogSingleMeter/AnalogSingleMeter.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/parts/AnalogSingleMeter/AnalogSingleMeter.json</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/test/partsTest/AnalogSingleMeterTest.ts</file>
-            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/parts/AnalogMeterCluster/AnalogMeterFont_45px.fnt</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/parts/LEDTachoMeter/LEDTachoMeterTexture.json</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/test/partsTest/FullCircularGaugeTest.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/parts/CircularGauges/private/FullCircularGaugePanelBase.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/lib/Graphics/private/RectangularProgressBar.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/lib/Graphics/private/CircularProgressBar.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/lib/Graphics/private/GaugeBase.ts</file>
+            <file>file:/C:/Users/kuniaki/Documents/NetBeansProjects/WebSocketGaugeClientNeo/src/parts/GasMilageGraph/MilageGraph.ts</file>
         </group>
     </open-files>
 </project-private>
