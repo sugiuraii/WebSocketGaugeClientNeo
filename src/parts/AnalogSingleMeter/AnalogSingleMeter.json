@@ -1,0 +1,94 @@
+{
+    "frames": {
+        "AnalogSingleMeter_Base": {
+            "frame": {
+                "x": 421,
+                "y": 0,
+                "w": 420,
+                "h": 420
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 420,
+                "h": 420
+            },
+            "sourceSize": {
+                "w": 420,
+                "h": 420
+            }
+        },
+        "AnalogSingleMeter_Grid": {
+            "frame": {
+                "x": 0,
+                "y": 0,
+                "w": 420,
+                "h": 420
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 420,
+                "h": 420
+            },
+            "sourceSize": {
+                "w": 420,
+                "h": 420
+            }
+        },
+        "AnalogSingleMeter_Needle": {
+            "frame": {
+                "x": 96,
+                "y": 421,
+                "w": 253,
+                "h": 30
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 253,
+                "h": 30
+            },
+            "sourceSize": {
+                "w": 253,
+                "h": 30
+            }
+        },
+        "AnalogSingleMeter_NeedleCap": {
+            "frame": {
+                "x": 0,
+                "y": 421,
+                "w": 95,
+                "h": 95
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 95,
+                "h": 95
+            },
+            "sourceSize": {
+                "w": 95,
+                "h": 95
+            }
+        }
+    },
+    "meta": {
+        "app": "https://www.leshylabs.com/apps/sstool/",
+        "version": "Leshy SpriteSheet Tool v0.8.4",
+        "image": "AnalogSingleMeter_0.png",
+        "size": {
+            "w": 841,
+            "h": 516
+        },
+        "scale": 1
+    }
+}

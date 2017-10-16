@@ -30,7 +30,8 @@ module.exports = {
         "FullCircularGaugeTest" : './FullCircularGaugeTest.ts',
         "LEDTachoMeterTest" : './LEDTachoMeterTest.ts',
         "MilageBarTest" : './MilageBarTest.ts',
-        "SemiCircularGaugeTest" : './SemiCircularGaugeTest.ts'
+        "SemiCircularGaugeTest" : './SemiCircularGaugeTest.ts',
+        "AnalogSingleMeterTest" : './AnalogSingleMeterTest.ts'
     },
     devtool: "source-map",
     output: 
