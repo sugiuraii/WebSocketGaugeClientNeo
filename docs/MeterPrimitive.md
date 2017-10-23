@@ -12,7 +12,7 @@ This library currently have 3 types of meter primitive parts.
 Each parts extnends the PIXI.Container parts, and can be treated like PIXI.Container.
 To view the source code of meter primitives, refer [WebSocketGaugeClientNeo/src/lib/Graphics](../src/lib/Graphics).
 
-### Input the settings.
+### Setup options
 Each meter primitive classes have "Option" class to describe the setting.
 Before construct the parts instance (by `new` statement), it is better to describe the metter seeting like this..
 ```js
@@ -64,7 +64,9 @@ All of meter primitives have some common properties and methods.
 * `GagueFullOnValueMin` (:boolean)
 	* This flag is set to false by default.
 	* If this flag set to true, gauge filling(rotation or moving) direction is inverted. (Therefore, gauge is full when he `Value` equal to `Min`).
+	
 	![GaugeFullOnValueMin-False](CustomMeterParts.img/GaugeFullOnValueMin-False.gif)![GaugeFullOnValueMin-True](CustomMeterParts.img/GaugeFullOnValueMin-True.gif)
+    
     (Left : GagueFullOnValueMin = **false**. Right : GagueFullOnValueMin = **true**.)
 
 ### Methods
@@ -78,9 +80,11 @@ All of meter primitives have some common properties and methods.
 
 ## CircularProgressBar
 * `CircularProgressBar` defines the pie or doughnut shaped progress bar like gauge.
+
 	![CircularProgressBar](CustomMeterParts.img/CircularProgressBar.gif).
 
 * The `CircularProgressBar` class create the "doughnut" or "pie" shaped mask, and clips the `Texture` with using this mask.
+
 	![CircularProgressBarOptions](CustomMeterParts.img/CircularProgressBarOptions.jpg).
 
 ### Example code
@@ -121,5 +125,7 @@ Following properties are available on `CircularProgressBarOptios` class.
 * `AngleStep` (:number)
 	* The filling step of progress bar (in degree). For smooth animation this value shold be set to small value (0.1 deg at default).
 	* However, changing this to specified angle sholud be useful to make "LED type" gauge (see below).
+	
 	![AngleStep-0.1deg](CustomMeterParts.img/LEDTacho-Anglestep-0.1deg.gif) ![AngleStep-6deg](CustomMeterParts.img/LEDTachoAnglestep-6deg.gif)
+	
     (Left : `AngleStep` = **0.1**deg(default), Right: `AngleStep` = **6**deg)
