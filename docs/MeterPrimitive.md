@@ -1,4 +1,4 @@
-# Documentation of meter primitive classes.
+# Documentation of meter primitive parts classes.
 
 ## Table of contents
 * Introduction
@@ -53,6 +53,9 @@ tachoProgressBar.Options.MaskWidth = 577;
 All of meter primitives have some common properties and methods.
 (Actually, all of the meter primitive extend the base class of `Gauge1D`).
 
+### Class definition code
+See [WebSocketGaugeClientNeo/src/lib/Graphics/GagueBase.ts](../src/lib/Graphics/private/GaugeBase.ts).
+
 ### Properties
 * `Value` (:number)
 	* The value of gauge.
@@ -87,6 +90,9 @@ All of meter primitives have some common properties and methods.
 
 	![CircularProgressBarOptions](CustomMeterParts.img/CircularProgressBarOptions.jpg).
 
+## Class definition code
+See [WebSocketGaugeClientNeo/src/lib/Graphics/CircularProgressBar.ts](../src/lib/Graphics/private/CircularProgressBar.ts).
+
 ### Example code
 ```js
 // Create Option class
@@ -108,7 +114,6 @@ waterTempProgressBarOptions.Center.set(162,162);
 const waterTempProgressBar = new CircularProgressBar(waterTempProgressBarOptions);
 ```
 
-
 ### Properties
 Following properties are available on `CircularProgressBarOptios` class.
 * `Radius` (:number)
@@ -129,3 +134,61 @@ Following properties are available on `CircularProgressBarOptios` class.
 	![AngleStep-0.1deg](CustomMeterParts.img/LEDTacho-Anglestep-0.1deg.gif) ![AngleStep-6deg](CustomMeterParts.img/LEDTachoAnglestep-6deg.gif)
 	
     (Left : `AngleStep` = **0.1**deg(default), Right: `AngleStep` = **6**deg)
+
+## RectangularProgressBar
+
+* `RectangularProgressBar` defines the rectangle progress bar like gauge.
+
+	![RectangularProgressBar](CustomMeterParts.img/RectangularProgressBar.gif).
+
+* The `RectangularProgressBar` class create the rectangle mask, and clips the `Texture` with using this mask.
+
+	![RectangularProgressBarOptions](CustomMeterParts.img/RectangularProgressBarOptions.jpg).
+    
+## Class definition code
+See [WebSocketGaugeClientNeo/src/lib/Graphics/RectangularProgressBar.ts](../src/lib/Graphics/private/RectangularProgressBar.ts).
+
+## Example code
+```js
+//Create tacho(engine rev) progress bar
+const tachoProgressBar = new RectangularProgressBar();
+
+// Assign texture.
+tachoProgressBar.Options.Texture = PIXI.Texture.fromFrame("DigiTachoBar");
+
+// Set Max and Min (0rpm to 9000rpm)
+tachoProgressBar.Options.Min = 0;
+tachoProgressBar.Options.Max = 9000;
+
+// This gauge sweeps horizontal and left to right (see above figure)
+tachoProgressBar.Options.Vertical = false;
+tachoProgressBar.Options.InvertDirection = false;
+tachoProgressBar.Options.GagueFullOnValueMin = false;
+
+// Set mask height and width
+tachoProgressBar.Options.MaskHeight = 246;
+tachoProgressBar.Options.MaskWidth = 577;
+```
+
+## Properties
+* `MaskHeight` (:number)
+* `MaskWidth` (:number)
+	* Set the mask height and width.
+* `Vertucal` (:boolean) (default : false)
+	* Set vertical sweep (true) or horizontal sweep (false).
+	* When this flag is false (i.e. horizontal sweep), `MaskWidth` will be the mask width where `Value` = `Max`.
+	* When thus flag is true (i.e. vertical sweep), `MaskHieght` wll be the mask height where `Value` = `Max`.
+* `InvertDirection` (:boolean) (default : false)
+	* This flag invert the sweep direction.
+	* On `Vertical` = false
+		* Sweep left -> right when `IntertDirection` = false.
+		* Sweep right -> left when `InvertDirection` = true.
+    * On `Vertical` = true
+    	* Sweep down -> up when `InvertDirection` = false.
+    	* Sweep up -> down when `InvertDirection` = true.
+* `PixelStep` (:number)
+	* Limit the step of sweep by given pixels. (as well as  the`AngleStep` property of the `CircularProgressBar` class).
+
+	![PixelStep-1px](CustomMeterParts.img/RectangleTachoBar_1pixelStep.gif) ![PixelStep-24px](CustomMeterParts.img/RectangleTachoBar_24pixelStep.gif)
+
+	(Left : `PixelStep` = **1**pixel(default), Right: `PixelStep` = **24**pixel)
