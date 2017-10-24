@@ -1,13 +1,13 @@
 # Documentation of meter primitive parts classes.
 
 ## Table of contents
-* Introduction
-* Common properties and methods.
-* CircularProgressBar
-* rectangularProgressBar
-* RotationNeedleGauge
+* [Introduction](#introduction)
+* [Common properties and methods.](#commonProperties)
+* [CircularProgressBar](#circularProgressBar)
+* [RectangularProgressBar](#rectangularProgressBar)
+* [RotationNeedleGauge](#rotationNeedleGauge)
 
-## Introduction
+## <a name="introduction">Introduction</a>
 This library currently have 3 types of meter primitive parts.
 Each parts extnends the PIXI.Container parts, and can be treated like PIXI.Container.
 To view the source code of meter primitives, refer [WebSocketGaugeClientNeo/src/lib/Graphics](../src/lib/Graphics).
@@ -49,12 +49,12 @@ tachoProgressBar.Options.MaskHeight = 246;
 tachoProgressBar.Options.MaskWidth = 577;
 ```
 
-## Common properties (member of super class `Gauge1D` and `Gauge1DOptions`)
+## <a name="commonProperties">Common properties (member of super class `Gauge1D` and `Gauge1DOptions`)</a>
 All of meter primitives have some common properties and methods.
 (Actually, all of the meter primitive extend the base class of `Gauge1D`).
 
 ### Class definition code
-See [WebSocketGaugeClientNeo/src/lib/Graphics/GagueBase.ts](../src/lib/Graphics/private/GaugeBase.ts).
+See [WebSocketGaugeClientNeo/src/lib/Graphics/private/GagueBase.ts](../src/lib/Graphics/private/GaugeBase.ts).
 
 ### Properties
 * `Value` (:number)
@@ -81,7 +81,7 @@ See [WebSocketGaugeClientNeo/src/lib/Graphics/GagueBase.ts](../src/lib/Graphics/
 	* If the gauge `Value` is not updated (fixed) after creation (such as red zone indicator), use this instead of `update()`.
 		* (This 'value update check' feature aims to eliminate javascript calls to improve the performance. However, this might not be so effecitve. And might be eliminated in furture version.)
 
-## CircularProgressBar
+## <a name="circularProgressBar">CircularProgressBar</a>
 * `CircularProgressBar` defines the pie or doughnut shaped progress bar like gauge.
 
 	![CircularProgressBar](CustomMeterParts.img/CircularProgressBar.gif).
@@ -91,7 +91,7 @@ See [WebSocketGaugeClientNeo/src/lib/Graphics/GagueBase.ts](../src/lib/Graphics/
 	![CircularProgressBarOptions](CustomMeterParts.img/CircularProgressBarOptions.jpg).
 
 ## Class definition code
-See [WebSocketGaugeClientNeo/src/lib/Graphics/CircularProgressBar.ts](../src/lib/Graphics/private/CircularProgressBar.ts).
+See [WebSocketGaugeClientNeo/src/lib/Graphics/private/CircularProgressBar.ts](../src/lib/Graphics/private/CircularProgressBar.ts).
 
 ### Example code
 ```js
@@ -135,7 +135,7 @@ Following properties are available on `CircularProgressBarOptios` class.
 	
     (Left : `AngleStep` = **0.1**deg(default), Right: `AngleStep` = **6**deg)
 
-## RectangularProgressBar
+## <a name=="rectangularProgressBar">RectangularProgressBar</a>
 
 * `RectangularProgressBar` defines the rectangle progress bar like gauge.
 
@@ -146,7 +146,7 @@ Following properties are available on `CircularProgressBarOptios` class.
 	![RectangularProgressBarOptions](CustomMeterParts.img/RectangularProgressBarOptions.jpg).
     
 ## Class definition code
-See [WebSocketGaugeClientNeo/src/lib/Graphics/RectangularProgressBar.ts](../src/lib/Graphics/private/RectangularProgressBar.ts).
+See [WebSocketGaugeClientNeo/src/lib/Graphics/private/RectangularProgressBar.ts](../src/lib/Graphics/private/RectangularProgressBar.ts).
 
 ## Example code
 ```js
@@ -192,3 +192,52 @@ tachoProgressBar.Options.MaskWidth = 577;
 	![PixelStep-1px](CustomMeterParts.img/RectangleTachoBar_1pixelStep.gif) ![PixelStep-24px](CustomMeterParts.img/RectangleTachoBar_24pixelStep.gif)
 
 	(Left : `PixelStep` = **1**pixel(default), Right: `PixelStep` = **24**pixel)
+    
+## <a name="rotationNeedleGauge">RotationNeedleGauge</a>
+* `RotationNeedleGauge` defines the meter gauge with rotation needle indicator.
+
+	![RotationNeedleGauge](CustomMeterParts.img/RotationNeedleGauge.gif).
+
+* The `RotationNeedleGauge` class rotate itself(its container, rotation pivod should be set as PIXI.Container.pivot) corresponding its `Value`.
+
+	![RotationNeedleGauge](CustomMeterParts.img/RotationNeedleGaugerOptions.jpg).
+
+## Class definition code
+See [WebSocketGaugeClientNeo/src/lib/Graphics/private/RotationNeedleGauge.ts](../src/lib/Graphics/private/RotationNeedleGauge.ts).
+
+## Example code
+```js
+// Create option class.
+const tachoNeedleGaugeOptions = new RotationNeedleGaugeOptions();
+// Assign texture
+tachoNeedleGaugeOptions.Texture = PIXI.Texture.fromFrame("AnalogTachoMeter_Needle");
+// Set Max and Min to 0(rpm) and 9000(rpm), respectevely.
+tachoNeedleGaugeOptions.Max = 0;
+tachoNeedleGaugeOptions.Min = 9000;
+// Offset angle (rotation angle when Value = Min) set to 90deg.
+tachoNeedleGaugeOptions.OffsetAngle = 90;
+// Full angle to 270deg.
+tachoNeedleGaugeOptions.FullAngle = 270;
+
+// Create gauge instance.
+this.tachoNeedleGauge = new RotationNeedleGauge(tachoNeedleGaugeOptions);
+
+// Set rotation pivot coodinate to (15, 15)
+this.tachoNeedleGauge.pivot.set(15,15);
+// Place needle gauge to (300, 300)
+this.tachoNeedleGauge.position.set(300,300);
+```
+
+### Properties
+Properties is similar to those of `CircularProgressBar`.
+* `OffsetAngle` (:number)
+	* Angle offset (in degree) of the gauge. Angle offset means the rotation angle where `Value` equal to `Min`.
+* `FullAngle` (:number)
+	* Angle displacement from the `OffsetAngle`, when the `Value` = `Max`.
+* `AntiClockwise` (:boolean)
+	* The direction of the rotation of needle. Default is false.
+	* If this flag set to true, the needle is rotated in anticlockwise direction.
+* `AngleStep` (:number)
+	* The rotation step of needle (in degree).
+
+
