@@ -9,12 +9,12 @@
 
 ## <a name="introduction">Introduction</a>
 This library currently have 3 types of meter primitive parts.
-Each parts extnends the PIXI.Container parts, and can be treated like PIXI.Container.
+Each parts extends the PIXI.Container parts, and can be treated like PIXI.Container.
 To view the source code of meter primitives, refer [WebSocketGaugeClientNeo/src/lib/Graphics](../src/lib/Graphics).
 
 ### Setup options
 Each meter primitive classes have "Option" class to describe the setting.
-Before construct the parts instance (by `new` statement), it is better to describe the metter seeting like this..
+Before construct the parts instance (by `new` statement), it is better to describe the meter setting like this..
 ```js
 // Create "Option" object and input the settings.
 const waterTempProgressBarOptions = new CircularProgressBarOptions();
@@ -63,7 +63,7 @@ See [WebSocketGaugeClientNeo/src/lib/Graphics/private/GagueBase.ts](../src/lib/G
 	Please do not forget.**
 * `Max` (:number)
 * `Min` (:number)
-	* Define the maxiumu and minimun of the gagues. It is posible to set the `Value` out of the range of Min to Max. In that case, gague view stuck to Min or Max.
+	* Define the maximum and minimum of the gauges. It is possible to set the `Value` out of the range of Min to Max. In that case, gauge view stuck to Min or Max.
 * `GagueFullOnValueMin` (:boolean)
 	* This flag is set to false by default.
 	* If this flag set to true, gauge filling(rotation or moving) direction is inverted. (Therefore, gauge is full when he `Value` equal to `Min`).
@@ -77,9 +77,9 @@ See [WebSocketGaugeClientNeo/src/lib/Graphics/private/GagueBase.ts](../src/lib/G
 	* Update the gauge viewing.
 	* If the `Value` property is not changed from the previous call of `update()`, this function is exited with do nothing.
 * `updateForce()`
-	* Similar to `update()`, but this method update the gauge vieweng even if the `Value` property is not change from the previous call.
+	* Similar to `update()`, but this method update the gauge viewing even if the `Value` property is not change from the previous call.
 	* If the gauge `Value` is not updated (fixed) after creation (such as red zone indicator), use this instead of `update()`.
-		* (This 'value update check' feature aims to eliminate javascript calls to improve the performance. However, this might not be so effecitve. And might be eliminated in furture version.)
+		* (This 'value update check' feature aims to eliminate javascript calls to improve the performance. However, this might not be so effective. And might be eliminated in future version.)
 
 ## <a name="circularProgressBar">CircularProgressBar</a>
 * `CircularProgressBar` defines the pie or doughnut shaped progress bar like gauge.
@@ -128,14 +128,14 @@ Following properties are available on `CircularProgressBarOptios` class.
 	* The direction of the filling of CircularProgressBar. Default is false.
 	* If this flag set to true, the progress bar is filled in anticlockwise direction.
 * `AngleStep` (:number)
-	* The filling step of progress bar (in degree). For smooth animation this value shold be set to small value (0.1 deg at default).
-	* However, changing this to specified angle sholud be useful to make "LED type" gauge (see below).
+	* The filling step of progress bar (in degree). For smooth animation this value should be set to small value (0.1 deg at default).
+	* However, changing this to specified angle should be useful to make "LED type" gauge (see below).
 	
 	![AngleStep-0.1deg](CustomMeterParts.img/LEDTacho-Anglestep-0.1deg.gif) ![AngleStep-6deg](CustomMeterParts.img/LEDTachoAnglestep-6deg.gif)
 	
     (Left : `AngleStep` = **0.1**deg(default), Right: `AngleStep` = **6**deg)
 
-## <a name=="rectangularProgressBar">RectangularProgressBar</a>
+## <a name="rectangularProgressBar">RectangularProgressBar</a>
 
 * `RectangularProgressBar` defines the rectangle progress bar like gauge.
 
@@ -174,14 +174,14 @@ tachoProgressBar.Options.MaskWidth = 577;
 * `MaskHeight` (:number)
 * `MaskWidth` (:number)
 	* Set the mask height and width.
-* `Vertucal` (:boolean) (default : false)
+* `Vertical` (:boolean) (default : false)
 	* Set vertical sweep (true) or horizontal sweep (false).
 	* When this flag is false (i.e. horizontal sweep), `MaskWidth` will be the mask width where `Value` = `Max`.
-	* When thus flag is true (i.e. vertical sweep), `MaskHieght` wll be the mask height where `Value` = `Max`.
+	* When thus flag is true (i.e. vertical sweep), `MaskHeight` wll be the mask height where `Value` = `Max`.
 * `InvertDirection` (:boolean) (default : false)
 	* This flag invert the sweep direction.
 	* On `Vertical` = false
-		* Sweep left -> right when `IntertDirection` = false.
+		* Sweep left -> right when `InvertDirection` = false.
 		* Sweep right -> left when `InvertDirection` = true.
     * On `Vertical` = true
     	* Sweep down -> up when `InvertDirection` = false.
@@ -198,7 +198,7 @@ tachoProgressBar.Options.MaskWidth = 577;
 
 	![RotationNeedleGauge](CustomMeterParts.img/RotationNeedleGauge.gif).
 
-* The `RotationNeedleGauge` class rotate itself(its container, rotation pivod should be set as PIXI.Container.pivot) corresponding its `Value`.
+* The `RotationNeedleGauge` class rotate itself(its container, rotation pivot should be set as PIXI.Container.pivot) corresponding its `Value`.
 
 	![RotationNeedleGauge](CustomMeterParts.img/RotationNeedleGaugerOptions.jpg).
 
