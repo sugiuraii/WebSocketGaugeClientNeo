@@ -10,6 +10,7 @@
 	* [Import dependent libraries and resources (textures and bitmap fonts)](#import)
 	* [Creating option class](#option)
 	* [Set class specific(static) property](#classProperty)
+	* [Construct meter parts](#construct)
 
 ## <a name="tools">Tools to make meter parts</a>
 
@@ -212,7 +213,123 @@ These properties defines the name of texture, WebFont family name and the url of
 These properties will be reffered by the file pre-loading setting of meter application class.
 To know the detail, please see the "Define application class"->"Setup picture and font preloading" section in [CustomMeterApp.md](./CustomMeterApp.md).
 
-Currently, these properties are NOT linked with `require()` statement at the first part of the code (see [previous section](#)). Texture and font names need to be defined on both `reqiure()` statememt and these static properties.
+Currently, these properties are NOT linked with `require()` statement at the first part of the code (see [previous section](#import)). Texture and font names need to be defined on both `reqiure()` statememt and these static properties.
 
 And please note that `RequestedFontFamily` and `RequestedFontCSSURL` properties only treat Webfont (such as TrueType font).
 "Bitmap font" are treated as "Texture" here. That is why `*.fnt` (bitmap font definition file) files are defined in `RequestedTexturePath` property, not in the `RequestedFontFamily` property.
+
+### <a name="construct">Construct meter parts</a>
+```js
+export class AnalogSingleMeter extends PIXI.Container
+{
+	...
+    
+    /**
+     * Construct AnalogSingleMeter class.
+     * @param option Meter setting option.
+     */   
+    constructor(option: AnalogSingleMeterOption)
+    {
+        // Call the constructor of PIXI.Container.
+        super();
+        
+        // Set option
+        this.Option = option;
+        
+        //Create meter backplate (see below).
+        const meterBackPlate = this.createMeterBackPlate(option.Title, option.ScaleLabel, option.Unit)
+        
+        //Create needle gauge.
+        const needleGaugeOptions = new RotationNeedleGaugeOptions();
+        needleGaugeOptions.Max = option.Max;
+        needleGaugeOptions.Min = option.Min;
+        needleGaugeOptions.OffsetAngle = 270;
+        needleGaugeOptions.FullAngle = 270;
+        needleGaugeOptions.Texture = PIXI.Texture.fromFrame("AnalogSingleMeter_Needle");
+        const needleGauge = new RotationNeedleGauge(needleGaugeOptions);
+        needleGauge.pivot.set(220, 15);
+        needleGauge.position.set(210, 210);
+        needleGauge.Value = option.Min;
+        
+        //Create needleCap
+        const needleCap = PIXI.Sprite.fromFrame("AnalogSingleMeter_NeedleCap");
+        needleCap.pivot.set(47, 47);
+        needleCap.position.set(210, 210);
+        
+        //Add each sub container to master container.
+        this.addChild(meterBackPlate);
+        this.addChild(needleGauge);
+        this.addChild(needleCap);
+        
+        //Set reference of needleGauge to this.NeedleGauge.
+        this.NeedleGauge = needleGauge;
+    }
+    
+    /**
+     * Create meter backplate (contains meter base, grid and text labels).
+     * @return Container of meter backplate.
+     */
+    private createMeterBackPlate(gaugeTitle : string, numberLabels : string[], unit : string) : PIXI.Container
+    {  
+        //Create MeterBase sprite
+        const backSprite = PIXI.Sprite.fromFrame("AnalogSingleMeter_Base");
+
+        //Create MeterGrid sprite
+        const gridSprite = PIXI.Sprite.fromFrame("AnalogSingleMeter_Grid");
+        
+        //Create gauge title label
+        const titleElem = new PIXI.extras.BitmapText(gaugeTitle, {font: {name : "Michroma", size : 48 }, align: "right"});
+        titleElem.anchor = new PIXI.Point(1,0.5);
+        titleElem.position.set(370,260);
+        
+        //Create gauge unit label
+        const unitElem = new PIXI.extras.BitmapText(unit, {font: {name : "Michroma", size : 24 }, align: "center"});
+        unitElem.anchor = new PIXI.Point(0.5,0.5);
+        unitElem.position.set(210,150);
+
+        //Create meter number label
+        let numberElements: PIXI.extras.BitmapText[] = [];
+        numberElements[0] = new PIXI.extras.BitmapText(numberLabels[0], {font: {name : "Michroma", size : 48 }, align: "center"});
+        numberElements[0].anchor = new PIXI.Point(0.5,1);
+        numberElements[0].position.set(210,372);
+        numberElements[1] = new PIXI.extras.BitmapText(numberLabels[1], {font: {name : "Michroma", size : 48 }, align: "left"});
+        numberElements[1].anchor = new PIXI.Point(0,1);
+        numberElements[1].position.set(85,330);
+        numberElements[2] = new PIXI.extras.BitmapText(numberLabels[2], {font: {name : "Michroma", size : 48 }, align: "left"});
+        numberElements[2].anchor = new PIXI.Point(0,0.5);
+        numberElements[2].position.set(52,210);
+        numberElements[3] = new PIXI.extras.BitmapText(numberLabels[3], {font: {name : "Michroma", size : 48 }, align: "left"});
+        numberElements[3].anchor = new PIXI.Point(0,0);
+        numberElements[3].position.set(85, 90);
+        numberElements[4] = new PIXI.extras.BitmapText(numberLabels[4], {font: {name : "Michroma", size : 48 }, align: "center"});
+        numberElements[4].anchor = new PIXI.Point(0.5,0);
+        numberElements[4].position.set(210,40);
+        numberElements[5] = new PIXI.extras.BitmapText(numberLabels[5], {font: {name : "Michroma", size : 48 }, align: "right"});
+        numberElements[5].anchor = new PIXI.Point(1,0);
+        numberElements[5].position.set(335,90);
+        numberElements[6] = new PIXI.extras.BitmapText(numberLabels[6], {font: {name : "Michroma", size : 48 }, align: "right"});
+        numberElements[6].anchor = new PIXI.Point(1,0.5);
+        numberElements[6].position.set(375,210);
+
+        // Add all of elements to baseContainer.
+        const baseContainer = new PIXI.Container();
+        baseContainer.addChild(backSprite);
+        baseContainer.addChild(gridSprite);
+        baseContainer.addChild(titleElem);
+        baseContainer.addChild(unitElem);
+        for (let i = 0; i < numberLabels.length; i++)
+            baseContainer.addChild(numberElements[i]);
+        
+        // "Baking" this container to single texture
+        // This can speed up the rendering (since gpu dose not need to construct this constructor on every frame)
+        baseContainer.cacheAsBitmap = true;
+        return baseContainer;
+    }
+}
+```
+Finally, `AnalogSingleMeter` is constructed by defining elements (sprites, bitmap texts and gauge primitives), and adding these elements to master containers (by `this.addChild()`).
+(To know the meanings of element's properties, please see [pixi.js examples](http://pixijs.github.io/examples/), [pixi.js tutorials](http://www.pixijs.com/tutorials), or [MeterPrimitive.md](./MeterPrimitive.md)).
+
+On this example, "Meter back plate" (=backSprite + gridSprite + title label + unit label + number labels) are grouped into single container (by the method of `createMeterBackPlate()`).
+At the final step of `createMeterBackPlate()`, the contents of this container are cached ("baked") into single texture by setting `cacheAsBitMap = true`. By this, the WebGL renderer need not to construct this container by every frame and improve rendering performance (This technique is explained in [cachAsBitmap section of pixi.js demo](https://pixijs.github.io/examples/#/demos/cacheAsBitmap.js).
+

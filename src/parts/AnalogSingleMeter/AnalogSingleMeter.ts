@@ -131,12 +131,19 @@ export class AnalogSingleMeter extends PIXI.Container
     public set Value(val: number) {
         this.NeedleGauge.Value = val;
         this.NeedleGauge.update();
-    }  
-        
+    }
+    
+      
+    /**
+     * Construct AnalogSingleMeter class.
+     * @param option Meter setting option.
+     */    
     constructor(option: AnalogSingleMeterOption)
     {
+        // Call the constructor of PIXI.Container.
         super();
         
+        // Set option
         this.Option = option;
         
         //Create meter backplate.
@@ -213,7 +220,8 @@ export class AnalogSingleMeter extends PIXI.Container
         numberElements[6] = new PIXI.extras.BitmapText(numberLabels[6], {font: {name : "Michroma", size : 48 }, align: "right"});
         numberElements[6].anchor = new PIXI.Point(1,0.5);
         numberElements[6].position.set(375,210);
-
+        
+        // Add all of elements to baseContainer.
         const baseContainer = new PIXI.Container();        
         baseContainer.addChild(backSprite);
         baseContainer.addChild(gridSprite);
@@ -222,6 +230,8 @@ export class AnalogSingleMeter extends PIXI.Container
         for (let i = 0; i < numberLabels.length; i++)
             baseContainer.addChild(numberElements[i]);
         
+        // "Baking" this container to single texture
+        // This can speed up the rendering (since gpu dose not need to construct this constructor on every frame)
         baseContainer.cacheAsBitmap = true;
         return baseContainer;
     }
