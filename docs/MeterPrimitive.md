@@ -84,14 +84,14 @@ See [WebSocketGaugeClientNeo/src/lib/Graphics/private/GagueBase.ts](../src/lib/G
 ## <a name="circularProgressBar">CircularProgressBar</a>
 * `CircularProgressBar` defines the pie or doughnut shaped progress bar like gauge.
 
-	![CircularProgressBar](CustomMeterParts.img/CircularProgressBar.gif).
+	![CircularProgressBar](CustomMeterParts.img/CircularProgressBar.gif)
 
 * The `CircularProgressBar` class create the "doughnut" or "pie" shaped mask, and clips the `Texture` with using this mask.
 
-	![CircularProgressBarOptions](CustomMeterParts.img/CircularProgressBarOptions.jpg).
+	![CircularProgressBarOptions](CustomMeterParts.img/CircularProgressBarOptions.jpg)
 
 ## Class definition code
-See [WebSocketGaugeClientNeo/src/lib/Graphics/private/CircularProgressBar.ts](../src/lib/Graphics/private/CircularProgressBar.ts).
+See [WebSocketGaugeClientNeo/src/lib/Graphics/private/CircularProgressBar.ts](../src/lib/Graphics/private/CircularProgressBar.ts)
 
 ### Example code
 ```js
@@ -139,14 +139,14 @@ Following properties are available on `CircularProgressBarOptios` class.
 
 * `RectangularProgressBar` defines the rectangle progress bar like gauge.
 
-	![RectangularProgressBar](CustomMeterParts.img/RectangularProgressBar.gif).
+	![RectangularProgressBar](CustomMeterParts.img/RectangularProgressBar.gif)
 
 * The `RectangularProgressBar` class create the rectangle mask, and clips the `Texture` with using this mask.
 
-	![RectangularProgressBarOptions](CustomMeterParts.img/RectangularProgressBarOptions.jpg).
+	![RectangularProgressBarOptions](CustomMeterParts.img/RectangularProgressBarOptions.jpg)
     
 ## Class definition code
-See [WebSocketGaugeClientNeo/src/lib/Graphics/private/RectangularProgressBar.ts](../src/lib/Graphics/private/RectangularProgressBar.ts).
+See [WebSocketGaugeClientNeo/src/lib/Graphics/private/RectangularProgressBar.ts](../src/lib/Graphics/private/RectangularProgressBar.ts)
 
 ## Example code
 ```js
@@ -196,11 +196,11 @@ tachoProgressBar.Options.MaskWidth = 577;
 ## <a name="rotationNeedleGauge">RotationNeedleGauge</a>
 * `RotationNeedleGauge` defines the meter gauge with rotation needle indicator.
 
-	![RotationNeedleGauge](CustomMeterParts.img/RotationNeedleGauge.gif).
+	![RotationNeedleGauge](CustomMeterParts.img/RotationNeedleGauge.gif)
 
 * The `RotationNeedleGauge` class rotate itself(its container, rotation pivot should be set as PIXI.Container.pivot) corresponding its `Value`.
 
-	![RotationNeedleGauge](CustomMeterParts.img/RotationNeedleGaugerOptions.jpg).
+	![RotationNeedleGauge](CustomMeterParts.img/RotationNeedleGaugerOptions.jpg)
 
 ## Class definition code
 See [WebSocketGaugeClientNeo/src/lib/Graphics/private/RotationNeedleGauge.ts](../src/lib/Graphics/private/RotationNeedleGauge.ts).

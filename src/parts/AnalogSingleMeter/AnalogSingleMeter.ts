@@ -62,6 +62,9 @@ export class AnalogSingleMeterOption
      */
     public ScaleLabel : string[];
     
+    /**
+     * Construct AnalogSingleMeterOption with default settings.
+     */
     constructor()
     {
         this.Max = 2.0;
@@ -77,6 +80,10 @@ export class AnalogSingleMeterOption
  */
 export class AnalogSingleMeter extends PIXI.Container
 {
+    /**
+     * The variable option class to define the design (max, min, title and scale labels).
+     * @see AnalogSingleMeterOption
+     */
     private Option : AnalogSingleMeterOption;
     
     /**
