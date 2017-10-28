@@ -1,18 +1,18 @@
 # Meter application source code.
 
 ## Table of contents
-* [Meter application source files](#meter application source)
-* [Bundle html file with typescript file](#bundle html and typescript)
-* [Import dependent modules](#import dependent modules)
-* [Application entry point](#application entry point)
-* [Define application class](#define application class)
-	* [Setup websocket communication (by implementing `setWebSocketOptions()`)](#setup websocket communication)
-	* [Setup picture and font preloading (by implementing `setTextureFontPreloadOptions()`)](#setup preloading)
-	* [Setup meter panel configuration (by implementing `setPIXIMeterPanel()`)](#setup meter panel)
-* [The html file](#html file)
+* [Meter application source files](#meter_application_source)
+* [Bundle html file with typescript file](#bundle_html_and_typescript)
+* [Import dependent modules](#import_dependent_modules)
+* [Application entry point](#application_entry_point)
+* [Define application class](#define_application_class)
+	* [Setup websocket communication (by implementing `setWebSocketOptions()`)](#setup_websocket_communication)
+	* [Setup picture and font preloading (by implementing `setTextureFontPreloadOptions()`)](#setup_preloading)
+	* [Setup meter panel configuration (by implementing `setPIXIMeterPanel()`)](#setup_meter_panel)
+* [The html file](#html_file)
 * [Build custom meter application](#build)
 
-## <a name="meter application source">Meter application source files.</a>
+## <a name="meter_application_source">Meter application source files.</a>
 
 Meter application (top level deifition of meter panel that consist of meter parts and websocket communication) is stored in `WebSocketGaugeClientNeo/application` directory.
 
@@ -25,7 +25,7 @@ The *.html file simply calls javascript file. The main part of application logic
 
 In this document, `DigitalMFD-ELM327DemoApp.ts` and `DigitalMFD-ELM327DemoApp.html` will be used to explain the application coding.
 
-## <a name="bundle html and typescript">Bundle html file with typescript file. </a>
+## <a name="bundle_html_and_typescript">Bundle html file with typescript file. </a>
 `DigitalMFD-ELM327DemApp.ts`
 ```js
 // Set entry point html file to bundle by webpack
@@ -34,7 +34,7 @@ require("./DigitalMFD-ELM327DemoApp.html");
 The html file is need to be bundled with the application typescirpt file as the `require()` statement above.
 By using sthis information, webpack will bundle html file and type script file, and build to `WebSocketGaugeClientNeo/public_html` directory.
 
-## <a name="import dependent modules">Import dependent modules</a>
+## <a name="import_dependent_modules">Import dependent modules</a>
 `DigitalMFD-ELM327DemoApp.ts`
 ```js
 //Import application base class
@@ -67,7 +67,7 @@ Import several modules by `import{}` statement. In meter application source, fol
  		* Subaru SSM : `SSMParameterCode` and `SSMSwitchCode`
  			* For ELM327 and SSM, `ReadModeCode` also should be imported. (This defines read mode (interval of sending data from ECU)).
 
-## <a name="application entry point">Application entry point</a>
+## <a name="application_entry_point">Application entry point</a>
 
 `DigitalMFD-ELM327DemoApp.ts`
 ```js
@@ -81,7 +81,7 @@ This entry point method (`window.onload()`) is called when the browser finish lo
 (But it should be noted that browser do not wait to finish loading picture and font files. Because of that, preload setting should be defined in application class).
 Construct application class (described below), and start application class with `run()` method.
 
-## <a name="define application class">Define application class</a>
+## <a name="define_application_class">Define application class</a>
 `DigitalMFD-ELM327DemoApp.ts`
 ```js
 class DigitalMFD_ELM327DemoApp extends MeterApplicationBase
@@ -110,7 +110,7 @@ The application class of `DigitalMFD_ELM327DemoApp` extends the base (abstract) 
 	* Setup the actual design and operation of meter panel.
 	* Construct meter parts, set the position of meter parts, and define the operation on every animation frame.
 
-### <a name="setup websocket communication">Setup websocket communication (by implementing `setWebSocketOptions()`) </a>
+### <a name="setup_websocket_communication">Setup websocket communication (by implementing `setWebSocketOptions()`) </a>
 `DigitalMFD-ELM327DemoApp.ts`
 ```js
 protected setWebSocketOptions()
@@ -146,7 +146,7 @@ Of course, code registration method is also available on Arduino, Defi and SSM.
 * Defi Link : `registerDefiParameterCode(code : string, interpolate : boolean)`
 * Subaru SSM : `registerSSMParameterCode(code : string, readMode : string, interpolate : boolean)`
 
-### <a name="setup preloading">Setup picture and font preloading (by implementing `setTextureFontPreloadOptions()`)</a>
+### <a name="setup_preloading">Setup picture and font preloading (by implementing `setTextureFontPreloadOptions()`)</a>
 `DigitalMFD-ELM327DemoApp.ts`
 ```js
 protected setTextureFontPreloadOptions()
@@ -169,7 +169,7 @@ protected setTextureFontPreloadOptions()
 ```
 In `setTextureFontPreloadOptions()` method, `WebFontFamilyName`, `WebFontCSSURL` and `TexturePath` shold be registered for each parts. These parameters are implemented as static properties of meter parts classes.
 
-### <a name="setup meter panel">Setup meter panel configuration (by implementing `setPIXIMeterPanel()`)</a>
+### <a name="setup_meter_panel">Setup meter panel configuration (by implementing `setPIXIMeterPanel()`)</a>
 `DigitalMFD-ELM327DemoApp.ts`
 ```js
 protected setPIXIMeterPanel()
@@ -234,7 +234,7 @@ The latter half of above code (after `this.ticker.add()`) defines the ticker met
 * `getRawVal(code : string)`
 	* This method gets raw value (not interpolated) of sensor.
 
-## <a name="html file">The html file</a>
+## <a name="html_file">The html file</a>
 html file (in this example, `DigitalMFD-ELM327DemoApp.html`) simply calls the javascript file (this javascript file is complied and deployed by webpack).
 ```html
 <html>
