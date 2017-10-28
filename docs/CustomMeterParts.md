@@ -1,6 +1,17 @@
 # Making custom meter parts
 
-## Tools to make meter parts
+## Table of contents
+* [Tools to make meter parts](#tools)
+* [Meter parts example](#example)
+* [Design meter parts and export to PNG file](#design)
+* [Making sprite sheet](#spriteSheet)
+* [Making bitmap font file](#bitmapFont)
+* [Coding meter parts class](#coding)
+	* [Import dependent libraries and resources (textures and bitmap fonts)](#import)
+	* [Creating option class](#option)
+	* [Set class specific(static) property](#classProperty)
+
+## <a name="tools">Tools to make meter parts</a>
 
 * Drawing software to design([Inkscape](https://inkscape.org/))
 
@@ -12,7 +23,7 @@
 
 * And before reading this document, it may be better to see some of Pixi.js [examples](http://pixijs.github.io/examples/) or [tutorials](http://www.pixijs.com/tutorials).
 
-## Meter parts example
+## <a name="example">Meter parts example</a>
 
 In this document, following "AnalogSingleMeter" class will be explained as a example.
 
@@ -24,14 +35,14 @@ In this document, following "AnalogSingleMeter" class will be explained as a exa
 
 	* This svg (and this design) uses [Microma font](https://fonts.google.com/specimen/Michroma). Please install this font before opening the svg file.
 
-## Design meter parts and export to PNG file.
+## <a name="design">Design meter parts and export to PNG file</a>
 
 First of all, design meter panel by drawing tool (such as Inkscape). After making design, export to PNG files.
 This example separate meter design into 4 png files. These 4 png files (sprite, textures) will be combined while coding meter parts class.
 
 ![AnalogSingleMeter_TexturePNG](./CustomMeterParts.img/AnalogSingleMeter_TexturesPNG.jpg).
 
-## Making sprite sheet
+## <a name="spriteSheet"> Making sprite sheet</a>
 On Pixi.js, making sprite sheet is recommened to handle textures, because of its performance optimization.
 [Leshy SpriteSheet Tool](https://www.leshylabs.com/apps/sstool/) or [TexturePacker](https://www.codeandweb.com/texturepacker) can make sprite sheet for Pixi.js.
 (Please set the sprite sheet map file format to 'JSON-Hash').
@@ -40,7 +51,7 @@ Sprite sheet tool will finally make one picture file (where all of sprite PNG fi
 [Exported sprite sheet](../src/parts/AnalogSingleMeter/AnalogSingleMeter_0.png).
 [Exported json file](../src/parts/AnalogSingleMeter/AnalogSingleMeter.json).
 
-## Making bitmap font file
+## <a name="bitmapFont">Making bitmap font file</a>
 Pixi.js can handle various type of font, including TrueType and other types of Webfont.
 Among them, bitmap font (PIXI.extras.BitmapText) is recommended because of its performance. (Vector type font needs rendereing every time the text is updated. This can make the performance overhead.)
 
@@ -48,20 +59,25 @@ Among them, bitmap font (PIXI.extras.BitmapText) is recommended because of its p
 
 On exporting bitmap font, set font descriptor to "xml" and file format to "png" at "Options"->"Export options"->"File format".
 
-## Coding meter parts class.
+## <a name="coding">Coding meter parts class</a>
 After preparing sprite(textures) and fonts, make a code of parts class.
 
 This library currently have three types of primitive gauge parts. To know how to use these classes, please refer [MeterPrimitive.md](./MeterPrimitive.md). These gauge primitive parts classes can be treated like "Container" of PIXI.js, since they extends the PIXI.Container class.
 * CircularProgressBar
+  
+  ![CircularProgressBar](CustomMeterParts.img/CircularProgressBar.gif) 
 * RectangularProgressBar
+  
+  ![RectangularProgressBar](CustomMeterParts.img/RectangularProgressBar.gif)
 * RotationNeedleGauge
-![CircularProgressBar](CustomMeterParts.img/CircularProgressBar.gif) ![RectangularProgressBar](CustomMeterParts.img/RectangularProgressBar.gif) ![RotationNeedleGauge](CustomMeterParts.img/RotationNeedleGauge.gif)
+
+  ![RotationNeedleGauge](CustomMeterParts.img/RotationNeedleGauge.gif)
 
 In this example, first make the master container class of "AnalogSingleMeter" (extends PIXI.Container), and add some child elements (Sprites and sub-containers).
 ![AnalogSingleMeter and child elements](./CustomMeterParts.img/MeterLayerAndContainer.jpg)
 [Final code of AnalgSingleMeter.ts](../src/parts/AnalogSingleMeter/AnalogSingleMeter.ts)
 
-### Import dependent libraries and resources (textures and bitmap fonts).
+### <a name="import">Import dependent libraries and resources (textures and bitmap fonts)</a>
 ```js
 // Import dependent libraries (pixi.js and RotationNeedleGauge)
 import {RotationNeedleGauge} from '../../lib/Graphics/PIXIGauge';
@@ -79,7 +95,7 @@ require("./Michroma_48px_Glow_0.png");
 ```
 The first part of [AnalgSingleMeter.ts](../src/parts/AnalogSingleMeter/AnalogSingleMeter.ts) imports dependent library classes (pixi.js library, RotationNeedleGauge class and its option class) and resource files (textures(sprite sheet) and bitmap font files). These resource files will be bundled to build destination directory (WebSocketGaugeClientNeo/public_html) by webpack and webpack file loader.
 
-### Creating option class
+### <a name="option">Creating option class</a>
 The second part of [AnalgSingleMeter.ts](../src/parts/AnalogSingleMeter/AnalogSingleMeter.ts) defines `AnalogSingleMeterOptions` class. This class stores setting of `AnalogSingleMeter`, such as Max/Min value, gauge title text, unit label text and scale label texts. (In this example, meter settings are defined in separate class.)
 Of course, "Option" class is not absolutely necessary, and you can define meter panel setting in the meter class itself.
 
@@ -124,7 +140,7 @@ export class AnalogSingleMeterOption
 }
 ```
 
-### Set class specific(static) property.
+### <a name="classProperty">Set class specific(static) property</a>
 After that, `AnalogSingleMeter` class is defined. First, class member variables and properties are defined.
 
 ```js
