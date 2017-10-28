@@ -9,6 +9,16 @@
 
 ## <a name="introduction">Introduction</a>
 This library currently have 3 types of meter primitive parts.
+* [CircularProgressBar](#circularProgressBar) (Progress bar changing pie/doughnut shape texture mask)
+
+ ![CircularProgressBar](CustomMeterParts.img/CircularProgressBar.gif)
+* [RectangularProgressBar](#rectangularProgressBar) (Progress bar changing rectangular shape texture mask)
+
+ ![RectangularProgressBar](CustomMeterParts.img/RectangularProgressBar.gif)
+* [RotationNeedleGauge](#rotationNeedleGauge) (The gauge rotating the texture of "needle")
+
+ ![RotationNeedleGauge](CustomMeterParts.img/RotationNeedleGauge.gif)
+
 Each parts extends the PIXI.Container parts, and can be treated like PIXI.Container.
 To view the source code of meter primitives, refer [WebSocketGaugeClientNeo/src/lib/Graphics](../src/lib/Graphics).
 
