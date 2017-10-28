@@ -53,9 +53,14 @@ After preparing sprite(textures) and fonts, make a code of parts class.
 
 This library currently have three types of primitive gauge parts. To know how to use these classes, please refer [MeterPrimitive.md](./MeterPrimitive.md). These gauge primitive parts classes can be treated like "Container" of PIXI.js, since they extends the PIXI.Container class.
 * CircularProgressBar
+
+ ![CircularProgressBar](CustomMeterParts.img/CircularProgressBar.gif)
 * RectangularProgressBar
+
+ ![RectangularProgressBar](CustomMeterParts.img/RectangularProgressBar.gif) 
 * RotationNeedleGauge
-![CircularProgressBar](CustomMeterParts.img/CircularProgressBar.gif) ![RectangularProgressBar](CustomMeterParts.img/RectangularProgressBar.gif) ![RotationNeedleGauge](CustomMeterParts.img/RotationNeedleGauge.gif)
+
+ ![RotationNeedleGauge](CustomMeterParts.img/RotationNeedleGauge.gif)
 
 In this example, first make the master container class of "AnalogSingleMeter" (extends PIXI.Container), and add some child elements (Sprites and sub-containers).
 ![AnalogSingleMeter and child elements](./CustomMeterParts.img/MeterLayerAndContainer.jpg)
