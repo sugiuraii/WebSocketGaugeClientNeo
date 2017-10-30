@@ -9,6 +9,7 @@
 * [Install](#install)
 * [Build](#build)
 * [Making custom meter panel](#custom)
+* [Other documents](#otherDocs)
 * [License](#license)
 
 ## <a name="description">Description</a>
@@ -71,12 +72,21 @@ Build command is incuded in npm scirpt (please see `package.json`). To build,
 > npm run build-application
 ```
 
-## <a name="custom">Making custom meter panel<a/>
-There are some sample source codes of meter application in `WebSocketGaugeClientNeo/src/application`directoy.
+## <a name="custom">Making custom meter panel</a>
+There are some sample source codes of meter application in [`WebSocketGaugeClientNeo/src/application`](./src/application)directoy.
 To make your custom meter application, refer [CustomMeterApp.md](./docs/CustomMeterApp.md)
 
 ## <a name="install">Install</a>
 After buiding sources, compiled htmls and javascripts will be stored in `public_html` folder. Please copy these files to your web server (e.g. nginx) export directory.
+
+## <a name="otherDocs">Other docuents</a>
+* [docs/CustomMeterApp.md](docs/CustomMeterApp.md)
+	* Making own meter application class(setting up websocket communication and place of meter parts).
+* [docs/MeterAppBuild.md](docs/MeterAppBuild.md)
+	* Set up the build parameter (typescript and webpack).
+* [docs/CustomMeterParts.md](docs/CustomMeterParts.md)
+* [docs/MeterPrimitive.md](docs/MeterPrimitive.md)
+	* Making own meter parts classes (with you original meter design).
 
 ## <a name="license">License</a>
 [MIT License](./LICENSE)
