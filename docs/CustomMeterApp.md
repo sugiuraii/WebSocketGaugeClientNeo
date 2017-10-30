@@ -1,6 +1,7 @@
-# Meter application source code.
+# Making custom meter application.
 
 ## Table of contents
+* [Introduction](#intro)
 * [Meter application source files](#meter_application_source)
 * [Bundle html file with typescript file](#bundle_html_and_typescript)
 * [Import dependent modules](#import_dependent_modules)
@@ -11,6 +12,19 @@
 	* [Setup meter panel configuration (by implementing `setPIXIMeterPanel()`)](#setup_meter_panel)
 * [The html file](#html_file)
 * [Build custom meter application](#build)
+
+## <a name="intro">Introduction</a>
+![Application diagram](./CustomMeterApp.img/ApplicationDiagram.jpg)
+Meter application (html5 front panel view of gauge) have mainly two kind of object, one is websocket communication(client) class, and the other is meter (graphical) parts class.
+Websocket client classes manage the communication with [Websocket server programs](https://github.com/sugiuraii/WebSocketGaugeServer), with parsing JSON data from Websocket server. The parsed data are sent to meter parts classes by every animation frame. The meter parts classes changes its view (rotating needle, changing progressbar, changing digital indictaor, etc..) corresponding the data received from websocket communication(client) classes.
+
+This document will explain how to costruct meter application class. During making the application class, you can setup,
+* Which kind of websocket client (Defi/SSM/Arduino/ELM327) will be used.
+* Which kind of data (engine rpm, boost pressure, etc..) will be sent from websocket server.
+* Which kind of meter parts will be used.
+* Position and size of meter parts.
+
+If you want to make your own meter parts (with your new design), please refer [CustomMeterParts.md](./CustomMeterParts.md) and [MeterPrimitive.md](./MeterPrimitive.md).
 
 ## <a name="meter_application_source">Meter application source files.</a>
 
@@ -57,7 +71,7 @@ Import several modules by `import{}` statement. In meter application source, fol
 * Meter parts classes
 	* Defines parts of meter panel. In `DigitalMFD-ELM327DemoApp.ts`, four types of meter parts are imported.
 	* The source code of mater panel parts exists in `WebSocketGaugeClientNeo/parts` directory. You can add your original design meter parts.
-	![Meter panel parts class](CustomMeterApp.img/MeterpanelMod_PartsClass.PNG)
+	![Meter panel parts class](CustomMeterApp.img/MeterpanelMod_PartsClass.jpg)
 * Parameter code enumator modlules
  	* Define enumator of parameter code (Engine_Speed, Manifold_Absolute_Pressure, etc...).
  	* Import the parameter code module corresponding the websocket server to communicate.
