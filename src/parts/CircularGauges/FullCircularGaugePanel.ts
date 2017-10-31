@@ -1,52 +1,52 @@
 /* 
- * Copyright (c) 2017, kuniaki
- * All rights reserved.
+ * The MIT License
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
+ * Copyright 2017 kuniaki.
  *
- * * Redistributions of source code must retain the above copyright notice, this
- *   list of conditions and the following disclaimer.
- * * Redistributions in binary form must reproduce the above copyright notice,
- *   this list of conditions and the following disclaimer in the documentation
- *   and/or other materials provided with the distribution.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 
 import {FullCircularGaugePanelBase} from "./private/FullCircularGaugePanelBase"
+import {FullCircularGaugePanelOptionsBase} from "./private/FullCircularGaugePanelBase"
 
 export class BoostGaugePanel extends FullCircularGaugePanelBase
 {
-    protected setOption() : void
+    constructor()
     {
-        super.setOption();
-        this.titleLabel = "TURBO BOOST";
-        this.unitLabel = "x100kPa";
-        this.min = -1.0;
-        this.max = 2.0;
-        this.redZoneBarEnable = true;
-        this.yellowZoneBarEnable = true;
-        this.greenZoneBarEnable = true;
-        this.redZoneBarOffsetAngle = 315;
-        this.yellowZoneBarOffsetAngle = 270;
-        this.greenZoneBarOffsetAngle = 90;
-        this.redZoneBarFullAngle = 40;
-        this.yellowZoneBarFullAngle = 45;
-        this.greenZoneBarFullAngle = 90;
-        this.valueNumberRoundDigit = 1;
+        let options = new FullCircularGaugePanelOptionsBase();
         
-        this.setAxisLabel(
+        options.TitleLabel = "TURBO BOOST";
+        options.UnitLabel = "x100kPa";
+        options.Min = -1.0;
+        options.Max = 2.0;
+        options.RedZoneBarEnable = true;
+        options.YellowZoneBarEnable = true;
+        options.GreenZoneBarEnable = true;
+        options.RedZoneBarOffsetAngle = 315;
+        options.YellowZoneBarOffsetAngle = 270;
+        options.GreenZoneBarOffsetAngle = 90;
+        options.RedZoneBarFullAngle = 42;
+        options.YellowZoneBarFullAngle = 45;
+        options.GreenZoneBarFullAngle = 90;
+        options.ValueNumberRoundDigit = 1;
+        
+        options.AxisLabel = 
         [   "-1.0",
             "-0.5",
             "0",
@@ -54,28 +54,31 @@ export class BoostGaugePanel extends FullCircularGaugePanelBase
             "+1.0",
             "+1.5",
             "+2.0"
-        ]);
+        ];
+        
+        super(options);
     }
 }
 
 export class AirFuelGaugePanel extends FullCircularGaugePanelBase
 {
-    protected setOption() : void
+    constructor()
     {
-        super.setOption();
-        this.titleLabel = "Air/Fuel Ratio";
-        this.min = 8;
-        this.max = 20;
-        this.redZoneBarOffsetAngle = 315;
-        this.redZoneBarFullAngle = 45;
-        this.yellowZoneBarOffsetAngle = 225;
-        this.yellowZoneBarFullAngle = 90;
-        this.greenZoneBarOffsetAngle = 135;
-        this.greenZoneBarFullAngle = 90;
-        this.invertDraw = true;
-        this.unitLabel="A/F";
-        this.valueNumberRoundDigit = 1;
-        this.setAxisLabel(
+        let options = new FullCircularGaugePanelOptionsBase();
+
+        options.TitleLabel = "Air/Fuel Ratio";
+        options.Min = 8;
+        options.Max = 20;
+        options.RedZoneBarOffsetAngle = 315;
+        options.RedZoneBarFullAngle = 45;
+        options.YellowZoneBarOffsetAngle = 225;
+        options.YellowZoneBarFullAngle = 90;
+        options.GreenZoneBarOffsetAngle = 135;
+        options.GreenZoneBarFullAngle = 90;
+        options.GaugeFullOnValueMin = true;
+        options.UnitLabel="A/F";
+        options.ValueNumberRoundDigit = 1;
+        options.AxisLabel = 
         [   "20",
             "18",
             "16",
@@ -83,6 +86,132 @@ export class AirFuelGaugePanel extends FullCircularGaugePanelBase
             "12",
             "10",
             "8"
-        ]);
+        ];
+        
+        super(options);
+    }
+}
+
+export class WaterTempGaugePanel extends FullCircularGaugePanelBase
+{
+    constructor()
+    {
+        let options = new FullCircularGaugePanelOptionsBase();
+        
+        options.TitleLabel = "WATER TEMP";
+        options.UnitLabel = "degC";
+        options.Min = 0;
+        options.Max = 120;
+        options.RedZoneBarEnable = true;
+        options.YellowZoneBarEnable = true;
+        options.GreenZoneBarEnable = false;
+        options.RedZoneBarOffsetAngle = 315;
+        options.YellowZoneBarOffsetAngle = 292.5;
+        options.RedZoneBarFullAngle = 42;
+        options.YellowZoneBarFullAngle = 22.5;
+        options.ValueNumberRoundDigit = 0;
+        
+        options.AxisLabel = 
+        [   "0",
+            "20",
+            "40",
+            "60",
+            "80",
+            "100",
+            "120"
+        ];
+        
+        super(options);
+    }
+}
+
+export class EngineOilTempGaugePanel extends FullCircularGaugePanelBase
+{
+    constructor()
+    {
+        let options = new FullCircularGaugePanelOptionsBase();
+        
+        options.TitleLabel = "ENG. OIL TEMP";
+        options.UnitLabel = "degC";
+        options.Min = 30;
+        options.Max = 150;
+        options.RedZoneBarEnable = true;
+        options.YellowZoneBarEnable = true;
+        options.GreenZoneBarEnable = false;
+        options.RedZoneBarOffsetAngle = 315;
+        options.YellowZoneBarOffsetAngle = 292.5;
+        options.RedZoneBarFullAngle = 42;
+        options.YellowZoneBarFullAngle = 22.5;
+        options.ValueNumberRoundDigit = 0;
+        
+        options.AxisLabel = 
+        [   "30",
+            "50",
+            "70",
+            "90",
+            "110",
+            "130",
+            "150"
+        ];
+        
+        super(options);
+    }
+}
+
+export class  BatteryVoltageGaugePanel extends FullCircularGaugePanelBase
+{
+    constructor()
+    {
+        let options = new FullCircularGaugePanelOptionsBase();
+        
+        options.TitleLabel = "BATTERY VOLT";
+        options.UnitLabel = "V";
+        options.Min = 9;
+        options.Max = 15;
+        options.RedZoneBarEnable = false;
+        options.YellowZoneBarEnable = false;
+        options.GreenZoneBarEnable = false;
+        options.ValueNumberRoundDigit = 1;
+        
+        options.AxisLabel = 
+        [   "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15"
+        ];
+        
+        super(options);
+    }
+}
+
+export class  MassAirFlowGaugePanel extends FullCircularGaugePanelBase
+{
+    constructor()
+    {
+        let options = new FullCircularGaugePanelOptionsBase();
+        
+        options.TitleLabel = "MASS AIRFLOW";
+        options.UnitLabel = "x10g/s";
+        options.Min = 0;
+        options.Max = 50;
+        options.RedZoneBarEnable = false;
+        options.YellowZoneBarEnable = false;
+        options.GreenZoneBarEnable = false;
+        options.ValueNumberRoundDigit = 0;
+        
+        options.AxisLabel = 
+        [   "0",
+            "10",
+            "20",
+            "30",
+            "40",
+            "50",
+            "60"
+        ];
+        
+        super(options);
     }
 }

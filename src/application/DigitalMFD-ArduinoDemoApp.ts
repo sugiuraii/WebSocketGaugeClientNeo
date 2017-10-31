@@ -1,31 +1,32 @@
 /* 
- * Copyright (c) 2017, kuniaki
- * All rights reserved.
+ * The MIT License
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
+ * Copyright 2017 kuniaki.
  *
- * * Redistributions of source code must retain the above copyright notice, this
- *   list of conditions and the following disclaimer.
- * * Redistributions in binary form must reproduce the above copyright notice,
- *   this list of conditions and the following disclaimer in the documentation
- *   and/or other materials provided with the distribution.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
+ 
 // This is required to webpack font/texture/html files
 /// <reference path="../lib/webpackRequire.ts" />
 
+//Assign entry point html file to bundle by webpack
+require("./DigitalMFD-ArduinoDemoApp.html");
 
 //Import application base class
 import {MeterApplicationBase} from "../lib/MeterAppBase/MeterApplicationBase";
@@ -39,12 +40,10 @@ import {DigiTachoPanel} from "../parts/DigiTachoPanel/DigiTachoPanel";
 //Import enumuator of parameter code
 import {ArduinoParameterCode} from "../lib/WebSocket/WebSocketCommunication";
 
-//For including entry point html file in webpack
-require("./DigitalMFD-ArduinoDemoApp.html");
 
 window.onload = function()
 {
-    const meterapp = new DigitalMFD_ArduinoDemoApp();
+    const meterapp = new DigitalMFD_ArduinoDemoApp(720, 1280);
     meterapp.run();
 }
 
@@ -78,13 +77,7 @@ class DigitalMFD_ArduinoDemoApp extends MeterApplicationBase
     }
     
     protected setPIXIMeterPanel()
-    {
-        this.pixiApp = new PIXI.Application(720, 1280);
-        const app = this.pixiApp;
-        document.body.appendChild(app.view);
-        app.view.style.width = "100vw";
-        app.view.style.touchAction = "auto";
-        
+    {        
         const digiTachoPanel = new DigiTachoPanel();
         digiTachoPanel.position.set(0,0);
         digiTachoPanel.scale.set(1.15);
@@ -101,12 +94,12 @@ class DigitalMFD_ArduinoDemoApp extends MeterApplicationBase
         engineOilTempPanel.position.set(360,890);
         engineOilTempPanel.scale.set(0.85);
                 
-        app.stage.addChild(digiTachoPanel);
-        app.stage.addChild(boostPanel);
-        app.stage.addChild(waterTempPanel);
-        app.stage.addChild(engineOilTempPanel);
+        this.stage.addChild(digiTachoPanel);
+        this.stage.addChild(boostPanel);
+        this.stage.addChild(waterTempPanel);
+        this.stage.addChild(engineOilTempPanel);
                 
-        app.ticker.add(() => 
+        this.ticker.add(() => 
         {
             const timestamp = PIXI.ticker.shared.lastTime;
             const tacho = this.ArduinoWS.getVal(ArduinoParameterCode.Engine_Speed, timestamp);

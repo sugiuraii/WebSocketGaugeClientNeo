@@ -1,34 +1,31 @@
 /* 
- * Copyright (c) 2017, kuniaki
- * All rights reserved.
+ * The MIT License
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
+ * Copyright 2017 kuniaki.
  *
- * * Redistributions of source code must retain the above copyright notice, this
- *   list of conditions and the following disclaimer.
- * * Redistributions in binary form must reproduce the above copyright notice,
- *   this list of conditions and the following disclaimer in the documentation
- *   and/or other materials provided with the distribution.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
-
+import * as PIXI from "pixi.js";
 import {ControlPanel} from "./ControlPanel";
 import * as WebFont from "webfontloader";
 import * as WebSocketCommunication from "../WebSocket/WebSocketCommunication";
 import {calculateGearPosition} from "./CalculateGearPosition";
-export {DefiParameterCode} from "../WebSocket/WebSocketCommunication";
 
 const DEFICOM_WS_PORT = 2012;
 const ARDUINOCOM_WS_PORT = 2015;
@@ -43,10 +40,11 @@ const WAITTIME_BEFORE_RECONNECT = 5000;
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
 //const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui";
 
-export abstract class MeterApplicationBase
-{
-    protected pixiApp : PIXI.Application;
-    
+/**
+ * Base class to define application with meter panel and websocket clients.
+ */
+export abstract class MeterApplicationBase extends PIXI.Application
+{    
     private webSocketServerName : string;
     
     private controlPanel = new ControlPanel();
@@ -55,24 +53,61 @@ export abstract class MeterApplicationBase
     private ssmWS = new WebSocketCommunication.SSMWebsocket();
     private arduinoWS = new WebSocketCommunication.ArduinoCOMWebsocket();
     private elm327WS = new WebSocketCommunication.ELM327COMWebsocket();
-    private fueltripWS = new WebSocketCommunication.FUELTRIPWebsocket();    
+    private fueltripWS = new WebSocketCommunication.FUELTRIPWebsocket();   
+    /**
+     * Get DefiWS websocket client.
+     */ 
     get DefiWS() {return this.defiWS}
+    /**
+     * Get SSMWS websocket client.
+     */
     get SSMWS() {return this.ssmWS}
+    /**
+     * Get ArduinoWS websocket client.
+     */
     get ArduinoWS() {return this.arduinoWS}
+    /**
+     * Get ELM327WS websocket client..
+     */
     get ELM327WS() { return this.elm327WS}
+    /**
+     * Get FUElTRIP websocket client.
+     */
     get FUELTRIPWS() {return this.fueltripWS}
+    /**
+     * Flag to enable DefiWS client.
+     */
     public IsDefiWSEnabled = false;
+    /**
+     * Flag to enable SSMWS client.
+     */
     public IsSSMWSEnabled = false;
+    /**
+     *  Flag to enable ArduinoWS client.
+     */
     public IsArudinoWSEnabled = false;
+    /**
+     * Flag to enable ELM327WS client.
+     */
     public IsELM327WSEnabled = false;
+    /**
+     * Flag to enable FUELTRIP WS client.
+     */
     public IsFUELTRIPWSEnabled = false;
     
+    /**
+     * Slow read interval for SSM and ELM327 Websocket.
+     */
     public SSMELM327SlowReadInterval : number = 10;
     
     private webFontFamiliyNameToPreload : string[] = new Array();
     private webFontCSSURLToPreload : string[] = new Array();
     private texturePathToPreload : string[] = new Array();
     
+    /**
+     * Register WebFont family name to preload before running meter application.
+     * @param target WebFontFamily name to preload.
+     */
     public registerWebFontFamilyNameToPreload(target : string[]) : void;
     public registerWebFontFamilyNameToPreload(target : string) : void;
     public registerWebFontFamilyNameToPreload(target : any) : void
@@ -85,6 +120,10 @@ export abstract class MeterApplicationBase
         else if (target instanceof Array)
              this.webFontFamiliyNameToPreload = this.webFontFamiliyNameToPreload.concat(target);
     }
+    /**
+     * Register WebFont CSS URL to preload before running meter application.
+     * @param target CSS URL to preload.
+     */
     public registerWebFontCSSURLToPreload(target : string[]) : void;
     public registerWebFontCSSURLToPreload(target : string) : void;
     public registerWebFontCSSURLToPreload(target : any) : void
@@ -97,6 +136,10 @@ export abstract class MeterApplicationBase
         else if (target instanceof Array)
              this.webFontCSSURLToPreload = this.webFontCSSURLToPreload.concat(target);
     }
+    /**
+     * Register texture(sprite) image path to preload before running meter application.
+     * @param target Image (or sprite sheet json file) path to preload.
+     */
     public registerTexturePathToPreload(target : string[]) : void;
     public registerTexturePathToPreload(target : string) : void;
     public registerTexturePathToPreload(target : any) : void
@@ -115,33 +158,79 @@ export abstract class MeterApplicationBase
     private ssmParameterCodeList : {code : string, readMode : string, interpolate : boolean}[] = new Array();
     private elm327ParameterCodeList : {code : string, readMode : string, interpolate : boolean}[] = new Array();
     
+    /**
+     * Register Defi parameter code to enable communication.
+     * @param code Parameter code name to register.
+     * @param interpolate Flag to enable or disable time domain interpolation.
+     */
     public registerDefiParameterCode(code : string, interpolate : boolean)
     {
         this.defiParameterCodeList.push({code, interpolate});
     }
+    /**
+     * Register Arduino parameter code to enable communication.
+     * @param code Parameter code name to register.
+     * @param interpolate Flag to enable or disable time domain interpolation.
+     */
     public registerArduinoParameterCode(code : string, interpolate : boolean)
     {
         this.arduinoParameterCodeList.push({code, interpolate});
     }
+    /**
+     * Register SSM parameter code to enable communication.
+     * @param code Parameter code name to register.
+     * @param interpolate Flag to enable or disable time domain interpolation.
+     */
     public registerSSMParameterCode(code : string, readMode : string, interpolate : boolean)
     {
         this.ssmParameterCodeList.push({code, readMode, interpolate});
     }
+    /**
+     * Register ELM327(OBDII PID) parameter code to enable communication.
+     * @param code Parameter code name to register.
+     * @param interpolate Flag to enable or disable time domain interpolation.
+     */
     public registerELM327ParameterCode(code : string, readMode : string, interpolate : boolean)
     {
         this.elm327ParameterCodeList.push({code, readMode, interpolate});
     }
     
+    /**
+     * Fueltrip logger section fueltrip time span (in sec).
+     */
     public FUELTRIPSectSpan : number = 300;
+    /**
+     * Number of section to store gas milage.
+     */
     public FUELTRIPSectStoreMax : number = 5;
     
+    /**
+     * Set websocket options.
+     */
     protected abstract setWebSocketOptions() : void;
+    /**
+     * Set webfont/texture preload.
+     */
     protected abstract setTextureFontPreloadOptions() : void;
-    
+    /**
+     * Set pixi.js meter panel.
+     */
     protected abstract setPIXIMeterPanel() : void;
     
-    constructor(webSocketServerName? : string)
+    /**
+     * Construct MeterApplicationBase.
+     * @param width Stage width in px.
+     * @param height Stage height in px.
+     * @param webSocketServerName Hostname of websocket server (default : same as webserver).s
+     */
+    constructor(width : number, height : number, webSocketServerName? : string)
     {
+        super(width, height);
+        // Append to document body
+        this.view.style.width = "100vw";
+        this.view.style.touchAction = "auto";
+        document.body.appendChild(this.view);
+        
         //Set url of websocket
         if (typeof (webSocketServerName) === "undefined")
             this.webSocketServerName = location.hostname;
@@ -187,6 +276,9 @@ export abstract class MeterApplicationBase
         this.preloadFonts( () => this.preloadTextures( () => this.setPIXIMeterPanel()));        
     }
     
+    /**
+     * Set viewport meta tag.
+     */
     private setViewPortMetaTag()
     {
         let metalist = document.getElementsByTagName('meta');
@@ -211,6 +303,9 @@ export abstract class MeterApplicationBase
         }
     }
     
+    /**
+     * Set meta tag to capable webapp.
+     */
     private setWebAppCapable() : void
     {
         {
@@ -227,6 +322,9 @@ export abstract class MeterApplicationBase
         }
     }
     
+    /**
+     * Set websocket URL.
+     */
     private setWSURL(webSocketServerName : string)
     {
         this.defiWS.URL = "ws://" + webSocketServerName + ":" + DEFICOM_WS_PORT.toString() + "/"; 
@@ -307,6 +405,9 @@ export abstract class MeterApplicationBase
         Indicator.setFUELTRIPIndicatorStatus(this.fueltripWS.getReadyState());
     }
     
+    /**
+     * Start application.
+     */
     public run()
     {
         this.connectWebSocket();
@@ -511,6 +612,13 @@ export abstract class MeterApplicationBase
         
     }
     
+    /** 
+     * Calculate gear position.
+     * @param rev Engine speed in rpm.
+     * @paran speed Vehicle speelp.
+     * @param neutralSw Flag of netural.
+     * @return Calcualted gear position (number or "N" in the case of neutral).
+     */
     protected calculateGearPosition(rev : number, speed : number, neutralSw : boolean) : string
     {
         return calculateGearPosition(rev, speed, neutralSw);
@@ -518,7 +626,7 @@ export abstract class MeterApplicationBase
     
     public setBlurOnAppStage(amount : number)
     {
-        const stage = this.pixiApp.stage;
+        const stage = this.stage;
         const filter = new PIXI.filters.BlurFilter();
         filter.blur = amount;
         stage.filters = [filter];
@@ -526,7 +634,7 @@ export abstract class MeterApplicationBase
     
     public unsetBlurOnAppStage()
     {
-        const stage = this.pixiApp.stage;
+        const stage = this.stage;
         stage.filters = [];        
     }
     

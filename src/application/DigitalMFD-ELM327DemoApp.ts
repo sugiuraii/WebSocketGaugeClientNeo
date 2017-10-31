@@ -1,31 +1,31 @@
 /* 
- * Copyright (c) 2017, kuniaki
- * All rights reserved.
+ * The MIT License
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
+ * Copyright 2017 kuniaki.
  *
- * * Redistributions of source code must retain the above copyright notice, this
- *   list of conditions and the following disclaimer.
- * * Redistributions in binary form must reproduce the above copyright notice,
- *   this list of conditions and the following disclaimer in the documentation
- *   and/or other materials provided with the distribution.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
-// This is required to webpack font/texture/html files
+// This line is required to bundle font/texture/html files by webpack file-loader (do not delete)
 /// <reference path="../lib/webpackRequire.ts" />
 
+// Set entry point html file to bundle by webpack
+require("./DigitalMFD-ELM327DemoApp.html");
 
 //Import application base class
 import {MeterApplicationBase} from "../lib/MeterAppBase/MeterApplicationBase";
@@ -40,17 +40,18 @@ import {BoostGaugePanel} from "../parts/CircularGauges/FullCircularGaugePanel";
 import {OBDIIParameterCode} from "../lib/WebSocket/WebSocketCommunication";
 import {ReadModeCode} from "../lib/WebSocket/WebSocketCommunication";
 
-//For including entry point html file in webpack
-require("./DigitalMFD-ELM327DemoApp.html");
 
 window.onload = function()
 {
-    const meterapp = new DigitalMFD_ELM327DemoApp();
+    const meterapp = new DigitalMFD_ELM327DemoApp(720, 1280);
     meterapp.run();
 }
 
 class DigitalMFD_ELM327DemoApp extends MeterApplicationBase
 {
+    /**
+     * Put code to set up websocket communication.
+     */
     protected setWebSocketOptions()
     {
         //Enable ELM327 websocket client
@@ -62,30 +63,33 @@ class DigitalMFD_ELM327DemoApp extends MeterApplicationBase
         this.registerELM327ParameterCode(OBDIIParameterCode.Coolant_Temperature, ReadModeCode.SLOW, true); 
         this.registerELM327ParameterCode(OBDIIParameterCode.Manifold_Absolute_Pressure, ReadModeCode.SLOWandFAST, true);       
     }
-    
+    /**
+     * Put code to register resources (texture image files, fonts) to preload.
+     */
     protected setTextureFontPreloadOptions()
     {
         this.registerWebFontFamilyNameToPreload(WaterTempGaugePanel.RequestedFontFamily);
         this.registerWebFontFamilyNameToPreload(DigiTachoPanel.RequestedFontFamily);
         this.registerWebFontFamilyNameToPreload(BoostGaugePanel.RequestedFontFamily);
+        this.registerWebFontFamilyNameToPreload(ThrottleGaugePanel.RequestedFontFamily);
     
         this.registerWebFontCSSURLToPreload(WaterTempGaugePanel.RequestedFontCSSURL);
         this.registerWebFontCSSURLToPreload(DigiTachoPanel.RequestedFontCSSURL);
         this.registerWebFontCSSURLToPreload(BoostGaugePanel.RequestedFontCSSURL);
+        this.registerWebFontCSSURLToPreload(ThrottleGaugePanel.RequestedFontCSSURL);
         
         this.registerTexturePathToPreload(WaterTempGaugePanel.RequestedTexturePath);
         this.registerTexturePathToPreload(DigiTachoPanel.RequestedTexturePath);
         this.registerTexturePathToPreload(BoostGaugePanel.RequestedTexturePath);
+        this.registerTexturePathToPreload(ThrottleGaugePanel.RequestedTexturePath);
     }
     
+    /**
+     * Put code to setup pixi.js meter panel.
+     */
     protected setPIXIMeterPanel()
     {
-        this.pixiApp = new PIXI.Application(720, 1280);
-        const app = this.pixiApp;
-        document.body.appendChild(app.view);
-        app.view.style.width = "100vw";
-        app.view.style.touchAction = "auto";
-        
+        // Construct meter panel parts.
         const digiTachoPanel = new DigiTachoPanel();
         digiTachoPanel.position.set(0,0);
         digiTachoPanel.scale.set(1.15);
@@ -101,26 +105,28 @@ class DigitalMFD_ELM327DemoApp extends MeterApplicationBase
         const throttlePanel = new ThrottleGaugePanel();
         throttlePanel.position.set(360,890);
         throttlePanel.scale.set(0.85);
-        
 
+        // Put meter panel parts to stage.
+        this.stage.addChild(digiTachoPanel);
+        this.stage.addChild(boostPanel);
+        this.stage.addChild(waterTempPanel);
+        this.stage.addChild(throttlePanel);
         
-        app.stage.addChild(digiTachoPanel);
-        app.stage.addChild(boostPanel);
-        app.stage.addChild(waterTempPanel);
-        app.stage.addChild(throttlePanel);
-        
-        app.ticker.add(() => 
+        // Define ticker method to update meter view (this ticker method will be called every frame).
+        this.ticker.add(() => 
         {
+            // Take timestamp of animation frame. (This time stamp is needed to interpolate meter sensor reading).
             const timestamp = PIXI.ticker.shared.lastTime;
+            // Get sensor information from websocket communication objects.
             const tacho = this.ELM327WS.getVal(OBDIIParameterCode.Engine_Speed, timestamp);
             const speed = this.ELM327WS.getVal(OBDIIParameterCode.Vehicle_Speed, timestamp);
             const neutralSw = false;
             const gearPos = this.calculateGearPosition(tacho, speed, neutralSw);
-            const boost = this.ELM327WS.getVal(OBDIIParameterCode.Manifold_Absolute_Pressure, timestamp)  * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
-            
+            const boost = this.ELM327WS.getVal(OBDIIParameterCode.Manifold_Absolute_Pressure, timestamp)  * 0.0101972 - 1; //convert kPa to kgf/cm2 and relative pressure   
             const waterTemp = this.ELM327WS.getRawVal(OBDIIParameterCode.Coolant_Temperature);
             const throttle = this.ELM327WS.getVal(OBDIIParameterCode.Throttle_Opening_Angle, timestamp);
             
+            // Update meter panel value by sensor data.
             digiTachoPanel.Speed = speed;
             digiTachoPanel.Tacho = tacho;
             digiTachoPanel.GearPos = gearPos;

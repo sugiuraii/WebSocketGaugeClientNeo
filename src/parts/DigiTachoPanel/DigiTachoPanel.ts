@@ -1,32 +1,32 @@
 /* 
- * Copyright (c) 2017, kuniaki
- * All rights reserved.
+ * The MIT License
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
+ * Copyright 2017 kuniaki.
  *
- * * Redistributions of source code must retain the above copyright notice, this
- *   list of conditions and the following disclaimer.
- * * Redistributions in binary form must reproduce the above copyright notice,
- *   this list of conditions and the following disclaimer in the documentation
- *   and/or other materials provided with the distribution.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 
  /// <reference path="../../lib/webpackRequire.ts" />
  
 import {RectangularProgressBar} from '../../lib/Graphics/PIXIGauge';
+import {BitmapFontNumericIndicator} from '../../lib/Graphics/PIXIGauge';
+
 import * as PIXI from 'pixi.js';
 
 require("./DigiTachoTexture.json");
@@ -44,7 +44,7 @@ export class DigiTachoPanel extends PIXI.Container
 {
     private tachoProgressBar: RectangularProgressBar;
 
-    private speedLabel: PIXI.extras.BitmapText;
+    private speedLabel: BitmapFontNumericIndicator;
     private geasposLabel: PIXI.extras.BitmapText;
 
     private speed : number = 0;
@@ -70,8 +70,7 @@ export class DigiTachoPanel extends PIXI.Container
     set Speed(speed : number)
     {
         this.speed = speed;
-        const roundedSpeed : number = Math.round(speed);
-        this.speedLabel.text = roundedSpeed.toString();
+        this.speedLabel.Value = speed;
     }
 
     get Tacho(): number {return this.tacho}
@@ -108,22 +107,23 @@ export class DigiTachoPanel extends PIXI.Container
         //Create tacho progress bar
         const tachoProgressBar = new RectangularProgressBar();
         this.tachoProgressBar = tachoProgressBar;
-        tachoProgressBar.Texture = tachoProgressBarTexture;
+        tachoProgressBar.Options.Texture = tachoProgressBarTexture;
         tachoProgressBar.position.set(10,6);
-        tachoProgressBar.Min = 0;
-        tachoProgressBar.Max = 9000;
-        tachoProgressBar.Vertical = false;
-        tachoProgressBar.InvertDirection = false;
-        tachoProgressBar.InvertDraw = false;
-        tachoProgressBar.PixelStep = 8;
-        tachoProgressBar.MaskHeight = 246;
-        tachoProgressBar.MaskWidth = 577;
+        tachoProgressBar.Options.Min = 0;
+        tachoProgressBar.Options.Max = 9000;
+        tachoProgressBar.Options.Vertical = false;
+        tachoProgressBar.Options.InvertDirection = false;
+        tachoProgressBar.Options.GagueFullOnValueMin = false;
+        tachoProgressBar.Options.PixelStep = 8;
+        tachoProgressBar.Options.MaskHeight = 246;
+        tachoProgressBar.Options.MaskWidth = 577;
         super.addChild(tachoProgressBar);
 
-        const speedTextLabel = new PIXI.extras.BitmapText(this.speed.toString(), {font : "FreeSans", align : "right"});
+        const speedTextLabel = new BitmapFontNumericIndicator(this.speed.toString(), {font : "FreeSans", align : "right"});
         this.speedLabel = speedTextLabel;
         speedTextLabel.position.set(485,320);
         speedTextLabel.anchor = new PIXI.Point(1,1);
+        speedTextLabel.NumberOfDecimalPlace = 0;
         super.addChild(speedTextLabel);
 
         const gearTextLabel = new PIXI.extras.BitmapText(this.gearPos,{font : "Audiowide", align : "center"});
