@@ -1,7 +1,9 @@
 # Websocket dashboard client (new version with WebGL)
 
-## Table of contents
+##Image
+![main screen](README.img/MainScreen.jpg)
 
+## Table of contents
 * [Description](#description)
 * [System diagram](#system_diagram)
 * [Requirement](#requirement)
@@ -22,7 +24,7 @@ The graphical part of this program depends on [PIXI.js](http://www.pixijs.com/).
 You can make your custom gauges by modifying the source code. Please see []().
 
 ## <a name="system_diagram">System diagram</a>
-![System diagram](./README.img/WebsocketServerDiagram.png)
+![System diagram](./README.img/WebsocketServerDiagram.jpg)
 ## <a name="requirement">Requirement</a>
 * Web server PC or appliance to distribute html and javascript files to browsers.
 * Web browser to view dashboard gauges.
