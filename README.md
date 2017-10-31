@@ -1,7 +1,5 @@
 # Websocket dashboard client (new version with WebGL)
 
-##　Image
-
 ![main screen](README.img/MainScreen.jpg)
 
 ## Table of contents
