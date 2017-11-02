@@ -223,9 +223,10 @@ export abstract class MeterApplicationBase extends PIXI.Application
      * @param height Stage height in px.
      * @param webSocketServerName Hostname of websocket server (default : same as webserver).s
      */
-    constructor(width : number, height : number, webSocketServerName? : string)
+    constructor(width: number, height: number, applicationOptions?: PIXI.ApplicationOptions, webSocketServerName? : string)
     {
-        super(width, height);
+        super(width, height, applicationOptions);
+        
         // Append to document body
         this.view.style.width = "100vw";
         this.view.style.touchAction = "auto";
