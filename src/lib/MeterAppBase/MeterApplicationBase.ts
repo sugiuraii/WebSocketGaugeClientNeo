@@ -49,11 +49,11 @@ export abstract class MeterApplicationBase extends PIXI.Application
     
     private controlPanel = new ControlPanel();
     
-    private defiWS = new WebSocketCommunication.DefiCOMWebsocket();
-    private ssmWS = new WebSocketCommunication.SSMWebsocket();
-    private arduinoWS = new WebSocketCommunication.ArduinoCOMWebsocket();
-    private elm327WS = new WebSocketCommunication.ELM327COMWebsocket();
-    private fueltripWS = new WebSocketCommunication.FUELTRIPWebsocket();   
+    private defiWS: WebSocketCommunication.DefiCOMWebsocket;
+    private ssmWS: WebSocketCommunication.SSMWebsocket;
+    private arduinoWS: WebSocketCommunication.ArduinoCOMWebsocket;
+    private elm327WS: WebSocketCommunication.ELM327COMWebsocket;
+    private fueltripWS: WebSocketCommunication.FUELTRIPWebsocket;   
     /**
      * Get DefiWS websocket client.
      */ 
@@ -77,28 +77,28 @@ export abstract class MeterApplicationBase extends PIXI.Application
     /**
      * Flag to enable DefiWS client.
      */
-    public IsDefiWSEnabled = false;
+    public IsDefiWSEnabled: boolean;
     /**
      * Flag to enable SSMWS client.
      */
-    public IsSSMWSEnabled = false;
+    public IsSSMWSEnabled: boolean;
     /**
      *  Flag to enable ArduinoWS client.
      */
-    public IsArudinoWSEnabled = false;
+    public IsArudinoWSEnabled: boolean;
     /**
      * Flag to enable ELM327WS client.
      */
-    public IsELM327WSEnabled = false;
+    public IsELM327WSEnabled: boolean;
     /**
      * Flag to enable FUELTRIP WS client.
      */
-    public IsFUELTRIPWSEnabled = false;
+    public IsFUELTRIPWSEnabled: boolean;
     
     /**
      * Slow read interval for SSM and ELM327 Websocket.
      */
-    public SSMELM327SlowReadInterval : number = 10;
+    public SSMELM327SlowReadInterval : number;
     
     private webFontFamiliyNameToPreload : string[] = new Array();
     private webFontCSSURLToPreload : string[] = new Array();
@@ -153,10 +153,10 @@ export abstract class MeterApplicationBase extends PIXI.Application
             this.texturePathToPreload = this.texturePathToPreload.concat(target);
     }
     
-    private defiParameterCodeList: {code: string, interpolate : boolean}[] = new Array();
-    private arduinoParameterCodeList : {code : string, interpolate : boolean}[] = new Array(); 
-    private ssmParameterCodeList : {code : string, readMode : string, interpolate : boolean}[] = new Array();
-    private elm327ParameterCodeList : {code : string, readMode : string, interpolate : boolean}[] = new Array();
+    private defiParameterCodeList: {code: string, interpolate : boolean}[];
+    private arduinoParameterCodeList : {code : string, interpolate : boolean}[]; 
+    private ssmParameterCodeList : {code : string, readMode : string, interpolate: boolean}[];
+    private elm327ParameterCodeList : {code : string, readMode : string, interpolate : boolean}[];
     
     /**
      * Register Defi parameter code to enable communication.
@@ -198,11 +198,11 @@ export abstract class MeterApplicationBase extends PIXI.Application
     /**
      * Fueltrip logger section fueltrip time span (in sec).
      */
-    public FUELTRIPSectSpan : number = 300;
+    public FUELTRIPSectSpan : number;
     /**
      * Number of section to store gas milage.
      */
-    public FUELTRIPSectStoreMax : number = 5;
+    public FUELTRIPSectStoreMax : number;
     
     /**
      * Set websocket options.
@@ -226,6 +226,9 @@ export abstract class MeterApplicationBase extends PIXI.Application
     constructor(width: number, height: number, applicationOptions?: PIXI.ApplicationOptions, webSocketServerName? : string)
     {
         super(width, height, applicationOptions);
+        
+        // Initialize websocket instances
+        this.initializeWebSocketInstances();
         
         // Append to document body
         this.view.style.width = "100vw";
@@ -275,6 +278,28 @@ export abstract class MeterApplicationBase extends PIXI.Application
         
         // Preload Fonts -> textures-> parts
         this.preloadFonts( () => this.preloadTextures( () => this.setPIXIMeterPanel()));        
+    }
+    
+    private initializeWebSocketInstances()
+    {
+        this.defiWS = new WebSocketCommunication.DefiCOMWebsocket();
+        this.ssmWS = new WebSocketCommunication.SSMWebsocket();
+        this.arduinoWS = new WebSocketCommunication.ArduinoCOMWebsocket();
+        this.elm327WS = new WebSocketCommunication.ELM327COMWebsocket();
+        this.fueltripWS = new WebSocketCommunication.FUELTRIPWebsocket();
+        this.IsDefiWSEnabled = false;
+        this.IsSSMWSEnabled = false;
+        this.IsArudinoWSEnabled = false;
+        this.IsELM327WSEnabled = false;
+        this.SSMELM327SlowReadInterval = 10;
+        
+        this.FUELTRIPSectSpan = 300;
+        this.FUELTRIPSectStoreMax = 5;
+        
+        this.defiParameterCodeList = new Array();
+        this.arduinoParameterCodeList = new Array(); 
+        this.ssmParameterCodeList = new Array();
+        this.elm327ParameterCodeList = new Array();
     }
     
     /**
