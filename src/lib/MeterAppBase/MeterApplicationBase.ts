@@ -47,7 +47,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
 {    
     private webSocketServerName : string;
     
-    private controlPanel = new ControlPanel();
+    private controlPanel: ControlPanel;
     
     private defiWS: WebSocketCommunication.DefiCOMWebsocket;
     private ssmWS: WebSocketCommunication.SSMWebsocket;
@@ -100,9 +100,9 @@ export abstract class MeterApplicationBase extends PIXI.Application
      */
     public SSMELM327SlowReadInterval : number;
     
-    private webFontFamiliyNameToPreload : string[] = new Array();
-    private webFontCSSURLToPreload : string[] = new Array();
-    private texturePathToPreload : string[] = new Array();
+    private webFontFamiliyNameToPreload : string[];
+    private webFontCSSURLToPreload : string[];
+    private texturePathToPreload : string[];
     
     /**
      * Register WebFont family name to preload before running meter application.
@@ -226,7 +226,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
     constructor(width: number, height: number, applicationOptions?: PIXI.ApplicationOptions, webSocketServerName? : string)
     {
         super(width, height, applicationOptions);
-        
+           
         // Initialize websocket instances
         this.initializeWebSocketInstances();
         
@@ -242,13 +242,8 @@ export abstract class MeterApplicationBase extends PIXI.Application
             this.webSocketServerName = webSocketServerName;
         this.setWSURL(this.webSocketServerName);
         
-        //Set controlPanel
-        document.body.appendChild(this.controlPanel.Container);   
-        //Add controlPanel open button
-        document.body.appendChild(this.controlPanel.OpenButton);
-        
-        // Register control panel events (buttons and spinner)
-        this.registerControlPanelEvents();
+        // Initialize control panel.
+        this.initializeControlPanel();
         
         // Set viewport meta-tag
         this.setViewPortMetaTag();
@@ -274,6 +269,9 @@ export abstract class MeterApplicationBase extends PIXI.Application
         this.setWSIntervalSpinner();
         
         // Set texture, font preload options
+        this.webFontFamiliyNameToPreload = new Array();
+        this.webFontCSSURLToPreload = new Array();
+        this.texturePathToPreload = new Array();
         this.setTextureFontPreloadOptions();
         
         // Preload Fonts -> textures-> parts
@@ -300,6 +298,19 @@ export abstract class MeterApplicationBase extends PIXI.Application
         this.arduinoParameterCodeList = new Array(); 
         this.ssmParameterCodeList = new Array();
         this.elm327ParameterCodeList = new Array();
+    }
+    
+    private initializeControlPanel()
+    {
+        this.controlPanel = new ControlPanel();
+        
+        //Set controlPanel
+        document.body.appendChild(this.controlPanel.Container);   
+        //Add controlPanel open button
+        document.body.appendChild(this.controlPanel.OpenButton);
+        
+        // Register control panel events (buttons and spinner)
+        this.registerControlPanelEvents();
     }
     
     /**
@@ -415,9 +426,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
             if (!wsIntervalSent)
             {
                 this.controlPanel.LogWindow.appendLog("WSInterval spinner is changed. However, neither DefiWS nor ArduinoWS are active.");
-            }
-            
-            
+            }  
         });
     }
     
