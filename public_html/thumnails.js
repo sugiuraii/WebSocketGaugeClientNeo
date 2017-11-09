@@ -22,23 +22,23 @@
  * THE SOFTWARE.
  */
 
-var fs = require('fs');
-var page = require('webpage').create();
 const waitTime = 1000;
 const thumbnailWidth = 400;
 const thumbnailHeight = 400;
 
 function getFileUrl(str) {
-  var pathName = fs.absolute(str).replace(/\\/g, '/');
-  // Windows drive letter must be prefixed with a slash
-  if (pathName[0] !== "/") {
-    pathName = "/" + pathName;
-  }
-  return encodeURI("file://" + pathName);
+    const fs = require('fs');
+    var pathName = fs.absolute(str).replace(/\\/g, '/');
+    // Windows drive letter must be prefixed with a slash
+    if (pathName[0] !== "/") {
+        pathName = "/" + pathName;
+    }
+    return encodeURI("file://" + pathName);
 };
 
 function createThumbNail(htmlPath, pngPath)
 {
+    const page = require('webpage').create();
     const fileUrl = getFileUrl(htmlPath);
     page.viewportSize =
     {
@@ -47,10 +47,19 @@ function createThumbNail(htmlPath, pngPath)
     };
     
     page.open(fileUrl, function() {
-    window.setTimeout(function () {
-    page.render(pngPath);
-    phantom.exit();},waitTime);
+    window.setTimeout(function () 
+    {
+        page.render(pngPath);
+    },waitTime);
     });
 }
 
 createThumbNail("benchmark/AnalogMeterClusterBenchApp.html", "thumbnails/AnalogMeterClusterBenchApp.png");
+createThumbNail("benchmark/DigitalMFDBenchApp.html", "thumbnails/DigitalMFDBenchApp.png");
+createThumbNail("application/AnalogMeterClusterApp.html", "thumbnails/AnalogMeterClusterApp.png");
+createThumbNail("application/DigitalMFD-ArduinoDemoApp.html", "thumbnails/DigitalMFD-ArduinoDemoApp.png");
+createThumbNail("application/DigitalMFD-ELM327DemoApp.html", "thumbnails/DigitalMFD-ELM327DemoApp.png");
+createThumbNail("application/DigitalMFD-SSMDemoApp.html", "thumbnails/DigitalMFD-SSMDemoApp.png");
+createThumbNail("application/DigitalMFDApp.html", "thumbnails/DigitalMFDApp.png");
+
+//phantom.exit();
