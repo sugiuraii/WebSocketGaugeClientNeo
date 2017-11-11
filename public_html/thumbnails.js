@@ -62,4 +62,4 @@ createThumbNail("application/DigitalMFD-ELM327DemoApp.html", "thumbnails/Digital
 createThumbNail("application/DigitalMFD-SSMDemoApp.html", "thumbnails/DigitalMFD-SSMDemoApp.png");
 createThumbNail("application/DigitalMFDApp.html", "thumbnails/DigitalMFDApp.png");
 
-//phantom.exit();
+window.setTimeout(function(){phantom.exit();},10000);
