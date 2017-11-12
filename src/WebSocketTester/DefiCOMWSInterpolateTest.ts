@@ -68,8 +68,8 @@ class DefiCOMWSTestInterpolate extends DefiArduinoCOMWSTestBase{
         super.inputWSSend();
         
         //Set interpolation flag.
-        const code: string = $('#codeSelect').val();
-        const flag: string = $('#codeFlag').val();
+        const code: string = $('#codeSelect').val().toString();
+        const flag: string = $('#codeFlag').val().toString();
         switch (flag) {
             case "true":
                 this.WebSocket.EnableInterpolate(code);

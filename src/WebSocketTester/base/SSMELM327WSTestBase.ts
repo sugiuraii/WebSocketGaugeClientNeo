@@ -76,10 +76,14 @@ export abstract class SSMELM327COMWSTestBase extends WebSocketTesterBase {
     }
 
     public inputWSSend() {
-        this.webSocket.SendCOMRead($('#codeSelect').val(), $('#codeReadmode').val(), $('#codeFlag').val());
+        const codeSelect = $('#codeSelect').val().toString();
+        const codeReadmode = $('#codeReadmode').val().toString();
+        const codeFlag = $('#codeFlag').val() === "true" ? true:false;
+        this.webSocket.SendCOMRead(codeSelect, codeReadmode, codeFlag);
     };
 
     public inputWSInterval() {
-        this.webSocket.SendSlowreadInterval(($('#WSInterval').val()));
+        const WSinterval = Number($('#WSInterval').val());
+        this.webSocket.SendSlowreadInterval(WSinterval);
     };
 }
