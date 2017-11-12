@@ -23,30 +23,30 @@
  */
 
 module.exports = {
-    entry: 
-    {
-        "DigitalMFDBenchApp" : './DigitalMFDBenchApp.ts',
-        "AnalogMeterClusterBenchApp" : "./AnalogMeterClusterBenchApp.ts"
-    },
+    entry:
+            {
+                "DigitalMFDBenchApp": './DigitalMFDBenchApp.ts',
+                "AnalogMeterClusterBenchApp": "./AnalogMeterClusterBenchApp.ts"
+            },
     devtool: "source-map",
-    output: 
-    {
-        path: __dirname + "/../../public_html/benchmark",
-        filename: "./js/[name].js"
-    },
+    output:
+            {
+                path: __dirname + "/../../public_html/benchmark",
+                filename: "./js/[name].js"
+            },
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.
         extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
     },
-  module: {
-    loaders: [
-        { test: /\.tsx?$/, loader: 'ts-loader' },
-        { test: /\.png$/, loader: "file-loader?name=img/[name].[ext]" },
-        { test: /\.fnt$/, loader: "file-loader?name=img/[name].[ext]" }, // Bitmap font setting files
-        { test: /\.json$/, loader: "file-loader?name=img/[name].[ext]" },
-        { test: /\.html$/, loader: "file-loader?name=[name].[ext]" },
-        { test: /\.css$/, loader: "file-loader?name=[name].[ext]" },
-        { test: /\.(ttf|otf)$/, loader: "file-loader?name=fonts/[name].[ext]" }
-    ]
-  }
+    module: {
+        loaders: [
+            {test: /\.tsx?$/, loader: 'ts-loader'},
+            {test: /\.png$/, loader: "file-loader?name=img/[name].[ext]"},
+            {test: /\.fnt$/, loader: "file-loader?name=img/[name].[ext]"}, // Bitmap font setting files
+            {test: /\.json$/, loader: "file-loader?name=img/[name].[ext]"},
+            {test: /\.html$/, loader: "file-loader?name=[name].[ext]"},
+            {test: /\.css$/, loader: "file-loader?name=[name].[ext]"},
+            {test: /\.(ttf|otf)$/, loader: "file-loader?name=fonts/[name].[ext]"}
+        ]
+    }
 };

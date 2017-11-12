@@ -24,34 +24,34 @@
 
 module.exports = {
     cache: true,
-    entry: 
-    {
-        // Register meter application and set entry point typescript file.
-        "AnalogMeterClusterApp" : './AnalogMeterClusterApp.ts',
-        "DigitalMFDApp" : './DigitalMFDApp.ts',
-        "DigitalMFD-ELM327DemoApp" : './DigitalMFD-ELM327DemoApp.ts',
-        "DigitalMFD-ArduinoDemoApp" : './DigitalMFD-ArduinoDemoApp.ts',
-        "DigitalMFD-SSMDemoApp" : './DigitalMFD-SSMDemoApp.ts'
-    },
+    entry:
+            {
+                // Register meter application and set entry point typescript file.
+                "AnalogMeterClusterApp": './AnalogMeterClusterApp.ts',
+                "DigitalMFDApp": './DigitalMFDApp.ts',
+                "DigitalMFD-ELM327DemoApp": './DigitalMFD-ELM327DemoApp.ts',
+                "DigitalMFD-ArduinoDemoApp": './DigitalMFD-ArduinoDemoApp.ts',
+                "DigitalMFD-SSMDemoApp": './DigitalMFD-SSMDemoApp.ts'
+            },
     devtool: "#inline-source-map",
-    output: 
-    {
-        path: __dirname + "/../../public_html/application",
-        filename: "./js/[name].js"
-    },
+    output:
+            {
+                path: __dirname + "/../../public_html/application",
+                filename: "./js/[name].js"
+            },
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.
         extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
     },
-  module: {
-    loaders: [
-        { test: /\.tsx?$/, loader: 'ts-loader' },
-        { test: /\.png$/, loader: "file-loader?name=img/[name].[ext]" },
-        { test: /\.fnt$/, loader: "file-loader?name=img/[name].[ext]" }, // Bitmap font setting files
-        { test: /\.json$/, loader: "file-loader?name=img/[name].[ext]" },
-        { test: /\.html$/, loader: "file-loader?name=[name].[ext]" },
-        { test: /\.css$/, loader: "file-loader?name=[name].[ext]" },
-        { test: /\.(ttf|otf)$/, loader: "file-loader?name=fonts/[name].[ext]" }
-    ]
-  }
+    module: {
+        loaders: [
+            {test: /\.tsx?$/, loader: 'ts-loader'},
+            {test: /\.png$/, loader: "file-loader?name=img/[name].[ext]"},
+            {test: /\.fnt$/, loader: "file-loader?name=img/[name].[ext]"}, // Bitmap font setting files
+            {test: /\.json$/, loader: "file-loader?name=img/[name].[ext]"},
+            {test: /\.html$/, loader: "file-loader?name=[name].[ext]"},
+            {test: /\.css$/, loader: "file-loader?name=[name].[ext]"},
+            {test: /\.(ttf|otf)$/, loader: "file-loader?name=fonts/[name].[ext]"}
+        ]
+    }
 };
