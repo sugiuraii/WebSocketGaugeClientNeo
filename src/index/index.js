@@ -25,5 +25,6 @@
 import 'bootstrap';
 import 'jquery';
 import 'popper.js';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import '../css/bootstrap-slate/bootstrap.slate.min.css';
+import './index.css';
 require('./index.html');

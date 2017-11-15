@@ -23,8 +23,8 @@
  */
 
 const waitTime = 1000;
-const thumbnailWidth = 400;
-const thumbnailHeight = 400;
+const thumbnailWidth = 300;
+const thumbnailHeight = 200;
 
 function getFileUrl(str) {
     const fs = require('fs');
@@ -42,6 +42,14 @@ function createThumbNail(htmlPath, pngPath)
     const fileUrl = getFileUrl(htmlPath);
     page.viewportSize =
     {
+        width : thumbnailWidth,
+        height : thumbnailHeight
+    };
+    
+    page.clipRect =
+    {
+        top : 0,
+        left : 0,
         width : thumbnailWidth,
         height : thumbnailHeight
     };
