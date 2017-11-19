@@ -26,11 +26,12 @@ THE SOFTWARE.
     <head>
         <title>WebSocketGaugeClientNeo</title>
         <meta charset="UTF-8">
-        <!--
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui">
-        <link rel="stylesheet" type="text/css" href="indexmenu.css">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="mobile-web-app-capable" content="yes">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui">
+
+        <!--
+        <link rel="stylesheet" type="text/css" href="indexmenu.css">
         -->
         <script type="text/javascript" src="js/index.js"></script>
     </head>
@@ -48,226 +49,209 @@ THE SOFTWARE.
                 </ul>
             </div>
         </nav>
-
-        <h1>
-            Gauge Panel Application Sample (Multiple websocket communication procotols).
-        </h1>
-        <div class="card-deck">
-            <div class="row">
-                <div class="card col-xs">
-                    <img class="card-img-top img-thumbnail" src="thumbnails/AnalogMeterClusterApp.png" alt="Card image cap">
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            AnalogMeterCluster
-                        </h4>
-
-                        <p class="card-text">
-                            Triple analog gauge cluster demonstration (speed+coolant temp, rev+trip and boost).
-                        </p>
-                        <a href="application/AnalogMeterClusterApp.html" class="btn btn-primary btn-lg btn-block">Start Application</a>
-                    </div>
-                    <div class="card-footer">
+        <div class="jumbotron">
+            <h1>
+                Gauge Panel Application Sample
+            </h1>
+            <p>
+                (Multiple websocket communication procotols)
+            </p>
+        </div>
+        <div class="row">
+            <div class="card col-sm-4">
+                <img class="card-img-top img-thumbnail" src="thumbnails/AnalogMeterClusterApp.png" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Analog Meter Cluster
+                    </h4>
+                    <p class="card-text">
+                        Triple analog gauge cluster demonstration (speed+coolant temp, rev+trip and boost).
+                    </p>
+                    <p>
                         <span class="badge badge-info">DefiCOM</span>
                         <span class="badge badge-info">SSMCOM</span>
-                    </div>
+                    </p>
+                    <a href="application/AnalogMeterClusterApp.html" class="btn btn-primary btn-lg btn-block">Start</a>
                 </div>
+            </div>
 
-                <div class="card col-xs">
-                    <img class="card-img-top img-thumbnail" src="thumbnails/DigitalMFDApp.png" alt="Card image cap">
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            DigitalMFD
-                        </h4>
+            <div class="card col-sm-4">
+                <img class="card-img-top img-thumbnail" src="thumbnails/DigitalMFDApp.png" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Digital MFD
+                    </h4>
 
-                        <p class="card-text">
-                            Multi function display demo with rev, speed, fuel/trip, boost, A/F, coolant temp, battery voltage and throttle.
-                        </p>
-                        <a href="application/DigitalMFDApp.html" class="btn btn-primary btn-lg btn-block">Start Application</a>
-                    </div>
-                    <div class="card-footer">
+                    <p class="card-text">
+                        Multi function display demo with rev, speed, fuel/trip, boost, A/F, coolant temp, battery voltage and throttle.
+                    </p>
+                    <p>
                         <span class="badge badge-info">DefiCOM</span>
                         <span class="badge badge-info">SSMCOM</span>
-                    </div>
+                    </p>
+                    <a href="application/DigitalMFDApp.html" class="btn btn-primary btn-lg btn-block">Start</a>
                 </div>
             </div>
         </div>
-        <h1>
-            Gauge Panel Application Sample (Single websocket communication procotols).
-        </h1>
-        <div class="card-deck">
-            <div class="row">
-                <div class="card col-xs">
-                    <img class="card-img-top img-thumbnail" src="thumbnails/DigitalMFD-SSMDemoApp.png" alt="Card image cap">
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            DigitalMFD(SSM)
-                        </h4>
+        <div class="jumbotron">
+            <h1>
+                Gauge Panel Application Sample.
+            </h1>
+            <p>
+                (Single websocket communication procotols)
+            </p>
+        </div>
+        <div class="row">
+            <div class="card col-sm-4">
+                <img class="card-img-top img-thumbnail" src="thumbnails/DigitalMFD-SSMDemoApp.png" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        DigitalMFD (SSM)
+                    </h4>
 
-                        <p class="card-text">
-                            Mini Multi function display demo (for SSMCOM).
-                        </p>
-                        <a href="application/DigitalMFD-SSMDemoApp.html" class="btn btn-primary btn-lg btn-block">Start Application</a>
-                    </div>
-                    <div class="card-footer">
-                        <span class="badge badge-info">SSMCOM</span>
-                    </div>
+                    <p class="card-text">
+                        Mini Multi function display demo (for SSMCOM).
+                    </p>
+                    <p class="badge badge-info">ArduinoCOM</p>
+                    <a href="application/DigitalMFD-SSMDemoApp.html" class="btn btn-primary btn-lg btn-block">Start</a>
                 </div>
-                <div class="card col-xs">
-                    <img class="card-img-top img-thumbnail" src="thumbnails/DigitalMFD-ArduinoDemoApp.png" alt="Card image cap">
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            DigitalMFD(Arduino)
-                        </h4>
+            </div>
+            <div class="card col-sm-4">
+                <img class="card-img-top img-thumbnail" src="thumbnails/DigitalMFD-ArduinoDemoApp.png" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        DigitalMFD (Arduino)
+                    </h4>
 
-                        <p class="card-text">
-                            Mini Multi function display demo (for ArduinoCOM).
-                        </p>
-                        <a href="application/DigitalMFD-ArduinoDemoApp.html" class="btn btn-primary btn-lg btn-block">Start Application</a>
-                    </div>
-                    <div class="card-footer">
-                        <span class="badge badge-info">ArduinoCOM</span>
-                    </div>
+                    <p class="card-text">
+                        Mini Multi function display demo (for ArduinoCOM).
+                    </p>
+                    <p class="badge badge-info">ArduinoCOM</p>                    
+                    <a href="application/DigitalMFD-ArduinoDemoApp.html" class="btn btn-primary btn-lg btn-block">Start</a>
                 </div>
-                <div class="card col-xs">
-                    <img class="card-img-top img-thumbnail" src="thumbnails/DigitalMFD-ELM327DemoApp.png" alt="Card image cap">
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            DigitalMFD(ELM327)
-                        </h4>
+            </div>
+            <div class="card col-sm-4">
+                <img class="card-img-top img-thumbnail" src="thumbnails/DigitalMFD-ELM327DemoApp.png" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        DigitalMFD (ELM327)
+                    </h4>
 
-                        <p class="card-text">
-                            Mini Multi function display demo (for ELM327COM).
-                        </p>
-                        <a href="application/DigitalMFD-ELM327DemoApp.html" class="btn btn-primary btn-lg btn-block">Start Application</a>
-                    </div>
-                    <div class="card-footer">
-                        <span class="badge badge-info">ELM327COM</span>
-                    </div>
+                    <p class="card-text">
+                        Mini Multi function display demo (for ELM327COM).
+                    </p>
+                    <p class="badge badge-info">ELM327COM</p>
+                    <a href="application/DigitalMFD-ELM327DemoApp.html" class="btn btn-primary btn-lg btn-block">Start</a>
                 </div>
             </div>
         </div>
-        <h1>
-            Gauge Panel benchmark.
-        </h1>
-        <div class="card-deck">
-            <div class="row">
-                <div class="card col-xs">
-                    <img class="card-img-top img-thumbnail" src="thumbnails/AnalogMeterClusterBenchApp.png" alt="Card image cap">
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            AnalogMeterCluster Benchmark
-                        </h4>
+        <div class="jumbotron">
+            <h1>
+                Gauge Panel benchmark.
+            </h1>
+        </div>
+        <div class="row">
+            <div class="card col-sm-4">
+                <img class="card-img-top img-thumbnail" src="thumbnails/AnalogMeterClusterBenchApp.png" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Analog Meter Cluster Benchmark
+                    </h4>
 
-                        <p class="card-text">
-                            Graphic drawing benchmark test of triple analog gauge cluster.
-                        </p>
-                        <a href="benchmark/AnalogMeterClusterBenchApp.html" class="btn btn-primary btn-lg btn-block">Start Application</a>
-                    </div>
-                    <div class="card-footer">
-                    </div>
+                    <p class="card-text">
+                        Graphic drawing benchmark test of triple analog gauge cluster.
+                    </p>
+                    <a href="benchmark/AnalogMeterClusterBenchApp.html" class="btn btn-primary btn-lg btn-block">Start</a>
                 </div>
+            </div>
+            <div class="card col-sm-4">
+                <img class="card-img-top img-thumbnail" src="thumbnails/DigitalMFDBenchApp.png" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Digital MFD Benchmark
+                    </h4>
 
-                <div class="card col-xs">
-                    <img class="card-img-top img-thumbnail" src="thumbnails/DigitalMFDBenchApp.png" alt="Card image cap">
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            DigitalMFD Benchmark
-                        </h4>
-
-                        <p class="card-text">
-                            Graphic drawing benchmark test of multi function display.
-                        </p>
-                        <a href="benchmark/DigitalMFDBenchApp.html" class="btn btn-primary btn-lg btn-block">Start Application</a>
-                    </div>
-                    <div class="card-footer">
-                    </div>
+                    <p class="card-text">
+                        Graphic drawing benchmark test of multi function display.
+                    </p>
+                    <a href="benchmark/DigitalMFDBenchApp.html" class="btn btn-primary btn-lg btn-block">Start</a>
                 </div>
             </div>
         </div>
+        <div class="jumbotron">
+            <h1>
+                Websocket communication test.
+            </h1>
+        </div>
+        <div class="row">
+            <div class="card col-sm-4">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        DefiCOM test
+                    </h4>
 
-        <h1>
-            Websocket communication test.
-        </h1>
-        <div class="card-deck">
-            <div class="row">
-                <div class="card col-xs">
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            DefiCOM test
-                        </h4>
-
-                        <p class="card-text">
-                            Simple websocket communication test for DefiCOM websocet.
-                        </p>
-                        <a href="WebSocketTester/DefiCOMWSTest.html" class="btn btn-primary btn-lg btn-block">Start Application</a>
-                    </div>
-                    <div class="card-footer">
-                        <span class="badge badge-info">DefiCOM</span>
-                    </div>
-                </div>
-                <div class="card col-xs">
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            DefiCOM test (with interpolation)
-                        </h4>
-
-                        <p class="card-text">
-                            Simple websocket communication test for DefiCOM websocet (interpolation enabled).
-                        </p>
-                        <a href="WebSocketTester/DefiCOMWSInterpolateTest.html" class="btn btn-primary btn-lg btn-block">Start Application</a>
-                    </div>
-                    <div class="card-footer">
-                        <span class="badge badge-info">DefiCOM</span>
-                    </div>
-                </div>
-                <div class="card col-xs">
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            SSMCOM test
-                        </h4>
-
-                        <p class="card-text">
-                            Simple websocket communication test for SSMCOM websocet.
-                        </p>
-                        <a href="WebSocketTester/SSMCOMWSTest.html" class="btn btn-primary btn-lg btn-block">Start Application</a>
-                    </div>
-                    <div class="card-footer">
-                        <span class="badge badge-info">SSMCOM</span>
-                    </div>
+                    <p class="card-text">
+                        Simple websocket communication test for DefiCOM websocet.
+                    </p>
+                    <p class="badge badge-info">DefiCOM</p>
+                    <a href="WebSocketTester/DefiCOMWSTest.html" class="btn btn-primary btn-lg btn-block">Start</a>
                 </div>
             </div>
-            <div class="row">
-                <div class="card col-xs">
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            ArduinoCOM test
-                        </h4>
-
-                        <p class="card-text">
-                            Simple websocket communication test for ArduinoCOM websocet.
-                        </p>
-                        <a href="WebSocketTester/ArduinoCOMWSTest.html" class="btn btn-primary btn-lg btn-block">Start Application</a>
-                    </div>
-                    <div class="card-footer">
-                        <span class="badge badge-info">ArduinoCOM</span>
-                    </div>
-                </div>
-                <div class="card col-xs">
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            ELM327COM test
-                        </h4>
-
-                        <p class="card-text">
-                            Simple websocket communication test for ELM327COM websocet.
-                        </p>
-                        <a href="WebSocketTester/ELM327COMWSTest.html" class="btn btn-primary btn-lg btn-block">Start Application</a>
-                    </div>
-                    <div class="card-footer">
-                        <span class="badge badge-info">ELM327COM</span>
-                    </div>
-                </div>
+            <div class="card col-sm-4">
+                <div class="card-body" >
+                    <h4 class="card-title">
+                        DefiCOM test
+                    </h4>
+                    <h5 class=""card-title">
+                        (with interpolation)
+                </h5>
+                <p class="card-text">
+                    Simple websocket communication test for DefiCOM websocet (interpolation enabled).
+                </p>
+                <p class="badge badge-info">DefiCOM</p>
+                <a href="WebSocketTester/DefiCOMWSInterpolateTest.html" class="btn btn-primary btn-lg btn-block">Start</a>                    
             </div>
         </div>
-    </body>
+        <div class="card col-sm-4">
+            <div class="card-body">
+                <h4 class="card-title">
+                    SSMCOM test
+                </h4>
+
+                <p class="card-text">
+                    Simple websocket communication test for SSMCOM websocet.
+                </p>
+                <a href="WebSocketTester/SSMCOMWSTest.html" class="btn btn-primary btn-lg btn-block">Start</a>
+                <p class="badge badge-info">SSMCOM</p>
+            </div>
+        </div>
+        <div class="card col-sm-4">
+            <div class="card-body">
+                <h4 class="card-title">
+                    ArduinoCOM test
+                </h4>
+
+                <p class="card-text">
+                    Simple websocket communication test for ArduinoCOM websocet.
+                </p>
+                <p class="badge badge-info">ArduinoCOM</p>
+                <a href="WebSocketTester/ArduinoCOMWSTest.html" class="btn btn-primary btn-lg btn-block">Start</a>
+            </div>
+        </div>
+        <div class="card col-sm-4">
+            <div class="card-body">
+                <h4 class="card-title">
+                    ELM327COM test
+                </h4>
+
+                <p class="card-text">
+                    Simple websocket communication test for ELM327COM websocet.
+                </p>
+                <p class="badge badge-info">ELM327COM</p>
+                <a href="WebSocketTester/ELM327COMWSTest.html" class="btn btn-primary btn-lg btn-block">Start</a>
+
+            </div>
+        </div>
+    </div>
+</body>
 </html>
