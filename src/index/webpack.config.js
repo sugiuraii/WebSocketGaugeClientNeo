@@ -27,7 +27,7 @@ var webpack = require('webpack');
 module.exports = {
     entry:
             {
-                "index": './index.js'
+                "index": ['./indexNavBar.ts', './index.js']
             },
     devtool: "source-map",
     output:
@@ -49,6 +49,7 @@ module.exports = {
     ],
     module: {
         loaders: [
+            {test: /\.tsx?$/, loader: 'ts-loader'},
             {test: /\.png$/, loader: "file-loader?name=img/[name].[ext]"},
             {test: /\.html$/, loader: "file-loader?name=[name].[ext]"},
             { test: /\.css$/, loader: 'style-loader!css-loader' },
