@@ -223,9 +223,11 @@ export abstract class MeterApplicationBase extends PIXI.Application
      * @param height Stage height in px.
      * @param webSocketServerName Hostname of websocket server (default : same as webserver).s
      */
-    constructor(width: number, height: number, applicationOptions?: PIXI.ApplicationOptions, webSocketServerName? : string)
+    constructor(width: number, height: number, webSocketServerName? : string)
     {
-        super(width, height, applicationOptions);
+        const forceCanvas : boolean = localStorage.getItem("ForceCanvas")==="true"?true:false;
+        
+        super(width, height, {forceCanvas: forceCanvas});
            
         // Initialize websocket instances
         this.initializeWebSocketInstances();

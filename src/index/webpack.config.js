@@ -27,7 +27,7 @@ var webpack = require('webpack');
 module.exports = {
     entry:
             {
-                "index": ['./indexNavBar.ts', './index.js']
+                "index": './index.ts'
             },
     devtool: "source-map",
     output:
