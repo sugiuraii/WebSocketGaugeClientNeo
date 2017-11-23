@@ -25,7 +25,7 @@
 import * as $ from 'jquery';
 
 /**
- * Bootstrap navbar class for index.html.
+ * Bootstrap navbar class for index.htmls.
  */
 export class indexNavBar
 {
@@ -41,23 +41,19 @@ export class indexNavBar
     {
         const html = 
             '<nav class="navbar navbar-expand-lg navbar-dark bg-primary">\n\
-                <a class="navbar-brand" href="#">Menu</a>\n\
+                <a class="navbar-brand" href="#">Websocket gauge client menu</a>\n\
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">\n\
                     <span class="navbar-toggler-icon"></span>\n\
                 </button>\n\
                 <div class="collapse navbar-collapse" id="navbarNav">\n\
                     <ul class="navbar-nav mr-auto">\n\
-                        <li class="nav-item active">\n\
-                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>\
-                        </li>\
-                        <li class="nav-item active">\
+                        <li class="nav-item">\
                             <a class="nav-link" data-toggle="modal" data-target="#optionModal">\n\
                                 Options\
                             </a>\
-                        </button>\
                         </li>\
-                    </ul>\n\
-                </div>\n\
+                    </ul>\
+                </div>\
             </nav>';
                    
         return html;
