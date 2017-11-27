@@ -27,6 +27,11 @@ import {FUELTRIPWebsocket} from '../../WebSocket/WebSocketCommunication';
 
 export class FUELTripResetModalDialog
 {
+    private fuelTripWebSocket: FUELTRIPWebsocket;
+    
+    public set FUELTRIPWebsocket(wsObj : FUELTRIPWebsocket) {this.fuelTripWebSocket = wsObj}
+    public get FUELTRIPWebsocket(): FUELTRIPWebsocket {return this.fuelTripWebSocket}
+    
     private get dialogHTML() : string 
     {
         const html =         
@@ -55,12 +60,11 @@ export class FUELTripResetModalDialog
     
     /**
      * Create fuel/trip reset button.
-     * @param fuelTripWebSocket FUELTRIPWebsocket object to reset (on click reset button).
      */
-    public create(fuelTripWebSocket: FUELTRIPWebsocket)
+    public create()
     {
          $('body').append(this.dialogHTML);
          //Assign control change event
-         $('#fuelTripResetButtont').on('click', () => {fuelTripWebSocket.SendReset()});
+         $('#fuelTripResetButton').on('click', () => {this.fuelTripWebSocket.SendReset()});
     }
 }
