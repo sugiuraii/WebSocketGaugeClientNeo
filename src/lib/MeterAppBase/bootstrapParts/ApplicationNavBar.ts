@@ -28,7 +28,9 @@ import * as $ from 'jquery';
  * Bootstrap navbar class for meter application.
  */
 export class ApplicationNavBar
-{
+{    
+    private indicatorEnabledFlag = new indicatorEnaledFlag();
+    
     /**
      * Create bootstrap navbar for index.html.
      */
@@ -76,11 +78,56 @@ export class ApplicationNavBar
         return html;
     }
     
-    public setDefiIndicatorStatus(status : number) {this.changeIndicatorColor("defiIndicator", status)};
-    public setSSMIndicatorStatus(status : number) {this.changeIndicatorColor("ssmIndicator", status)};
-    public setArduinoIndicatorStatus(status : number) {this.changeIndicatorColor("arduinoIndicator", status)};
-    public setELM327IndicatorStatus(status : number) {this.changeIndicatorColor("elm327Indicator", status)};
-    public setFUELTRIPIndicatorStatus(status : number) {this.changeIndicatorColor("fueltripIndicator", status)};
+    public setDefiIndicatorStatus(status : number)
+    {
+        if (this.indicatorEnabledFlag.Defi)
+            this.changeIndicatorColor("defiIndicator", status)
+        else
+            this.changeIndicatorColor("defiIndicator", -1)
+    }
+
+    public setSSMIndicatorStatus(status : number) 
+    {
+        if (this.indicatorEnabledFlag.SSM)
+            this.changeIndicatorColor("ssmIndicator", status)
+        else
+            this.changeIndicatorColor("ssmIndicator", -1)
+    }
+    
+    public setArduinoIndicatorStatus(status : number)
+    {
+        if (this.indicatorEnabledFlag.Arduino)
+            this.changeIndicatorColor("arduinoIndicator", status)
+        else
+            this.changeIndicatorColor("arduinoIndicator", -1)
+    }
+    
+    public setELM327IndicatorStatus(status : number) 
+    {
+        if (this.indicatorEnabledFlag.ELM327)
+            this.changeIndicatorColor("elm327Indicator", status)
+        else
+            this.changeIndicatorColor("elm327Indicator", -1)
+    }
+    
+    public setFUELTRIPIndicatorStatus(status : number) 
+    {
+        if (this.indicatorEnabledFlag.FUELTRIP)
+            this.changeIndicatorColor("fueltripIndicator", status)
+        else
+            this.changeIndicatorColor("fueltripIndicator", -1)
+    }
+    
+    public get IsDefiInidicatorEnabled() {return this.indicatorEnabledFlag.Defi }
+    public set IsDefiInidicatorEnabled(flag : boolean) { this.indicatorEnabledFlag.Defi = flag }
+    public get IsSSMInidicatorEnabled() {return this.indicatorEnabledFlag.SSM }
+    public set IsSSMInidicatorEnabled(flag: boolean) {this.indicatorEnabledFlag.SSM = flag }
+    public get IsArduinoInidicatorEnabled() {return this.indicatorEnabledFlag.Arduino }
+    public set IsArduinoInidicatorEnabled(flag: boolean) {this.indicatorEnabledFlag.Arduino = flag }
+    public get IsELM327InidicatorEnabled() {return this.indicatorEnabledFlag.ELM327 }
+    public set IsELM327InidicatorEnabled(flag: boolean) {this.indicatorEnabledFlag.ELM327 = flag }
+    public get IsFUELTRIPInidicatorEnabled() {return this.indicatorEnabledFlag.FUELTRIP }
+    public set IsFUELTRIPInidicatorEnabled(flag: boolean) {this.indicatorEnabledFlag.FUELTRIP = flag }
     
     private changeIndicatorColor(elementID : string, status : number)
     {
@@ -109,4 +156,13 @@ export class ApplicationNavBar
         
         $(elementID).removeClass().addClass(cssClass);
     }
+}
+
+class indicatorEnaledFlag
+{
+    public Defi = false;
+    public SSM = false;
+    public Arduino = false;
+    public ELM327 = false;
+    public FUELTRIP = false;
 }
