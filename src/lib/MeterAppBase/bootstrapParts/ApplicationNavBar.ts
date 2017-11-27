@@ -23,6 +23,9 @@
  */
 
 import * as $ from 'jquery';
+import {FUELTripResetModalDialog} from "./FUELTripResetModalDialog"
+import {LogModalDialog} from "./LogModalDialog"
+import {OptionModalDialog} from "./OptionModalDialog"
 
 /**
  * Bootstrap navbar class for meter application.
@@ -31,12 +34,21 @@ export class ApplicationNavBar
 {    
     private indicatorEnabledFlag = new indicatorEnaledFlag();
     
+    private logModalDialog = new LogModalDialog();
+    private fuelTripResetModalDialog = new FUELTripResetModalDialog();
+    
     /**
      * Create bootstrap navbar for index.html.
      */
     public create()
     {
         $('body').prepend(this.navbarHTML);
+
+        // Create subparts.
+        const optionModalDialog = new OptionModalDialog();
+        optionModalDialog.create();
+        this.logModalDialog.create();
+        this.fuelTripResetModalDialog.create();
     }
     
     private get navbarHTML() : string
