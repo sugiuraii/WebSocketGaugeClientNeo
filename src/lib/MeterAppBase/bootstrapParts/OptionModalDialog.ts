@@ -86,6 +86,12 @@ export class OptionModalDialog
     public create()
     {
         $('body').append(this.dialogHTML);
+             
+        //Load stored value from webstorage
+        const wsInterval = Number(localStorage.getItem("WSInterval"));
+        const forceCanvas = localStorage.getItem("ForceCanvas")==="true"?true:false;
+        $('#wsIntervalInput').val(wsInterval);
+        $('#forceCanvasCheckBox').prop('checked', forceCanvas);
         
         //Assign control change event
         $('#wsIntervalInput').on('change', ()=>{this.onWSIntervalSpinnerValueChanged(Number($('#wsIntervalInput').val()))});

@@ -23,6 +23,7 @@
  */
 
 import * as $ from 'jquery';
+import {OptionModalDialog} from './OptionModalDialog'
 
 /**
  * Bootstrap navbar class for index.htmls.
@@ -34,6 +35,8 @@ export class indexNavBar
      */
     public create()
     {
+        const optionModalDialog = new OptionModalDialog();
+        optionModalDialog.create();
         $('body').prepend(this.navbarHTML);
     }
     

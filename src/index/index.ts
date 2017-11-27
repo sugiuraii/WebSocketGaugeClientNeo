@@ -37,7 +37,5 @@ import {OptionModalDialog} from '../lib/MeterAppBase/bootstrapParts/OptionModalD
 window.onload = () =>
 {
     const indexNavBar1 = new indexNavBar();
-    const optionModalDialog = new OptionModalDialog();
-    optionModalDialog.create();
     indexNavBar1.create();
 }
