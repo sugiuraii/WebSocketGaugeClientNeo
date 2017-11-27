@@ -25,6 +25,11 @@
 import * as $ from 'jquery';
 import {OptionModalDialog} from './OptionModalDialog'
 
+import 'bootstrap';
+import 'jquery';
+import 'popper.js';
+import '../../../css/bootstrap-slate/bootstrap.slate.min.css';
+
 /**
  * Bootstrap navbar class for index.htmls.
  */

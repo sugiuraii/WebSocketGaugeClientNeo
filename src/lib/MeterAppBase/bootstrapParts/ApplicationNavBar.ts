@@ -23,9 +23,15 @@
  */
 
 import * as $ from 'jquery';
+
 import {FUELTripResetModalDialog} from "./FUELTripResetModalDialog"
 import {LogModalDialog} from "./LogModalDialog"
 import {OptionModalDialog} from "./OptionModalDialog"
+
+import 'bootstrap';
+import 'jquery';
+import 'popper.js';
+import '../../../css/bootstrap-slate/bootstrap.slate.min.css';
 
 /**
  * Bootstrap navbar class for meter application.
@@ -37,25 +43,28 @@ export class ApplicationNavBar
     private logModalDialog = new LogModalDialog();
     private fuelTripResetModalDialog = new FUELTripResetModalDialog();
     
+    public get LogModalDialog() {return this.logModalDialog}
+    public get FUELTRIPModalDialog() {return this.fuelTripResetModalDialog }
+    
     /**
      * Create bootstrap navbar for index.html.
      */
     public create()
     {
-        $('body').prepend(this.navbarHTML);
-
         // Create subparts.
         const optionModalDialog = new OptionModalDialog();
         optionModalDialog.create();
         this.logModalDialog.create();
         this.fuelTripResetModalDialog.create();
+        
+        $('body').prepend(this.navbarHTML);
     }
     
     private get navbarHTML() : string
     {
         const html = 
-            '<nav class="navbar navbar-expand-lg navbar-dark bg-primary">\n\
-                <a class="navbar-brand" href="#">Websocket gauge client menu</a>\n\
+            '<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary" style="transition: opacity .35s; opacity : 0.1;" onmouseover="this.style.opacity = 1" onmouseleave="this.style.opacity = 0.1">\n\
+                <a class="navbar-brand" href="#">Menu</a>\n\
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">\n\
                     <span class="navbar-toggler-icon"></span>\n\
                 </button>\n\
@@ -78,11 +87,11 @@ export class ApplicationNavBar
                         </li>\n\
                     </ul>\n\
                     <form class="form-inline">\n\
-                        <span id="defiIndicaror" class="badge badge-dark">Defi</span>\
-                        <span id="ssmIndicaror" class="badge badge-dark">SSM</span>\
-                        <span id="arduinoIndicaror" class="badge badge-dark">Arduino</span>\
-                        <span id="elm327Indicaror" class="badge badge-dark">ELM327</span>\
-                        <span id="fueltripIndicaror" class="badge badge-dark">FUELTRIP</span>\
+                        <span id="defiIndicator" class="badge badge-dark">Defi</span>\
+                        <span id="ssmIndicator" class="badge badge-dark">SSM</span>\
+                        <span id="arduinoIndicator" class="badge badge-dark">Arduino</span>\
+                        <span id="elm327Indicator" class="badge badge-dark">ELM327</span>\
+                        <span id="fueltripIndicator" class="badge badge-dark">FUELTRIP</span>\
                     </form>\
                 </div>\
             </nav>';
@@ -93,41 +102,41 @@ export class ApplicationNavBar
     public setDefiIndicatorStatus(status : number)
     {
         if (this.indicatorEnabledFlag.Defi)
-            this.changeIndicatorColor("defiIndicator", status)
+            this.changeIndicatorColor("#defiIndicator", status)
         else
-            this.changeIndicatorColor("defiIndicator", -1)
+            this.changeIndicatorColor("#defiIndicator", -1)
     }
 
     public setSSMIndicatorStatus(status : number) 
     {
         if (this.indicatorEnabledFlag.SSM)
-            this.changeIndicatorColor("ssmIndicator", status)
+            this.changeIndicatorColor("#ssmIndicator", status)
         else
-            this.changeIndicatorColor("ssmIndicator", -1)
+            this.changeIndicatorColor("#ssmIndicator", -1)
     }
     
     public setArduinoIndicatorStatus(status : number)
     {
         if (this.indicatorEnabledFlag.Arduino)
-            this.changeIndicatorColor("arduinoIndicator", status)
+            this.changeIndicatorColor("#arduinoIndicator", status)
         else
-            this.changeIndicatorColor("arduinoIndicator", -1)
+            this.changeIndicatorColor("#arduinoIndicator", -1)
     }
     
     public setELM327IndicatorStatus(status : number) 
     {
         if (this.indicatorEnabledFlag.ELM327)
-            this.changeIndicatorColor("elm327Indicator", status)
+            this.changeIndicatorColor("#elm327Indicator", status)
         else
-            this.changeIndicatorColor("elm327Indicator", -1)
+            this.changeIndicatorColor("#elm327Indicator", -1)
     }
     
     public setFUELTRIPIndicatorStatus(status : number) 
     {
         if (this.indicatorEnabledFlag.FUELTRIP)
-            this.changeIndicatorColor("fueltripIndicator", status)
+            this.changeIndicatorColor("#fueltripIndicator", status)
         else
-            this.changeIndicatorColor("fueltripIndicator", -1)
+            this.changeIndicatorColor("#fueltripIndicator", -1)
     }
     
     public get IsDefiInidicatorEnabled() {return this.indicatorEnabledFlag.Defi }

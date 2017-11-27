@@ -22,17 +22,9 @@
  * THE SOFTWARE.
  */
 
-import * as $ from 'jquery';
-
-import 'bootstrap';
-import 'jquery';
-import 'popper.js';
-import '../css/bootstrap-slate/bootstrap.slate.min.css';
-import './index.css';
 require('./index.html');
 
 import {indexNavBar} from '../lib/MeterAppBase/bootstrapParts/indexNavBar'
-import {OptionModalDialog} from '../lib/MeterAppBase/bootstrapParts/OptionModalDialog'
 
 window.onload = () =>
 {
