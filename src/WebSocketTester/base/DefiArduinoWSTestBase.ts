@@ -90,12 +90,14 @@ export abstract class DefiArduinoCOMWSTestBase extends WebSocketTesterBase
 
     public inputWSSend()
     {
-        this.webSocket.SendWSSend($('#codeSelect').val(),$('#codeFlag').val());
+        const codeFlag = $('#codeFlag').val() === "true" ? true : false; 
+        this.webSocket.SendWSSend($('#codeSelect').val().toString(), codeFlag);
     };
 
     public inputWSInterval()
     {
-        this.webSocket.SendWSInterval($('#WSInterval').val());
+        const wsInterval = Number($('#WSInterval').val());
+        this.webSocket.SendWSInterval(wsInterval);
     };
 }
 

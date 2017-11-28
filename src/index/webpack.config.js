@@ -27,13 +27,12 @@ var webpack = require('webpack');
 module.exports = {
     entry:
             {
-                "DigitalMFDBenchApp": './DigitalMFDBenchApp.ts',
-                "AnalogMeterClusterBenchApp": "./AnalogMeterClusterBenchApp.ts"
+                "index": './index.ts'
             },
     devtool: "source-map",
     output:
             {
-                path: __dirname + "/../../public_html/benchmark",
+                path: __dirname + "/../../public_html/",
                 filename: "./js/[name].js"
             },
     resolve: {
@@ -52,16 +51,13 @@ module.exports = {
         loaders: [
             {test: /\.tsx?$/, loader: 'ts-loader'},
             {test: /\.png$/, loader: "file-loader?name=img/[name].[ext]"},
-            {test: /\.fnt$/, loader: "file-loader?name=img/[name].[ext]"}, // Bitmap font setting files
-            {test: /\.json$/, loader: "file-loader?name=img/[name].[ext]"},
             {test: /\.html$/, loader: "file-loader?name=[name].[ext]"},
-            {test: /bootstrap.slate.min.css/, loader: "style-loader!css-loader"}, // for bootstrap
-            {test: /\.css$/, exclude: /bootstrap.slate.min.css/, loader: 'file-loader?name=[name].[ext]'},
-            {test: /\.svg$/, loader: 'url-loader?mimetype=image/svg+xml'},
-            {test: /\.woff$/, loader: 'url-loader?mimetype=application/font-woff'},
-            {test: /\.woff2$/, loader: 'url-loader?mimetype=application/font-woff'},
-            {test: /\.eot$/, loader: 'url-loader?mimetype=application/font-woff'},
-            {test: /\.(ttf|otf)$/, loader: "file-loader?name=fonts/[name].[ext]"},
+            { test: /\.css$/, loader: 'style-loader!css-loader' },
+            { test: /\.svg$/, loader: 'url-loader?mimetype=image/svg+xml' },
+            { test: /\.woff$/, loader: 'url-loader?mimetype=application/font-woff' },
+            { test: /\.woff2$/, loader: 'url-loader?mimetype=application/font-woff' },
+            { test: /\.eot$/, loader: 'url-loader?mimetype=application/font-woff' },
+            { test: /\.ttf$/, loader: 'url-loader?mimetype=application/font-woff' },
             {
                 test: /\.(scss)$/,
                 use: [{

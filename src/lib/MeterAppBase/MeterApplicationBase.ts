@@ -21,8 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 import * as PIXI from "pixi.js";
-import {ControlPanel} from "./ControlPanel";
+import {ApplicationNavBar} from "./bootstrapParts/ApplicationNavBar"
 import * as WebFont from "webfontloader";
 import * as WebSocketCommunication from "../WebSocket/WebSocketCommunication";
 import {calculateGearPosition} from "./CalculateGearPosition";
@@ -47,7 +48,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
 {    
     private webSocketServerName : string;
     
-    private controlPanel: ControlPanel;
+    private applicationnavBar: ApplicationNavBar;
     
     private defiWS: WebSocketCommunication.DefiCOMWebsocket;
     private ssmWS: WebSocketCommunication.SSMWebsocket;
@@ -223,16 +224,21 @@ export abstract class MeterApplicationBase extends PIXI.Application
      * @param height Stage height in px.
      * @param webSocketServerName Hostname of websocket server (default : same as webserver).s
      */
-    constructor(width: number, height: number, applicationOptions?: PIXI.ApplicationOptions, webSocketServerName? : string)
+    constructor(width: number, height: number, webSocketServerName? : string)
     {
-        super(width, height, applicationOptions);
+        // Get force canvas flag from webstorage
+        const forceCanvas : boolean = localStorage.getItem("ForceCanvas")==="true"?true:false;
+        
+        // Call PIXI.Application
+        super(width, height, {forceCanvas: forceCanvas});
            
         // Initialize websocket instances
         this.initializeWebSocketInstances();
         
-        // Append to document body
+        // Append PIXI.js application to document body
         this.view.style.width = "100vw";
         this.view.style.touchAction = "auto";
+        this.view.style.pointerEvents = "none";
         document.body.appendChild(this.view);
         
         //Set url of websocket
@@ -243,7 +249,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
         this.setWSURL(this.webSocketServerName);
         
         // Initialize control panel.
-        this.initializeControlPanel();
+        this.initializeNavBar();
         
         // Set viewport meta-tag
         this.setViewPortMetaTag();
@@ -264,9 +270,6 @@ export abstract class MeterApplicationBase extends PIXI.Application
         
         //Setup websocket indicator.
         this.setWebsocketIndicator();
-        
-        //Load WSInterval from localstorage and set to spinner.
-        this.setWSIntervalSpinner();
         
         // Set texture, font preload options
         this.webFontFamiliyNameToPreload = new Array();
@@ -300,17 +303,11 @@ export abstract class MeterApplicationBase extends PIXI.Application
         this.elm327ParameterCodeList = new Array();
     }
     
-    private initializeControlPanel()
+    private initializeNavBar()
     {
-        this.controlPanel = new ControlPanel();
-        
-        //Set controlPanel
-        document.body.appendChild(this.controlPanel.Container);   
-        //Add controlPanel open button
-        document.body.appendChild(this.controlPanel.OpenButton);
-        
-        // Register control panel events (buttons and spinner)
-        this.registerControlPanelEvents();
+        this.applicationnavBar = new ApplicationNavBar();
+        this.applicationnavBar.create();
+        this.applicationnavBar.FUELTRIPModalDialog.FUELTRIPWebsocket = this.FUELTRIPWS;
     }
     
     /**
@@ -373,7 +370,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
     
     private registerWebSocketCommonEvents(logPrefix : string, wsObj: WebSocketCommunication.WebsocketCommon)
     {
-        const logWindow = this.controlPanel.LogWindow;
+        const logWindow = this.applicationnavBar.LogModalDialog;
 
         wsObj.OnWebsocketError = (message: string) => {
             logWindow.appendLog(logPrefix + " websocket error : " + message);
@@ -386,53 +383,9 @@ export abstract class MeterApplicationBase extends PIXI.Application
         }
     }
     
-    private registerControlPanelEvents()
-    {
-        const ResetButton = this.controlPanel.ResetButton;
-        const LogWindow = this.controlPanel.LogWindow;
-        const IntervalController = this.controlPanel.IntervalController;
-        
-        ResetButton.onclick =  () => 
-        {
-            if (window.confirm("Reset FUELTRIP logger?"))
-            {
-                if (this.fueltripWS.getReadyState() === WebSocket.OPEN)
-                {
-                    LogWindow.appendLog("FUELTRIP send RESET..");
-                    this.fueltripWS.SendReset();
-                }
-                else
-                    LogWindow.appendLog("FUELTRIP RESET is requested. However, fueltripWS is not active.");
-            }
-        };
-        IntervalController.setOnWebSocketIntervalSpinnerChanged( () =>
-        {
-            let wsIntervalSent = false;
-            
-            //Save to local storage
-            this.setWSIntervalToLocalStorage(IntervalController.WebSocketInterval);
-            
-            if (this.defiWS.getReadyState() === WebSocket.OPEN)
-            {
-                this.defiWS.SendWSInterval(IntervalController.WebSocketInterval);
-                wsIntervalSent = true;
-            }
-            if (this.arduinoWS.getReadyState()  === WebSocket.OPEN)
-            {
-                this.arduinoWS.SendWSInterval(IntervalController.WebSocketInterval);
-                wsIntervalSent = true;
-            }
-            
-            if (!wsIntervalSent)
-            {
-                this.controlPanel.LogWindow.appendLog("WSInterval spinner is changed. However, neither DefiWS nor ArduinoWS are active.");
-            }  
-        });
-    }
-    
     private checkWebSocketStatus()
     {
-        const Indicator = this.controlPanel.WebSocketIndicator;
+        const Indicator = this.applicationnavBar;
         Indicator.setDefiIndicatorStatus(this.defiWS.getReadyState());
         Indicator.setSSMIndicatorStatus(this.ssmWS.getReadyState());
         Indicator.setArduinoIndicatorStatus(this.arduinoWS.getReadyState());
@@ -450,7 +403,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
     
     private setWebsocketIndicator()
     {
-        const Indicator = this.controlPanel.WebSocketIndicator;
+        const Indicator = this.applicationnavBar;
         Indicator.IsDefiInidicatorEnabled = this.IsDefiWSEnabled;
         Indicator.IsSSMInidicatorEnabled = this.IsSSMWSEnabled;
         Indicator.IsArduinoInidicatorEnabled = this.IsArudinoWSEnabled;
@@ -460,13 +413,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
         // Check websocket staus every 1sec
         window.setInterval(() => this.checkWebSocketStatus(), WEBSOCKET_CHECK_INTERVAL);
     }
-    
-    private setWSIntervalSpinner()
-    {
-        const interval = this.getWSIntervalFromLocalStorage();
-        this.controlPanel.IntervalController.WebSocketInterval = interval;
-    }
-    
+        
     private preloadFonts(callBack : ()=> void)
     {
         const webFontFamilyWithoutOverlap = this.webFontFamiliyNameToPreload.filter(
@@ -537,7 +484,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
     
     private connectFUELTRIPWebSocket(logPrefix: string, sectSpan : number, sectStoreMax : number, webSocketObj: WebSocketCommunication.FUELTRIPWebsocket)
     {
-        const LogWindow = this.controlPanel.LogWindow;
+        const LogWindow = this.applicationnavBar.LogModalDialog;
         webSocketObj.OnWebsocketOpen = () =>
         {
             LogWindow.appendLog(logPrefix + " is connected. Send SECT_SPAN and SECT_STOREMAX after " + WAITTIME_BEFORE_SENDWSSEND.toString() + " ms.");
@@ -562,7 +509,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
     
     private connectDefiArduinoWebSocket(logPrefix : string, parameterCodeList : {code: string, interpolate : boolean}[] , webSocketObj: WebSocketCommunication.DefiCOMWebsocket)
     {
-        const LogWindow = this.controlPanel.LogWindow;
+        const LogWindow = this.applicationnavBar.LogModalDialog;
         webSocketObj.OnWebsocketOpen = () =>
         {
             LogWindow.appendLog(logPrefix + " is connected. SendWSSend/Interval after "  + WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
@@ -579,7 +526,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
                 }
                 
                 //SendWSInterval from spinner
-                webSocketObj.SendWSInterval(this.controlPanel.IntervalController.WebSocketInterval);
+                webSocketObj.SendWSInterval(this.getWSIntervalFromLocalStorage());
                 
             }, WAITTIME_BEFORE_SENDWSSEND);
         }
@@ -595,7 +542,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
     
     private connectSSMELM327WebSocket(logPrefix : string, parameterCodeList : {code: string, readMode: string, interpolate : boolean}[] , slowReadInterval : number, webSocketObj: WebSocketCommunication.SSMWebsocket)
     {
-        const LogWindow = this.controlPanel.LogWindow;
+        const LogWindow = this.applicationnavBar.LogModalDialog;
         webSocketObj.OnWebsocketOpen = () =>
         {
             LogWindow.appendLog(logPrefix + " is connected. SendWSSend after "  + WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
@@ -644,7 +591,6 @@ export abstract class MeterApplicationBase extends PIXI.Application
             const interval = parseInt(localStorage.getItem("WSInterval"));
             return interval;    
         }
-        
     }
     
     /** 
