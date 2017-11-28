@@ -60,8 +60,8 @@ module.exports = {
             {test: /\.fnt$/, loader: "file-loader?name=img/[name].[ext]"}, // Bitmap font setting files
             {test: /\.json$/, loader: "file-loader?name=img/[name].[ext]"},
             {test: /\.html$/, loader: "file-loader?name=[name].[ext]"},
-            {test: /font.css/, loader: "file-loader?name=[name].[ext]"},
-            {test: /\.css$/, exclude: /font.css/, loader: 'style-loader!css-loader'},
+            {test: /bootstrap.slate.min.css/, loader: "style-loader!css-loader"},// for bootstrap
+            {test: /\.css$/, exclude: /bootstrap.slate.min.css/, loader: 'file-loader?name=[name].[ext]'},
             {test: /\.svg$/, loader: 'url-loader?mimetype=image/svg+xml'},
             {test: /\.woff$/, loader: 'url-loader?mimetype=application/font-woff'},
             {test: /\.woff2$/, loader: 'url-loader?mimetype=application/font-woff'},

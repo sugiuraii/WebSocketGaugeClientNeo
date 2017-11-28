@@ -22,6 +22,8 @@
  * THE SOFTWARE.
  */
 
+var webpack = require('webpack');
+
 module.exports = {
     entry:
             {
@@ -38,6 +40,14 @@ module.exports = {
         // Add `.ts` and `.tsx` as a resolvable extension.
         extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
     },
+    plugins: [
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery',
+            Popper: ['popper.js', 'default']
+        })
+    ],
     module: {
         loaders: [
             {test: /\.tsx?$/, loader: 'ts-loader'},
@@ -45,8 +55,33 @@ module.exports = {
             {test: /\.fnt$/, loader: "file-loader?name=img/[name].[ext]"}, // Bitmap font setting files
             {test: /\.json$/, loader: "file-loader?name=img/[name].[ext]"},
             {test: /\.html$/, loader: "file-loader?name=[name].[ext]"},
-            {test: /\.css$/, loader: "file-loader?name=[name].[ext]"},
-            {test: /\.(ttf|otf)$/, loader: "file-loader?name=fonts/[name].[ext]"}
+            {test: /bootstrap.slate.min.css/, loader: "style-loader!css-loader"}, // for bootstrap
+            {test: /\.css$/, exclude: /bootstrap.slate.min.css/, loader: 'file-loader?name=[name].[ext]'},
+            {test: /\.svg$/, loader: 'url-loader?mimetype=image/svg+xml'},
+            {test: /\.woff$/, loader: 'url-loader?mimetype=application/font-woff'},
+            {test: /\.woff2$/, loader: 'url-loader?mimetype=application/font-woff'},
+            {test: /\.eot$/, loader: 'url-loader?mimetype=application/font-woff'},
+            {test: /\.(ttf|otf)$/, loader: "file-loader?name=fonts/[name].[ext]"},
+            {
+                test: /\.(scss)$/,
+                use: [{
+                        loader: 'style-loader' // inject CSS to page
+                    }, {
+                        loader: 'css-loader' // translates CSS into CommonJS modules
+                    }, {
+                        loader: 'postcss-loader', // Run post css actions
+                        options: {
+                            plugins: function () { // post css plugins, can be exported to postcss.config.js
+                                return [
+                                    require('precss'),
+                                    require('autoprefixer')
+                                ];
+                            }
+                        }
+                    }, {
+                        loader: 'sass-loader' // compiles SASS to CSS
+                    }]
+            }
         ]
     }
 };
