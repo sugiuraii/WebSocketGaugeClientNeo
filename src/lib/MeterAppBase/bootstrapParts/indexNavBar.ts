@@ -49,7 +49,7 @@ export class indexNavBar
     {
         const html = 
             '<nav class="navbar navbar-expand-lg navbar-dark bg-primary">\n\
-                <a class="navbar-brand" href="#">Websocket gauge client menu</a>\n\
+                <a class="navbar-brand" href="#">Menu</a>\n\
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">\n\
                     <span class="navbar-toggler-icon"></span>\n\
                 </button>\n\
