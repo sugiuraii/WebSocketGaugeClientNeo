@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-const waitTime = 1000;
+const waitTime = 3000;
 const thumbnailWidth = 300;
 const thumbnailHeight = 200;
 
