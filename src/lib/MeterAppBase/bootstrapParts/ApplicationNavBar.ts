@@ -71,6 +71,10 @@ export class ApplicationNavBar
                 <div class="collapse navbar-collapse" id="navbarNav">\n\
                     <ul class="navbar-nav mr-auto">\n\
                         <li class="nav-item">\
+                            <a class="nav-link" href="../index.html">\n\
+                                Home\
+                            </a>\
+                        </li>\                        <li class="nav-item">\
                             <a class="nav-link" data-toggle="modal" data-target="#optionModal">\n\
                                 Options\
                             </a>\
