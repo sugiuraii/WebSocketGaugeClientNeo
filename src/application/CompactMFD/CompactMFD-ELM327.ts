@@ -43,11 +43,11 @@ import {ReadModeCode} from "../../lib/WebSocket/WebSocketCommunication";
 
 window.onload = function()
 {
-    const meterapp = new DigitalMFD_ELM327DemoApp(720, 1280);
+    const meterapp = new CompactMFD_ELM327(720, 1280);
     meterapp.run();
 }
 
-class DigitalMFD_ELM327DemoApp extends MeterApplicationBase
+class CompactMFD_ELM327 extends MeterApplicationBase
 {
     /**
      * Put code to set up websocket communication.

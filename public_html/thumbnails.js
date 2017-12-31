@@ -68,6 +68,6 @@ createThumbNail("application/AnalogMeterCluster-Defi-SSM.html", "thumbnails/Anal
 //createThumbNail("application/CompactMFD-Arduino.html", "thumbnails/CompactMFD-Arduino.png");
 //createThumbNail("application/CompactMFD-ELM327.html", "thumbnails/CompactMFD-ELM327.png");
 createThumbNail("application/CompactMFD-SSM.html", "thumbnails/CompactMFD-SSM.png");
-createThumbNail("application/DigitalMFDApp.html", "thumbnails/DigitalMFDApp.png");
+createThumbNail("application/DigitalMFD-Defi-SSM.html", "thumbnails/DigitalMFD-Defi-SSM.png");
 
 window.setTimeout(function(){phantom.exit();},10000);

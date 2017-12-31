@@ -44,11 +44,11 @@ require("./AnalogMeterCluster-Defi-SSM.html");
 
 window.onload = function()
 {
-    const meterapp = new AnalogMeterClusterApp(1100, 600);
+    const meterapp = new AnalogMeterCluster_Defi_SSM(1100, 600);
     meterapp.run();
 }
 
-class AnalogMeterClusterApp extends MeterApplicationBase
+class AnalogMeterCluster_Defi_SSM extends MeterApplicationBase
 {
     protected setWebSocketOptions()
     {

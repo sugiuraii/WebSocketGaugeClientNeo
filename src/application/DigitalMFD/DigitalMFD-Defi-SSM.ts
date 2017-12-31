@@ -23,38 +23,38 @@
  */
  
 // This is required to webpack font/texture/html files
-/// <reference path="../lib/webpackRequire.ts" />
+/// <reference path="../../lib/webpackRequire.ts" />
 
 import * as PIXI from "pixi.js";
 
 //Import application base class
-import {MeterApplicationBase} from "../lib/MeterAppBase/MeterApplicationBase";
+import {MeterApplicationBase} from "../../lib/MeterAppBase/MeterApplicationBase";
 
 //Import meter parts
-import {BoostGaugePanel} from "../parts/CircularGauges/FullCircularGaugePanel";
-import {AirFuelGaugePanel} from "../parts/CircularGauges/FullCircularGaugePanel";
-import {WaterTempGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel";
-import {BatteryVoltageGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel";
-import {ThrottleGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel";
-import {DigiTachoPanel} from "../parts/DigiTachoPanel/DigiTachoPanel";
-import {MilageGraphPanel} from "../parts/GasMilageGraph/MilageGraph";
+import {BoostGaugePanel} from "../../parts/CircularGauges/FullCircularGaugePanel";
+import {AirFuelGaugePanel} from "../../parts/CircularGauges/FullCircularGaugePanel";
+import {WaterTempGaugePanel} from "../../parts/CircularGauges/SemiCircularGaugePanel";
+import {BatteryVoltageGaugePanel} from "../../parts/CircularGauges/SemiCircularGaugePanel";
+import {ThrottleGaugePanel} from "../../parts/CircularGauges/SemiCircularGaugePanel";
+import {DigiTachoPanel} from "../../parts/DigiTachoPanel/DigiTachoPanel";
+import {MilageGraphPanel} from "../../parts/GasMilageGraph/MilageGraph";
 
 //Import enumuator of parameter code
-import {DefiParameterCode} from "../lib/WebSocket/WebSocketCommunication";
-import {SSMParameterCode} from "../lib/WebSocket/WebSocketCommunication";
-import {SSMSwitchCode} from "../lib/WebSocket/WebSocketCommunication";
-import {ReadModeCode} from "../lib/WebSocket/WebSocketCommunication";
+import {DefiParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
+import {SSMParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
+import {SSMSwitchCode} from "../../lib/WebSocket/WebSocketCommunication";
+import {ReadModeCode} from "../../lib/WebSocket/WebSocketCommunication";
 
 //For including entry point html file in webpack
-require("./DigitalMFDApp.html");
+require("./DigitalMFD-Defi-SSM.html");
 
 window.onload = function()
 {
-    const meterapp = new DigitalMFDApp(1200, 600);
+    const meterapp = new DigitalMFD_Defi_SSM(1200, 600);
     meterapp.run();
 }
 
-class DigitalMFDApp extends MeterApplicationBase
+class DigitalMFD_Defi_SSM extends MeterApplicationBase
 {
     protected setWebSocketOptions()
     {

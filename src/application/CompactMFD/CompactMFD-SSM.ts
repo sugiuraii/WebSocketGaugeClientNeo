@@ -46,11 +46,11 @@ import {ReadModeCode} from "../../lib/WebSocket/WebSocketCommunication";
 
 window.onload = function()
 {
-    const meterapp = new DigitalMFD_SSMDemoApp(720, 1280);
+    const meterapp = new CompactMFD_SSM(720, 1280);
     meterapp.run();
 }
 
-class DigitalMFD_SSMDemoApp extends MeterApplicationBase
+class CompactMFD_SSM extends MeterApplicationBase
 {
     protected setWebSocketOptions()
     {

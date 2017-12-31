@@ -43,11 +43,11 @@ import {ArduinoParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
 
 window.onload = function()
 {
-    const meterapp = new DigitalMFD_ArduinoDemoApp(720, 1280);
+    const meterapp = new CompactMFD_Arduino(720, 1280);
     meterapp.run();
 }
 
-class DigitalMFD_ArduinoDemoApp extends MeterApplicationBase
+class CompactMFD_Arduino extends MeterApplicationBase
 {
     protected setWebSocketOptions()
     {
