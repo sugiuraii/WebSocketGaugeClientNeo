@@ -64,7 +64,7 @@ function createThumbNail(htmlPath, pngPath)
 
 createThumbNail("benchmark/AnalogMeterClusterBenchApp.html", "thumbnails/AnalogMeterClusterBenchApp.png");
 createThumbNail("benchmark/DigitalMFDBenchApp.html", "thumbnails/DigitalMFDBenchApp.png");
-createThumbNail("application/AnalogMeterClusterApp.html", "thumbnails/AnalogMeterClusterApp.png");
+createThumbNail("application/AnalogMeterCluster-Defi-SSM.html", "thumbnails/AnalogMeterCluster-Defi-SSM.png");
 createThumbNail("application/CompactMFD-Arduino.html", "thumbnails/CompactMFD-Arduino.png");
 createThumbNail("application/CompactMFD-ELM327.html", "thumbnails/CompactMFD-ELM327.png");
 createThumbNail("application/CompactMFD-SSM.html", "thumbnails/CompactMFD-SSM.png");
