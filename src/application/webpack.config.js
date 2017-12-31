@@ -31,9 +31,9 @@ module.exports = {
                 // Register meter application and set entry point typescript file.
                 "AnalogMeterClusterApp": './AnalogMeterClusterApp.ts',
                 "DigitalMFDApp": './DigitalMFDApp.ts',
-                "DigitalMFD-ELM327DemoApp": './DigitalMFD-ELM327DemoApp.ts',
-                "DigitalMFD-ArduinoDemoApp": './DigitalMFD-ArduinoDemoApp.ts',
-                "DigitalMFD-SSMDemoApp": './DigitalMFD-SSMDemoApp.ts'
+                "CompactMFD-ELM327": './CompactMFD/CompactMFD-ELM327.ts',
+                "CompactMFD-Arduino": './CompactMFD/CompactMFD-Arduino.ts',
+                "CompactMFD-SSM": './CompactMFD/CompactMFD-SSM.ts'
             },
     devtool: "#inline-source-map",
     output:

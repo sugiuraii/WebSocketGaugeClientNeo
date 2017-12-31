@@ -23,25 +23,25 @@
  */
  
 // This is required to webpack font/texture/html files
-/// <reference path="../lib/webpackRequire.ts" />
+/// <reference path="../../lib/webpackRequire.ts" />
 
 //For including entry point html file in webpack
-require("./DigitalMFD-SSMDemoApp.html");
+require("./CompactMFD-SSM.html");
 
 //Import application base class
-import {MeterApplicationBase} from "../lib/MeterAppBase/MeterApplicationBase";
+import {MeterApplicationBase} from "../../lib/MeterAppBase/MeterApplicationBase";
 
 //Import meter parts
-import {WaterTempGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel";
-import {ThrottleGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel";
-import {DigiTachoPanel} from "../parts/DigiTachoPanel/DigiTachoPanel";
-import {BoostGaugePanel} from "../parts/CircularGauges/FullCircularGaugePanel";
+import {WaterTempGaugePanel} from "../../parts/CircularGauges/SemiCircularGaugePanel";
+import {ThrottleGaugePanel} from "../../parts/CircularGauges/SemiCircularGaugePanel";
+import {DigiTachoPanel} from "../../parts/DigiTachoPanel/DigiTachoPanel";
+import {BoostGaugePanel} from "../../parts/CircularGauges/FullCircularGaugePanel";
 
 //Import enumuator of parameter code
-import {SSMParameterCode} from "../lib/WebSocket/WebSocketCommunication";
-import {SSMSwitchCode} from "../lib/WebSocket/WebSocketCommunication";
+import {SSMParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
+import {SSMSwitchCode} from "../../lib/WebSocket/WebSocketCommunication";
 
-import {ReadModeCode} from "../lib/WebSocket/WebSocketCommunication";
+import {ReadModeCode} from "../../lib/WebSocket/WebSocketCommunication";
 
 
 window.onload = function()

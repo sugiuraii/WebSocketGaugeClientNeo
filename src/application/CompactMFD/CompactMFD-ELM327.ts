@@ -22,23 +22,23 @@
  * THE SOFTWARE.
  */
 // This line is required to bundle font/texture/html files by webpack file-loader (do not delete)
-/// <reference path="../lib/webpackRequire.ts" />
+/// <reference path="../../lib/webpackRequire.ts" />
 
 // Set entry point html file to bundle by webpack
-require("./DigitalMFD-ELM327DemoApp.html");
+require("./CompactMFD-ELM327.html");
 
 //Import application base class
-import {MeterApplicationBase} from "../lib/MeterAppBase/MeterApplicationBase";
+import {MeterApplicationBase} from "../../lib/MeterAppBase/MeterApplicationBase";
 
 //Import meter parts
-import {WaterTempGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel";
-import {ThrottleGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel";
-import {DigiTachoPanel} from "../parts/DigiTachoPanel/DigiTachoPanel";
-import {BoostGaugePanel} from "../parts/CircularGauges/FullCircularGaugePanel";
+import {WaterTempGaugePanel} from "../../parts/CircularGauges/SemiCircularGaugePanel";
+import {ThrottleGaugePanel} from "../../parts/CircularGauges/SemiCircularGaugePanel";
+import {DigiTachoPanel} from "../../parts/DigiTachoPanel/DigiTachoPanel";
+import {BoostGaugePanel} from "../../parts/CircularGauges/FullCircularGaugePanel";
 
 //Import enumuator of parameter code
-import {OBDIIParameterCode} from "../lib/WebSocket/WebSocketCommunication";
-import {ReadModeCode} from "../lib/WebSocket/WebSocketCommunication";
+import {OBDIIParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
+import {ReadModeCode} from "../../lib/WebSocket/WebSocketCommunication";
 
 
 window.onload = function()

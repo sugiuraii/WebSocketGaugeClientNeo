@@ -65,9 +65,9 @@ function createThumbNail(htmlPath, pngPath)
 createThumbNail("benchmark/AnalogMeterClusterBenchApp.html", "thumbnails/AnalogMeterClusterBenchApp.png");
 createThumbNail("benchmark/DigitalMFDBenchApp.html", "thumbnails/DigitalMFDBenchApp.png");
 createThumbNail("application/AnalogMeterClusterApp.html", "thumbnails/AnalogMeterClusterApp.png");
-createThumbNail("application/DigitalMFD-ArduinoDemoApp.html", "thumbnails/DigitalMFD-ArduinoDemoApp.png");
-createThumbNail("application/DigitalMFD-ELM327DemoApp.html", "thumbnails/DigitalMFD-ELM327DemoApp.png");
-createThumbNail("application/DigitalMFD-SSMDemoApp.html", "thumbnails/DigitalMFD-SSMDemoApp.png");
+createThumbNail("application/CompactMFD-Arduino.html", "thumbnails/CompactMFD-Arduino.png");
+createThumbNail("application/CompactMFD-ELM327.html", "thumbnails/CompactMFD-ELM327.png");
+createThumbNail("application/CompactMFD-SSM.html", "thumbnails/CompactMFD-SSM.png");
 createThumbNail("application/DigitalMFDApp.html", "thumbnails/DigitalMFDApp.png");
 
 window.setTimeout(function(){phantom.exit();},10000);
