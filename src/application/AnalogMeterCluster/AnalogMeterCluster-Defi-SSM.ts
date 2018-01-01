@@ -23,32 +23,32 @@
  */
  
 // This is required to webpack font/texture/html files 
-/// <reference path="../lib/webpackRequire.ts" />
+/// <reference path="../../lib/webpackRequire.ts" />
 
 import * as PIXI from "pixi.js";
 
 //Import application base class
-import {MeterApplicationBase} from "../lib/MeterAppBase/MeterApplicationBase";
+import {MeterApplicationBase} from "../../lib/MeterAppBase/MeterApplicationBase";
 
 //Import meter parts
-import {AnalogMeterCluster} from "../parts/AnalogMeterCluster/AnalogMeterCluster";
+import {AnalogMeterCluster} from "../../parts/AnalogMeterCluster/AnalogMeterCluster";
 
 //Import enumuator of parameter code
-import {DefiParameterCode} from "../lib/WebSocket/WebSocketCommunication";
-import {SSMParameterCode} from "../lib/WebSocket/WebSocketCommunication";
-import {SSMSwitchCode} from "../lib/WebSocket/WebSocketCommunication";
-import {ReadModeCode} from "../lib/WebSocket/WebSocketCommunication";
+import {DefiParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
+import {SSMParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
+import {SSMSwitchCode} from "../../lib/WebSocket/WebSocketCommunication";
+import {ReadModeCode} from "../../lib/WebSocket/WebSocketCommunication";
 
 //For including entry point html file in webpack
-require("./AnalogMeterClusterApp.html");
+require("./AnalogMeterCluster-Defi-SSM.html");
 
 window.onload = function()
 {
-    const meterapp = new AnalogMeterClusterApp(1100, 600);
+    const meterapp = new AnalogMeterCluster_Defi_SSM(1100, 600);
     meterapp.run();
 }
 
-class AnalogMeterClusterApp extends MeterApplicationBase
+class AnalogMeterCluster_Defi_SSM extends MeterApplicationBase
 {
     protected setWebSocketOptions()
     {
