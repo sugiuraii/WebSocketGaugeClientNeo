@@ -265,8 +265,8 @@ export class WaterTempMeter extends AnalogSingleMeter
     constructor()
     {
         const option = new AnalogSingleMeterOption();
-        option.Max = 20;
-        option.Min = 140;
+        option.Min = 20;
+        option.Max = 140;
         option.Title = "Water";
         option.Unit = "degC";
         option.ScaleLabel = ["20","40","60", "80", "100", "120", "140"];
@@ -279,8 +279,8 @@ export class OilTempMeter extends AnalogSingleMeter
     constructor()
     {
         const option = new AnalogSingleMeterOption();
-        option.Max = 40;
-        option.Min = 160;
+        option.Min = 40;
+        option.Max = 160;
         option.Title = "OilTemp";
         option.Unit = "degC";
         option.ScaleLabel = ["40","60","80", "100", "120", "140", "160"];
@@ -293,8 +293,8 @@ export class BatteryVoltageMeter extends AnalogSingleMeter
     constructor()
     {
         const option = new AnalogSingleMeterOption();
-        option.Max = 6;
-        option.Min = 18;
+        option.Min = 6;
+        option.Max = 18;
         option.Title = "Voltage";
         option.Unit = "Volt";
         option.ScaleLabel = ["6","8","10", "12", "14", "16", "18"];
@@ -307,8 +307,8 @@ export class OilPressureMeter extends AnalogSingleMeter
     constructor()
     {
         const option = new AnalogSingleMeterOption();
-        option.Max = 0;
-        option.Min = 12;
+        option.Min = 0;
+        option.Max = 12;
         option.Title = "OilPres.";
         option.Unit = "x100kPa";
         option.ScaleLabel = ["0","2","4", "6", "8", "10", "12"];
