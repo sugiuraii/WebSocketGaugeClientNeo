@@ -41,11 +41,11 @@ import {DefiParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
 
 window.onload = function()
 {
-    const meterapp = new CompactMFD_Defi(1280, 720);
+    const meterapp = new AnalogTripleMeter_Defi(1280, 720);
     meterapp.run();
 }
 
-class CompactMFD_Defi extends MeterApplicationBase
+class AnalogTripleMeter_Defi extends MeterApplicationBase
 {
     protected setWebSocketOptions()
     {
