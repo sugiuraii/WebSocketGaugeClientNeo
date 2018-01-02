@@ -43,11 +43,11 @@ import {ReadModeCode} from "../../lib/WebSocket/WebSocketCommunication";
 
 window.onload = function()
 {
-    const meterapp = new CompactMFD_SSM(1280, 720);
+    const meterapp = new AnalogTripleMeter_SSM(1280, 720);
     meterapp.run();
 }
 
-class CompactMFD_SSM extends MeterApplicationBase
+class AnalogTripleMeter_SSM extends MeterApplicationBase
 {
     protected setWebSocketOptions()
     {
