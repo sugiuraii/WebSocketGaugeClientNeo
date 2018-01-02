@@ -41,7 +41,9 @@ module.exports = {
                 "AnalogTripleMeter-ELM327": './AnalogTripleMeter/AnalogTripleMeter-ELM327.ts',
                 "AnalogTripleMeter-Defi": './AnalogTripleMeter/AnalogTripleMeter-Defi.ts',
                 "AnalogTripleMeter-Arduino": './AnalogTripleMeter/AnalogTripleMeter-Arduino.ts',
-                "LEDRevMeter-SSM": './LEDRevMeter/LEDRevMeter-SSM.ts'
+                "LEDRevMeter-SSM": './LEDRevMeter/LEDRevMeter-SSM.ts',
+                "LEDRevMeter-ELM327": './LEDRevMeter/LEDRevMeter-ELM327.ts',
+                "LEDRevMeter-Defi-SSM": './LEDRevMeter/LEDRevMeter-Defi-SSM.ts'
             },
     devtool: "#inline-source-map",
     output:
