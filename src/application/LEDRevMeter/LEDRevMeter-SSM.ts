@@ -38,64 +38,77 @@ import {LEDTachoMeter} from "../../parts/LEDTachoMeter/LEDTachoMeter";
 
 //Import enumuator of parameter code
 import {SSMParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
+import {SSMSwitchCode} from "../../lib/WebSocket/WebSocketCommunication";
 import {ReadModeCode} from "../../lib/WebSocket/WebSocketCommunication";
 
 
 window.onload = function()
 {
-    const meterapp = new LEDMeter_SSM(1280, 720);
+    const meterapp = new LEDRevMeter_SSM(1280, 720);
     meterapp.run();
 }
 
-class CompactMFD_SSM extends MeterApplicationBase
+class LEDRevMeter_SSM extends MeterApplicationBase
 {
     protected setWebSocketOptions()
     {
         //Enable SSM websocket client
         this.IsSSMWSEnabled = true;
-        this.registerSSMParameterCode(SSMParameterCode.Battery_Voltage, ReadModeCode.SLOW, true);         
+        this.IsFUELTRIPWSEnabled = true;
+        this.registerSSMParameterCode(SSMParameterCode.Engine_Speed, ReadModeCode.SLOWandFAST, true);         
+        this.registerSSMParameterCode(SSMParameterCode.Vehicle_Speed, ReadModeCode.SLOWandFAST, false);         
         this.registerSSMParameterCode(SSMParameterCode.Coolant_Temperature, ReadModeCode.SLOW, true); 
         this.registerSSMParameterCode(SSMParameterCode.Manifold_Absolute_Pressure, ReadModeCode.SLOWandFAST, true);
-
+        this.registerSSMParameterCode(SSMSwitchCode.getNumericCodeFromSwitchCode(SSMSwitchCode.Neutral_Position_Switch), ReadModeCode.SLOWandFAST, false);
     }
     
     protected setTextureFontPreloadOptions()
     {
         this.registerWebFontFamilyNameToPreload(BoostMeter.RequestedFontFamily);    
         this.registerWebFontCSSURLToPreload(BoostMeter.RequestedFontCSSURL);        
+        this.registerWebFontFamilyNameToPreload(LEDTachoMeter.RequestedFontFamily);
+        this.registerWebFontCSSURLToPreload(LEDTachoMeter.RequestedFontCSSURL);
         this.registerTexturePathToPreload(BoostMeter.RequestedTexturePath);
+        this.registerTexturePathToPreload(LEDTachoMeter.RequestedTexturePath);
     }
     
     protected setPIXIMeterPanel()
-    {
-        //Centering the top-level container
-        this.stage.pivot.set(600, 200);
-        this.stage.position.set(this.screen.width/2, this.screen.height/2);
-        
+    {        
         const boostMeter = new BoostMeter();
-        boostMeter.position.set(800,0);
+        boostMeter.position.set(850,0);
         
         const waterTempMeter = new WaterTempMeter();
         waterTempMeter.position.set(0,0);
 
-        const batteryVoltageMeter = new BatteryVoltageMeter();
-        batteryVoltageMeter.position.set(400,0);
+        const ledRevMeter = new LEDTachoMeter();
+        ledRevMeter.position.set(330,110);
                 
         this.stage.addChild(boostMeter);
         this.stage.addChild(waterTempMeter);
-        this.stage.addChild(batteryVoltageMeter);
+        this.stage.addChild(ledRevMeter);
         
         this.ticker.add(() => 
         {
             const timestamp = PIXI.ticker.shared.lastTime;
-            const boost = this.SSMWS.getVal(SSMParameterCode.Manifold_Absolute_Pressure, timestamp)  * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
-            
+            const boost = this.SSMWS.getVal(SSMParameterCode.Manifold_Absolute_Pressure, timestamp)  * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;            
             const waterTemp = this.SSMWS.getRawVal(SSMParameterCode.Coolant_Temperature);
-            const voltage = this.SSMWS.getRawVal(SSMParameterCode.Battery_Voltage);
+            const rev = this.SSMWS.getVal(SSMParameterCode.Engine_Speed, timestamp);
+            const speed = this.SSMWS.getRawVal(SSMParameterCode.Vehicle_Speed);
+            const totalFuel = this.FUELTRIPWS.getTotalGas();
+            const totalTrip = this.FUELTRIPWS.getTotalTrip();
+            const totalFuelRate = this.FUELTRIPWS.getTotalGasMilage();
+            const neutralSw = this.SSMWS.getSwitchFlag(SSMSwitchCode.Neutral_Position_Switch);
+            
+            const geasPos = this.calculateGearPosition(rev, speed, neutralSw);
             
             boostMeter.Value = boost;
             waterTempMeter.Value = waterTemp;
-            batteryVoltageMeter.Value = voltage;
+            ledRevMeter.Tacho = rev;
+            ledRevMeter.Speed = speed;
+            ledRevMeter.GearPos = geasPos;
+            ledRevMeter.Trip = totalTrip;
+            ledRevMeter.Fuel = totalFuel;
+            ledRevMeter.GasMilage = totalFuelRate;
        });
     }
 }
