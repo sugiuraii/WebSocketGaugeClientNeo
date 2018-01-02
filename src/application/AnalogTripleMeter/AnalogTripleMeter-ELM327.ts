@@ -67,6 +67,10 @@ class CompactMFD_SSM extends MeterApplicationBase
     
     protected setPIXIMeterPanel()
     {        
+        //Centering the top-level container
+        this.stage.pivot.set(600, 200);
+        this.stage.position.set(this.screen.width/2, this.screen.height/2);
+
         const boostMeter = new BoostMeter();
         boostMeter.position.set(800,0);
         

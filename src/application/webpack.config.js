@@ -38,7 +38,9 @@ module.exports = {
                 "CompactMFD-Arduino": './CompactMFD/CompactMFD-Arduino.ts',
                 "CompactMFD-SSM": './CompactMFD/CompactMFD-SSM.ts',
                 "AnalogTripleMeter-SSM": './AnalogTripleMeter/AnalogTripleMeter-SSM.ts',
-                "AnalogTripleMeter-ELM327": './AnalogTripleMeter/AnalogTripleMeter-ELM327.ts'
+                "AnalogTripleMeter-ELM327": './AnalogTripleMeter/AnalogTripleMeter-ELM327.ts',
+                "AnalogTripleMeter-Defi": './AnalogTripleMeter/AnalogTripleMeter-Defi.ts',
+                "AnalogTripleMeter-Arduino": './AnalogTripleMeter/AnalogTripleMeter-Arduino.ts'
             },
     devtool: "#inline-source-map",
     output:

@@ -26,7 +26,7 @@
 /// <reference path="../../lib/webpackRequire.ts" />
 
 //For including entry point html file in webpack
-require("./AnalogTripleMeter-SSM.html");
+require("./AnalogTripleMeter-Defi.html");
 
 //Import application base class
 import {MeterApplicationBase} from "../../lib/MeterAppBase/MeterApplicationBase";
@@ -34,28 +34,25 @@ import {MeterApplicationBase} from "../../lib/MeterAppBase/MeterApplicationBase"
 //Import meter parts
 import {BoostMeter} from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
 import {WaterTempMeter} from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
-import {BatteryVoltageMeter} from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
+import {OilTempMeter} from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
 
 //Import enumuator of parameter code
-import {SSMParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
-import {ReadModeCode} from "../../lib/WebSocket/WebSocketCommunication";
-
+import {DefiParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
 
 window.onload = function()
 {
-    const meterapp = new CompactMFD_SSM(1280, 720);
+    const meterapp = new CompactMFD_Defi(1280, 720);
     meterapp.run();
 }
 
-class CompactMFD_SSM extends MeterApplicationBase
+class CompactMFD_Defi extends MeterApplicationBase
 {
     protected setWebSocketOptions()
     {
-        //Enable SSM websocket client
-        this.IsSSMWSEnabled = true;
-        this.registerSSMParameterCode(SSMParameterCode.Battery_Voltage, ReadModeCode.SLOW, true);         
-        this.registerSSMParameterCode(SSMParameterCode.Coolant_Temperature, ReadModeCode.SLOW, true); 
-        this.registerSSMParameterCode(SSMParameterCode.Manifold_Absolute_Pressure, ReadModeCode.SLOWandFAST, true);
+        this.IsDefiWSEnabled = true;
+        this.registerDefiParameterCode(DefiParameterCode.Manifold_Absolute_Pressure, true);         
+        this.registerDefiParameterCode(DefiParameterCode.Coolant_Temperature, true); 
+        this.registerDefiParameterCode(DefiParameterCode.Oil_Temperature, true);
 
     }
     
@@ -67,35 +64,35 @@ class CompactMFD_SSM extends MeterApplicationBase
     }
     
     protected setPIXIMeterPanel()
-    {
+    {  
         //Centering the top-level container
         this.stage.pivot.set(600, 200);
         this.stage.position.set(this.screen.width/2, this.screen.height/2);
-        
+      
         const boostMeter = new BoostMeter();
         boostMeter.position.set(800,0);
         
         const waterTempMeter = new WaterTempMeter();
         waterTempMeter.position.set(0,0);
 
-        const batteryVoltageMeter = new BatteryVoltageMeter();
-        batteryVoltageMeter.position.set(400,0);
+        const oilTempMeter = new OilTempMeter();
+        oilTempMeter.position.set(400,0);
                 
         this.stage.addChild(boostMeter);
         this.stage.addChild(waterTempMeter);
-        this.stage.addChild(batteryVoltageMeter);
+        this.stage.addChild(oilTempMeter);
         
         this.ticker.add(() => 
         {
             const timestamp = PIXI.ticker.shared.lastTime;
-            const boost = this.SSMWS.getVal(SSMParameterCode.Manifold_Absolute_Pressure, timestamp)  * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
+            const boost = this.DefiWS.getVal(DefiParameterCode.Manifold_Absolute_Pressure, timestamp)  * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
             
-            const waterTemp = this.SSMWS.getRawVal(SSMParameterCode.Coolant_Temperature);
-            const voltage = this.SSMWS.getRawVal(SSMParameterCode.Battery_Voltage);
+            const waterTemp = this.DefiWS.getRawVal(DefiParameterCode.Coolant_Temperature);
+            const oilTemp = this.DefiWS.getRawVal(DefiParameterCode.Oil_Temperature);
             
             boostMeter.Value = boost;
             waterTempMeter.Value = waterTemp;
-            batteryVoltageMeter.Value = voltage;
+            oilTempMeter.Value = oilTemp;
        });
     }
 }
