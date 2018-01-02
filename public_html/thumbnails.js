@@ -70,5 +70,6 @@ createThumbNail("application/AnalogMeterCluster-Defi-SSM.html", "thumbnails/Anal
 createThumbNail("application/CompactMFD-SSM.html", "thumbnails/CompactMFD-SSM.png");
 createThumbNail("application/DigitalMFD-Defi-SSM.html", "thumbnails/DigitalMFD-Defi-SSM.png");
 createThumbNail("application/AnalogTripleMeter-SSM.html", "thumbnails/AnalogTripleMeter.png");
+createThumbNail("application/LEDRevMeter-SSM.html", "thumbnails/LEDRevMeter.png");
 
 window.setTimeout(function(){phantom.exit();},10000);
