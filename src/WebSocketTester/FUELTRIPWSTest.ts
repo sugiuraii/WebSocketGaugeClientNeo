@@ -105,11 +105,11 @@ export class FUELTRIPWSTest extends WebSocketTesterBase {
     }
 
     private inputSECTSPAN() {
-        this.webSocket.SendSectSpan($('#sectSPANBox').val());
+        this.webSocket.SendSectSpan(Number($('#sectSPANBox').val()));
     };
 
     private inputSECTSTOREMAX() {
-        this.webSocket.SendSectStoreMax($('#sectStoreMaxBox').val());
+        this.webSocket.SendSectStoreMax(Number($('#sectStoreMaxBox').val()));
     };
 }
 

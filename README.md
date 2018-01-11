@@ -1,6 +1,5 @@
 # Websocket dashboard client (new version with WebGL)
 
-##Image
 ![main screen](README.img/MainScreen.jpg)
 
 ## Table of contents
@@ -42,6 +41,7 @@ You can make your custom gauges by modifying the source code. Please see []().
         | Microsoft Edge | Windows 10| Toshiba Satellite C640<br> Core i5-560M | - | - | Some of sprites are missing.|
         | Google Chrome 59.0 | Android 6.0.1 | ASUS Zenfone2 <br> (ZE551ML Atom Z3560) | 60fps | 60fps | OK |
         | Google Chrome 59.0 | Android 4.1.2| Sharp 203SH <br> (Snapdragon S4 Pro) | 54-60fps | 50-60fps | OK |
+        | Google Chrome 61.0 | Android 7.0 | Oukitel C8 <br> (Mediatek MTK6580) | 54fps | 47fps | ARM Mali-400 series　seems to have blinking issue in pixi.js under WebGL. `forceCanvas` or `preserveDrawingBuffer` needs to be enabled. |
         | Safari | iOS 9.3.5 | iPhone 4s <br> (Apple A5) | [54-60fps](https://www.youtube.com/watch?v=ZE71ya6LY0U) | [47fps](https://www.youtube.com/watch?v=ZE71ya6LY0U) | OK |
 
 ## <a name="dependency">Dependency</a>

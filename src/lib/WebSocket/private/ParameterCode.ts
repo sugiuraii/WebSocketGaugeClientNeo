@@ -365,6 +365,36 @@ export namespace OBDIIParameterCode
     export const Time_run_with_MIL_on = "Time_run_with_MIL_on";
     export const Time_since_trouble_codes_cleared = "Time_since_trouble_codes_cleared";
     export const Ethanol_fuel_percent = "Ethanol_fuel_percent";
+    
+    // Added on 2018/01/07
+    export const O2Sensor_1_Air_Fuel_Correction = "O2Sensor_1_Air_Fuel_Correction";
+    export const O2Sensor_2_Air_Fuel_Correction = "O2Sensor_2_Air_Fuel_Correction";
+    export const O2Sensor_3_Air_Fuel_Correction = "O2Sensor_3_Air_Fuel_Correction";
+    export const O2Sensor_4_Air_Fuel_Correction = "O2Sensor_4_Air_Fuel_Correction";
+    export const O2Sensor_5_Air_Fuel_Correction = "O2Sensor_5_Air_Fuel_Correction";
+    export const O2Sensor_6_Air_Fuel_Correction = "O2Sensor_6_Air_Fuel_Correction";
+    export const O2Sensor_7_Air_Fuel_Correction = "O2Sensor_7_Air_Fuel_Correction";
+    export const O2Sensor_8_Air_Fuel_Correction = "O2Sensor_8_Air_Fuel_Correction";
+
+    export const O2Sensor_1_Air_Fuel_Ratio = "O2Sensor_1_Air_Fuel_Ratio";
+    export const O2Sensor_2_Air_Fuel_Ratio = "O2Sensor_2_Air_Fuel_Ratio";
+    export const O2Sensor_3_Air_Fuel_Ratio = "O2Sensor_3_Air_Fuel_Ratio";
+    export const O2Sensor_4_Air_Fuel_Ratio = "O2Sensor_4_Air_Fuel_Ratio";
+    export const O2Sensor_5_Air_Fuel_Ratio = "O2Sensor_5_Air_Fuel_Ratio";
+    export const O2Sensor_6_Air_Fuel_Ratio = "O2Sensor_6_Air_Fuel_Ratio";
+    export const O2Sensor_7_Air_Fuel_Ratio = "O2Sensor_7_Air_Fuel_Ratio";
+    export const O2Sensor_8_Air_Fuel_Ratio = "O2Sensor_8_Air_Fuel_Ratio";
+
+    export const Evap_system_vapor_pressure = "Evap_system_vapor_pressure";
+    export const Fuel_rail_absolute_pressure = "Fuel_rail_absolute_pressure";
+    export const Relative_accelerator_pedal_position = "Relative_accelerator_pedal_position";
+    export const Hybrid_battery_pack_remaining_life = "Hybrid_battery_pack_remaining_life";
+    export const Engine_oil_temperature = "Engine_oil_temperature";
+    export const Fuel_injection_timing = "Fuel_injection_timing";
+    export const Engine_fuel_rate = "Engine_fuel_rate";
+    export const Driver_demand_engine_percent_torque = "Driver_demand_engine_percent_torque";
+    export const Actual_engine_percent_torque = "Actual_engine_percent_torque";
+    export const Engine_reference_torque = "Engine_reference_torque";
 }
 
 export namespace ReadModeCode

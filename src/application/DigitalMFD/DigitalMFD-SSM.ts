@@ -23,47 +23,45 @@
  */
  
 // This is required to webpack font/texture/html files
-/// <reference path="../lib/webpackRequire.ts" />
+/// <reference path="../../lib/webpackRequire.ts" />
 
 import * as PIXI from "pixi.js";
 
 //Import application base class
-import {MeterApplicationBase} from "../lib/MeterAppBase/MeterApplicationBase";
+import {MeterApplicationBase} from "../../lib/MeterAppBase/MeterApplicationBase";
 
 //Import meter parts
-import {BoostGaugePanel} from "../parts/CircularGauges/FullCircularGaugePanel";
-import {AirFuelGaugePanel} from "../parts/CircularGauges/FullCircularGaugePanel";
-import {WaterTempGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel";
-import {BatteryVoltageGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel";
-import {ThrottleGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel";
-import {DigiTachoPanel} from "../parts/DigiTachoPanel/DigiTachoPanel";
-import {MilageGraphPanel} from "../parts/GasMilageGraph/MilageGraph";
+import {BoostGaugePanel} from "../../parts/CircularGauges/FullCircularGaugePanel";
+import {AirFuelGaugePanel} from "../../parts/CircularGauges/FullCircularGaugePanel";
+import {WaterTempGaugePanel} from "../../parts/CircularGauges/SemiCircularGaugePanel";
+import {BatteryVoltageGaugePanel} from "../../parts/CircularGauges/SemiCircularGaugePanel";
+import {ThrottleGaugePanel} from "../../parts/CircularGauges/SemiCircularGaugePanel";
+import {DigiTachoPanel} from "../../parts/DigiTachoPanel/DigiTachoPanel";
+import {MilageGraphPanel} from "../../parts/GasMilageGraph/MilageGraph";
 
 //Import enumuator of parameter code
-import {DefiParameterCode} from "../lib/WebSocket/WebSocketCommunication";
-import {SSMParameterCode} from "../lib/WebSocket/WebSocketCommunication";
-import {SSMSwitchCode} from "../lib/WebSocket/WebSocketCommunication";
-import {ReadModeCode} from "../lib/WebSocket/WebSocketCommunication";
+import {SSMParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
+import {SSMSwitchCode} from "../../lib/WebSocket/WebSocketCommunication";
+import {ReadModeCode} from "../../lib/WebSocket/WebSocketCommunication";
 
 //For including entry point html file in webpack
-require("./DigitalMFDApp.html");
+require("./DigitalMFD-SSM.html");
 
 window.onload = function()
 {
-    const meterapp = new DigitalMFDApp(1200, 600);
+    const meterapp = new DigitalMFD_SSM(1200, 600);
     meterapp.run();
 }
 
-class DigitalMFDApp extends MeterApplicationBase
+class DigitalMFD_SSM extends MeterApplicationBase
 {
     protected setWebSocketOptions()
     {
-        this.IsDefiWSEnabled = true;
         this.IsSSMWSEnabled = true;
         this.IsFUELTRIPWSEnabled = true;
         
-        this.registerDefiParameterCode(DefiParameterCode.Engine_Speed, true);
-        this.registerDefiParameterCode(DefiParameterCode.Manifold_Absolute_Pressure, true);
+        this.registerSSMParameterCode(SSMParameterCode.Engine_Speed, ReadModeCode.SLOWandFAST,  true);
+        this.registerSSMParameterCode(SSMParameterCode.Manifold_Absolute_Pressure, ReadModeCode.SLOWandFAST, true);
         this.registerSSMParameterCode(SSMParameterCode.Vehicle_Speed, ReadModeCode.SLOWandFAST, false);
         this.registerSSMParameterCode(SSMParameterCode.Coolant_Temperature, ReadModeCode.SLOW, false);
         this.registerSSMParameterCode(SSMParameterCode.Battery_Voltage, ReadModeCode.SLOW, false);
@@ -133,7 +131,7 @@ class DigitalMFDApp extends MeterApplicationBase
         this.ticker.add(() => 
         {
             const timestamp = PIXI.ticker.shared.lastTime;
-            const tacho = this.DefiWS.getVal(DefiParameterCode.Engine_Speed, timestamp);
+            const tacho = this.SSMWS.getVal(SSMParameterCode.Engine_Speed, timestamp);
             const speed = this.SSMWS.getVal(SSMParameterCode.Vehicle_Speed, timestamp);
             const neutralSw = this.SSMWS.getSwitchFlag(SSMSwitchCode.Neutral_Position_Switch);
             const gearPos = this.calculateGearPosition(tacho, speed, neutralSw);
@@ -149,7 +147,7 @@ class DigitalMFDApp extends MeterApplicationBase
             const totalFuel = this.FUELTRIPWS.getTotalGas();
             const totalTrip = this.FUELTRIPWS.getTotalTrip();
             
-            const boost = this.DefiWS.getVal(DefiParameterCode.Manifold_Absolute_Pressure, timestamp)  * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
+            const boost = this.SSMWS.getVal(SSMParameterCode.Manifold_Absolute_Pressure, timestamp)  * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
             const airFuelRatio = this.SSMWS.getVal(SSMParameterCode.Air_Fuel_Sensor_1, timestamp)*14;
             const waterTemp = this.SSMWS.getRawVal(SSMParameterCode.Coolant_Temperature);
             const batteryVolt = this.SSMWS.getRawVal(SSMParameterCode.Battery_Voltage);

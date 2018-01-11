@@ -47,7 +47,7 @@ export abstract class WebSocketTesterBase
     
     public connectWebSocket() : void
     {
-        this.webSocketBase.URL = $("#serverURLBox").val();
+        this.webSocketBase.URL = $("#serverURLBox").val().toString();
         this.webSocketBase.Connect();
     };
 

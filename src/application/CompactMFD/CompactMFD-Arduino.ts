@@ -23,31 +23,31 @@
  */
  
 // This is required to webpack font/texture/html files
-/// <reference path="../lib/webpackRequire.ts" />
+/// <reference path="../../lib/webpackRequire.ts" />
 
 //Assign entry point html file to bundle by webpack
-require("./DigitalMFD-ArduinoDemoApp.html");
+require("./CompactMFD-Arduino.html");
 
 //Import application base class
-import {MeterApplicationBase} from "../lib/MeterAppBase/MeterApplicationBase";
+import {MeterApplicationBase} from "../../lib/MeterAppBase/MeterApplicationBase";
 
 //Import meter parts
-import {BoostGaugePanel} from "../parts/CircularGauges/FullCircularGaugePanel";
-import {WaterTempGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel";
-import {EngineOilTempGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel";
-import {DigiTachoPanel} from "../parts/DigiTachoPanel/DigiTachoPanel";
+import {BoostGaugePanel} from "../../parts/CircularGauges/FullCircularGaugePanel";
+import {WaterTempGaugePanel} from "../../parts/CircularGauges/SemiCircularGaugePanel";
+import {EngineOilTempGaugePanel} from "../../parts/CircularGauges/SemiCircularGaugePanel";
+import {DigiTachoPanel} from "../../parts/DigiTachoPanel/DigiTachoPanel";
 
 //Import enumuator of parameter code
-import {ArduinoParameterCode} from "../lib/WebSocket/WebSocketCommunication";
+import {ArduinoParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
 
 
 window.onload = function()
 {
-    const meterapp = new DigitalMFD_ArduinoDemoApp(720, 1280);
+    const meterapp = new CompactMFD_Arduino(720, 1280);
     meterapp.run();
 }
 
-class DigitalMFD_ArduinoDemoApp extends MeterApplicationBase
+class CompactMFD_Arduino extends MeterApplicationBase
 {
     protected setWebSocketOptions()
     {

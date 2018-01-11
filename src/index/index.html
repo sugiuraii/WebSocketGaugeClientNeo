@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<!--
+The MIT License
+
+Copyright 2017 kuniaki.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-->
+<html>
+    <head>
+        <title>WebSocketGaugeClientNeo</title>
+        <meta charset="UTF-8">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui">
+
+        <!--
+        <link rel="stylesheet" type="text/css" href="indexmenu.css">
+        -->
+        <script type="text/javascript" src="js/index.js"></script>
+    </head>
+    <body>
+        <div class="jumbotron">
+            <h1>
+                Gauge Panel Application Sample
+            </h1>
+        </div>
+        <div class="row">
+            <div class="card col-sm-4">
+                <img class="card-img-top img-thumbnail" src="thumbnails/AnalogMeterCluster-Defi-SSM.png" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Analog Meter Cluster
+                    </h4>
+                    <p class="card-text">
+                        Triple analog gauge cluster demonstration (speed+coolant temp, rev+trip and boost).
+                    </p>
+                    <p>
+                        <span class="badge badge-info">DefiCOM</span>
+                        <span class="badge badge-info">SSMCOM</span>
+                        <span class="badge badge-info">ELM327COM</span>
+                    </p>
+                    <a href="application/AnalogMeterCluster-SSM.html" class="btn btn-primary btn-lg btn-block">Start(SSM)</a>
+                    <a href="application/AnalogMeterCluster-ELM327.html" class="btn btn-primary btn-lg btn-block">Start(ELM327)</a>
+                    <a href="application/AnalogMeterCluster-Defi-SSM.html" class="btn btn-primary btn-lg btn-block">Start(Defi+SSM)</a>
+                </div>
+            </div>
+
+            <div class="card col-sm-4">
+                <img class="card-img-top img-thumbnail" src="thumbnails/DigitalMFD-Defi-SSM.png" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Digital MFD
+                    </h4>
+
+                    <p class="card-text">
+                        Multi function display demo with rev, speed, fuel/trip, boost, A/F, coolant temp, battery voltage and throttle.
+                    </p>
+                    <p>
+                        <span class="badge badge-info">DefiCOM</span>
+                        <span class="badge badge-info">SSMCOM</span>
+                    </p>
+                    <a href="application/DigitalMFD-SSM.html" class="btn btn-primary btn-lg btn-block">Start(SSM)</a>
+                    <a href="application/DigitalMFD-Defi-SSM.html" class="btn btn-primary btn-lg btn-block">Start(Defi+SSM)</a>
+                </div>
+            </div>
+            <div class="card col-sm-4">
+                <img class="card-img-top img-thumbnail" src="thumbnails/CompactMFD-SSM.png" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        CompactMFD
+                    </h4>
+
+                    <p class="card-text">
+                        Mini Multi function display demo.
+                    </p>
+                    <p class="badge badge-info">SSMCOM</p>
+                    <p class="badge badge-info">ArduinoCOM</p>
+                    <p class="badge badge-info">ELM327COM</p>
+                    <a href="application/CompactMFD-SSM.html" class="btn btn-primary btn-lg btn-block">Start(SSM)</a>
+                    <a href="application/CompactMFD-Arduino.html" class="btn btn-primary btn-lg btn-block">Start(Arduino)</a>
+                    <a href="application/CompactMFD-ELM327.html" class="btn btn-primary btn-lg btn-block">Start(ELM327)</a>
+                </div>
+            </div>
+            <div class="card col-sm-4">
+                <img class="card-img-top img-thumbnail" src="thumbnails/AnalogTripleMeter.png" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Analog triple meter
+                    </h4>
+
+                    <p class="card-text">
+                        Triple analog meter.
+                    </p>
+                    <p class="badge badge-info">DefiCOM</p>
+                    <p class="badge badge-info">SSMCOM</p>
+                    <p class="badge badge-info">ArduinoCOM</p>
+                    <p class="badge badge-info">ELM327COM</p>
+                    <a href="application/AnalogTripleMeter-SSM.html" class="btn btn-primary btn-lg btn-block">Start(SSM)</a>
+                    <a href="application/AnalogTripleMeter-ELM327.html" class="btn btn-primary btn-lg btn-block">Start(ELM327)</a>
+                    <a href="application/AnalogTripleMeter-Defi.html" class="btn btn-primary btn-lg btn-block">Start(Defi)</a>
+                    <a href="application/AnalogTripleMeter-Arduino.html" class="btn btn-primary btn-lg btn-block">Start(Arduino)</a>
+                </div>
+            </div>
+            <div class="card col-sm-4">
+                <img class="card-img-top img-thumbnail" src="thumbnails/LEDRevMeter.png" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        LED rev meter (with 2 analog meters)
+                    </h4>
+
+                    <p class="card-text">
+                        LED rev meter(+ Speed/Trip/Fuel indicator) with 2 analog meters.
+                    </p>
+                    <p class="badge badge-info">DefiCOM</p>
+                    <p class="badge badge-info">SSMCOM</p>
+                    <p class="badge badge-info">ELM327COM</p>
+                    <a href="application/LEDRevMeter-SSM.html" class="btn btn-primary btn-lg btn-block">Start(SSM)</a>
+                    <a href="application/LEDRevMeter-ELM327.html" class="btn btn-primary btn-lg btn-block">Start(ELM327)</a>
+                    <a href="application/LEDRevMeter-Defi-SSM.html" class="btn btn-primary btn-lg btn-block">Start(Defi+SSM)</a>
+                </div>
+            </div>
+        </div>
+        <div class="jumbotron">
+            <h1>
+                Gauge Panel benchmark.
+            </h1>
+            <h4>
+                Graphic benchmark test without websocket communication.
+            </h4>
+        </div>
+        <div class="row">
+            <div class="card col-sm-4">
+                <img class="card-img-top img-thumbnail" src="thumbnails/AnalogMeterClusterBenchApp.png" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Analog Meter Cluster Benchmark
+                    </h4>
+
+                    <p class="card-text">
+                        Graphic drawing benchmark test of triple analog gauge cluster.
+                    </p>
+                    <a href="benchmark/AnalogMeterClusterBenchApp.html" class="btn btn-primary btn-lg btn-block">Start</a>
+                </div>
+            </div>
+            <div class="card col-sm-4">
+                <img class="card-img-top img-thumbnail" src="thumbnails/DigitalMFDBenchApp.png" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Digital MFD Benchmark
+                    </h4>
+
+                    <p class="card-text">
+                        Graphic drawing benchmark test of multi function display.
+                    </p>
+                    <a href="benchmark/DigitalMFDBenchApp.html" class="btn btn-primary btn-lg btn-block">Start</a>
+                </div>
+            </div>
+        </div>
+        <div class="jumbotron">
+            <h1>
+                Websocket communication test.
+            </h1>
+        </div>
+        <div class="row">
+            <div class="card col-sm-4">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        DefiCOM test
+                    </h4>
+
+                    <p class="card-text">
+                        Simple websocket communication test for DefiCOM websocet.
+                    </p>
+                    <p class="badge badge-info">DefiCOM</p>
+                    <a href="WebSocketTester/DefiCOMWSTest.html" class="btn btn-primary btn-lg btn-block">Start</a>
+                </div>
+            </div>
+            <div class="card col-sm-4">
+                <div class="card-body" >
+                    <h4 class="card-title">
+                        DefiCOM test
+                    </h4>
+                    <h5 class=""card-title">
+                        (with interpolation)
+                </h5>
+                <p class="card-text">
+                    Simple websocket communication test for DefiCOM websocet (interpolation enabled).
+                </p>
+                <p class="badge badge-info">DefiCOM</p>
+                <a href="WebSocketTester/DefiCOMWSInterpolateTest.html" class="btn btn-primary btn-lg btn-block">Start</a>                    
+            </div>
+        </div>
+        <div class="card col-sm-4">
+            <div class="card-body">
+                <h4 class="card-title">
+                    SSMCOM test
+                </h4>
+
+                <p class="card-text">
+                    Simple websocket communication test for SSMCOM websocet.
+                </p>
+                <a href="WebSocketTester/SSMCOMWSTest.html" class="btn btn-primary btn-lg btn-block">Start</a>
+                <p class="badge badge-info">SSMCOM</p>
+            </div>
+        </div>
+        <div class="card col-sm-4">
+            <div class="card-body">
+                <h4 class="card-title">
+                    ArduinoCOM test
+                </h4>
+
+                <p class="card-text">
+                    Simple websocket communication test for ArduinoCOM websocet.
+                </p>
+                <p class="badge badge-info">ArduinoCOM</p>
+                <a href="WebSocketTester/ArduinoCOMWSTest.html" class="btn btn-primary btn-lg btn-block">Start</a>
+            </div>
+        </div>
+        <div class="card col-sm-4">
+            <div class="card-body">
+                <h4 class="card-title">
+                    ELM327COM test
+                </h4>
+
+                <p class="card-text">
+                    Simple websocket communication test for ELM327COM websocet.
+                </p>
+                <p class="badge badge-info">ELM327COM</p>
+                <a href="WebSocketTester/ELM327COMWSTest.html" class="btn btn-primary btn-lg btn-block">Start</a>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

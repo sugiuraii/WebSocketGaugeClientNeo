@@ -108,7 +108,7 @@ export class LEDTachoMeter extends PIXI.Container
     }
 
     get GearPos() { return this.gearPos }
-    set GeasPos(val : string)
+    set GearPos(val : string)
     {
         this.gearPos = val;
         this.gearPosLabel.text = val;
@@ -155,17 +155,17 @@ export class LEDTachoMeter extends PIXI.Container
         gasMilageLabel.position.set(310,360);
         super.addChild(gasMilageLabel);
 
-        const tripLabel = this.tripLabel = this.gasMilageLabel = new PIXI.extras.BitmapText(tripValDefault.toFixed(1), {font: "DSEG14_Classic_30px", align : "right"});
+        const tripLabel = this.tripLabel = new PIXI.extras.BitmapText(tripValDefault.toFixed(1), {font: "DSEG14_Classic_30px", align : "right"});
         tripLabel.anchor = new PIXI.Point(1,0.5);
         tripLabel.position.set(510,355);
         super.addChild(tripLabel);
 
-        const fuelLabel = this.fuelLabel = this.gasMilageLabel = new PIXI.extras.BitmapText(fuelValDefault.toFixed(2), {font: "DSEG14_Classic_30px", align : "right"});
+        const fuelLabel = this.fuelLabel = new PIXI.extras.BitmapText(fuelValDefault.toFixed(2), {font: "DSEG14_Classic_30px", align : "right"});
         fuelLabel.anchor = new PIXI.Point(1,0.5);
         fuelLabel.position.set(510,395);
         super.addChild(fuelLabel);
 
-        const gearPosLabel = this.gearPosLabel = this.gasMilageLabel = new PIXI.extras.BitmapText("N", {font: "DSEG14_Classic_100px", align : "right"});
+        const gearPosLabel = this.gearPosLabel = new PIXI.extras.BitmapText("N", {font: "DSEG14_Classic_100px", align : "right"});
         gearPosLabel.anchor = new PIXI.Point(1,0.5);
         gearPosLabel.text = "N";
         gearPosLabel.position.set(410,495);
