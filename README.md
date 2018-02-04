@@ -30,8 +30,8 @@ You can make your custom gauges by modifying the source code. Please see []().
 	* Web browser capable of WebGL or Canvas
 		* To get sufficient performance (over 30fps), currently Chrome + WebGL is recommended.
 		* You can check the operation (and grahical performance) by following demonstration pages.
-			* [Test1 (Analog 3-meter cluster test)](https://sugiuraii.github.io/benchmark/AnalogMeterClusterBenchApp.html)
-			* [Test2 (Digital multi function display test)](https://sugiuraii.github.io/benchmark/DigitalMFDBenchApp.html)
+			* [Test1 (Analog 3-meter cluster test)](https://sugiuraii.github.io/WebsocketGauge/clientdemo/benchmark/AnalogMeterClusterBenchApp.html)
+			* [Test2 (Digital multi function display test)](https://sugiuraii.github.io/WebsocketGauge/clientdemo/benchmark/DigitalMFDBenchApp.html)
 	* Operation is tested following platforms.
 
 		| Browser |	 OS	 | Hardware | fps(Test1) | fps(Test2) | comment |
