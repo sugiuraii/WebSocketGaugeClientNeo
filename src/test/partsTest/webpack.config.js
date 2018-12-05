@@ -44,11 +44,11 @@ module.exports = {
         extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
     },
   module: {
-    loaders: [
+    rules: [
         { test: /\.tsx?$/, loader: 'ts-loader' },
         { test: /\.png$/, loader: "file-loader?name=img/[name].[ext]" },
         { test: /\.fnt$/, loader: "file-loader?name=img/[name].[ext]" }, // Bitmap font setting files
-        { test: /\.json$/, loader: "file-loader?name=img/[name].[ext]" },
+        { type: "javascript/auto", test: /\.json$/, loader: "file-loader?name=img/[name].[ext]" },
         { test: /\.html$/, loader: "file-loader?name=[name].[ext]" },
         { test: /\.css$/, loader: "file-loader?name=[name].[ext]" },
         { test: /\.(ttf|otf)$/, loader: "file-loader?name=fonts/[name].[ext]" }

@@ -48,7 +48,7 @@ module.exports = {
         })
     ],
     module: {
-        loaders: [
+        rules: [
             {test: /\.tsx?$/, loader: 'ts-loader'},
             {test: /\.png$/, loader: "file-loader?name=img/[name].[ext]"},
             {test: /\.html$/, loader: "file-loader?name=[name].[ext]"},
