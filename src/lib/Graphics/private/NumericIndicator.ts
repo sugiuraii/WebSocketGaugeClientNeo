@@ -24,7 +24,7 @@
 
 import * as PIXI from 'pixi.js';
 
-export class BitmapFontNumericIndicator extends PIXI.extras.BitmapText
+export class BitmapFontNumericIndicator extends PIXI.BitmapText
 {
     private value : number = 0;
     
