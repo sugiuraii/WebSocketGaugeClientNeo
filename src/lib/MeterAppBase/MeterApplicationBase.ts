@@ -225,12 +225,9 @@ export abstract class MeterApplicationBase extends PIXI.Application
      * @param webSocketServerName Hostname of websocket server (default : same as webserver).s
      */
     constructor(width: number, height: number, webSocketServerName? : string)
-    {
-        // Get force canvas flag from webstorage
-        const forceCanvas : boolean = localStorage.getItem("ForceCanvas")==="true"?true:false;
-        
+    {        
         // Call PIXI.Application
-        super(width, height, {forceCanvas: forceCanvas});
+        super({width:width, height:height});
            
         // Initialize websocket instances
         this.initializeWebSocketInstances();
