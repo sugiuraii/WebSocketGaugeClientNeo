@@ -89,7 +89,7 @@ export class TextOption
 
 export abstract class CircularGaugePanelOptionBase
 {
-    public ValueTextLabel: PIXI.extras.BitmapText;
+    public ValueTextLabel: PIXI.BitmapText;
     public ValueTextLabelOption: BitmapTextOption = new BitmapTextOption();
     public ValueNumberRoundDigit : number = 1;
     

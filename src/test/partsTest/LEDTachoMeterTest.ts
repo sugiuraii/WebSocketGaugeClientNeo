@@ -51,7 +51,7 @@ namespace LEDTachoMeterTest
 
     function main()
     {
-        const app = new PIXI.Application(1366,1366);
+        const app = new PIXI.Application({height:1366,width:1366});
         document.body.appendChild(app.view);
 
         const meter = new LEDTachoMeter();
