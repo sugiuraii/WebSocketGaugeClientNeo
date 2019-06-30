@@ -23,6 +23,7 @@
  */
 
 module.exports = {
+    mode: "development",
     entry:
             {
                 "ArduinoCOMWSTest": './ArduinoCOMWSTest.ts',

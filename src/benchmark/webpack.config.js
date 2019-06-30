@@ -25,6 +25,7 @@
 var webpack = require('webpack');
 
 module.exports = {
+    mode: "development",
     entry:
             {
                 "DigitalMFDBenchApp": './DigitalMFDBenchApp.ts',

@@ -25,6 +25,7 @@
 var webpack = require('webpack');
 
 module.exports = {
+    mode: "development",
     cache: true,
     entry:
             {
