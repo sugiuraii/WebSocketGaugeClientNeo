@@ -45,7 +45,7 @@ export class DigiTachoPanel extends PIXI.Container
     private tachoProgressBar: RectangularProgressBar;
 
     private speedLabel: BitmapFontNumericIndicator;
-    private geasposLabel: PIXI.extras.BitmapText;
+    private geasposLabel: PIXI.BitmapText;
 
     private speed : number = 0;
     private tacho : number = 0;
@@ -96,8 +96,8 @@ export class DigiTachoPanel extends PIXI.Container
 
     private create() : void
     {
-        const backTexture = PIXI.Texture.fromFrame("DigiTachoBack");
-        const tachoProgressBarTexture = PIXI.Texture.fromFrame("DigiTachoBar");
+        const backTexture = PIXI.Texture.from("DigiTachoBack");
+        const tachoProgressBarTexture = PIXI.Texture.from("DigiTachoBar");
 
         //Create background sprite
         const backSprite = new PIXI.Sprite();
@@ -119,14 +119,14 @@ export class DigiTachoPanel extends PIXI.Container
         tachoProgressBar.Options.MaskWidth = 577;
         super.addChild(tachoProgressBar);
 
-        const speedTextLabel = new BitmapFontNumericIndicator(this.speed.toString(), {font : "FreeSans", align : "right"});
+        const speedTextLabel = new BitmapFontNumericIndicator(this.speed.toString(), {font : {name: "FreeSans"}, align : "right"});
         this.speedLabel = speedTextLabel;
         speedTextLabel.position.set(485,320);
         speedTextLabel.anchor = new PIXI.Point(1,1);
         speedTextLabel.NumberOfDecimalPlace = 0;
         super.addChild(speedTextLabel);
 
-        const gearTextLabel = new PIXI.extras.BitmapText(this.gearPos,{font : "Audiowide", align : "center"});
+        const gearTextLabel = new PIXI.BitmapText(this.gearPos,{font : {name : "Audiowide"}, align : "center"});
         this.geasposLabel = gearTextLabel;
         gearTextLabel.position.set(66, 62);
         gearTextLabel.anchor = new PIXI.Point(0.5, 0.5);

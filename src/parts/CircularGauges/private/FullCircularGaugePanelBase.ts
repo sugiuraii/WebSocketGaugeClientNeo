@@ -44,12 +44,12 @@ export class FullCircularGaugePanelOptionsBase extends CircularGaugePanelOptionB
     
     private setOption() : void
     {            
-        this.RedZoneBarTexture = PIXI.Texture.fromFrame("FullCircularGauge_RedZone_Bar");
-        this.YellowZoneBarTexture = PIXI.Texture.fromFrame("FullCircularGauge_YellowZone_Bar");
-        this.GreenZoneBarTexture = PIXI.Texture.fromFrame("FullCircularGauge_GreenZone_Bar");
-        this.ValueBarTexture = PIXI.Texture.fromFrame("FullCircularGauge_ValueBar");
-        this.BackTexture = PIXI.Texture.fromFrame("FullCircularGauge_Back");
-        this.GridTexture = PIXI.Texture.fromFrame("FullCircularGauge_Grid");
+        this.RedZoneBarTexture = PIXI.Texture.from("FullCircularGauge_RedZone_Bar");
+        this.YellowZoneBarTexture = PIXI.Texture.from("FullCircularGauge_YellowZone_Bar");
+        this.GreenZoneBarTexture = PIXI.Texture.from("FullCircularGauge_GreenZone_Bar");
+        this.ValueBarTexture = PIXI.Texture.from("FullCircularGauge_ValueBar");
+        this.BackTexture = PIXI.Texture.from("FullCircularGauge_Back");
+        this.GridTexture = PIXI.Texture.from("FullCircularGauge_Grid");
 
         this.MasterTextStyle = new PIXI.TextStyle(
         {

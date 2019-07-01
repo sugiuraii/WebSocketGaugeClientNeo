@@ -41,9 +41,9 @@ export class MilageGraphPanel extends PIXI.Container
 {
     private momentGasMilageBar: RectangularProgressBar = new RectangularProgressBar();
     private sectGasMilageBar: {[spankey : string] : RectangularProgressBar } = {};
-    private tripLabel: PIXI.extras.BitmapText;
-    private fuelLabel: PIXI.extras.BitmapText;
-    private gasMilageLabel: PIXI.extras.BitmapText;
+    private tripLabel: PIXI.BitmapText;
+    private fuelLabel: PIXI.BitmapText;
+    private gasMilageLabel: PIXI.BitmapText;
 
     private momentGasMilage : number = 0;
     private trip : number = 0;
@@ -125,11 +125,11 @@ export class MilageGraphPanel extends PIXI.Container
 
     private create()
     {
-        const backTexture = PIXI.Texture.fromFrame("MilageGraph_Back");
+        const backTexture = PIXI.Texture.from("MilageGraph_Back");
         const backSprite = new PIXI.Sprite(backTexture);
         super.addChild(backSprite);
 
-        const momentGasMilageTexture = PIXI.Texture.fromFrame("MilageGraph_valueBar2");
+        const momentGasMilageTexture = PIXI.Texture.from("MilageGraph_valueBar2");
         this.momentGasMilageBar.Options.Texture = momentGasMilageTexture;
         this.momentGasMilageBar.Options.Vertical = true;
         this.momentGasMilageBar.Options.MaskWidth = 40;
@@ -140,7 +140,7 @@ export class MilageGraphPanel extends PIXI.Container
         super.addChild(this.momentGasMilageBar);
 
         //Sect fuelTrip progressbar
-        const sectGasMilageBarTexture = PIXI.Texture.fromFrame("MilageGraph_valueBar1");
+        const sectGasMilageBarTexture = PIXI.Texture.from("MilageGraph_valueBar1");
         for (let i = 0; i < this.sectSpan.length; i++)
         {
             const spankey: string = this.sectSpan[i];
@@ -160,17 +160,17 @@ export class MilageGraphPanel extends PIXI.Container
         this.sectGasMilageBar["10min"].position.set(303,17);
         this.sectGasMilageBar["5min"].position.set(360,17);
         
-        this.tripLabel = new PIXI.extras.BitmapText("0.0", { font : "FreeSans_45px", align : "right"});
+        this.tripLabel = new PIXI.BitmapText("0.0", { font : {name : "FreeSans_45px"}, align : "right"});
         this.tripLabel.anchor = new PIXI.Point(1,1);
         this.tripLabel.position.set(610,115);
         super.addChild(this.tripLabel);
 
-        this.fuelLabel = new PIXI.extras.BitmapText("0.00", { font : "FreeSans_45px", align : "right"});
+        this.fuelLabel = new PIXI.BitmapText("0.00", { font : {name  : "FreeSans_45px"}, align : "right"});
         this.fuelLabel.anchor = new PIXI.Point(1,1);
         this.fuelLabel.position.set(610,170);
         super.addChild(this.fuelLabel);
 
-        this.gasMilageLabel = new PIXI.extras.BitmapText("0.00", { font : "FreeSans_68px", align : "right"});
+        this.gasMilageLabel = new PIXI.BitmapText("0.00", { font : {name : "FreeSans_68px"}, align : "right"});
         this.gasMilageLabel.anchor = new PIXI.Point(1,1);
         this.gasMilageLabel.position.set(625, 270); 
         super.addChild(this.gasMilageLabel);
