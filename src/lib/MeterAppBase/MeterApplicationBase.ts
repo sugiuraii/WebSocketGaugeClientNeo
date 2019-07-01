@@ -454,10 +454,10 @@ export abstract class MeterApplicationBase extends PIXI.Application
         for (let i = 0; i < texturePathWithoutOverlap.length; i++)
         {
             const texturePath = texturePathWithoutOverlap[i];
-            PIXI.loader.add(texturePath);
+            PIXI.Loader.shared.add(texturePath);
         }
 
-        PIXI.loader.load(() => 
+        PIXI.Loader.shared.load(() => 
         {
             callBack();
         }
