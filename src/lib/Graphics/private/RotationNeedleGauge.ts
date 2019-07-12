@@ -24,6 +24,7 @@
 
 import {Gauge1DOptions} from './GaugeBase'
 import {Gauge1D} from './GaugeBase'
+import * as PIXI from 'pixi.js';
 
 /**
  * Needle gauge option class.
