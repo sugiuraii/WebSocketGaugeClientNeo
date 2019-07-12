@@ -24,6 +24,7 @@
 
 import {ProgressBarOptions} from './ProgressBarBase'
 import {ProgressBar} from './ProgressBarBase'
+import * as PIXI from 'pixi.js';
 
 /**
  * Rectangular progressbar option class.

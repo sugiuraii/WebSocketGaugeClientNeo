@@ -23,6 +23,7 @@
  */
 import {ProgressBarOptions} from './ProgressBarBase'
 import {ProgressBar} from './ProgressBarBase'
+import * as PIXI from 'pixi.js';
 
 /**
  * Option class for CircularProgressBar.
