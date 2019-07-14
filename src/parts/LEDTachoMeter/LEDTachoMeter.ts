@@ -24,7 +24,7 @@
  
 /// <reference path="../../lib/webpackRequire.ts" />
  
-import {CircularProgressBar} from  '../../lib/Graphics/PIXIGauge';
+import {CircularProgressBar, CircularProgressBarOptions} from  '../../lib/Graphics/PIXIGauge';
 import * as PIXI from 'pixi.js';
 
 require("./LEDTachoMeterTexture.json");
@@ -42,7 +42,7 @@ require("./LEDMeterFont_30px_0.png");
 
 export class LEDTachoMeter extends PIXI.Container
 {
-    private tachoProgressBar = new CircularProgressBar();
+    private tachoProgressBar;
     private speedLabel : PIXI.BitmapText;
     private gasMilageLabel : PIXI.BitmapText;
     private tripLabel : PIXI.BitmapText;
@@ -129,20 +129,23 @@ export class LEDTachoMeter extends PIXI.Container
         const backSprite = PIXI.Sprite.from("LEDTachoMeter_Base");
         super.addChild(backSprite);
 
-        const tachoProgressBar = this.tachoProgressBar;
-        tachoProgressBar.Options.Texture = PIXI.Texture.from("LEDTachoMeter_LED_Yellow");
-        tachoProgressBar.Options.Center.set(300,300);
+        const tachoProgressBarOption = new CircularProgressBarOptions();
+        tachoProgressBarOption.Texture = PIXI.Texture.from("LEDTachoMeter_LED_Yellow");
+        tachoProgressBarOption.Center.set(300,300);
+        tachoProgressBarOption.Radius = 300;
+        tachoProgressBarOption.InnerRadius = 200;
+        tachoProgressBarOption.Max = tachoMax;
+        tachoProgressBarOption.Min = tachoMin;
+        tachoProgressBarOption.OffsetAngle = 90;
+        tachoProgressBarOption.FullAngle = 270;
+        tachoProgressBarOption.AngleStep = 6;
+        
+        const tachoProgressBar = new CircularProgressBar(tachoProgressBarOption);
         tachoProgressBar.pivot.set(300,300);
         tachoProgressBar.position.set(300, 300);
-        tachoProgressBar.Options.Radius = 300;
-        tachoProgressBar.Options.InnerRadius = 200;
-        tachoProgressBar.Options.Max = tachoMax;
-        tachoProgressBar.Options.Min = tachoMin;
         tachoProgressBar.Value = tachoValDefault;
-        tachoProgressBar.Options.OffsetAngle = 90;
-        tachoProgressBar.Options.FullAngle = 270;
-        tachoProgressBar.Options.AngleStep = 6;
         tachoProgressBar.updateForce();
+        this.tachoProgressBar = tachoProgressBar;
         super.addChild(tachoProgressBar);
 
         const speedLabel = this.speedLabel = new PIXI.BitmapText(speedValDefault.toFixed(0), {font: {name:"DSEG14_Classic_88px"}, align : "right"});

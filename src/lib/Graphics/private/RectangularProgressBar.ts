@@ -77,7 +77,7 @@ export class RectangularProgressBar extends ProgressBar
     /**
      * @param options Option to set.
      */
-    constructor(options?: RectangularProgressBarOptions)
+    constructor(options: RectangularProgressBarOptions)
     {
         let rectangularProgressBarOptions: RectangularProgressBarOptions;
         if (!(options instanceof RectangularProgressBarOptions))

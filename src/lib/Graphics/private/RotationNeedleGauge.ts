@@ -50,7 +50,7 @@ abstract class NeedleGauge extends Gauge1D
 
     private sprite : PIXI.Sprite;
 
-    constructor(options?: NeedleGaugeOptions)
+    constructor(options: NeedleGaugeOptions)
     {
         let needleGaugeOptions: NeedleGaugeOptions;
         if (!(options instanceof NeedleGaugeOptions))

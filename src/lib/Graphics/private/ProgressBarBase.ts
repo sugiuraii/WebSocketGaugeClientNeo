@@ -53,7 +53,7 @@ export abstract class ProgressBar extends Gauge1D
     /**
      * @param options Option to set.
      */
-    constructor(options?: ProgressBarOptions)
+    constructor(options: ProgressBarOptions)
     {
         let progressBarOptions: ProgressBarOptions;
         if (!(options instanceof ProgressBarOptions))

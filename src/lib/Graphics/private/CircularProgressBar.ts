@@ -82,7 +82,7 @@ export class CircularProgressBar extends ProgressBar
     /**
      * @param options CircularProgressBarOption to set.
      */
-    constructor(options?: CircularProgressBarOptions)
+    constructor(options: CircularProgressBarOptions)
     {
         let circularProgressBarOptions: CircularProgressBarOptions;
         if (!(options instanceof CircularProgressBarOptions))
