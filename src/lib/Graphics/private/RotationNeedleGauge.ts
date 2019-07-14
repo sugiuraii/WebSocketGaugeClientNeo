@@ -120,15 +120,10 @@ export class RotationNeedleGauge extends NeedleGauge
      */
     get Options() {return this.rotationNeedleGaugeOptions}
 
-    constructor(options?: RotationNeedleGaugeOptions)
+    constructor(options: RotationNeedleGaugeOptions)
     {
-        let rotationNeedleGaugeOptions: RotationNeedleGaugeOptions;
-        if (!(options instanceof RotationNeedleGaugeOptions))
-            rotationNeedleGaugeOptions = new RotationNeedleGaugeOptions();
-        else
-            rotationNeedleGaugeOptions = options;
-        super(rotationNeedleGaugeOptions);
-        this.rotationNeedleGaugeOptions = rotationNeedleGaugeOptions;
+        super(options);
+        this.rotationNeedleGaugeOptions = options;
     }
 
     /**

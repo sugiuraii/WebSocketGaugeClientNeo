@@ -79,13 +79,8 @@ export class RectangularProgressBar extends ProgressBar
      */
     constructor(options: RectangularProgressBarOptions)
     {
-        let rectangularProgressBarOptions: RectangularProgressBarOptions;
-        if (!(options instanceof RectangularProgressBarOptions))
-            rectangularProgressBarOptions = new RectangularProgressBarOptions();
-        else
-            rectangularProgressBarOptions = options;
-        super(rectangularProgressBarOptions);
-        this.rectangularProgressBarOptions = rectangularProgressBarOptions;
+        super(options);
+        this.rectangularProgressBarOptions = options;
     }
     
     /**

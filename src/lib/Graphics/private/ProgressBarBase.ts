@@ -55,17 +55,8 @@ export abstract class ProgressBar extends Gauge1D
      */
     constructor(options: ProgressBarOptions)
     {
-        let progressBarOptions: ProgressBarOptions;
-        if (!(options instanceof ProgressBarOptions))
-        {
-            progressBarOptions = new ProgressBarOptions();
-        }
-        else
-        {
-            progressBarOptions = options;
-        }
-        super(progressBarOptions);
-        this.progressBarOptions = progressBarOptions;
+        super(options);
+        this.progressBarOptions = options;
 
         this.sprite = PIXI.Sprite.from(this.progressBarOptions.Texture);
         this.spriteMask = new PIXI.Graphics();
