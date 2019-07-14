@@ -25,6 +25,7 @@
 import {CircularGaugePanelBase} from './CircularGaugePanelBase';
 import {TextOption} from './CircularGaugePanelBase';
 import {CircularGaugePanelOptionBase} from './CircularGaugePanelBase';
+import * as PIXI from 'pixi.js';
 
 require("./FullCircularGaugeTexture.json");
 require("./FullCircularGaugeTexture.png");
