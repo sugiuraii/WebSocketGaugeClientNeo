@@ -25,7 +25,8 @@
  /// <reference path="../../lib/webpackRequire.ts" />
  
 import {RectangularProgressBar, RectangularProgressBarOptions} from '../../lib/Graphics/PIXIGauge';
-import {BitmapFontNumericIndicator} from '../../lib/Graphics/PIXIGauge';
+import {BitmapTextNumericIndicator} from '../../lib/Graphics/PIXIGauge';
+import {NumericIndicator} from '../../lib/Graphics/PIXIGauge';
 
 import * as PIXI from 'pixi.js';
 
@@ -44,7 +45,7 @@ export class DigiTachoPanel extends PIXI.Container
 {
     private tachoProgressBar: RectangularProgressBar;
 
-    private speedLabel: BitmapFontNumericIndicator;
+    private speedLabel: NumericIndicator;
     private geasposLabel: PIXI.BitmapText;
 
     private speed : number = 0;
@@ -121,7 +122,7 @@ export class DigiTachoPanel extends PIXI.Container
 
         super.addChild(tachoProgressBar);
 
-        const speedTextLabel = new BitmapFontNumericIndicator(this.speed.toString(), {font : {name: "FreeSans"}, align : "right"});
+        const speedTextLabel = new BitmapTextNumericIndicator(this.speed.toString(), {font : {name: "FreeSans"}, align : "right"});
         this.speedLabel = speedTextLabel;
         speedTextLabel.position.set(485,320);
         speedTextLabel.anchor = new PIXI.Point(1,1);
