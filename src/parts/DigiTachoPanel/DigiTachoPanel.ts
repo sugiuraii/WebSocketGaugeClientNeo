@@ -24,7 +24,7 @@
 
  /// <reference path="../../lib/webpackRequire.ts" />
  
-import {RectangularProgressBar} from '../../lib/Graphics/PIXIGauge';
+import {RectangularProgressBar, RectangularProgressBarOptions} from '../../lib/Graphics/PIXIGauge';
 import {BitmapFontNumericIndicator} from '../../lib/Graphics/PIXIGauge';
 
 import * as PIXI from 'pixi.js';
@@ -105,18 +105,20 @@ export class DigiTachoPanel extends PIXI.Container
         super.addChild(backSprite);
 
         //Create tacho progress bar
-        const tachoProgressBar = new RectangularProgressBar();
+        const tachoProgressBarOption = new RectangularProgressBarOptions();
+        tachoProgressBarOption.Texture = tachoProgressBarTexture;
+        tachoProgressBarOption.Min = 0;
+        tachoProgressBarOption.Max = 9000;
+        tachoProgressBarOption.Vertical = false;
+        tachoProgressBarOption.InvertDirection = false;
+        tachoProgressBarOption.GagueFullOnValueMin = false;
+        tachoProgressBarOption.PixelStep = 8;
+        tachoProgressBarOption.MaskHeight = 246;
+        tachoProgressBarOption.MaskWidth = 577;
+        const tachoProgressBar = new RectangularProgressBar(tachoProgressBarOption);
         this.tachoProgressBar = tachoProgressBar;
-        tachoProgressBar.Options.Texture = tachoProgressBarTexture;
         tachoProgressBar.position.set(10,6);
-        tachoProgressBar.Options.Min = 0;
-        tachoProgressBar.Options.Max = 9000;
-        tachoProgressBar.Options.Vertical = false;
-        tachoProgressBar.Options.InvertDirection = false;
-        tachoProgressBar.Options.GagueFullOnValueMin = false;
-        tachoProgressBar.Options.PixelStep = 8;
-        tachoProgressBar.Options.MaskHeight = 246;
-        tachoProgressBar.Options.MaskWidth = 577;
+
         super.addChild(tachoProgressBar);
 
         const speedTextLabel = new BitmapFontNumericIndicator(this.speed.toString(), {font : {name: "FreeSans"}, align : "right"});
