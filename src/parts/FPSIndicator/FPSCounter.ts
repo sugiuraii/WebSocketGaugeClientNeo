@@ -42,7 +42,7 @@ export class FPSCounter extends PIXI.Container
     constructor()
     {
         super();
-        this.fpsText = new PIXI.BitmapText("0fps",{font: {name : "fpsCounterFont"}, align : "left" });
+        this.fpsText = new PIXI.BitmapText("0fps",{font: {name : "fpsCounterFont", size:32}, align : "left" });
         super.addChild(this.fpsText);
     }
     
