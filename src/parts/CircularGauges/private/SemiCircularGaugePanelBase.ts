@@ -57,7 +57,7 @@ export class SemiCircularGaugePanelOptionBase extends CircularGaugePanelOptionBa
             dropShadow : true,
             dropShadowBlur: 15,
             padding : 15,
-            dropShadowColor: "white",
+            dropShadowColor: "#FFFFFF",
             dropShadowDistance: 0,
             fill : "white",
             fontFamily: "FreeSans-Bold"
