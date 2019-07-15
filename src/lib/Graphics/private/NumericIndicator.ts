@@ -24,7 +24,15 @@
 
 import * as PIXI from 'pixi.js';
 
-export class BitmapFontNumericIndicator extends PIXI.extras.BitmapText
+export interface NumericIndicator
+{
+    NumberOfDecimalPlace : number;
+    ShowPlusSign : boolean;
+    Value : number;
+    text : string;
+}
+
+export class BitmapTextNumericIndicator extends PIXI.BitmapText implements NumericIndicator
 {
     private value : number = 0;
     
@@ -59,7 +67,7 @@ export class BitmapFontNumericIndicator extends PIXI.extras.BitmapText
     public get Value() : number { return this.value }
 }
 
-export class NumericIndicator extends PIXI.Text
+export class TextNumericIndicator extends PIXI.Text implements NumericIndicator
 {
     private value : number = 0;
     /**
@@ -82,7 +90,7 @@ export class NumericIndicator extends PIXI.Text
         
         if (this.ShowPlusSign && val > 0)
         {
-                showText = "+".concat(showText);
+            showText = "+".concat(showText);
         }
         
         this.text = showText;

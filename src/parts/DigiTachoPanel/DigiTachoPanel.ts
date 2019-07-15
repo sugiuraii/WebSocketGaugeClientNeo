@@ -24,8 +24,9 @@
 
  /// <reference path="../../lib/webpackRequire.ts" />
  
-import {RectangularProgressBar} from '../../lib/Graphics/PIXIGauge';
-import {BitmapFontNumericIndicator} from '../../lib/Graphics/PIXIGauge';
+import {RectangularProgressBar, RectangularProgressBarOptions} from '../../lib/Graphics/PIXIGauge';
+import {BitmapTextNumericIndicator} from '../../lib/Graphics/PIXIGauge';
+import {NumericIndicator} from '../../lib/Graphics/PIXIGauge';
 
 import * as PIXI from 'pixi.js';
 
@@ -44,8 +45,8 @@ export class DigiTachoPanel extends PIXI.Container
 {
     private tachoProgressBar: RectangularProgressBar;
 
-    private speedLabel: BitmapFontNumericIndicator;
-    private geasposLabel: PIXI.extras.BitmapText;
+    private speedLabel: NumericIndicator;
+    private geasposLabel: PIXI.BitmapText;
 
     private speed : number = 0;
     private tacho : number = 0;
@@ -96,8 +97,8 @@ export class DigiTachoPanel extends PIXI.Container
 
     private create() : void
     {
-        const backTexture = PIXI.Texture.fromFrame("DigiTachoBack");
-        const tachoProgressBarTexture = PIXI.Texture.fromFrame("DigiTachoBar");
+        const backTexture = PIXI.Texture.from("DigiTachoBack");
+        const tachoProgressBarTexture = PIXI.Texture.from("DigiTachoBar");
 
         //Create background sprite
         const backSprite = new PIXI.Sprite();
@@ -105,28 +106,30 @@ export class DigiTachoPanel extends PIXI.Container
         super.addChild(backSprite);
 
         //Create tacho progress bar
-        const tachoProgressBar = new RectangularProgressBar();
+        const tachoProgressBarOption = new RectangularProgressBarOptions();
+        tachoProgressBarOption.Texture = tachoProgressBarTexture;
+        tachoProgressBarOption.Min = 0;
+        tachoProgressBarOption.Max = 9000;
+        tachoProgressBarOption.Vertical = false;
+        tachoProgressBarOption.InvertDirection = false;
+        tachoProgressBarOption.GagueFullOnValueMin = false;
+        tachoProgressBarOption.PixelStep = 8;
+        tachoProgressBarOption.MaskHeight = 246;
+        tachoProgressBarOption.MaskWidth = 577;
+        const tachoProgressBar = new RectangularProgressBar(tachoProgressBarOption);
         this.tachoProgressBar = tachoProgressBar;
-        tachoProgressBar.Options.Texture = tachoProgressBarTexture;
         tachoProgressBar.position.set(10,6);
-        tachoProgressBar.Options.Min = 0;
-        tachoProgressBar.Options.Max = 9000;
-        tachoProgressBar.Options.Vertical = false;
-        tachoProgressBar.Options.InvertDirection = false;
-        tachoProgressBar.Options.GagueFullOnValueMin = false;
-        tachoProgressBar.Options.PixelStep = 8;
-        tachoProgressBar.Options.MaskHeight = 246;
-        tachoProgressBar.Options.MaskWidth = 577;
+
         super.addChild(tachoProgressBar);
 
-        const speedTextLabel = new BitmapFontNumericIndicator(this.speed.toString(), {font : "FreeSans", align : "right"});
+        const speedTextLabel = new BitmapTextNumericIndicator(this.speed.toString(), {font : {name: "FreeSans", size: 185}, align : "right"});
         this.speedLabel = speedTextLabel;
         speedTextLabel.position.set(485,320);
         speedTextLabel.anchor = new PIXI.Point(1,1);
         speedTextLabel.NumberOfDecimalPlace = 0;
         super.addChild(speedTextLabel);
 
-        const gearTextLabel = new PIXI.extras.BitmapText(this.gearPos,{font : "Audiowide", align : "center"});
+        const gearTextLabel = new PIXI.BitmapText(this.gearPos,{font : {name : "Audiowide", size: 125}, align : "center"});
         this.geasposLabel = gearTextLabel;
         gearTextLabel.position.set(66, 62);
         gearTextLabel.anchor = new PIXI.Point(0.5, 0.5);

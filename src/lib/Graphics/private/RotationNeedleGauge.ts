@@ -24,6 +24,7 @@
 
 import {Gauge1DOptions} from './GaugeBase'
 import {Gauge1D} from './GaugeBase'
+import * as PIXI from 'pixi.js';
 
 /**
  * Needle gauge option class.
@@ -49,7 +50,7 @@ abstract class NeedleGauge extends Gauge1D
 
     private sprite : PIXI.Sprite;
 
-    constructor(options?: NeedleGaugeOptions)
+    constructor(options: NeedleGaugeOptions)
     {
         let needleGaugeOptions: NeedleGaugeOptions;
         if (!(options instanceof NeedleGaugeOptions))
@@ -119,15 +120,10 @@ export class RotationNeedleGauge extends NeedleGauge
      */
     get Options() {return this.rotationNeedleGaugeOptions}
 
-    constructor(options?: RotationNeedleGaugeOptions)
+    constructor(options: RotationNeedleGaugeOptions)
     {
-        let rotationNeedleGaugeOptions: RotationNeedleGaugeOptions;
-        if (!(options instanceof RotationNeedleGaugeOptions))
-            rotationNeedleGaugeOptions = new RotationNeedleGaugeOptions();
-        else
-            rotationNeedleGaugeOptions = options;
-        super(rotationNeedleGaugeOptions);
-        this.rotationNeedleGaugeOptions = rotationNeedleGaugeOptions;
+        super(options);
+        this.rotationNeedleGaugeOptions = options;
     }
 
     /**

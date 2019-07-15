@@ -24,7 +24,7 @@
 
  /// <reference path="../../lib/webpackRequire.ts" />
  
-import {RectangularProgressBar} from '../../lib/Graphics/PIXIGauge';
+import {RectangularProgressBar, RectangularProgressBarOptions} from '../../lib/Graphics/PIXIGauge';
 import * as PIXI from 'pixi.js';
  
 require("./MilageGraphTexture.json");
@@ -39,11 +39,11 @@ require("./MilageGraphFont_68px_0.png");
 
 export class MilageGraphPanel extends PIXI.Container
 {
-    private momentGasMilageBar: RectangularProgressBar = new RectangularProgressBar();
+    private momentGasMilageBar: RectangularProgressBar;
     private sectGasMilageBar: {[spankey : string] : RectangularProgressBar } = {};
-    private tripLabel: PIXI.extras.BitmapText;
-    private fuelLabel: PIXI.extras.BitmapText;
-    private gasMilageLabel: PIXI.extras.BitmapText;
+    private tripLabel: PIXI.BitmapText;
+    private fuelLabel: PIXI.BitmapText;
+    private gasMilageLabel: PIXI.BitmapText;
 
     private momentGasMilage : number = 0;
     private trip : number = 0;
@@ -114,43 +114,41 @@ export class MilageGraphPanel extends PIXI.Container
     constructor()
     {
         super();
-        //Initialize array fields
-        for (let span in this.sectSpan)
-        {
-            this.sectGasMilageBar[span] = new RectangularProgressBar();
-            this.sectGasMilage[span] = 0;
-        }
         this.create();
     }
 
     private create()
     {
-        const backTexture = PIXI.Texture.fromFrame("MilageGraph_Back");
+        const backTexture = PIXI.Texture.from("MilageGraph_Back");
         const backSprite = new PIXI.Sprite(backTexture);
         super.addChild(backSprite);
 
-        const momentGasMilageTexture = PIXI.Texture.fromFrame("MilageGraph_valueBar2");
-        this.momentGasMilageBar.Options.Texture = momentGasMilageTexture;
-        this.momentGasMilageBar.Options.Vertical = true;
-        this.momentGasMilageBar.Options.MaskWidth = 40;
-        this.momentGasMilageBar.Options.MaskHeight = 240;
-        this.momentGasMilageBar.Options.Max = 20;
-        this.momentGasMilageBar.Options.Min = 0;
+        const momentGasMilageBarOption = new RectangularProgressBarOptions();
+        momentGasMilageBarOption.Texture = PIXI.Texture.from("MilageGraph_valueBar2");
+        momentGasMilageBarOption.Vertical = true;
+        momentGasMilageBarOption.MaskWidth = 40;
+        momentGasMilageBarOption.MaskHeight = 240;
+        momentGasMilageBarOption.Max = 20;
+        momentGasMilageBarOption.Min = 0;
+        
+        this.momentGasMilageBar = new RectangularProgressBar(momentGasMilageBarOption);
         this.momentGasMilageBar.position.set(411,17);
         super.addChild(this.momentGasMilageBar);
 
         //Sect fuelTrip progressbar
-        const sectGasMilageBarTexture = PIXI.Texture.fromFrame("MilageGraph_valueBar1");
+        const sectGasMilageBarTexture = PIXI.Texture.from("MilageGraph_valueBar1");
         for (let i = 0; i < this.sectSpan.length; i++)
         {
             const spankey: string = this.sectSpan[i];
-            this.sectGasMilageBar[spankey] = new RectangularProgressBar();
-            this.sectGasMilageBar[spankey].Options.Texture = sectGasMilageBarTexture;
-            this.sectGasMilageBar[spankey].Options.Vertical = true;
-            this.sectGasMilageBar[spankey].Options.MaskWidth = 30;
-            this.sectGasMilageBar[spankey].Options.MaskHeight = 240;
-            this.sectGasMilageBar[spankey].Options.Max = 20;
-            this.sectGasMilageBar[spankey].Options.Min = 0;
+            const sectGasMilageBarOption = new RectangularProgressBarOptions();
+            sectGasMilageBarOption.Texture = sectGasMilageBarTexture;
+            sectGasMilageBarOption.Vertical = true;
+            sectGasMilageBarOption.MaskWidth = 30;
+            sectGasMilageBarOption.MaskHeight = 240;
+            sectGasMilageBarOption.Max = 20;
+            sectGasMilageBarOption.Min = 0;
+            this.sectGasMilageBar[spankey] = new RectangularProgressBar(sectGasMilageBarOption);
+            this.sectGasMilage[spankey] = 0;
             super.addChild(this.sectGasMilageBar[spankey]);
         }
         this.sectGasMilageBar["30min"].position.set(72,17);
@@ -160,17 +158,17 @@ export class MilageGraphPanel extends PIXI.Container
         this.sectGasMilageBar["10min"].position.set(303,17);
         this.sectGasMilageBar["5min"].position.set(360,17);
         
-        this.tripLabel = new PIXI.extras.BitmapText("0.0", { font : "FreeSans_45px", align : "right"});
+        this.tripLabel = new PIXI.BitmapText("0.0", { font : {name : "FreeSans_45px", size: 45}, align : "right"});
         this.tripLabel.anchor = new PIXI.Point(1,1);
         this.tripLabel.position.set(610,115);
         super.addChild(this.tripLabel);
 
-        this.fuelLabel = new PIXI.extras.BitmapText("0.00", { font : "FreeSans_45px", align : "right"});
+        this.fuelLabel = new PIXI.BitmapText("0.00", { font : {name  : "FreeSans_45px", size: 45}, align : "right"});
         this.fuelLabel.anchor = new PIXI.Point(1,1);
         this.fuelLabel.position.set(610,170);
         super.addChild(this.fuelLabel);
 
-        this.gasMilageLabel = new PIXI.extras.BitmapText("0.00", { font : "FreeSans_68px", align : "right"});
+        this.gasMilageLabel = new PIXI.BitmapText("0.00", { font : {name : "FreeSans_68px", size: 68}, align : "right"});
         this.gasMilageLabel.anchor = new PIXI.Point(1,1);
         this.gasMilageLabel.position.set(625, 270); 
         super.addChild(this.gasMilageLabel);

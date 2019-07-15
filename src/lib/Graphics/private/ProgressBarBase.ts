@@ -22,6 +22,7 @@
  * THE SOFTWARE.
  */
 
+import * as PIXI from "pixi.js";
 import {Gauge1DOptions} from './GaugeBase'
 import {Gauge1D} from './GaugeBase'
 
@@ -52,27 +53,16 @@ export abstract class ProgressBar extends Gauge1D
     /**
      * @param options Option to set.
      */
-    constructor(options?: ProgressBarOptions)
+    constructor(options: ProgressBarOptions)
     {
-        let progressBarOptions: ProgressBarOptions;
-        if (!(options instanceof ProgressBarOptions))
-        {
-            progressBarOptions = new ProgressBarOptions();
-        }
-        else
-        {
-            progressBarOptions = options;
-        }
-        super(progressBarOptions);
-        this.progressBarOptions = progressBarOptions;
+        super(options);
+        this.progressBarOptions = options;
 
-        this.sprite = new PIXI.Sprite();
+        this.sprite = PIXI.Sprite.from(this.progressBarOptions.Texture);
         this.spriteMask = new PIXI.Graphics();
 
         //Assign mask to sprite
         this.sprite.mask = this.spriteMask;            
-        //Assign texture to sprite
-        this.sprite.texture = this.progressBarOptions.Texture;
 
         //Assign spirite and mask to container
         super.addChild(this.sprite);

@@ -24,6 +24,7 @@
 
 import {ProgressBarOptions} from './ProgressBarBase'
 import {ProgressBar} from './ProgressBarBase'
+import * as PIXI from 'pixi.js';
 
 /**
  * Rectangular progressbar option class.
@@ -76,15 +77,10 @@ export class RectangularProgressBar extends ProgressBar
     /**
      * @param options Option to set.
      */
-    constructor(options?: RectangularProgressBarOptions)
+    constructor(options: RectangularProgressBarOptions)
     {
-        let rectangularProgressBarOptions: RectangularProgressBarOptions;
-        if (!(options instanceof RectangularProgressBarOptions))
-            rectangularProgressBarOptions = new RectangularProgressBarOptions();
-        else
-            rectangularProgressBarOptions = options;
-        super(rectangularProgressBarOptions);
-        this.rectangularProgressBarOptions = rectangularProgressBarOptions;
+        super(options);
+        this.rectangularProgressBarOptions = options;
     }
     
     /**

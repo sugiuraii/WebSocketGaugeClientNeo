@@ -23,6 +23,7 @@
  */
 import {ProgressBarOptions} from './ProgressBarBase'
 import {ProgressBar} from './ProgressBarBase'
+import * as PIXI from 'pixi.js';
 
 /**
  * Option class for CircularProgressBar.
@@ -81,16 +82,10 @@ export class CircularProgressBar extends ProgressBar
     /**
      * @param options CircularProgressBarOption to set.
      */
-    constructor(options?: CircularProgressBarOptions)
+    constructor(options: CircularProgressBarOptions)
     {
-        let circularProgressBarOptions: CircularProgressBarOptions;
-        if (!(options instanceof CircularProgressBarOptions))
-            circularProgressBarOptions = new CircularProgressBarOptions();
-        else
-            circularProgressBarOptions = options;
-
-        super(circularProgressBarOptions);
-        this.circularProgressbarOptions = circularProgressBarOptions;
+        super(options);
+        this.circularProgressbarOptions = options;
     }
     
     /**

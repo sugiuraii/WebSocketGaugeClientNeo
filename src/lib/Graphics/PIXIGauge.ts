@@ -32,4 +32,5 @@ export {RotationNeedleGauge} from './private/RotationNeedleGauge'
 export {RotationNeedleGaugeOptions} from './private/RotationNeedleGauge'
 
 export {NumericIndicator} from './private/NumericIndicator'
-export {BitmapFontNumericIndicator} from './private/NumericIndicator'
+export {TextNumericIndicator} from './private/NumericIndicator'
+export {BitmapTextNumericIndicator} from './private/NumericIndicator'

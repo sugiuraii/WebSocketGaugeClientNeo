@@ -225,12 +225,9 @@ export abstract class MeterApplicationBase extends PIXI.Application
      * @param webSocketServerName Hostname of websocket server (default : same as webserver).s
      */
     constructor(width: number, height: number, webSocketServerName? : string)
-    {
-        // Get force canvas flag from webstorage
-        const forceCanvas : boolean = localStorage.getItem("ForceCanvas")==="true"?true:false;
-        
+    {        
         // Call PIXI.Application
-        super(width, height, {forceCanvas: forceCanvas});
+        super({width:width, height:height});
            
         // Initialize websocket instances
         this.initializeWebSocketInstances();
@@ -457,10 +454,10 @@ export abstract class MeterApplicationBase extends PIXI.Application
         for (let i = 0; i < texturePathWithoutOverlap.length; i++)
         {
             const texturePath = texturePathWithoutOverlap[i];
-            PIXI.loader.add(texturePath);
+            PIXI.Loader.shared.add(texturePath);
         }
 
-        PIXI.loader.load(() => 
+        PIXI.Loader.shared.load(() => 
         {
             callBack();
         }

@@ -28,7 +28,8 @@ import {CircularProgressBar} from '../../lib/Graphics/PIXIGauge';
 import {CircularProgressBarOptions} from '../../lib/Graphics/PIXIGauge';
 import {RotationNeedleGauge} from '../../lib/Graphics/PIXIGauge';
 import {RotationNeedleGaugeOptions} from '../../lib/Graphics/PIXIGauge';
-import {BitmapFontNumericIndicator} from '../../lib/Graphics/PIXIGauge';
+import {BitmapTextNumericIndicator} from '../../lib/Graphics/PIXIGauge';
+import {NumericIndicator} from '../../lib/Graphics/PIXIGauge';
 
 import * as PIXI from 'pixi.js';
 
@@ -54,11 +55,11 @@ export class AnalogMeterCluster extends PIXI.Container
     private speedNeedleGauge: RotationNeedleGauge;
     private boostNeedleGauge: RotationNeedleGauge;
 
-    private speedLabel: BitmapFontNumericIndicator;
-    private gasMilageLabel: BitmapFontNumericIndicator;
-    private tripLabel: BitmapFontNumericIndicator;
-    private fuelLabel: BitmapFontNumericIndicator;
-    private gearPosLabel: BitmapFontNumericIndicator;
+    private speedLabel: NumericIndicator;
+    private gasMilageLabel: NumericIndicator;
+    private tripLabel: NumericIndicator;
+    private fuelLabel: NumericIndicator;
+    private gearPosLabel: NumericIndicator;
 
     private tacho = 0;
     private speed = 0;
@@ -168,11 +169,11 @@ export class AnalogMeterCluster extends PIXI.Container
         const tachoValDefalut = 0;
 
         const tachoContainer = new PIXI.Container();
-        const backSprite = PIXI.Sprite.fromFrame("AnalogTachoMeter_Base");
+        const backSprite = PIXI.Sprite.from("AnalogTachoMeter_Base");
         tachoContainer.addChild(backSprite);
         
         const tachoProgressBarOptions = new CircularProgressBarOptions();
-        tachoProgressBarOptions.Texture = PIXI.Texture.fromFrame("AnalogTachoMeter_Bar");
+        tachoProgressBarOptions.Texture = PIXI.Texture.from("AnalogTachoMeter_Bar");
         tachoProgressBarOptions.OffsetAngle = 90;
         tachoProgressBarOptions.FullAngle = 270;
         tachoProgressBarOptions.Max = tachoMax;
@@ -188,7 +189,7 @@ export class AnalogMeterCluster extends PIXI.Container
         this.tachoProgressBar.updateForce();
                 
         const tachoNeedleGaugeOptions = new RotationNeedleGaugeOptions();
-        tachoNeedleGaugeOptions.Texture = PIXI.Texture.fromFrame("AnalogTachoMeter_Needle");
+        tachoNeedleGaugeOptions.Texture = PIXI.Texture.from("AnalogTachoMeter_Needle");
         tachoNeedleGaugeOptions.Max = tachoMax;
         tachoNeedleGaugeOptions.Min = tachoMin;
         tachoNeedleGaugeOptions.OffsetAngle = 90;
@@ -200,19 +201,19 @@ export class AnalogMeterCluster extends PIXI.Container
         this.tachoNeedleGauge.Value = tachoValDefalut; 
         this.tachoNeedleGauge.updateForce();
 
-        const shaftSprite = PIXI.Sprite.fromFrame("AnalogTachoMeter_NeedleCap");
+        const shaftSprite = PIXI.Sprite.from("AnalogTachoMeter_NeedleCap");
         shaftSprite.pivot.set(72,72);
         shaftSprite.position.set(300,300);
         tachoContainer.addChild(shaftSprite);
 
-        const gasMilageLabel = this.gasMilageLabel = new BitmapFontNumericIndicator("0.00", {font : "DSEG14_Classic_45px", align : "right"});
+        const gasMilageLabel = this.gasMilageLabel = new BitmapTextNumericIndicator("0.00", {font : {name : "DSEG14_Classic_45px", size: 45}, align : "right"});
         gasMilageLabel.NumberOfDecimalPlace = 2;
         gasMilageLabel.anchor = new PIXI.Point(1,0.5);
         gasMilageLabel.position.set(495,335);
         gasMilageLabel.scale.set(0.9);
         tachoContainer.addChild(gasMilageLabel);
 
-        const tripLabel = this.tripLabel = new BitmapFontNumericIndicator("0.0", {font : "DSEG14_Classic_40px", align : "right"});
+        const tripLabel = this.tripLabel = new BitmapTextNumericIndicator("0.0", {font : {name : "DSEG14_Classic_40px", size:40}, align : "right"});
         tripLabel.NumberOfDecimalPlace = 1;
         tripLabel.anchor = new PIXI.Point(1,0.5);
         tripLabel.position = new PIXI.Point(505,378);
@@ -220,7 +221,7 @@ export class AnalogMeterCluster extends PIXI.Container
         tripLabel.scale.set(0.9);
         tachoContainer.addChild(tripLabel);
 
-        const fuelLabel = this.fuelLabel = new BitmapFontNumericIndicator("0.00", {font : "DSEG14_Classic_40px", align : "right"});
+        const fuelLabel = this.fuelLabel = new BitmapTextNumericIndicator("0.00", {font : {name: "DSEG14_Classic_40px", size: 40}, align : "right"});
         fuelLabel.NumberOfDecimalPlace = 2;
         fuelLabel.anchor = new PIXI.Point(1,0.5);
         fuelLabel.position = new PIXI.Point(505,420);
@@ -228,7 +229,7 @@ export class AnalogMeterCluster extends PIXI.Container
         fuelLabel.scale.set(0.9);
         tachoContainer.addChild(fuelLabel);
 
-        const gearPosLabel = this.gearPosLabel = new BitmapFontNumericIndicator("N", {font : "DSEG14_Classic_115px", align : "center"});
+        const gearPosLabel = this.gearPosLabel = new BitmapTextNumericIndicator("N", {font : {name: "DSEG14_Classic_115px", size: 115}, align : "center"});
         gearPosLabel.anchor = new PIXI.Point(0.5,0.5);
         gearPosLabel.position = new PIXI.Point(358,493);
         gearPosLabel.text = "N";
@@ -249,10 +250,10 @@ export class AnalogMeterCluster extends PIXI.Container
 
         const speedMeterContainer = new PIXI.Container();            
 
-        const backSprite = PIXI.Sprite.fromFrame("AnalogSpeedMeter_Base");
+        const backSprite = PIXI.Sprite.from("AnalogSpeedMeter_Base");
         speedMeterContainer.addChild(backSprite);
 
-        const speedLabel = this.speedLabel = new BitmapFontNumericIndicator(speedValDefault.toFixed(0), {font : "DSEG14_Classic_60px", align : "center"});
+        const speedLabel = this.speedLabel = new BitmapTextNumericIndicator(speedValDefault.toFixed(0), {font : {name : "DSEG14_Classic_60px", size: 60}, align : "center"});
         speedLabel.NumberOfDecimalPlace = 0;
         speedLabel.anchor = new PIXI.Point(1,0.5);
         speedLabel.position.set(355,407);
@@ -260,7 +261,7 @@ export class AnalogMeterCluster extends PIXI.Container
         speedMeterContainer.addChild(speedLabel);
 
         const waterTempProgressBarOptions = new CircularProgressBarOptions();
-        waterTempProgressBarOptions.Texture = PIXI.Texture.fromFrame("AnalogSpeedMeter_Bar");
+        waterTempProgressBarOptions.Texture = PIXI.Texture.from("AnalogSpeedMeter_Bar");
         waterTempProgressBarOptions.Max = waterTempMax;
         waterTempProgressBarOptions.Min = waterTempMin;
 
@@ -277,7 +278,7 @@ export class AnalogMeterCluster extends PIXI.Container
         this.waterTempProgressBar.updateForce();
  
         const speedNeedleGaugeOptions = new RotationNeedleGaugeOptions();
-        speedNeedleGaugeOptions.Texture = PIXI.Texture.fromFrame("AnalogSpeedMeter_Needle");
+        speedNeedleGaugeOptions.Texture = PIXI.Texture.from("AnalogSpeedMeter_Needle");
         speedNeedleGaugeOptions.Max = speedMax;
         speedNeedleGaugeOptions.Min = speedMin;
         speedNeedleGaugeOptions.OffsetAngle = 75;
@@ -289,7 +290,7 @@ export class AnalogMeterCluster extends PIXI.Container
         this.speedNeedleGauge.Value = speedValDefault;
         this.speedNeedleGauge.updateForce();
 
-        const shaftSprite = PIXI.Sprite.fromFrame("AnalogSpeedMeter_NeedleCap");
+        const shaftSprite = PIXI.Sprite.from("AnalogSpeedMeter_NeedleCap");
         shaftSprite.anchor.set(0.5,0.5);
         shaftSprite.position.set(300,300);
         speedMeterContainer.addChild(shaftSprite);
@@ -305,11 +306,11 @@ export class AnalogMeterCluster extends PIXI.Container
 
         const boostMeterContainer = new PIXI.Container();
 
-        const backSprite = PIXI.Sprite.fromFrame("BoostMeter_Base");
+        const backSprite = PIXI.Sprite.from("BoostMeter_Base");
         boostMeterContainer.addChild(backSprite);
 
         const boostNeedleGaugeOptions = new RotationNeedleGaugeOptions();
-        boostNeedleGaugeOptions.Texture = PIXI.Texture.fromFrame("BoostMeter_Needle");
+        boostNeedleGaugeOptions.Texture = PIXI.Texture.from("BoostMeter_Needle");
         boostNeedleGaugeOptions.OffsetAngle = 30;
         boostNeedleGaugeOptions.FullAngle = 90;
         boostNeedleGaugeOptions.AntiClockwise = true;

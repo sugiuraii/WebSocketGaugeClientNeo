@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
  
-import {CircularProgressBar} from  '../../../lib/Graphics/PIXIGauge';
+import {CircularProgressBar,CircularProgressBarOptions} from  '../../../lib/Graphics/PIXIGauge';
 import * as PIXI from 'pixi.js';
 
 export class BitmapTextOption
@@ -31,6 +31,7 @@ export class BitmapTextOption
     public anchor = new PIXI.Point(0, 0);
     public align : string = "left";
     public fontName = "FreeSans_90px";
+    public fontSize : number = 90;
 
     constructor(position?: PIXI.Point, anchor? :  PIXI.Point, align? : string)
     {
@@ -89,7 +90,7 @@ export class TextOption
 
 export abstract class CircularGaugePanelOptionBase
 {
-    public ValueTextLabel: PIXI.extras.BitmapText;
+    public ValueTextLabel: PIXI.BitmapText;
     public ValueTextLabelOption: BitmapTextOption = new BitmapTextOption();
     public ValueNumberRoundDigit : number = 1;
     
@@ -158,29 +159,30 @@ export abstract class CircularGaugePanelBase extends PIXI.Container
     }
 
     private createValueProgressBar() : void
-    {            
-        this.valueProgressBar = new CircularProgressBar();
-        this.valueProgressBar.Options.OffsetAngle = this.Options.OffsetAngle;
-        this.valueProgressBar.Options.FullAngle = this.Options.FullAngle;
-        this.valueProgressBar.Options.Min = this.Options.Min;
-        this.valueProgressBar.Options.Max = this.Options.Max;
-        this.valueProgressBar.Options.AngleStep = this.Options.AngleStep;
-        this.valueProgressBar.Options.GagueFullOnValueMin = this.Options.GaugeFullOnValueMin;
-        this.valueProgressBar.Options.AntiClockwise = this.Options.AntiClockWise;
+    {
+        const valueProgressBarOption = new CircularProgressBarOptions();           
+        valueProgressBarOption.OffsetAngle = this.Options.OffsetAngle;
+        valueProgressBarOption.FullAngle = this.Options.FullAngle;
+        valueProgressBarOption.Min = this.Options.Min;
+        valueProgressBarOption.Max = this.Options.Max;
+        valueProgressBarOption.AngleStep = this.Options.AngleStep;
+        valueProgressBarOption.GagueFullOnValueMin = this.Options.GaugeFullOnValueMin;
+        valueProgressBarOption.AntiClockwise = this.Options.AntiClockWise;
 
-        this.valueProgressBar.Options.Center = this.Options.CenterPosition;
-        this.valueProgressBar.Options.Radius = this.Options.ValueBarRadius;
-        this.valueProgressBar.Options.InnerRadius = this.Options.ValueBarInnerRadius;
+        valueProgressBarOption.Center = this.Options.CenterPosition;
+        valueProgressBarOption.Radius = this.Options.ValueBarRadius;
+        valueProgressBarOption.InnerRadius = this.Options.ValueBarInnerRadius;
 
-        this.valueProgressBar.Options.Texture = this.Options.ValueBarTexture;
+        valueProgressBarOption.Texture = this.Options.ValueBarTexture;
+        this.valueProgressBar = new CircularProgressBar(valueProgressBarOption);
         super.addChild(this.valueProgressBar);
         
         const valueTextLabelOption = this.Options.ValueTextLabelOption;
-        const valueTextLabelStyle: PIXI.extras.BitmapTextStyle = {
-            font: valueTextLabelOption.fontName,
+        const valueTextLabelStyle = {
+            font: { name : valueTextLabelOption.fontName , size : valueTextLabelOption.fontSize },
             align: valueTextLabelOption.align
         };
-        this.Options.ValueTextLabel = new PIXI.extras.BitmapText(this.Options.Min.toFixed(this.Options.ValueNumberRoundDigit).toString(), valueTextLabelStyle);
+        this.Options.ValueTextLabel = new PIXI.BitmapText(this.Options.Min.toFixed(this.Options.ValueNumberRoundDigit).toString(), valueTextLabelStyle);
         this.Options.ValueTextLabel.position = valueTextLabelOption.position;
         this.Options.ValueTextLabel.anchor = new PIXI.Point(valueTextLabelOption.anchor.x, valueTextLabelOption.anchor.y);
         super.addChild(this.Options.ValueTextLabel);            
@@ -218,14 +220,15 @@ export abstract class CircularGaugePanelBase extends PIXI.Container
         if (this.Options.RedZoneBarEnable)
         {
             const redZoneBarTexture = this.Options.RedZoneBarTexture;
-            const redzoneBar = new CircularProgressBar();
-            redzoneBar.Options.OffsetAngle = this.Options.RedZoneBarOffsetAngle;
-            redzoneBar.Options.FullAngle = this.Options.RedZoneBarFullAngle;
-            redzoneBar.Options.Texture = redZoneBarTexture;
-            redzoneBar.Value = redzoneBar.Options.Max;
-            redzoneBar.Options.Center = centerPosition;
-            redzoneBar.Options.Radius = zoneBarRadius;
-            redzoneBar.Options.InnerRadius = 0;
+            const redzoneBarOption = new CircularProgressBarOptions();
+            redzoneBarOption.OffsetAngle = this.Options.RedZoneBarOffsetAngle;
+            redzoneBarOption.FullAngle = this.Options.RedZoneBarFullAngle;
+            redzoneBarOption.Texture = redZoneBarTexture;
+            redzoneBarOption.Center = centerPosition;
+            redzoneBarOption.Radius = zoneBarRadius;
+            redzoneBarOption.InnerRadius = 0;
+            const redzoneBar = new CircularProgressBar(redzoneBarOption);
+            redzoneBar.Value = redzoneBarOption.Max;
             redzoneBar.updateForce();
             backContainer.addChild(redzoneBar);
         }
@@ -234,14 +237,15 @@ export abstract class CircularGaugePanelBase extends PIXI.Container
         if (this.Options.YellowZoneBarEnable)
         {
             const yellowZoneBarTexture = this.Options.YellowZoneBarTexture;
-            const yellowzoneBar = new CircularProgressBar();
-            yellowzoneBar.Options.OffsetAngle = this.Options.YellowZoneBarOffsetAngle;
-            yellowzoneBar.Options.FullAngle = this.Options.YellowZoneBarFullAngle;
-            yellowzoneBar.Options.Texture = yellowZoneBarTexture;
-            yellowzoneBar.Value = yellowzoneBar.Options.Max;
-            yellowzoneBar.Options.Center = centerPosition;
-            yellowzoneBar.Options.Radius = zoneBarRadius;
-            yellowzoneBar.Options.InnerRadius = 0;
+            const yellowzoneBarOption = new CircularProgressBarOptions();
+            yellowzoneBarOption.OffsetAngle = this.Options.YellowZoneBarOffsetAngle;
+            yellowzoneBarOption.FullAngle = this.Options.YellowZoneBarFullAngle;
+            yellowzoneBarOption.Texture = yellowZoneBarTexture;
+            yellowzoneBarOption.Center = centerPosition;
+            yellowzoneBarOption.Radius = zoneBarRadius;
+            yellowzoneBarOption.InnerRadius = 0;
+            const yellowzoneBar = new CircularProgressBar(yellowzoneBarOption);
+            yellowzoneBar.Value = yellowzoneBarOption.Max;
             yellowzoneBar.updateForce();
             backContainer.addChild(yellowzoneBar);
         }
@@ -250,14 +254,15 @@ export abstract class CircularGaugePanelBase extends PIXI.Container
         if (this.Options.GreenZoneBarEnable)
         {
             const greenZoneBarTexture = this.Options.GreenZoneBarTexture;
-            const greenzoneBar = new CircularProgressBar();
-            greenzoneBar.Options.OffsetAngle = this.Options.GreenZoneBarOffsetAngle;
-            greenzoneBar.Options.FullAngle = this.Options.GreenZoneBarFullAngle;
-            greenzoneBar.Options.Texture = greenZoneBarTexture;
-            greenzoneBar.Value = greenzoneBar.Options.Max;
-            greenzoneBar.Options.Center = centerPosition;
-            greenzoneBar.Options.Radius = zoneBarRadius;
-            greenzoneBar.Options.InnerRadius = 0;
+            const greenzoneBarOption = new CircularProgressBarOptions();
+            greenzoneBarOption.OffsetAngle = this.Options.GreenZoneBarOffsetAngle;
+            greenzoneBarOption.FullAngle = this.Options.GreenZoneBarFullAngle;
+            greenzoneBarOption.Texture = greenZoneBarTexture;
+            greenzoneBarOption.Center = centerPosition;
+            greenzoneBarOption.Radius = zoneBarRadius;
+            greenzoneBarOption.InnerRadius = 0;
+            const greenzoneBar = new CircularProgressBar(greenzoneBarOption);
+            greenzoneBar.Value = greenzoneBarOption.Max;
             greenzoneBar.updateForce();
             backContainer.addChild(greenzoneBar);
         }

@@ -43,7 +43,7 @@ namespace DigiTachoTest
     }
     function main()
     {
-        const app = new PIXI.Application(1366,1366);
+        const app = new PIXI.Application({height:1366,width:1366});
         document.body.appendChild(app.view);
         let gaugeArray: DigiTachoPanel[] = new Array();
         let index = 0;
