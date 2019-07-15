@@ -31,6 +31,7 @@ export class BitmapTextOption
     public anchor = new PIXI.Point(0, 0);
     public align : string = "left";
     public fontName = "FreeSans_90px";
+    public fontSize : number = 90;
 
     constructor(position?: PIXI.Point, anchor? :  PIXI.Point, align? : string)
     {
@@ -178,7 +179,7 @@ export abstract class CircularGaugePanelBase extends PIXI.Container
         
         const valueTextLabelOption = this.Options.ValueTextLabelOption;
         const valueTextLabelStyle = {
-            font: { name : valueTextLabelOption.fontName},
+            font: { name : valueTextLabelOption.fontName , size : valueTextLabelOption.fontSize },
             align: valueTextLabelOption.align
         };
         this.Options.ValueTextLabel = new PIXI.BitmapText(this.Options.Min.toFixed(this.Options.ValueNumberRoundDigit).toString(), valueTextLabelStyle);
