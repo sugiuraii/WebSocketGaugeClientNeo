@@ -224,10 +224,13 @@ export abstract class MeterApplicationBase extends PIXI.Application
      * @param height Stage height in px.
      * @param webSocketServerName Hostname of websocket server (default : same as webserver).s
      */
-    constructor(width: number, height: number, webSocketServerName? : string)
+    constructor(width: number, height: number, clearBeforeReneder? : boolean, transparent? : boolean,
+        antialias? :boolean, preserveDrawingBuffer? : boolean,
+        forceFXAA? : boolean, powerPreference? : string, webSocketServerName? : string)
     {        
         // Call PIXI.Application
-        super({width:width, height:height});
+        super({width:width, height:height, clearBeforeRender:clearBeforeReneder, transparent : transparent, 
+        antialias : antialias, preserveDrawingBuffer:preserveDrawingBuffer, forceFXAA: forceFXAA, powerPreference : powerPreference});
            
         // Initialize websocket instances
         this.initializeWebSocketInstances();
