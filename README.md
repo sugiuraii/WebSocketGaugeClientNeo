@@ -16,9 +16,9 @@
 ## <a name="description">Description</a>
 This program is graphical dashboard gauge, web-based client for [DefiSSMCOM_WebsocketServer](https://github.com/sugiuraii/DefiSSMCOM_WebsocketServer).
 
-This program receive car sensor information from the websocket server programs, and show sensor data by WebGL(or Canvas) based graphical gauges.
+This program receive car sensor information from the websocket server programs, and show sensor data by WebGL based graphical gauges.
 
-The graphical part of this program depends on [PIXI.js](http://www.pixijs.com/). Thanks to PIXI.js, this program can show the gauge in HTML5 Canvas if the browser does not support WebGL (However performance (fps) is degraded compared to WebGL).
+The graphical part of this program depends on [PIXI.js](http://www.pixijs.com/). 
 
 You can make your custom gauges by modifying the source code. Please see []().
 
@@ -27,7 +27,7 @@ You can make your custom gauges by modifying the source code. Please see []().
 ## <a name="requirement">Requirement</a>
 * Web server PC or appliance to distribute html and javascript files to browsers.
 * Web browser to view dashboard gauges.
-	* Web browser capable of WebGL or Canvas
+	* Web browser capable of WebGL
 		* To get sufficient performance (over 30fps), currently Chrome + WebGL is recommended.
 		* You can check the operation (and grahical performance) by following demonstration pages.
 			* [Test1 (Analog 3-meter cluster test)](https://sugiuraii.github.io/WebsocketGauge/clientdemo/benchmark/AnalogMeterClusterBenchApp.html)
@@ -38,11 +38,13 @@ You can make your custom gauges by modifying the source code. Please see []().
 		|--------|--------|--------|--------|--------|--------|
 		| Google Chrome 59.0 | Windows 10 | Toshiba Satellite C640<br> Core i5-560M | 60fps | 60fps | OK |
         | Firefox 54.0.1 | Windows 10| Toshiba Satellite C640<br> Core i5-560M | 27fps | 27fps | Slow |
+        | Firefox 64.0 | Windows 10| Toshiba Satellite C640<br> Core i5-560M | 60fps | 54-60fps | Slightly slower than Chrome, but acceptable. |
         | Microsoft Edge | Windows 10| Toshiba Satellite C640<br> Core i5-560M | - | - | Some of sprites are missing.|
         | Google Chrome 59.0 | Android 6.0.1 | ASUS Zenfone2 <br> (ZE551ML Atom Z3560) | 60fps | 60fps | OK |
         | Google Chrome 59.0 | Android 4.1.2| Sharp 203SH <br> (Snapdragon S4 Pro) | 54-60fps | 50-60fps | OK |
-        | Google Chrome 61.0 | Android 7.0 | Oukitel C8 <br> (Mediatek MTK6580) | 54fps | 47fps | ARM Mali-400 series　seems to have blinking issue in pixi.js under WebGL. `forceCanvas` or `preserveDrawingBuffer` needs to be enabled. |
+		| Google Chrome 70.0 | Android 8.1 | Samsung Galaxy Note 9 <br> (Exynos 9810(Mali-G72 MP18)) | 60fps | 60fps | OK |
         | Safari | iOS 9.3.5 | iPhone 4s <br> (Apple A5) | [54-60fps](https://www.youtube.com/watch?v=ZE71ya6LY0U) | [47fps](https://www.youtube.com/watch?v=ZE71ya6LY0U) | OK |
+		| Safari | iOS 12.1.1 | iPhone 8 <br> (Apple A11) | 60fps | 60fps | OK |
 
 ## <a name="dependency">Dependency</a>
 * [Node.js (Version.8.2.1)](https://nodejs.org/)

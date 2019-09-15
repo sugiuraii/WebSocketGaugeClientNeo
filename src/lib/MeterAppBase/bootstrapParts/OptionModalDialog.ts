@@ -31,11 +31,6 @@ export class OptionModalDialog
         localStorage.setItem("WSInterval", val.toString());
     };
     
-    private onPIXIJSSwitchIsChanged : (forceCanvas : boolean)=> void = (forceCanvas : boolean) =>
-    {
-        localStorage.setItem("ForceCanvas", forceCanvas?"true":"false");
-    };
-    
     /**
      * Event listener on WSIntervalSpinner is changed.
      */
@@ -44,7 +39,6 @@ export class OptionModalDialog
     /**
      * Event listener on PIXI.js related option switch is changed.
      */
-    //public set OnPIXIJSSwitchIsChanged(listener: (forceCanvas : boolean) => void) {this.onPIXIJSSwitchIsChanged = listener };
     
     private get dialogHTML() : string
     {
@@ -63,12 +57,6 @@ export class OptionModalDialog
                         <div class="form-group">\
                             <label for="wsIntervalInput">Defi/Arduino websocket message interval</label>\
                             <input type="number" class="form-control" id="wsIntervalInput" min="0" placeholder="0">\
-                        </div>\
-                        <hr>\
-                        <div class="form-check">\
-                            <label class="form-check-label">\
-                            <input id="forceCanvasCheckBox" class="form-check-input" type="checkbox" value="">Force canvas rendering instead of WebGL\
-                            </label>\
                         </div>\
                     </form>\
                 </div>\
@@ -89,13 +77,10 @@ export class OptionModalDialog
              
         //Load stored value from webstorage
         const wsInterval = Number(localStorage.getItem("WSInterval"));
-        const forceCanvas = localStorage.getItem("ForceCanvas")==="true"?true:false;
         $('#wsIntervalInput').val(wsInterval);
-        $('#forceCanvasCheckBox').prop('checked', forceCanvas);
         
         //Assign control change event
         $('#wsIntervalInput').on('change', ()=>{this.onWSIntervalSpinnerValueChanged(Number($('#wsIntervalInput').val()))});
-        $('#forceCanvasCheckBox').on('change', () => {this.onPIXIJSSwitchIsChanged(Boolean($('#forceCanvasCheckBox').prop('checked')))});
     }
     
 }
