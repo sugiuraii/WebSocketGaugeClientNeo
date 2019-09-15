@@ -225,9 +225,12 @@ export abstract class MeterApplicationBase extends PIXI.Application
      * @param webSocketServerName Hostname of websocket server (default : same as webserver).s
      */
     constructor(width: number, height: number, webSocketServerName? : string)
-    {        
+    {
+        // Get preserveDrawingBuffer flag from webstorage
+        const preserveDrawingBuffer : boolean = localStorage.getItem("preserveDrawingBuffer")==="true"?true:false;        
+        
         // Call PIXI.Application
-        super({width:width, height:height});
+        super({width:width, height:height, preserveDrawingBuffer});
            
         // Initialize websocket instances
         this.initializeWebSocketInstances();
