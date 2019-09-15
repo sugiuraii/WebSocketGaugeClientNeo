@@ -43,7 +43,8 @@ You can make your custom gauges by modifying the source code. Please see []().
         | Google Chrome 59.0 | Android 6.0.1 | ASUS Zenfone2 <br> (ZE551ML Atom Z3560) | 60fps | 60fps | OK |
         | Google Chrome 59.0 | Android 4.1.2| Sharp 203SH <br> (Snapdragon S4 Pro) | 54-60fps | 50-60fps | OK |
 		| Google Chrome 70.0 | Android 8.1 | Samsung Galaxy Note 9 <br> (Exynos 9810(Mali-G72 MP18)) | 60fps | 60fps | OK |
-        | Safari | iOS 9.3.5 | iPhone 4s <br> (Apple A5) | [54-60fps](https://www.youtube.com/watch?v=ZE71ya6LY0U) | [47fps](https://www.youtube.com/watch?v=ZE71ya6LY0U) | OK |
+		| Google Chrome 76.0 | Android 7.0 | Oukitel C8 <br> (Mediatek MTK6580(Mali-400MP2)) | 54fps | 47fps | ARM Mali-400 series seems to have blinking issue in pixi.js. To avoid this, `preserveDrawingBuffer` needs to be enabled. |
+		| Safari | iOS 9.3.5 | iPhone 4s <br> (Apple A5) | [54-60fps](https://www.youtube.com/watch?v=ZE71ya6LY0U) | [47fps](https://www.youtube.com/watch?v=ZE71ya6LY0U) | OK |
 		| Safari | iOS 12.1.1 | iPhone 8 <br> (Apple A11) | 60fps | 60fps | OK |
 
 ## <a name="dependency">Dependency</a>
