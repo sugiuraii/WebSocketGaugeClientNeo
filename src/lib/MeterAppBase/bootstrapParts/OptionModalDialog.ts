@@ -31,6 +31,12 @@ export class OptionModalDialog
         localStorage.setItem("WSInterval", val.toString());
     };
     
+    private onPIXIpreserveDrawingBufferSwitchChanged : (preserveDrawingBuffer : boolean)=> void = (preserveDrawingBuffer : boolean) =>
+    {
+        localStorage.setItem("preserveDrawingBuffer", preserveDrawingBuffer?"true":"false");
+    };
+
+
     /**
      * Event listener on WSIntervalSpinner is changed.
      */
@@ -58,6 +64,12 @@ export class OptionModalDialog
                             <label for="wsIntervalInput">Defi/Arduino websocket message interval</label>\
                             <input type="number" class="form-control" id="wsIntervalInput" min="0" placeholder="0">\
                         </div>\
+                        <hr>\
+                        <div class="form-check">\
+                            <label class="form-check-label">\
+                            <input id="preserveDrawingBufferCheckBox" class="form-check-input" type="checkbox" value="">Enable preserveDrawingBuffer on pixi.js\
+                            </label>\
+                        </div>\
                     </form>\
                 </div>\
                 <div class="modal-footer">\
@@ -77,10 +89,13 @@ export class OptionModalDialog
              
         //Load stored value from webstorage
         const wsInterval = Number(localStorage.getItem("WSInterval"));
+        const preserveDrawingBuffer = localStorage.getItem("preserveDrawingBuffer")==="true"?true:false;
         $('#wsIntervalInput').val(wsInterval);
-        
+        $('#preserveDrawingBufferCheckBox').prop('checked', preserveDrawingBuffer);
+
         //Assign control change event
         $('#wsIntervalInput').on('change', ()=>{this.onWSIntervalSpinnerValueChanged(Number($('#wsIntervalInput').val()))});
+        $('#preserveDrawingBufferCheckBox').on('change', () => {this.onPIXIpreserveDrawingBufferSwitchChanged(Boolean($('#preserveDrawingBufferCheckBox').prop('checked')))});
     }
     
 }
