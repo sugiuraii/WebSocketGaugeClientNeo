@@ -25,6 +25,8 @@
 // This is required to webpack font/texture/html files
 /// <reference path="../../lib/webpackRequire.ts" />
 
+import * as PIXI from "pixi.js";
+
 //Assign entry point html file to bundle by webpack
 require("./CompactMFD-Arduino.html");
 
@@ -101,7 +103,7 @@ class CompactMFD_Arduino extends MeterApplicationBase
                 
         this.ticker.add(() => 
         {
-            const timestamp = PIXI.ticker.shared.lastTime;
+            const timestamp = PIXI.Ticker.shared.lastTime;
             const tacho = this.ArduinoWS.getVal(ArduinoParameterCode.Engine_Speed, timestamp);
             const speed = this.ArduinoWS.getVal(ArduinoParameterCode.Vehicle_Speed, timestamp);
             const neutralSw = false;

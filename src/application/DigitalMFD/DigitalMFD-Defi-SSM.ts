@@ -132,7 +132,7 @@ class DigitalMFD_Defi_SSM extends MeterApplicationBase
         
         this.ticker.add(() => 
         {
-            const timestamp = PIXI.ticker.shared.lastTime;
+            const timestamp = PIXI.Ticker.shared.lastTime;
             const tacho = this.DefiWS.getVal(DefiParameterCode.Engine_Speed, timestamp);
             const speed = this.SSMWS.getVal(SSMParameterCode.Vehicle_Speed, timestamp);
             const neutralSw = this.SSMWS.getSwitchFlag(SSMSwitchCode.Neutral_Position_Switch);

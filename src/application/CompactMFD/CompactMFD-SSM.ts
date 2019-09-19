@@ -25,6 +25,8 @@
 // This is required to webpack font/texture/html files
 /// <reference path="../../lib/webpackRequire.ts" />
 
+import * as PIXI from "pixi.js";
+
 //For including entry point html file in webpack
 require("./CompactMFD-SSM.html");
 
@@ -107,7 +109,7 @@ class CompactMFD_SSM extends MeterApplicationBase
         
         this.ticker.add(() => 
         {
-            const timestamp = PIXI.ticker.shared.lastTime;
+            const timestamp = PIXI.Ticker.shared.lastTime;
             const tacho = this.SSMWS.getVal(SSMParameterCode.Engine_Speed, timestamp);
             const speed = this.SSMWS.getVal(SSMParameterCode.Vehicle_Speed, timestamp);
             const neutralSw = this.SSMWS.getSwitchFlag(SSMSwitchCode.Neutral_Position_Switch);

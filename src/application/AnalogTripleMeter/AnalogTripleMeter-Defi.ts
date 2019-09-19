@@ -25,6 +25,8 @@
 // This is required to webpack font/texture/html files
 /// <reference path="../../lib/webpackRequire.ts" />
 
+import * as PIXI from "pixi.js";
+
 //For including entry point html file in webpack
 require("./AnalogTripleMeter-Defi.html");
 
@@ -84,7 +86,7 @@ class AnalogTripleMeter_Defi extends MeterApplicationBase
         
         this.ticker.add(() => 
         {
-            const timestamp = PIXI.ticker.shared.lastTime;
+            const timestamp = PIXI.Ticker.shared.lastTime;
             const boost = this.DefiWS.getVal(DefiParameterCode.Manifold_Absolute_Pressure, timestamp)  * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
             
             const waterTemp = this.DefiWS.getRawVal(DefiParameterCode.Coolant_Temperature);

@@ -74,7 +74,7 @@ class AnalogMeterCluster_SSM extends MeterApplicationBase
         this.stage.addChild(meterCluster);
 
         this.ticker.add(() => {
-            const timestamp = PIXI.ticker.shared.lastTime;
+            const timestamp = PIXI.Ticker.shared.lastTime;
             const tacho = this.SSMWS.getVal(SSMParameterCode.Engine_Speed, timestamp);
             const boost = this.SSMWS.getVal(SSMParameterCode.Manifold_Absolute_Pressure, timestamp) * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
             const speed = this.SSMWS.getVal(SSMParameterCode.Vehicle_Speed,timestamp);
