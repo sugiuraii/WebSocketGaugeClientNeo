@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
+/*
 const waitTime = 3000;
 const thumbnailWidth = 300;
 const thumbnailHeight = 200;
@@ -73,3 +73,25 @@ createThumbNail("application/AnalogTripleMeter-SSM.html", "thumbnails/AnalogTrip
 createThumbNail("application/LEDRevMeter-SSM.html", "thumbnails/LEDRevMeter.png");
 
 window.setTimeout(function(){phantom.exit();},10000);
+*/
+
+const puppeteer = require('puppeteer');
+const path = require('path');
+const fs = require('fs');
+
+(async () => {
+  const browser = await puppeteer.launch({args:['--allow-file-access', '--allow-file-access-from-files', '--headless' ,'--use-gl=swiftshader']});
+  const page = await browser.newPage();
+  await page.goto(`file:`+path.join(__dirname, 'benchmark/AnalogMeterClusterBenchApp.html'));
+//await page.goto(`https://sugiuraii.github.io/WebsocketGauge/clientdemo/benchmark/AnalogMeterClusterBenchApp.html`, {waitUntil : "networkidle2"});
+//await page.goto(`http://localhost:5500/public_html/benchmark/AnalogMeterClusterBenchApp.html`);
+//await page.setContent(file_content);
+//await page.on('console', msg => console.log('PAGE LOG:', msg.text()));
+//await page.evaluate(file_content => {
+//    console.log(file_content);
+//  }, file_content);
+await page.waitFor(1000);
+await page.screenshot({path: 'thumbnails/example.png'});
+
+await browser.close();
+})();
