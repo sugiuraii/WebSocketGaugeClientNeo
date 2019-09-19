@@ -101,7 +101,7 @@ class CompactMFD_Arduino extends MeterApplicationBase
                 
         this.ticker.add(() => 
         {
-            const timestamp = PIXI.ticker.shared.lastTime;
+            const timestamp = PIXI.Ticker.shared.lastTime;
             const tacho = this.ArduinoWS.getVal(ArduinoParameterCode.Engine_Speed, timestamp);
             const speed = this.ArduinoWS.getVal(ArduinoParameterCode.Vehicle_Speed, timestamp);
             const neutralSw = false;

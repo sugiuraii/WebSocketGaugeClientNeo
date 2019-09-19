@@ -77,8 +77,6 @@ window.setTimeout(function(){phantom.exit();},10000);
 
 const puppeteer = require('puppeteer');
 const path = require('path');
-const async = require('async');
-
 
 createThumbNail("benchmark/AnalogMeterClusterBenchApp.html", "thumbnails/AnalogMeterClusterBenchApp.png");
 createThumbNail("benchmark/DigitalMFDBenchApp.html", "thumbnails/DigitalMFDBenchApp.png");

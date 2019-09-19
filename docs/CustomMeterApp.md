@@ -215,7 +215,7 @@ protected setPIXIMeterPanel()
     this.ticker.add(() =>
     {
         // Take timestamp of animation frame. (This time stamp is needed to interpolate meter sensor reading).
-        const timestamp = PIXI.ticker.shared.lastTime;
+        const timestamp = PIXI.Ticker.shared.lastTime;
         // Get sensor information from websocket communication objects.
         const tacho = this.ELM327WS.getVal(OBDIIParameterCode.Engine_Speed, timestamp);
         const speed = this.ELM327WS.getVal(OBDIIParameterCode.Vehicle_Speed, timestamp);
