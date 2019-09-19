@@ -44,7 +44,7 @@
         "build-benchmark": "cd src/benchmark && npx webpack",
         "build-application": "cd src/application && npx webpack",
         "build-partsTest": "cd src/test/partsTest && npx webpack",
-        "build-thumbnails": "cd public_html && phantomjs thumbnails.js",
+        "build-thumbnails": "cd public_html && node thumbnails.js",
         "build-index": "cd src/index && npx webpack"
     }
 }
