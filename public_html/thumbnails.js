@@ -77,21 +77,27 @@ window.setTimeout(function(){phantom.exit();},10000);
 
 const puppeteer = require('puppeteer');
 const path = require('path');
-const fs = require('fs');
+const async = require('async');
 
-(async () => {
-  const browser = await puppeteer.launch({args:['--allow-file-access', '--allow-file-access-from-files', '--headless' ,'--use-gl=swiftshader']});
-  const page = await browser.newPage();
-  await page.goto(`file:`+path.join(__dirname, 'benchmark/AnalogMeterClusterBenchApp.html'));
-//await page.goto(`https://sugiuraii.github.io/WebsocketGauge/clientdemo/benchmark/AnalogMeterClusterBenchApp.html`, {waitUntil : "networkidle2"});
-//await page.goto(`http://localhost:5500/public_html/benchmark/AnalogMeterClusterBenchApp.html`);
-//await page.setContent(file_content);
-//await page.on('console', msg => console.log('PAGE LOG:', msg.text()));
-//await page.evaluate(file_content => {
-//    console.log(file_content);
-//  }, file_content);
-await page.waitFor(1000);
-await page.screenshot({path: 'thumbnails/example.png'});
 
-await browser.close();
-})();
+createThumbNail("benchmark/AnalogMeterClusterBenchApp.html", "thumbnails/AnalogMeterClusterBenchApp.png");
+createThumbNail("benchmark/DigitalMFDBenchApp.html", "thumbnails/DigitalMFDBenchApp.png");
+createThumbNail("application/AnalogMeterCluster-Defi-SSM.html", "thumbnails/AnalogMeterCluster-Defi-SSM.png");
+createThumbNail("application/CompactMFD-SSM.html", "thumbnails/CompactMFD-SSM.png");
+createThumbNail("application/DigitalMFD-Defi-SSM.html", "thumbnails/DigitalMFD-Defi-SSM.png");
+createThumbNail("application/AnalogTripleMeter-SSM.html", "thumbnails/AnalogTripleMeter.png");
+createThumbNail("application/LEDRevMeter-SSM.html", "thumbnails/LEDRevMeter.png");
+
+function createThumbNail(htmlpath, pngpath)
+{
+    (async () => {
+    const browser = await puppeteer.launch({args:['--allow-file-access', '--allow-file-access-from-files', '--headless' ,'--use-gl=swiftshader']});
+    const page = await browser.newPage();
+    await page.setViewport({ width: 600, height: 400 })
+    await page.goto(`file:`+path.join(__dirname, htmlpath));
+    await page.waitFor(1000);
+    await page.screenshot({path: pngpath});
+  
+    await browser.close();
+    })();
+}
