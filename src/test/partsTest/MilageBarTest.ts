@@ -23,7 +23,7 @@
  */
 
 /// <reference path="../../lib/webpackRequire.ts" />
-
+import * as PIXI from 'pixi.js';
 import {MilageGraphPanel} from "../../parts/GasMilageGraph/MilageGraph";
 import * as WebFont from "webfontloader";
 
@@ -46,8 +46,8 @@ namespace MilageBarTest
 {
     export function preloadTexture()
     {
-        PIXI.loader.add(MilageGraphPanel.RequestedTexturePath);
-        PIXI.loader.load(main);
+        PIXI.Loader.shared.add(MilageGraphPanel.RequestedTexturePath);
+        PIXI.Loader.shared.load(main);
     }
     function main()
     {

@@ -26,6 +26,7 @@
 
 import {BoostGaugePanel} from "../../parts/CircularGauges/FullCircularGaugePanel";
 import * as WebFont from "webfontloader";
+import * as PIXI from 'pixi.js';
 
 require("./FullCircularGaugeTest.html");
 
@@ -45,8 +46,8 @@ namespace FullCircularGaugeTest
 {
     export function preloadTexture()
     {
-        PIXI.loader.add(BoostGaugePanel.RequestedTexturePath);;
-        PIXI.loader.load(main);
+        PIXI.Loader.shared.add(BoostGaugePanel.RequestedTexturePath);;
+        PIXI.Loader.shared.load(main);
     }
     function main()
     {

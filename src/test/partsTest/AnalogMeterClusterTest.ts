@@ -23,7 +23,7 @@
  */
  
 /// <reference path="../../lib/webpackRequire.ts" />
-
+import * as PIXI from 'pixi.js';
 import * as WebFont from "webfontloader";
 import {AnalogMeterCluster} from '../../parts/AnalogMeterCluster/AnalogMeterCluster';
 
@@ -44,8 +44,8 @@ namespace AnalogMeterClusterTest
 {
     export function preloadTexture()
     {
-        PIXI.loader.add(AnalogMeterCluster.RequestedTexturePath);
-        PIXI.loader.load(main);
+        PIXI.Loader.shared.add(AnalogMeterCluster.RequestedTexturePath);
+        PIXI.Loader.shared.load(main);
     }
 
     function main()

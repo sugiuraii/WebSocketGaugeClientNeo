@@ -23,7 +23,7 @@
  */
  
 /// <reference path="../../lib/webpackRequire.ts" />
- 
+import * as PIXI from 'pixi.js';
 import {ThrottleGaugePanel} from "../../parts/CircularGauges/SemiCircularGaugePanel";
 import * as WebFont from "webfontloader";
 
@@ -46,8 +46,8 @@ namespace SemiCircularGaugeTest
 {
     export function preloadTexture()
     {
-        PIXI.loader.add(ThrottleGaugePanel.RequestedTexturePath);;
-        PIXI.loader.load(main);
+        PIXI.Loader.shared.add(ThrottleGaugePanel.RequestedTexturePath);;
+        PIXI.Loader.shared.load(main);
     }
     function main()
     {

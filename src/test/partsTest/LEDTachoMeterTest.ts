@@ -23,7 +23,7 @@
  */
  
 /// <reference path="../../lib/webpackRequire.ts" />
-
+import * as PIXI from 'pixi.js';
 import {LEDTachoMeter} from "../../parts/LEDTachoMeter/LEDTachoMeter";
 import * as WebFont from "webfontloader";
 
@@ -45,8 +45,8 @@ namespace LEDTachoMeterTest
 {
     export function preloadTexture()
     {
-        PIXI.loader.add(LEDTachoMeter.RequestedTexturePath);
-        PIXI.loader.load(main);
+        PIXI.Loader.shared.add(LEDTachoMeter.RequestedTexturePath);
+        PIXI.Loader.shared.load(main);
     }
 
     function main()

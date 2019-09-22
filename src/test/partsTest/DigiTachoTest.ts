@@ -26,6 +26,7 @@
  
 import {DigiTachoPanel} from "../../parts/DigiTachoPanel/DigiTachoPanel";
 import * as WebFont from  "webfontloader";
+import * as PIXI from 'pixi.js';
 
 require("./DigiTachoTest.html");
 
@@ -38,8 +39,8 @@ namespace DigiTachoTest
 {
     export function preloadTexture()
     {
-        PIXI.loader.add(DigiTachoPanel.RequestedTexturePath);
-        PIXI.loader.load(main);
+        PIXI.Loader.shared.add(DigiTachoPanel.RequestedTexturePath);
+        PIXI.Loader.shared.load(main);
     }
     function main()
     {

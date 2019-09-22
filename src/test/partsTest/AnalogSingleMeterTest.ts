@@ -23,7 +23,7 @@
  */
 
 /// <reference path="../../lib/webpackRequire.ts" />
-
+import * as PIXI from 'pixi.js';
 import {AnalogSingleMeter} from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
 import {AnalogSingleMeterOption} from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
 import * as WebFont from "webfontloader";
@@ -39,8 +39,8 @@ namespace AnalogSingleMeterTest
 {
     export function preloadTexture()
     {
-        PIXI.loader.add(AnalogSingleMeter.RequestedTexturePath);;
-        PIXI.loader.load(main);
+        PIXI.Loader.shared.add(AnalogSingleMeter.RequestedTexturePath);;
+        PIXI.Loader.shared.load(main);
     }
     function main()
     {
