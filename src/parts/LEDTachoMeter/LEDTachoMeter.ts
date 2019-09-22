@@ -24,7 +24,7 @@
  
 /// <reference path="../../lib/webpackRequire.ts" />
  
-import {CircularProgressBar, CircularProgressBarOptions} from  '../../lib/Graphics/PIXIGauge';
+import {CircularProgressBar, CircularProgressBarOptions, NumericIndicator, BitmapTextNumericIndicator} from  '../../lib/Graphics/PIXIGauge';
 import * as PIXI from 'pixi.js';
 
 require("./LEDTachoMeterTexture.json");
@@ -43,11 +43,11 @@ require("./LEDMeterFont_30px_0.png");
 export class LEDTachoMeter extends PIXI.Container
 {
     private tachoProgressBar;
-    private speedLabel : PIXI.BitmapText;
-    private gasMilageLabel : PIXI.BitmapText;
-    private tripLabel : PIXI.BitmapText;
-    private fuelLabel : PIXI.BitmapText;
-    private gearPosLabel : PIXI.BitmapText;
+    private speedLabel : NumericIndicator;
+    private gasMilageLabel : NumericIndicator;
+    private tripLabel : NumericIndicator;
+    private fuelLabel : NumericIndicator;
+    private gearPosLabel : NumericIndicator;
 
     private tacho = 0;
     private speed = 0;
@@ -148,27 +148,27 @@ export class LEDTachoMeter extends PIXI.Container
         this.tachoProgressBar = tachoProgressBar;
         super.addChild(tachoProgressBar);
 
-        const speedLabel = this.speedLabel = new PIXI.BitmapText(speedValDefault.toFixed(0), {font: {name:"DSEG14_Classic_88px"}, align : "right"});
+        const speedLabel = this.speedLabel = new BitmapTextNumericIndicator(speedValDefault.toFixed(0), {font: {name:"DSEG14_Classic_88px", size:88}, align : "right"});
         speedLabel.anchor = new PIXI.Point(1,0.5);
         speedLabel.position.set(410,230);
         super.addChild(speedLabel);
 
-        const gasMilageLabel = this.gasMilageLabel = new PIXI.BitmapText(gasMilageValDefault.toFixed(2), {font: {name : "DSEG14_Classic_45px"}, align : "right"});
+        const gasMilageLabel = this.gasMilageLabel = new BitmapTextNumericIndicator(gasMilageValDefault.toFixed(2), {font: {name : "DSEG14_Classic_45px", size:45}, align : "right"});
         gasMilageLabel.anchor = new PIXI.Point(1,0.5);
         gasMilageLabel.position.set(310,360);
         super.addChild(gasMilageLabel);
 
-        const tripLabel = this.tripLabel = new PIXI.BitmapText(tripValDefault.toFixed(1), {font: {name : "DSEG14_Classic_30px"}, align : "right"});
+        const tripLabel = this.tripLabel = new BitmapTextNumericIndicator(tripValDefault.toFixed(1), {font: {name : "DSEG14_Classic_30px", size:30}, align : "right"});
         tripLabel.anchor = new PIXI.Point(1,0.5);
         tripLabel.position.set(510,355);
         super.addChild(tripLabel);
 
-        const fuelLabel = this.fuelLabel = new PIXI.BitmapText(fuelValDefault.toFixed(2), {font: {name : "DSEG14_Classic_30px"}, align : "right"});
+        const fuelLabel = this.fuelLabel = new BitmapTextNumericIndicator(fuelValDefault.toFixed(2), {font: {name : "DSEG14_Classic_30px", size:30}, align : "right"});
         fuelLabel.anchor = new PIXI.Point(1,0.5);
         fuelLabel.position.set(510,395);
         super.addChild(fuelLabel);
 
-        const gearPosLabel = this.gearPosLabel = new PIXI.BitmapText("N", {font: {name : "DSEG14_Classic_100px"}, align : "right"});
+        const gearPosLabel = this.gearPosLabel = new BitmapTextNumericIndicator("N", {font: {name : "DSEG14_Classic_100px", size:100}, align : "right"});
         gearPosLabel.anchor = new PIXI.Point(1,0.5);
         gearPosLabel.text = "N";
         gearPosLabel.position.set(410,495);
