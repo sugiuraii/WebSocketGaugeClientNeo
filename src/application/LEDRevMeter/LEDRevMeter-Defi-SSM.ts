@@ -25,6 +25,8 @@
 // This is required to webpack font/texture/html files
 /// <reference path="../../lib/webpackRequire.ts" />
 
+import * as PIXI from "pixi.js";
+
 //For including entry point html file in webpack
 require("./LEDRevMeter-Defi-SSM.html");
 
@@ -91,7 +93,7 @@ class LEDRevMeter_Defi_SSM extends MeterApplicationBase
         
         this.ticker.add(() => 
         {
-            const timestamp = PIXI.ticker.shared.lastTime;
+            const timestamp = PIXI.Ticker.shared.lastTime;
             const boost = this.DefiWS.getVal(DefiParameterCode.Manifold_Absolute_Pressure, timestamp)  * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;            
             const waterTemp = this.SSMWS.getRawVal(SSMParameterCode.Coolant_Temperature);
             const rev = this.DefiWS.getVal(DefiParameterCode.Engine_Speed, timestamp);
