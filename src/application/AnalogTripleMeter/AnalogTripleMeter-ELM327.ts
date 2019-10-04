@@ -88,7 +88,7 @@ class AnalogTripleMeter_ELM327 extends MeterApplicationBase
         
         this.ticker.add(() => 
         {
-            const timestamp = PIXI.Ticker.shared.lastTime;
+            const timestamp = this.ticker.lastTime;
             const boost = this.ELM327WS.getVal(OBDIIParameterCode.Manifold_Absolute_Pressure, timestamp)  * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
             
             const waterTemp = this.ELM327WS.getRawVal(OBDIIParameterCode.Coolant_Temperature);
