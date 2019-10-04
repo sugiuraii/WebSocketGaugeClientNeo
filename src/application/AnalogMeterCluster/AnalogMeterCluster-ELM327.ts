@@ -72,7 +72,7 @@ class AnalogMeterCluster_ELM327 extends MeterApplicationBase
         this.stage.addChild(meterCluster);
 
         this.ticker.add(() => {
-            const timestamp = PIXI.Ticker.shared.lastTime;
+            const timestamp = this.ticker.lastTime;
             const tacho = this.ELM327WS.getVal(OBDIIParameterCode.Engine_Speed, timestamp);
             const boost = this.ELM327WS.getVal(OBDIIParameterCode.Manifold_Absolute_Pressure, timestamp) * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
             const speed = this.ELM327WS.getVal(OBDIIParameterCode.Vehicle_Speed,timestamp);
