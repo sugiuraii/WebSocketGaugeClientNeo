@@ -26,26 +26,22 @@ import * as $ from 'jquery';
 
 export class OptionModalDialog
 {
+    /**
+     * Event listener on WSIntervalSpinner is changed.
+     */
     private onWSIntervalSpinnerValueChanged : (val : number) => void = (val : number) => 
     {
         localStorage.setItem("WSInterval", val.toString());
     };
-    
+
+    /**
+     * Event listener on PIXI.js related option switch is changed.
+     */    
     private onPIXIpreserveDrawingBufferSwitchChanged : (preserveDrawingBuffer : boolean)=> void = (preserveDrawingBuffer : boolean) =>
     {
         localStorage.setItem("preserveDrawingBuffer", preserveDrawingBuffer?"true":"false");
     };
 
-
-    /**
-     * Event listener on WSIntervalSpinner is changed.
-     */
-    //public set OnWSIntervalSpinnerValueChanged(listener : (val:number) => void ) {this.onWSIntervalSpinnerValueChanged = listener };
-    
-    /**
-     * Event listener on PIXI.js related option switch is changed.
-     */
-    
     private get dialogHTML() : string
     {
         const optionModalDialogHTML = 
@@ -62,7 +58,7 @@ export class OptionModalDialog
                     <form>\
                         <div class="form-group">\
                           <label for="wsURL">Websocket server URL</label>\
-                          <input type="url" class="form-control" id="wsURLInput" content=""ws://wsserveraddress.to.set/" placeholder="0">\
+                          <input type="text" class="form-control" id="websocketServerHostname" content=""ws://wsserveraddress.to.set/" placeholder="0">\
                         </div>\
                         <hr>\
                         <div class="form-check">\
@@ -94,19 +90,46 @@ export class OptionModalDialog
         return optionModalDialogHTML;
     }
     
+    private setInitialValue()
+    {
+      if(!localStorage.getItem("WSServerHostname"))
+        localStorage.setItem("WSServerHostname",location.hostname);
+      if(!localStorage.getItem("SetWSServerSameAsHttp"))
+        localStorage.setItem("SetWSServerSameAsHttp","true");
+      if(!localStorage.getItem("WSInterval"))
+        localStorage.setItem("WSInterval","0");
+      if(!localStorage.getItem("preserveDrawingBuffer"))
+        localStorage.setItem("preserveDrawingBuffer", "false");
+    }
+
     public create()
     {
         $('body').append(this.dialogHTML);
-             
+        
+        // Set default value if keys are not found on webstorage.
+        this.setInitialValue();
+        
         //Load stored value from webstorage
         const wsInterval = Number(localStorage.getItem("WSInterval"));
         const preserveDrawingBuffer = localStorage.getItem("preserveDrawingBuffer")==="true"?true:false;
         $('#wsIntervalInput').val(wsInterval);
         $('#preserveDrawingBufferCheckBox').prop('checked', preserveDrawingBuffer);
+        const wsServerHostname : string = localStorage.getItem("WSServerHostname");
+        const setWSServerSameAsHttpSite : boolean = localStorage.getItem("SetWSServerSameAsHttp")==="true"?true:false;
+        $('#websocketServerHostname').val(wsServerHostname);
+        $('#setWSServerSameAsHttpSite').prop('checked',setWSServerSameAsHttpSite);
+        $('#websocketServerHostname').prop('disabled',setWSServerSameAsHttpSite);
 
         //Assign control change event
         $('#wsIntervalInput').on('change', ()=>{this.onWSIntervalSpinnerValueChanged(Number($('#wsIntervalInput').val()))});
         $('#preserveDrawingBufferCheckBox').on('change', () => {this.onPIXIpreserveDrawingBufferSwitchChanged(Boolean($('#preserveDrawingBufferCheckBox').prop('checked')))});
+        $('#websocketServerHostname').on('change', ()=>localStorage.setItem("WSServerHostname",String($('#websocketServerHostname').val())));
+        $('#setWSServerSameAsHttpSite').on('change', ()=> 
+        {
+          const setWSServerSameAsHttpSite : boolean = $('#setWSServerSameAsHttpSite').prop('checked');
+          localStorage.setItem("SetWSServerSameAsHttp",setWSServerSameAsHttpSite?"true":"false");
+          $('#websocketServerHostname').prop('disabled',setWSServerSameAsHttpSite);
+        })
     }
     
 }
