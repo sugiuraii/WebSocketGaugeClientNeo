@@ -61,6 +61,17 @@ export class OptionModalDialog
                 <div class="modal-body">\
                     <form>\
                         <div class="form-group">\
+                          <label for="wsURL">Websocket server URL</label>\
+                          <input type="url" class="form-control" id="wsURLInput" content=""ws://wsserveraddress.to.set/" placeholder="0">\
+                        </div>\
+                        <hr>\
+                        <div class="form-check">\
+                          <label class="form-check-label">\
+                          <input id="setWSServerSameAsHttpSite" class="form-check-input" type="checkbox" value="">Set websocket server address same as this website.\
+                          </label>\
+                        </div>\
+                        <hr>\
+                        <div class="form-group">\
                             <label for="wsIntervalInput">Defi/Arduino websocket message interval</label>\
                             <input type="number" class="form-control" id="wsIntervalInput" min="0" placeholder="0">\
                         </div>\
