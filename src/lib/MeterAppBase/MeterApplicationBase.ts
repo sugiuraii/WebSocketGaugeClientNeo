@@ -222,9 +222,8 @@ export abstract class MeterApplicationBase extends PIXI.Application
      * Construct MeterApplicationBase.
      * @param width Stage width in px.
      * @param height Stage height in px.
-     * @param webSocketServerName Hostname of websocket server (default : same as webserver).s
      */
-    constructor(width: number, height: number, webSocketServerName? : string)
+    constructor(width: number, height: number)
     {
         // Get preserveDrawingBuffer flag from webstorage
         const preserveDrawingBuffer : boolean = localStorage.getItem("preserveDrawingBuffer")==="true"?true:false;        
@@ -242,10 +241,12 @@ export abstract class MeterApplicationBase extends PIXI.Application
         document.body.appendChild(this.view);
         
         //Set url of websocket
-        if (typeof (webSocketServerName) === "undefined")
+        const wsServerHostname : string = localStorage.getItem("WSServerHostname");
+        const setWSServerSameAsHttpSite : boolean = localStorage.getItem("SetWSServerSameAsHttp")==="true"?true:false;
+        if (setWSServerSameAsHttpSite)
             this.webSocketServerName = location.hostname;
         else
-            this.webSocketServerName = webSocketServerName;
+            this.webSocketServerName = wsServerHostname;
         this.setWSURL(this.webSocketServerName);
         
         // Initialize control panel.
