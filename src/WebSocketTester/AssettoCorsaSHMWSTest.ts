@@ -24,7 +24,7 @@
 
 /// <reference path="../lib/webpackRequire.ts" />
 
-import {AssettoCorsaSHMWebsocket, AssettoCorsaSHMPhysicsParameterCode} from '../lib/WebSocket/WebSocketCommunication';
+import {AssettoCorsaSHMWebsocket, AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMStaticInfoParameterCode} from '../lib/WebSocket/WebSocketCommunication';
 import {AssettoCorsaSHMGraphicsParameterCode} from '../lib/WebSocket/WebSocketCommunication';
 import {WebSocketTesterBase} from './base/WebSocketTesterBase'
 
@@ -53,12 +53,20 @@ class AssettoCorsaSHMWSTest extends WebSocketTesterBase
         super.assignButtonEvents();
         $("#buttonPhysWSSend").click(() => this.inputPhysWSSend());
         $("#buttonPhysWSInterval").click(() => this.inputPhysWSInterval());
+        $("#buttonGrphWSSend").click(() => this.inputGrphWSSend());
+        $("#buttonGrphWSInterval").click(() => this.inputGrphWSInterval());
+        $("#buttonStaticWSSend").click(() => this.inputStaticWSSend());
+        $("#buttonStaticWSInterval").click(() => this.inputStaticWSInterval());
     }
 
     protected setParameterCodeSelectBox() : void
     {
         for (let code in AssettoCorsaSHMPhysicsParameterCode)
             $('#physCodeSelect').append($('<option>').html(code).val(code));
+        for (let code in AssettoCorsaSHMGraphicsParameterCode)
+            $('#grphCodeSelect').append($('<option>').html(code).val(code));
+        for (let code in AssettoCorsaSHMStaticInfoParameterCode)
+            $('#staticCodeSelect').append($('<option>').html(code).val(code));
     }
 
     protected registerWSEvents() : void
@@ -110,5 +118,29 @@ class AssettoCorsaSHMWSTest extends WebSocketTesterBase
     {
         const wsInterval = Number($('#physWSInterval').val());
         this.webSocket.SendPhysicsWSInterval(wsInterval);
+    };
+
+    public inputGrphWSSend()
+    {
+        const codeFlag = $('#grphCodeFlag').val() === "true" ? true : false; 
+        this.webSocket.SendGraphicsWSSend($('#grphCodeSelect').val().toString(), codeFlag);
+    };
+
+    public inputGrphWSInterval()
+    {
+        const wsInterval = Number($('#grphWSInterval').val());
+        this.webSocket.SendGraphicsWSInterval(wsInterval);
+    };
+
+    public inputStaticWSSend()
+    {
+        const codeFlag = $('#staticCodeFlag').val() === "true" ? true : false; 
+        this.webSocket.SendStaticInfoWSSend($('#staticCodeSelect').val().toString(), codeFlag);
+    };
+
+    public inputStaticWSInterval()
+    {
+        const wsInterval = Number($('#staticWSInterval').val());
+        this.webSocket.SendStaticInfoWSInterval(wsInterval);
     };
 }

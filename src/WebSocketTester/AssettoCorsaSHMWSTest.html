@@ -52,7 +52,40 @@ THE SOFTWARE.
                  <input type="button" id="buttonPhysWSSend" value="input ACSHM_PHYS_WS_SEND"/>
              </li>
          </ul>
+
+         <h4>ACSHM_GRPH_WS_SEND</h4>
+         <ul>
+             <li>Code<br>
+                <select id="grphCodeSelect"></select>
+             </li>
+             <li>Flag<br>
+                <select id="grphCodeFlag">
+                    <option value="true">true</option>
+                    <option value="false">false</option>
+                </select>
+             </li>
+             <li>
+                 <input type="button" id="buttonGrphWSSend" value="input ACSHM_GRPH_WS_SEND"/>
+             </li>
+         </ul>
          
+         <h4>ACSHM_STATIC_WS_SEND</h4>
+         <ul>
+             <li>Code<br>
+                <select id="staticCodeSelect"></select>
+             </li>
+             <li>Flag<br>
+                <select id="staticCodeFlag">
+                    <option value="true">true</option>
+                    <option value="false">false</option>
+                </select>
+             </li>
+             <li>
+                 <input type="button" id="buttonStaticWSSend" value="input ACSHM_STATIC_WS_SEND"/>
+             </li>
+         </ul>
+         
+
          <h4>ACSHM_PHYS_WS_INTERVAL</h4>
          <ul>
              <li>
@@ -62,7 +95,26 @@ THE SOFTWARE.
                 <input type="button" id="buttonPhysWSInterval" value="input ACSHM_PHYS_INTERVAL" />
              </li>
          </ul>
-                  
+
+         <h4>ACSHM_GRPH_WS_INTERVAL</h4>
+         <ul>
+             <li>
+                <input type="number" id="grphWSInterval">
+             </li>
+            <li>
+                <input type="button" id="buttonGrphWSInterval" value="input ACSHM_GRPH_INTERVAL" />
+             </li>
+         </ul>
+         
+         <h4>ACSHM_STATIC_WS_INTERVAL</h4>
+         <ul>
+             <li>
+                <input type="number" id="staticWSInterval">
+             </li>
+            <li>
+                <input type="button" id="buttonStaticWSInterval" value="input ACSHM_STATIC_INTERVAL" />
+             </li>
+         </ul>         
          <hr>
          
          <h3>VAL packet</h3>
