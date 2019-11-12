@@ -28,6 +28,7 @@ export {ArduinoCOMWebsocket} from "./private/DefiSSMWebSocket";
 export {SSMWebsocket} from "./private/DefiSSMWebSocket";
 export {ELM327COMWebsocket} from "./private/DefiSSMWebSocket";
 export {FUELTRIPWebsocket} from "./private/FUELTRIPWebsocket";
+export {AssettoCorsaSHMWebsocket} from "./private/AssetoCorsaSHMWebSocket";
 export {DefiParameterCode} from "./private/ParameterCode";
 export {ArduinoParameterCode} from "./private/ParameterCode";
 export {SSMParameterCode} from "./private/ParameterCode";

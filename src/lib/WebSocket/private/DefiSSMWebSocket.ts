@@ -29,7 +29,7 @@ import {WebsocketCommon} from "./WebsocketCommon";
 /**
 * Superclass of Defi/SSM/Arduino/ELM327 websocket.
 */
-abstract class DefiSSMWebsocketCommon extends WebsocketCommon
+export abstract class DefiSSMWebsocketCommon extends WebsocketCommon
 {
     private recordIntervalTimeEnabled : boolean;
 
