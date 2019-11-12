@@ -31,7 +31,8 @@ module.exports = {
                 "ELM327COMWSTest": './ELM327COMWSTest.ts',
                 "SSMCOMWSTest": './SSMCOMWSTest.ts',
                 "FUELTRIPWSTest": './FUELTRIPWSTest.ts',
-                "DefiCOMWSInterpolateTest": './DefiCOMWSInterpolateTest.ts'
+                "DefiCOMWSInterpolateTest": './DefiCOMWSInterpolateTest.ts',
+                "AssettoCorsaSHMWSTest": './AssettoCorsaSHMWSTest.ts'
             },
     devtool: "source-map",
     output:
