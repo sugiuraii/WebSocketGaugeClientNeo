@@ -108,10 +108,31 @@ class AssettoCorsaSHMWSTest extends WebSocketTesterBase
         };
     }
 
+    public main()
+    {
+        super.main();
+        window.requestAnimationFrame((timestamp: number) => this.showInterpolateVal(timestamp));
+    }
+
     public inputPhysWSSend()
     {
         const codeFlag = $('#physCodeFlag').val() === "true" ? true : false; 
         this.webSocket.SendPhysicsWSSend($('#physCodeSelect').val().toString(), codeFlag);
+
+        //Set interpolation flag.
+        const code: string = $('#physCodeSelect').val().toString();
+        const flag: string = $('#physCodeFlag').val().toString();
+        switch (flag) {
+            case "true":
+                this.webSocket.EnableInterpolate(code);
+                break;
+            case "false":
+                this.webSocket.DisableInterpolate(code);
+                break;
+            default:
+                console.log("Error : #codeflag is nether true or false.");
+                break;
+        }
     };
 
     public inputPhysWSInterval()
@@ -143,4 +164,14 @@ class AssettoCorsaSHMWSTest extends WebSocketTesterBase
         const wsInterval = Number($('#staticWSInterval').val());
         this.webSocket.SendStaticInfoWSInterval(wsInterval);
     };
+
+    public showInterpolateVal(timestamp: number) {
+        $('#divInterpolatedVAL').html("");
+        for (let key in AssettoCorsaSHMPhysicsParameterCode) {
+            const val: number = this.webSocket.getVal(key, timestamp);
+            if (typeof (val) !== "undefined")
+                $('#divInterpolatedVAL').append(key + " : " + val + "<br>");
+        }
+        window.requestAnimationFrame((timestamp: number) => this.showInterpolateVal(timestamp));
+    }
 }
