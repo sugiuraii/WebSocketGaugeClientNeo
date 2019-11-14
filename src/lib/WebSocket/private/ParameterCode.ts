@@ -458,6 +458,9 @@ export namespace AssettoCorsaSHMPhysicsParameterCode
     export const TyreContactHeading = "TyreContactHeading";
     export const BrakeBias = "BrakeBias";
     export const LocalVelocity = "LocalVelocity";
+
+    //Custom parameter code
+    export const ManifoldPressure = "ManifoldPressure";
 }
 
 export namespace AssettoCorsaSHMGraphicsParameterCode
