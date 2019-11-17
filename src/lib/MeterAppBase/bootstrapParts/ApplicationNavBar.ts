@@ -96,6 +96,7 @@ export class ApplicationNavBar
                         <span id="arduinoIndicator" class="badge badge-dark">Arduino</span>\
                         <span id="elm327Indicator" class="badge badge-dark">ELM327</span>\
                         <span id="fueltripIndicator" class="badge badge-dark">FUELTRIP</span>\
+                        <span id="assettoCrosaSHMIndicator" class="badge badge-dark">ACSHMP</span>\
                     </form>\
                 </div>\
             </nav>';
@@ -143,6 +144,13 @@ export class ApplicationNavBar
             this.changeIndicatorColor("#fueltripIndicator", -1)
     }
     
+    public setAssetoCorsaSHMIndicatorStatus(status : number) 
+    {
+        if (this.indicatorEnabledFlag.ACSHM)
+            this.changeIndicatorColor("#assettoCrosaSHMIndicator", status)
+        else
+            this.changeIndicatorColor("#assettoCrosaSHMIndicator", -1)
+    }
     public get IsDefiInidicatorEnabled() {return this.indicatorEnabledFlag.Defi }
     public set IsDefiInidicatorEnabled(flag : boolean) { this.indicatorEnabledFlag.Defi = flag }
     public get IsSSMInidicatorEnabled() {return this.indicatorEnabledFlag.SSM }
@@ -153,7 +161,8 @@ export class ApplicationNavBar
     public set IsELM327InidicatorEnabled(flag: boolean) {this.indicatorEnabledFlag.ELM327 = flag }
     public get IsFUELTRIPInidicatorEnabled() {return this.indicatorEnabledFlag.FUELTRIP }
     public set IsFUELTRIPInidicatorEnabled(flag: boolean) {this.indicatorEnabledFlag.FUELTRIP = flag }
-    
+    public get IsAssettoCorsaSHMInidicatorEnabled() {return this.indicatorEnabledFlag.ACSHM }
+    public set IsAssettoCorsaSHMInidicatorEnabled(flag: boolean) {this.indicatorEnabledFlag.ACSHM = flag }
     private changeIndicatorColor(elementID : string, status : number)
     {
         let cssClass : string = "";
@@ -190,4 +199,5 @@ class indicatorEnaledFlag
     public Arduino = false;
     public ELM327 = false;
     public FUELTRIP = false;
+    public ACSHM = false;
 }
