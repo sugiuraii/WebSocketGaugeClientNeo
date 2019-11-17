@@ -78,7 +78,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
      */
     get FUELTRIPWS() {return this.fueltripWS}
  
-    get AssettoCorsaWS() { return this.AssettoCorsaWS}
+    get AssettoCorsaWS() { return this.assettoCorsaWS}
 
     /**
      * Flag to enable DefiWS client.
