@@ -33,6 +33,7 @@ const ARDUINOCOM_WS_PORT = 2015;
 const SSMCOM_WS_PORT = 2013;
 const ELM327COM_WS_PORT = 2016;
 const FUELTRIP_WS_PORT = 2014;
+const ACSHM_WS_PORT = 2017;
 
 const WEBSOCKET_CHECK_INTERVAL = 1000;
 const WAITTIME_BEFORE_SENDWSSEND = 3000;
@@ -54,7 +55,8 @@ export abstract class MeterApplicationBase extends PIXI.Application
     private ssmWS: WebSocketCommunication.SSMWebsocket;
     private arduinoWS: WebSocketCommunication.ArduinoCOMWebsocket;
     private elm327WS: WebSocketCommunication.ELM327COMWebsocket;
-    private fueltripWS: WebSocketCommunication.FUELTRIPWebsocket;   
+    private fueltripWS: WebSocketCommunication.FUELTRIPWebsocket;
+    private assettoCorsaWS : WebSocketCommunication.AssettoCorsaSHMWebsocket;   
     /**
      * Get DefiWS websocket client.
      */ 
@@ -75,6 +77,9 @@ export abstract class MeterApplicationBase extends PIXI.Application
      * Get FUElTRIP websocket client.
      */
     get FUELTRIPWS() {return this.fueltripWS}
+ 
+    get AssettoCorsaWS() { return this.AssettoCorsaWS}
+
     /**
      * Flag to enable DefiWS client.
      */
@@ -95,7 +100,9 @@ export abstract class MeterApplicationBase extends PIXI.Application
      * Flag to enable FUELTRIP WS client.
      */
     public IsFUELTRIPWSEnabled: boolean;
-    
+
+    public IsAssettoCorsaWSEnabled: boolean;
+
     /**
      * Slow read interval for SSM and ELM327 Websocket.
      */
@@ -158,6 +165,9 @@ export abstract class MeterApplicationBase extends PIXI.Application
     private arduinoParameterCodeList : {code : string, interpolate : boolean}[]; 
     private ssmParameterCodeList : {code : string, readMode : string, interpolate: boolean}[];
     private elm327ParameterCodeList : {code : string, readMode : string, interpolate : boolean}[];
+    private assettoCorsaPhysicsParameterCodeList  : {code : string, interpolate : boolean}[];
+    private assettoCorsaGraphicsParameterCodeList  : {code : string, interpolate : boolean}[];
+    private assettoCorsaStaticInfoParameterCodeList  : {code : string, interpolate : boolean}[];
     
     /**
      * Register Defi parameter code to enable communication.
@@ -196,6 +206,23 @@ export abstract class MeterApplicationBase extends PIXI.Application
         this.elm327ParameterCodeList.push({code, readMode, interpolate});
     }
     
+    public registerAssettoCorsaPhysicsParameterCode(code : string, interpolate : boolean)
+    {
+        this.assettoCorsaPhysicsParameterCodeList.push({code, interpolate});
+    }
+
+    public registerAssettoCorsaGraphicsParameterCode(code : string, interpolate : boolean)
+    {
+        this.assettoCorsaGraphicsParameterCodeList.push({code, interpolate});
+    }
+
+    public registerAssettoCorsaStaticInfoParameterCode(code : string, interpolate : boolean)
+    {
+        this.assettoCorsaStaticInfoParameterCodeList.push({code, interpolate});
+    }
+
+
+
     /**
      * Fueltrip logger section fueltrip time span (in sec).
      */
@@ -264,7 +291,8 @@ export abstract class MeterApplicationBase extends PIXI.Application
         this.registerWebSocketCommonEvents("ARDUINO", this.arduinoWS);
         this.registerWebSocketCommonEvents("ELM327", this.elm327WS);
         this.registerWebSocketCommonEvents("FUELTRIP", this.fueltripWS); 
-        
+        this.registerWebSocketCommonEvents("ACSHM", this.assettoCorsaWS); 
+
         // Set websocket options
         // Code list, etc...
         this.setWebSocketOptions();
@@ -289,10 +317,14 @@ export abstract class MeterApplicationBase extends PIXI.Application
         this.arduinoWS = new WebSocketCommunication.ArduinoCOMWebsocket();
         this.elm327WS = new WebSocketCommunication.ELM327COMWebsocket();
         this.fueltripWS = new WebSocketCommunication.FUELTRIPWebsocket();
+        this.assettoCorsaWS = new WebSocketCommunication.AssettoCorsaSHMWebsocket();
+        
         this.IsDefiWSEnabled = false;
         this.IsSSMWSEnabled = false;
         this.IsArudinoWSEnabled = false;
         this.IsELM327WSEnabled = false;
+        this.IsAssettoCorsaWSEnabled = false;
+
         this.SSMELM327SlowReadInterval = 10;
         
         this.FUELTRIPSectSpan = 300;
@@ -302,6 +334,9 @@ export abstract class MeterApplicationBase extends PIXI.Application
         this.arduinoParameterCodeList = new Array(); 
         this.ssmParameterCodeList = new Array();
         this.elm327ParameterCodeList = new Array();
+        this.assettoCorsaPhysicsParameterCodeList = new Array();
+        this.assettoCorsaGraphicsParameterCodeList = new Array();
+        this.assettoCorsaStaticInfoParameterCodeList = new Array();
     }
     
     private initializeNavBar()
@@ -367,6 +402,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
         this.arduinoWS.URL = "ws://" + webSocketServerName + ":" + ARDUINOCOM_WS_PORT.toString() + "/"; 
         this.elm327WS.URL = "ws://" + webSocketServerName + ":" + ELM327COM_WS_PORT.toString() + "/"; 
         this.fueltripWS.URL = "ws://" + webSocketServerName + ":" + FUELTRIP_WS_PORT.toString() + "/"; 
+        this.assettoCorsaWS.URL = "ws://" + webSocketServerName + ":" + ACSHM_WS_PORT.toString() + "/"; 
     }
     
     private registerWebSocketCommonEvents(logPrefix : string, wsObj: WebSocketCommunication.WebsocketCommon)
@@ -392,6 +428,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
         Indicator.setArduinoIndicatorStatus(this.arduinoWS.getReadyState());
         Indicator.setELM327IndicatorStatus(this.elm327WS.getReadyState());
         Indicator.setFUELTRIPIndicatorStatus(this.fueltripWS.getReadyState());
+        Indicator.setAssetoCorsaSHMIndicatorStatus(this.assettoCorsaWS.getReadyState());
     }
     
     /**
@@ -410,6 +447,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
         Indicator.IsArduinoInidicatorEnabled = this.IsArudinoWSEnabled;
         Indicator.IsELM327InidicatorEnabled = this.IsELM327WSEnabled;
         Indicator.IsFUELTRIPInidicatorEnabled = this.IsFUELTRIPWSEnabled;
+        Indicator.IsAssettoCorsaSHMInidicatorEnabled = this.IsAssettoCorsaWSEnabled;
         
         // Check websocket staus every 1sec
         window.setInterval(() => this.checkWebSocketStatus(), WEBSOCKET_CHECK_INTERVAL);
@@ -481,6 +519,12 @@ export abstract class MeterApplicationBase extends PIXI.Application
             this.connectSSMELM327WebSocket("ELM327WS", this.elm327ParameterCodeList, this.SSMELM327SlowReadInterval, this.elm327WS);
         if (this.IsFUELTRIPWSEnabled)
             this.connectFUELTRIPWebSocket("FUELTRIPWS",  this.FUELTRIPSectSpan, this.FUELTRIPSectStoreMax, this.fueltripWS);
+        if(this.IsAssettoCorsaWSEnabled)
+            this.connectAssetoCorsaSHMWebSocket("ACSHMWS",
+            this.assettoCorsaPhysicsParameterCodeList,
+            this.assettoCorsaGraphicsParameterCodeList,
+            this.assettoCorsaStaticInfoParameterCodeList,
+             this.assettoCorsaWS);
     }
     
     private connectFUELTRIPWebSocket(logPrefix: string, sectSpan : number, sectStoreMax : number, webSocketObj: WebSocketCommunication.FUELTRIPWebsocket)
@@ -577,7 +621,59 @@ export abstract class MeterApplicationBase extends PIXI.Application
         LogWindow.appendLog(logPrefix + " connect...");
         webSocketObj.Connect();
     }
-    
+
+    private connectAssetoCorsaSHMWebSocket(logPrefix : string, 
+        physicsParameterCodeList : {code: string, interpolate : boolean}[],
+        graphicsParameterCodeList : {code: string, interpolate : boolean}[],
+        staticInfoParameterCodeList : {code: string, interpolate : boolean}[],
+         webSocketObj: WebSocketCommunication.AssettoCorsaSHMWebsocket)
+    {
+        const LogWindow = this.applicationnavBar.LogModalDialog;
+        webSocketObj.OnWebsocketOpen = () =>
+        {
+            LogWindow.appendLog(logPrefix + " is connected. SendWSSend/Interval after "  + WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
+            window.setTimeout( () => 
+            {                
+                for (let item of physicsParameterCodeList)
+                {
+                    webSocketObj.SendPhysicsWSSend(item.code, true);
+                    if (item.interpolate)
+                        webSocketObj.EnableInterpolate(item.code)
+                    else
+                        webSocketObj.DisableInterpolate(item.code)
+                }
+                for (let item of graphicsParameterCodeList)
+                {
+                    webSocketObj.SendGraphicsWSSend(item.code, true);
+                    if (item.interpolate)
+                        webSocketObj.EnableInterpolate(item.code)
+                    else
+                        webSocketObj.DisableInterpolate(item.code)
+                }
+                for (let item of staticInfoParameterCodeList)
+                {
+                    webSocketObj.SendStaticInfoWSSend(item.code, true);
+                    if (item.interpolate)
+                        webSocketObj.EnableInterpolate(item.code)
+                    else
+                        webSocketObj.DisableInterpolate(item.code)
+                }
+                //SendPhysicsWSInterval from spinner
+                webSocketObj.SendPhysicsWSInterval(this.getWSIntervalFromLocalStorage());
+                
+            }, WAITTIME_BEFORE_SENDWSSEND);
+        }
+        webSocketObj.OnWebsocketClose = () =>
+        {
+            LogWindow.appendLog(logPrefix + " is disconnected. Reconnect after " + WAITTIME_BEFORE_RECONNECT.toString() + "msec...");                
+            window.setTimeout(() => webSocketObj.Connect(), WAITTIME_BEFORE_RECONNECT);
+        }
+
+        LogWindow.appendLog(logPrefix + " connect...");
+        webSocketObj.Connect();
+    }
+
+
     private setWSIntervalToLocalStorage(interval: number)
     {
         localStorage.setItem("WSInterval", interval.toString());
