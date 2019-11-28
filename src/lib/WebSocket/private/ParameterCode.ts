@@ -23,15 +23,15 @@
  */
 
 //Define string based enum of ParameterCode
-export namespace DefiParameterCode
+export enum DefiParameterCode
 {
-    export const Manifold_Absolute_Pressure = "Manifold_Absolute_Pressure";
-    export const Engine_Speed = "Engine_Speed";
-    export const Oil_Pressure = "Oil_Pressure";
-    export const Fuel_Rail_Pressure = "Fuel_Rail_Pressure";
-    export const Exhaust_Gas_Temperature = "Exhaust_Gas_Temperature";
-    export const Oil_Temperature = "Oil_Temperature";
-    export const Coolant_Temperature = "Coolant_Temperature";
+    Manifold_Absolute_Pressure,
+    Engine_Speed,
+    Oil_Pressure,
+    Fuel_Rail_Pressure,
+    Exhaust_Gas_Temperature,
+    Oil_Temperature,
+    Coolant_Temperature
 }
 
 export namespace ArduinoParameterCode
