@@ -25,6 +25,9 @@
 import * as Interpolation from "./Interpolation";
 import * as JSONFormats from "./JSONFormats";
 import {WebsocketCommon} from "./WebsocketCommon";
+import {DefiParameterCode} from "./ParameterCode";
+import {ArduinoParameterCode} from "./ParameterCode";
+
 
 /**
 * Superclass of Defi/SSM/Arduino/ELM327 websocket.
@@ -53,12 +56,12 @@ export abstract class DefiSSMWebsocketCommon extends WebsocketCommon
         this.valPacketIntervalTime = 0;
     }
 
-    public EnableInterpolate(code : string) : void
+    protected EnableInterpolateBase(code : string) : void
     {
         this.checkInterpolateBufferAndCreateIfEmpty(code);
         this.interpolateBuffers[code].InterpolateEnabled = true;
     }
-    public DisableInterpolate(code : string) : void
+    protected DisableInterpolateBase(code : string) : void
     {
         this.checkInterpolateBufferAndCreateIfEmpty(code);
         this.interpolateBuffers[code].InterpolateEnabled = false;
@@ -70,19 +73,19 @@ export abstract class DefiSSMWebsocketCommon extends WebsocketCommon
             this.interpolateBuffers[code] = new Interpolation.VALInterpolationBuffer();            
     }
     
-    public getVal(code : string, timestamp : number) : number
+    protected getValBase(code : string, timestamp : number) : number
     {
         this.checkInterpolateBufferAndCreateIfEmpty(code);
         return this.interpolateBuffers[code].getVal(timestamp);
     }
 
-    public getRawVal(code : string) : number
+    protected getRawValBase(code : string) : number
     {
         this.checkInterpolateBufferAndCreateIfEmpty(code);
         return this.interpolateBuffers[code].getRawVal();
     }
     
-    public getSwitchFlag(code : string) : boolean
+    protected getSwitchFlagBase(code : string) : boolean
     {
         return this.switchFlagBuffers[code];
     }
@@ -187,14 +190,33 @@ export class DefiCOMWebsocket extends DefiSSMWebsocketCommon
         this.modePrefix = "DEFI";
     }
 
-    public SendWSSend(code : string, flag : boolean) : void
+    public getVal(code : DefiParameterCode, timestamp : number) : number
+    {
+        return super.getValBase(DefiParameterCode[code], timestamp);
+    }
+
+    public getRawVal(code : DefiParameterCode) : number
+    {
+        return super.getRawValBase(DefiParameterCode[code]);
+    }
+
+    public EnableInterpolate(code : DefiParameterCode) : void
+    {
+        super.EnableInterpolateBase(DefiParameterCode[code]);
+    }
+    public DisableInterpolate(code : DefiParameterCode) : void
+    {
+        super.DisableInterpolateBase(DefiParameterCode[code]);
+    }
+    
+    public SendWSSend(code : DefiParameterCode, flag : boolean) : void
     {
         if (!this.IsConnetced)
             return;
 
         let sendWSSendObj = new JSONFormats.SendWSSendJSONMessage();          
         sendWSSendObj.mode = this.modePrefix + "_WS_SEND";
-        sendWSSendObj.code = code;
+        sendWSSendObj.code = DefiParameterCode[code];
         sendWSSendObj.flag = flag;
         let jsonstr: string = JSON.stringify(sendWSSendObj);
         this.WebSocket.send(jsonstr);
@@ -217,13 +239,57 @@ export class DefiCOMWebsocket extends DefiSSMWebsocketCommon
  * ArduinoCOM_Websocket class.
  * @extends DefiCOMWebsocket
  */
-export class ArduinoCOMWebsocket extends DefiCOMWebsocket
+export class ArduinoCOMWebsocket extends DefiSSMWebsocketCommon
 {
     constructor()
     {
         super();
         this.modePrefix = "ARDUINO";
     }
+
+    public getVal(code : ArduinoParameterCode, timestamp : number) : number
+    {
+        return super.getValBase(ArduinoParameterCode[code], timestamp);
+    }
+
+    public getRawVal(code : ArduinoParameterCode) : number
+    {
+        return super.getRawValBase(ArduinoParameterCode[code]);
+    }
+
+    public EnableInterpolate(code : ArduinoParameterCode) : void
+    {
+        super.EnableInterpolateBase(ArduinoParameterCode[code]);
+    }
+    public DisableInterpolate(code : ArduinoParameterCode) : void
+    {
+        super.DisableInterpolateBase(ArduinoParameterCode[code]);
+    }
+    
+    public SendWSSend(code : ArduinoParameterCode, flag : boolean) : void
+    {
+        if (!this.IsConnetced)
+            return;
+
+        let sendWSSendObj = new JSONFormats.SendWSSendJSONMessage();          
+        sendWSSendObj.mode = this.modePrefix + "_WS_SEND";
+        sendWSSendObj.code = ArduinoParameterCode[code];
+        sendWSSendObj.flag = flag;
+        let jsonstr: string = JSON.stringify(sendWSSendObj);
+        this.WebSocket.send(jsonstr);
+    }
+
+    public SendWSInterval(interval : number) : void
+    {
+        if (!this.IsConnetced)
+            return;
+
+        let sendWSIntervalObj = new JSONFormats.SendWSIntervalJSONMessage();
+        sendWSIntervalObj.mode = this.modePrefix + "_WS_INTERVAL";
+        sendWSIntervalObj.interval = interval;           
+        var jsonstr = JSON.stringify(sendWSIntervalObj);
+        this.WebSocket.send(jsonstr);
+    } 
 }
 
 export class SSMWebsocket extends DefiSSMWebsocketCommon
