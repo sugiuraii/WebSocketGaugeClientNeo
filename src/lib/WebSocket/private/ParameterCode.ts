@@ -34,16 +34,16 @@ export enum DefiParameterCode
     Coolant_Temperature
 }
 
-export namespace ArduinoParameterCode
+export enum ArduinoParameterCode
 {
-    export const Engine_Speed = "Engine_Speed";
-    export const Vehicle_Speed = "Vehicle_Speed";
-    export const Manifold_Absolute_Pressure = "Manifold_Absolute_Pressure";
-    export const Coolant_Temperature = "Coolant_Temperature";
-    export const Oil_Temperature = "Oil_Temperature";
-    export const Oil_Temperature2 = "Oil_Temperature2";
-    export const Oil_Pressure = "Oil_Pressure";
-    export const Fuel_Rail_Pressure = "Fuel_Rail_Pressure";
+    Engine_Speed,
+    Vehicle_Speed,
+    Manifold_Absolute_Pressure,
+    Coolant_Temperature,
+    Oil_Temperature,
+    Oil_Temperature2,
+    Oil_Pressure,
+    Fuel_Rail_Pressure
 }
 
 export namespace SSMParameterCode
