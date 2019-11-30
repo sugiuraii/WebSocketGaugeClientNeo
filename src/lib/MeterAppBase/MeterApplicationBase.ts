@@ -161,8 +161,8 @@ export abstract class MeterApplicationBase extends PIXI.Application
             this.texturePathToPreload = this.texturePathToPreload.concat(target);
     }
     
-    private defiParameterCodeList: {code: string, interpolate : boolean}[];
-    private arduinoParameterCodeList : {code : string, interpolate : boolean}[]; 
+    private defiParameterCodeList: {code: WebSocketCommunication.DefiParameterCode, interpolate : boolean}[];
+    private arduinoParameterCodeList : {code : WebSocketCommunication.ArduinoParameterCode, interpolate : boolean}[]; 
     private ssmParameterCodeList : {code : string, readMode : string, interpolate: boolean}[];
     private elm327ParameterCodeList : {code : string, readMode : string, interpolate : boolean}[];
     private assettoCorsaPhysicsParameterCodeList  : {code : string, interpolate : boolean}[];
@@ -174,7 +174,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
      * @param code Parameter code name to register.
      * @param interpolate Flag to enable or disable time domain interpolation.
      */
-    public registerDefiParameterCode(code : string, interpolate : boolean)
+    public registerDefiParameterCode(code : WebSocketCommunication.DefiParameterCode, interpolate : boolean)
     {
         this.defiParameterCodeList.push({code, interpolate});
     }
@@ -183,7 +183,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
      * @param code Parameter code name to register.
      * @param interpolate Flag to enable or disable time domain interpolation.
      */
-    public registerArduinoParameterCode(code : string, interpolate : boolean)
+    public registerArduinoParameterCode(code : WebSocketCommunication.ArduinoParameterCode, interpolate : boolean)
     {
         this.arduinoParameterCodeList.push({code, interpolate});
     }
@@ -510,9 +510,9 @@ export abstract class MeterApplicationBase extends PIXI.Application
     {
         console.debug("called connectWebSocket");
         if (this.IsDefiWSEnabled)
-            this.connectDefiArduinoWebSocket("DefiWS", this.defiParameterCodeList, this.defiWS);
+            this.connectDefiWebSocket("DefiWS", this.defiParameterCodeList, this.defiWS);
         if (this.IsArudinoWSEnabled)
-            this.connectDefiArduinoWebSocket("ArduinoWS", this.arduinoParameterCodeList, this.arduinoWS);
+            this.connectArduinoWebSocket("ArduinoWS", this.arduinoParameterCodeList, this.arduinoWS);
         if (this.IsSSMWSEnabled)
             this.connectSSMELM327WebSocket("SSMWS", this.ssmParameterCodeList, this.SSMELM327SlowReadInterval,  this.ssmWS);
         if (this.IsELM327WSEnabled)
@@ -552,7 +552,40 @@ export abstract class MeterApplicationBase extends PIXI.Application
         
     }
     
-    private connectDefiArduinoWebSocket(logPrefix : string, parameterCodeList : {code: string, interpolate : boolean}[] , webSocketObj: WebSocketCommunication.DefiCOMWebsocket)
+    private connectDefiWebSocket(logPrefix : string, parameterCodeList : {code: WebSocketCommunication.DefiParameterCode, interpolate : boolean}[] , webSocketObj: WebSocketCommunication.DefiCOMWebsocket)
+    {
+        const LogWindow = this.applicationnavBar.LogModalDialog;
+        webSocketObj.OnWebsocketOpen = () =>
+        {
+            LogWindow.appendLog(logPrefix + " is connected. SendWSSend/Interval after "  + WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
+            window.setTimeout( () => 
+            {
+                //SendWSSend
+                for (let item of parameterCodeList)
+                {
+                    webSocketObj.SendWSSend(item.code, true);
+                    if (item.interpolate)
+                        webSocketObj.EnableInterpolate(item.code)
+                    else
+                        webSocketObj.DisableInterpolate(item.code)
+                }
+                
+                //SendWSInterval from spinner
+                webSocketObj.SendWSInterval(this.getWSIntervalFromLocalStorage());
+                
+            }, WAITTIME_BEFORE_SENDWSSEND);
+        }
+        webSocketObj.OnWebsocketClose = () =>
+        {
+            LogWindow.appendLog(logPrefix + " is disconnected. Reconnect after " + WAITTIME_BEFORE_RECONNECT.toString() + "msec...");                
+            window.setTimeout(() => webSocketObj.Connect(), WAITTIME_BEFORE_RECONNECT);
+        }
+
+        LogWindow.appendLog(logPrefix + " connect...");
+        webSocketObj.Connect();
+    }
+
+    private connectArduinoWebSocket(logPrefix : string, parameterCodeList : {code: WebSocketCommunication.ArduinoParameterCode, interpolate : boolean}[] , webSocketObj: WebSocketCommunication.ArduinoCOMWebsocket)
     {
         const LogWindow = this.applicationnavBar.LogModalDialog;
         webSocketObj.OnWebsocketOpen = () =>
@@ -626,7 +659,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
         physicsParameterCodeList : {code: string, interpolate : boolean}[],
         graphicsParameterCodeList : {code: string, interpolate : boolean}[],
         staticInfoParameterCodeList : {code: string, interpolate : boolean}[],
-         webSocketObj: WebSocketCommunication.AssettoCorsaSHMWebsocket)
+        webSocketObj: WebSocketCommunication.AssettoCorsaSHMWebsocket)
     {
         const LogWindow = this.applicationnavBar.LogModalDialog;
         webSocketObj.OnWebsocketOpen = () =>
