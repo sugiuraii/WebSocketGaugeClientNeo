@@ -26,6 +26,7 @@
 
 import {AssettoCorsaSHMWebsocket, AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMStaticInfoParameterCode} from '../lib/WebSocket/WebSocketCommunication';
 import {AssettoCorsaSHMGraphicsParameterCode} from '../lib/WebSocket/WebSocketCommunication';
+import {AssettoCorsaSHMVALCode} from '../lib/WebSocket/WebSocketCommunication';
 import {WebSocketTesterBase} from './base/WebSocketTesterBase'
 
 import * as $ from "jquery";
@@ -167,7 +168,7 @@ class AssettoCorsaSHMWSTest extends WebSocketTesterBase
 
     public showInterpolateVal(timestamp: number) {
         $('#divInterpolatedVAL').html("");
-        for (let key in AssettoCorsaSHMPhysicsParameterCode) {
+        for (let key in AssettoCorsaSHMVALCode) {
             const val: number = this.webSocket.getVal(key, timestamp);
             if (typeof (val) !== "undefined")
                 $('#divInterpolatedVAL').append(key + " : " + val + "<br>");
