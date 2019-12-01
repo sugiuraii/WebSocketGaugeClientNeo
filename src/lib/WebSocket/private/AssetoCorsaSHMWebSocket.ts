@@ -38,9 +38,9 @@ export class AssettoCorsaSHMWebsocket extends WebsocketCommon
     private valPacketIntervalTime : number;
 
     //Interpolate value buffer
-    private interpolateBuffers: {[code: string]: Interpolation.VALInterpolationBuffer} = {};
+    private valueInterpolateBuffers: {[code: string]: Interpolation.VALInterpolationBuffer} = {};
     
-    private switchFlagBuffers: {[code: string] : boolean} = {};
+    private stringBuffers: {[code: string] : string} = {};
 
     constructor()
     {
@@ -109,35 +109,35 @@ export class AssettoCorsaSHMWebsocket extends WebsocketCommon
     public EnableInterpolate(code : string) : void
     {
         this.checkInterpolateBufferAndCreateIfEmpty(code);
-        this.interpolateBuffers[code].InterpolateEnabled = true;
+        this.valueInterpolateBuffers[code].InterpolateEnabled = true;
     }
     public DisableInterpolate(code : string) : void
     {
         this.checkInterpolateBufferAndCreateIfEmpty(code);
-        this.interpolateBuffers[code].InterpolateEnabled = false;
+        this.valueInterpolateBuffers[code].InterpolateEnabled = false;
     }
 
     private checkInterpolateBufferAndCreateIfEmpty(code: string): void
     {
-        if(!(code in this.interpolateBuffers))
-            this.interpolateBuffers[code] = new Interpolation.VALInterpolationBuffer();            
+        if(!(code in this.valueInterpolateBuffers))
+            this.valueInterpolateBuffers[code] = new Interpolation.VALInterpolationBuffer();            
     }
     
     public getVal(code : string, timestamp : number) : number
     {
         this.checkInterpolateBufferAndCreateIfEmpty(code);
-        return this.interpolateBuffers[code].getVal(timestamp);
+        return this.valueInterpolateBuffers[code].getVal(timestamp);
     }
 
     public getRawVal(code : string) : number
     {
         this.checkInterpolateBufferAndCreateIfEmpty(code);
-        return this.interpolateBuffers[code].getRawVal();
+        return this.valueInterpolateBuffers[code].getRawVal();
     }
     
-    public getSwitchFlag(code : string) : boolean
+    public getStringVal(code : string) : string
     {
-        return this.switchFlagBuffers[code];
+        return this.stringBuffers[code];
     }
     
     private processVALJSONMessage(receivedJson: JSONFormats.StringVALJSONMessage) : void
@@ -175,14 +175,14 @@ export class AssettoCorsaSHMWebsocket extends WebsocketCommon
                 else
                     valFlag = false;
                 
-                this.switchFlagBuffers[key] = valFlag;                   
+                this.stringBuffers[key] = valFlag;                   
             }
             else // Val is number
             {
                 const val: number = Number(receivedJson.val[key]);
                 // Register to interpolate buffer
                 this.checkInterpolateBufferAndCreateIfEmpty(key);
-                this.interpolateBuffers[key].setVal(val);
+                this.valueInterpolateBuffers[key].setVal(val);
             }
         }
     }
