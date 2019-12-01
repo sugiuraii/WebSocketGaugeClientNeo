@@ -40,7 +40,7 @@ import {EngineOilTempGaugePanel} from "../../parts/CircularGauges/SemiCircularGa
 import {DigiTachoPanel} from "../../parts/DigiTachoPanel/DigiTachoPanel";
 
 //Import enumuator of parameter code
-import {AssettoCorsaSHMPhysicsParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
+import {AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMNumericalVALCode} from "../../lib/WebSocket/WebSocketCommunication";
 
 
 window.onload = function()
@@ -56,10 +56,10 @@ class CompactMFD_AssettoCorsaSHM extends MeterApplicationBase
         //Enable Arduino websocket clent
         this.IsAssettoCorsaWSEnabled = true;
         
-        this.registerAssettoCorsaPhysicsParameterCode(AssettoCorsaSHMPhysicsParameterCode.Rpms, true);
-        this.registerAssettoCorsaPhysicsParameterCode(AssettoCorsaSHMPhysicsParameterCode.SpeedKmh, true);
-        this.registerAssettoCorsaPhysicsParameterCode(AssettoCorsaSHMPhysicsParameterCode.ManifoldPressure, true);
-        this.registerAssettoCorsaPhysicsParameterCode(AssettoCorsaSHMPhysicsParameterCode.Gear, false);
+        this.registerAssettoCorsaPhysicsParameterCode(AssettoCorsaSHMPhysicsParameterCode.Rpms);
+        this.registerAssettoCorsaPhysicsParameterCode(AssettoCorsaSHMPhysicsParameterCode.SpeedKmh);
+        this.registerAssettoCorsaPhysicsParameterCode(AssettoCorsaSHMPhysicsParameterCode.ManifoldPressure);
+        this.registerAssettoCorsaPhysicsParameterCode(AssettoCorsaSHMPhysicsParameterCode.Gear);
     }
     
     protected setTextureFontPreloadOptions()
@@ -103,12 +103,12 @@ class CompactMFD_AssettoCorsaSHM extends MeterApplicationBase
         this.ticker.add(() => 
         {
             const timestamp = this.ticker.lastTime;
-            const tacho = this.AssettoCorsaWS.getVal(AssettoCorsaSHMPhysicsParameterCode.Rpms, timestamp);
-            const speed = this.AssettoCorsaWS.getVal(AssettoCorsaSHMPhysicsParameterCode.SpeedKmh, timestamp);
-            const gearPos = this.AssettoCorsaWS.getRawVal(AssettoCorsaSHMPhysicsParameterCode.Gear);
+            const tacho = this.AssettoCorsaWS.getVal(AssettoCorsaSHMNumericalVALCode.Rpms, timestamp);
+            const speed = this.AssettoCorsaWS.getVal(AssettoCorsaSHMNumericalVALCode.SpeedKmh, timestamp);
+            const gearPos = this.AssettoCorsaWS.getRawVal(AssettoCorsaSHMNumericalVALCode.Gear);
             const engineOilTemp = 110;
                         
-            const boost = this.AssettoCorsaWS.getVal(AssettoCorsaSHMPhysicsParameterCode.ManifoldPressure, timestamp) * 1.0197;
+            const boost = this.AssettoCorsaWS.getVal(AssettoCorsaSHMNumericalVALCode.ManifoldPressure, timestamp) * 1.0197;
             //convert bar to kgf/cm2 and relative pressure;
             const waterTemp = 95;
             

@@ -52,9 +52,9 @@ class AnalogTripleMeter_Arduino extends MeterApplicationBase
     protected setWebSocketOptions()
     {
         this.IsArudinoWSEnabled = true;
-        this.registerArduinoParameterCode(ArduinoParameterCode.Manifold_Absolute_Pressure, true);         
-        this.registerArduinoParameterCode(ArduinoParameterCode.Coolant_Temperature, true); 
-        this.registerArduinoParameterCode(ArduinoParameterCode.Oil_Temperature, true);
+        this.registerArduinoParameterCode(ArduinoParameterCode.Manifold_Absolute_Pressure);         
+        this.registerArduinoParameterCode(ArduinoParameterCode.Coolant_Temperature); 
+        this.registerArduinoParameterCode(ArduinoParameterCode.Oil_Temperature);
 
     }
     

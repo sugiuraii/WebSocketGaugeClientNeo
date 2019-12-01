@@ -117,11 +117,6 @@ class AssettoCorsaSHMWSTest extends WebSocketTesterBase
         const codeFlag = $('#physCodeFlag').val() === "true" ? true : false; 
         const codeName = AssettoCorsaSHMPhysicsParameterCode[$('#physCodeSelect').val().toString()];
         this.webSocket.SendPhysicsWSSend(codeName, codeFlag);
-
-        if(codeFlag)
-            this.webSocket.EnableInterpolate(codeName);
-        else
-            this.webSocket.DisableInterpolate(codeName);
     };
 
     public inputPhysWSInterval()

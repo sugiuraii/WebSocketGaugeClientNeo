@@ -53,17 +53,6 @@ export abstract class DefiSSMWebsocketCommon extends WebsocketCommon
         this.valPacketIntervalTime = 0;
     }
 
-    public EnableInterpolate(code : string) : void
-    {
-        this.checkInterpolateBufferAndCreateIfEmpty(code);
-        this.interpolateBuffers[code].InterpolateEnabled = true;
-    }
-    public DisableInterpolate(code : string) : void
-    {
-        this.checkInterpolateBufferAndCreateIfEmpty(code);
-        this.interpolateBuffers[code].InterpolateEnabled = false;
-    }
-
     private checkInterpolateBufferAndCreateIfEmpty(code: string): void
     {
         if(!(code in this.interpolateBuffers))

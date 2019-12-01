@@ -63,24 +63,4 @@ class DefiCOMWSTestInterpolate extends DefiArduinoCOMWSTestBase{
         }
         window.requestAnimationFrame((timestamp: number) => this.showInterpolateVal(timestamp));
     }
-    
-    public inputWSSend() {
-        super.inputWSSend();
-        
-        //Set interpolation flag.
-        const code: string = $('#codeSelect').val().toString();
-        const flag: string = $('#codeFlag').val().toString();
-        switch (flag) {
-            case "true":
-                this.WebSocket.EnableInterpolate(code);
-                break;
-            case "false":
-                this.WebSocket.DisableInterpolate(code);
-                break;
-            default:
-                console.log("Error : #codeflag is nether true or false.");
-                break;
-        }
-    };
-
 } 

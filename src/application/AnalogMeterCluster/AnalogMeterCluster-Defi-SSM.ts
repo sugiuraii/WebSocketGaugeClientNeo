@@ -56,11 +56,11 @@ class AnalogMeterCluster_Defi_SSM extends MeterApplicationBase
         this.IsSSMWSEnabled = true;
         this.IsFUELTRIPWSEnabled = true;
         
-        this.registerDefiParameterCode(DefiParameterCode.Engine_Speed, true);
-        this.registerDefiParameterCode(DefiParameterCode.Manifold_Absolute_Pressure, true);
-        this.registerSSMParameterCode(SSMParameterCode.Vehicle_Speed, ReadModeCode.SLOWandFAST, true);
-        this.registerSSMParameterCode(SSMParameterCode.Coolant_Temperature, ReadModeCode.SLOW, false);
-        this.registerSSMParameterCode(SSMSwitchCode.getNumericCodeFromSwitchCode(SSMSwitchCode.Neutral_Position_Switch), ReadModeCode.SLOWandFAST, false);
+        this.registerDefiParameterCode(DefiParameterCode.Engine_Speed);
+        this.registerDefiParameterCode(DefiParameterCode.Manifold_Absolute_Pressure);
+        this.registerSSMParameterCode(SSMParameterCode.Vehicle_Speed, ReadModeCode.SLOWandFAST);
+        this.registerSSMParameterCode(SSMParameterCode.Coolant_Temperature, ReadModeCode.SLOW);
+        this.registerSSMParameterCode(SSMSwitchCode.getNumericCodeFromSwitchCode(SSMSwitchCode.Neutral_Position_Switch), ReadModeCode.SLOWandFAST);
     }
     
     protected setTextureFontPreloadOptions()
