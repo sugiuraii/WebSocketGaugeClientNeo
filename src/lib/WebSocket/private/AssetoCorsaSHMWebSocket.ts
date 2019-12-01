@@ -25,6 +25,12 @@
 import * as Interpolation from "./Interpolation";
 import * as JSONFormats from "./JSONFormats";
 import {WebsocketCommon} from "./WebsocketCommon";
+import {AssettoCorsaSHMNumericalVALCode,
+        AssettoCorsaSHMStringVALCode,
+        AssettoCorsaSHMGraphicsParameterCode,
+        AssettoCorsaSHMPhysicsParameterCode,
+        AssettoCorsaSHMStaticInfoParameterCode} from "./AssettoCorsaSHMParameterCode";
+import {EnumUtils} from "../../EnumUtils";
 
 export class AssettoCorsaSHMWebsocket extends WebsocketCommon
 {
@@ -51,19 +57,19 @@ export class AssettoCorsaSHMWebsocket extends WebsocketCommon
         this.valPacketIntervalTime = 0;
     }
 
-    public SendPhysicsWSSend(code : string, flag : boolean)
+    public SendPhysicsWSSend(code : AssettoCorsaSHMPhysicsParameterCode, flag : boolean)
     {
-        this.SendWSSend("PHYS", code, flag);
+        this.SendWSSend("PHYS", AssettoCorsaSHMPhysicsParameterCode[code], flag);
     }
 
-    public SendGraphicsWSSend(code : string, flag : boolean)
+    public SendGraphicsWSSend(code : AssettoCorsaSHMGraphicsParameterCode, flag : boolean)
     {
-        this.SendWSSend("GRPH", code, flag);
+        this.SendWSSend("GRPH", AssettoCorsaSHMGraphicsParameterCode[code], flag);
     }
 
-    public SendStaticInfoWSSend(code : string, flag : boolean)
+    public SendStaticInfoWSSend(code : AssettoCorsaSHMStaticInfoParameterCode, flag : boolean)
     {
-        this.SendWSSend("STATIC", code, flag);
+        this.SendWSSend("STATIC", AssettoCorsaSHMStaticInfoParameterCode[code], flag);
     }
 
     public SendPhysicsWSInterval(interval : number)
@@ -106,38 +112,30 @@ export class AssettoCorsaSHMWebsocket extends WebsocketCommon
         this.WebSocket.send(jsonstr);
     }
 
-    public EnableInterpolate(code : string) : void
+    private checkInterpolateBufferAndCreateIfEmpty(codeName: string): void
     {
-        this.checkInterpolateBufferAndCreateIfEmpty(code);
-        this.valueInterpolateBuffers[code].InterpolateEnabled = true;
-    }
-    public DisableInterpolate(code : string) : void
-    {
-        this.checkInterpolateBufferAndCreateIfEmpty(code);
-        this.valueInterpolateBuffers[code].InterpolateEnabled = false;
-    }
-
-    private checkInterpolateBufferAndCreateIfEmpty(code: string): void
-    {
-        if(!(code in this.valueInterpolateBuffers))
-            this.valueInterpolateBuffers[code] = new Interpolation.VALInterpolationBuffer();            
+        if(!(codeName in this.valueInterpolateBuffers))
+            this.valueInterpolateBuffers[codeName] = new Interpolation.VALInterpolationBuffer();            
     }
     
-    public getVal(code : string, timestamp : number) : number
+    public getVal(code : AssettoCorsaSHMNumericalVALCode, timestamp : number) : number
     {
-        this.checkInterpolateBufferAndCreateIfEmpty(code);
-        return this.valueInterpolateBuffers[code].getVal(timestamp);
+        const codeName = AssettoCorsaSHMNumericalVALCode[code];
+        this.checkInterpolateBufferAndCreateIfEmpty(codeName);
+        return this.valueInterpolateBuffers[codeName].getVal(timestamp);
     }
 
-    public getRawVal(code : string) : number
+    public getRawVal(code : AssettoCorsaSHMNumericalVALCode) : number
     {
-        this.checkInterpolateBufferAndCreateIfEmpty(code);
+        const codeName = AssettoCorsaSHMNumericalVALCode[code];
+        this.checkInterpolateBufferAndCreateIfEmpty(codeName);
         return this.valueInterpolateBuffers[code].getRawVal();
     }
     
-    public getStringVal(code : string) : string
+    public getStringVal(code : AssettoCorsaSHMStringVALCode) : string
     {
-        return this.stringBuffers[code];
+        const codeName = AssettoCorsaSHMStringVALCode[code];
+        return this.stringBuffers[codeName];
     }
     
     private processVALJSONMessage(receivedJson: JSONFormats.StringVALJSONMessage) : void
@@ -165,25 +163,19 @@ export class AssettoCorsaSHMWebsocket extends WebsocketCommon
                 if (key in this.onVALPacketReceivedByCode)
                     this.OnVALPacketReceivedByCode[key](valStr);
             }
-
+            
             // Store into interpolation(or value) buffer.
-            if (valStr.toLowerCase() === "true" || valStr.toLowerCase() === "false") //Val is boolean (ex. SSMSwitchCode)
-            {
-                let valFlag : boolean;
-                if(valStr.toLowerCase() === "true")
-                    valFlag = true;
-                else
-                    valFlag = false;
-                
-                this.stringBuffers[key] = valFlag;                   
-            }
-            else // Val is number
+            if (EnumUtils.IsEnumContaninsKey(AssettoCorsaSHMNumericalVALCode, key))// Val is number
             {
                 const val: number = Number(receivedJson.val[key]);
                 // Register to interpolate buffer
-                this.checkInterpolateBufferAndCreateIfEmpty(key);
+                this.checkInterpolateBufferAndCreateIfEmpty(AssettoCorsaSHMNumericalVALCode[key]);
                 this.valueInterpolateBuffers[key].setVal(val);
             }
+            else if (EnumUtils.IsEnumContaninsKey(AssettoCorsaSHMStringVALCode, key)) //Val is string.
+                this.stringBuffers[key] = valStr;                   
+            else
+                throw new Error("Undefined key of VAL packet is found.");
         }
     }
     
@@ -226,5 +218,4 @@ export class AssettoCorsaSHMWebsocket extends WebsocketCommon
     public get OnVALPacketReceived() {return this.onVALPacketReceived};
     public set OnVALPacketReceived(func) {this.onVALPacketReceived = func };
     public get VALPacketIntervalTime(): number { return this.valPacketIntervalTime; }
-
 }
