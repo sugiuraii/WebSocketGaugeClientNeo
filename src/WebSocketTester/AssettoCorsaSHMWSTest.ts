@@ -24,10 +24,10 @@
 
 /// <reference path="../lib/webpackRequire.ts" />
 
-import {AssettoCorsaSHMWebsocket, AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMStaticInfoParameterCode} from '../lib/WebSocket/WebSocketCommunication';
-import {AssettoCorsaSHMGraphicsParameterCode} from '../lib/WebSocket/WebSocketCommunication';
-import {AssettoCorsaSHMVALCode} from '../lib/WebSocket/WebSocketCommunication';
+import {AssettoCorsaSHMWebsocket, AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMStaticInfoParameterCode, AssettoCorsaSHMGraphicsParameterCode} from '../lib/WebSocket/WebSocketCommunication';
+import {AssettoCorsaSHMNumericalVALCode, AssettoCorsaSHMStringVALCode } from '../lib/WebSocket/WebSocketCommunication';
 import {WebSocketTesterBase} from './base/WebSocketTesterBase'
+import {EnumUtils} from '../lib/EnumUtils'
 
 import * as $ from "jquery";
 require('./AssettoCorsaSHMWSTest.html');
@@ -40,7 +40,7 @@ window.onload = function()
 
 class AssettoCorsaSHMWSTest extends WebSocketTesterBase
 {
-    private webSocket : AssettoCorsaSHMWebsocket;        
+    private webSocket : AssettoCorsaSHMWebsocket;
     constructor()
     {
         const webSocket = new AssettoCorsaSHMWebsocket();
@@ -62,12 +62,9 @@ class AssettoCorsaSHMWSTest extends WebSocketTesterBase
 
     protected setParameterCodeSelectBox() : void
     {
-        for (let code in AssettoCorsaSHMPhysicsParameterCode)
-            $('#physCodeSelect').append($('<option>').html(code).val(code));
-        for (let code in AssettoCorsaSHMGraphicsParameterCode)
-            $('#grphCodeSelect').append($('<option>').html(code).val(code));
-        for (let code in AssettoCorsaSHMStaticInfoParameterCode)
-            $('#staticCodeSelect').append($('<option>').html(code).val(code));
+        EnumUtils.EnumToKeyStrArray(AssettoCorsaSHMPhysicsParameterCode).forEach(code => $('#physCodeSelect').append($('<option>').html(code).val(code)));
+        EnumUtils.EnumToKeyStrArray(AssettoCorsaSHMGraphicsParameterCode).forEach(code => $('#grphCodeSelect').append($('<option>').html(code).val(code)));
+        EnumUtils.EnumToKeyStrArray(AssettoCorsaSHMStaticInfoParameterCode).forEach(code => $('#staticCodeSelect').append($('<option>').html(code).val(code)));
     }
 
     protected registerWSEvents() : void
@@ -118,22 +115,13 @@ class AssettoCorsaSHMWSTest extends WebSocketTesterBase
     public inputPhysWSSend()
     {
         const codeFlag = $('#physCodeFlag').val() === "true" ? true : false; 
-        this.webSocket.SendPhysicsWSSend($('#physCodeSelect').val().toString(), codeFlag);
+        const codeName = AssettoCorsaSHMPhysicsParameterCode[$('#physCodeSelect').val().toString()];
+        this.webSocket.SendPhysicsWSSend(codeName, codeFlag);
 
-        //Set interpolation flag.
-        const code: string = $('#physCodeSelect').val().toString();
-        const flag: string = $('#physCodeFlag').val().toString();
-        switch (flag) {
-            case "true":
-                this.webSocket.EnableInterpolate(code);
-                break;
-            case "false":
-                this.webSocket.DisableInterpolate(code);
-                break;
-            default:
-                console.log("Error : #codeflag is nether true or false.");
-                break;
-        }
+        if(codeFlag)
+            this.webSocket.EnableInterpolate(codeName);
+        else
+            this.webSocket.DisableInterpolate(codeName);
     };
 
     public inputPhysWSInterval()
@@ -144,8 +132,9 @@ class AssettoCorsaSHMWSTest extends WebSocketTesterBase
 
     public inputGrphWSSend()
     {
-        const codeFlag = $('#grphCodeFlag').val() === "true" ? true : false; 
-        this.webSocket.SendGraphicsWSSend($('#grphCodeSelect').val().toString(), codeFlag);
+        const codeFlag = $('#grphCodeFlag').val() === "true" ? true : false;
+        const codeName = AssettoCorsaSHMGraphicsParameterCode[$('#grphCodeSelect').val().toString()];
+        this.webSocket.SendGraphicsWSSend(codeName, codeFlag);
     };
 
     public inputGrphWSInterval()
@@ -156,8 +145,9 @@ class AssettoCorsaSHMWSTest extends WebSocketTesterBase
 
     public inputStaticWSSend()
     {
+        const codeName = AssettoCorsaSHMStaticInfoParameterCode[$('#staticCodeSelect').val().toString()];
         const codeFlag = $('#staticCodeFlag').val() === "true" ? true : false; 
-        this.webSocket.SendStaticInfoWSSend($('#staticCodeSelect').val().toString(), codeFlag);
+        this.webSocket.SendStaticInfoWSSend(codeName, codeFlag);
     };
 
     public inputStaticWSInterval()
@@ -168,11 +158,14 @@ class AssettoCorsaSHMWSTest extends WebSocketTesterBase
 
     public showInterpolateVal(timestamp: number) {
         $('#divInterpolatedVAL').html("");
-        for (let key in AssettoCorsaSHMVALCode) {
-            const val: number = this.webSocket.getVal(key, timestamp);
-            if (typeof (val) !== "undefined")
-                $('#divInterpolatedVAL').append(key + " : " + val + "<br>");
-        }
+        const numericVALCodeIndexList = EnumUtils.EnumToIndexArray(AssettoCorsaSHMNumericalVALCode);
+        numericVALCodeIndexList.forEach(k =>  
+        {
+            const keyIndex : AssettoCorsaSHMNumericalVALCode = k;
+            const keyName : string = AssettoCorsaSHMNumericalVALCode[keyIndex];
+            const val = this.webSocket.getVal(keyIndex, timestamp);
+            $('#divInterpolatedVAL').append(keyName + " : " + val + "<br>");
+        });
         window.requestAnimationFrame((timestamp: number) => this.showInterpolateVal(timestamp));
     }
 }
