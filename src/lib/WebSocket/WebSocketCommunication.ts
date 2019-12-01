@@ -34,9 +34,10 @@ export {ArduinoParameterCode} from "./private/ParameterCode";
 export {SSMParameterCode} from "./private/ParameterCode";
 export {SSMSwitchCode} from "./private/ParameterCode";
 export {OBDIIParameterCode} from "./private/ParameterCode";
-export {AssettoCorsaSHMPhysicsParameterCode} from "./private/ParameterCode";
-export {AssettoCorsaSHMGraphicsParameterCode} from "./private/ParameterCode";
-export {AssettoCorsaSHMStaticInfoParameterCode} from "./private/ParameterCode";
-export {AssettoCorsaSHMVALCode} from "./private/ParameterCode";
+export {AssettoCorsaSHMPhysicsParameterCode} from "./private/AssettoCorsaSHMParameterCode";
+export {AssettoCorsaSHMGraphicsParameterCode} from "./private/AssettoCorsaSHMParameterCode";
+export {AssettoCorsaSHMStaticInfoParameterCode} from "./private/AssettoCorsaSHMParameterCode";
+export {AssettoCorsaSHMNumericalVALCode} from "./private/AssettoCorsaSHMParameterCode";
+export {AssettoCorsaSHMStringVALCode} from "./private/AssettoCorsaSHMParameterCode";
 export {ReadModeCode} from "./private/ParameterCode";
 

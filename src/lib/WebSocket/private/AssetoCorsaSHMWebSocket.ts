@@ -25,6 +25,7 @@
 import * as Interpolation from "./Interpolation";
 import * as JSONFormats from "./JSONFormats";
 import {WebsocketCommon} from "./WebsocketCommon";
+import {AssettoCorsaSHMStringVALCode} from "./AssettoCorsaSHMParameterCode";
 
 export class AssettoCorsaSHMWebsocket extends WebsocketCommon
 {
@@ -167,7 +168,7 @@ export class AssettoCorsaSHMWebsocket extends WebsocketCommon
             }
 
             // Store into interpolation(or value) buffer.
-            if (valStr.toLowerCase() === "true" || valStr.toLowerCase() === "false") //Val is boolean (ex. SSMSwitchCode)
+            if () //Val is string.
             {
                 let valFlag : boolean;
                 if(valStr.toLowerCase() === "true")
