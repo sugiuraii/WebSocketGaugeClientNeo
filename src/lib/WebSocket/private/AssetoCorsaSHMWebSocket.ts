@@ -218,5 +218,4 @@ export class AssettoCorsaSHMWebsocket extends WebsocketCommon
     public get OnVALPacketReceived() {return this.onVALPacketReceived};
     public set OnVALPacketReceived(func) {this.onVALPacketReceived = func };
     public get VALPacketIntervalTime(): number { return this.valPacketIntervalTime; }
-
 }
