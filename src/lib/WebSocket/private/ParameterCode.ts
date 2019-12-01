@@ -538,7 +538,34 @@ export namespace AssettoCorsaSHMStaticInfoParameterCode
     export const PitWindowEnd = "PitWindowEnd";
 }
 
-export namespace AssettoCorsaSHMVALCode
+export namespace AssettoCorsaSHMStringVALCode
+{
+    export const Status = "Status";
+    export const Session = "Session";
+    export const CurrentTime = "CurrentTime";
+    export const LastTime = "LastTime";
+    export const BestTime = "BestTime";
+    export const Split = "Split";
+    
+    export const TyreCompound = "TyreCompound";
+
+    export const Flag = "Flag";
+
+    export const SMVersion = "SMVersion";
+    export const ACVersion = "ACVersion";
+
+    export const CarModel = "CarModel";
+    export const Track = "Track";
+    export const PlayerName = "PlayerName";
+    export const PlayerSurname = "PlayerSurname";
+    export const PlayerNick = "PlayerNick";
+
+    export const TrackConfiguration = "TrackConfiguration";
+
+    export const CarSkin = "CarSkin";
+}
+
+export namespace AssettoCorsaSHMNumericaVALCode
 {
     export const Gas = "Gas";
     export const Brake = "Brake";
@@ -603,12 +630,6 @@ export namespace AssettoCorsaSHMVALCode
     //Custom parameter code
     export const ManifoldPressure = "ManifoldPressure";
 
-    export const Status = "Status";
-    export const Session = "Session";
-    export const CurrentTime = "CurrentTime";
-    export const LastTime = "LastTime";
-    export const BestTime = "BestTime";
-    export const Split = "Split";
     export const CompletedLaps = "CompletedLaps";
     export const Position = "Position";
     export const iCurrentTime = "iCurrentTime";
@@ -620,26 +641,19 @@ export namespace AssettoCorsaSHMVALCode
     export const CurrentSectorIndex = "CurrentSectorIndex";
     export const LastSectorTime = "LastSectorTime";
     export const NumberOfLaps = "NumberOfLaps";
-    export const TyreCompound = "TyreCompound";
     export const ReplayTimeMultiplier = "ReplayTimeMultiplier";
     export const NormalizedCarPosition = "NormalizedCarPosition";
     export const CarCoordinates = "CarCoordinates";
     export const PenaltyTime = "PenaltyTime";
-    export const Flag = "Flag";
+
     export const IdealLineOn = "IdealLineOn";
     export const IsInPitLane = "IsInPitLane";
     export const SurfaceGrip = "SurfaceGrip";
     export const MandatoryPitDone = "MandatoryPitDone";
 
-    export const SMVersion = "SMVersion";
-    export const ACVersion = "ACVersion";
     export const NumberOfSessions = "NumberOfSessions";
     export const NumCars = "NumCars";
-    export const CarModel = "CarModel";
-    export const Track = "Track";
-    export const PlayerName = "PlayerName";
-    export const PlayerSurname = "PlayerSurname";
-    export const PlayerNick = "PlayerNick";
+
     export const SectorCount = "SectorCount";
     export const MaxTorque = "MaxTorque";
     export const MaxPower = "MaxPower";
@@ -663,11 +677,11 @@ export namespace AssettoCorsaSHMVALCode
     export const EngineBrakeSettingsCount = "EngineBrakeSettingsCount";
     export const ErsPowerControllerCount = "ErsPowerControllerCount";
     export const TrackSPlineLength = "TrackSPlineLength";
-    export const TrackConfiguration = "TrackConfiguration";
+
     export const ErsMaxJ = "ErsMaxJ";
     export const IsTimedRace = "IsTimedRace";
     export const HasExtraLap = "HasExtraLap";
-    export const CarSkin = "CarSkin";
+
     export const ReversedGridPositions = "ReversedGridPositions";
     export const PitWindowStart = "PitWindowStart";
     export const PitWindowEnd = "PitWindowEnd";
