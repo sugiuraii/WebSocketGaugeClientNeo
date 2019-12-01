@@ -65,14 +65,6 @@ export class FUELTRIPWebsocket extends WebsocketCommon
         this.momentFUELTripPacketIntervalTime = 0;
     }
     
-    public EnableInterpolate() : void
-    {
-        this.momentGasMilageInterpolateBuffer.InterpolateEnabled = true;
-    }
-    public DisableInterpolate() : void
-    {
-        this.momentGasMilageInterpolateBuffer.InterpolateEnabled = false;
-    }
     public getMomentGasMilage(timestamp : number) : number
     {
         return this.momentGasMilageInterpolateBuffer.getVal(timestamp);

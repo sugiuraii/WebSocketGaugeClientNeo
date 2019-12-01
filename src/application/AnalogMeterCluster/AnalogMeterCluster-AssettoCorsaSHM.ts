@@ -34,7 +34,7 @@ import {MeterApplicationBase} from "../../lib/MeterAppBase/MeterApplicationBase"
 import {AnalogMeterCluster} from "../../parts/AnalogMeterCluster/AnalogMeterCluster";
 
 //Import enumuator of parameter code
-import {AssettoCorsaSHMPhysicsParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
+import {AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMNumericalVALCode} from "../../lib/WebSocket/WebSocketCommunication";
 import {AssettoCorsaSHMGraphicsParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
 import {AssettoCorsaSHMStaticInfoParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
 
@@ -53,10 +53,10 @@ class AnalogMeterCluster_AssettoCorsaSHM extends MeterApplicationBase
     {
         this.IsAssettoCorsaWSEnabled = true;
         
-        this.registerAssettoCorsaPhysicsParameterCode(AssettoCorsaSHMPhysicsParameterCode.Rpms, true);
-        this.registerAssettoCorsaPhysicsParameterCode(AssettoCorsaSHMPhysicsParameterCode.SpeedKmh, true);
-        this.registerAssettoCorsaPhysicsParameterCode(AssettoCorsaSHMPhysicsParameterCode.ManifoldPressure, true);
-        this.registerAssettoCorsaPhysicsParameterCode(AssettoCorsaSHMPhysicsParameterCode.Gear, true);
+        this.registerAssettoCorsaPhysicsParameterCode(AssettoCorsaSHMPhysicsParameterCode.Rpms);
+        this.registerAssettoCorsaPhysicsParameterCode(AssettoCorsaSHMPhysicsParameterCode.SpeedKmh);
+        this.registerAssettoCorsaPhysicsParameterCode(AssettoCorsaSHMPhysicsParameterCode.ManifoldPressure);
+        this.registerAssettoCorsaPhysicsParameterCode(AssettoCorsaSHMPhysicsParameterCode.Gear);
     }
     
     protected setTextureFontPreloadOptions()
@@ -73,15 +73,15 @@ class AnalogMeterCluster_AssettoCorsaSHM extends MeterApplicationBase
 
         this.ticker.add(() => {
             const timestamp = this.ticker.lastTime;
-            const tacho = this.AssettoCorsaWS.getVal(AssettoCorsaSHMPhysicsParameterCode.Rpms, timestamp);
-            const boost = this.AssettoCorsaWS.getVal(AssettoCorsaSHMPhysicsParameterCode.ManifoldPressure, timestamp) * 1.01972 //convert kPa to kgf/cm2 and relative pressure;
-            const speed = this.AssettoCorsaWS.getVal(AssettoCorsaSHMPhysicsParameterCode.SpeedKmh, timestamp);
+            const tacho = this.AssettoCorsaWS.getVal(AssettoCorsaSHMNumericalVALCode.Rpms, timestamp);
+            const boost = this.AssettoCorsaWS.getVal(AssettoCorsaSHMNumericalVALCode.ManifoldPressure, timestamp) * 1.01972 //convert kPa to kgf/cm2 and relative pressure;
+            const speed = this.AssettoCorsaWS.getVal(AssettoCorsaSHMNumericalVALCode.SpeedKmh, timestamp);
             const waterTemp = 95;
             const trip = 100;
             const fuel = 20;
             const gasMilage = 10;
             
-            const gearPos = this.AssettoCorsaWS.getRawVal(AssettoCorsaSHMPhysicsParameterCode.Gear);
+            const gearPos = this.AssettoCorsaWS.getRawVal(AssettoCorsaSHMNumericalVALCode.Gear);
             
             meterCluster.Tacho = tacho;
             meterCluster.Boost = boost; 
