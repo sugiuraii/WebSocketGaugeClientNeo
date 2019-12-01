@@ -24,15 +24,32 @@
 
  export namespace EnumUtils
  {
-    export function EnumToIndexArray(e : object) : number[]
+    export function EnumToIndexArray(enumType : object) : number[]
     {
         // Filter only index since Object.key(enum) generates array with both index and keyname.
-        return Object.keys(e).filter(k => !isNaN(Number(k))).map(k=> Number(k));
+        return Object.keys(enumType).filter(k => !isNaN(Number(k))).map(k=> Number(k));
     }
 
-    export function EnumToKeyStrArray(e : object) : string[]
+    export function EnumToKeyStrArray(enumType : object) : string[]
     {
         // Filter only key since Object.key(enum) generates array with both index and keyname.
-        return Object.keys(e).filter(k => isNaN(Number(k)));
+        return Object.keys(enumType).filter(k => isNaN(Number(k)));
+    }
+
+    export function GetKeyStr(enumType : object, value : number) : string
+    {
+        return enumType[value];
+    }
+
+    export function GetEnumValue(enumType : object, keyName : string) : number
+    {
+        if(enumType[keyName] == undefined)
+            throw Error("Given key is not found in enum.")
+        return Number(enumType[keyName]);
+    }
+
+    export function IsEnumContaninsKey(enumType : object, keyName : string) :boolean
+    {
+        return !(enumType[keyName] == undefined);
     }
 }
