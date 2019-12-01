@@ -41,8 +41,6 @@ export class VALInterpolationBuffer
 
     private updatePeriodAveragingQueue: MovingAverageQueue;
 
-    private interpolateEnabled : boolean = false;
-
     constructor()
     {
         //Set default value to avoid return "undefined" on getVal
@@ -97,14 +95,8 @@ export class VALInterpolationBuffer
         this.value = value;
     }
 
-    public get InterpolateEnabled() {return this.interpolateEnabled;}
-    public set InterpolateEnabled(flag) {this.interpolateEnabled = flag;}
-
     public getVal(timeStamp?: number): number
     {
-        if (!this.InterpolateEnabled)
-            return this.value;
-
         let actualTimeStamp : number
         if(!(typeof(timeStamp) === "number"))
             actualTimeStamp = performance.now();
