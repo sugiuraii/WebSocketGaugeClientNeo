@@ -52,9 +52,9 @@ class AnalogTripleMeter_Defi extends MeterApplicationBase
     protected setWebSocketOptions()
     {
         this.IsDefiWSEnabled = true;
-        this.registerDefiParameterCode(DefiParameterCode.Manifold_Absolute_Pressure, true);         
-        this.registerDefiParameterCode(DefiParameterCode.Coolant_Temperature, true); 
-        this.registerDefiParameterCode(DefiParameterCode.Oil_Temperature, true);
+        this.registerDefiParameterCode(DefiParameterCode.Manifold_Absolute_Pressure);         
+        this.registerDefiParameterCode(DefiParameterCode.Coolant_Temperature); 
+        this.registerDefiParameterCode(DefiParameterCode.Oil_Temperature);
 
     }
     
