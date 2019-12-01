@@ -30,6 +30,7 @@ import {AssettoCorsaSHMNumericalVALCode,
         AssettoCorsaSHMGraphicsParameterCode,
         AssettoCorsaSHMPhysicsParameterCode,
         AssettoCorsaSHMStaticInfoParameterCode} from "./AssettoCorsaSHMParameterCode";
+import {EnumUtils} from "../../EnumUtils";
 
 export class AssettoCorsaSHMWebsocket extends WebsocketCommon
 {
@@ -113,36 +114,41 @@ export class AssettoCorsaSHMWebsocket extends WebsocketCommon
 
     public EnableInterpolate(code : AssettoCorsaSHMNumericalVALCode) : void
     {
-        this.checkInterpolateBufferAndCreateIfEmpty(code);
-        this.valueInterpolateBuffers[code].InterpolateEnabled = true;
+        const codeName = AssettoCorsaSHMNumericalVALCode[code];
+        this.checkInterpolateBufferAndCreateIfEmpty(codeName);
+        this.valueInterpolateBuffers[codeName].InterpolateEnabled = true;
     }
     public DisableInterpolate(code : AssettoCorsaSHMNumericalVALCode) : void
     {
-        this.checkInterpolateBufferAndCreateIfEmpty(code);
-        this.valueInterpolateBuffers[code].InterpolateEnabled = false;
+        const codeName = AssettoCorsaSHMNumericalVALCode[code];
+        this.checkInterpolateBufferAndCreateIfEmpty(codeName);
+        this.valueInterpolateBuffers[codeName].InterpolateEnabled = false;
     }
 
-    private checkInterpolateBufferAndCreateIfEmpty(code: AssettoCorsaSHMNumericalVALCode): void
+    private checkInterpolateBufferAndCreateIfEmpty(codeName: string): void
     {
-        if(!(code in this.valueInterpolateBuffers))
-            this.valueInterpolateBuffers[code] = new Interpolation.VALInterpolationBuffer();            
+        if(!(codeName in this.valueInterpolateBuffers))
+            this.valueInterpolateBuffers[codeName] = new Interpolation.VALInterpolationBuffer();            
     }
     
     public getVal(code : AssettoCorsaSHMNumericalVALCode, timestamp : number) : number
     {
-        this.checkInterpolateBufferAndCreateIfEmpty(code);
-        return this.valueInterpolateBuffers[code].getVal(timestamp);
+        const codeName = AssettoCorsaSHMNumericalVALCode[code];
+        this.checkInterpolateBufferAndCreateIfEmpty(codeName);
+        return this.valueInterpolateBuffers[codeName].getVal(timestamp);
     }
 
     public getRawVal(code : AssettoCorsaSHMNumericalVALCode) : number
     {
-        this.checkInterpolateBufferAndCreateIfEmpty(code);
+        const codeName = AssettoCorsaSHMNumericalVALCode[code];
+        this.checkInterpolateBufferAndCreateIfEmpty(codeName);
         return this.valueInterpolateBuffers[code].getRawVal();
     }
     
     public getStringVal(code : AssettoCorsaSHMStringVALCode) : string
     {
-        return this.stringBuffers[code];
+        const codeName = AssettoCorsaSHMStringVALCode[code];
+        return this.stringBuffers[codeName];
     }
     
     private processVALJSONMessage(receivedJson: JSONFormats.StringVALJSONMessage) : void
@@ -170,16 +176,16 @@ export class AssettoCorsaSHMWebsocket extends WebsocketCommon
                 if (key in this.onVALPacketReceivedByCode)
                     this.OnVALPacketReceivedByCode[key](valStr);
             }
-
+            
             // Store into interpolation(or value) buffer.
-            if (AssettoCorsaSHMNumericalVALCode[key])// Val is number
+            if (EnumUtils.IsEnumContaninsKey(AssettoCorsaSHMNumericalVALCode, key))// Val is number
             {
                 const val: number = Number(receivedJson.val[key]);
                 // Register to interpolate buffer
                 this.checkInterpolateBufferAndCreateIfEmpty(AssettoCorsaSHMNumericalVALCode[key]);
                 this.valueInterpolateBuffers[key].setVal(val);
             }
-            else if (AssettoCorsaSHMStringVALCode[key]) //Val is string.
+            else if (EnumUtils.IsEnumContaninsKey(AssettoCorsaSHMStringVALCode, key)) //Val is string.
                 this.stringBuffers[key] = valStr;                   
             else
                 throw new Error("Undefined key of VAL packet is found.");
