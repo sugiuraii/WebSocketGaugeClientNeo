@@ -26,6 +26,7 @@
 import {DefiCOMWebsocket} from '../lib/WebSocket/WebSocketCommunication';
 import {DefiParameterCode} from '../lib/WebSocket/WebSocketCommunication';
 import {DefiArduinoCOMWSTestBase} from './base/DefiArduinoWSTestBase';
+import {EnumUtils} from '../lib/EnumUtils'
 
 import * as $ from "jquery";
 require('./DefiCOMWSInterpolateTest.html');
@@ -56,10 +57,15 @@ class DefiCOMWSTestInterpolate extends DefiArduinoCOMWSTestBase{
 
     public showInterpolateVal(timestamp: number) {
         $('#divInterpolatedVAL').html("");
+        EnumUtils.EnumToKeyStrArray(DefiParameterCode).forEach(key => 
+            {
+                const val: number = this.WebSocket.getVal(DefiParameterCode[key], timestamp);
+                if (typeof (val) !== "undefined")
+                    $('#divInterpolatedVAL').append(key + " : " + val + "<br>");
+
+            });
         for (let key in DefiParameterCode) {
-            const val: number = this.WebSocket.getVal(key, timestamp);
-            if (typeof (val) !== "undefined")
-                $('#divInterpolatedVAL').append(key + " : " + val + "<br>");
+            
         }
         window.requestAnimationFrame((timestamp: number) => this.showInterpolateVal(timestamp));
     }
