@@ -46,362 +46,362 @@ export enum ArduinoParameterCode
     Fuel_Rail_Pressure
 }
 
-export namespace SSMParameterCode
+export enum SSMParameterCode
 {
-    export const Engine_Load = "Engine_Load";
-    export const Coolant_Temperature = "Coolant_Temperature";
-    export const Air_Fuel_Correction_1 = "Air_Fuel_Correction_1";
-    export const Air_Fuel_Learning_1 = "Air_Fuel_Learning_1";
-    export const Air_Fuel_Correction_2 = "Air_Fuel_Correction_2";
-    export const Air_Fuel_Learning_2 = "Air_Fuel_Learning_2";
-    export const Manifold_Absolute_Pressure = "Manifold_Absolute_Pressure";
-    export const Engine_Speed = "Engine_Speed";
-    export const Vehicle_Speed = "Vehicle_Speed";
-    export const Ignition_Timing = "Ignition_Timing";
-    export const Intake_Air_Temperature = "Intake_Air_Temperature";
-    export const Mass_Air_Flow = "Mass_Air_Flow";
-    export const Throttle_Opening_Angle = "Throttle_Opening_Angle";
-    export const Front_O2_Sensor_1 = "Front_O2_Sensor_1";
-    export const Rear_O2_Sensor = "Rear_O2_Sensor";
-    export const Front_O2_Sensor_2 = "Front_O2_Sensor_2";
-    export const Battery_Voltage = "Battery_Voltage";
-    export const Air_Flow_Sensor_Voltage = "Air_Flow_Sensor_Voltage";
-    export const Throttle_Sensor_Voltage = "Throttle_Sensor_Voltage";
-    export const Differential_Pressure_Sensor_Voltage = "Differential_Pressure_Sensor_Voltage";
-    export const Fuel_Injection_1_Pulse_Width = "Fuel_Injection_1_Pulse_Width";
-    export const Fuel_Injection_2_Pulse_Width = "Fuel_Injection_2_Pulse_Width";
-    export const Knock_Correction = "Knock_Correction";
-    export const Atmospheric_Pressure = "Atmospheric_Pressure";
-    export const Manifold_Relative_Pressure = "Manifold_Relative_Pressure";
-    export const Pressure_Differential_Sensor = "Pressure_Differential_Sensor";
-    export const Fuel_Tank_Pressure = "Fuel_Tank_Pressure";
-    export const CO_Adjustment = "CO_Adjustment";
-    export const Learned_Ignition_Timing = "Learned_Ignition_Timing";
-    export const Accelerator_Opening_Angle = "Accelerator_Opening_Angle";
-    export const Fuel_Temperature = "Fuel_Temperature";
-    export const Front_O2_Heater_1 = "Front_O2_Heater_1";
-    export const Rear_O2_Heater_Current = "Rear_O2_Heater_Current";
-    export const Front_O2_Heater_2 = "Front_O2_Heater_2";
-    export const Fuel_Level = "Fuel_Level";
-    export const Primary_Wastegate_Duty_Cycle = "Primary_Wastegate_Duty_Cycle";
-    export const Secondary_Wastegate_Duty_Cycle = "Secondary_Wastegate_Duty_Cycle";
-    export const CPC_Valve_Duty_Ratio = "CPC_Valve_Duty_Ratio";
-    export const Tumble_Valve_Position_Sensor_Right = "Tumble_Valve_Position_Sensor_Right";
-    export const Tumble_Valve_Position_Sensor_Left = "Tumble_Valve_Position_Sensor_Left";
-    export const Idle_Speed_Control_Valve_Duty_Ratio = "Idle_Speed_Control_Valve_Duty_Ratio";
-    export const Air_Fuel_Lean_Correction = "Air_Fuel_Lean_Correction";
-    export const Air_Fuel_Heater_Duty = "Air_Fuel_Heater_Duty";
-    export const Idle_Speed_Control_Valve_Step = "Idle_Speed_Control_Valve_Step";
-    export const Number_of_Ex_Gas_Recirc_Steps = "Number_of_Ex_Gas_Recirc_Steps";
-    export const Alternator_Duty = "Alternator_Duty";
-    export const Fuel_Pump_Duty = "Fuel_Pump_Duty";
-    export const Intake_VVT_Advance_Angle_Right = "Intake_VVT_Advance_Angle_Right";
-    export const Intake_VVT_Advance_Angle_Left = "Intake_VVT_Advance_Angle_Left";
-    export const Intake_OCV_Duty_Right = "Intake_OCV_Duty_Right";
-    export const Intake_OCV_Duty_Left = "Intake_OCV_Duty_Left";
-    export const Intake_OCV_Current_Right = "Intake_OCV_Current_Right";
-    export const Intake_OCV_Current_Left = "Intake_OCV_Current_Left";
-    export const Air_Fuel_Sensor_1_Current = "Air_Fuel_Sensor_1_Current";
-    export const Air_Fuel_Sensor_2_Current = "Air_Fuel_Sensor_2_Current";
-    export const Air_Fuel_Sensor_1_Resistance = "Air_Fuel_Sensor_1_Resistance";
-    export const Air_Fuel_Sensor_2_Resistance = "Air_Fuel_Sensor_2_Resistance";
-    export const Air_Fuel_Sensor_1 = "Air_Fuel_Sensor_1";
-    export const Air_Fuel_Sensor_2 = "Air_Fuel_Sensor_2";
-    export const Gear_Position = "Gear_Position";
-    export const A_F_Sensor_1_Heater_Current = "A_F_Sensor_1_Heater_Current";
-    export const A_F_Sensor_2_Heater_Current = "A_F_Sensor_2_Heater_Current";
-    export const Roughness_Monitor_Cylinder_1 = "Roughness_Monitor_Cylinder_1";
-    export const Roughness_Monitor_Cylinder_2 = "Roughness_Monitor_Cylinder_2";
-    export const Air_Fuel_Correction_3 = "Air_Fuel_Correction_3";
-    export const Air_Fuel_Learning_3 = "Air_Fuel_Learning_3";
-    export const Rear_O2_Heater_Voltage = "Rear_O2_Heater_Voltage";
-    export const Air_Fuel_Adjustment_Voltage = "Air_Fuel_Adjustment_Voltage";
-    export const Roughness_Monitor_Cylinder_3 = "Roughness_Monitor_Cylinder_3";
-    export const Roughness_Monitor_Cylinder_4 = "Roughness_Monitor_Cylinder_4";
-    export const Throttle_Motor_Duty = "Throttle_Motor_Duty";
-    export const Throttle_Motor_Voltage = "Throttle_Motor_Voltage";
-    export const Sub_Throttle_Sensor = "Sub_Throttle_Sensor";
-    export const Main_Throttle_Sensor = "Main_Throttle_Sensor";
-    export const Sub_Accelerator_Sensor = "Sub_Accelerator_Sensor";
-    export const Main_Accelerator_Sensor = "Main_Accelerator_Sensor";
-    export const Brake_Booster_Pressure = "Brake_Booster_Pressure";
-    export const Fuel_Rail_Pressure = "Fuel_Rail_Pressure";
-    export const Exhaust_Gas_Temperature = "Exhaust_Gas_Temperature";
-    export const Cold_Start_Injector = "Cold_Start_Injector";
-    export const SCV_Step = "SCV_Step";
-    export const Memorised_Cruise_Speed = "Memorised_Cruise_Speed";
-    export const Exhaust_VVT_Advance_Angle_Right = "Exhaust_VVT_Advance_Angle_Right";
-    export const Exhaust_VVT_Advance_Angle_Left = "Exhaust_VVT_Advance_Angle_Left";
-    export const Exhaust_OCV_Duty_Right = "Exhaust_OCV_Duty_Right";
-    export const Exhaust_OCV_Duty_Left = "Exhaust_OCV_Duty_Left";
-    export const Exhaust_OCV_Current_Right = "Exhaust_OCV_Current_Right";
-    export const Exhaust_OCV_Current_Left = "Exhaust_OCV_Current_Left";
-    export const Switch_P0x061 = "Switch_P0x061";
-    export const Switch_P0x062 = "Switch_P0x062";
-    export const Switch_P0x063 = "Switch_P0x063";
-    export const Switch_P0x064 = "Switch_P0x064";
-    export const Switch_P0x065 = "Switch_P0x065";
-    export const Switch_P0x066 = "Switch_P0x066";
-    export const Switch_P0x067 = "Switch_P0x067";
-    export const Switch_P0x068 = "Switch_P0x068";
-    export const Switch_P0x069 = "Switch_P0x069";
-    export const Switch_P0x120 = "Switch_P0x120";
-    export const Switch_P0x121 = "Switch_P0x121";
+    Engine_Load,
+    Coolant_Temperature,
+    Air_Fuel_Correction_1,
+    Air_Fuel_Learning_1,
+    Air_Fuel_Correction_2,
+    Air_Fuel_Learning_2,
+    Manifold_Absolute_Pressure,
+    Engine_Speed,
+    Vehicle_Speed,
+    Ignition_Timing,
+    Intake_Air_Temperature,
+    Mass_Air_Flow,
+    Throttle_Opening_Angle,
+    Front_O2_Sensor_1,
+    Rear_O2_Sensor,
+    Front_O2_Sensor_2,
+    Battery_Voltage,
+    Air_Flow_Sensor_Voltage,
+    Throttle_Sensor_Voltage,
+    Differential_Pressure_Sensor_Voltage,
+    Fuel_Injection_1_Pulse_Width,
+    Fuel_Injection_2_Pulse_Width,
+    Knock_Correction,
+    Atmospheric_Pressure,
+    Manifold_Relative_Pressure,
+    Pressure_Differential_Sensor,
+    Fuel_Tank_Pressure,
+    CO_Adjustment,
+    Learned_Ignition_Timing,
+    Accelerator_Opening_Angle,
+    Fuel_Temperature,
+    Front_O2_Heater_1,
+    Rear_O2_Heater_Current,
+    Front_O2_Heater_2,
+    Fuel_Level,
+    Primary_Wastegate_Duty_Cycle,
+    Secondary_Wastegate_Duty_Cycle,
+    CPC_Valve_Duty_Ratio,
+    Tumble_Valve_Position_Sensor_Right,
+    Tumble_Valve_Position_Sensor_Left,
+    Idle_Speed_Control_Valve_Duty_Ratio,
+    Air_Fuel_Lean_Correction,
+    Air_Fuel_Heater_Duty,
+    Idle_Speed_Control_Valve_Step,
+    Number_of_Ex_Gas_Recirc_Steps,
+    Alternator_Duty,
+    Fuel_Pump_Duty,
+    Intake_VVT_Advance_Angle_Right,
+    Intake_VVT_Advance_Angle_Left,
+    Intake_OCV_Duty_Right,
+    Intake_OCV_Duty_Left,
+    Intake_OCV_Current_Right,
+    Intake_OCV_Current_Left,
+    Air_Fuel_Sensor_1_Current,
+    Air_Fuel_Sensor_2_Current,
+    Air_Fuel_Sensor_1_Resistance,
+    Air_Fuel_Sensor_2_Resistance,
+    Air_Fuel_Sensor_1,
+    Air_Fuel_Sensor_2,
+    Gear_Position,
+    A_F_Sensor_1_Heater_Current,
+    A_F_Sensor_2_Heater_Current,
+    Roughness_Monitor_Cylinder_1,
+    Roughness_Monitor_Cylinder_2,
+    Air_Fuel_Correction_3,
+    Air_Fuel_Learning_3,
+    Rear_O2_Heater_Voltage,
+    Air_Fuel_Adjustment_Voltage,
+    Roughness_Monitor_Cylinder_3,
+    Roughness_Monitor_Cylinder_4,
+    Throttle_Motor_Duty,
+    Throttle_Motor_Voltage,
+    Sub_Throttle_Sensor,
+    Main_Throttle_Sensor,
+    Sub_Accelerator_Sensor,
+    Main_Accelerator_Sensor,
+    Brake_Booster_Pressure,
+    Fuel_Rail_Pressure,
+    Exhaust_Gas_Temperature,
+    Cold_Start_Injector,
+    SCV_Step,
+    Memorised_Cruise_Speed,
+    Exhaust_VVT_Advance_Angle_Right,
+    Exhaust_VVT_Advance_Angle_Left,
+    Exhaust_OCV_Duty_Right,
+    Exhaust_OCV_Duty_Left,
+    Exhaust_OCV_Current_Right,
+    Exhaust_OCV_Current_Left,
+    Switch_P0x061,
+    Switch_P0x062,
+    Switch_P0x063,
+    Switch_P0x064,
+    Switch_P0x065,
+    Switch_P0x066,
+    Switch_P0x067,
+    Switch_P0x068,
+    Switch_P0x069,
+    Switch_P0x120,
+    Switch_P0x121
 }
 
 export namespace SSMSwitchCode
 {
-    export const AT_Vehicle_ID = "AT_Vehicle_ID";
-    export const Test_Mode_Connector = "Test_Mode_Connector";
-    export const Read_Memory_Connector = "Read_Memory_Connector";
-    export const Neutral_Position_Switch = "Neutral_Position_Switch";
-    export const Idle_Switch = "Idle_Switch";
-    export const Intercooler_AutoWash_Switch = "Intercooler_AutoWash_Switch";
-    export const Ignition_Switch = "Ignition_Switch";
-    export const Power_Steering_Switch = "Power_Steering_Switch";
-    export const Air_Conditioning_Switch = "Air_Conditioning_Switch";
-    export const Handle_Switch = "Handle_Switch";
-    export const Starter_Switch = "Starter_Switch";
-    export const Front_O2_Rich_Signal = "Front_O2_Rich_Signal";
-    export const Rear_O2_Rich_Signal = "Rear_O2_Rich_Signal";
-    export const Front_O2_2_Rich_Signal = "Front_O2_2_Rich_Signal";
-    export const Knock_Signal_1 = "Knock_Signal_1";
-    export const Knock_Signal_2 = "Knock_Signal_2";
-    export const Electrical_Load_Signal = "Electrical_Load_Signal";
-    export const Crank_Position_Sensor = "Crank_Position_Sensor";
-    export const Cam_Position_Sensor = "Cam_Position_Sensor";
-    export const Defogger_Switch = "Defogger_Switch";
-    export const Blower_Switch = "Blower_Switch";
-    export const Interior_Light_Switch = "Interior_Light_Switch";
-    export const Wiper_Switch = "Wiper_Switch";
-    export const AirCon_Lock_Signal = "AirCon_Lock_Signal";
-    export const AirCon_Mid_Pressure_Switch = "AirCon_Mid_Pressure_Switch";
-    export const AirCon_Compressor_Signal = "AirCon_Compressor_Signal";
-    export const Radiator_Fan_Relay_3 = "Radiator_Fan_Relay_3";
-    export const Radiator_Fan_Relay_1 = "Radiator_Fan_Relay_1";
-    export const Radiator_Fan_Relay_2 = "Radiator_Fan_Relay_2";
-    export const Fuel_Pump_Relay = "Fuel_Pump_Relay";
-    export const Intercooler_AutoWash_Relay = "Intercooler_AutoWash_Relay";
-    export const CPC_Solenoid_Valve = "CPC_Solenoid_Valve";
-    export const BlowBy_Leak_Connector = "BlowBy_Leak_Connector";
-    export const PCV_Solenoid_Valve = "PCV_Solenoid_Valve";
-    export const TGV_Output = "TGV_Output";
-    export const TGV_Drive = "TGV_Drive";
-    export const Variable_Intake_Air_Solenoid = "Variable_Intake_Air_Solenoid";
-    export const Pressure_Sources_Change = "Pressure_Sources_Change";
-    export const Vent_Solenoid_Valve = "Vent_Solenoid_Valve";
-    export const P_S_Solenoid_Valve = "P_S_Solenoid_Valve";
-    export const Assist_Air_Solenoid_Valve = "Assist_Air_Solenoid_Valve";
-    export const Tank_Sensor_Control_Valve = "Tank_Sensor_Control_Valve";
-    export const Relief_Valve_Solenoid_1 = "Relief_Valve_Solenoid_1";
-    export const Relief_Valve_Solenoid_2 = "Relief_Valve_Solenoid_2";
-    export const TCS_Relief_Valve_Solenoid = "TCS_Relief_Valve_Solenoid";
-    export const Ex_Gas_Positive_Pressure = "Ex_Gas_Positive_Pressure";
-    export const Ex_Gas_Negative_Pressure = "Ex_Gas_Negative_Pressure";
-    export const Intake_Air_Solenoid = "Intake_Air_Solenoid";
-    export const Muffler_Control = "Muffler_Control";
-    export const Retard_Signal_from_AT = "Retard_Signal_from_AT";
-    export const Fuel_Cut_Signal_from_AT = "Fuel_Cut_Signal_from_AT";
-    export const Ban_of_Torque_Down = "Ban_of_Torque_Down";
-    export const Request_Torque_Down_VDC = "Request_Torque_Down_VDC";
-    export const Torque_Control_Signal_1 = "Torque_Control_Signal_1";
-    export const Torque_Control_Signal_2 = "Torque_Control_Signal_2";
-    export const Torque_Permission_Signal = "Torque_Permission_Signal";
-    export const EAM_Signal = "EAM_Signal";
-    export const AT_coop_lock_up_signal = "AT_coop_lock_up_signal";
-    export const AT_coop_lean_burn_signal = "AT_coop_lean_burn_signal";
-    export const AT_coop_rich_spike_signal = "AT_coop_rich_spike_signal";
-    export const AET_Signal = "AET_Signal";
-    export const ETC_Motor_Relay = "ETC_Motor_Relay";
-    export const Clutch_Switch = "Clutch_Switch";
-    export const Stop_Light_Switch = "Stop_Light_Switch";
-    export const Set_Coast_Switch = "Set_Coast_Switch";
-    export const Rsume_Accelerate_Switch = "Rsume_Accelerate_Switch";
-    export const Brake_Switch = "Brake_Switch";
-    export const Accelerator_Switch = "Accelerator_Switch";
-
-    export function getNumericCodeFromSwitchCode(switchCode : string) : string
+    export function getNumericCodeFromSwitchCode(switchCode : SSMSwitchCode) : SSMParameterCode
     {
         switch(switchCode){
-            case "AT_Vehicle_ID" : 
-            case "Test_Mode_Connector" : 
-            case "Read_Memory_Connector" : 
-                return "Switch_P0x061";
+            case SSMSwitchCode.AT_Vehicle_ID: 
+            case SSMSwitchCode.Test_Mode_Connector: 
+            case SSMSwitchCode.Read_Memory_Connector: 
+                return SSMParameterCode.Switch_P0x061;
 
-            case "Neutral_Position_Switch" : 
-            case "Idle_Switch" : 
-            case "Intercooler_AutoWash_Switch" : 
-            case "Ignition_Switch" : 
-            case "Power_Steering_Switch" : 
-            case "Air_Conditioning_Switch" : 
-                return "Switch_P0x062";
+            case SSMSwitchCode.Neutral_Position_Switch: 
+            case SSMSwitchCode.Idle_Switch: 
+            case SSMSwitchCode.Intercooler_AutoWash_Switch: 
+            case SSMSwitchCode.Ignition_Switch: 
+            case SSMSwitchCode.Power_Steering_Switch: 
+            case SSMSwitchCode.Air_Conditioning_Switch: 
+                return SSMParameterCode.Switch_P0x062;
 
-            case "Handle_Switch" : 
-            case "Starter_Switch" : 
-            case "Front_O2_Rich_Signal" : 
-            case "Rear_O2_Rich_Signal" : 
-            case "Front_O2_2_Rich_Signal" : 
-            case "Knock_Signal_1" : 
-            case "Knock_Signal_2" : 
-            case "Electrical_Load_Signal" : 
-                return "Switch_P0x063";
+            case SSMSwitchCode.Handle_Switch: 
+            case SSMSwitchCode.Starter_Switch: 
+            case SSMSwitchCode.Front_O2_Rich_Signal: 
+            case SSMSwitchCode.Rear_O2_Rich_Signal: 
+            case SSMSwitchCode.Front_O2_2_Rich_Signal: 
+            case SSMSwitchCode.Knock_Signal_1: 
+            case SSMSwitchCode.Knock_Signal_2: 
+            case SSMSwitchCode.Electrical_Load_Signal: 
+                return SSMParameterCode.Switch_P0x063;
 
-            case "Crank_Position_Sensor" : 
-            case "Cam_Position_Sensor" : 
-            case "Defogger_Switch" : 
-            case "Blower_Switch" : 
-            case "Interior_Light_Switch" : 
-            case "Wiper_Switch" : 
-            case "AirCon_Lock_Signal" : 
-            case "AirCon_Mid_Pressure_Switch" : 
-                return "Switch_P0x064";
+            case SSMSwitchCode.Crank_Position_Sensor: 
+            case SSMSwitchCode.Cam_Position_Sensor: 
+            case SSMSwitchCode.Defogger_Switch: 
+            case SSMSwitchCode.Blower_Switch: 
+            case SSMSwitchCode.Interior_Light_Switch: 
+            case SSMSwitchCode.Wiper_Switch: 
+            case SSMSwitchCode.AirCon_Lock_Signal: 
+            case SSMSwitchCode.AirCon_Mid_Pressure_Switch: 
+                return SSMParameterCode.Switch_P0x064;
 
-            case "AirCon_Compressor_Signal" : 
-            case "Radiator_Fan_Relay_3" : 
-            case "Radiator_Fan_Relay_1" : 
-            case "Radiator_Fan_Relay_2" : 
-            case "Fuel_Pump_Relay" : 
-            case "Intercooler_AutoWash_Relay" : 
-            case "CPC_Solenoid_Valve" : 
-            case "BlowBy_Leak_Connector" :
-                return "Switch_P0x065";
+            case SSMSwitchCode.AirCon_Compressor_Signal: 
+            case SSMSwitchCode.Radiator_Fan_Relay_3: 
+            case SSMSwitchCode.Radiator_Fan_Relay_1: 
+            case SSMSwitchCode.Radiator_Fan_Relay_2: 
+            case SSMSwitchCode.Fuel_Pump_Relay: 
+            case SSMSwitchCode.Intercooler_AutoWash_Relay: 
+            case SSMSwitchCode.CPC_Solenoid_Valve: 
+            case SSMSwitchCode.BlowBy_Leak_Connector:
+                return SSMParameterCode.Switch_P0x065;
 
-            case "PCV_Solenoid_Valve" : 
-            case "TGV_Output" : 
-            case "TGV_Drive" : 
-            case "Variable_Intake_Air_Solenoid" : 
-            case "Pressure_Sources_Change" : 
-            case "Vent_Solenoid_Valve" : 
-            case "P_S_Solenoid_Valve" : 
-            case "Assist_Air_Solenoid_Valve" : 
-                return "Switch_P0x066";
+            case SSMSwitchCode.PCV_Solenoid_Valve: 
+            case SSMSwitchCode.TGV_Output: 
+            case SSMSwitchCode.TGV_Drive: 
+            case SSMSwitchCode.Variable_Intake_Air_Solenoid: 
+            case SSMSwitchCode.Pressure_Sources_Change: 
+            case SSMSwitchCode.Vent_Solenoid_Valve: 
+            case SSMSwitchCode.P_S_Solenoid_Valve: 
+            case SSMSwitchCode.Assist_Air_Solenoid_Valve: 
+                return SSMParameterCode.Switch_P0x066;
 
-            case "Tank_Sensor_Control_Valve" : 
-            case "Relief_Valve_Solenoid_1" : 
-            case "Relief_Valve_Solenoid_2" : 
-            case "TCS_Relief_Valve_Solenoid" : 
-            case "Ex_Gas_Positive_Pressure" : 
-            case "Ex_Gas_Negative_Pressure" : 
-            case "Intake_Air_Solenoid" : 
-            case "Muffler_Control" : 
-                return "Switch_P0x067";
+            case SSMSwitchCode.Tank_Sensor_Control_Valve: 
+            case SSMSwitchCode.Relief_Valve_Solenoid_1: 
+            case SSMSwitchCode.Relief_Valve_Solenoid_2: 
+            case SSMSwitchCode.TCS_Relief_Valve_Solenoid: 
+            case SSMSwitchCode.Ex_Gas_Positive_Pressure: 
+            case SSMSwitchCode.Ex_Gas_Negative_Pressure: 
+            case SSMSwitchCode.Intake_Air_Solenoid: 
+            case SSMSwitchCode.Muffler_Control: 
+                return SSMParameterCode.Switch_P0x067;
 
-            case "Retard_Signal_from_AT" : 
-            case "Fuel_Cut_Signal_from_AT" : 
-            case "Ban_of_Torque_Down" : 
-            case "Request_Torque_Down_VDC" : 
-                return "Switch_P0x068";
+            case SSMSwitchCode.Retard_Signal_from_AT: 
+            case SSMSwitchCode.Fuel_Cut_Signal_from_AT: 
+            case SSMSwitchCode.Ban_of_Torque_Down: 
+            case SSMSwitchCode.Request_Torque_Down_VDC: 
+                return SSMParameterCode.Switch_P0x068;
 
-            case "Torque_Control_Signal_1" : 
-            case "Torque_Control_Signal_2" : 
-            case "Torque_Permission_Signal" : 
-            case "EAM_Signal" : 
-            case "AT_coop_lock_up_signal" : 
-            case "AT_coop_lean_burn_signal" : 
-            case "AT_coop_rich_spike_signal" : 
-            case "AET_Signal" : 
-                return "Switch_P0x069";
+            case SSMSwitchCode.Torque_Control_Signal_1: 
+            case SSMSwitchCode.Torque_Control_Signal_2: 
+            case SSMSwitchCode.Torque_Permission_Signal: 
+            case SSMSwitchCode.EAM_Signal: 
+            case SSMSwitchCode.AT_coop_lock_up_signal: 
+            case SSMSwitchCode.AT_coop_lean_burn_signal: 
+            case SSMSwitchCode.AT_coop_rich_spike_signal: 
+            case SSMSwitchCode.AET_Signal: 
+                return SSMParameterCode.Switch_P0x069;
 
-            case "ETC_Motor_Relay" : 
-                return "Switch_P0x120";
+            case SSMSwitchCode.ETC_Motor_Relay: 
+                return SSMParameterCode.Switch_P0x120;
 
-            case "Clutch_Switch" : 
-            case "Stop_Light_Switch" : 
-            case "Set_Coast_Switch" : 
-            case "Rsume_Accelerate_Switch" : 
-            case "Brake_Switch" : 
-            case "Accelerator_Switch" :
-                return "Switch_P0x121";
+            case SSMSwitchCode.Clutch_Switch: 
+            case SSMSwitchCode.Stop_Light_Switch: 
+            case SSMSwitchCode.Set_Coast_Switch: 
+            case SSMSwitchCode.Rsume_Accelerate_Switch: 
+            case SSMSwitchCode.Brake_Switch: 
+            case SSMSwitchCode.Accelerator_Switch:
+                return SSMParameterCode.Switch_P0x121;
  
             default :
-                return "Error_Switch_Code_Not_Match";
+                throw Error("Error_Switch_Code_Not_Match");
         }
-    }    
+    }
 }
 
-export namespace OBDIIParameterCode
+export enum SSMSwitchCode
 {
-    export const Engine_Load = "Engine_Load";
-    export const Coolant_Temperature = "Coolant_Temperature";
-    export const Air_Fuel_Correction_1 = "Air_Fuel_Correction_1";
-    export const Air_Fuel_Learning_1 = "Air_Fuel_Learning_1";
-    export const Air_Fuel_Correction_2 = "Air_Fuel_Correction_2";
-    export const Air_Fuel_Learning_2 = "Air_Fuel_Learning_2";
-    export const Fuel_Tank_Pressure = "Fuel_Tank_Pressure";
-    export const Manifold_Absolute_Pressure = "Manifold_Absolute_Pressure";
-    export const Engine_Speed = "Engine_Speed";
-    export const Vehicle_Speed = "Vehicle_Speed";
-    export const Ignition_Timing = "Ignition_Timing";
-    export const Intake_Air_Temperature = "Intake_Air_Temperature";
-    export const Mass_Air_Flow = "Mass_Air_Flow";
-    export const Throttle_Opening_Angle = "Throttle_Opening_Angle";
-    export const Run_time_since_engine_start = "Run_time_since_engine_start";
-    export const Distance_traveled_with_MIL_on = "Distance_traveled_with_MIL_on";
-    export const Fuel_Rail_Pressure = "Fuel_Rail_Pressure";
-    export const Fuel_Rail_Pressure_diesel = "Fuel_Rail_Pressure_diesel";
-    export const Commanded_EGR = "Commanded_EGR";
-    export const EGR_Error = "EGR_Error";
-    export const Commanded_evaporative_purge = "Commanded_evaporative_purge";
-    export const Fuel_Level_Input = "Fuel_Level_Input";
-    export const Number_of_warmups_since_codes_cleared = "Number_of_warmups_since_codes_cleared";
-    export const Distance_traveled_since_codes_cleared = "Distance_traveled_since_codes_cleared";
-    export const Evap_System_Vapor_Pressure = "Evap_System_Vapor_Pressure";
-    export const Atmospheric_Pressure = "Atmospheric_Pressure";
-    export const Catalyst_TemperatureBank_1_Sensor_1 = "Catalyst_TemperatureBank_1_Sensor_1";
-    export const Catalyst_TemperatureBank_2_Sensor_1 = "Catalyst_TemperatureBank_2_Sensor_1";
-    export const Catalyst_TemperatureBank_1_Sensor_2 = "Catalyst_TemperatureBank_1_Sensor_2";
-    export const Catalyst_TemperatureBank_2_Sensor_2 = "Catalyst_TemperatureBank_2_Sensor_2";
-    export const Battery_Voltage = "Battery_Voltage";
-    export const Absolute_load_value = "Absolute_load_value";
-    export const Command_equivalence_ratio = "Command_equivalence_ratio";
-    export const Relative_throttle_position = "Relative_throttle_position";
-    export const Ambient_air_temperature = "Ambient_air_temperature";
-    export const Absolute_throttle_position_B = "Absolute_throttle_position_B";
-    export const Absolute_throttle_position_C = "Absolute_throttle_position_C";
-    export const Accelerator_pedal_position_D = "Accelerator_pedal_position_D";
-    export const Accelerator_pedal_position_E = "Accelerator_pedal_position_E";
-    export const Accelerator_pedal_position_F = "Accelerator_pedal_position_F";
-    export const Commanded_throttle_actuator = "Commanded_throttle_actuator";
-    export const Time_run_with_MIL_on = "Time_run_with_MIL_on";
-    export const Time_since_trouble_codes_cleared = "Time_since_trouble_codes_cleared";
-    export const Ethanol_fuel_percent = "Ethanol_fuel_percent";
-    
+    AT_Vehicle_ID,
+    Test_Mode_Connector,
+    Read_Memory_Connector,
+    Neutral_Position_Switch,
+    Idle_Switch,
+    Intercooler_AutoWash_Switch,
+    Ignition_Switch,
+    Power_Steering_Switch,
+    Air_Conditioning_Switch,
+    Handle_Switch,
+    Starter_Switch,
+    Front_O2_Rich_Signal,
+    Rear_O2_Rich_Signal,
+    Front_O2_2_Rich_Signal,
+    Knock_Signal_1,
+    Knock_Signal_2,
+    Electrical_Load_Signal,
+    Crank_Position_Sensor,
+    Cam_Position_Sensor,
+    Defogger_Switch,
+    Blower_Switch,
+    Interior_Light_Switch,
+    Wiper_Switch,
+    AirCon_Lock_Signal,
+    AirCon_Mid_Pressure_Switch,
+    AirCon_Compressor_Signal,
+    Radiator_Fan_Relay_3,
+    Radiator_Fan_Relay_1,
+    Radiator_Fan_Relay_2,
+    Fuel_Pump_Relay,
+    Intercooler_AutoWash_Relay,
+    CPC_Solenoid_Valve,
+    BlowBy_Leak_Connector,
+    PCV_Solenoid_Valve,
+    TGV_Output,
+    TGV_Drive,
+    Variable_Intake_Air_Solenoid,
+    Pressure_Sources_Change,
+    Vent_Solenoid_Valve,
+    P_S_Solenoid_Valve,
+    Assist_Air_Solenoid_Valve,
+    Tank_Sensor_Control_Valve,
+    Relief_Valve_Solenoid_1,
+    Relief_Valve_Solenoid_2,
+    TCS_Relief_Valve_Solenoid,
+    Ex_Gas_Positive_Pressure,
+    Ex_Gas_Negative_Pressure,
+    Intake_Air_Solenoid,
+    Muffler_Control,
+    Retard_Signal_from_AT,
+    Fuel_Cut_Signal_from_AT,
+    Ban_of_Torque_Down,
+    Request_Torque_Down_VDC,
+    Torque_Control_Signal_1,
+    Torque_Control_Signal_2,
+    Torque_Permission_Signal,
+    EAM_Signal,
+    AT_coop_lock_up_signal,
+    AT_coop_lean_burn_signal,
+    AT_coop_rich_spike_signal,
+    AET_Signal,
+    ETC_Motor_Relay,
+    Clutch_Switch,
+    Stop_Light_Switch,
+    Set_Coast_Switch,
+    Rsume_Accelerate_Switch,
+    Brake_Switch,
+    Accelerator_Switch
+}
+
+export enum OBDIIParameterCode
+{
+    Engine_Load,
+    Coolant_Temperature,
+    Air_Fuel_Correction_1,
+    Air_Fuel_Learning_1,
+    Air_Fuel_Correction_2,
+    Air_Fuel_Learning_2,
+    Fuel_Tank_Pressure,
+    Manifold_Absolute_Pressure,
+    Engine_Speed,
+    Vehicle_Speed,
+    Ignition_Timing,
+    Intake_Air_Temperature,
+    Mass_Air_Flow,
+    Throttle_Opening_Angle,
+    Run_time_since_engine_start,
+    Distance_traveled_with_MIL_on,
+    Fuel_Rail_Pressure,
+    Fuel_Rail_Pressure_diesel,
+    Commanded_EGR,
+    EGR_Error,
+    Commanded_evaporative_purge,
+    Fuel_Level_Input,
+    Number_of_warmups_since_codes_cleared,
+    Distance_traveled_since_codes_cleared,
+    Evap_System_Vapor_Pressure,
+    Atmospheric_Pressure,
+    Catalyst_TemperatureBank_1_Sensor_1,
+    Catalyst_TemperatureBank_2_Sensor_1,
+    Catalyst_TemperatureBank_1_Sensor_2,
+    Catalyst_TemperatureBank_2_Sensor_2,
+    Battery_Voltage,
+    Absolute_load_value,
+    Command_equivalence_ratio,
+    Relative_throttle_position,
+    Ambient_air_temperature,
+    Absolute_throttle_position_B,
+    Absolute_throttle_position_C,
+    Accelerator_pedal_position_D,
+    Accelerator_pedal_position_E,
+    Accelerator_pedal_position_F,
+    Commanded_throttle_actuator,
+    Time_run_with_MIL_on,
+    Time_since_trouble_codes_cleared,
+    Ethanol_fuel_percent,
     // Added on 2018/01/07
-    export const O2Sensor_1_Air_Fuel_Correction = "O2Sensor_1_Air_Fuel_Correction";
-    export const O2Sensor_2_Air_Fuel_Correction = "O2Sensor_2_Air_Fuel_Correction";
-    export const O2Sensor_3_Air_Fuel_Correction = "O2Sensor_3_Air_Fuel_Correction";
-    export const O2Sensor_4_Air_Fuel_Correction = "O2Sensor_4_Air_Fuel_Correction";
-    export const O2Sensor_5_Air_Fuel_Correction = "O2Sensor_5_Air_Fuel_Correction";
-    export const O2Sensor_6_Air_Fuel_Correction = "O2Sensor_6_Air_Fuel_Correction";
-    export const O2Sensor_7_Air_Fuel_Correction = "O2Sensor_7_Air_Fuel_Correction";
-    export const O2Sensor_8_Air_Fuel_Correction = "O2Sensor_8_Air_Fuel_Correction";
-
-    export const O2Sensor_1_Air_Fuel_Ratio = "O2Sensor_1_Air_Fuel_Ratio";
-    export const O2Sensor_2_Air_Fuel_Ratio = "O2Sensor_2_Air_Fuel_Ratio";
-    export const O2Sensor_3_Air_Fuel_Ratio = "O2Sensor_3_Air_Fuel_Ratio";
-    export const O2Sensor_4_Air_Fuel_Ratio = "O2Sensor_4_Air_Fuel_Ratio";
-    export const O2Sensor_5_Air_Fuel_Ratio = "O2Sensor_5_Air_Fuel_Ratio";
-    export const O2Sensor_6_Air_Fuel_Ratio = "O2Sensor_6_Air_Fuel_Ratio";
-    export const O2Sensor_7_Air_Fuel_Ratio = "O2Sensor_7_Air_Fuel_Ratio";
-    export const O2Sensor_8_Air_Fuel_Ratio = "O2Sensor_8_Air_Fuel_Ratio";
-
-    export const Evap_system_vapor_pressure = "Evap_system_vapor_pressure";
-    export const Fuel_rail_absolute_pressure = "Fuel_rail_absolute_pressure";
-    export const Relative_accelerator_pedal_position = "Relative_accelerator_pedal_position";
-    export const Hybrid_battery_pack_remaining_life = "Hybrid_battery_pack_remaining_life";
-    export const Engine_oil_temperature = "Engine_oil_temperature";
-    export const Fuel_injection_timing = "Fuel_injection_timing";
-    export const Engine_fuel_rate = "Engine_fuel_rate";
-    export const Driver_demand_engine_percent_torque = "Driver_demand_engine_percent_torque";
-    export const Actual_engine_percent_torque = "Actual_engine_percent_torque";
-    export const Engine_reference_torque = "Engine_reference_torque";
+    O2Sensor_1_Air_Fuel_Correction,
+    O2Sensor_2_Air_Fuel_Correction,
+    O2Sensor_3_Air_Fuel_Correction,
+    O2Sensor_4_Air_Fuel_Correction,
+    O2Sensor_5_Air_Fuel_Correction,
+    O2Sensor_6_Air_Fuel_Correction,
+    O2Sensor_7_Air_Fuel_Correction,
+    O2Sensor_8_Air_Fuel_Correction,
+    O2Sensor_1_Air_Fuel_Ratio,
+    O2Sensor_2_Air_Fuel_Ratio,
+    O2Sensor_3_Air_Fuel_Ratio,
+    O2Sensor_4_Air_Fuel_Ratio,
+    O2Sensor_5_Air_Fuel_Ratio,
+    O2Sensor_6_Air_Fuel_Ratio,
+    O2Sensor_7_Air_Fuel_Ratio,
+    O2Sensor_8_Air_Fuel_Ratio,
+    Evap_system_vapor_pressure,
+    Fuel_rail_absolute_pressure,
+    Relative_accelerator_pedal_position,
+    Hybrid_battery_pack_remaining_life,
+    Engine_oil_temperature,
+    Fuel_injection_timing,
+    Engine_fuel_rate,
+    Driver_demand_engine_percent_torque,
+    Actual_engine_percent_torque,
+    Engine_reference_torque
 }
 
-export namespace ReadModeCode
+export enum ReadModeCode
 {
-    export const SLOW = "SLOW";
-    export const FAST = "FAST";
-    export const SLOWandFAST = "SLOWandFast";
+    SLOW,
+    FAST,
+    SLOWandFAST
 }
 
 
