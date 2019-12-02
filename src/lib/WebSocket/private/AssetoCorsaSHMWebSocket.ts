@@ -29,7 +29,7 @@ import {AssettoCorsaSHMNumericalVALCode,
         AssettoCorsaSHMStringVALCode,
         AssettoCorsaSHMGraphicsParameterCode,
         AssettoCorsaSHMPhysicsParameterCode,
-        AssettoCorsaSHMStaticInfoParameterCode} from "./AssettoCorsaSHMParameterCode";
+        AssettoCorsaSHMStaticInfoParameterCode} from "./parameterCode/AssettoCorsaSHMParameterCode";
 import {EnumUtils} from "../../EnumUtils";
 
 export class AssettoCorsaSHMWebsocket extends WebsocketCommon
