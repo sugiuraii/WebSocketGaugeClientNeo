@@ -188,15 +188,6 @@ export class DefiCOMWebsocket extends DefiSSMWebsocketCommon
     {
         return super.getRawValBase(DefiParameterCode[code]);
     }
-
-    public EnableInterpolate(code : DefiParameterCode) : void
-    {
-        super.EnableInterpolateBase(DefiParameterCode[code]);
-    }
-    public DisableInterpolate(code : DefiParameterCode) : void
-    {
-        super.DisableInterpolateBase(DefiParameterCode[code]);
-    }
     
     public SendWSSend(code : DefiParameterCode, flag : boolean) : void
     {
@@ -244,15 +235,6 @@ export class ArduinoCOMWebsocket extends DefiSSMWebsocketCommon
     public getRawVal(code : ArduinoParameterCode) : number
     {
         return super.getRawValBase(ArduinoParameterCode[code]);
-    }
-
-    public EnableInterpolate(code : ArduinoParameterCode) : void
-    {
-        super.EnableInterpolateBase(ArduinoParameterCode[code]);
-    }
-    public DisableInterpolate(code : ArduinoParameterCode) : void
-    {
-        super.DisableInterpolateBase(ArduinoParameterCode[code]);
     }
     
     public SendWSSend(code : ArduinoParameterCode, flag : boolean) : void
