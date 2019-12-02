@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import * as Interpolation from "./Interpolation";
+import * as Interpolation from "./utils/Interpolation";
 import * as JSONFormats from "./JSONFormats";
 import {WebsocketCommon} from "./WebsocketCommon";
 import {AssettoCorsaSHMNumericalVALCode,
