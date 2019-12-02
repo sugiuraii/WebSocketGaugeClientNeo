@@ -25,7 +25,16 @@
 import * as PIXI from "pixi.js";
 import {ApplicationNavBar} from "./bootstrapParts/ApplicationNavBar"
 import * as WebFont from "webfontloader";
-import * as WebSocketCommunication from "../WebSocket/WebSocketCommunication";
+import {WebsocketCommon} from "../WebSocket/WebSocketCommunication";
+import {DefiCOMWebsocket, DefiParameterCode} from "../WebSocket/WebSocketCommunication";
+import {SSMWebsocket, SSMParameterCode, SSMSwitchCode} from "../WebSocket/WebSocketCommunication";
+import {ArduinoCOMWebsocket, ArduinoParameterCode} from "../WebSocket/WebSocketCommunication";
+import {ELM327COMWebsocket, OBDIIParameterCode} from "../WebSocket/WebSocketCommunication";
+import {FUELTRIPWebsocket} from "../WebSocket/WebSocketCommunication";
+import {ReadModeCode} from "../WebSocket/WebSocketCommunication";
+
+import {AssettoCorsaSHMWebsocket, AssettoCorsaSHMPhysicsParameterCode, 
+    AssettoCorsaSHMGraphicsParameterCode, AssettoCorsaSHMStaticInfoParameterCode} from "../WebSocket/WebSocketCommunication";
 import {calculateGearPosition} from "./CalculateGearPosition";
 
 const DEFICOM_WS_PORT = 2012;
@@ -51,12 +60,12 @@ export abstract class MeterApplicationBase extends PIXI.Application
     
     private applicationnavBar: ApplicationNavBar;
     
-    private defiWS: WebSocketCommunication.DefiCOMWebsocket;
-    private ssmWS: WebSocketCommunication.SSMWebsocket;
-    private arduinoWS: WebSocketCommunication.ArduinoCOMWebsocket;
-    private elm327WS: WebSocketCommunication.ELM327COMWebsocket;
-    private fueltripWS: WebSocketCommunication.FUELTRIPWebsocket;
-    private assettoCorsaWS : WebSocketCommunication.AssettoCorsaSHMWebsocket;   
+    private defiWS: DefiCOMWebsocket;
+    private ssmWS: SSMWebsocket;
+    private arduinoWS: ArduinoCOMWebsocket;
+    private elm327WS: ELM327COMWebsocket;
+    private fueltripWS: FUELTRIPWebsocket;
+    private assettoCorsaWS : AssettoCorsaSHMWebsocket;   
     /**
      * Get DefiWS websocket client.
      */ 
@@ -161,64 +170,60 @@ export abstract class MeterApplicationBase extends PIXI.Application
             this.texturePathToPreload = this.texturePathToPreload.concat(target);
     }
     
-    private defiParameterCodeList: {code: WebSocketCommunication.DefiParameterCode, interpolate : boolean}[];
-    private arduinoParameterCodeList : {code : WebSocketCommunication.ArduinoParameterCode, interpolate : boolean}[]; 
-    private ssmParameterCodeList : {code : string, readMode : string, interpolate: boolean}[];
-    private elm327ParameterCodeList : {code : string, readMode : string, interpolate : boolean}[];
-    private assettoCorsaPhysicsParameterCodeList  : {code : string, interpolate : boolean}[];
-    private assettoCorsaGraphicsParameterCodeList  : {code : string, interpolate : boolean}[];
-    private assettoCorsaStaticInfoParameterCodeList  : {code : string, interpolate : boolean}[];
+    private defiParameterCodeList: {code: string}[];
+    private arduinoParameterCodeList : {code : string}[]; 
+    private ssmParameterCodeList : {code : string, readMode : string}[];
+    private elm327ParameterCodeList : {code : string, readMode : string}[];
+    private assettoCorsaPhysicsParameterCodeList  : {code : AssettoCorsaSHMPhysicsParameterCode}[];
+    private assettoCorsaGraphicsParameterCodeList  : {code : AssettoCorsaSHMGraphicsParameterCode}[];
+    private assettoCorsaStaticInfoParameterCodeList  : {code : AssettoCorsaSHMStaticInfoParameterCode}[];
     
     /**
      * Register Defi parameter code to enable communication.
      * @param code Parameter code name to register.
-     * @param interpolate Flag to enable or disable time domain interpolation.
      */
-    public registerDefiParameterCode(code : WebSocketCommunication.DefiParameterCode, interpolate : boolean)
+    public registerDefiParameterCode(code : string)
     {
-        this.defiParameterCodeList.push({code, interpolate});
+        this.defiParameterCodeList.push({code});
     }
     /**
      * Register Arduino parameter code to enable communication.
      * @param code Parameter code name to register.
-     * @param interpolate Flag to enable or disable time domain interpolation.
      */
-    public registerArduinoParameterCode(code : WebSocketCommunication.ArduinoParameterCode, interpolate : boolean)
+    public registerArduinoParameterCode(code : string)
     {
-        this.arduinoParameterCodeList.push({code, interpolate});
+        this.arduinoParameterCodeList.push({code});
     }
     /**
      * Register SSM parameter code to enable communication.
      * @param code Parameter code name to register.
-     * @param interpolate Flag to enable or disable time domain interpolation.
      */
-    public registerSSMParameterCode(code : string, readMode : string, interpolate : boolean)
+    public registerSSMParameterCode(code : string, readMode : string)
     {
-        this.ssmParameterCodeList.push({code, readMode, interpolate});
+        this.ssmParameterCodeList.push({code, readMode});
     }
     /**
      * Register ELM327(OBDII PID) parameter code to enable communication.
      * @param code Parameter code name to register.
-     * @param interpolate Flag to enable or disable time domain interpolation.
      */
-    public registerELM327ParameterCode(code : string, readMode : string, interpolate : boolean)
+    public registerELM327ParameterCode(code : string, readMode : string)
     {
-        this.elm327ParameterCodeList.push({code, readMode, interpolate});
+        this.elm327ParameterCodeList.push({code, readMode});
     }
     
-    public registerAssettoCorsaPhysicsParameterCode(code : string, interpolate : boolean)
+    public registerAssettoCorsaPhysicsParameterCode(code : AssettoCorsaSHMPhysicsParameterCode)
     {
-        this.assettoCorsaPhysicsParameterCodeList.push({code, interpolate});
+        this.assettoCorsaPhysicsParameterCodeList.push({code});
     }
 
-    public registerAssettoCorsaGraphicsParameterCode(code : string, interpolate : boolean)
+    public registerAssettoCorsaGraphicsParameterCode(code : AssettoCorsaSHMGraphicsParameterCode)
     {
-        this.assettoCorsaGraphicsParameterCodeList.push({code, interpolate});
+        this.assettoCorsaGraphicsParameterCodeList.push({code});
     }
 
-    public registerAssettoCorsaStaticInfoParameterCode(code : string, interpolate : boolean)
+    public registerAssettoCorsaStaticInfoParameterCode(code : AssettoCorsaSHMStaticInfoParameterCode)
     {
-        this.assettoCorsaStaticInfoParameterCodeList.push({code, interpolate});
+        this.assettoCorsaStaticInfoParameterCodeList.push({code});
     }
 
 
@@ -312,12 +317,12 @@ export abstract class MeterApplicationBase extends PIXI.Application
     
     private initializeWebSocketInstances()
     {
-        this.defiWS = new WebSocketCommunication.DefiCOMWebsocket();
-        this.ssmWS = new WebSocketCommunication.SSMWebsocket();
-        this.arduinoWS = new WebSocketCommunication.ArduinoCOMWebsocket();
-        this.elm327WS = new WebSocketCommunication.ELM327COMWebsocket();
-        this.fueltripWS = new WebSocketCommunication.FUELTRIPWebsocket();
-        this.assettoCorsaWS = new WebSocketCommunication.AssettoCorsaSHMWebsocket();
+        this.defiWS = new DefiCOMWebsocket();
+        this.ssmWS = new SSMWebsocket();
+        this.arduinoWS = new ArduinoCOMWebsocket();
+        this.elm327WS = new ELM327COMWebsocket();
+        this.fueltripWS = new FUELTRIPWebsocket();
+        this.assettoCorsaWS = new AssettoCorsaSHMWebsocket();
         
         this.IsDefiWSEnabled = false;
         this.IsSSMWSEnabled = false;
@@ -405,7 +410,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
         this.assettoCorsaWS.URL = "ws://" + webSocketServerName + ":" + ACSHM_WS_PORT.toString() + "/"; 
     }
     
-    private registerWebSocketCommonEvents(logPrefix : string, wsObj: WebSocketCommunication.WebsocketCommon)
+    private registerWebSocketCommonEvents(logPrefix : string, wsObj: WebsocketCommon)
     {
         const logWindow = this.applicationnavBar.LogModalDialog;
 
@@ -527,7 +532,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
              this.assettoCorsaWS);
     }
     
-    private connectFUELTRIPWebSocket(logPrefix: string, sectSpan : number, sectStoreMax : number, webSocketObj: WebSocketCommunication.FUELTRIPWebsocket)
+    private connectFUELTRIPWebSocket(logPrefix: string, sectSpan : number, sectStoreMax : number, webSocketObj: FUELTRIPWebsocket)
     {
         const LogWindow = this.applicationnavBar.LogModalDialog;
         webSocketObj.OnWebsocketOpen = () =>
@@ -552,7 +557,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
         
     }
     
-    private connectDefiWebSocket(logPrefix : string, parameterCodeList : {code: WebSocketCommunication.DefiParameterCode, interpolate : boolean}[] , webSocketObj: WebSocketCommunication.DefiCOMWebsocket)
+    private connectDefiArduinoWebSocket(logPrefix : string, parameterCodeList : {code: string}[] , webSocketObj: DefiCOMWebsocket)
     {
         const LogWindow = this.applicationnavBar.LogModalDialog;
         webSocketObj.OnWebsocketOpen = () =>
@@ -562,13 +567,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
             {
                 //SendWSSend
                 for (let item of parameterCodeList)
-                {
                     webSocketObj.SendWSSend(item.code, true);
-                    if (item.interpolate)
-                        webSocketObj.EnableInterpolate(item.code)
-                    else
-                        webSocketObj.DisableInterpolate(item.code)
-                }
                 
                 //SendWSInterval from spinner
                 webSocketObj.SendWSInterval(this.getWSIntervalFromLocalStorage());
@@ -618,7 +617,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
         webSocketObj.Connect();
     }
     
-    private connectSSMELM327WebSocket(logPrefix : string, parameterCodeList : {code: string, readMode: string, interpolate : boolean}[] , slowReadInterval : number, webSocketObj: WebSocketCommunication.SSMWebsocket)
+    private connectSSMELM327WebSocket(logPrefix : string, parameterCodeList : {code: string, readMode: string}[] , slowReadInterval : number, webSocketObj: SSMWebsocket)
     {
         const LogWindow = this.applicationnavBar.LogModalDialog;
         webSocketObj.OnWebsocketOpen = () =>
@@ -630,18 +629,13 @@ export abstract class MeterApplicationBase extends PIXI.Application
                 
                 for (let item of parameterCodeList)
                 {
-                    if (item.readMode === WebSocketCommunication.ReadModeCode.SLOWandFAST)
+                    if (item.readMode === ReadModeCode.SLOWandFAST)
                     {
-                        webSocketObj.SendCOMRead(item.code, WebSocketCommunication.ReadModeCode.SLOW, true);
-                        webSocketObj.SendCOMRead(item.code, WebSocketCommunication.ReadModeCode.FAST, true);
+                        webSocketObj.SendCOMRead(item.code, ReadModeCode.SLOW, true);
+                        webSocketObj.SendCOMRead(item.code, ReadModeCode.FAST, true);
                     }
                     else
                         webSocketObj.SendCOMRead(item.code, item.readMode, true);
-                    
-                    if (item.interpolate)
-                        webSocketObj.EnableInterpolate(item.code)
-                    else
-                        webSocketObj.DisableInterpolate(item.code)
                 }
             }, WAITTIME_BEFORE_SENDWSSEND);
         }
@@ -656,41 +650,21 @@ export abstract class MeterApplicationBase extends PIXI.Application
     }
 
     private connectAssetoCorsaSHMWebSocket(logPrefix : string, 
-        physicsParameterCodeList : {code: string, interpolate : boolean}[],
-        graphicsParameterCodeList : {code: string, interpolate : boolean}[],
-        staticInfoParameterCodeList : {code: string, interpolate : boolean}[],
-        webSocketObj: WebSocketCommunication.AssettoCorsaSHMWebsocket)
+        physicsParameterCodeList : {code: AssettoCorsaSHMPhysicsParameterCode}[],
+        graphicsParameterCodeList : {code: AssettoCorsaSHMGraphicsParameterCode}[],
+        staticInfoParameterCodeList : {code: AssettoCorsaSHMStaticInfoParameterCode}[],
+         webSocketObj: AssettoCorsaSHMWebsocket)
     {
         const LogWindow = this.applicationnavBar.LogModalDialog;
         webSocketObj.OnWebsocketOpen = () =>
         {
             LogWindow.appendLog(logPrefix + " is connected. SendWSSend/Interval after "  + WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
             window.setTimeout( () => 
-            {                
-                for (let item of physicsParameterCodeList)
-                {
-                    webSocketObj.SendPhysicsWSSend(item.code, true);
-                    if (item.interpolate)
-                        webSocketObj.EnableInterpolate(item.code)
-                    else
-                        webSocketObj.DisableInterpolate(item.code)
-                }
-                for (let item of graphicsParameterCodeList)
-                {
-                    webSocketObj.SendGraphicsWSSend(item.code, true);
-                    if (item.interpolate)
-                        webSocketObj.EnableInterpolate(item.code)
-                    else
-                        webSocketObj.DisableInterpolate(item.code)
-                }
-                for (let item of staticInfoParameterCodeList)
-                {
-                    webSocketObj.SendStaticInfoWSSend(item.code, true);
-                    if (item.interpolate)
-                        webSocketObj.EnableInterpolate(item.code)
-                    else
-                        webSocketObj.DisableInterpolate(item.code)
-                }
+            {
+                physicsParameterCodeList.forEach(item => webSocketObj.SendPhysicsWSSend(item.code, true));
+                graphicsParameterCodeList.forEach(item => webSocketObj.SendGraphicsWSSend(item.code, true));
+                staticInfoParameterCodeList.forEach(item => webSocketObj.SendStaticInfoWSSend(item.code, true));
+
                 //SendPhysicsWSInterval from spinner
                 webSocketObj.SendPhysicsWSInterval(this.getWSIntervalFromLocalStorage());
                 

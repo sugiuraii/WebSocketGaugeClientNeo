@@ -57,11 +57,11 @@ class LEDRevMeter_SSM extends MeterApplicationBase
         //Enable SSM websocket client
         this.IsSSMWSEnabled = true;
         this.IsFUELTRIPWSEnabled = true;
-        this.registerSSMParameterCode(SSMParameterCode.Engine_Speed, ReadModeCode.SLOWandFAST, true);         
-        this.registerSSMParameterCode(SSMParameterCode.Vehicle_Speed, ReadModeCode.SLOWandFAST, false);         
-        this.registerSSMParameterCode(SSMParameterCode.Coolant_Temperature, ReadModeCode.SLOW, true); 
-        this.registerSSMParameterCode(SSMParameterCode.Manifold_Absolute_Pressure, ReadModeCode.SLOWandFAST, true);
-        this.registerSSMParameterCode(SSMSwitchCode.getNumericCodeFromSwitchCode(SSMSwitchCode.Neutral_Position_Switch), ReadModeCode.SLOWandFAST, false);
+        this.registerSSMParameterCode(SSMParameterCode.Engine_Speed, ReadModeCode.SLOWandFAST);         
+        this.registerSSMParameterCode(SSMParameterCode.Vehicle_Speed, ReadModeCode.SLOWandFAST);         
+        this.registerSSMParameterCode(SSMParameterCode.Coolant_Temperature, ReadModeCode.SLOW); 
+        this.registerSSMParameterCode(SSMParameterCode.Manifold_Absolute_Pressure, ReadModeCode.SLOWandFAST);
+        this.registerSSMParameterCode(SSMSwitchCode.getNumericCodeFromSwitchCode(SSMSwitchCode.Neutral_Position_Switch), ReadModeCode.SLOWandFAST);
     }
     
     protected setTextureFontPreloadOptions()

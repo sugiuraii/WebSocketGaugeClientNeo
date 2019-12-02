@@ -55,9 +55,9 @@ class AnalogTripleMeter_SSM extends MeterApplicationBase
     {
         //Enable SSM websocket client
         this.IsSSMWSEnabled = true;
-        this.registerSSMParameterCode(SSMParameterCode.Battery_Voltage, ReadModeCode.SLOW, true);         
-        this.registerSSMParameterCode(SSMParameterCode.Coolant_Temperature, ReadModeCode.SLOW, true); 
-        this.registerSSMParameterCode(SSMParameterCode.Manifold_Absolute_Pressure, ReadModeCode.SLOWandFAST, true);
+        this.registerSSMParameterCode(SSMParameterCode.Battery_Voltage, ReadModeCode.SLOW);         
+        this.registerSSMParameterCode(SSMParameterCode.Coolant_Temperature, ReadModeCode.SLOW); 
+        this.registerSSMParameterCode(SSMParameterCode.Manifold_Absolute_Pressure, ReadModeCode.SLOWandFAST);
 
     }
     

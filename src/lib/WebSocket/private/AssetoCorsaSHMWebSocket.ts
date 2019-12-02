@@ -25,29 +25,51 @@
 import * as Interpolation from "./Interpolation";
 import * as JSONFormats from "./JSONFormats";
 import {WebsocketCommon} from "./WebsocketCommon";
-import {DefiSSMWebsocketCommon} from "./DefiSSMWebSocket";
+import {AssettoCorsaSHMNumericalVALCode,
+        AssettoCorsaSHMStringVALCode,
+        AssettoCorsaSHMGraphicsParameterCode,
+        AssettoCorsaSHMPhysicsParameterCode,
+        AssettoCorsaSHMStaticInfoParameterCode} from "./AssettoCorsaSHMParameterCode";
+import {EnumUtils} from "../../EnumUtils";
 
-export class AssettoCorsaSHMWebsocket extends DefiSSMWebsocketCommon
+export class AssettoCorsaSHMWebsocket extends WebsocketCommon
 {
+    private recordIntervalTimeEnabled : boolean;
+
+    private onVALPacketReceivedByCode : {[code : string] : (val : string)=>void};
+    private onVALPacketReceived : (intervalTime : number, val:{[code : string] : string}) => void;
+
+    //Internal state
+    private valPacketPreviousTimeStamp : number;
+    private valPacketIntervalTime : number;
+
+    //Interpolate value buffer
+    private valueInterpolateBuffers: {[code: string]: Interpolation.VALInterpolationBuffer} = {};
+    
+    private stringBuffers: {[code: string] : string} = {};
+
     constructor()
     {
         super();
         this.modePrefix = "ACSHM";
+        this.recordIntervalTimeEnabled = true;
+        this.valPacketPreviousTimeStamp = window.performance.now();
+        this.valPacketIntervalTime = 0;
     }
 
-    public SendPhysicsWSSend(code : string, flag : boolean)
+    public SendPhysicsWSSend(code : AssettoCorsaSHMPhysicsParameterCode, flag : boolean)
     {
-        this.SendWSSend("PHYS", code, flag);
+        this.SendWSSend("PHYS", AssettoCorsaSHMPhysicsParameterCode[code], flag);
     }
 
-    public SendGraphicsWSSend(code : string, flag : boolean)
+    public SendGraphicsWSSend(code : AssettoCorsaSHMGraphicsParameterCode, flag : boolean)
     {
-        this.SendWSSend("GRPH", code, flag);
+        this.SendWSSend("GRPH", AssettoCorsaSHMGraphicsParameterCode[code], flag);
     }
 
-    public SendStaticInfoWSSend(code : string, flag : boolean)
+    public SendStaticInfoWSSend(code : AssettoCorsaSHMStaticInfoParameterCode, flag : boolean)
     {
-        this.SendWSSend("STATIC", code, flag);
+        this.SendWSSend("STATIC", AssettoCorsaSHMStaticInfoParameterCode[code], flag);
     }
 
     public SendPhysicsWSInterval(interval : number)
@@ -88,5 +110,112 @@ export class AssettoCorsaSHMWebsocket extends DefiSSMWebsocketCommon
         sendWSIntervalObj.interval = interval;           
         var jsonstr = JSON.stringify(sendWSIntervalObj);
         this.WebSocket.send(jsonstr);
-    }    
+    }
+
+    private checkInterpolateBufferAndCreateIfEmpty(codeName: string): void
+    {
+        if(!(codeName in this.valueInterpolateBuffers))
+            this.valueInterpolateBuffers[codeName] = new Interpolation.VALInterpolationBuffer();            
+    }
+    
+    public getVal(code : AssettoCorsaSHMNumericalVALCode, timestamp : number) : number
+    {
+        const codeName = AssettoCorsaSHMNumericalVALCode[code];
+        this.checkInterpolateBufferAndCreateIfEmpty(codeName);
+        return this.valueInterpolateBuffers[codeName].getVal(timestamp);
+    }
+
+    public getRawVal(code : AssettoCorsaSHMNumericalVALCode) : number
+    {
+        const codeName = AssettoCorsaSHMNumericalVALCode[code];
+        this.checkInterpolateBufferAndCreateIfEmpty(codeName);
+        return this.valueInterpolateBuffers[code].getRawVal();
+    }
+    
+    public getStringVal(code : AssettoCorsaSHMStringVALCode) : string
+    {
+        const codeName = AssettoCorsaSHMStringVALCode[code];
+        return this.stringBuffers[codeName];
+    }
+    
+    private processVALJSONMessage(receivedJson: JSONFormats.StringVALJSONMessage) : void
+    {
+        if(this.recordIntervalTimeEnabled)
+        {
+            //Update interval time
+            var nowTime = window.performance.now();
+            this.valPacketIntervalTime = nowTime - this.valPacketPreviousTimeStamp;
+            this.valPacketPreviousTimeStamp = nowTime;
+        };
+
+        // Invoke VALPacketReceived Event
+        if ( typeof(this.onVALPacketReceived) !== "undefined" )
+            this.OnVALPacketReceived(this.valPacketIntervalTime, receivedJson.val);
+        
+        // Store value into interpolation buffers
+        for (let key in receivedJson.val)
+        {            
+            const valStr : string = receivedJson.val[key];
+                        
+            // Invoke onVALPacketReceivedByCode event
+            if (typeof (this.onVALPacketReceivedByCode) !== "undefined")
+            {
+                if (key in this.onVALPacketReceivedByCode)
+                    this.OnVALPacketReceivedByCode[key](valStr);
+            }
+            
+            // Store into interpolation(or value) buffer.
+            if (EnumUtils.IsEnumContaninsKey(AssettoCorsaSHMNumericalVALCode, key))// Val is number
+            {
+                const val: number = Number(receivedJson.val[key]);
+                // Register to interpolate buffer
+                this.checkInterpolateBufferAndCreateIfEmpty(AssettoCorsaSHMNumericalVALCode[key]);
+                this.valueInterpolateBuffers[key].setVal(val);
+            }
+            else if (EnumUtils.IsEnumContaninsKey(AssettoCorsaSHMStringVALCode, key)) //Val is string.
+                this.stringBuffers[key] = valStr;                   
+            else
+                throw new Error("Undefined key of VAL packet is found.");
+        }
+    }
+    
+    private processERRJSONMessage(receivedJson: JSONFormats.ErrorJSONMessage)
+    {
+        if (typeof (this.OnERRPacketReceived) !== "undefined")
+            this.OnERRPacketReceived(receivedJson.msg);
+    }
+    
+    private processRESJSONMessage(receivedJson: JSONFormats.ResponseJSONMessage)
+    {
+        if(typeof (this.OnRESPacketReceived) !== "undefined")
+            this.OnRESPacketReceived(receivedJson.msg);
+    }
+    
+    protected parseIncomingMessage(msg : string) : void
+    {
+        const receivedJson : any = JSON.parse(msg);
+        const modeCode : string = (<JSONFormats.IJSONMessage>receivedJson).mode;
+        switch (modeCode)
+        {
+            case ("VAL") :
+                this.processVALJSONMessage(<JSONFormats.StringVALJSONMessage>receivedJson);
+                break;
+            case("ERR"):
+                this.processERRJSONMessage(<JSONFormats.ErrorJSONMessage>receivedJson);
+                break;
+            case("RES"):
+                this.processRESJSONMessage(<JSONFormats.ResponseJSONMessage>receivedJson);
+                break;
+            default:
+                this.OnWebsocketError("Unknown mode packet received. " + msg);
+        };
+    }
+
+    public get RecordIntervalTimeEnabled(): boolean { return this.recordIntervalTimeEnabled;}
+    public set RecordIntervalTimeEnabled(val : boolean) { this.recordIntervalTimeEnabled = val;}
+    public get OnVALPacketReceivedByCode() {return this.onVALPacketReceivedByCode;}
+    public set OnVALPacketReceivedByCode(funclist) {this.onVALPacketReceivedByCode = funclist;}
+    public get OnVALPacketReceived() {return this.onVALPacketReceived};
+    public set OnVALPacketReceived(func) {this.onVALPacketReceived = func };
+    public get VALPacketIntervalTime(): number { return this.valPacketIntervalTime; }
 }

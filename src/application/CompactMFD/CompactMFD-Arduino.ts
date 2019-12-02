@@ -56,11 +56,11 @@ class CompactMFD_Arduino extends MeterApplicationBase
         //Enable Arduino websocket clent
         this.IsArudinoWSEnabled = true;
         
-        this.registerArduinoParameterCode(ArduinoParameterCode.Engine_Speed, true);
-        this.registerArduinoParameterCode(ArduinoParameterCode.Manifold_Absolute_Pressure, true);
-        this.registerArduinoParameterCode(ArduinoParameterCode.Vehicle_Speed, true);
-        this.registerArduinoParameterCode(ArduinoParameterCode.Coolant_Temperature, true); 
-        this.registerArduinoParameterCode(ArduinoParameterCode.Oil_Temperature, true);       
+        this.registerArduinoParameterCode(ArduinoParameterCode.Engine_Speed);
+        this.registerArduinoParameterCode(ArduinoParameterCode.Manifold_Absolute_Pressure);
+        this.registerArduinoParameterCode(ArduinoParameterCode.Vehicle_Speed);
+        this.registerArduinoParameterCode(ArduinoParameterCode.Coolant_Temperature); 
+        this.registerArduinoParameterCode(ArduinoParameterCode.Oil_Temperature);       
     }
     
     protected setTextureFontPreloadOptions()
