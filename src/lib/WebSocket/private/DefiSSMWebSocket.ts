@@ -25,9 +25,8 @@
 import * as Interpolation from "./Interpolation";
 import * as JSONFormats from "./JSONFormats";
 import {WebsocketCommon} from "./WebsocketCommon";
-import {DefiParameterCode} from "./ParameterCode";
-import {ArduinoParameterCode} from "./ParameterCode";
-
+import {DefiParameterCode} from "./parameterCode/DefiParameterCode";
+import {ArduinoParameterCode} from "./parameterCode/ArduinoParameterCode";
 
 /**
 * Superclass of Defi/SSM/Arduino/ELM327 websocket.
