@@ -517,9 +517,9 @@ export abstract class MeterApplicationBase extends PIXI.Application
         if (this.IsArudinoWSEnabled)
             this.connectArduinoWebSocket("ArduinoWS", this.arduinoParameterCodeList, this.arduinoWS);
         if (this.IsSSMWSEnabled)
-            this.connectSSMELM327WebSocket("SSMWS", this.ssmParameterCodeList, this.SSMELM327SlowReadInterval,  this.ssmWS);
+            this.connectSSMWebSocket("SSMWS", this.ssmParameterCodeList, this.SSMELM327SlowReadInterval,  this.ssmWS);
         if (this.IsELM327WSEnabled)
-            this.connectSSMELM327WebSocket("ELM327WS", this.elm327ParameterCodeList, this.SSMELM327SlowReadInterval, this.elm327WS);
+            this.connectELM327WebSocket("ELM327WS", this.elm327ParameterCodeList, this.SSMELM327SlowReadInterval, this.elm327WS);
         if (this.IsFUELTRIPWSEnabled)
             this.connectFUELTRIPWebSocket("FUELTRIPWS",  this.FUELTRIPSectSpan, this.FUELTRIPSectStoreMax, this.fueltripWS);
         if(this.IsAssettoCorsaWSEnabled)
@@ -621,14 +621,13 @@ export abstract class MeterApplicationBase extends PIXI.Application
                 
                 for (let item of parameterCodeList)
                 {
-                    const itemCodeStr = SSMParameterCode[item.code];
                     if (item.readMode === ReadModeCode.SLOWandFAST)
                     {
-                        webSocketObj.SendCOMRead(itemCodeStr, ReadModeCode[ReadModeCode.SLOW], true);
-                        webSocketObj.SendCOMRead(itemCodeStr, ReadModeCode[ReadModeCode.FAST], true);
+                        webSocketObj.SendCOMRead(item.code, ReadModeCode.SLOW, true);
+                        webSocketObj.SendCOMRead(item.code, ReadModeCode.FAST, true);
                     }
                     else
-                        webSocketObj.SendCOMRead(itemCodeStr, ReadModeCode[item.readMode], true);
+                        webSocketObj.SendCOMRead(item.code, item.readMode, true);
                 }
             }, WAITTIME_BEFORE_SENDWSSEND);
         }
@@ -654,14 +653,13 @@ export abstract class MeterApplicationBase extends PIXI.Application
                 
                 for (let item of parameterCodeList)
                 {
-                    const itemCodeStr = OBDIIParameterCode[item.code];
                     if (item.readMode === ReadModeCode.SLOWandFAST)
                     {
-                        webSocketObj.SendCOMRead(itemCodeStr, ReadModeCode[ReadModeCode.SLOW], true);
-                        webSocketObj.SendCOMRead(itemCodeStr, ReadModeCode[ReadModeCode.FAST], true);
+                        webSocketObj.SendCOMRead(item.code, ReadModeCode.SLOW, true);
+                        webSocketObj.SendCOMRead(item.code, ReadModeCode.FAST, true);
                     }
                     else
-                        webSocketObj.SendCOMRead(itemCodeStr, ReadModeCode[item.readMode], true);
+                        webSocketObj.SendCOMRead(item.code, item.readMode, true);
                 }
             }, WAITTIME_BEFORE_SENDWSSEND);
         }
