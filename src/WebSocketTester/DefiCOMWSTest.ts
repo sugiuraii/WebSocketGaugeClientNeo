@@ -47,6 +47,7 @@ export class DefiCOMWSTest extends WebSocketTesterBase
     {
         const webSocket = new DefiCOMWebsocket();
         super(webSocket);
+        this.webSocket = webSocket;
         this.defaultPortNo = 2012;
     }
     

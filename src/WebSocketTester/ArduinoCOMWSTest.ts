@@ -46,6 +46,7 @@ class ArduinoCOMWSTest extends WebSocketTesterBase
     {
         const webSocket = new ArduinoCOMWebsocket();
         super(webSocket);
+        this.webSocket = webSocket;
         this.defaultPortNo = 2015;
     }
     
