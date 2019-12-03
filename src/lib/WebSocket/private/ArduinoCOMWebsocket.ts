@@ -55,11 +55,13 @@ export class ArduinoCOMWebsocket extends WebsocketCommon
 
     public getVal(code : ArduinoParameterCode, timestamp : number) : number
     {
+        this.checkInterpolateBufferAndCreateIfEmpty(ArduinoParameterCode[code]);
         return this.interpolateBuffers[ArduinoParameterCode[code]].getVal(timestamp);
     }
 
     public getRawVal(code : ArduinoParameterCode) : number
     {
+        this.checkInterpolateBufferAndCreateIfEmpty(ArduinoParameterCode[code]);
         return this.interpolateBuffers[ArduinoParameterCode[code]].getRawVal();
     }
 

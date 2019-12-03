@@ -55,11 +55,13 @@ export class DefiCOMWebsocket extends WebsocketCommon
 
     public getVal(code : DefiParameterCode, timestamp : number) : number
     {
+        this.checkInterpolateBufferAndCreateIfEmpty(DefiParameterCode[code]);
         return this.interpolateBuffers[DefiParameterCode[code]].getVal(timestamp);
     }
 
     public getRawVal(code : DefiParameterCode) : number
     {
+        this.checkInterpolateBufferAndCreateIfEmpty(DefiParameterCode[code]);
         return this.interpolateBuffers[DefiParameterCode[code]].getRawVal();
     }
 
