@@ -26,7 +26,8 @@
 
 import {ArduinoCOMWebsocket} from '../lib/WebSocket/WebSocketCommunication';
 import {ArduinoParameterCode} from '../lib/WebSocket/WebSocketCommunication';
-import {DefiArduinoCOMWSTestBase} from './base/DefiArduinoWSTestBase';
+import {WebSocketTesterBase} from './base/WebSocketTesterBase';
+import {EnumUtils} from '../lib/EnumUtils';
 
 import * as $ from "jquery";
 require('./ArduinoCOMWSTest.html');
@@ -37,18 +38,78 @@ window.onload = function()
     wsTest.main();
 }
 
-class ArduinoCOMWSTest extends DefiArduinoCOMWSTestBase
+class ArduinoCOMWSTest extends WebSocketTesterBase
 {    
+    private webSocket: ArduinoCOMWebsocket;
+    
     constructor()
     {
         const webSocket = new ArduinoCOMWebsocket();
         super(webSocket);
+        this.webSocket = webSocket;
         this.defaultPortNo = 2015;
     }
-
+    
     protected setParameterCodeSelectBox() : void
     {
-        for (let code in ArduinoParameterCode)
-            $('#codeSelect').append($('<option>').html(code).val(code));
+        EnumUtils.EnumToKeyStrArray(ArduinoParameterCode).forEach(code => $('#codeSelect').append($('<option>').html(code).val(code)));
     }
+    protected assignButtonEvents() : void
+    {
+        super.assignButtonEvents();
+        $("#buttonWSSend").click(() => this.inputWSSend());
+        $("#buttonWSInterval").click(() => this.inputWSInterval());
+    }
+
+    protected registerWSEvents() : void
+    {
+        this.webSocket.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: string}) => 
+        {
+            $('#spanInterval').text(intervalTime.toFixed(2));
+             //clear
+            $('#divVAL').html("");
+            for (var key in val)
+            {
+                $('#divVAL').append(key + " : " + val[key] + "<br>" );
+            }
+        }
+        this.webSocket.OnERRPacketReceived = (msg:string)=>
+        {
+            $('#divERR').append(msg + "<br>")
+        };
+
+        this.webSocket.OnRESPacketReceived = (msg : string) =>
+        {
+            $('#divRES').append(msg + "<br>");
+        };
+        this.webSocket.OnWebsocketError = (msg : string) =>
+        {
+            $('#divWSMsg').append(msg + "<br>");
+        };
+        this.webSocket.OnWebsocketOpen = () =>
+        {
+            $('#divWSMsg').append('* Connection open<br/>');
+            $('#connectButton').attr("disabled", "disabled");
+            $('#disconnectButton').removeAttr("disabled");  
+        };
+        this.webSocket.OnWebsocketClose = () =>
+        {
+            $('#divWSMsg').append('* Connection closed<br/>');
+            $('#connectButton').removeAttr("disabled");
+            $('#disconnectButton').attr("disabled", "disabled");
+        };
+    }
+
+    public inputWSSend()
+    {
+        const codeFlag = $('#codeFlag').val() === "true" ? true : false; 
+        this.webSocket.SendWSSend(ArduinoParameterCode[$('#codeSelect').val().toString()], codeFlag);
+    };
+
+    public inputWSInterval()
+    {
+        const wsInterval = Number($('#WSInterval').val());
+        this.webSocket.SendWSInterval(wsInterval);
+    };
+
 }

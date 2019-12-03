@@ -25,7 +25,9 @@
 
 import {SSMWebsocket} from "../lib/WebSocket/WebSocketCommunication";
 import {SSMParameterCode} from "../lib/WebSocket/WebSocketCommunication";
-import {SSMELM327COMWSTestBase} from "./base/SSMELM327WSTestBase";
+import {ReadModeCode} from "../lib/WebSocket/WebSocketCommunication";
+import {WebSocketTesterBase} from "./base/WebSocketTesterBase";
+import { EnumUtils } from "../lib/EnumUtils";
 
 import * as $ from "jquery";
 require('./SSMCOMWSTest.html');
@@ -35,18 +37,69 @@ window.onload = function () {
     wsTest.main();
 }
 
-export class SSMCOMWSTest extends SSMELM327COMWSTestBase
+export class SSMCOMWSTest extends WebSocketTesterBase
 {
+    private webSocket: SSMWebsocket;
+    
     constructor()
     {
         const webSocket = new SSMWebsocket();
         super(webSocket);
+        this.webSocket = webSocket;
         this.defaultPortNo = 2013;
     }
 
     protected setParameterCodeSelectBox() {
-        for (let code in SSMParameterCode)
-            $('#codeSelect').append($('<option>').html(code).val(code));
+        EnumUtils.EnumToKeyStrArray(SSMParameterCode).forEach(code => $('#codeSelect').append($('<option>').html(code).val(code)));
     }
+
+    protected assignButtonEvents(): void {
+        super.assignButtonEvents();
+        $("#buttonWSSend").click(() => this.inputWSSend());
+        $("#buttonWSInterval").click(() => this.inputWSInterval());
+    }
+
+    protected registerWSEvents(): void {
+        this.webSocket.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: string}) => {
+            $('#spanInterval').text(intervalTime.toFixed(2));
+            //clear
+            $('#divVAL').html("");
+            for (var key in val) {
+                $('#divVAL').append(key + " : " + val[key] + "<br>");
+            }
+        }
+        this.webSocket.OnERRPacketReceived = (msg: string) => {
+            $('#divERR').append(msg + "<br>")
+        };
+
+        this.webSocket.OnRESPacketReceived = (msg: string) => {
+            $('#divRES').append(msg + "<br>");
+        };
+        this.webSocket.OnWebsocketError = (msg: string) => {
+            $('#divWSMsg').append(msg + "<br>");
+        };
+        this.webSocket.OnWebsocketOpen = () => {
+            $('#divWSMsg').append('* Connection open<br/>');
+            $('#connectButton').attr("disabled", "disabled");
+            $('#disconnectButton').removeAttr("disabled");
+        };
+        this.webSocket.OnWebsocketClose = () => {
+            $('#divWSMsg').append('* Connection closed<br/>');
+            $('#connectButton').removeAttr("disabled");
+            $('#disconnectButton').attr("disabled", "disabled");
+        };
+    }
+
+    public inputWSSend() {
+        const codeSelect = $('#codeSelect').val().toString();
+        const codeReadmode = $('#codeReadmode').val().toString();
+        const codeFlag = $('#codeFlag').val() === "true" ? true:false;
+        this.webSocket.SendCOMRead(SSMParameterCode[codeSelect], ReadModeCode[codeReadmode], codeFlag);
+    };
+
+    public inputWSInterval() {
+        const WSinterval = Number($('#WSInterval').val());
+        this.webSocket.SendSlowreadInterval(WSinterval);
+    };
 }
 

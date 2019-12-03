@@ -170,10 +170,10 @@ export abstract class MeterApplicationBase extends PIXI.Application
             this.texturePathToPreload = this.texturePathToPreload.concat(target);
     }
     
-    private defiParameterCodeList: {code: string}[];
-    private arduinoParameterCodeList : {code : string}[]; 
-    private ssmParameterCodeList : {code : string, readMode : string}[];
-    private elm327ParameterCodeList : {code : string, readMode : string}[];
+    private defiParameterCodeList: {code: DefiParameterCode}[];
+    private arduinoParameterCodeList : {code : ArduinoParameterCode}[]; 
+    private ssmParameterCodeList : {code : SSMParameterCode, readMode : ReadModeCode}[];
+    private elm327ParameterCodeList : {code : OBDIIParameterCode, readMode : ReadModeCode}[];
     private assettoCorsaPhysicsParameterCodeList  : {code : AssettoCorsaSHMPhysicsParameterCode}[];
     private assettoCorsaGraphicsParameterCodeList  : {code : AssettoCorsaSHMGraphicsParameterCode}[];
     private assettoCorsaStaticInfoParameterCodeList  : {code : AssettoCorsaSHMStaticInfoParameterCode}[];
@@ -182,7 +182,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
      * Register Defi parameter code to enable communication.
      * @param code Parameter code name to register.
      */
-    public registerDefiParameterCode(code : string)
+    public registerDefiParameterCode(code : DefiParameterCode)
     {
         this.defiParameterCodeList.push({code});
     }
@@ -190,7 +190,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
      * Register Arduino parameter code to enable communication.
      * @param code Parameter code name to register.
      */
-    public registerArduinoParameterCode(code : string)
+    public registerArduinoParameterCode(code : ArduinoParameterCode)
     {
         this.arduinoParameterCodeList.push({code});
     }
@@ -198,7 +198,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
      * Register SSM parameter code to enable communication.
      * @param code Parameter code name to register.
      */
-    public registerSSMParameterCode(code : string, readMode : string)
+    public registerSSMParameterCode(code : SSMParameterCode, readMode : ReadModeCode)
     {
         this.ssmParameterCodeList.push({code, readMode});
     }
@@ -206,7 +206,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
      * Register ELM327(OBDII PID) parameter code to enable communication.
      * @param code Parameter code name to register.
      */
-    public registerELM327ParameterCode(code : string, readMode : string)
+    public registerELM327ParameterCode(code : OBDIIParameterCode, readMode : ReadModeCode)
     {
         this.elm327ParameterCodeList.push({code, readMode});
     }
@@ -225,8 +225,6 @@ export abstract class MeterApplicationBase extends PIXI.Application
     {
         this.assettoCorsaStaticInfoParameterCodeList.push({code});
     }
-
-
 
     /**
      * Fueltrip logger section fueltrip time span (in sec).
@@ -515,13 +513,13 @@ export abstract class MeterApplicationBase extends PIXI.Application
     {
         console.debug("called connectWebSocket");
         if (this.IsDefiWSEnabled)
-            this.connectDefiArduinoWebSocket("DefiWS", this.defiParameterCodeList, this.defiWS);
+            this.connectDefiWebSocket("DefiWS", this.defiParameterCodeList, this.defiWS);
         if (this.IsArudinoWSEnabled)
-            this.connectDefiArduinoWebSocket("ArduinoWS", this.arduinoParameterCodeList, this.arduinoWS);
+            this.connectArduinoWebSocket("ArduinoWS", this.arduinoParameterCodeList, this.arduinoWS);
         if (this.IsSSMWSEnabled)
-            this.connectSSMELM327WebSocket("SSMWS", this.ssmParameterCodeList, this.SSMELM327SlowReadInterval,  this.ssmWS);
+            this.connectSSMWebSocket("SSMWS", this.ssmParameterCodeList, this.SSMELM327SlowReadInterval,  this.ssmWS);
         if (this.IsELM327WSEnabled)
-            this.connectSSMELM327WebSocket("ELM327WS", this.elm327ParameterCodeList, this.SSMELM327SlowReadInterval, this.elm327WS);
+            this.connectELM327WebSocket("ELM327WS", this.elm327ParameterCodeList, this.SSMELM327SlowReadInterval, this.elm327WS);
         if (this.IsFUELTRIPWSEnabled)
             this.connectFUELTRIPWebSocket("FUELTRIPWS",  this.FUELTRIPSectSpan, this.FUELTRIPSectStoreMax, this.fueltripWS);
         if(this.IsAssettoCorsaWSEnabled)
@@ -557,7 +555,7 @@ export abstract class MeterApplicationBase extends PIXI.Application
         
     }
     
-    private connectDefiArduinoWebSocket(logPrefix : string, parameterCodeList : {code: string}[] , webSocketObj: DefiCOMWebsocket)
+    private connectDefiWebSocket(logPrefix : string, parameterCodeList : {code: DefiParameterCode}[] , webSocketObj: DefiCOMWebsocket)
     {
         const LogWindow = this.applicationnavBar.LogModalDialog;
         webSocketObj.OnWebsocketOpen = () =>
@@ -583,8 +581,67 @@ export abstract class MeterApplicationBase extends PIXI.Application
         LogWindow.appendLog(logPrefix + " connect...");
         webSocketObj.Connect();
     }
+
+    private connectArduinoWebSocket(logPrefix : string, parameterCodeList : {code: ArduinoParameterCode}[] , webSocketObj: ArduinoCOMWebsocket)
+    {
+        const LogWindow = this.applicationnavBar.LogModalDialog;
+        webSocketObj.OnWebsocketOpen = () =>
+        {
+            LogWindow.appendLog(logPrefix + " is connected. SendWSSend/Interval after "  + WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
+            window.setTimeout( () => 
+            {
+                //SendWSSend
+                for (let item of parameterCodeList)
+                    webSocketObj.SendWSSend(item.code, true);
+
+                //SendWSInterval from spinner
+                webSocketObj.SendWSInterval(this.getWSIntervalFromLocalStorage());
+                
+            }, WAITTIME_BEFORE_SENDWSSEND);
+        }
+        webSocketObj.OnWebsocketClose = () =>
+        {
+            LogWindow.appendLog(logPrefix + " is disconnected. Reconnect after " + WAITTIME_BEFORE_RECONNECT.toString() + "msec...");                
+            window.setTimeout(() => webSocketObj.Connect(), WAITTIME_BEFORE_RECONNECT);
+        }
+
+        LogWindow.appendLog(logPrefix + " connect...");
+        webSocketObj.Connect();
+    }
     
-    private connectSSMELM327WebSocket(logPrefix : string, parameterCodeList : {code: string, readMode: string}[] , slowReadInterval : number, webSocketObj: SSMWebsocket)
+    private connectSSMWebSocket(logPrefix : string, parameterCodeList : {code: SSMParameterCode, readMode: ReadModeCode}[] , slowReadInterval : number, webSocketObj: SSMWebsocket)
+    {
+        const LogWindow = this.applicationnavBar.LogModalDialog;
+        webSocketObj.OnWebsocketOpen = () =>
+        {
+            LogWindow.appendLog(logPrefix + " is connected. SendWSSend after "  + WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
+            window.setTimeout( () => 
+            {
+                webSocketObj.SendSlowreadInterval(slowReadInterval);
+                
+                for (let item of parameterCodeList)
+                {
+                    if (item.readMode === ReadModeCode.SLOWandFAST)
+                    {
+                        webSocketObj.SendCOMRead(item.code, ReadModeCode.SLOW, true);
+                        webSocketObj.SendCOMRead(item.code, ReadModeCode.FAST, true);
+                    }
+                    else
+                        webSocketObj.SendCOMRead(item.code, item.readMode, true);
+                }
+            }, WAITTIME_BEFORE_SENDWSSEND);
+        }
+        webSocketObj.OnWebsocketClose = () =>
+        {
+            LogWindow.appendLog(logPrefix + " is disconnected. Reconnect after " + WAITTIME_BEFORE_RECONNECT.toString() + "msec...");                
+            window.setTimeout(() => webSocketObj.Connect(), WAITTIME_BEFORE_RECONNECT);
+        }
+
+        LogWindow.appendLog(logPrefix + " connect...");
+        webSocketObj.Connect();
+    }
+
+    private connectELM327WebSocket(logPrefix : string, parameterCodeList : {code: OBDIIParameterCode, readMode: ReadModeCode}[] , slowReadInterval : number, webSocketObj: ELM327COMWebsocket)
     {
         const LogWindow = this.applicationnavBar.LogModalDialog;
         webSocketObj.OnWebsocketOpen = () =>

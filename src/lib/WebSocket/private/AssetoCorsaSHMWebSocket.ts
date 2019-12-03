@@ -22,14 +22,14 @@
  * THE SOFTWARE.
  */
 
-import * as Interpolation from "./Interpolation";
+import * as Interpolation from "./utils/Interpolation";
 import * as JSONFormats from "./JSONFormats";
 import {WebsocketCommon} from "./WebsocketCommon";
 import {AssettoCorsaSHMNumericalVALCode,
         AssettoCorsaSHMStringVALCode,
         AssettoCorsaSHMGraphicsParameterCode,
         AssettoCorsaSHMPhysicsParameterCode,
-        AssettoCorsaSHMStaticInfoParameterCode} from "./AssettoCorsaSHMParameterCode";
+        AssettoCorsaSHMStaticInfoParameterCode} from "./parameterCode/AssettoCorsaSHMParameterCode";
 import {EnumUtils} from "../../EnumUtils";
 
 export class AssettoCorsaSHMWebsocket extends WebsocketCommon
@@ -129,7 +129,7 @@ export class AssettoCorsaSHMWebsocket extends WebsocketCommon
     {
         const codeName = AssettoCorsaSHMNumericalVALCode[code];
         this.checkInterpolateBufferAndCreateIfEmpty(codeName);
-        return this.valueInterpolateBuffers[code].getRawVal();
+        return this.valueInterpolateBuffers[codeName].getRawVal();
     }
     
     public getStringVal(code : AssettoCorsaSHMStringVALCode) : string

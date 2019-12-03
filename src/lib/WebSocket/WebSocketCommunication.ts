@@ -23,21 +23,22 @@
  */
 
 export {WebsocketCommon} from "./private/WebsocketCommon";
-export {DefiCOMWebsocket} from "./private/DefiSSMWebSocket";
-export {ArduinoCOMWebsocket} from "./private/DefiSSMWebSocket";
-export {SSMWebsocket} from "./private/DefiSSMWebSocket";
-export {ELM327COMWebsocket} from "./private/DefiSSMWebSocket";
+export {DefiCOMWebsocket} from "./private/DefiCOMWebsocket";
+export {ArduinoCOMWebsocket} from "./private/ArduinoCOMWebsocket";
+export {SSMWebsocket} from "./private/SSMWebsocket";
+export {ELM327COMWebsocket} from "./private/ELM327COMWebsocket";
 export {FUELTRIPWebsocket} from "./private/FUELTRIPWebsocket";
 export {AssettoCorsaSHMWebsocket} from "./private/AssetoCorsaSHMWebSocket";
-export {DefiParameterCode} from "./private/ParameterCode";
-export {ArduinoParameterCode} from "./private/ParameterCode";
-export {SSMParameterCode} from "./private/ParameterCode";
-export {SSMSwitchCode} from "./private/ParameterCode";
-export {OBDIIParameterCode} from "./private/ParameterCode";
-export {AssettoCorsaSHMPhysicsParameterCode} from "./private/AssettoCorsaSHMParameterCode";
-export {AssettoCorsaSHMGraphicsParameterCode} from "./private/AssettoCorsaSHMParameterCode";
-export {AssettoCorsaSHMStaticInfoParameterCode} from "./private/AssettoCorsaSHMParameterCode";
-export {AssettoCorsaSHMNumericalVALCode} from "./private/AssettoCorsaSHMParameterCode";
-export {AssettoCorsaSHMStringVALCode} from "./private/AssettoCorsaSHMParameterCode";
-export {ReadModeCode} from "./private/ParameterCode";
+
+export {DefiParameterCode} from "./private/parameterCode/DefiParameterCode";
+export {ArduinoParameterCode} from "./private/parameterCode/ArduinoParameterCode";
+export {SSMParameterCode} from "./private/parameterCode/SSMParameterCode";
+export {SSMSwitchCode} from "./private/parameterCode/SSMSwitchCode";
+export {OBDIIParameterCode} from "./private/parameterCode/OBDIIParameterCode";
+export {AssettoCorsaSHMPhysicsParameterCode} from "./private/parameterCode/AssettoCorsaSHMParameterCode";
+export {AssettoCorsaSHMGraphicsParameterCode} from "./private/parameterCode/AssettoCorsaSHMParameterCode";
+export {AssettoCorsaSHMStaticInfoParameterCode} from "./private/parameterCode/AssettoCorsaSHMParameterCode";
+export {AssettoCorsaSHMNumericalVALCode} from "./private/parameterCode/AssettoCorsaSHMParameterCode";
+export {AssettoCorsaSHMStringVALCode} from "./private/parameterCode/AssettoCorsaSHMParameterCode";
+export {ReadModeCode} from "./private/parameterCode/ReadModeCode";
 
