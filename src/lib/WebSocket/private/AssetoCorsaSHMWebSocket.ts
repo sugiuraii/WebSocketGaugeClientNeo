@@ -129,7 +129,7 @@ export class AssettoCorsaSHMWebsocket extends WebsocketCommon
     {
         const codeName = AssettoCorsaSHMNumericalVALCode[code];
         this.checkInterpolateBufferAndCreateIfEmpty(codeName);
-        return this.valueInterpolateBuffers[code].getRawVal();
+        return this.valueInterpolateBuffers[codeName].getRawVal();
     }
     
     public getStringVal(code : AssettoCorsaSHMStringVALCode) : string
