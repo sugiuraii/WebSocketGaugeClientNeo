@@ -23,10 +23,10 @@
  */
 
 export {WebsocketCommon} from "./private/WebsocketCommon";
-export {DefiCOMWebsocket} from "./private/DefiSSMWebSocket";
-export {ArduinoCOMWebsocket} from "./private/DefiSSMWebSocket";
-export {SSMWebsocket} from "./private/DefiSSMWebSocket";
-export {ELM327COMWebsocket} from "./private/DefiSSMWebSocket";
+export {DefiCOMWebsocket} from "./private/DefiCOMWebsocket";
+export {ArduinoCOMWebsocket} from "./private/ArduinoCOMWebsocket";
+export {SSMWebsocket} from "./private/SSMWebsocket";
+export {ELM327COMWebsocket} from "./private/ELM327COMWebsocket";
 export {FUELTRIPWebsocket} from "./private/FUELTRIPWebsocket";
 export {AssettoCorsaSHMWebsocket} from "./private/AssetoCorsaSHMWebSocket";
 
