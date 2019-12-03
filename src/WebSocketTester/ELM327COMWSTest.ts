@@ -25,7 +25,9 @@
 
 import {ELM327COMWebsocket} from "../lib/WebSocket/WebSocketCommunication";
 import {OBDIIParameterCode} from "../lib/WebSocket/WebSocketCommunication";
-import {SSMELM327COMWSTestBase} from "./base/SSMELM327WSTestBase";
+import {ReadModeCode} from "../lib/WebSocket/WebSocketCommunication";
+import {WebSocketTesterBase} from "./base/WebSocketTesterBase";
+import {EnumUtils} from "../lib/EnumUtils";
 
 import * as $ from "jquery";
 require('./ELM327COMWSTest.html');
@@ -35,7 +37,9 @@ window.onload = function () {
     wsTest.main();
 }
 
-export class ELM327COMWSTest extends SSMELM327COMWSTestBase {
+export class ELM327COMWSTest extends WebSocketTesterBase {
+    
+    private webSocket: ELM327COMWebsocket;
     constructor()
     {
         const webSocket = new ELM327COMWebsocket();
@@ -44,8 +48,50 @@ export class ELM327COMWSTest extends SSMELM327COMWSTestBase {
     }
 
     protected setParameterCodeSelectBox() {
-        for (let code in OBDIIParameterCode)
-            $('#codeSelect').append($('<option>').html(code).val(code));
+        EnumUtils.EnumToKeyStrArray(OBDIIParameterCode).forEach(code => $('#codeSelect').append($('<option>').html(code).val(code)));
     }
+
+    protected registerWSEvents(): void {
+        this.webSocket.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: string}) => {
+            $('#spanInterval').text(intervalTime.toFixed(2));
+            //clear
+            $('#divVAL').html("");
+            for (var key in val) {
+                $('#divVAL').append(key + " : " + val[key] + "<br>");
+            }
+        }
+        this.webSocket.OnERRPacketReceived = (msg: string) => {
+            $('#divERR').append(msg + "<br>")
+        };
+
+        this.webSocket.OnRESPacketReceived = (msg: string) => {
+            $('#divRES').append(msg + "<br>");
+        };
+        this.webSocket.OnWebsocketError = (msg: string) => {
+            $('#divWSMsg').append(msg + "<br>");
+        };
+        this.webSocket.OnWebsocketOpen = () => {
+            $('#divWSMsg').append('* Connection open<br/>');
+            $('#connectButton').attr("disabled", "disabled");
+            $('#disconnectButton').removeAttr("disabled");
+        };
+        this.webSocket.OnWebsocketClose = () => {
+            $('#divWSMsg').append('* Connection closed<br/>');
+            $('#connectButton').removeAttr("disabled");
+            $('#disconnectButton').attr("disabled", "disabled");
+        };
+    }
+
+    public inputWSSend() {
+        const codeSelect = $('#codeSelect').val().toString();
+        const codeReadmode = $('#codeReadmode').val().toString();
+        const codeFlag = $('#codeFlag').val() === "true" ? true:false;
+        this.webSocket.SendCOMRead(OBDIIParameterCode[codeSelect], ReadModeCode[codeReadmode], codeFlag);
+    };
+
+    public inputWSInterval() {
+        const WSinterval = Number($('#WSInterval').val());
+        this.webSocket.SendSlowreadInterval(WSinterval);
+    };
 }
 
