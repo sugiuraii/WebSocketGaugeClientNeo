@@ -26,7 +26,8 @@
 
 import {DefiCOMWebsocket} from '../lib/WebSocket/WebSocketCommunication';
 import {DefiParameterCode} from '../lib/WebSocket/WebSocketCommunication';
-import {DefiArduinoCOMWSTestBase} from './base/DefiArduinoWSTestBase'
+import {WebSocketTesterBase} from './base/WebSocketTesterBase'
+import {EnumUtils} from '../lib/EnumUtils';
 
 import * as $ from "jquery";
 require('./DefiCOMWSTest.html');
@@ -37,8 +38,11 @@ window.onload = function()
     wsTest.main();
 }
 
-class DefiCOMWSTest extends DefiArduinoCOMWSTestBase
-{        
+export class DefiCOMWSTest extends WebSocketTesterBase
+{
+    private webSocket: DefiCOMWebsocket;
+    protected get WebSocket() { return this.webSocket };
+    
     constructor()
     {
         const webSocket = new DefiCOMWebsocket();
@@ -48,8 +52,63 @@ class DefiCOMWSTest extends DefiArduinoCOMWSTestBase
     
     protected setParameterCodeSelectBox() : void
     {
-        for (let code in DefiParameterCode)
-            $('#codeSelect').append($('<option>').html(code).val(code));
+        EnumUtils.EnumToKeyStrArray(DefiParameterCode).forEach(code => $('#codeSelect').append($('<option>').html(code).val(code)));
     }
-    
+    protected assignButtonEvents() : void
+    {
+        super.assignButtonEvents();
+        $("#buttonWSSend").click(() => this.inputWSSend());
+        $("#buttonWSInterval").click(() => this.inputWSInterval());
+    }
+
+    protected registerWSEvents() : void
+    {
+        this.webSocket.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: string}) => 
+        {
+            $('#spanInterval').text(intervalTime.toFixed(2));
+             //clear
+            $('#divVAL').html("");
+            for (var key in val)
+            {
+                $('#divVAL').append(key + " : " + val[key] + "<br>" );
+            }
+        }
+        this.webSocket.OnERRPacketReceived = (msg:string)=>
+        {
+            $('#divERR').append(msg + "<br>")
+        };
+
+        this.webSocket.OnRESPacketReceived = (msg : string) =>
+        {
+            $('#divRES').append(msg + "<br>");
+        };
+        this.webSocket.OnWebsocketError = (msg : string) =>
+        {
+            $('#divWSMsg').append(msg + "<br>");
+        };
+        this.webSocket.OnWebsocketOpen = () =>
+        {
+            $('#divWSMsg').append('* Connection open<br/>');
+            $('#connectButton').attr("disabled", "disabled");
+            $('#disconnectButton').removeAttr("disabled");  
+        };
+        this.webSocket.OnWebsocketClose = () =>
+        {
+            $('#divWSMsg').append('* Connection closed<br/>');
+            $('#connectButton').removeAttr("disabled");
+            $('#disconnectButton').attr("disabled", "disabled");
+        };
+    }
+
+    public inputWSSend()
+    {
+        const codeFlag = $('#codeFlag').val() === "true" ? true : false; 
+        this.webSocket.SendWSSend(DefiParameterCode[$('#codeSelect').val().toString()], codeFlag);
+    };
+
+    public inputWSInterval()
+    {
+        const wsInterval = Number($('#WSInterval').val());
+        this.webSocket.SendWSInterval(wsInterval);
+    };
 }

@@ -23,9 +23,8 @@
  */
 /// <reference path="../lib/webpackRequire.ts" />
 
-import {DefiCOMWebsocket} from '../lib/WebSocket/WebSocketCommunication';
 import {DefiParameterCode} from '../lib/WebSocket/WebSocketCommunication';
-import {DefiArduinoCOMWSTestBase} from './base/DefiArduinoWSTestBase';
+import {DefiCOMWSTest} from "./DefiCOMWSTest"
 import {EnumUtils} from '../lib/EnumUtils'
 
 import * as $ from "jquery";
@@ -36,23 +35,17 @@ window.onload = () => {
     wsTest.main();
 }
 
-class DefiCOMWSTestInterpolate extends DefiArduinoCOMWSTestBase{
+class DefiCOMWSTestInterpolate extends DefiCOMWSTest
+{
     
     constructor()
     {
-        const webSocket = new DefiCOMWebsocket();
-        super(webSocket);
-        this.defaultPortNo = 2012;
+        super();
     }
 
     public main(): void {
         super.main();
         window.requestAnimationFrame((timestamp: number) => this.showInterpolateVal(timestamp));
-    }
-
-    protected setParameterCodeSelectBox() {
-        for (let code in DefiParameterCode)
-            $('#codeSelect').append($('<option>').html(code).val(code));
     }
 
     public showInterpolateVal(timestamp: number) {
@@ -64,9 +57,6 @@ class DefiCOMWSTestInterpolate extends DefiArduinoCOMWSTestBase{
                     $('#divInterpolatedVAL').append(key + " : " + val + "<br>");
 
             });
-        for (let key in DefiParameterCode) {
-            
-        }
         window.requestAnimationFrame((timestamp: number) => this.showInterpolateVal(timestamp));
     }
 } 
