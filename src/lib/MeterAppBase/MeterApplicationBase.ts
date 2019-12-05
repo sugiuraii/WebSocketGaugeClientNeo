@@ -35,7 +35,7 @@ import {ReadModeCode} from "../WebSocket/WebSocketCommunication";
 
 import {AssettoCorsaSHMWebsocket, AssettoCorsaSHMPhysicsParameterCode, 
     AssettoCorsaSHMGraphicsParameterCode, AssettoCorsaSHMStaticInfoParameterCode} from "../WebSocket/WebSocketCommunication";
-import {calculateGearPosition} from "./CalculateGearPosition";
+import {calculateGearPosition} from "./utils/CalculateGearPosition";
 
 const DEFICOM_WS_PORT = 2012;
 const ARDUINOCOM_WS_PORT = 2015;
