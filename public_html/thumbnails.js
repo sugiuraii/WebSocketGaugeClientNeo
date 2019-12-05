@@ -21,59 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-/*
-const waitTime = 3000;
-const thumbnailWidth = 300;
-const thumbnailHeight = 200;
 
-function getFileUrl(str) {
-    const fs = require('fs');
-    var pathName = fs.absolute(str).replace(/\\/g, '/');
-    // Windows drive letter must be prefixed with a slash
-    if (pathName[0] !== "/") {
-        pathName = "/" + pathName;
-    }
-    return encodeURI("file://" + pathName);
-};
+// Creare thuumbnails directory.
+var fs = require('fs');
+var dir = './thumbnails';
 
-function createThumbNail(htmlPath, pngPath)
-{
-    const page = require('webpage').create();
-    const fileUrl = getFileUrl(htmlPath);
-    page.viewportSize =
-    {
-        width : thumbnailWidth,
-        height : thumbnailHeight
-    };
-    
-    page.clipRect =
-    {
-        top : 0,
-        left : 0,
-        width : thumbnailWidth,
-        height : thumbnailHeight
-    };
-    
-    page.open(fileUrl, function() {
-    window.setTimeout(function () 
-    {
-        page.render(pngPath);
-    },waitTime);
-    });
+if (!fs.existsSync(dir)){
+    fs.mkdirSync(dir);
 }
-
-createThumbNail("benchmark/AnalogMeterClusterBenchApp.html", "thumbnails/AnalogMeterClusterBenchApp.png");
-createThumbNail("benchmark/DigitalMFDBenchApp.html", "thumbnails/DigitalMFDBenchApp.png");
-createThumbNail("application/AnalogMeterCluster-Defi-SSM.html", "thumbnails/AnalogMeterCluster-Defi-SSM.png");
-//createThumbNail("application/CompactMFD-Arduino.html", "thumbnails/CompactMFD-Arduino.png");
-//createThumbNail("application/CompactMFD-ELM327.html", "thumbnails/CompactMFD-ELM327.png");
-createThumbNail("application/CompactMFD-SSM.html", "thumbnails/CompactMFD-SSM.png");
-createThumbNail("application/DigitalMFD-Defi-SSM.html", "thumbnails/DigitalMFD-Defi-SSM.png");
-createThumbNail("application/AnalogTripleMeter-SSM.html", "thumbnails/AnalogTripleMeter.png");
-createThumbNail("application/LEDRevMeter-SSM.html", "thumbnails/LEDRevMeter.png");
-
-window.setTimeout(function(){phantom.exit();},10000);
-*/
 
 const puppeteer = require('puppeteer');
 const path = require('path');
