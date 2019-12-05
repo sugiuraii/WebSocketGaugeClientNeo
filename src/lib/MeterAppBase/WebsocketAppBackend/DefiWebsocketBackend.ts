@@ -25,8 +25,9 @@
 import {DefiCOMWebsocket, DefiParameterCode} from "../../WebSocket/WebSocketCommunication";
 import {WebstorageHandler} from "../Webstorage/WebstorageHandler";
 import {ILogWindow} from "../ControlPanelParts/LogWindow";
+import {IStatusIndicator} from "../ControlPanelParts/WebSocketIndicator";
 
- export class DefiWebsocketApp
+ export class DefiWebsocketBackend
  {
    private readonly logPrefix = "Defi";
    private readonly WEBSOCKET_CHECK_INTERVAL = 1000;
@@ -36,48 +37,63 @@ import {ILogWindow} from "../ControlPanelParts/LogWindow";
    private readonly defiWS: DefiCOMWebsocket;
    private readonly defiParameterCodeList: {code: DefiParameterCode}[] = new Array();
    private readonly loggerWindow : ILogWindow;
+   private readonly statusIndicator : IStatusIndicator;
 
    public get DefiWS() {return this.defiWS};
    public get ParameterCodeList() { return this.defiParameterCodeList };
 
    private readonly webSocketServerURL : string;
 
-   constructor(serverurl : string, loggerWindow : ILogWindow)
+   private indicatorUpdateIntervalID : number;
+
+   constructor(serverurl : string, loggerWindow : ILogWindow, statusIndicator : IStatusIndicator)
    {
       this.defiWS = new DefiCOMWebsocket();
       this.loggerWindow = loggerWindow;
+      this.statusIndicator = statusIndicator;
 
       this.defiWS.OnWebsocketError = (message: string) => this.loggerWindow.appendLog(this.logPrefix + " websocket error : " + message);
    }
 
+   public Run()
+   {
+      this.indicatorUpdateIntervalID = window.setInterval(() => this.setStatusIndicator(), this.WEBSOCKET_CHECK_INTERVAL);
+      this.connectWebSocket();
+   }
+
+   private setStatusIndicator()
+   {
+      this.statusIndicator.SetStatus(this.defiWS.getReadyState());
+   }
+
    private connectWebSocket()
    {
-       const LogWindow = this.loggerWindow;
-       const webSocketObj = this.defiWS;
-       const logPrefix = this.logPrefix;
+         const LogWindow = this.loggerWindow;
+         const webSocketObj = this.defiWS;
+         const logPrefix = this.logPrefix;
 
-       webSocketObj.OnWebsocketOpen = () =>
-       {
-           LogWindow.appendLog(logPrefix + " is connected. SendWSSend/Interval after "  + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
-           window.setTimeout( () => 
-           {
+         webSocketObj.URL = this.webSocketServerURL;
+
+         webSocketObj.OnWebsocketOpen = () =>
+         {
+            LogWindow.appendLog(logPrefix + " is connected. SendWSSend/Interval after "  + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
+            window.setTimeout( () => 
+            {
                //SendWSSend
                this.ParameterCodeList.forEach(item => webSocketObj.SendWSSend(item.code, true));
                
                //SendWSInterval from spinner
                webSocketObj.SendWSInterval(WebstorageHandler.GetWSIntervalFromLocalStorage());
                
-           }, this.WAITTIME_BEFORE_SENDWSSEND);
-       }
-       webSocketObj.OnWebsocketClose = () =>
-       {
-           LogWindow.appendLog(logPrefix + " is disconnected. Reconnect after " + this.WAITTIME_BEFORE_RECONNECT.toString() + "msec...");                
-           window.setTimeout(() => webSocketObj.Connect(), this.WAITTIME_BEFORE_RECONNECT);
-       }
+            }, this.WAITTIME_BEFORE_SENDWSSEND);
+         }
+         webSocketObj.OnWebsocketClose = () =>
+         {
+            LogWindow.appendLog(logPrefix + " is disconnected. Reconnect after " + this.WAITTIME_BEFORE_RECONNECT.toString() + "msec...");                
+            window.setTimeout(() => webSocketObj.Connect(), this.WAITTIME_BEFORE_RECONNECT);
+         }
 
-       LogWindow.appendLog(logPrefix + " connect...");
-       webSocketObj.Connect();
+         LogWindow.appendLog(logPrefix + " connect...");
+         webSocketObj.Connect();
    }
-
-
  }

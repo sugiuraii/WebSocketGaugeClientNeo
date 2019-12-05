@@ -24,6 +24,19 @@
 
 import {HTMLDivContainer} from './HTMLDivContainer';
 
+export enum WebsocketStatus
+{
+    Connecting = WebSocket.CONNECTING,
+    Open = WebSocket.OPEN,
+    Closing = WebSocket.CLOSING,
+    Closed = WebSocket.CLOSED
+}
+
+export interface IStatusIndicator
+{
+    SetStatus(status : WebsocketStatus); 
+}
+
 export class WebSocketIndicator extends HTMLDivContainer
 {
     private readonly defiCOMIndicator: HTMLDivElement;
