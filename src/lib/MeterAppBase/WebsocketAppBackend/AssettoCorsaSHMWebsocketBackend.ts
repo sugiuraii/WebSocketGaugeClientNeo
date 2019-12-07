@@ -90,6 +90,16 @@ export class AssettoCorsaSHMWebsocketBackend {
           LogWindow.appendLog(logPrefix + " is disconnected. Reconnect after " + this.WAITTIME_BEFORE_RECONNECT.toString() + "msec...");
           window.setTimeout(() => webSocketObj.Connect(), this.WAITTIME_BEFORE_RECONNECT);
        }
+
+       webSocketObj.OnWebsocketError = (message: string) => {
+         LogWindow.appendLog(logPrefix + " websocket error : " + message);
+      }
+      webSocketObj.OnRESPacketReceived = (message: string) => {
+         LogWindow.appendLog(logPrefix + " RES message : " + message);
+      }
+      webSocketObj.OnERRPacketReceived = (message: string) => {
+         LogWindow.appendLog(logPrefix + " ERR message : " + message);
+      }
  
        LogWindow.appendLog(logPrefix + " connect...");
        webSocketObj.Connect();
