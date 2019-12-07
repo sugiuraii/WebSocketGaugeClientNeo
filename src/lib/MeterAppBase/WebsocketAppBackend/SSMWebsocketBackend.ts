@@ -22,35 +22,37 @@
  * THE SOFTWARE.
  */
 
-import { DefiCOMWebsocket, DefiParameterCode } from "../../WebSocket/WebSocketCommunication";
+import { SSMWebsocket, SSMParameterCode, SSMSwitchCode, ReadModeCode } from "../../WebSocket/WebSocketCommunication";
 import { WebstorageHandler } from "../Webstorage/WebstorageHandler";
 import { ILogWindow } from "../ControlPanelParts/LogWindow";
 import { IStatusIndicator } from "../ControlPanelParts/WebSocketIndicator";
 
-export class DefiWebsocketBackend {
-   private readonly logPrefix = "Defi";
+export class SSMWebsocketBackend {
+   private readonly logPrefix = "SSM";
    private readonly WEBSOCKET_CHECK_INTERVAL = 1000;
    private readonly WAITTIME_BEFORE_SENDWSSEND = 3000;
    private readonly WAITTIME_BEFORE_RECONNECT = 5000;
 
-   private readonly defiWS: DefiCOMWebsocket;
-   private readonly defiParameterCodeList: { code: DefiParameterCode }[] = new Array();
+   private readonly SLOWREAD_INTERVAL = 10;
+
+   private readonly ssmWS: SSMWebsocket;
+   private readonly ssmParameterCodeList: { code: SSMParameterCode, readmode: ReadModeCode }[] = new Array();
    private readonly loggerWindow: ILogWindow;
    private readonly statusIndicator: IStatusIndicator;
 
-   public get DefiWS() { return this.defiWS };
-   public get ParameterCodeList() { return this.defiParameterCodeList };
+   public get SSMWS() { return this.ssmWS };
+   public get ParameterCodeList() { return this.ssmParameterCodeList };
 
    private readonly webSocketServerURL: string;
 
    private indicatorUpdateIntervalID: number;
 
    constructor(serverurl: string, loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
-      this.defiWS = new DefiCOMWebsocket();
+      this.ssmWS = new SSMWebsocket();
       this.loggerWindow = loggerWindow;
       this.statusIndicator = statusIndicator;
 
-      this.defiWS.OnWebsocketError = (message: string) => this.loggerWindow.appendLog(this.logPrefix + " websocket error : " + message);
+      this.ssmWS.OnWebsocketError = (message: string) => this.loggerWindow.appendLog(this.logPrefix + " websocket error : " + message);
    }
 
    public Run() {
@@ -59,12 +61,12 @@ export class DefiWebsocketBackend {
    }
 
    private setStatusIndicator() {
-      this.statusIndicator.SetStatus(this.defiWS.getReadyState());
+      this.statusIndicator.SetStatus(this.ssmWS.getReadyState());
    }
 
    private connectWebSocket() {
       const LogWindow = this.loggerWindow;
-      const webSocketObj = this.defiWS;
+      const webSocketObj = this.ssmWS;
       const logPrefix = this.logPrefix;
 
       webSocketObj.URL = this.webSocketServerURL;
@@ -73,19 +75,26 @@ export class DefiWebsocketBackend {
          LogWindow.appendLog(logPrefix + " is connected. SendWSSend/Interval after " + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
          window.setTimeout(() => {
             //SendWSSend
-            this.ParameterCodeList.forEach(item => webSocketObj.SendWSSend(item.code, true));
+            this.ParameterCodeList.forEach(item => {
+               if (item.readmode === ReadModeCode.SLOWandFAST) {
+                  webSocketObj.SendCOMRead(item.code, ReadModeCode.SLOW, true);
+                  webSocketObj.SendCOMRead(item.code, ReadModeCode.FAST, true);
+               }
+               else
+                  webSocketObj.SendCOMRead(item.code, item.readmode, true);
+            });
 
-            //SendWSInterval from spinner
-            webSocketObj.SendWSInterval(WebstorageHandler.GetWSIntervalFromLocalStorage());
-
+            webSocketObj.SendSlowreadInterval(this.SLOWREAD_INTERVAL);
          }, this.WAITTIME_BEFORE_SENDWSSEND);
-      }
+      };
+
       webSocketObj.OnWebsocketClose = () => {
          LogWindow.appendLog(logPrefix + " is disconnected. Reconnect after " + this.WAITTIME_BEFORE_RECONNECT.toString() + "msec...");
          window.setTimeout(() => webSocketObj.Connect(), this.WAITTIME_BEFORE_RECONNECT);
-      }
+      };
 
       LogWindow.appendLog(logPrefix + " connect...");
       webSocketObj.Connect();
    }
 }
+
