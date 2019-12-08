@@ -58,6 +58,12 @@ export class DefiWebsocketBackend {
       this.connectWebSocket();
    }
 
+   public Stop()
+   {
+      clearInterval(this.indicatorUpdateIntervalID);
+      this.defiWS.Close();
+   }
+
    private setStatusIndicator() {
       this.statusIndicator.SetStatus(this.defiWS.getReadyState());
    }

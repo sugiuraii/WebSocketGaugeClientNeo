@@ -59,6 +59,12 @@ export class FUELTRIPWebsocketBackend {
         this.connectWebSocket();
     }
 
+    public Stop()
+    {
+       clearInterval(this.indicatorUpdateIntervalID);
+       this.fueltripWS.Close();
+    }
+ 
     private setStatusIndicator() {
         this.statusIndicator.SetStatus(this.fueltripWS.getReadyState());
     }

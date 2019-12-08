@@ -60,6 +60,12 @@ export class SSMWebsocketBackend {
       this.connectWebSocket();
    }
 
+   public Stop()
+   {
+      clearInterval(this.indicatorUpdateIntervalID);
+      this.ssmWS.Close();
+   }
+
    private setStatusIndicator() {
       this.statusIndicator.SetStatus(this.ssmWS.getReadyState());
    }

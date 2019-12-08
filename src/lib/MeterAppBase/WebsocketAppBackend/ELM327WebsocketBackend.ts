@@ -60,6 +60,12 @@ export class ELM327WebsocketBackend {
       this.connectWebSocket();
    }
 
+   public Stop()
+   {
+      clearInterval(this.indicatorUpdateIntervalID);
+      this.elm327WS.Close();
+   }
+
    private setStatusIndicator() {
       this.statusIndicator.SetStatus(this.elm327WS.getReadyState());
    }

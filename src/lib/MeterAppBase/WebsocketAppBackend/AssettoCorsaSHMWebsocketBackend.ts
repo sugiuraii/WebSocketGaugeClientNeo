@@ -61,6 +61,13 @@ export class AssettoCorsaSHMWebsocketBackend {
        this.indicatorUpdateIntervalID = window.setInterval(() => this.setStatusIndicator(), this.WEBSOCKET_CHECK_INTERVAL);
        this.connectWebSocket();
     }
+
+    public Stop()
+    {
+       clearInterval(this.indicatorUpdateIntervalID);
+       this.assettocorsaWS.Close();
+    }
+ 
  
     private setStatusIndicator() {
        this.statusIndicator.SetStatus(this.assettocorsaWS.getReadyState());

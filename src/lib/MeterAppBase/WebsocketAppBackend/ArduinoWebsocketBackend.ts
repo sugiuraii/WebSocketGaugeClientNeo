@@ -58,6 +58,12 @@ export class ArduinoWebsocketBackend {
       this.connectWebSocket();
    }
 
+   public Stop()
+   {
+      clearInterval(this.indicatorUpdateIntervalID);
+      this.arduinoWS.Close();
+   }
+
    private setStatusIndicator() {
       this.statusIndicator.SetStatus(this.arduinoWS.getReadyState());
    }
