@@ -37,6 +37,46 @@ export interface IStatusIndicator
     SetStatus(status : WebsocketStatus); 
 }
 
+export class WebsocketStatusIndicator extends HTMLDivElement implements IStatusIndicator
+{
+    private status : number;
+
+    constructor(caption : string)
+    {
+        super();
+        this.innerText = caption;
+        this.status = WebsocketStatus.Closed;
+    }
+
+    public SetStatus(status : WebsocketStatus)
+    {
+        this.changeIndicatorColor(status);
+    }
+
+    private changeIndicatorColor(status : number)
+    {
+        const style = this.style;
+        switch (status)
+        {
+            case WebSocket.CONNECTING://CONNECTING
+                style.color = "blue";
+                break;
+            case WebSocket.OPEN://OPEN
+                style.color = "green";
+                break;
+            case WebSocket.CLOSING://CLOSING
+                style.color = "orange";
+                break;
+            case WebSocket.CLOSED://CLOSED
+                style.color = "grey";
+                break;
+            default:
+                // this never happens
+                break;     
+        }
+    }
+}  
+
 export class WebSocketIndicator extends HTMLDivContainer
 {
     private readonly defiCOMIndicator: HTMLDivElement;
