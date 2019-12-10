@@ -37,7 +37,7 @@ export interface IStatusIndicator
     SetStatus(status : WebsocketStatus); 
 }
 
-export class WebsocketStatusIndicator extends HTMLDivElement implements IStatusIndicator
+class WebsocketStatusIndicator extends HTMLDivElement implements IStatusIndicator
 {
     private status : number;
 
@@ -79,28 +79,19 @@ export class WebsocketStatusIndicator extends HTMLDivElement implements IStatusI
 
 export class WebSocketIndicator extends HTMLDivContainer
 {
-    private readonly defiCOMIndicator: HTMLDivElement;
-    private readonly ssmCOMIndicator: HTMLDivElement;
-    private readonly arduinoCOMIndicator: HTMLDivElement;
-    private readonly elm327COMIndicator: HTMLDivElement;
-    private readonly fueltripIndicator: HTMLDivElement;
+    private readonly defiIndicator = new WebsocketStatusIndicator("Defi");
+    private readonly ssmIndicator = new WebsocketStatusIndicator("SSM");
+    private readonly arduinoIndicator = new WebsocketStatusIndicator("Arduino");
+    private readonly elm327Indicator = new WebsocketStatusIndicator("ELM327");
+    private readonly fueltripIndicator = new WebsocketStatusIndicator("FUELTRIP");
+    private readonly assettoCorsaSHMIndicator = new WebsocketStatusIndicator("AssettoCorsa");
     
-    public setDefiIndicatorStatus(status : number) {this.changeIndicatorColor(this.defiCOMIndicator, status)};
-    public setSSMIndicatorStatus(status : number) {this.changeIndicatorColor(this.ssmCOMIndicator, status)};
-    public setArduinoIndicatorStatus(status : number) {this.changeIndicatorColor(this.arduinoCOMIndicator, status)};
-    public setELM327IndicatorStatus(status : number) {this.changeIndicatorColor(this.elm327COMIndicator, status)};
-    public setFUELTRIPIndicatorStatus(status : number) {this.changeIndicatorColor(this.fueltripIndicator, status)};
-    
-    public get IsDefiInidicatorEnabled() { return !this.defiCOMIndicator.hidden }
-    public set IsDefiInidicatorEnabled(flag : boolean) { this.defiCOMIndicator.hidden = !flag }
-    public get IsSSMInidicatorEnabled() { return !this.ssmCOMIndicator.hidden }
-    public set IsSSMInidicatorEnabled(flag : boolean) { this.ssmCOMIndicator.hidden = !flag }
-    public get IsArduinoInidicatorEnabled() { return !this.arduinoCOMIndicator.hidden }
-    public set IsArduinoInidicatorEnabled(flag : boolean) { this.arduinoCOMIndicator.hidden = !flag }
-    public get IsELM327InidicatorEnabled() { return !this.elm327COMIndicator.hidden }
-    public set IsELM327InidicatorEnabled(flag : boolean) { this.elm327COMIndicator.hidden = !flag }
-    public get IsFUELTRIPInidicatorEnabled() { return !this.fueltripIndicator.hidden }
-    public set IsFUELTRIPInidicatorEnabled(flag : boolean) { this.fueltripIndicator.hidden = !flag }
+    public get DefiIndicator() : IStatusIndicator{ return this.defiIndicator };  
+    public get SSMIndicator() : IStatusIndicator{ return this.ssmIndicator };  
+    public get ArduinoIndicator() : IStatusIndicator{ return this.arduinoIndicator };  
+    public get ELM327Indicator() : IStatusIndicator{ return this.elm327Indicator };  
+    public get FUELTRIPIndicator() : IStatusIndicator{ return this.fueltripIndicator };  
+    public get AssettoCorsaSHMIndicator() : IStatusIndicator{ return this.assettoCorsaSHMIndicator };  
     
     constructor()
     {
@@ -113,56 +104,24 @@ export class WebSocketIndicator extends HTMLDivContainer
         containerStyle.fontSize = "16px";
         containerStyle.fontWeight = "bold";
 
-        this.defiCOMIndicator = document.createElement('div');
-        this.defiCOMIndicator.innerText = "Defi";
-        this.ssmCOMIndicator = document.createElement('div');
-        this.ssmCOMIndicator.innerText = "SSM";
-        this.arduinoCOMIndicator = document.createElement('div');
-        this.arduinoCOMIndicator.innerText = "Arduino";
-        this.elm327COMIndicator = document.createElement('div');
-        this.elm327COMIndicator.innerText = "ELM327";
-        this.fueltripIndicator = document.createElement('div');
-        this.fueltripIndicator.innerText = "FUELTRIP";
-
         const titleElem = document.createElement('div');
         titleElem.innerText = "Websocket Status";
         titleElem.style.color = "white";
 
         this.Container.appendChild(titleElem);
-        this.Container.appendChild(this.defiCOMIndicator);
-        this.Container.appendChild(this.ssmCOMIndicator);
-        this.Container.appendChild(this.arduinoCOMIndicator);
-        this.Container.appendChild(this.elm327COMIndicator);
+        this.Container.appendChild(this.defiIndicator);
+        this.Container.appendChild(this.ssmIndicator);
+        this.Container.appendChild(this.arduinoIndicator);
+        this.Container.appendChild(this.elm327Indicator);
         this.Container.appendChild(this.fueltripIndicator);
-        
-        this.IsDefiInidicatorEnabled = false;
-        this.IsArduinoInidicatorEnabled = false;
-        this.IsSSMInidicatorEnabled = false;
-        this.IsELM327InidicatorEnabled = false;
-        this.IsFUELTRIPInidicatorEnabled = false;
-    }
-    
-    private changeIndicatorColor(indicator : HTMLDivElement, status : number)
-    {
-        const style = indicator.style;
-        switch (status)
-        {
-            case WebSocket.CONNECTING://CONNECTING
-                style.color = "blue";
-                break;
-            case WebSocket.OPEN://OPEN
-                style.color = "green";
-                break;
-            case WebSocket.CLOSING://CLOSING
-                style.color = "orange";
-                break;
-            case WebSocket.CLOSED://CLOSED
-                style.color = "grey";
-                break;
-            default:
-                // this never happens
-                break;     
-        }
-    }
+        this.Container.appendChild(this.assettoCorsaSHMIndicator);
+
+        this.defiIndicator.hidden = true;
+        this.ssmIndicator.hidden = true;
+        this.arduinoIndicator.hidden = true;
+        this.elm327Indicator.hidden = true;
+        this.fueltripIndicator.hidden = true;
+        this.assettoCorsaSHMIndicator.hidden = true;
+    }    
 }
 
