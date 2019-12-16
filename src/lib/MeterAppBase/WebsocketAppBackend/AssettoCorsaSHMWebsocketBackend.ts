@@ -24,8 +24,8 @@
 import { AssettoCorsaSHMWebsocket } from "../../WebSocket/WebSocketCommunication";
 import { AssettoCorsaSHMGraphicsParameterCode, AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMStaticInfoParameterCode } from "../../WebSocket/WebSocketCommunication";
 import { WebstorageHandler } from "../Webstorage/WebstorageHandler";
-import { ILogWindow } from "../ControlPanelParts/LogWindow";
-import { IStatusIndicator } from "../ControlPanelParts/WebSocketIndicator";
+import { ILogWindow } from "./ILogWindow";
+import { IStatusIndicator } from "./IStatusIndicator";
 
 export class AssettoCorsaSHMWebsocketBackend {
     private readonly logPrefix = "AssettoCorsaSHM";
