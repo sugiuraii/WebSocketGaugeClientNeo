@@ -90,6 +90,11 @@ export class ApplicationNavBar {
     public get LogModalDialog() { return this.logModalDialog }
     public get FUELTRIPModalDialog() { return this.fuelTripResetModalDialog }
 
+    public GetWebSocketStatusIndicator(id: string) : IStatusIndicator
+    {
+        return this.webSocketIndicators[id];
+    }
+    
     public AddWebSocketStatusIndicator(id: string, caption: string) {
         if (this.webSocketIndicators[id] != undefined)
             throw Error("Indicator of id=" + id + " already exists.");
