@@ -23,8 +23,9 @@
  */
 
 import * as $ from 'jquery';
+import {ILogWindow} from '../WebsocketAppBackend/ILogWindow';
 
-export class LogModalDialog
+export class LogModalDialog implements ILogWindow
 {
     private writeDate = false;
     
