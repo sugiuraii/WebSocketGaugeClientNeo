@@ -24,8 +24,8 @@
 
 import { ArduinoCOMWebsocket, ArduinoParameterCode } from "../../WebSocket/WebSocketCommunication";
 import { WebstorageHandler } from "../Webstorage/WebstorageHandler";
-import { ILogWindow } from "./ILogWindow";
-import { IStatusIndicator } from "./IStatusIndicator";
+import { ILogWindow } from "../interfaces/ILogWindow";
+import { IStatusIndicator } from "../interfaces/IStatusIndicator";
 
 export class ArduinoWebsocketBackend {
    private readonly logPrefix = "Arduino";
@@ -58,8 +58,7 @@ export class ArduinoWebsocketBackend {
       this.connectWebSocket();
    }
 
-   public Stop()
-   {
+   public Stop() {
       clearInterval(this.indicatorUpdateIntervalID);
       this.arduinoWS.Close();
    }

@@ -24,81 +24,80 @@
 import { AssettoCorsaSHMWebsocket } from "../../WebSocket/WebSocketCommunication";
 import { AssettoCorsaSHMGraphicsParameterCode, AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMStaticInfoParameterCode } from "../../WebSocket/WebSocketCommunication";
 import { WebstorageHandler } from "../Webstorage/WebstorageHandler";
-import { ILogWindow } from "./ILogWindow";
-import { IStatusIndicator } from "./IStatusIndicator";
+import { ILogWindow } from "../interfaces/ILogWindow";
+import { IStatusIndicator } from "../interfaces/IStatusIndicator";
 
 export class AssettoCorsaSHMWebsocketBackend {
-    private readonly logPrefix = "AssettoCorsaSHM";
-    private readonly WEBSOCKET_CHECK_INTERVAL = 1000;
-    private readonly WAITTIME_BEFORE_SENDWSSEND = 3000;
-    private readonly WAITTIME_BEFORE_RECONNECT = 5000;
- 
-    private readonly assettocorsaWS: AssettoCorsaSHMWebsocket;
-    private readonly physicsParameterCodeList: { code: AssettoCorsaSHMPhysicsParameterCode }[] = new Array();
-    private readonly graphicsParameterCodeList: { code: AssettoCorsaSHMGraphicsParameterCode }[] = new Array();
-    private readonly staticInfoParameterCodeList: { code: AssettoCorsaSHMStaticInfoParameterCode }[] = new Array();
-    private readonly loggerWindow: ILogWindow;
-    private readonly statusIndicator: IStatusIndicator;
- 
-    public get AssettoCorsaWS() { return this.assettocorsaWS };
-    public get PhysicsParameterCodeList() { return this.physicsParameterCodeList };
-    public get GraphicsParameterCodeList() { return this.graphicsParameterCodeList };
-    public get StaticInfoParameterCodeList() { return this.staticInfoParameterCodeList };
- 
-    private readonly webSocketServerURL: string;
- 
-    private indicatorUpdateIntervalID: number;
- 
-    constructor(serverurl: string, loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
-       this.assettocorsaWS = new AssettoCorsaSHMWebsocket();
-       this.loggerWindow = loggerWindow;
-       this.statusIndicator = statusIndicator;
- 
-       this.assettocorsaWS.OnWebsocketError = (message: string) => this.loggerWindow.appendLog(this.logPrefix + " websocket error : " + message);
-    }
- 
-    public Run() {
-       this.indicatorUpdateIntervalID = window.setInterval(() => this.setStatusIndicator(), this.WEBSOCKET_CHECK_INTERVAL);
-       this.connectWebSocket();
-    }
+   private readonly logPrefix = "AssettoCorsaSHM";
+   private readonly WEBSOCKET_CHECK_INTERVAL = 1000;
+   private readonly WAITTIME_BEFORE_SENDWSSEND = 3000;
+   private readonly WAITTIME_BEFORE_RECONNECT = 5000;
 
-    public Stop()
-    {
-       clearInterval(this.indicatorUpdateIntervalID);
-       this.assettocorsaWS.Close();
-    }
- 
- 
-    private setStatusIndicator() {
-       this.statusIndicator.SetStatus(this.assettocorsaWS.getReadyState());
-    }
- 
-    private connectWebSocket() {
-       const LogWindow = this.loggerWindow;
-       const webSocketObj = this.assettocorsaWS;
-       const logPrefix = this.logPrefix;
- 
-       webSocketObj.URL = this.webSocketServerURL;
- 
-       webSocketObj.OnWebsocketOpen = () => {
-          LogWindow.appendLog(logPrefix + " is connected. SendWSSend/Interval after " + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
-          window.setTimeout(() => {
-             //SendWSSend
-             this.physicsParameterCodeList.forEach(item => webSocketObj.SendPhysicsWSSend(item.code, true));
-             this.graphicsParameterCodeList.forEach(item => webSocketObj.SendGraphicsWSSend(item.code, true));
-             this.staticInfoParameterCodeList.forEach(item => webSocketObj.SendStaticInfoWSSend(item.code, true));
- 
-             //SendWSInterval from spinner
-             webSocketObj.SendPhysicsWSInterval(WebstorageHandler.GetWSIntervalFromLocalStorage());
- 
-          }, this.WAITTIME_BEFORE_SENDWSSEND);
-       }
-       webSocketObj.OnWebsocketClose = () => {
-          LogWindow.appendLog(logPrefix + " is disconnected. Reconnect after " + this.WAITTIME_BEFORE_RECONNECT.toString() + "msec...");
-          window.setTimeout(() => webSocketObj.Connect(), this.WAITTIME_BEFORE_RECONNECT);
-       }
+   private readonly assettocorsaWS: AssettoCorsaSHMWebsocket;
+   private readonly physicsParameterCodeList: { code: AssettoCorsaSHMPhysicsParameterCode }[] = new Array();
+   private readonly graphicsParameterCodeList: { code: AssettoCorsaSHMGraphicsParameterCode }[] = new Array();
+   private readonly staticInfoParameterCodeList: { code: AssettoCorsaSHMStaticInfoParameterCode }[] = new Array();
+   private readonly loggerWindow: ILogWindow;
+   private readonly statusIndicator: IStatusIndicator;
 
-       webSocketObj.OnWebsocketError = (message: string) => {
+   public get AssettoCorsaWS() { return this.assettocorsaWS };
+   public get PhysicsParameterCodeList() { return this.physicsParameterCodeList };
+   public get GraphicsParameterCodeList() { return this.graphicsParameterCodeList };
+   public get StaticInfoParameterCodeList() { return this.staticInfoParameterCodeList };
+
+   private readonly webSocketServerURL: string;
+
+   private indicatorUpdateIntervalID: number;
+
+   constructor(serverurl: string, loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
+      this.assettocorsaWS = new AssettoCorsaSHMWebsocket();
+      this.loggerWindow = loggerWindow;
+      this.statusIndicator = statusIndicator;
+
+      this.assettocorsaWS.OnWebsocketError = (message: string) => this.loggerWindow.appendLog(this.logPrefix + " websocket error : " + message);
+   }
+
+   public Run() {
+      this.indicatorUpdateIntervalID = window.setInterval(() => this.setStatusIndicator(), this.WEBSOCKET_CHECK_INTERVAL);
+      this.connectWebSocket();
+   }
+
+   public Stop() {
+      clearInterval(this.indicatorUpdateIntervalID);
+      this.assettocorsaWS.Close();
+   }
+
+
+   private setStatusIndicator() {
+      this.statusIndicator.SetStatus(this.assettocorsaWS.getReadyState());
+   }
+
+   private connectWebSocket() {
+      const LogWindow = this.loggerWindow;
+      const webSocketObj = this.assettocorsaWS;
+      const logPrefix = this.logPrefix;
+
+      webSocketObj.URL = this.webSocketServerURL;
+
+      webSocketObj.OnWebsocketOpen = () => {
+         LogWindow.appendLog(logPrefix + " is connected. SendWSSend/Interval after " + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
+         window.setTimeout(() => {
+            //SendWSSend
+            this.physicsParameterCodeList.forEach(item => webSocketObj.SendPhysicsWSSend(item.code, true));
+            this.graphicsParameterCodeList.forEach(item => webSocketObj.SendGraphicsWSSend(item.code, true));
+            this.staticInfoParameterCodeList.forEach(item => webSocketObj.SendStaticInfoWSSend(item.code, true));
+
+            //SendWSInterval from spinner
+            webSocketObj.SendPhysicsWSInterval(WebstorageHandler.GetWSIntervalFromLocalStorage());
+
+         }, this.WAITTIME_BEFORE_SENDWSSEND);
+      }
+      webSocketObj.OnWebsocketClose = () => {
+         LogWindow.appendLog(logPrefix + " is disconnected. Reconnect after " + this.WAITTIME_BEFORE_RECONNECT.toString() + "msec...");
+         window.setTimeout(() => webSocketObj.Connect(), this.WAITTIME_BEFORE_RECONNECT);
+      }
+
+      webSocketObj.OnWebsocketError = (message: string) => {
          LogWindow.appendLog(logPrefix + " websocket error : " + message);
       }
       webSocketObj.OnRESPacketReceived = (message: string) => {
@@ -107,8 +106,8 @@ export class AssettoCorsaSHMWebsocketBackend {
       webSocketObj.OnERRPacketReceived = (message: string) => {
          LogWindow.appendLog(logPrefix + " ERR message : " + message);
       }
- 
-       LogWindow.appendLog(logPrefix + " connect...");
-       webSocketObj.Connect();
-    }
- }
+
+      LogWindow.appendLog(logPrefix + " connect...");
+      webSocketObj.Connect();
+   }
+}

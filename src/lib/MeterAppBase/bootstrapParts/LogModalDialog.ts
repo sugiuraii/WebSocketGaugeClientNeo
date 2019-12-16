@@ -23,7 +23,7 @@
  */
 
 import * as $ from 'jquery';
-import {ILogWindow} from '../WebsocketAppBackend/ILogWindow';
+import {ILogWindow} from '../interfaces/ILogWindow';
 
 export class LogModalDialog implements ILogWindow
 {

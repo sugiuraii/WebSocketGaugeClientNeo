@@ -24,8 +24,8 @@
 
 import { DefiCOMWebsocket, DefiParameterCode } from "../../WebSocket/WebSocketCommunication";
 import { WebstorageHandler } from "../Webstorage/WebstorageHandler";
-import { ILogWindow } from "./ILogWindow";
-import { IStatusIndicator } from "./IStatusIndicator";
+import { ILogWindow } from "../interfaces/ILogWindow";
+import { IStatusIndicator } from "../interfaces/IStatusIndicator";
 
 export class DefiWebsocketBackend {
    private readonly logPrefix = "Defi";
@@ -58,8 +58,7 @@ export class DefiWebsocketBackend {
       this.connectWebSocket();
    }
 
-   public Stop()
-   {
+   public Stop() {
       clearInterval(this.indicatorUpdateIntervalID);
       this.defiWS.Close();
    }

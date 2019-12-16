@@ -24,8 +24,8 @@
 
 import { FUELTRIPWebsocket } from "../../WebSocket/WebSocketCommunication";
 import { WebstorageHandler } from "../Webstorage/WebstorageHandler";
-import { ILogWindow } from "./ILogWindow";
-import { IStatusIndicator } from "./IStatusIndicator";
+import { ILogWindow } from "../interfaces/ILogWindow";
+import { IStatusIndicator } from "../interfaces/IStatusIndicator";
 
 export class FUELTRIPWebsocketBackend {
     private readonly logPrefix = "FUELTRIP";
@@ -59,12 +59,11 @@ export class FUELTRIPWebsocketBackend {
         this.connectWebSocket();
     }
 
-    public Stop()
-    {
-       clearInterval(this.indicatorUpdateIntervalID);
-       this.fueltripWS.Close();
+    public Stop() {
+        clearInterval(this.indicatorUpdateIntervalID);
+        this.fueltripWS.Close();
     }
- 
+
     private setStatusIndicator() {
         this.statusIndicator.SetStatus(this.fueltripWS.getReadyState());
     }
