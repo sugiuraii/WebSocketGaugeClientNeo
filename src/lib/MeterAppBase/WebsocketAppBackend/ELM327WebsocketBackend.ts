@@ -28,6 +28,8 @@ import { ILogWindow } from "../interfaces/ILogWindow";
 import { IStatusIndicator } from "../interfaces/IStatusIndicator";
 
 export class ELM327WebsocketBackend {
+   public static readonly DEFAULT_WS_PORT = 2016;
+
    private readonly logPrefix = "ELM327";
    private readonly WEBSOCKET_CHECK_INTERVAL = 1000;
    private readonly WAITTIME_BEFORE_SENDWSSEND = 3000;

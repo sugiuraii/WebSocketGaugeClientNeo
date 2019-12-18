@@ -28,6 +28,8 @@ import { ILogWindow } from "../interfaces/ILogWindow";
 import { IStatusIndicator } from "../interfaces/IStatusIndicator";
 
 export class SSMWebsocketBackend {
+   public static readonly DEFAULT_WS_PORT = 2013;
+
    private readonly logPrefix = "SSM";
    private readonly WEBSOCKET_CHECK_INTERVAL = 1000;
    private readonly WAITTIME_BEFORE_SENDWSSEND = 3000;

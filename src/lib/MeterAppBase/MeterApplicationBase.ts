@@ -24,6 +24,12 @@
 
 import * as PIXI from "pixi.js";
 import {ApplicationNavBar} from "./bootstrapParts/ApplicationNavBar"
+import {DefiWebsocketBackend} from "./WebsocketAppBackend/DefiWebsocketBackend";
+import {SSMWebsocketBackend} from "./WebsocketAppBackend/SSMWebsocketBackend";
+import {ArduinoWebsocketBackend} from "./WebsocketAppBackend/ArduinoWebsocketBackend";
+import {ELM327WebsocketBackend} from "./WebsocketAppBackend/ELM327WebsocketBackend";
+import {AssettoCorsaSHMWebsocketBackend} from "./WebsocketAppBackend/AssettoCorsaSHMWebsocketBackend";
+import {FUELTRIPWebsocketBackend} from "./WebsocketAppBackend/FUELTRIPWebsocketBackend";
 import * as WebFont from "webfontloader";
 import {WebsocketCommon} from "../WebSocket/WebSocketCommunication";
 import {DefiCOMWebsocket, DefiParameterCode} from "../WebSocket/WebSocketCommunication";
@@ -37,19 +43,7 @@ import {AssettoCorsaSHMWebsocket, AssettoCorsaSHMPhysicsParameterCode,
     AssettoCorsaSHMGraphicsParameterCode, AssettoCorsaSHMStaticInfoParameterCode} from "../WebSocket/WebSocketCommunication";
 import {calculateGearPosition} from "./utils/CalculateGearPosition";
 
-const DEFICOM_WS_PORT = 2012;
-const ARDUINOCOM_WS_PORT = 2015;
-const SSMCOM_WS_PORT = 2013;
-const ELM327COM_WS_PORT = 2016;
-const FUELTRIP_WS_PORT = 2014;
-const ACSHM_WS_PORT = 2017;
-
-const WEBSOCKET_CHECK_INTERVAL = 1000;
-const WAITTIME_BEFORE_SENDWSSEND = 3000;
-const WAITTIME_BEFORE_RECONNECT = 5000;
-
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
-//const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui";
 
 /**
  * Base class to define application with meter panel and websocket clients.

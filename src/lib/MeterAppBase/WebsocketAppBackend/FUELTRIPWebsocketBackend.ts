@@ -28,12 +28,14 @@ import { ILogWindow } from "../interfaces/ILogWindow";
 import { IStatusIndicator } from "../interfaces/IStatusIndicator";
 
 export class FUELTRIPWebsocketBackend {
+    public static readonly DEFAULT_WS_PORT = 2014;
+
     private readonly logPrefix = "FUELTRIP";
     private readonly WEBSOCKET_CHECK_INTERVAL = 1000;
     private readonly WAITTIME_BEFORE_SENDWSSEND = 3000;
     private readonly WAITTIME_BEFORE_RECONNECT = 5000;
 
-    private fueltripWS: FUELTRIPWebsocket;
+    private readonly fueltripWS: FUELTRIPWebsocket;
     get FUELTRIPWS() { return this.fueltripWS };
 
     private readonly loggerWindow: ILogWindow;
@@ -101,8 +103,5 @@ export class FUELTRIPWebsocketBackend {
 
         logWindow.appendLog(logPrefix + " connect...");
         wsObj.Connect();
-
     }
-
-
 }
