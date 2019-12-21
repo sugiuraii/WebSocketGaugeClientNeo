@@ -42,7 +42,6 @@ export class ELM327WebsocketBackend {
    private readonly loggerWindow: ILogWindow;
    private readonly statusIndicator: IStatusIndicator;
 
-   public get ELM327WS() { return this.elm327WS };
    public get ParameterCodeList() { return this.obdiiParameterCodeList };
 
    private readonly webSocketServerURL: string;
@@ -65,6 +64,16 @@ export class ELM327WebsocketBackend {
    public Stop() {
       clearInterval(this.indicatorUpdateIntervalID);
       this.elm327WS.Close();
+   }
+
+   public getVal(code : OBDIIParameterCode, timestamp : number)
+   {
+      return this.elm327WS.getVal(code, timestamp);
+   }
+
+   public getRawVal(code : OBDIIParameterCode)
+   {
+      return this.elm327WS.getRawVal(code);
    }
 
    private setStatusIndicator() {

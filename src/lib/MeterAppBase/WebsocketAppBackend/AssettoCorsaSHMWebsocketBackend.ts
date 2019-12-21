@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { AssettoCorsaSHMWebsocket } from "../../WebSocket/WebSocketCommunication";
+import { AssettoCorsaSHMWebsocket, AssettoCorsaSHMNumericalVALCode, AssettoCorsaSHMStringVALCode } from "../../WebSocket/WebSocketCommunication";
 import { AssettoCorsaSHMGraphicsParameterCode, AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMStaticInfoParameterCode } from "../../WebSocket/WebSocketCommunication";
 import { WebstorageHandler } from "../Webstorage/WebstorageHandler";
 import { ILogWindow } from "../interfaces/ILogWindow";
@@ -42,7 +42,6 @@ export class AssettoCorsaSHMWebsocketBackend {
    private readonly loggerWindow: ILogWindow;
    private readonly statusIndicator: IStatusIndicator;
 
-   public get AssettoCorsaWS() { return this.assettocorsaWS };
    public get PhysicsParameterCodeList() { return this.physicsParameterCodeList };
    public get GraphicsParameterCodeList() { return this.graphicsParameterCodeList };
    public get StaticInfoParameterCodeList() { return this.staticInfoParameterCodeList };
@@ -67,6 +66,21 @@ export class AssettoCorsaSHMWebsocketBackend {
    public Stop() {
       clearInterval(this.indicatorUpdateIntervalID);
       this.assettocorsaWS.Close();
+   }
+
+   public getVal(code : AssettoCorsaSHMNumericalVALCode, timestamp : number)
+   {
+      return this.assettocorsaWS.getVal(code, timestamp);
+   }
+
+   public getRawVal(code : AssettoCorsaSHMNumericalVALCode)
+   {
+      return this.assettocorsaWS.getRawVal(code);
+   }
+
+   public getStringVal(code : AssettoCorsaSHMStringVALCode)
+   {
+      return this.assettocorsaWS.getStringVal(code);
    }
 
 

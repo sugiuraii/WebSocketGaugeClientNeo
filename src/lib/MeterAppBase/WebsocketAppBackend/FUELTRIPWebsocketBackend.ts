@@ -36,7 +36,6 @@ export class FUELTRIPWebsocketBackend {
     private readonly WAITTIME_BEFORE_RECONNECT = 5000;
 
     private readonly fueltripWS: FUELTRIPWebsocket;
-    get FUELTRIPWS() { return this.fueltripWS };
 
     private readonly loggerWindow: ILogWindow;
     private readonly statusIndicator: IStatusIndicator;
@@ -66,6 +65,42 @@ export class FUELTRIPWebsocketBackend {
         this.fueltripWS.Close();
     }
 
+    public getMomentGasMilage(timestamp : number) : number
+    {
+        return this.fueltripWS.getMomentGasMilage(timestamp);
+    }
+    public getRawMomentGasMilage() : number
+    {
+        return this.fueltripWS.getRawMomentGasMilage();
+    }
+    public getTotalTrip() : number
+    {
+        return this.fueltripWS.getTotalTrip();
+    }
+    public getTotalGas() : number
+    {
+        return this.fueltripWS.getTotalGas();
+    }
+    public getTotalGasMilage() : number
+    {
+        return this.fueltripWS.getTotalGasMilage();
+    }
+    public getSectSpan() : number
+    {
+        return this.fueltripWS.getSectSpan();
+    }
+    public getSectTrip(sectIndex : number) : number
+    {
+        return this.fueltripWS.getSectTrip(sectIndex);
+    }
+    public getSectGas(sectIndex : number) : number
+    {
+        return this.fueltripWS.getSectGas(sectIndex);
+    }
+    public getSectGasMilage(sectIndex : number)
+    {
+        return this.fueltripWS.getSectGasMilage(sectIndex);
+    }
     private setStatusIndicator() {
         this.statusIndicator.SetStatus(this.fueltripWS.getReadyState());
     }

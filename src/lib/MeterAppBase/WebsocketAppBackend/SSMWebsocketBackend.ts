@@ -42,7 +42,6 @@ export class SSMWebsocketBackend {
    private readonly loggerWindow: ILogWindow;
    private readonly statusIndicator: IStatusIndicator;
 
-   public get SSMWS() { return this.ssmWS };
    public get ParameterCodeList() { return this.ssmParameterCodeList };
 
    private readonly webSocketServerURL: string;
@@ -65,6 +64,21 @@ export class SSMWebsocketBackend {
    public Stop() {
       clearInterval(this.indicatorUpdateIntervalID);
       this.ssmWS.Close();
+   }
+
+   public getVal(code : SSMParameterCode, timestamp : number)
+   {
+      return this.ssmWS.getVal(code, timestamp);
+   }
+
+   public getRawVal(code : SSMParameterCode)
+   {
+      return this.ssmWS.getRawVal(code);
+   }
+
+   public getSwitchFlag(code : SSMSwitchCode)
+   {
+      return this.ssmWS.getSwitchFlag(code);
    }
 
    private setStatusIndicator() {

@@ -41,7 +41,6 @@ export class DefiWebsocketBackend {
    private readonly loggerWindow: ILogWindow;
    private readonly statusIndicator: IStatusIndicator;
 
-   public get DefiWS() { return this.defiWS };
    public get ParameterCodeList() { return this.defiParameterCodeList };
 
    private readonly webSocketServerURL: string;
@@ -54,6 +53,16 @@ export class DefiWebsocketBackend {
       this.statusIndicator = statusIndicator;
 
       this.defiWS.OnWebsocketError = (message: string) => this.loggerWindow.appendLog(this.logPrefix + " websocket error : " + message);
+   }
+
+   public getVal(code : DefiParameterCode, timestamp : number)
+   {
+      return this.defiWS.getVal(code, timestamp);
+   }
+
+   public getRawVal(code : DefiParameterCode)
+   {
+      return this.defiWS.getRawVal(code);
    }
 
    public Run() {

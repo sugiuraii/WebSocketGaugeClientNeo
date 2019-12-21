@@ -40,7 +40,6 @@ export class ArduinoWebsocketBackend {
    private readonly loggerWindow: ILogWindow;
    private readonly statusIndicator: IStatusIndicator;
 
-   public get ArduinoWS() { return this.arduinoWS };
    public get ParameterCodeList() { return this.parameterCodeList };
 
    private readonly webSocketServerURL: string;
@@ -63,6 +62,16 @@ export class ArduinoWebsocketBackend {
    public Stop() {
       clearInterval(this.indicatorUpdateIntervalID);
       this.arduinoWS.Close();
+   }
+
+   public getVal(code : ArduinoParameterCode, timestamp : number)
+   {
+      return this.arduinoWS.getVal(code, timestamp);
+   }
+
+   public getRawVal(code : ArduinoParameterCode)
+   {
+      return this.arduinoWS.getRawVal(code);
    }
 
    private setStatusIndicator() {
