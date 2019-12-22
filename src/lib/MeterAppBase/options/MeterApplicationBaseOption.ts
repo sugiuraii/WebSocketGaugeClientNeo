@@ -44,13 +44,11 @@ export class MeterApplicationBaseOption
     public height : number;
 
     public readonly WebSocketServerName : string;
-    
-    public readonly pPreserveDrawingBuffer : boolean = localStorage.getItem("preserveDrawingBuffer")==="true"?true:false;        
+    public readonly PreserveDrawingBuffer : boolean = localStorage.getItem("preserveDrawingBuffer")==="true"?true:false;        
 
     constructor()
     {
         this.WebSocketServerName = this.getWebsocketServerName();
-
     }
 
     private getWebsocketServerName() : string
@@ -62,5 +60,4 @@ export class MeterApplicationBaseOption
         else
             return wsServerHostname;
     }
-
 }
