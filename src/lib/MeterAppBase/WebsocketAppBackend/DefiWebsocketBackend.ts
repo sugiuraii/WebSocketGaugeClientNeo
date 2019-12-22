@@ -51,6 +51,7 @@ export class DefiWebsocketBackend {
       this.defiWS = new DefiCOMWebsocket();
       this.loggerWindow = loggerWindow;
       this.statusIndicator = statusIndicator;
+      this.webSocketServerURL = serverurl;
 
       this.defiWS.OnWebsocketError = (message: string) => this.loggerWindow.appendLog(this.logPrefix + " websocket error : " + message);
    }

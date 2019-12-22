@@ -50,6 +50,7 @@ export class ArduinoWebsocketBackend {
       this.arduinoWS = new ArduinoCOMWebsocket();
       this.loggerWindow = loggerWindow;
       this.statusIndicator = statusIndicator;
+      this.webSocketServerURL = serverurl;
 
       this.arduinoWS.OnWebsocketError = (message: string) => this.loggerWindow.appendLog(this.logPrefix + " websocket error : " + message);
    }

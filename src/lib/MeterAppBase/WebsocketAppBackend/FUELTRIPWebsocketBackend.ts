@@ -51,6 +51,7 @@ export class FUELTRIPWebsocketBackend {
         this.fueltripWS = new FUELTRIPWebsocket();
         this.loggerWindow = loggerWindow;
         this.statusIndicator = statusIndicator;
+        this.webSocketServerURL = serverurl;
 
         this.fueltripWS.OnWebsocketError = (message: string) => this.loggerWindow.appendLog(this.logPrefix + " websocket error : " + message);
     }

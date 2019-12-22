@@ -52,6 +52,7 @@ export class SSMWebsocketBackend {
       this.ssmWS = new SSMWebsocket();
       this.loggerWindow = loggerWindow;
       this.statusIndicator = statusIndicator;
+      this.webSocketServerURL = serverurl;
 
       this.ssmWS.OnWebsocketError = (message: string) => this.loggerWindow.appendLog(this.logPrefix + " websocket error : " + message);
    }

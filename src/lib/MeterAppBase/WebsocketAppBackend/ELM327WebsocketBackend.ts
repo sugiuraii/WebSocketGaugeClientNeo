@@ -52,6 +52,7 @@ export class ELM327WebsocketBackend {
       this.elm327WS = new ELM327COMWebsocket();
       this.loggerWindow = loggerWindow;
       this.statusIndicator = statusIndicator;
+      this.webSocketServerURL = serverurl;
 
       this.elm327WS.OnWebsocketError = (message: string) => this.loggerWindow.appendLog(this.logPrefix + " websocket error : " + message);
    }

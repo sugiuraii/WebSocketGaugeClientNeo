@@ -54,6 +54,7 @@ export class AssettoCorsaSHMWebsocketBackend {
       this.assettocorsaWS = new AssettoCorsaSHMWebsocket();
       this.loggerWindow = loggerWindow;
       this.statusIndicator = statusIndicator;
+      this.webSocketServerURL = serverurl;
 
       this.assettocorsaWS.OnWebsocketError = (message: string) => this.loggerWindow.appendLog(this.logPrefix + " websocket error : " + message);
    }
