@@ -73,19 +73,6 @@ export abstract class MeterApplicationBase extends PIXI.Application
     get AssettoCorsaWS() { return this.assettoCorsaWS}
     
     /**
-     * Set websocket options.
-     */
-    protected abstract setWebSocketOptions() : void;
-    /**
-     * Set webfont/texture preload.
-     */
-    protected abstract setTextureFontPreloadOptions() : void;
-    /**
-     * Set pixi.js meter panel.
-     */
-    protected abstract setPIXIMeterPanel() : void;
-    
-    /**
      * Construct MeterApplicationBase.
      * @param width Stage width in px.
      * @param height Stage height in px.
@@ -111,12 +98,9 @@ export abstract class MeterApplicationBase extends PIXI.Application
         this.applicationnavBar.create();
 
         this.initializeWebsocketBackend(this.applicationnavBar);
-                       
-        // Set texture, font preload options
-        this.setTextureFontPreloadOptions();
-        
+                               
         // Preload Fonts -> textures-> parts
-        this.preloadFonts( () => this.preloadTextures( () => this.setPIXIMeterPanel()));        
+        this.preloadFonts( () => this.preloadTextures( () => option.SetupPIXIMeterPanel(this)));        
     }
     
     /**
@@ -211,6 +195,22 @@ export abstract class MeterApplicationBase extends PIXI.Application
         }
     }
     
+    private connectWebSocket() : void
+    {
+        if(this.Option.WebsocketEnableFlag.Defi)
+            this.DefiWS.Run();
+        if(this.Option.WebsocketEnableFlag.SSM)
+            this.SSMWS.Run();
+        if(this.Option.WebsocketEnableFlag.Arduino)
+            this.ArduinoWS.Run();
+        if(this.Option.WebsocketEnableFlag.ELM327)
+            this.ELM327WS.Run();
+        if(this.Option.WebsocketEnableFlag.FUELTRIP)
+            this.FUELTRIPWS.Run();
+        if(this.Option.WebsocketEnableFlag.AssettoCorsaSHM)
+            this.AssettoCorsaWS.Run();
+    }
+
     /**
      * Start application.
      */
