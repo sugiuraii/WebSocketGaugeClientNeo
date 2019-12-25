@@ -23,7 +23,6 @@
  */
 
 import { SSMWebsocket, SSMParameterCode, SSMSwitchCode, ReadModeCode } from "../../WebSocket/WebSocketCommunication";
-import { WebstorageHandler } from "../Webstorage/WebstorageHandler";
 import { ILogWindow } from "../interfaces/ILogWindow";
 import { IStatusIndicator } from "../interfaces/IStatusIndicator";
 
@@ -38,18 +37,17 @@ export class SSMWebsocketBackend {
    private readonly SLOWREAD_INTERVAL = 10;
 
    private readonly ssmWS: SSMWebsocket;
-   private readonly ssmParameterCodeList: { code: SSMParameterCode, readmode: ReadModeCode }[] = new Array();
+   private readonly parameterCodeList: { code: SSMParameterCode, readmode: ReadModeCode }[];
    private readonly loggerWindow: ILogWindow;
    private readonly statusIndicator: IStatusIndicator;
-
-   public get ParameterCodeList() { return this.ssmParameterCodeList };
 
    private readonly webSocketServerURL: string;
 
    private indicatorUpdateIntervalID: number;
 
-   constructor(serverurl: string, loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
+   constructor(serverurl: string, paramCode : { code: SSMParameterCode, readmode: ReadModeCode }[], loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
       this.ssmWS = new SSMWebsocket();
+      this.parameterCodeList = paramCode;
       this.loggerWindow = loggerWindow;
       this.statusIndicator = statusIndicator;
       this.webSocketServerURL = serverurl;
@@ -97,7 +95,7 @@ export class SSMWebsocketBackend {
          LogWindow.appendLog(logPrefix + " is connected. SendWSSend/Interval after " + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
          window.setTimeout(() => {
             //SendWSSend
-            this.ParameterCodeList.forEach(item => {
+            this.parameterCodeList.forEach(item => {
                if (item.readmode === ReadModeCode.SLOWandFAST) {
                   webSocketObj.SendCOMRead(item.code, ReadModeCode.SLOW, true);
                   webSocketObj.SendCOMRead(item.code, ReadModeCode.FAST, true);

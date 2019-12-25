@@ -37,18 +37,17 @@ export class DefiWebsocketBackend {
    private readonly WAITTIME_BEFORE_RECONNECT = 5000;
 
    private readonly defiWS: DefiCOMWebsocket;
-   private readonly defiParameterCodeList: { code: DefiParameterCode }[] = new Array();
+   private readonly parameterCodeList: DefiParameterCode[];
    private readonly loggerWindow: ILogWindow;
    private readonly statusIndicator: IStatusIndicator;
-
-   public get ParameterCodeList() { return this.defiParameterCodeList };
 
    private readonly webSocketServerURL: string;
 
    private indicatorUpdateIntervalID: number;
 
-   constructor(serverurl: string, loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
+   constructor(serverurl: string, codeList : DefiParameterCode[], loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
       this.defiWS = new DefiCOMWebsocket();
+      this.parameterCodeList = codeList;
       this.loggerWindow = loggerWindow;
       this.statusIndicator = statusIndicator;
       this.webSocketServerURL = serverurl;
@@ -91,7 +90,7 @@ export class DefiWebsocketBackend {
          LogWindow.appendLog(logPrefix + " is connected. SendWSSend/Interval after " + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
          window.setTimeout(() => {
             //SendWSSend
-            this.ParameterCodeList.forEach(item => webSocketObj.SendWSSend(item.code, true));
+            this.parameterCodeList.forEach(item => webSocketObj.SendWSSend(item, true));
 
             //SendWSInterval from spinner
             webSocketObj.SendWSInterval(WebstorageHandler.GetWSIntervalFromLocalStorage());

@@ -38,18 +38,17 @@ export class ELM327WebsocketBackend {
    private readonly SLOWREAD_INTERVAL = 10;
 
    private readonly elm327WS: ELM327COMWebsocket;
-   private readonly obdiiParameterCodeList: { code: OBDIIParameterCode, readmode: ReadModeCode }[] = new Array();
+   private readonly parameterCodeList: { code: OBDIIParameterCode, readmode: ReadModeCode }[];
    private readonly loggerWindow: ILogWindow;
    private readonly statusIndicator: IStatusIndicator;
-
-   public get ParameterCodeList() { return this.obdiiParameterCodeList };
 
    private readonly webSocketServerURL: string;
 
    private indicatorUpdateIntervalID: number;
 
-   constructor(serverurl: string, loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
+   constructor(serverurl: string, paramCode : { code: OBDIIParameterCode, readmode: ReadModeCode }[], loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
       this.elm327WS = new ELM327COMWebsocket();
+      this.parameterCodeList = paramCode;
       this.loggerWindow = loggerWindow;
       this.statusIndicator = statusIndicator;
       this.webSocketServerURL = serverurl;
@@ -92,7 +91,7 @@ export class ELM327WebsocketBackend {
          LogWindow.appendLog(logPrefix + " is connected. SendWSSend/Interval after " + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
          window.setTimeout(() => {
             //SendWSSend
-            this.ParameterCodeList.forEach(item => {
+            this.parameterCodeList.forEach(item => {
                if (item.readmode === ReadModeCode.SLOWandFAST) {
                   webSocketObj.SendCOMRead(item.code, ReadModeCode.SLOW, true);
                   webSocketObj.SendCOMRead(item.code, ReadModeCode.FAST, true);

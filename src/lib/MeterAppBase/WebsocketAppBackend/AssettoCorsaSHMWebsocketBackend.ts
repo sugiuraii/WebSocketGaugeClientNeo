@@ -36,22 +36,21 @@ export class AssettoCorsaSHMWebsocketBackend {
    private readonly WAITTIME_BEFORE_RECONNECT = 5000;
 
    private readonly assettocorsaWS: AssettoCorsaSHMWebsocket;
-   private readonly physicsParameterCodeList: { code: AssettoCorsaSHMPhysicsParameterCode }[] = new Array();
-   private readonly graphicsParameterCodeList: { code: AssettoCorsaSHMGraphicsParameterCode }[] = new Array();
-   private readonly staticInfoParameterCodeList: { code: AssettoCorsaSHMStaticInfoParameterCode }[] = new Array();
+   private readonly physicsParameterCodeList: AssettoCorsaSHMPhysicsParameterCode[];
+   private readonly graphicsParameterCodeList: AssettoCorsaSHMGraphicsParameterCode[];
+   private readonly staticInfoParameterCodeList: AssettoCorsaSHMStaticInfoParameterCode[];
    private readonly loggerWindow: ILogWindow;
    private readonly statusIndicator: IStatusIndicator;
-
-   public get PhysicsParameterCodeList() { return this.physicsParameterCodeList };
-   public get GraphicsParameterCodeList() { return this.graphicsParameterCodeList };
-   public get StaticInfoParameterCodeList() { return this.staticInfoParameterCodeList };
 
    private readonly webSocketServerURL: string;
 
    private indicatorUpdateIntervalID: number;
 
-   constructor(serverurl: string, loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
+   constructor(serverurl: string, physCode : AssettoCorsaSHMPhysicsParameterCode[], graphicsCode : AssettoCorsaSHMGraphicsParameterCode[], staticCode : AssettoCorsaSHMStaticInfoParameterCode[], loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
       this.assettocorsaWS = new AssettoCorsaSHMWebsocket();
+      this.physicsParameterCodeList = physCode;
+      this.graphicsParameterCodeList = graphicsCode;
+      this.staticInfoParameterCodeList = staticCode;
       this.loggerWindow = loggerWindow;
       this.statusIndicator = statusIndicator;
       this.webSocketServerURL = serverurl;
@@ -100,9 +99,9 @@ export class AssettoCorsaSHMWebsocketBackend {
          LogWindow.appendLog(logPrefix + " is connected. SendWSSend/Interval after " + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
          window.setTimeout(() => {
             //SendWSSend
-            this.physicsParameterCodeList.forEach(item => webSocketObj.SendPhysicsWSSend(item.code, true));
-            this.graphicsParameterCodeList.forEach(item => webSocketObj.SendGraphicsWSSend(item.code, true));
-            this.staticInfoParameterCodeList.forEach(item => webSocketObj.SendStaticInfoWSSend(item.code, true));
+            this.physicsParameterCodeList.forEach(item => webSocketObj.SendPhysicsWSSend(item, true));
+            this.graphicsParameterCodeList.forEach(item => webSocketObj.SendGraphicsWSSend(item, true));
+            this.staticInfoParameterCodeList.forEach(item => webSocketObj.SendStaticInfoWSSend(item, true));
 
             //SendWSInterval from spinner
             webSocketObj.SendPhysicsWSInterval(WebstorageHandler.GetWSIntervalFromLocalStorage());

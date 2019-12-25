@@ -70,25 +70,25 @@ export class WebsocketObjectCollection
         {
             const wsURL = "ws://" + webSocketServerName + ":" + DefiWebsocketBackend.DEFAULT_WS_PORT.toString() + "/";
             navBar.AddWebSocketStatusIndicator("defiWSIndicator", "Defi");
-            this.defiWS = new DefiWebsocketBackend(wsURL, logDialog, navBar.GetWebSocketStatusIndicator("defiWSIndicator"));
+            this.defiWS = new DefiWebsocketBackend(wsURL, this.AppOption.ParameterCode.Defi.Array, logDialog, navBar.GetWebSocketStatusIndicator("defiWSIndicator"));
         }
         if(appOption.WebsocketEnableFlag.SSM)
         {
             const wsURL = "ws://" + webSocketServerName + ":" + SSMWebsocketBackend.DEFAULT_WS_PORT.toString() + "/";
             navBar.AddWebSocketStatusIndicator("ssmWSIndicator", "SSM");
-            this.ssmWS = new SSMWebsocketBackend(wsURL, logDialog, navBar.GetWebSocketStatusIndicator("ssmWSIndicator"));
+            this.ssmWS = new SSMWebsocketBackend(wsURL, this.AppOption.ParameterCode.SSM.Array,logDialog, navBar.GetWebSocketStatusIndicator("ssmWSIndicator"));
         }
         if(appOption.WebsocketEnableFlag.Arduino)
         {
             const wsURL = "ws://" + webSocketServerName + ":" + ArduinoWebsocketBackend.DEFAULT_WS_PORT.toString() + "/";
             navBar.AddWebSocketStatusIndicator("arduinoWSIndicator", "Arduino");
-            this.arduinoWS = new ArduinoWebsocketBackend(wsURL, logDialog, navBar.GetWebSocketStatusIndicator("arduinoWSIndicator"));
+            this.arduinoWS = new ArduinoWebsocketBackend(wsURL, this.AppOption.ParameterCode.Arduino.Array,logDialog, navBar.GetWebSocketStatusIndicator("arduinoWSIndicator"));
         }
         if(appOption.WebsocketEnableFlag.ELM327)
         {
             const wsURL = "ws://" + webSocketServerName + ":" + ELM327WebsocketBackend.DEFAULT_WS_PORT.toString() + "/";
             navBar.AddWebSocketStatusIndicator("elm327WSIndicator", "ELM327");
-            this.elm327WS = new ELM327WebsocketBackend(wsURL, logDialog, navBar.GetWebSocketStatusIndicator("elm327WSIndicator"));
+            this.elm327WS = new ELM327WebsocketBackend(wsURL, this.AppOption.ParameterCode.ELM327OBDII.Array, logDialog, navBar.GetWebSocketStatusIndicator("elm327WSIndicator"));
         }
         if(appOption.WebsocketEnableFlag.FUELTRIP)
         {
@@ -100,7 +100,11 @@ export class WebsocketObjectCollection
         {
             const wsURL = "ws://" + webSocketServerName + ":" + AssettoCorsaSHMWebsocketBackend.DEFAULT_WS_PORT.toString() + "/";
             navBar.AddWebSocketStatusIndicator("acshmWSIndicator", "AssettoCorsaSHM");
-            this.assettoCorsaWS = new AssettoCorsaSHMWebsocketBackend(wsURL, logDialog, navBar.GetWebSocketStatusIndicator("acshmWSIndicator"));
+            this.assettoCorsaWS = new AssettoCorsaSHMWebsocketBackend(wsURL, 
+                this.AppOption.ParameterCode.AssettoCorsaPhysics.Array,
+                this.AppOption.ParameterCode.AssettoCorsaGraphics.Array,
+                this.AppOption.ParameterCode.AssettoCorsaStaticInfo.Array,
+                logDialog, navBar.GetWebSocketStatusIndicator("acshmWSIndicator"));
         }
     }
     

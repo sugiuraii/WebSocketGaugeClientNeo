@@ -23,7 +23,6 @@
  */
 
 import { FUELTRIPWebsocket } from "../../WebSocket/WebSocketCommunication";
-import { WebstorageHandler } from "../Webstorage/WebstorageHandler";
 import { ILogWindow } from "../interfaces/ILogWindow";
 import { IStatusIndicator } from "../interfaces/IStatusIndicator";
 
