@@ -71,7 +71,7 @@ class WebsocketStatusIndicator implements IStatusIndicator {
             }
         }
 
-        $(elementID).removeClass().addClass(cssClass);
+        $('#' + elementID).removeClass().addClass(cssClass);
     }
 }
 
