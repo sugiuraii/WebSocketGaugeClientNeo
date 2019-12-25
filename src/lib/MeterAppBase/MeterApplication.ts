@@ -31,7 +31,7 @@ import { WebsocketObjectCollection } from "./WebSocketObjectCollection";
 
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
 
-export abstract class MeterApplication
+export class MeterApplication
 {   
     private Option = new MeterApplicationOption();
 
@@ -123,13 +123,13 @@ export abstract class MeterApplication
            
     private preloadFonts(callBack : ()=> void)
     {
-        const webFontFamilyWithoutOverlap = this.Option.WebFontFamiliyNameToPreload.filter(
+        const webFontFamilyWithoutOverlap = this.Option.PreloadResource.WebFontFamiliyName.Array.filter(
             (x, i, self) => 
             {
                 return self.indexOf(x) === i;
             }
         );
-        const webFontCSSURLWithoutOverlap = this.Option.WebFontCSSURLToPreload.filter(
+        const webFontCSSURLWithoutOverlap = this.Option.PreloadResource.WebFontCSSURL.Array.filter(
             (x, i, self) => 
             {
                 return self.indexOf(x) === i;
@@ -154,7 +154,7 @@ export abstract class MeterApplication
     
     private preloadTextures(callBack : ()=> void)
     {
-        const texturePathWithoutOverlap = this.Option.TexturePathToPreload.filter(
+        const texturePathWithoutOverlap = this.Option.PreloadResource.TexturePath.Array.filter(
             (x, i, self) => 
             {
                 return self.indexOf(x) === i;

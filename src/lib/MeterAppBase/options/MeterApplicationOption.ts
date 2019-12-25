@@ -40,25 +40,45 @@ class WebsocketEnableFlag
     public AssettoCorsaSHM = false;
 }
 
+class AddAllArray<T>
+{
+    private readonly content = new Array<T>();
+    public get Array() { return this.content };
+
+    public addall(itemToAdd : T);
+    public addall(itemToAdd : Array<T>);
+    public addall(itemToAdd : any)
+    {
+        if(itemToAdd instanceof Array)
+            itemToAdd.forEach(e => this.content.push(e));
+        else
+            this.content.push(itemToAdd);
+    }
+}
+
 class ParameterCodeCollection
 {
-    public readonly DefiParameterCodeList: { code: DefiParameterCode }[] = new Array();
-    public readonly SSMParameterCodeList: { code: SSMParameterCode, readmode: ReadModeCode }[] = new Array();
-    public readonly ArduinoParameterCodeList: { code: ArduinoParameterCode }[] = new Array();
-    public readonly OBDIIParameterCodeList: { code: OBDIIParameterCode, readmode: ReadModeCode }[] = new Array();
-    public readonly AssettoCorsaPhysicsParameterCodeList: { code: AssettoCorsaSHMPhysicsParameterCode }[] = new Array();
-    public readonly AssettoCorsaGraphicsParameterCodeList: { code: AssettoCorsaSHMGraphicsParameterCode }[] = new Array();
-    public readonly AssettoCorsaStaticInfoParameterCodeList: { code: AssettoCorsaSHMStaticInfoParameterCode }[] = new Array();
+    public readonly Defi = new AddAllArray<DefiParameterCode>();
+    public readonly SSM = new AddAllArray<{ code: SSMParameterCode, readmode: ReadModeCode }>();
+    public readonly Arduino = new AddAllArray<ArduinoParameterCode>();
+    public readonly ELM327OBDII = new AddAllArray<{ code: OBDIIParameterCode, readmode: ReadModeCode }>();
+    public readonly AssettoCorsaPhysics = new AddAllArray<AssettoCorsaSHMPhysicsParameterCode>();
+    public readonly AssettoCorsaGraphics = new AddAllArray<AssettoCorsaSHMGraphicsParameterCode>();
+    public readonly AssettoCorsaStaticInfo = new AddAllArray<AssettoCorsaSHMStaticInfoParameterCode>();
+}
+
+class PreloadResourceCollection
+{
+    public readonly WebFontFamiliyName = new AddAllArray<string>();
+    public readonly WebFontCSSURL = new AddAllArray<string>();
+    public readonly TexturePath = new AddAllArray<string>();
 }
 
 export class MeterApplicationOption
 {
     public readonly WebsocketEnableFlag = new WebsocketEnableFlag();
-    public readonly WebsocketReadParameterCode = new ParameterCodeCollection();
-
-    public readonly WebFontFamiliyNameToPreload : string[] = new Array();
-    public readonly WebFontCSSURLToPreload : string[] = new Array();
-    public readonly TexturePathToPreload : string[] = new Array();
+    public readonly ParameterCode = new ParameterCodeCollection();
+    public readonly PreloadResource = new PreloadResourceCollection();
 
     public height : number;
     public width : number;
