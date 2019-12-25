@@ -42,11 +42,7 @@ export class MeterApplicationBaseOption
     public readonly WebFontCSSURLToPreload : string[] = new Array();
     public readonly TexturePathToPreload : string[] = new Array();
 
-    public width : number;
-    public height : number;
-
     public readonly WebSocketServerName : string;
-    public readonly PreserveDrawingBuffer : boolean = localStorage.getItem("preserveDrawingBuffer")==="true"?true:false;
     public SetupPIXIMeterPanel : (app : MeterApplicationBase) => void;
 
     constructor()

@@ -39,7 +39,7 @@ const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
 
 export abstract class MeterApplicationBase extends PIXI.Application
 {   
-    private Option : MeterApplicationBaseOption; 
+    private Option = new MeterApplicationBaseOption();
 
     private applicationnavBar: ApplicationNavBar;
     
@@ -77,30 +77,10 @@ export abstract class MeterApplicationBase extends PIXI.Application
      * @param width Stage width in px.
      * @param height Stage height in px.
      */
-    constructor(option : MeterApplicationBaseOption)
+    constructor(width : number, height: number)
     {
         // Call PIXI.Application
-        super({width:option.width, height:option.height, preserveDrawingBuffer:option.PreserveDrawingBuffer});
-
-        this.Option = option;
-
-        // Append PIXI.js application to document body
-        this.view.style.width = "100vw";
-        this.view.style.touchAction = "auto";
-        this.view.style.pointerEvents = "none";
-        document.body.appendChild(this.view);
-        // Set viewport meta-tag
-        this.setViewPortMetaTag();        
-        // Set fullscreen tag for android and ios
-        this.setWebAppCapable();
-        
-        this.applicationnavBar = new ApplicationNavBar();
-        this.applicationnavBar.create();
-
-        this.initializeWebsocketBackend(this.applicationnavBar);
-                               
-        // Preload Fonts -> textures-> parts
-        this.preloadFonts( () => this.preloadTextures( () => option.SetupPIXIMeterPanel(this)));        
+        super({width:width, height:height, preserveDrawingBuffer:localStorage.getItem("preserveDrawingBuffer")==="true"?true:false});
     }
     
     /**
@@ -214,8 +194,26 @@ export abstract class MeterApplicationBase extends PIXI.Application
     /**
      * Start application.
      */
-    public run()
+    public Run()
     {
+        // Append PIXI.js application to document body
+        this.view.style.width = "100vw";
+        this.view.style.touchAction = "auto";
+        this.view.style.pointerEvents = "none";
+        document.body.appendChild(this.view);
+        // Set viewport meta-tag
+        this.setViewPortMetaTag();        
+        // Set fullscreen tag for android and ios
+        this.setWebAppCapable();
+        
+        this.applicationnavBar = new ApplicationNavBar();
+        this.applicationnavBar.create();
+
+        this.initializeWebsocketBackend(this.applicationnavBar);
+                                
+        // Preload Fonts -> textures-> parts
+        this.preloadFonts( () => this.preloadTextures( () => option.SetupPIXIMeterPanel(this)));     
+
         this.connectWebSocket();
     }
            
