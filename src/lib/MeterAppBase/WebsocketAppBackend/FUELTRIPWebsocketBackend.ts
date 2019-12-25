@@ -112,6 +112,8 @@ export class FUELTRIPWebsocketBackend {
         const sectSpan = this.FUELTRIPSectSpan;
         const sectStoreMax = this.FUELTRIPSectStoreMax;
 
+        wsObj.URL = this.webSocketServerURL;
+
         wsObj.OnWebsocketOpen = () => {
             logWindow.appendLog(logPrefix + " is connected. Send SECT_SPAN and SECT_STOREMAX after " + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " ms.");
             window.setTimeout(() => {
