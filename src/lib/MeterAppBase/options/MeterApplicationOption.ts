@@ -1,5 +1,3 @@
-import { MeterApplicationBase } from "../MeterApplicationBase";
-
 /* 
  * The MIT License
  *
@@ -23,6 +21,14 @@ import { MeterApplicationBase } from "../MeterApplicationBase";
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+import {
+        DefiParameterCode, SSMParameterCode, SSMSwitchCode,
+        ArduinoParameterCode, OBDIIParameterCode, ReadModeCode,
+        AssettoCorsaSHMGraphicsParameterCode, AssettoCorsaSHMStaticInfoParameterCode, AssettoCorsaSHMPhysicsParameterCode
+    } from "../../WebSocket/WebSocketCommunication";
+
+import * as PIXI from "pixi.js";
+import { WebsocketObjectCollection } from "../WebSocketObjectCollection";
 
 class WebsocketEnableFlag
 {
@@ -34,29 +40,28 @@ class WebsocketEnableFlag
     public AssettoCorsaSHM = false;
 }
 
-export class MeterApplicationBaseOption
+class ParameterCodeCollection
+{
+    public readonly DefiParameterCodeList: { code: DefiParameterCode }[] = new Array();
+    public readonly SSMParameterCodeList: { code: SSMParameterCode, readmode: ReadModeCode }[] = new Array();
+    public readonly ArduinoParameterCodeList: { code: ArduinoParameterCode }[] = new Array();
+    public readonly OBDIIParameterCodeList: { code: OBDIIParameterCode, readmode: ReadModeCode }[] = new Array();
+    public readonly AssettoCorsaPhysicsParameterCodeList: { code: AssettoCorsaSHMPhysicsParameterCode }[] = new Array();
+    public readonly AssettoCorsaGraphicsParameterCodeList: { code: AssettoCorsaSHMGraphicsParameterCode }[] = new Array();
+    public readonly AssettoCorsaStaticInfoParameterCodeList: { code: AssettoCorsaSHMStaticInfoParameterCode }[] = new Array();
+}
+
+export class MeterApplicationOption
 {
     public readonly WebsocketEnableFlag = new WebsocketEnableFlag();
+    public readonly WebsocketReadParameterCode = new ParameterCodeCollection();
 
     public readonly WebFontFamiliyNameToPreload : string[] = new Array();
     public readonly WebFontCSSURLToPreload : string[] = new Array();
     public readonly TexturePathToPreload : string[] = new Array();
 
-    public readonly WebSocketServerName : string;
-    public SetupPIXIMeterPanel : (app : MeterApplicationBase) => void;
+    public height : number;
+    public width : number;
 
-    constructor()
-    {
-        this.WebSocketServerName = this.getWebsocketServerName();
-    }
-
-    private getWebsocketServerName() : string
-    {
-        const wsServerHostname : string = localStorage.getItem("WSServerHostname");
-        const setWSServerSameAsHttpSite : boolean = localStorage.getItem("SetWSServerSameAsHttp")==="true"?true:false;
-        if (setWSServerSameAsHttpSite)
-            return location.hostname;
-        else
-            return wsServerHostname;
-    }
+    public SetupPIXIMeterPanel : (pixiApp : PIXI.Application, wsObj : WebsocketObjectCollection) => void;
 }

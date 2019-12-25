@@ -28,12 +28,12 @@ import {ArduinoWebsocketBackend} from "./WebsocketAppBackend/ArduinoWebsocketBac
 import {ELM327WebsocketBackend} from "./WebsocketAppBackend/ELM327WebsocketBackend";
 import {AssettoCorsaSHMWebsocketBackend} from "./WebsocketAppBackend/AssettoCorsaSHMWebsocketBackend";
 import {FUELTRIPWebsocketBackend} from "./WebsocketAppBackend/FUELTRIPWebsocketBackend";
-import {MeterApplicationBaseOption} from "./options/MeterApplicationBaseOption"
+import {MeterApplicationOption} from "./options/MeterApplicationOption"
 import {ApplicationNavBar} from "./bootstrapParts/ApplicationNavBar"
 
 export class WebsocketObjectCollection
 {
-    private readonly AppOption : MeterApplicationBaseOption;
+    private readonly AppOption : MeterApplicationOption;
 
     private readonly defiWS: DefiWebsocketBackend;
     private readonly ssmWS: SSMWebsocketBackend;
@@ -49,11 +49,21 @@ export class WebsocketObjectCollection
     get FUELTRIPWS() {return this.fueltripWS}
     get AssettoCorsaWS() { return this.assettoCorsaWS}
 
-    constructor(navBar : ApplicationNavBar, appOption : MeterApplicationBaseOption)
+    private getWebsocketServerName() : string
+    {
+        const wsServerHostname : string = localStorage.getItem("WSServerHostname");
+        const setWSServerSameAsHttpSite : boolean = localStorage.getItem("SetWSServerSameAsHttp")==="true"?true:false;
+        if (setWSServerSameAsHttpSite)
+            return location.hostname;
+        else
+            return wsServerHostname;
+    }
+    
+    constructor(navBar : ApplicationNavBar, appOption : MeterApplicationOption)
     {
         this.AppOption = appOption;
 
-        const webSocketServerName = appOption.WebSocketServerName;
+        const webSocketServerName = this.getWebsocketServerName();
         const logDialog = navBar.LogModalDialog;
 
         if(appOption.WebsocketEnableFlag.Defi)
@@ -108,21 +118,5 @@ export class WebsocketObjectCollection
             this.FUELTRIPWS.Run();
         if(this.AppOption.WebsocketEnableFlag.AssettoCorsaSHM)
             this.AssettoCorsaWS.Run();
-    }
-
-    public Stop() : void
-    {
-        if(this.AppOption.WebsocketEnableFlag.Defi)
-        this.DefiWS.Stop();
-        if(this.AppOption.WebsocketEnableFlag.SSM)
-            this.SSMWS.Stop();
-        if(this.AppOption.WebsocketEnableFlag.Arduino)
-            this.ArduinoWS.Stop();
-        if(this.AppOption.WebsocketEnableFlag.ELM327)
-            this.ELM327WS.Stop();
-        if(this.AppOption.WebsocketEnableFlag.FUELTRIP)
-            this.FUELTRIPWS.Stop();
-        if(this.AppOption.WebsocketEnableFlag.AssettoCorsaSHM)
-            this.AssettoCorsaWS.Stop();
     }
 }
