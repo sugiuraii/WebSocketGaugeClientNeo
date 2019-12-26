@@ -31,7 +31,8 @@ import * as PIXI from "pixi.js";
 require("./CompactMFD-Arduino.html");
 
 //Import application base class
-import {MeterApplicationBase} from "../../lib/MeterAppBase/MeterApplicationBase";
+import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
+import { MeterApplicationOption } from "../../lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
 import {BoostGaugePanel} from "../../parts/CircularGauges/FullCircularGaugePanel";
@@ -42,84 +43,81 @@ import {DigiTachoPanel} from "../../parts/DigiTachoPanel/DigiTachoPanel";
 //Import enumuator of parameter code
 import {ArduinoParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
 
+import { calculateGearPosition } from "../../lib/MeterAppBase/utils/CalculateGearPosition";
 
 window.onload = function()
 {
-    const meterapp = new CompactMFD_Arduino(720, 1280);
-    meterapp.run();
+    const meterapp = new CompactMFD_Arduino();
+    meterapp.Start();
 }
 
-class CompactMFD_Arduino extends MeterApplicationBase
+class CompactMFD_Arduino
 {
-    protected setWebSocketOptions()
-    {
-        //Enable Arduino websocket clent
-        this.IsArudinoWSEnabled = true;
+    public Start() {
+        const appOption = new MeterApplicationOption();
+        appOption.width = 720;
+        appOption.height = 1280;
+        appOption.PreloadResource.WebFontFamiliyName.addall(WaterTempGaugePanel.RequestedFontFamily);
+        appOption.PreloadResource.WebFontFamiliyName.addall(DigiTachoPanel.RequestedFontFamily);
+        appOption.PreloadResource.WebFontFamiliyName.addall(BoostGaugePanel.RequestedFontFamily);
+
+        appOption.PreloadResource.WebFontCSSURL.addall(WaterTempGaugePanel.RequestedFontCSSURL);
+        appOption.PreloadResource.WebFontCSSURL.addall(DigiTachoPanel.RequestedFontCSSURL);
+        appOption.PreloadResource.WebFontCSSURL.addall(BoostGaugePanel.RequestedFontCSSURL);
+
+        appOption.PreloadResource.TexturePath.addall(WaterTempGaugePanel.RequestedTexturePath);
+        appOption.PreloadResource.TexturePath.addall(DigiTachoPanel.RequestedTexturePath);
+        appOption.PreloadResource.TexturePath.addall(BoostGaugePanel.RequestedTexturePath);
+
+        appOption.WebsocketEnableFlag.Arduino = true;
+
+        appOption.ParameterCode.Arduino.addall([ArduinoParameterCode.Engine_Speed,ArduinoParameterCode.Manifold_Absolute_Pressure, ArduinoParameterCode.Vehicle_Speed, ArduinoParameterCode.Coolant_Temperature, ArduinoParameterCode.Oil_Temperature]);
         
-        this.registerArduinoParameterCode(ArduinoParameterCode.Engine_Speed);
-        this.registerArduinoParameterCode(ArduinoParameterCode.Manifold_Absolute_Pressure);
-        this.registerArduinoParameterCode(ArduinoParameterCode.Vehicle_Speed);
-        this.registerArduinoParameterCode(ArduinoParameterCode.Coolant_Temperature); 
-        this.registerArduinoParameterCode(ArduinoParameterCode.Oil_Temperature);       
-    }
-    
-    protected setTextureFontPreloadOptions()
-    {
-        this.registerWebFontFamilyNameToPreload(BoostGaugePanel.RequestedFontFamily);
-        this.registerWebFontFamilyNameToPreload(WaterTempGaugePanel.RequestedFontFamily);
-        this.registerWebFontFamilyNameToPreload(DigiTachoPanel.RequestedFontFamily);
-        
-        this.registerWebFontCSSURLToPreload(BoostGaugePanel.RequestedFontCSSURL);
-        this.registerWebFontCSSURLToPreload(WaterTempGaugePanel.RequestedFontCSSURL);
-        this.registerWebFontCSSURLToPreload(DigiTachoPanel.RequestedFontCSSURL);
-        
-        this.registerTexturePathToPreload(BoostGaugePanel.RequestedTexturePath);
-        this.registerTexturePathToPreload(WaterTempGaugePanel.RequestedTexturePath);
-        this.registerTexturePathToPreload(DigiTachoPanel.RequestedTexturePath);
-    }
-    
-    protected setPIXIMeterPanel()
-    {        
-        const digiTachoPanel = new DigiTachoPanel();
-        digiTachoPanel.position.set(0,0);
-        digiTachoPanel.scale.set(1.15);
-                
-        const boostPanel = new BoostGaugePanel();
-        boostPanel.position.set(90, 360);
-        boostPanel.scale.set(1.3);
-                
-        const waterTempPanel = new WaterTempGaugePanel();
-        waterTempPanel.position.set(0,890);
-        waterTempPanel.scale.set(0.85);
-        
-        const engineOilTempPanel = new EngineOilTempGaugePanel();
-        engineOilTempPanel.position.set(360,890);
-        engineOilTempPanel.scale.set(0.85);
-                
-        this.stage.addChild(digiTachoPanel);
-        this.stage.addChild(boostPanel);
-        this.stage.addChild(waterTempPanel);
-        this.stage.addChild(engineOilTempPanel);
-                
-        this.ticker.add(() => 
-        {
-            const timestamp = this.ticker.lastTime;
-            const tacho = this.ArduinoWS.getVal(ArduinoParameterCode.Engine_Speed, timestamp);
-            const speed = this.ArduinoWS.getVal(ArduinoParameterCode.Vehicle_Speed, timestamp);
-            const neutralSw = false;
-            const gearPos = this.calculateGearPosition(tacho, speed, neutralSw);
-            const engineOilTemp = this.ArduinoWS.getVal(ArduinoParameterCode.Oil_Temperature, timestamp);
-                        
-            const boost = this.ArduinoWS.getVal(ArduinoParameterCode.Manifold_Absolute_Pressure, timestamp) * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
-            const waterTemp = this.ArduinoWS.getRawVal(ArduinoParameterCode.Coolant_Temperature);
+        appOption.SetupPIXIMeterPanel = (app, ws) => {
+            const stage = app.stage;
+            const digiTachoPanel = new DigiTachoPanel();
+            digiTachoPanel.position.set(0,0);
+            digiTachoPanel.scale.set(1.15);
+                    
+            const boostPanel = new BoostGaugePanel();
+            boostPanel.position.set(90, 360);
+            boostPanel.scale.set(1.3);
+                    
+            const waterTempPanel = new WaterTempGaugePanel();
+            waterTempPanel.position.set(0,890);
+            waterTempPanel.scale.set(0.85);
             
-            digiTachoPanel.Speed = speed;
-            digiTachoPanel.Tacho = tacho;
-            digiTachoPanel.GearPos = gearPos;
-                        
-            boostPanel.Value = boost;
-            waterTempPanel.Value = waterTemp;
-            engineOilTempPanel.Value = engineOilTemp;
-       });
+            const engineOilTempPanel = new EngineOilTempGaugePanel();
+            engineOilTempPanel.position.set(360,890);
+            engineOilTempPanel.scale.set(0.85);
+                    
+            stage.addChild(digiTachoPanel);
+            stage.addChild(boostPanel);
+            stage.addChild(waterTempPanel);
+            stage.addChild(engineOilTempPanel);
+                    
+            app.ticker.add(() => 
+            {
+                const timestamp = app.ticker.lastTime;
+                const tacho = ws.ArduinoWS.getVal(ArduinoParameterCode.Engine_Speed, timestamp);
+                const speed = ws.ArduinoWS.getVal(ArduinoParameterCode.Vehicle_Speed, timestamp);
+                const neutralSw = false;
+                const gearPos = calculateGearPosition(tacho, speed, neutralSw);
+                const engineOilTemp = ws.ArduinoWS.getVal(ArduinoParameterCode.Oil_Temperature, timestamp);
+                            
+                const boost = ws.ArduinoWS.getVal(ArduinoParameterCode.Manifold_Absolute_Pressure, timestamp) * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
+                const waterTemp = ws.ArduinoWS.getRawVal(ArduinoParameterCode.Coolant_Temperature);
+                
+                digiTachoPanel.Speed = speed;
+                digiTachoPanel.Tacho = tacho;
+                digiTachoPanel.GearPos = gearPos;
+                            
+                boostPanel.Value = boost;
+                waterTempPanel.Value = waterTemp;
+                engineOilTempPanel.Value = engineOilTemp;
+           });
+        };
+        const app = new MeterApplication(appOption);
+        app.Run();
     }
 }

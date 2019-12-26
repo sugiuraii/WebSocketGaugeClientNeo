@@ -121,5 +121,7 @@ class CompactMFD_SSM {
                 boostPanel.Value = boost;
             });
         };
+        const app = new MeterApplication(appOption);
+        app.Run();
     }
 }
