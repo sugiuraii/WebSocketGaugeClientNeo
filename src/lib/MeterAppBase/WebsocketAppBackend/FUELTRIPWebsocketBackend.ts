@@ -39,18 +39,20 @@ export class FUELTRIPWebsocketBackend {
     private readonly loggerWindow: ILogWindow;
     private readonly statusIndicator: IStatusIndicator;
 
-    public FUELTRIPSectStoreMax: number;
-    public FUELTRIPSectSpan: number;
+    private readonly fueltripSectStoreMax: number;
+    private readonly fueltripSectSpan: number;
 
     private readonly webSocketServerURL: string;
 
     private indicatorUpdateIntervalID: number;
 
-    constructor(serverurl: string, loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
+    constructor(serverurl: string, loggerWindow: ILogWindow, fueltripSectSpan: number, fueltripSectStoremax : number, statusIndicator: IStatusIndicator) {
         this.fueltripWS = new FUELTRIPWebsocket();
         this.loggerWindow = loggerWindow;
         this.statusIndicator = statusIndicator;
         this.webSocketServerURL = serverurl;
+        this.fueltripSectSpan = fueltripSectSpan;
+        this.fueltripSectStoreMax = fueltripSectStoremax;
 
         this.fueltripWS.OnWebsocketError = (message: string) => this.loggerWindow.appendLog(this.logPrefix + " websocket error : " + message);
     }
@@ -109,8 +111,8 @@ export class FUELTRIPWebsocketBackend {
         const wsObj = this.fueltripWS;
         const logWindow = this.loggerWindow;
         const logPrefix = this.logPrefix;
-        const sectSpan = this.FUELTRIPSectSpan;
-        const sectStoreMax = this.FUELTRIPSectStoreMax;
+        const sectSpan = this.fueltripSectSpan;
+        const sectStoreMax = this.fueltripSectStoreMax;
 
         wsObj.URL = this.webSocketServerURL;
 

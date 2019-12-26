@@ -94,7 +94,9 @@ export class WebsocketObjectCollection
         {
             const wsURL = "ws://" + webSocketServerName + ":" + FUELTRIPWebsocketBackend.DEFAULT_WS_PORT.toString() + "/";
             navBar.AddWebSocketStatusIndicator("fueltripWSIndicator", "FUELTRIP");
-            this.fueltripWS = new FUELTRIPWebsocketBackend(wsURL, logDialog, navBar.GetWebSocketStatusIndicator("fueltripWSIndicator"));
+            const fuelTripSectSpan = appOption.FUELTRIPWebsocketOption.FUELTRIPSectSpan;
+            const fuelTripSectStoreMax = appOption.FUELTRIPWebsocketOption.FUELTRIPSectStoreMax;
+            this.fueltripWS = new FUELTRIPWebsocketBackend(wsURL, logDialog, fuelTripSectSpan, fuelTripSectStoreMax, navBar.GetWebSocketStatusIndicator("fueltripWSIndicator"));
         }
         if(appOption.WebsocketEnableFlag.AssettoCorsaSHM)
         {

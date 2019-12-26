@@ -67,6 +67,12 @@ class ParameterCodeCollection
     public readonly AssettoCorsaStaticInfo = new AddAllArray<AssettoCorsaSHMStaticInfoParameterCode>();
 }
 
+class FUELTRIPWebsocketOption
+{
+    public FUELTRIPSectSpan : number = 300;
+    public FUELTRIPSectStoreMax : number = 6;
+}
+
 class PreloadResourceCollection
 {
     public readonly WebFontFamiliyName = new AddAllArray<string>();
@@ -79,6 +85,7 @@ export class MeterApplicationOption
     public readonly WebsocketEnableFlag = new WebsocketEnableFlag();
     public readonly ParameterCode = new ParameterCodeCollection();
     public readonly PreloadResource = new PreloadResourceCollection();
+    public readonly FUELTRIPWebsocketOption = new FUELTRIPWebsocketOption();
 
     public height : number;
     public width : number;
