@@ -97,5 +97,7 @@ class AnalogMeterCluster_ELM327
                 meterCluster.GasMilage = gasMilage;
             });
         }
+        const app = new MeterApplication(appOption);
+        app.Run();
     }
 }

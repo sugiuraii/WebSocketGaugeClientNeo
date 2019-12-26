@@ -94,5 +94,7 @@ class AnalogTripleMeter_Arduino {
                 oilTempMeter.Value = oilTemp;
             });
         };
+        const app = new MeterApplication(appOption);
+        app.Run();
     }
 }

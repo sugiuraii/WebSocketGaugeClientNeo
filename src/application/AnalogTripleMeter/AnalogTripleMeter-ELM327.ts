@@ -96,5 +96,7 @@ class AnalogTripleMeter_ELM327 {
                 batteryVoltageMeter.Value = voltage;
             });
         };
+        const app = new MeterApplication(appOption);
+        app.Run();
     }
 }

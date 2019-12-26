@@ -37,8 +37,6 @@ import { AnalogMeterCluster } from "../../parts/AnalogMeterCluster/AnalogMeterCl
 
 //Import enumuator of parameter code
 import { AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMNumericalVALCode } from "../../lib/WebSocket/WebSocketCommunication";
-import { AssettoCorsaSHMGraphicsParameterCode } from "../../lib/WebSocket/WebSocketCommunication";
-import { AssettoCorsaSHMStaticInfoParameterCode } from "../../lib/WebSocket/WebSocketCommunication";
 
 //For including entry point html file in webpack
 require("./AnalogMeterCluster-AssettoCorsaSHM.html");
@@ -97,5 +95,7 @@ class AnalogMeterCluster_AssettoCorsaSHM {
                 meterCluster.GasMilage = gasMilage;
             });
         }
+        const app = new MeterApplication(appOption);
+        app.Run();
     }
 }

@@ -101,5 +101,7 @@ class AnalogMeterCluster_Defi_SSM
                 meterCluster.GasMilage = gasMilage;
             });
         };
+        const app = new MeterApplication(appOption);
+        app.Run();
     }
 }

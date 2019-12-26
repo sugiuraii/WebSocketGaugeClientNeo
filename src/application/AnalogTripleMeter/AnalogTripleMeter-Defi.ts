@@ -94,5 +94,7 @@ class AnalogTripleMeter_Defi {
                 oilTempMeter.Value = oilTemp;
             });
         };
+        const app = new MeterApplication(appOption);
+        app.Run();
     }
 }

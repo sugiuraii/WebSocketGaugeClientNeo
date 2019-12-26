@@ -96,5 +96,7 @@ class AnalogTripleMeter_SSM {
                 batteryVoltageMeter.Value = voltage;
             });
         }
+        const app = new MeterApplication(appOption);
+        app.Run();
     }
 }
