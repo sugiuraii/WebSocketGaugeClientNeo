@@ -61,7 +61,7 @@ class AnalogTripleMeter_Defi {
 
         appOption.ParameterCode.Defi.addall(DefiParameterCode.Manifold_Absolute_Pressure);
         appOption.ParameterCode.Defi.addall(DefiParameterCode.Coolant_Temperature);
-        appOption.ParameterCode.Defi.addall(DefiParameterCode.Oil_Pressure);
+        appOption.ParameterCode.Defi.addall(DefiParameterCode.Oil_Temperature);
 
         appOption.SetupPIXIMeterPanel = (app, ws) => {
             const stage = app.stage;
