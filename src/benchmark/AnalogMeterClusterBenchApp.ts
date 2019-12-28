@@ -26,91 +26,96 @@
 /// <reference path="../lib/webpackRequire.ts" />
 
 //Import application base class
-import {MeterApplicationBase} from "../lib/MeterAppBase/MeterApplicationBase";
+import {MeterApplication} from "../lib/MeterAppBase/MeterApplication";
+import {MeterApplicationOption} from "../lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
 import {AnalogMeterCluster} from "../parts/AnalogMeterCluster/AnalogMeterCluster";
 
 import {FPSCounter} from "../parts/FPSIndicator/FPSCounter";
 
+import {calculateGearPosition} from "../lib/MeterAppBase/utils/CalculateGearPosition";
+
 //For including entry point html file in webpack
 require("./AnalogMeterClusterBenchApp.html");
 
 window.onload = function()
 {
-    const meterapp = new AnalogMeterClusterBenchApp(1100, 600);
-    meterapp.run();
+    const meterapp = new AnalogMeterClusterBenchApp();
+    meterapp.Start();
 }
 
-class AnalogMeterClusterBenchApp extends MeterApplicationBase
+class AnalogMeterClusterBenchApp
 {
-    protected setWebSocketOptions()
+    public Start()
     {
-        //For graphic benchmark. Do nothing for websocket.
-    }
-    
-    protected setTextureFontPreloadOptions()
-    {
-        this.registerWebFontFamilyNameToPreload(AnalogMeterCluster.RequestedFontFamily);
-        this.registerWebFontCSSURLToPreload(AnalogMeterCluster.RequestedFontCSSURL);
-        this.registerTexturePathToPreload(AnalogMeterCluster.RequestedTexturePath);
-        
-        this.registerTexturePathToPreload(FPSCounter.RequestedTexturePath);
-    }
-    
-    protected setPIXIMeterPanel()
-    {
-        const meterCluster = new AnalogMeterCluster();
-        this.stage.addChild(meterCluster);
-        
-        const fpsCounter = new FPSCounter();
-        fpsCounter.position.set(0,0);
-        this.stage.addChild(fpsCounter);
-        
-        let tacho = 0;
-        let speed = 0;
-        let gearPos = "1";
+        const appOption = new MeterApplicationOption();
+        appOption.width = 1100;
+        appOption.height = 600;
+        appOption.PreloadResource.WebFontFamiliyName.addall(AnalogMeterCluster.RequestedFontFamily);
+        appOption.PreloadResource.WebFontCSSURL.addall(AnalogMeterCluster.RequestedFontCSSURL);
+        appOption.PreloadResource.TexturePath.addall(AnalogMeterCluster.RequestedTexturePath);
+        appOption.PreloadResource.TexturePath.addall(FPSCounter.RequestedTexturePath);
 
-        const totalGasMilage = 12.0;
-        const totalFuel = 20.0;
-        const totalTrip = 356.0;
-
-        let boost = -1.0;
-        let waterTemp = 50.0;
-                
-        this.ticker.add(() => 
+        appOption.SetupPIXIMeterPanel = (app, ws) =>
         {
-            fpsCounter.setFPS(this.ticker.FPS);
+            const meterCluster = new AnalogMeterCluster();
+            const stage = app.stage;
+
+            stage.addChild(meterCluster);
             
-            if(tacho > 9000)
-                tacho = 0;
-            else
-                tacho += 200;
+            const fpsCounter = new FPSCounter();
+            fpsCounter.position.set(0,0);
+            stage.addChild(fpsCounter);
             
-            if(speed > 280)
-                speed = 0;
-            else
-                speed += 0.5;
-            
-            if(boost > 2.0)
-                boost = -1.0;
-            else
-                boost += 0.05;
-            
-            if (waterTemp > 140)
-                waterTemp = 50;
-            else
-                waterTemp += 0.1;
-            gearPos = this.calculateGearPosition(tacho, speed, false);
-            
-            meterCluster.Tacho = tacho;
-            meterCluster.Speed = speed;
-            meterCluster.Boost = boost;
-            meterCluster.WaterTemp = waterTemp;
-            meterCluster.GasMilage = totalGasMilage;
-            meterCluster.Trip = totalTrip;
-            meterCluster.Fuel = totalFuel;
-            meterCluster.GearPos = gearPos;
-       });
+            let tacho = 0;
+            let speed = 0;
+            let gearPos = "1";
+    
+            const totalGasMilage = 12.0;
+            const totalFuel = 20.0;
+            const totalTrip = 356.0;
+    
+            let boost = -1.0;
+            let waterTemp = 50.0;
+                    
+            app.ticker.add(() => 
+            {
+                fpsCounter.setFPS(app.ticker.FPS);
+                
+                if(tacho > 9000)
+                    tacho = 0;
+                else
+                    tacho += 200;
+                
+                if(speed > 280)
+                    speed = 0;
+                else
+                    speed += 0.5;
+                
+                if(boost > 2.0)
+                    boost = -1.0;
+                else
+                    boost += 0.05;
+                
+                if (waterTemp > 140)
+                    waterTemp = 50;
+                else
+                    waterTemp += 0.1;
+                gearPos = calculateGearPosition(tacho, speed, false);
+                
+                meterCluster.Tacho = tacho;
+                meterCluster.Speed = speed;
+                meterCluster.Boost = boost;
+                meterCluster.WaterTemp = waterTemp;
+                meterCluster.GasMilage = totalGasMilage;
+                meterCluster.Trip = totalTrip;
+                meterCluster.Fuel = totalFuel;
+                meterCluster.GearPos = gearPos;
+           });    
+        };
+
+        const app = new MeterApplication(appOption);
+        app.Run();
     }
 }

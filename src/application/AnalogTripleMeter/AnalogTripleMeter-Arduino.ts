@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
- 
+
 // This is required to webpack font/texture/html files
 /// <reference path="../../lib/webpackRequire.ts" />
 
@@ -31,70 +31,70 @@ import * as PIXI from "pixi.js";
 require("./AnalogTripleMeter-Arduino.html");
 
 //Import application base class
-import {MeterApplicationBase} from "../../lib/MeterAppBase/MeterApplicationBase";
+import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
+import { MeterApplicationOption } from "../../lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
-import {BoostMeter} from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
-import {WaterTempMeter} from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
-import {OilTempMeter} from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
+import { BoostMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
+import { WaterTempMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
+import { OilTempMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
 
 //Import enumuator of parameter code
-import {ArduinoParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
+import { ArduinoParameterCode } from "../../lib/WebSocket/WebSocketCommunication";
 
-window.onload = function()
-{
-    const meterapp = new AnalogTripleMeter_Arduino(1280, 720);
-    meterapp.run();
+window.onload = function () {
+    const meterapp = new AnalogTripleMeter_Arduino();
+    meterapp.Start();
 }
 
-class AnalogTripleMeter_Arduino extends MeterApplicationBase
-{
-    protected setWebSocketOptions()
-    {
-        this.IsArudinoWSEnabled = true;
-        this.registerArduinoParameterCode(ArduinoParameterCode.Manifold_Absolute_Pressure);         
-        this.registerArduinoParameterCode(ArduinoParameterCode.Coolant_Temperature); 
-        this.registerArduinoParameterCode(ArduinoParameterCode.Oil_Temperature);
+class AnalogTripleMeter_Arduino {
+    public Start() {
+        const appOption = new MeterApplicationOption();
+        appOption.width = 1280;
+        appOption.height = 720;
 
-    }
-    
-    protected setTextureFontPreloadOptions()
-    {
-        this.registerWebFontFamilyNameToPreload(BoostMeter.RequestedFontFamily);    
-        this.registerWebFontCSSURLToPreload(BoostMeter.RequestedFontCSSURL);        
-        this.registerTexturePathToPreload(BoostMeter.RequestedTexturePath);
-    }
-    
-    protected setPIXIMeterPanel()
-    {   
-        //Centering the top-level container
-        this.stage.pivot.set(600, 200);
-        this.stage.position.set(this.screen.width/2, this.screen.height/2);
-        
-        const boostMeter = new BoostMeter();
-        boostMeter.position.set(800,0);
-        
-        const waterTempMeter = new WaterTempMeter();
-        waterTempMeter.position.set(0,0);
+        appOption.PreloadResource.WebFontFamiliyName.addall(BoostMeter.RequestedFontFamily);
+        appOption.PreloadResource.WebFontCSSURL.addall(BoostMeter.RequestedFontCSSURL);
+        appOption.PreloadResource.TexturePath.addall(BoostMeter.RequestedTexturePath);
 
-        const oilTempMeter = new OilTempMeter();
-        oilTempMeter.position.set(400,0);
-                
-        this.stage.addChild(boostMeter);
-        this.stage.addChild(waterTempMeter);
-        this.stage.addChild(oilTempMeter);
-        
-        this.ticker.add(() => 
-        {
-            const timestamp = this.ticker.lastTime;
-            const boost = this.ArduinoWS.getVal(ArduinoParameterCode.Manifold_Absolute_Pressure, timestamp)  * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
-            
-            const waterTemp = this.ArduinoWS.getRawVal(ArduinoParameterCode.Coolant_Temperature);
-            const oilTemp = this.ArduinoWS.getRawVal(ArduinoParameterCode.Oil_Temperature);
-            
-            boostMeter.Value = boost;
-            waterTempMeter.Value = waterTemp;
-            oilTempMeter.Value = oilTemp;
-       });
+        appOption.WebsocketEnableFlag.Arduino = true;
+
+        appOption.ParameterCode.Arduino.addall(ArduinoParameterCode.Manifold_Absolute_Pressure);
+        appOption.ParameterCode.Arduino.addall(ArduinoParameterCode.Coolant_Temperature);
+        appOption.ParameterCode.Arduino.addall(ArduinoParameterCode.Oil_Pressure);
+
+        appOption.SetupPIXIMeterPanel = (app, ws) => {
+            const stage = app.stage;
+            //Centering the top-level container
+            stage.pivot.set(600, 200);
+            stage.position.set(app.screen.width / 2, app.screen.height / 2);
+
+            const boostMeter = new BoostMeter();
+            boostMeter.position.set(800, 0);
+
+            const waterTempMeter = new WaterTempMeter();
+            waterTempMeter.position.set(0, 0);
+
+            const oilTempMeter = new OilTempMeter();
+            oilTempMeter.position.set(400, 0);
+
+            stage.addChild(boostMeter);
+            stage.addChild(waterTempMeter);
+            stage.addChild(oilTempMeter);
+
+            app.ticker.add(() => {
+                const timestamp = app.ticker.lastTime;
+                const boost = ws.ArduinoWS.getVal(ArduinoParameterCode.Manifold_Absolute_Pressure, timestamp) * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
+
+                const waterTemp = ws.ArduinoWS.getRawVal(ArduinoParameterCode.Coolant_Temperature);
+                const oilTemp = ws.ArduinoWS.getRawVal(ArduinoParameterCode.Oil_Temperature);
+
+                boostMeter.Value = boost;
+                waterTempMeter.Value = waterTemp;
+                oilTempMeter.Value = oilTemp;
+            });
+        };
+        const app = new MeterApplication(appOption);
+        app.Run();
     }
 }

@@ -21,9 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+import {WebsocketStatus} from '../WebsocketAppBackend/WebsocketStatus'
 
-export abstract class HTMLDivContainer
+export interface IStatusIndicator
 {
-    private readonly container: HTMLDivElement = document.createElement('div');
-    public get Container() {return this.container};    
+    SetStatus(status : WebsocketStatus); 
 }

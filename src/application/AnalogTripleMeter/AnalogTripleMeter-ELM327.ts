@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
- 
+
 // This is required to webpack font/texture/html files
 /// <reference path="../../lib/webpackRequire.ts" />
 
@@ -31,72 +31,72 @@ import * as PIXI from "pixi.js";
 require("./AnalogTripleMeter-ELM327.html");
 
 //Import application base class
-import {MeterApplicationBase} from "../../lib/MeterAppBase/MeterApplicationBase";
+import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
+import { MeterApplicationOption } from "../../lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
-import {BoostMeter} from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
-import {WaterTempMeter} from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
-import {BatteryVoltageMeter} from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
+import { BoostMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
+import { WaterTempMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
+import { BatteryVoltageMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
 
 //Import enumuator of parameter code
-import {OBDIIParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
-import {ReadModeCode} from "../../lib/WebSocket/WebSocketCommunication";
+import { OBDIIParameterCode } from "../../lib/WebSocket/WebSocketCommunication";
+import { ReadModeCode } from "../../lib/WebSocket/WebSocketCommunication";
 
 
-window.onload = function()
-{
-    const meterapp = new AnalogTripleMeter_ELM327(1280, 720);
-    meterapp.run();
+window.onload = function () {
+    const meterapp = new AnalogTripleMeter_ELM327();
+    meterapp.Start();
 }
 
-class AnalogTripleMeter_ELM327 extends MeterApplicationBase
-{
-    protected setWebSocketOptions()
-    {
-        //Enable SSM websocket client
-        this.IsELM327WSEnabled = true;
-        this.registerELM327ParameterCode(OBDIIParameterCode.Coolant_Temperature, ReadModeCode.SLOW);
-        this.registerELM327ParameterCode(OBDIIParameterCode.Battery_Voltage, ReadModeCode.SLOW);         
-        this.registerELM327ParameterCode(OBDIIParameterCode.Manifold_Absolute_Pressure, ReadModeCode.SLOWandFAST);
-    }
-    
-    protected setTextureFontPreloadOptions()
-    {
-        this.registerWebFontFamilyNameToPreload(BoostMeter.RequestedFontFamily);    
-        this.registerWebFontCSSURLToPreload(BoostMeter.RequestedFontCSSURL);        
-        this.registerTexturePathToPreload(BoostMeter.RequestedTexturePath);
-    }
-    
-    protected setPIXIMeterPanel()
-    {        
-        //Centering the top-level container
-        this.stage.pivot.set(600, 200);
-        this.stage.position.set(this.screen.width/2, this.screen.height/2);
+class AnalogTripleMeter_ELM327 {
+    public Start() {
+        const appOption = new MeterApplicationOption();
+        appOption.width = 1280;
+        appOption.height = 720;
 
-        const boostMeter = new BoostMeter();
-        boostMeter.position.set(800,0);
-        
-        const waterTempMeter = new WaterTempMeter();
-        waterTempMeter.position.set(0,0);
+        appOption.PreloadResource.WebFontFamiliyName.addall(BoostMeter.RequestedFontFamily);
+        appOption.PreloadResource.WebFontCSSURL.addall(BoostMeter.RequestedFontCSSURL);
+        appOption.PreloadResource.TexturePath.addall(BoostMeter.RequestedTexturePath);
 
-        const batteryVoltageMeter = new BatteryVoltageMeter();
-        batteryVoltageMeter.position.set(400,0);
-                
-        this.stage.addChild(boostMeter);
-        this.stage.addChild(waterTempMeter);
-        this.stage.addChild(batteryVoltageMeter);
-        
-        this.ticker.add(() => 
-        {
-            const timestamp = this.ticker.lastTime;
-            const boost = this.ELM327WS.getVal(OBDIIParameterCode.Manifold_Absolute_Pressure, timestamp)  * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
-            
-            const waterTemp = this.ELM327WS.getRawVal(OBDIIParameterCode.Coolant_Temperature);
-            const voltage = this.ELM327WS.getRawVal(OBDIIParameterCode.Battery_Voltage);
-            
-            boostMeter.Value = boost;
-            waterTempMeter.Value = waterTemp;
-            batteryVoltageMeter.Value = voltage;
-       });
+        appOption.WebsocketEnableFlag.ELM327 = true;
+
+        appOption.ParameterCode.ELM327OBDII.addall({ code: OBDIIParameterCode.Coolant_Temperature, readmode: ReadModeCode.SLOW });
+        appOption.ParameterCode.ELM327OBDII.addall({ code: OBDIIParameterCode.Manifold_Absolute_Pressure, readmode: ReadModeCode.SLOWandFAST });
+        appOption.ParameterCode.ELM327OBDII.addall({ code: OBDIIParameterCode.Battery_Voltage, readmode: ReadModeCode.SLOW });
+
+        appOption.SetupPIXIMeterPanel = (app, ws) => {
+            const stage = app.stage;
+            //Centering the top-level container
+            stage.pivot.set(600, 200);
+            stage.position.set(app.screen.width / 2, app.screen.height / 2);
+
+            const boostMeter = new BoostMeter();
+            boostMeter.position.set(800, 0);
+
+            const waterTempMeter = new WaterTempMeter();
+            waterTempMeter.position.set(0, 0);
+
+            const batteryVoltageMeter = new BatteryVoltageMeter();
+            batteryVoltageMeter.position.set(400, 0);
+
+            stage.addChild(boostMeter);
+            stage.addChild(waterTempMeter);
+            stage.addChild(batteryVoltageMeter);
+
+            app.ticker.add(() => {
+                const timestamp = app.ticker.lastTime;
+                const boost = ws.ELM327WS.getVal(OBDIIParameterCode.Manifold_Absolute_Pressure, timestamp) * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
+
+                const waterTemp = ws.ELM327WS.getRawVal(OBDIIParameterCode.Coolant_Temperature);
+                const voltage = ws.ELM327WS.getRawVal(OBDIIParameterCode.Battery_Voltage);
+
+                boostMeter.Value = boost;
+                waterTempMeter.Value = waterTemp;
+                batteryVoltageMeter.Value = voltage;
+            });
+        };
+        const app = new MeterApplication(appOption);
+        app.Run();
     }
 }

@@ -24,45 +24,109 @@
 
 import * as $ from 'jquery';
 
-import {FUELTripResetModalDialog} from "./FUELTripResetModalDialog"
-import {LogModalDialog} from "./LogModalDialog"
-import {OptionModalDialog} from "./OptionModalDialog"
+import { FUELTripResetModalDialog } from "./FUELTripResetModalDialog"
+import { LogModalDialog } from "./LogModalDialog"
+import { OptionModalDialog } from "./OptionModalDialog"
 
 import 'bootstrap';
 import 'jquery';
 import 'popper.js';
 import '../../../css/bootstrap-slate/bootstrap.slate.min.css';
+import { IStatusIndicator } from '../interfaces/IStatusIndicator';
+import { WebsocketStatus } from '../WebsocketAppBackend/WebsocketStatus'
+
+class WebsocketStatusIndicator implements IStatusIndicator {
+
+    private readonly elementID: string;
+    private isEnabled: boolean = true;
+
+    constructor(elementID: string) {
+        this.elementID = elementID;
+    }
+
+    public SetStatus(status: WebsocketStatus) {
+        let cssClass: string = "";
+        const elementID = this.elementID;
+
+        if (!this.isEnabled)
+            //Disabled
+            cssClass = "badge badge-dark";
+        else {
+            switch (status) {
+                case WebsocketStatus.Connecting:
+                    cssClass = "badge badge-info";
+                    break;
+                case WebsocketStatus.Open:
+                    cssClass = "badge badge-success";
+                    break;
+                case WebsocketStatus.Closing:
+                    cssClass = "badge badge-warning";
+                    break;
+                case WebsocketStatus.Closed:
+                    cssClass = "badge badge-danger";
+                    break;
+                default:
+                    throw Error("Unknown websocket stauts is assigned to WebsocketIndicator.")
+                    break;
+            }
+        }
+
+        $('#' + elementID).removeClass().addClass(cssClass);
+    }
+}
 
 /**
  * Bootstrap navbar class for meter application.
  */
-export class ApplicationNavBar
-{    
-    private indicatorEnabledFlag = new indicatorEnaledFlag();
-    
+export class ApplicationNavBar {
+
     private logModalDialog = new LogModalDialog();
     private fuelTripResetModalDialog = new FUELTripResetModalDialog();
+
+    private webSocketIndicators: { [key: string]: WebsocketStatusIndicator; } = {};
+
+    private isCreated = false;
+
+    public get LogModalDialog() { return this.logModalDialog }
+    public get FUELTRIPModalDialog() { return this.fuelTripResetModalDialog }
+
+    public GetWebSocketStatusIndicator(id: string) : IStatusIndicator
+    {
+        return this.webSocketIndicators[id];
+    }
     
-    public get LogModalDialog() {return this.logModalDialog}
-    public get FUELTRIPModalDialog() {return this.fuelTripResetModalDialog }
-    
+    public AddWebSocketStatusIndicator(id: string, caption: string) {
+        if (this.webSocketIndicators[id] != undefined)
+            throw Error("Indicator of id=" + id + " already exists.");
+        else if ($('#' + id).length != 0)
+            throw Error("Element id of " + id + " is reaseved in template HTML.");
+        else if (!this.isCreated)
+            throw Error("Application Navbar is not created. Call create() first.");
+        else {
+            this.webSocketIndicators[id] = new WebsocketStatusIndicator(id);
+            $("#webSocketStatusIndicatorContainer").append('<span id="' + id + '" class="badge badge-dark">' + caption + '</span>');
+        }
+    }
+
     /**
      * Create bootstrap navbar for index.html.
      */
-    public create()
-    {
+    public create() {
+        if (this.isCreated)
+            throw Error("Application NavBar is already created");
+
         // Create subparts.
         const optionModalDialog = new OptionModalDialog();
         optionModalDialog.create();
         this.logModalDialog.create();
         this.fuelTripResetModalDialog.create();
-        
+
         $('body').prepend(this.navbarHTML);
+        this.isCreated = true;
     }
-    
-    private get navbarHTML() : string
-    {
-        const html = 
+
+    private get navbarHTML(): string {
+        const html =
             '<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary" style="transition: opacity .35s; opacity : 0.1;" onmouseover="this.style.opacity = 1" onmouseleave="this.style.opacity = 0.1">\n\
                 <a class="navbar-brand" href="#">Menu</a>\n\
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">\n\
@@ -90,114 +154,11 @@ export class ApplicationNavBar
                             </a>\n\
                         </li>\n\
                     </ul>\n\
-                    <form class="form-inline">\n\
-                        <span id="defiIndicator" class="badge badge-dark">Defi</span>\
-                        <span id="ssmIndicator" class="badge badge-dark">SSM</span>\
-                        <span id="arduinoIndicator" class="badge badge-dark">Arduino</span>\
-                        <span id="elm327Indicator" class="badge badge-dark">ELM327</span>\
-                        <span id="fueltripIndicator" class="badge badge-dark">FUELTRIP</span>\
-                        <span id="assettoCrosaSHMIndicator" class="badge badge-dark">ACSHMP</span>\
+                    <form id="webSocketStatusIndicatorContainer" class="form-inline">\n\
                     </form>\
                 </div>\
             </nav>';
-                   
+
         return html;
     }
-    
-    public setDefiIndicatorStatus(status : number)
-    {
-        if (this.indicatorEnabledFlag.Defi)
-            this.changeIndicatorColor("#defiIndicator", status)
-        else
-            this.changeIndicatorColor("#defiIndicator", -1)
-    }
-
-    public setSSMIndicatorStatus(status : number) 
-    {
-        if (this.indicatorEnabledFlag.SSM)
-            this.changeIndicatorColor("#ssmIndicator", status)
-        else
-            this.changeIndicatorColor("#ssmIndicator", -1)
-    }
-    
-    public setArduinoIndicatorStatus(status : number)
-    {
-        if (this.indicatorEnabledFlag.Arduino)
-            this.changeIndicatorColor("#arduinoIndicator", status)
-        else
-            this.changeIndicatorColor("#arduinoIndicator", -1)
-    }
-    
-    public setELM327IndicatorStatus(status : number) 
-    {
-        if (this.indicatorEnabledFlag.ELM327)
-            this.changeIndicatorColor("#elm327Indicator", status)
-        else
-            this.changeIndicatorColor("#elm327Indicator", -1)
-    }
-    
-    public setFUELTRIPIndicatorStatus(status : number) 
-    {
-        if (this.indicatorEnabledFlag.FUELTRIP)
-            this.changeIndicatorColor("#fueltripIndicator", status)
-        else
-            this.changeIndicatorColor("#fueltripIndicator", -1)
-    }
-    
-    public setAssetoCorsaSHMIndicatorStatus(status : number) 
-    {
-        if (this.indicatorEnabledFlag.ACSHM)
-            this.changeIndicatorColor("#assettoCrosaSHMIndicator", status)
-        else
-            this.changeIndicatorColor("#assettoCrosaSHMIndicator", -1)
-    }
-    public get IsDefiInidicatorEnabled() {return this.indicatorEnabledFlag.Defi }
-    public set IsDefiInidicatorEnabled(flag : boolean) { this.indicatorEnabledFlag.Defi = flag }
-    public get IsSSMInidicatorEnabled() {return this.indicatorEnabledFlag.SSM }
-    public set IsSSMInidicatorEnabled(flag: boolean) {this.indicatorEnabledFlag.SSM = flag }
-    public get IsArduinoInidicatorEnabled() {return this.indicatorEnabledFlag.Arduino }
-    public set IsArduinoInidicatorEnabled(flag: boolean) {this.indicatorEnabledFlag.Arduino = flag }
-    public get IsELM327InidicatorEnabled() {return this.indicatorEnabledFlag.ELM327 }
-    public set IsELM327InidicatorEnabled(flag: boolean) {this.indicatorEnabledFlag.ELM327 = flag }
-    public get IsFUELTRIPInidicatorEnabled() {return this.indicatorEnabledFlag.FUELTRIP }
-    public set IsFUELTRIPInidicatorEnabled(flag: boolean) {this.indicatorEnabledFlag.FUELTRIP = flag }
-    public get IsAssettoCorsaSHMInidicatorEnabled() {return this.indicatorEnabledFlag.ACSHM }
-    public set IsAssettoCorsaSHMInidicatorEnabled(flag: boolean) {this.indicatorEnabledFlag.ACSHM = flag }
-    private changeIndicatorColor(elementID : string, status : number)
-    {
-        let cssClass : string = "";
-        switch (status)
-        {
-            case WebSocket.CONNECTING://CONNECTING
-                cssClass = "badge badge-info";
-                break;
-            case WebSocket.OPEN://OPEN
-                cssClass = "badge badge-success";
-                break;
-            case WebSocket.CLOSING://CLOSING
-                cssClass = "badge badge-warning";
-                break;
-            case WebSocket.CLOSED://CLOSED
-                cssClass = "badge badge-danger";
-                break;
-            case -1: //Disabled
-                cssClass = "badge badge-dark";
-                break;
-            default:
-                // this never happens
-                break;     
-        }
-        
-        $(elementID).removeClass().addClass(cssClass);
-    }
-}
-
-class indicatorEnaledFlag
-{
-    public Defi = false;
-    public SSM = false;
-    public Arduino = false;
-    public ELM327 = false;
-    public FUELTRIP = false;
-    public ACSHM = false;
 }

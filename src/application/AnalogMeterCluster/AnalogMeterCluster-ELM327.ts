@@ -28,7 +28,8 @@
 import * as PIXI from "pixi.js";
 
 //Import application base class
-import {MeterApplicationBase} from "../../lib/MeterAppBase/MeterApplicationBase";
+import {MeterApplication} from "../../lib/MeterAppBase/MeterApplication";
+import {MeterApplicationOption} from "../../lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
 import {AnalogMeterCluster} from "../../parts/AnalogMeterCluster/AnalogMeterCluster";
@@ -37,61 +38,66 @@ import {AnalogMeterCluster} from "../../parts/AnalogMeterCluster/AnalogMeterClus
 import {OBDIIParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
 import {ReadModeCode} from "../../lib/WebSocket/WebSocketCommunication";
 
+import {calculateGearPosition} from "../../lib/MeterAppBase/utils/CalculateGearPosition";
+
 //For including entry point html file in webpack
 require("./AnalogMeterCluster-ELM327.html");
 
 window.onload = function()
 {
-    const meterapp = new AnalogMeterCluster_ELM327(1100, 600);
-    meterapp.run();
+    const meterapp = new AnalogMeterCluster_ELM327();
+    meterapp.Start();
 }
 
-class AnalogMeterCluster_ELM327 extends MeterApplicationBase
+class AnalogMeterCluster_ELM327
 {
-    protected setWebSocketOptions()
+    public Start()
     {
-        this.IsELM327WSEnabled = true;
-        this.IsFUELTRIPWSEnabled = true;
-        
-        this.registerELM327ParameterCode(OBDIIParameterCode.Engine_Speed, ReadModeCode.SLOWandFAST);
-        this.registerELM327ParameterCode(OBDIIParameterCode.Manifold_Absolute_Pressure, ReadModeCode.SLOWandFAST);
-        this.registerELM327ParameterCode(OBDIIParameterCode.Vehicle_Speed, ReadModeCode.SLOWandFAST);
-        this.registerELM327ParameterCode(OBDIIParameterCode.Coolant_Temperature, ReadModeCode.SLOW);
-    }
-    
-    protected setTextureFontPreloadOptions()
-    {
-        this.registerWebFontFamilyNameToPreload(AnalogMeterCluster.RequestedFontFamily);
-        this.registerWebFontCSSURLToPreload(AnalogMeterCluster.RequestedFontCSSURL);
-        this.registerTexturePathToPreload(AnalogMeterCluster.RequestedTexturePath);
-    }
-    
-    protected setPIXIMeterPanel() : void
-    {
-        const meterCluster = new AnalogMeterCluster();
-        this.stage.addChild(meterCluster);
+        const appOption = new MeterApplicationOption();
+        appOption.width = 1100;
+        appOption.height = 600;
+        appOption.PreloadResource.WebFontFamiliyName.addall(AnalogMeterCluster.RequestedFontFamily);
+        appOption.PreloadResource.WebFontCSSURL.addall(AnalogMeterCluster.RequestedFontCSSURL);
+        appOption.PreloadResource.TexturePath.addall(AnalogMeterCluster.RequestedTexturePath);
 
-        this.ticker.add(() => {
-            const timestamp = this.ticker.lastTime;
-            const tacho = this.ELM327WS.getVal(OBDIIParameterCode.Engine_Speed, timestamp);
-            const boost = this.ELM327WS.getVal(OBDIIParameterCode.Manifold_Absolute_Pressure, timestamp) * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
-            const speed = this.ELM327WS.getVal(OBDIIParameterCode.Vehicle_Speed,timestamp);
-            const waterTemp = this.ELM327WS.getRawVal(OBDIIParameterCode.Coolant_Temperature);
-            const trip = this.FUELTRIPWS.getTotalTrip();
-            const fuel = this.FUELTRIPWS.getTotalGas();
-            const gasMilage = this.FUELTRIPWS.getTotalGasMilage();
-            const neutralSw = false;
-            
-            const geasPos = this.calculateGearPosition(tacho, speed, neutralSw);
-            
-            meterCluster.Tacho = tacho;
-            meterCluster.Boost = boost; 
-            meterCluster.Speed = speed;
-            meterCluster.WaterTemp = waterTemp;
-            meterCluster.GearPos = geasPos;
-            meterCluster.Trip = trip;
-            meterCluster.Fuel = fuel;
-            meterCluster.GasMilage = gasMilage;
-        });
+        appOption.WebsocketEnableFlag.ELM327 = true;
+        appOption.WebsocketEnableFlag.FUELTRIP = true;
+
+        appOption.ParameterCode.ELM327OBDII.addall({code:OBDIIParameterCode.Engine_Speed, readmode:ReadModeCode.SLOWandFAST});
+        appOption.ParameterCode.ELM327OBDII.addall({code:OBDIIParameterCode.Manifold_Absolute_Pressure, readmode:ReadModeCode.SLOWandFAST});
+        appOption.ParameterCode.ELM327OBDII.addall({code:OBDIIParameterCode.Vehicle_Speed, readmode:ReadModeCode.SLOWandFAST});
+        appOption.ParameterCode.ELM327OBDII.addall({code:OBDIIParameterCode.Coolant_Temperature, readmode:ReadModeCode.SLOW});
+        
+        appOption.SetupPIXIMeterPanel = (app, ws) =>
+        {
+            const stage = app.stage;
+            const meterCluster = new AnalogMeterCluster();
+            stage.addChild(meterCluster);
+    
+            app.ticker.add(() => {
+                const timestamp = app.ticker.lastTime;
+                const tacho = ws.ELM327WS.getVal(OBDIIParameterCode.Engine_Speed, timestamp);
+                const boost = ws.ELM327WS.getVal(OBDIIParameterCode.Manifold_Absolute_Pressure, timestamp) * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
+                const speed = ws.ELM327WS.getVal(OBDIIParameterCode.Vehicle_Speed,timestamp);
+                const waterTemp = ws.ELM327WS.getRawVal(OBDIIParameterCode.Coolant_Temperature);
+                const trip = ws.FUELTRIPWS.getTotalTrip();
+                const fuel = ws.FUELTRIPWS.getTotalGas();
+                const gasMilage = ws.FUELTRIPWS.getTotalGasMilage();
+                const neutralSw = false;
+                
+                const geasPos = calculateGearPosition(tacho, speed, neutralSw);
+                
+                meterCluster.Tacho = tacho;
+                meterCluster.Boost = boost; 
+                meterCluster.Speed = speed;
+                meterCluster.WaterTemp = waterTemp;
+                meterCluster.GearPos = geasPos;
+                meterCluster.Trip = trip;
+                meterCluster.Fuel = fuel;
+                meterCluster.GasMilage = gasMilage;
+            });
+        }
+        const app = new MeterApplication(appOption);
+        app.Run();
     }
 }

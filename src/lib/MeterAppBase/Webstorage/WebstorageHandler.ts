@@ -22,20 +22,21 @@
  * THE SOFTWARE.
  */
 
-export class ButtonStyle
+export class WebstorageHandler
 {
-    public static setButtonStyle(buttonElem: HTMLButtonElement)
+    public static SetWSIntervalToLocalStorage(interval: number)
     {
-        const style = buttonElem.style;
-        style.position = "relative";
-        style.textAlign = "center";
-        style.height = "32px";
-        style.fontSize = "7vm";
-        style.fontWeight = "bold";
-        style.padding = "3px";
-        style.color = "white";
-        style.background = "#666666";
-        style.borderRadius = "5px";
-        style.boxSizing = "border-box";
+        localStorage.setItem("WSInterval", interval.toString());
+    }
+    
+    public static GetWSIntervalFromLocalStorage() : number
+    {
+        if (localStorage.getItem("WSInterval") === null)
+            return 0;
+        else
+        {
+            const interval = parseInt(localStorage.getItem("WSInterval"));
+            return interval;    
+        }
     }
 }
