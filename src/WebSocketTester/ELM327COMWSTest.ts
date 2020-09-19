@@ -51,7 +51,13 @@ export class ELM327COMWSTest extends WebSocketTesterBase {
     protected setParameterCodeSelectBox() {
         EnumUtils.EnumToKeyStrArray(OBDIIParameterCode).forEach(code => $('#codeSelect').append($('<option>').html(code).val(code)));
     }
-
+    
+    protected assignButtonEvents(): void {
+        super.assignButtonEvents();
+        $("#buttonWSSend").click(() => this.inputWSSend());
+        $("#buttonWSInterval").click(() => this.inputWSInterval());
+    }
+    
     protected registerWSEvents(): void {
         this.webSocket.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: string}) => {
             $('#spanInterval').text(intervalTime.toFixed(2));
