@@ -23,6 +23,7 @@
  */
 
 var webpack = require('webpack');
+const outputPath = __dirname + "/../../public_html/benchmark";
 
 module.exports = {
     mode: "development",
@@ -34,7 +35,7 @@ module.exports = {
     devtool: "source-map",
     output:
             {
-                path: __dirname + "/../../public_html/benchmark",
+                path: outputPath,
                 filename: "./js/[name].js"
             },
     resolve: {
@@ -49,6 +50,10 @@ module.exports = {
             Popper: ['popper.js', 'default']
         })
     ],
+    devServer: {
+        contentBase: outputPath
+    }
+    ,
     module: {
         rules: [
             {test: /\.tsx?$/, loader: 'ts-loader'},
