@@ -278,36 +278,36 @@ export class AnalogSingleMeter extends PIXI.Container
         const gridSprite = PIXI.Sprite.fromFrame("AnalogSingleMeter_Grid");
         
         //Create gauge title label
-        const titleElem = new PIXI.extras.BitmapText(gaugeTitle, {font: {name : "Michroma", size : 48 }, align: "right"});
+        const titleElem = new PIXI.extras.BitmapText(gaugeTitle, {fontName :"Michroma", fontSize : 48, align: "right"});
         titleElem.anchor = new PIXI.Point(1,0.5);
         titleElem.position.set(370,260);
         
         //Create gauge unit label
-        const unitElem = new PIXI.extras.BitmapText(unit, {font: {name : "Michroma", size : 24 }, align: "center"});
+        const unitElem = new PIXI.extras.BitmapText(unit, {fontName :"Michroma", fontSize : 24, align: "center"});
         unitElem.anchor = new PIXI.Point(0.5,0.5);
         unitElem.position.set(210,150);
 
         //Create meter number label
         let numberElements: PIXI.extras.BitmapText[] = [];
-        numberElements[0] = new PIXI.extras.BitmapText(numberLabels[0], {font: {name : "Michroma", size : 48 }, align: "center"});
+        numberElements[0] = new PIXI.extras.BitmapText(numberLabels[0], {fontName :"Michroma", fontSize : 48, align: "center"});
         numberElements[0].anchor = new PIXI.Point(0.5,1);
         numberElements[0].position.set(210,372);
-        numberElements[1] = new PIXI.extras.BitmapText(numberLabels[1], {font: {name : "Michroma", size : 48 }, align: "left"});
+        numberElements[1] = new PIXI.extras.BitmapText(numberLabels[1], {fontName :"Michroma", fontSize : 48, align: "left"});
         numberElements[1].anchor = new PIXI.Point(0,1);
         numberElements[1].position.set(85,330);
-        numberElements[2] = new PIXI.extras.BitmapText(numberLabels[2], {font: {name : "Michroma", size : 48 }, align: "left"});
+        numberElements[2] = new PIXI.extras.BitmapText(numberLabels[2], {fontName :"Michroma", fontSize : 48, align: "left"});
         numberElements[2].anchor = new PIXI.Point(0,0.5);
         numberElements[2].position.set(52,210);
-        numberElements[3] = new PIXI.extras.BitmapText(numberLabels[3], {font: {name : "Michroma", size : 48 }, align: "left"});
+        numberElements[3] = new PIXI.extras.BitmapText(numberLabels[3], {fontName :"Michroma", fontSize : 48, align: "left"});
         numberElements[3].anchor = new PIXI.Point(0,0);
         numberElements[3].position.set(85, 90);
-        numberElements[4] = new PIXI.extras.BitmapText(numberLabels[4], {font: {name : "Michroma", size : 48 }, align: "center"});
+        numberElements[4] = new PIXI.extras.BitmapText(numberLabels[4], {fontName :"Michroma", fontSize : 48, align: "center"});
         numberElements[4].anchor = new PIXI.Point(0.5,0);
         numberElements[4].position.set(210,40);
-        numberElements[5] = new PIXI.extras.BitmapText(numberLabels[5], {font: {name : "Michroma", size : 48 }, align: "right"});
+        numberElements[5] = new PIXI.extras.BitmapText(numberLabels[5], {fontName :"Michroma", fontSize : 48, align: "right"});
         numberElements[5].anchor = new PIXI.Point(1,0);
         numberElements[5].position.set(335,90);
-        numberElements[6] = new PIXI.extras.BitmapText(numberLabels[6], {font: {name : "Michroma", size : 48 }, align: "right"});
+        numberElements[6] = new PIXI.extras.BitmapText(numberLabels[6], {fontName :"Michroma", fontSize : 48, align: "right"});
         numberElements[6].anchor = new PIXI.Point(1,0.5);
         numberElements[6].position.set(375,210);
 
