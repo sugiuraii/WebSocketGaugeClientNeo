@@ -179,8 +179,7 @@ export abstract class CircularGaugePanelBase extends PIXI.Container
         
         const valueTextLabelOption = this.Options.ValueTextLabelOption;
         const valueTextLabelStyle = {
-            font: { name : valueTextLabelOption.fontName , size : valueTextLabelOption.fontSize },
-            align: valueTextLabelOption.align
+            fontName : valueTextLabelOption.fontName , fontSize : valueTextLabelOption.fontSize, align: valueTextLabelOption.align
         };
         this.Options.ValueTextLabel = new PIXI.BitmapText(this.Options.Min.toFixed(this.Options.ValueNumberRoundDigit).toString(), valueTextLabelStyle);
         this.Options.ValueTextLabel.position = valueTextLabelOption.position;

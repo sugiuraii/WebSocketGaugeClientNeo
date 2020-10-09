@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
- 
+
 /// <reference path="../../lib/webpackRequire.ts" />
 import * as PIXI from 'pixi.js';
 require("./fpsCounterFont.fnt");
@@ -29,43 +29,37 @@ require("./fpsCounterFont_0.png");
 
 const FPSBUFFER_LENGTH = 5;
 
-export class FPSCounter extends PIXI.Container
-{
+export class FPSCounter extends PIXI.Container {
     private fpsText: PIXI.BitmapText;
-    private fpsbuffer : number[] = new Array();
-    
-    static get RequestedTexturePath() : string[]
-    {
+    private fpsbuffer: number[] = new Array();
+
+    static get RequestedTexturePath(): string[] {
         return ["img/fpsCounterFont.fnt"];
     }
-    
-    constructor()
-    {
+
+    constructor() {
         super();
-        this.fpsText = new PIXI.BitmapText("0fps",{font: {name : "fpsCounterFont", size:32}, align : "left" });
+        this.fpsText = new PIXI.BitmapText("0fps", { fontName: "fpsCounterFont", fontSize: 32, align: "left" });
         super.addChild(this.fpsText);
     }
-    
-    public setFPS(fps : number) : void
-    {
+
+    public setFPS(fps: number): void {
         this.pushFPSBuffer(fps);
         const avgFPS = this.calcAverageFPS();
         this.fpsText.text = avgFPS.toFixed(0) + "fps";
     }
-    
-    private pushFPSBuffer(fps : number) : void
-    {
+
+    private pushFPSBuffer(fps: number): void {
         this.fpsbuffer.push(fps);
         if (this.fpsbuffer.length > FPSBUFFER_LENGTH)
             this.fpsbuffer.shift();
     }
-    
-    private calcAverageFPS() : number
-    {
+
+    private calcAverageFPS(): number {
         let sum = 0;
         for (let i = 0; i < this.fpsbuffer.length; i++)
             sum += this.fpsbuffer[i];
-            
+
         return sum / this.fpsbuffer.length;
     }
 }

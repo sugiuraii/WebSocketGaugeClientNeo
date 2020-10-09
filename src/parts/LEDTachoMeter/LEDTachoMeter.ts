@@ -21,10 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
- 
+
 /// <reference path="../../lib/webpackRequire.ts" />
- 
-import {CircularProgressBar, CircularProgressBarOptions, NumericIndicator, BitmapTextNumericIndicator} from  '../../lib/Graphics/PIXIGauge';
+
+import { CircularProgressBar, CircularProgressBarOptions, NumericIndicator, BitmapTextNumericIndicator } from '../../lib/Graphics/PIXIGauge';
 import * as PIXI from 'pixi.js';
 
 require("./LEDTachoMeterTexture.json");
@@ -40,82 +40,71 @@ require("./LEDMeterFont_88px_0.png");
 require("./LEDMeterFont_45px_0.png");
 require("./LEDMeterFont_30px_0.png");
 
-export class LEDTachoMeter extends PIXI.Container
-{
+export class LEDTachoMeter extends PIXI.Container {
     private tachoProgressBar;
-    private speedLabel : NumericIndicator;
-    private gasMilageLabel : NumericIndicator;
-    private tripLabel : NumericIndicator;
-    private fuelLabel : NumericIndicator;
-    private gearPosLabel : NumericIndicator;
+    private speedLabel: NumericIndicator;
+    private gasMilageLabel: NumericIndicator;
+    private tripLabel: NumericIndicator;
+    private fuelLabel: NumericIndicator;
+    private gearPosLabel: NumericIndicator;
 
     private tacho = 0;
     private speed = 0;
     private gasMilage = 0;
     private trip = 0;
     private fuel = 0;
-    private gearPos : string = "";
+    private gearPos: string = "";
 
-    static get RequestedTexturePath() : string[]
-    {
+    static get RequestedTexturePath(): string[] {
         return ["img/LEDTachoMeterTexture.json", "img/LEDMeterFont_100px.fnt", "img/LEDMeterFont_88px.fnt", "img/LEDMeterFont_45px.fnt", "img/LEDMeterFont_30px.fnt"];
     }
 
-    static get RequestedFontFamily() : string[]
-    {
+    static get RequestedFontFamily(): string[] {
         return ["DSEG14ClassicItalic"]
     }
 
-    static get RequestedFontCSSURL() : string[]
-    {
+    static get RequestedFontCSSURL(): string[] {
         return ['font.css'];
     }
 
-    get Tacho() : number { return this.tacho; }
-    set Tacho(val : number)
-    {
+    get Tacho(): number { return this.tacho; }
+    set Tacho(val: number) {
         this.tacho = val;
         this.tachoProgressBar.Value = val;
         this.changeRedZoneProgressBarColor();
         this.tachoProgressBar.update();
     }
     get Speed() { return this.speed; }
-    set Speed(val : number)
-    {
+    set Speed(val: number) {
         this.speed = val;
         this.speedLabel.text = val.toFixed(0);
-    }        
+    }
     get GasMilage() { return this.gasMilage; }
-    set GasMilage(val : number)
-    {
+    set GasMilage(val: number) {
         this.gasMilage = val;
-        if(val > 99)
+        if (val > 99)
             this.gasMilageLabel.text = "--.--";
         else
             this.gasMilageLabel.text = val.toFixed(2);
     }
     get Trip() { return this.trip }
-    set Trip(val : number)
-    {
+    set Trip(val: number) {
         this.trip = val;
         this.tripLabel.text = val.toFixed(1);
     }
     get Fuel() { return this.fuel }
-    set Fuel(val : number)
-    {
+    set Fuel(val: number) {
         this.fuel = val;
         this.fuelLabel.text = val.toFixed(2);
     }
 
     get GearPos() { return this.gearPos }
-    set GearPos(val : string)
-    {
+    set GearPos(val: string) {
         this.gearPos = val;
         this.gearPosLabel.text = val;
     }
 
-    constructor()
-    {
+    constructor() {
         super();
 
         const tachoMax = 9000;
@@ -131,7 +120,7 @@ export class LEDTachoMeter extends PIXI.Container
 
         const tachoProgressBarOption = new CircularProgressBarOptions();
         tachoProgressBarOption.Texture = PIXI.Texture.from("LEDTachoMeter_LED_Yellow");
-        tachoProgressBarOption.Center.set(300,300);
+        tachoProgressBarOption.Center.set(300, 300);
         tachoProgressBarOption.Radius = 300;
         tachoProgressBarOption.InnerRadius = 200;
         tachoProgressBarOption.Max = tachoMax;
@@ -139,52 +128,50 @@ export class LEDTachoMeter extends PIXI.Container
         tachoProgressBarOption.OffsetAngle = 90;
         tachoProgressBarOption.FullAngle = 270;
         tachoProgressBarOption.AngleStep = 6;
-        
+
         const tachoProgressBar = new CircularProgressBar(tachoProgressBarOption);
-        tachoProgressBar.pivot.set(300,300);
+        tachoProgressBar.pivot.set(300, 300);
         tachoProgressBar.position.set(300, 300);
         tachoProgressBar.Value = tachoValDefault;
         tachoProgressBar.updateForce();
         this.tachoProgressBar = tachoProgressBar;
         super.addChild(tachoProgressBar);
 
-        const speedLabel = this.speedLabel = new BitmapTextNumericIndicator(speedValDefault.toFixed(0), {font: {name:"DSEG14_Classic_88px", size:88}, align : "right"});
-        speedLabel.anchor = new PIXI.Point(1,0.5);
-        speedLabel.position.set(410,230);
+        const speedLabel = this.speedLabel = new BitmapTextNumericIndicator(speedValDefault.toFixed(0), { fontName: "DSEG14_Classic_88px", fontSize: 88, align: "right" });
+        speedLabel.anchor = new PIXI.Point(1, 0.5);
+        speedLabel.position.set(410, 230);
         super.addChild(speedLabel);
 
-        const gasMilageLabel = this.gasMilageLabel = new BitmapTextNumericIndicator(gasMilageValDefault.toFixed(2), {font: {name : "DSEG14_Classic_45px", size:45}, align : "right"});
-        gasMilageLabel.anchor = new PIXI.Point(1,0.5);
-        gasMilageLabel.position.set(310,360);
+        const gasMilageLabel = this.gasMilageLabel = new BitmapTextNumericIndicator(gasMilageValDefault.toFixed(2), { fontName: "DSEG14_Classic_45px", fontSize: 45, align: "right" });
+        gasMilageLabel.anchor = new PIXI.Point(1, 0.5);
+        gasMilageLabel.position.set(310, 360);
         super.addChild(gasMilageLabel);
 
-        const tripLabel = this.tripLabel = new BitmapTextNumericIndicator(tripValDefault.toFixed(1), {font: {name : "DSEG14_Classic_30px", size:30}, align : "right"});
-        tripLabel.anchor = new PIXI.Point(1,0.5);
-        tripLabel.position.set(510,355);
+        const tripLabel = this.tripLabel = new BitmapTextNumericIndicator(tripValDefault.toFixed(1), { fontName: "DSEG14_Classic_30px", fontSize: 30, align: "right" });
+        tripLabel.anchor = new PIXI.Point(1, 0.5);
+        tripLabel.position.set(510, 355);
         super.addChild(tripLabel);
 
-        const fuelLabel = this.fuelLabel = new BitmapTextNumericIndicator(fuelValDefault.toFixed(2), {font: {name : "DSEG14_Classic_30px", size:30}, align : "right"});
-        fuelLabel.anchor = new PIXI.Point(1,0.5);
-        fuelLabel.position.set(510,395);
+        const fuelLabel = this.fuelLabel = new BitmapTextNumericIndicator(fuelValDefault.toFixed(2), { fontName: "DSEG14_Classic_30px", fontSize: 30, align: "right" });
+        fuelLabel.anchor = new PIXI.Point(1, 0.5);
+        fuelLabel.position.set(510, 395);
         super.addChild(fuelLabel);
 
-        const gearPosLabel = this.gearPosLabel = new BitmapTextNumericIndicator("N", {font: {name : "DSEG14_Classic_100px", size:100}, align : "right"});
-        gearPosLabel.anchor = new PIXI.Point(1,0.5);
+        const gearPosLabel = this.gearPosLabel = new BitmapTextNumericIndicator("N", { fontName: "DSEG14_Classic_100px", fontSize: 100, align: "right" });
+        gearPosLabel.anchor = new PIXI.Point(1, 0.5);
         gearPosLabel.text = "N";
-        gearPosLabel.position.set(410,495);
+        gearPosLabel.position.set(410, 495);
         super.addChild(gearPosLabel);
     }
 
-    private changeRedZoneProgressBarColor()
-    {
+    private changeRedZoneProgressBarColor() {
         const redZoneTacho = 8000;
-        if (this.tacho > redZoneTacho)
-        {
+        if (this.tacho > redZoneTacho) {
             const redfilter = new PIXI.filters.ColorMatrixFilter();
             redfilter.hue(300, true);
             this.tachoProgressBar.filters = [redfilter];
         }
         else
-            this.tachoProgressBar.filters = [];       
+            this.tachoProgressBar.filters = [];
     }
 }
