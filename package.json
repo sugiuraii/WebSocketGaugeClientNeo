@@ -50,6 +50,9 @@
         "build-application": "cd src/application && npx webpack",
         "build-partsTest": "cd src/test/partsTest && npx webpack",
         "build-thumbnails": "cd public_html && node thumbnails.js",
-        "build-index": "cd src/index && npx webpack"
+        "build-index": "cd src/index && npx webpack",
+        "debug-benchmark": "cd src/benchmark && npx webpack-dev-server",
+        "debug-application": "cd src/application && npx webpack-dev-server",
+        "debug-partsTest": "cd src/test/partsTest && npx webpack-dev-server"
     }
 }
