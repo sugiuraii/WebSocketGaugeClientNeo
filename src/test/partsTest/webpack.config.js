@@ -22,37 +22,43 @@
  * THE SOFTWARE.
  */
 
+const outputPath = __dirname + "/../../../public_html/partsTest";
+
 module.exports = {
-    entry: 
+    entry:
     {
-        "AnalogMeterClusterTest" : './AnalogMeterClusterTest.ts',
-        "DigiTachoTest" : './DigiTachoTest.ts',
-        "FullCircularGaugeTest" : './FullCircularGaugeTest.ts',
-        "LEDTachoMeterTest" : './LEDTachoMeterTest.ts',
-        "MilageBarTest" : './MilageBarTest.ts',
-        "SemiCircularGaugeTest" : './SemicircularGaugeTest.ts',
-        "AnalogSingleMeterTest" : './AnalogSingleMeterTest.ts'
+        "AnalogMeterClusterTest": './AnalogMeterClusterTest.ts',
+        "DigiTachoTest": './DigiTachoTest.ts',
+        "FullCircularGaugeTest": './FullCircularGaugeTest.ts',
+        "LEDTachoMeterTest": './LEDTachoMeterTest.ts',
+        "MilageBarTest": './MilageBarTest.ts',
+        "SemiCircularGaugeTest": './SemicircularGaugeTest.ts',
+        "AnalogSingleMeterTest": './AnalogSingleMeterTest.ts'
     },
     mode: "development",
     devtool: "source-map",
-    output: 
+    output:
     {
-        path: __dirname + "/../../../public_html/partsTest",
+        path: outputPath,
         filename: "./js/[name].js"
     },
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.
         extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
     },
-  module: {
-    rules: [
-        { test: /\.tsx?$/, loader: 'ts-loader' },
-        { test: /\.png$/, loader: "file-loader?name=img/[name].[ext]" },
-        { test: /\.fnt$/, loader: "file-loader?name=img/[name].[ext]" }, // Bitmap font setting files
-        { type: "javascript/auto", test: /\.json$/, loader: "file-loader?name=img/[name].[ext]" },
-        { test: /\.html$/, loader: "file-loader?name=[name].[ext]" },
-        { test: /\.css$/, loader: "file-loader?name=[name].[ext]" },
-        { test: /\.(ttf|otf)$/, loader: "file-loader?name=fonts/[name].[ext]" }
-    ]
-  }
+    devServer: {
+        contentBase: outputPath
+    }
+    ,
+    module: {
+        rules: [
+            { test: /\.tsx?$/, loader: 'ts-loader' },
+            { test: /\.png$/, loader: "file-loader?name=img/[name].[ext]" },
+            { test: /\.fnt$/, loader: "file-loader?name=img/[name].[ext]" }, // Bitmap font setting files
+            { type: "javascript/auto", test: /\.json$/, loader: "file-loader?name=img/[name].[ext]" },
+            { test: /\.html$/, loader: "file-loader?name=[name].[ext]" },
+            { test: /\.css$/, loader: "file-loader?name=[name].[ext]" },
+            { test: /\.(ttf|otf)$/, loader: "file-loader?name=fonts/[name].[ext]" }
+        ]
+    }
 };
