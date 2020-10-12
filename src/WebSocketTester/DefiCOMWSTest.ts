@@ -29,7 +29,7 @@ import {DefiParameterCode} from '../lib/WebSocket/WebSocketCommunication';
 import {WebSocketTesterBase} from './base/WebSocketTesterBase'
 import {EnumUtils} from '../lib/EnumUtils';
 
-import * as $ from "jquery";
+import $ from "jquery";
 require('./DefiCOMWSTest.html');
 
 window.onload = function()

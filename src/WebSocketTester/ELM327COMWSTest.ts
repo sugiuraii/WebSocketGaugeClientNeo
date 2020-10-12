@@ -29,7 +29,7 @@ import {ReadModeCode} from "../lib/WebSocket/WebSocketCommunication";
 import {WebSocketTesterBase} from "./base/WebSocketTesterBase";
 import {EnumUtils} from "../lib/EnumUtils";
 
-import * as $ from "jquery";
+import $ from "jquery";
 require('./ELM327COMWSTest.html');
 
 window.onload = function () {

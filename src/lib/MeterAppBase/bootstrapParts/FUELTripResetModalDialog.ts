@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
  
-import * as $ from 'jquery';
+import $ from 'jquery';
 import {FUELTRIPWebsocket} from '../../WebSocket/WebSocketCommunication';
 
 export class FUELTripResetModalDialog

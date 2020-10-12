@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import * as $ from "jquery";
+import $ from "jquery";
 import {WebsocketCommon} from '../../lib/WebSocket/WebSocketCommunication';
 
 export abstract class WebSocketTesterBase

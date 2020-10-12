@@ -27,7 +27,7 @@ import {DefiParameterCode} from '../lib/WebSocket/WebSocketCommunication';
 import {DefiCOMWSTest} from "./DefiCOMWSTest"
 import {EnumUtils} from '../lib/EnumUtils'
 
-import * as $ from "jquery";
+import $ from "jquery";
 require('./DefiCOMWSInterpolateTest.html');
 
 window.onload = () => {

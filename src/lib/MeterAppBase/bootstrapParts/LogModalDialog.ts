@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import * as $ from 'jquery';
+import $ from "jquery";
 import {ILogWindow} from '../interfaces/ILogWindow';
 
 export class LogModalDialog implements ILogWindow

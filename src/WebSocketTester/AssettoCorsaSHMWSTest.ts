@@ -29,7 +29,7 @@ import {AssettoCorsaSHMNumericalVALCode, AssettoCorsaSHMStringVALCode } from '..
 import {WebSocketTesterBase} from './base/WebSocketTesterBase'
 import {EnumUtils} from '../lib/EnumUtils'
 
-import * as $ from "jquery";
+import $ from "jquery";
 require('./AssettoCorsaSHMWSTest.html');
 
 window.onload = function()

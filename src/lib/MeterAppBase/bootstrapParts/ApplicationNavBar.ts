@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import * as $ from 'jquery';
+import $ from 'jquery';
 
 import { FUELTripResetModalDialog } from "./FUELTripResetModalDialog"
 import { LogModalDialog } from "./LogModalDialog"

@@ -26,7 +26,7 @@
 
 import {FUELTRIPWebsocket} from '../lib/WebSocket/WebSocketCommunication';
 import {WebSocketTesterBase} from './base/WebSocketTesterBase';
-import * as $ from "jquery";
+import $ from "jquery";
 require('./FUELTRIPWSTest.html');
 
 window.onload = function () {
