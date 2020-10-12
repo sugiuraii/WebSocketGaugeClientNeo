@@ -22,12 +22,14 @@
  * THE SOFTWARE.
  */
  
-export enum UpdatePeriodCalcMethod
+const UpdatePeriodCalcMethod =
 {
-    Direct,
-    Average,
-    Median
-}
+    Direct : "Direct",
+    Average : "Average",
+    Median : "Median"
+} as const;
+
+type UpdatePeriodCalcMethod = typeof UpdatePeriodCalcMethod[keyof typeof UpdatePeriodCalcMethod];
 
 export class VALInterpolationBuffer
 {
