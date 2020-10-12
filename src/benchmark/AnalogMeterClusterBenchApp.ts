@@ -57,7 +57,7 @@ class AnalogMeterClusterBenchApp
         appOption.PreloadResource.TexturePath.addall(AnalogMeterCluster.RequestedTexturePath);
         appOption.PreloadResource.TexturePath.addall(FPSCounter.RequestedTexturePath);
 
-        appOption.SetupPIXIMeterPanel = (app, ws) =>
+        appOption.SetupPIXIMeterPanel = (app) =>
         {
             const meterCluster = new AnalogMeterCluster();
             const stage = app.stage;

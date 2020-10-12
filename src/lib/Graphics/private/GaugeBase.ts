@@ -67,6 +67,7 @@ export abstract class Gauge1D extends PIXI.Container
     constructor(options : Gauge1DOptions)
     {
         super();
+        this.gauge1DOptions = options;
         this.value = 0;
     }
     

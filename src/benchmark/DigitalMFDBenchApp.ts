@@ -74,7 +74,7 @@ class DigitalMFDBenchApp
         
         appOption.PreloadResource.TexturePath.addall(FPSCounter.RequestedTexturePath);
 
-        appOption.SetupPIXIMeterPanel = (app, ws) =>
+        appOption.SetupPIXIMeterPanel = (app) =>
         {
             const stage = app.stage;
 
