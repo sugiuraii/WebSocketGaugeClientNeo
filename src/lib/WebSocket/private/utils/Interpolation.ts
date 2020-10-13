@@ -34,7 +34,7 @@ type UpdatePeriodCalcMethod = typeof UpdatePeriodCalcMethod[keyof typeof UpdateP
 export class VALInterpolationBuffer
 {
     public static UpdatePeriodCalcMethod: UpdatePeriodCalcMethod = UpdatePeriodCalcMethod.Median;
-    public static UpdatePeriodBufferLength : number = 10;
+    public static UpdatePeriodBufferLength  = 10;
 
     private lastUpdateTimeStamp : number;
     private lastValue : number;
@@ -129,7 +129,7 @@ class MovingAverageQueue
     constructor(queueLength : number)
     {
         this.queueLength = queueLength;
-        this.valArray = new Array();
+        this.valArray = [];
     }
 
     /**
@@ -151,7 +151,7 @@ class MovingAverageQueue
     public getAverage() : number
     {
         const length : number = this.valArray.length;
-        let temp : number = 0;
+        let temp  = 0;
         for(let i = 0; i < length; i++)
             temp += this.valArray[i];
 
