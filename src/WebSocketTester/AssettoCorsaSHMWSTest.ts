@@ -22,145 +22,118 @@
  * THE SOFTWARE.
  */
 
-/// <reference path="../lib/webpackRequire.ts" />
-
-import {AssettoCorsaSHMWebsocket, AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMStaticInfoParameterCode, AssettoCorsaSHMGraphicsParameterCode} from '../lib/WebSocket/WebSocketCommunication';
-import {AssettoCorsaSHMNumericalVALCode, AssettoCorsaSHMStringVALCode } from '../lib/WebSocket/WebSocketCommunication';
-import {WebSocketTesterBase} from './base/WebSocketTesterBase'
-import {EnumUtils} from '../lib/EnumUtils'
+import { AssettoCorsaSHMWebsocket, AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMStaticInfoParameterCode, AssettoCorsaSHMGraphicsParameterCode } from '../lib/WebSocket/WebSocketCommunication';
+import { AssettoCorsaSHMNumericalVALCode } from '../lib/WebSocket/WebSocketCommunication';
+import { WebSocketTesterBase } from './base/WebSocketTesterBase'
 
 import $ from "jquery";
 require('./AssettoCorsaSHMWSTest.html');
 
-window.onload = function()
-{
-    let wsTest = new AssettoCorsaSHMWSTest();
+window.onload = function () {
+    const wsTest = new AssettoCorsaSHMWSTest();
     wsTest.main();
 }
 
-class AssettoCorsaSHMWSTest extends WebSocketTesterBase
-{
-    private webSocket : AssettoCorsaSHMWebsocket;
-    constructor()
-    {
+class AssettoCorsaSHMWSTest extends WebSocketTesterBase {
+    private webSocket: AssettoCorsaSHMWebsocket;
+    constructor() {
         const webSocket = new AssettoCorsaSHMWebsocket();
         super(webSocket);
         this.webSocket = webSocket;
         this.defaultPortNo = 2017;
     }
-    
-    protected assignButtonEvents() : void
-    {
+
+    protected assignButtonEvents(): void {
         super.assignButtonEvents();
-        $("#buttonPhysWSSend").click(() => this.inputPhysWSSend());
-        $("#buttonPhysWSInterval").click(() => this.inputPhysWSInterval());
-        $("#buttonGrphWSSend").click(() => this.inputGrphWSSend());
-        $("#buttonGrphWSInterval").click(() => this.inputGrphWSInterval());
-        $("#buttonStaticWSSend").click(() => this.inputStaticWSSend());
-        $("#buttonStaticWSInterval").click(() => this.inputStaticWSInterval());
+        $("#buttonPhysWSSend").on('click', () => this.inputPhysWSSend());
+        $("#buttonPhysWSInterval").on('click', () => this.inputPhysWSInterval());
+        $("#buttonGrphWSSend").on('click', () => this.inputGrphWSSend());
+        $("#buttonGrphWSInterval").on('click', () => this.inputGrphWSInterval());
+        $("#buttonStaticWSSend").on('click', () => this.inputStaticWSSend());
+        $("#buttonStaticWSInterval").on('click', () => this.inputStaticWSInterval());
     }
 
-    protected setParameterCodeSelectBox() : void
-    {
-        EnumUtils.EnumToKeyStrArray(AssettoCorsaSHMPhysicsParameterCode).forEach(code => $('#physCodeSelect').append($('<option>').html(code).val(code)));
-        EnumUtils.EnumToKeyStrArray(AssettoCorsaSHMGraphicsParameterCode).forEach(code => $('#grphCodeSelect').append($('<option>').html(code).val(code)));
-        EnumUtils.EnumToKeyStrArray(AssettoCorsaSHMStaticInfoParameterCode).forEach(code => $('#staticCodeSelect').append($('<option>').html(code).val(code)));
+    protected setParameterCodeSelectBox(): void {
+        Object.values(AssettoCorsaSHMPhysicsParameterCode).forEach(code => $('#physCodeSelect').append($('<option>').html(code).val(code)));
+        Object.values(AssettoCorsaSHMGraphicsParameterCode).forEach(code => $('#grphCodeSelect').append($('<option>').html(code).val(code)));
+        Object.values(AssettoCorsaSHMStaticInfoParameterCode).forEach(code => $('#staticCodeSelect').append($('<option>').html(code).val(code)));
     }
 
-    protected registerWSEvents() : void
-    {
-        this.webSocket.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: string}) => 
-        {
+    protected registerWSEvents(): void {
+        this.webSocket.OnVALPacketReceived = (intervalTime: number, val: { [code: string]: string }) => {
             $('#spanInterval').text(intervalTime.toFixed(2));
-             //clear
+            //clear
             $('#divVAL').html("");
-            for (var key in val)
-            {
-                $('#divVAL').append(key + " : " + val[key] + "<br>" );
+            for (const key in val) {
+                $('#divVAL').append(key + " : " + val[key] + "<br>");
             }
         }
-        this.webSocket.OnERRPacketReceived = (msg:string)=>
-        {
+        this.webSocket.OnERRPacketReceived = (msg: string) => {
             $('#divERR').append(msg + "<br>")
         };
 
-        this.webSocket.OnRESPacketReceived = (msg : string) =>
-        {
+        this.webSocket.OnRESPacketReceived = (msg: string) => {
             $('#divRES').append(msg + "<br>");
         };
-        this.webSocket.OnWebsocketError = (msg : string) =>
-        {
+        this.webSocket.OnWebsocketError = (msg: string) => {
             $('#divWSMsg').append(msg + "<br>");
         };
-        this.webSocket.OnWebsocketOpen = () =>
-        {
+        this.webSocket.OnWebsocketOpen = () => {
             $('#divWSMsg').append('* Connection open<br/>');
             $('#connectButton').attr("disabled", "disabled");
-            $('#disconnectButton').removeAttr("disabled");  
+            $('#disconnectButton').removeAttr("disabled");
         };
-        this.webSocket.OnWebsocketClose = () =>
-        {
+        this.webSocket.OnWebsocketClose = () => {
             $('#divWSMsg').append('* Connection closed<br/>');
             $('#connectButton').removeAttr("disabled");
             $('#disconnectButton').attr("disabled", "disabled");
         };
     }
 
-    public main()
-    {
+    public main() {
         super.main();
         window.requestAnimationFrame((timestamp: number) => this.showInterpolateVal(timestamp));
     }
 
-    public inputPhysWSSend()
-    {
-        const codeFlag = $('#physCodeFlag').val() === "true" ? true : false; 
+    public inputPhysWSSend() {
+        const codeFlag = $('#physCodeFlag').val() === "true" ? true : false;
         const codeName = AssettoCorsaSHMPhysicsParameterCode[$('#physCodeSelect').val().toString()];
         this.webSocket.SendPhysicsWSSend(codeName, codeFlag);
-    };
+    }
 
-    public inputPhysWSInterval()
-    {
+    public inputPhysWSInterval() {
         const wsInterval = Number($('#physWSInterval').val());
         this.webSocket.SendPhysicsWSInterval(wsInterval);
-    };
+    }
 
-    public inputGrphWSSend()
-    {
+    public inputGrphWSSend() {
         const codeFlag = $('#grphCodeFlag').val() === "true" ? true : false;
         const codeName = AssettoCorsaSHMGraphicsParameterCode[$('#grphCodeSelect').val().toString()];
         this.webSocket.SendGraphicsWSSend(codeName, codeFlag);
-    };
+    }
 
-    public inputGrphWSInterval()
-    {
+    public inputGrphWSInterval() {
         const wsInterval = Number($('#grphWSInterval').val());
         this.webSocket.SendGraphicsWSInterval(wsInterval);
-    };
+    }
 
-    public inputStaticWSSend()
-    {
+    public inputStaticWSSend() {
         const codeName = AssettoCorsaSHMStaticInfoParameterCode[$('#staticCodeSelect').val().toString()];
-        const codeFlag = $('#staticCodeFlag').val() === "true" ? true : false; 
+        const codeFlag = $('#staticCodeFlag').val() === "true" ? true : false;
         this.webSocket.SendStaticInfoWSSend(codeName, codeFlag);
-    };
+    }
 
-    public inputStaticWSInterval()
-    {
+    public inputStaticWSInterval() {
         const wsInterval = Number($('#staticWSInterval').val());
         this.webSocket.SendStaticInfoWSInterval(wsInterval);
-    };
+    }
 
     public showInterpolateVal(timestamp: number) {
         $('#divInterpolatedVAL').html("");
-        const numericVALCodeIndexList = EnumUtils.EnumToIndexArray(AssettoCorsaSHMNumericalVALCode);
-        numericVALCodeIndexList.forEach(k =>  
-        {
-            const keyIndex : AssettoCorsaSHMNumericalVALCode = k;
-            const keyName : string = AssettoCorsaSHMNumericalVALCode[keyIndex];
-            const val = this.webSocket.getVal(keyIndex, timestamp);
-            $('#divInterpolatedVAL').append(keyName + " : " + val + "<br>");
+        Object.values(AssettoCorsaSHMNumericalVALCode).forEach(k => {
+            const val = this.webSocket.getVal(k, timestamp);
+            $('#divInterpolatedVAL').append(k + " : " + val + "<br>");
         });
-        window.requestAnimationFrame((timestamp: number) => this.showInterpolateVal(timestamp));
+        window.requestAnimationFrame((timestamp) => this.showInterpolateVal(timestamp));
     }
 }
