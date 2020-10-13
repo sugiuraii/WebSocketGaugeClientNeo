@@ -26,7 +26,6 @@ import { WebsocketCommon } from './WebsocketCommon';
 import { DefiParameterCode } from './parameterCode/DefiParameterCode'
 import { VALInterpolationBuffer } from './utils/Interpolation';
 import * as JSONFormats from './JSONFormats';
-import { EnumUtils } from '../../EnumUtils';
 
 export class DefiCOMWebsocket extends WebsocketCommon {
     private onVALPacketReceived: (intervalTime: number, val: { [code: string]: string }) => void;
@@ -72,7 +71,7 @@ export class DefiCOMWebsocket extends WebsocketCommon {
 
         // Store value into interpolation buffers
         for (const key in receivedJson.val) {
-            if (EnumUtils.IsEnumContaninsKey(DefiParameterCode, key)) {
+            if (Object.values(DefiParameterCode).includes(key as DefiParameterCode)) {
                 const val = Number(receivedJson.val[key]);
                 // Register to interpolate buffer
                 this.checkInterpolateBufferAndCreateIfEmpty(key);
