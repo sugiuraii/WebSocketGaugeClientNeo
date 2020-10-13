@@ -30,37 +30,37 @@ export interface IJSONMessage
 
 export class ResetJSONMessage implements IJSONMessage
 {
-    public mode : string = "RESET";
+    public mode  = "RESET";
 }
 
 export class VALJSONMessage implements IJSONMessage
 {
-    public mode:string = "VAL";
+    public mode = "VAL";
     public val : {[key : string] : number;};
 }
 
 export class StringVALJSONMessage implements IJSONMessage
 {
-    public mode:string = "VAL";
+    public mode = "VAL";
     public val : {[key : string] : string;}; 
 }
 
 
 export class ErrorJSONMessage implements IJSONMessage
 {
-    public mode: string = "ERR";
+    public mode = "ERR";
     public msg: string;
 }
 
 export class ResponseJSONMessage implements IJSONMessage
 {
-    public mode: string = "RES";
+    public mode = "RES";
     public msg: string;
 }
 
 export class MomentFuelTripJSONMessage implements IJSONMessage
 {
-    public mode: string = "MOMENT_FUELTRIP";
+    public mode = "MOMENT_FUELTRIP";
     public moment_gasmilage : number;
     public total_gas : number;
     public total_trip : number;
@@ -69,7 +69,7 @@ export class MomentFuelTripJSONMessage implements IJSONMessage
 
 export class SectFuelTripJSONMessage implements IJSONMessage
 {
-    public mode: string = "SECT_FUELTRIP";
+    public mode = "SECT_FUELTRIP";
     public sect_span: number;
     public sect_trip : number[];
     public sect_gas : number[];
@@ -78,13 +78,13 @@ export class SectFuelTripJSONMessage implements IJSONMessage
 
 export class SectSpanJSONMessage implements IJSONMessage
 {
-    public mode : string = "SECT_SPAN";
+    public mode  = "SECT_SPAN";
     public sect_span : number;
 }
 
 export class SectStoreMaxJSONMessage implements IJSONMessage
 {
-    public mode : string = "SECT_STOREMAX";
+    public mode  = "SECT_STOREMAX";
     public storemax : number;
 }
 

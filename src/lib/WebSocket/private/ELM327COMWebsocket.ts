@@ -122,16 +122,17 @@ export class ELM327COMWebsocket extends WebsocketCommon {
     }
 
     protected parseIncomingMessage(msg: string): void {
-        const modeCode: string = (JSON.parse(msg) as JSONFormats.IJSONMessage).mode;
+        const receivedJsonObj: JSONFormats.IJSONMessage | JSONFormats.StringVALJSONMessage | JSONFormats.ErrorJSONMessage | JSONFormats.ResponseJSONMessage = JSON.parse(msg);
+        const modeCode: string = receivedJsonObj.mode;
         switch (modeCode) {
             case ("VAL"):
-                this.processVALJSONMessage(JSON.parse(msg) as JSONFormats.StringVALJSONMessage);
+                this.processVALJSONMessage(receivedJsonObj as JSONFormats.StringVALJSONMessage);
                 break;
             case ("ERR"):
-                this.processERRJSONMessage(JSON.parse(msg) as JSONFormats.ErrorJSONMessage);
+                this.processERRJSONMessage(receivedJsonObj as JSONFormats.ErrorJSONMessage);
                 break;
             case ("RES"):
-                this.processRESJSONMessage(JSON.parse(msg) as JSONFormats.ResponseJSONMessage);
+                this.processRESJSONMessage(receivedJsonObj as JSONFormats.ResponseJSONMessage);
                 break;
             default:
                 this.OnWebsocketError("Unknown mode packet received. " + msg);
