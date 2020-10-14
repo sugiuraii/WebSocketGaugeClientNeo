@@ -21,9 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
- 
-export function calculateGearPosition(rev : number, speed : number, neutralSw : boolean) : string
-{
+
+export function calculateGearPosition(rev: number, speed: number, neutralSw: boolean): string {
     if (neutralSw)
         return "N";
 
@@ -31,7 +30,7 @@ export function calculateGearPosition(rev : number, speed : number, neutralSw : 
     if (speed <= 0)
         return "-";
 
-    var gear_ratio = 1 / 3.9 * rev * 60 * 0.001992 / speed;
+    const gear_ratio = 1 / 3.9 * rev * 60 * 0.001992 / speed;
 
     if (gear_ratio > 4.27)
         return "-";
@@ -48,6 +47,6 @@ export function calculateGearPosition(rev : number, speed : number, neutralSw : 
     else if (gear_ratio > 0.73)
         return "6";
     else
-        return "-";  
+        return "-";
 }
 

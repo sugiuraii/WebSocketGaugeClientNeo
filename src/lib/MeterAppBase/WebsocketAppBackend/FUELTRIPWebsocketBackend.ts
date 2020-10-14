@@ -46,7 +46,7 @@ export class FUELTRIPWebsocketBackend {
 
     private indicatorUpdateIntervalID: number;
 
-    constructor(serverurl: string, loggerWindow: ILogWindow, fueltripSectSpan: number, fueltripSectStoremax : number, statusIndicator: IStatusIndicator) {
+    constructor(serverurl: string, loggerWindow: ILogWindow, fueltripSectSpan: number, fueltripSectStoremax: number, statusIndicator: IStatusIndicator) {
         this.fueltripWS = new FUELTRIPWebsocket();
         this.loggerWindow = loggerWindow;
         this.statusIndicator = statusIndicator;
@@ -57,57 +57,48 @@ export class FUELTRIPWebsocketBackend {
         this.fueltripWS.OnWebsocketError = (message: string) => this.loggerWindow.appendLog(this.logPrefix + " websocket error : " + message);
     }
 
-    public Run() {
+    public Run(): void {
         this.indicatorUpdateIntervalID = window.setInterval(() => this.setStatusIndicator(), this.WEBSOCKET_CHECK_INTERVAL);
         this.connectWebSocket();
     }
 
-    public Stop() {
+    public Stop(): void {
         clearInterval(this.indicatorUpdateIntervalID);
         this.fueltripWS.Close();
     }
 
-    public getMomentGasMilage(timestamp : number) : number
-    {
+    public getMomentGasMilage(timestamp: number): number {
         return this.fueltripWS.getMomentGasMilage(timestamp);
     }
-    public getRawMomentGasMilage() : number
-    {
+    public getRawMomentGasMilage(): number {
         return this.fueltripWS.getRawMomentGasMilage();
     }
-    public getTotalTrip() : number
-    {
+    public getTotalTrip(): number {
         return this.fueltripWS.getTotalTrip();
     }
-    public getTotalGas() : number
-    {
+    public getTotalGas(): number {
         return this.fueltripWS.getTotalGas();
     }
-    public getTotalGasMilage() : number
-    {
+    public getTotalGasMilage(): number {
         return this.fueltripWS.getTotalGasMilage();
     }
-    public getSectSpan() : number
-    {
+    public getSectSpan(): number {
         return this.fueltripWS.getSectSpan();
     }
-    public getSectTrip(sectIndex : number) : number
-    {
+    public getSectTrip(sectIndex: number): number {
         return this.fueltripWS.getSectTrip(sectIndex);
     }
-    public getSectGas(sectIndex : number) : number
-    {
+    public getSectGas(sectIndex: number): number {
         return this.fueltripWS.getSectGas(sectIndex);
     }
-    public getSectGasMilage(sectIndex : number)
-    {
+    public getSectGasMilage(sectIndex: number): number {
         return this.fueltripWS.getSectGasMilage(sectIndex);
     }
-    private setStatusIndicator() {
+    private setStatusIndicator(): void {
         this.statusIndicator.SetStatus(this.fueltripWS.getReadyState());
     }
 
-    private connectWebSocket() {
+    private connectWebSocket(): void {
         const wsObj = this.fueltripWS;
         const logWindow = this.loggerWindow;
         const logPrefix = this.logPrefix;

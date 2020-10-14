@@ -46,7 +46,7 @@ export class AssettoCorsaSHMWebsocketBackend {
 
    private indicatorUpdateIntervalID: number;
 
-   constructor(serverurl: string, physCode : AssettoCorsaSHMPhysicsParameterCode[], graphicsCode : AssettoCorsaSHMGraphicsParameterCode[], staticCode : AssettoCorsaSHMStaticInfoParameterCode[], loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
+   constructor(serverurl: string, physCode: AssettoCorsaSHMPhysicsParameterCode[], graphicsCode: AssettoCorsaSHMGraphicsParameterCode[], staticCode: AssettoCorsaSHMStaticInfoParameterCode[], loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
       this.assettocorsaWS = new AssettoCorsaSHMWebsocket();
       this.physicsParameterCodeList = physCode;
       this.graphicsParameterCodeList = graphicsCode;
@@ -58,28 +58,25 @@ export class AssettoCorsaSHMWebsocketBackend {
       this.assettocorsaWS.OnWebsocketError = (message: string) => this.loggerWindow.appendLog(this.logPrefix + " websocket error : " + message);
    }
 
-   public Run() {
+   public Run(): void {
       this.indicatorUpdateIntervalID = window.setInterval(() => this.setStatusIndicator(), this.WEBSOCKET_CHECK_INTERVAL);
       this.connectWebSocket();
    }
 
-   public Stop() {
+   public Stop(): void {
       clearInterval(this.indicatorUpdateIntervalID);
       this.assettocorsaWS.Close();
    }
 
-   public getVal(code : AssettoCorsaSHMNumericalVALCode, timestamp : number)
-   {
+   public getVal(code: AssettoCorsaSHMNumericalVALCode, timestamp: number): number {
       return this.assettocorsaWS.getVal(code, timestamp);
    }
 
-   public getRawVal(code : AssettoCorsaSHMNumericalVALCode)
-   {
+   public getRawVal(code: AssettoCorsaSHMNumericalVALCode): number {
       return this.assettocorsaWS.getRawVal(code);
    }
 
-   public getStringVal(code : AssettoCorsaSHMStringVALCode)
-   {
+   public getStringVal(code: AssettoCorsaSHMStringVALCode): string {
       return this.assettocorsaWS.getStringVal(code);
    }
 
