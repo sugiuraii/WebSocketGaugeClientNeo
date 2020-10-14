@@ -22,21 +22,19 @@
  * THE SOFTWARE.
  */
 
-import {Gauge1DOptions} from './GaugeBase'
-import {Gauge1D} from './GaugeBase'
+import { Gauge1DOptions } from './GaugeBase'
+import { Gauge1D } from './GaugeBase'
 import * as PIXI from 'pixi.js';
 
 /**
  * Needle gauge option class.
  */
-class NeedleGaugeOptions extends Gauge1DOptions
-{
+class NeedleGaugeOptions extends Gauge1DOptions {
     /**
      * Texture of gauge needle.
      */
     public Texture: PIXI.Texture;
-    constructor()
-    {
+    constructor() {
         super();
     }
 }
@@ -44,14 +42,12 @@ class NeedleGaugeOptions extends Gauge1DOptions
 /**
  * Needle gauge class.
  */
-abstract class NeedleGauge extends Gauge1D
-{
+abstract class NeedleGauge extends Gauge1D {
     private needleGaugeOptions: NeedleGaugeOptions;
 
-    private sprite : PIXI.Sprite;
+    private sprite: PIXI.Sprite;
 
-    constructor(options: NeedleGaugeOptions)
-    {
+    constructor(options: NeedleGaugeOptions) {
         let needleGaugeOptions: NeedleGaugeOptions;
         if (!(options instanceof NeedleGaugeOptions))
             needleGaugeOptions = new NeedleGaugeOptions();
@@ -66,40 +62,38 @@ abstract class NeedleGauge extends Gauge1D
         //Assign spirite and mask to container
         this.addChild(this.sprite);
     }
-    
+
     /**
      * Get Options.
      * @return Options.
      */
-    get Options() {return this.needleGaugeOptions}
-    
+    get Options(): NeedleGaugeOptions { return this.needleGaugeOptions }
+
     get Sprite(): PIXI.Sprite { return this.sprite; }
 }
 
 /**
  * Rotation needle gauge option class.
  */
-export class RotationNeedleGaugeOptions extends NeedleGaugeOptions
-{
+export class RotationNeedleGaugeOptions extends NeedleGaugeOptions {
     /**
      * Offset angle (angle of value=Min)
      */
-    public OffsetAngle : number;
+    public OffsetAngle: number;
     /**
      * Angle of value=Max.
      * (Actual rotation angle = OffsetAngle + FullAngle).
      */
-    public FullAngle : number;
+    public FullAngle: number;
     /**
      * Angle tick step.
      */
-    public AngleStep : number;
+    public AngleStep: number;
     /**
      * Rotation direction. (Anticlockwise drawing in true).
      */
-    public AntiClockwise : boolean;
-    constructor()
-    {
+    public AntiClockwise: boolean;
+    constructor() {
         super();
         this.OffsetAngle = 0;
         this.FullAngle = 360;
@@ -108,20 +102,18 @@ export class RotationNeedleGaugeOptions extends NeedleGaugeOptions
     }
 }
 
-export class RotationNeedleGauge extends NeedleGauge
-{
+export class RotationNeedleGauge extends NeedleGauge {
     private rotationNeedleGaugeOptions: RotationNeedleGaugeOptions;
 
-    private currAngle : number;
+    private currAngle: number;
 
     /**
      * Get Options.
      * @return Options.
      */
-    get Options() {return this.rotationNeedleGaugeOptions}
+    get Options(): RotationNeedleGaugeOptions { return this.rotationNeedleGaugeOptions }
 
-    constructor(options: RotationNeedleGaugeOptions)
-    {
+    constructor(options: RotationNeedleGaugeOptions) {
         super(options);
         this.rotationNeedleGaugeOptions = options;
     }
@@ -130,40 +122,38 @@ export class RotationNeedleGauge extends NeedleGauge
      * Update gauge.
      * @param skipStepCheck Skip checking angle displacement over the angleStep or not.
      */
-    protected _update(skipStepCheck: boolean): void
-    {
+    protected _update(skipStepCheck: boolean): void {
         // Update texture reference of sprite.
         this.Sprite.texture = this.rotationNeedleGaugeOptions.Texture;
-        
+
         const anticlockwise: boolean = this.Options.AntiClockwise;
-        const offsetAngle : number = this.Options.OffsetAngle;
-        const fullAngle : number = this.Options.FullAngle;
-        const angleStep : number = this.Options.AngleStep;
+        const offsetAngle: number = this.Options.OffsetAngle;
+        const fullAngle: number = this.Options.FullAngle;
+        const angleStep: number = this.Options.AngleStep;
 
-        const valueMax : number = this.Options.Max;
-        const valueMin : number = this.Options.Min;
-        const value : number = this.DrawValue;
+        const valueMax: number = this.Options.Max;
+        const valueMin: number = this.Options.Min;
+        const value: number = this.DrawValue;
 
-        const currentAngle: number= this.currAngle;
+        const currentAngle: number = this.currAngle;
         let angle: number;
-        if(!anticlockwise)
-            angle = (value - valueMin)/(valueMax - valueMin) * fullAngle + offsetAngle;
+        if (!anticlockwise)
+            angle = (value - valueMin) / (valueMax - valueMin) * fullAngle + offsetAngle;
         else
-            angle = -(value - valueMin)/(valueMax - valueMin) * fullAngle + offsetAngle;
+            angle = -(value - valueMin) / (valueMax - valueMin) * fullAngle + offsetAngle;
 
         //Check angle displacement over the angleStep or not
         const deltaAngle: number = Math.abs(angle - currentAngle);
-        if(!skipStepCheck && deltaAngle < angleStep)
+        if (!skipStepCheck && deltaAngle < angleStep)
             return;
-        else
-        {
+        else {
             //Round into angle_resolution
-            angle = Math.floor(angle/angleStep) * angleStep;
+            angle = Math.floor(angle / angleStep) * angleStep;
             //Update currentAngle
             this.currAngle = angle;
         }
 
-        const angleRad: number = Math.PI/180*angle;
+        const angleRad: number = Math.PI / 180 * angle;
 
         //Set container angle
         this.rotation = angleRad;

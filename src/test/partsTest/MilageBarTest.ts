@@ -22,7 +22,6 @@
  * THE SOFTWARE.
  */
 
-/// <reference path="../../lib/webpackRequire.ts" />
 import * as PIXI from 'pixi.js';
 import {MilageGraphPanel} from "../../parts/GasMilageGraph/MilageGraph";
 import * as WebFont from "webfontloader";
@@ -38,13 +37,11 @@ window.onload = function()
             families: MilageGraphPanel.RequestedFontFamily,
             urls: MilageGraphPanel.RequestedFontCSSURL 
         },    
-        active: function () {MilageBarTest.preloadTexture();}
+        active: function () {preloadTexture();}
     });
 }
 
-namespace MilageBarTest
-{
-    export function preloadTexture()
+function preloadTexture()
     {
         PIXI.Loader.shared.add(MilageGraphPanel.RequestedTexturePath);
         PIXI.Loader.shared.load(main);
@@ -53,7 +50,7 @@ namespace MilageBarTest
     {
         const app = new PIXI.Application({height:1366,width:1366});
         document.body.appendChild(app.view);
-        let gaugeArray: MilageGraphPanel[] = new Array();
+        const gaugeArray: MilageGraphPanel[] = [];
         let index = 0;
         for (let j = 0; j < 6; j++)
         {
@@ -73,7 +70,4 @@ namespace MilageBarTest
                 index++;
             }
         }
-        app.ticker.add(() => {
-            });
     }
-}

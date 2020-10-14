@@ -44,7 +44,7 @@ export class ArduinoWebsocketBackend {
 
    private indicatorUpdateIntervalID: number;
 
-   constructor(serverurl: string, codeList : ArduinoParameterCode[], loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
+   constructor(serverurl: string, codeList: ArduinoParameterCode[], loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
       this.arduinoWS = new ArduinoCOMWebsocket();
       this.parameterCodeList = codeList;
       this.loggerWindow = loggerWindow;
@@ -54,23 +54,21 @@ export class ArduinoWebsocketBackend {
       this.arduinoWS.OnWebsocketError = (message: string) => this.loggerWindow.appendLog(this.logPrefix + " websocket error : " + message);
    }
 
-   public Run() {
+   public Run(): void {
       this.indicatorUpdateIntervalID = window.setInterval(() => this.setStatusIndicator(), this.WEBSOCKET_CHECK_INTERVAL);
       this.connectWebSocket();
    }
 
-   public Stop() {
+   public Stop(): void {
       clearInterval(this.indicatorUpdateIntervalID);
       this.arduinoWS.Close();
    }
 
-   public getVal(code : ArduinoParameterCode, timestamp : number)
-   {
+   public getVal(code: ArduinoParameterCode, timestamp: number): number {
       return this.arduinoWS.getVal(code, timestamp);
    }
 
-   public getRawVal(code : ArduinoParameterCode)
-   {
+   public getRawVal(code: ArduinoParameterCode): number {
       return this.arduinoWS.getRawVal(code);
    }
 

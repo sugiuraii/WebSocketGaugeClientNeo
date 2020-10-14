@@ -22,8 +22,6 @@
  * THE SOFTWARE.
  */
 
-/// <reference path="../../lib/webpackRequire.ts" />
-
 import { RectangularProgressBar, RectangularProgressBarOptions } from '../../lib/Graphics/PIXIGauge';
 import { BitmapTextNumericIndicator } from '../../lib/Graphics/PIXIGauge';
 import { NumericIndicator } from '../../lib/Graphics/PIXIGauge';
@@ -47,9 +45,9 @@ export class DigiTachoPanel extends PIXI.Container {
     private speedLabel: NumericIndicator;
     private geasposLabel: PIXI.BitmapText;
 
-    private speed: number = 0;
-    private tacho: number = 0;
-    private gearPos: string = "N";
+    private speed = 0;
+    private tacho = 0;
+    private gearPos = "N";
 
     static get RequestedTexturePath(): string[] {
         return ["img/DigiTachoTexture.json", "img/GearPosFont.fnt", "img/SpeedMeterFont.fnt"];

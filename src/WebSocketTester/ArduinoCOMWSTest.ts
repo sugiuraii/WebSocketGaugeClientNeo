@@ -22,19 +22,16 @@
  * THE SOFTWARE.
  */
  
-/// <reference path="../lib/webpackRequire.ts" />
-
 import {ArduinoCOMWebsocket} from '../lib/WebSocket/WebSocketCommunication';
 import {ArduinoParameterCode} from '../lib/WebSocket/WebSocketCommunication';
 import {WebSocketTesterBase} from './base/WebSocketTesterBase';
-import {EnumUtils} from '../lib/EnumUtils';
 
 import $ from "jquery";
 require('./ArduinoCOMWSTest.html');
 
 window.onload = function()
 {
-    let wsTest = new ArduinoCOMWSTest();
+    const wsTest = new ArduinoCOMWSTest();
     wsTest.main();
 }
 
@@ -52,13 +49,13 @@ class ArduinoCOMWSTest extends WebSocketTesterBase
     
     protected setParameterCodeSelectBox() : void
     {
-        EnumUtils.EnumToKeyStrArray(ArduinoParameterCode).forEach(code => $('#codeSelect').append($('<option>').html(code).val(code)));
+        Object.values(ArduinoParameterCode).forEach(code => $('#codeSelect').append($('<option>').html(code).val(code)));
     }
     protected assignButtonEvents() : void
     {
         super.assignButtonEvents();
-        $("#buttonWSSend").click(() => this.inputWSSend());
-        $("#buttonWSInterval").click(() => this.inputWSInterval());
+        $("#buttonWSSend").on('click', () => this.inputWSSend());
+        $("#buttonWSInterval").on('click', () => this.inputWSInterval());
     }
 
     protected registerWSEvents() : void
@@ -68,7 +65,7 @@ class ArduinoCOMWSTest extends WebSocketTesterBase
             $('#spanInterval').text(intervalTime.toFixed(2));
              //clear
             $('#divVAL').html("");
-            for (var key in val)
+            for (const key in val)
             {
                 $('#divVAL').append(key + " : " + val[key] + "<br>" );
             }
@@ -104,12 +101,12 @@ class ArduinoCOMWSTest extends WebSocketTesterBase
     {
         const codeFlag = $('#codeFlag').val() === "true" ? true : false; 
         this.webSocket.SendWSSend(ArduinoParameterCode[$('#codeSelect').val().toString()], codeFlag);
-    };
+    }
 
     public inputWSInterval()
     {
         const wsInterval = Number($('#WSInterval').val());
         this.webSocket.SendWSInterval(wsInterval);
-    };
+    }
 
 }

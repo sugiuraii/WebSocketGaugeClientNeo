@@ -49,12 +49,12 @@ export abstract class WebSocketTesterBase
     {
         this.webSocketBase.URL = $("#serverURLBox").val().toString();
         this.webSocketBase.Connect();
-    };
+    }
 
-    public disconnectWebSocket()
+    public disconnectWebSocket() : void
     {
         this.webSocketBase.Close();
-    };
+    }
     
     protected assignButtonEvents() : void
     {

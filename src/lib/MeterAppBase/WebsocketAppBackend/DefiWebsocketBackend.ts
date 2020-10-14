@@ -28,7 +28,7 @@ import { ILogWindow } from "../interfaces/ILogWindow";
 import { IStatusIndicator } from "../interfaces/IStatusIndicator";
 
 export class DefiWebsocketBackend {
-   
+
    public static readonly DEFAULT_WS_PORT = 2012;
 
    private readonly logPrefix = "Defi";
@@ -45,7 +45,7 @@ export class DefiWebsocketBackend {
 
    private indicatorUpdateIntervalID: number;
 
-   constructor(serverurl: string, codeList : DefiParameterCode[], loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
+   constructor(serverurl: string, codeList: DefiParameterCode[], loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
       this.defiWS = new DefiCOMWebsocket();
       this.parameterCodeList = codeList;
       this.loggerWindow = loggerWindow;
@@ -55,22 +55,20 @@ export class DefiWebsocketBackend {
       this.defiWS.OnWebsocketError = (message: string) => this.loggerWindow.appendLog(this.logPrefix + " websocket error : " + message);
    }
 
-   public getVal(code : DefiParameterCode, timestamp : number)
-   {
+   public getVal(code: DefiParameterCode, timestamp: number): number {
       return this.defiWS.getVal(code, timestamp);
    }
 
-   public getRawVal(code : DefiParameterCode)
-   {
+   public getRawVal(code: DefiParameterCode): number {
       return this.defiWS.getRawVal(code);
    }
 
-   public Run() {
+   public Run(): void {
       this.indicatorUpdateIntervalID = window.setInterval(() => this.setStatusIndicator(), this.WEBSOCKET_CHECK_INTERVAL);
       this.connectWebSocket();
    }
 
-   public Stop() {
+   public Stop(): void {
       clearInterval(this.indicatorUpdateIntervalID);
       this.defiWS.Close();
    }

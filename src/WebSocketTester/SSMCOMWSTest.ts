@@ -21,36 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-/// <reference path="../lib/webpackRequire.ts" />
 
-import {SSMWebsocket} from "../lib/WebSocket/WebSocketCommunication";
-import {SSMParameterCode} from "../lib/WebSocket/WebSocketCommunication";
-import {ReadModeCode} from "../lib/WebSocket/WebSocketCommunication";
-import {WebSocketTesterBase} from "./base/WebSocketTesterBase";
-import { EnumUtils } from "../lib/EnumUtils";
+import { SSMWebsocket } from "../lib/WebSocket/WebSocketCommunication";
+import { SSMParameterCode } from "../lib/WebSocket/WebSocketCommunication";
+import { ReadModeCode } from "../lib/WebSocket/WebSocketCommunication";
+import { WebSocketTesterBase } from "./base/WebSocketTesterBase";
 
 import $ from "jquery";
 require('./SSMCOMWSTest.html');
 
 window.onload = function () {
-    let wsTest = new SSMCOMWSTest();
+    const wsTest = new SSMCOMWSTest();
     wsTest.main();
 }
 
-export class SSMCOMWSTest extends WebSocketTesterBase
-{
+export class SSMCOMWSTest extends WebSocketTesterBase {
     private webSocket: SSMWebsocket;
-    
-    constructor()
-    {
+
+    constructor() {
         const webSocket = new SSMWebsocket();
         super(webSocket);
         this.webSocket = webSocket;
         this.defaultPortNo = 2013;
     }
 
-    protected setParameterCodeSelectBox() {
-        EnumUtils.EnumToKeyStrArray(SSMParameterCode).forEach(code => $('#codeSelect').append($('<option>').html(code).val(code)));
+    protected setParameterCodeSelectBox(): void {
+        Object.values(SSMParameterCode).forEach(code => $('#codeSelect').append($('<option>').html(code).val(code)));
     }
 
     protected assignButtonEvents(): void {
@@ -60,11 +56,11 @@ export class SSMCOMWSTest extends WebSocketTesterBase
     }
 
     protected registerWSEvents(): void {
-        this.webSocket.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: string}) => {
+        this.webSocket.OnVALPacketReceived = (intervalTime: number, val: { [code: string]: string }) => {
             $('#spanInterval').text(intervalTime.toFixed(2));
             //clear
             $('#divVAL').html("");
-            for (var key in val) {
+            for (const key in val) {
                 $('#divVAL').append(key + " : " + val[key] + "<br>");
             }
         }
@@ -90,16 +86,16 @@ export class SSMCOMWSTest extends WebSocketTesterBase
         };
     }
 
-    public inputWSSend() {
+    public inputWSSend(): void {
         const codeSelect = $('#codeSelect').val().toString();
         const codeReadmode = $('#codeReadmode').val().toString();
-        const codeFlag = $('#codeFlag').val() === "true" ? true:false;
+        const codeFlag = $('#codeFlag').val() === "true" ? true : false;
         this.webSocket.SendCOMRead(SSMParameterCode[codeSelect], ReadModeCode[codeReadmode], codeFlag);
-    };
+    }
 
-    public inputWSInterval() {
+    public inputWSInterval(): void {
         const WSinterval = Number($('#WSInterval').val());
         this.webSocket.SendSlowreadInterval(WSinterval);
-    };
+    }
 }
 

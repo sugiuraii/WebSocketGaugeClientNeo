@@ -27,8 +27,7 @@ import * as PIXI from 'pixi.js';
 /**
  * 1D Gauge option class.
  */
-export class Gauge1DOptions
-{
+export class Gauge1DOptions {
     /**
      * Max value of gauge.
      */
@@ -37,16 +36,15 @@ export class Gauge1DOptions
      * Min value of gauge.
      */
     public Min: number;
-    
+
     /**
      * Flag to set gauge full on value min (invert the direction of gauge Max to Min)
      * (On this flag is true, gauge move from Max to Min by increasing value)
      * (on this flag is false(default), gauge move from Min to Max by increasing value) 
      */
-    public GagueFullOnValueMin : boolean;
-    
-    constructor()
-    {
+    public GagueFullOnValueMin: boolean;
+
+    constructor() {
         this.Max = 100;
         this.Min = 0;
     }
@@ -55,49 +53,46 @@ export class Gauge1DOptions
 /**
  * 1D gauge class.
  */
-export abstract class Gauge1D extends PIXI.Container
-{
+export abstract class Gauge1D extends PIXI.Container {
     private gauge1DOptions: Gauge1DOptions;
 
-    private value : number;
-    
+    private value: number;
+
     /**
      * @param options Option to set.
      */
-    constructor(options : Gauge1DOptions)
-    {
+    constructor(options: Gauge1DOptions) {
         super();
         this.gauge1DOptions = options;
         this.value = 0;
     }
-    
+
     /**
      * Get Options.
      * @return Options.
      */
-    get Options() {return this.gauge1DOptions}
-    
+    get Options(): Gauge1DOptions { return this.gauge1DOptions }
+
     /**
      * Get gauge value.
      */
-    get Value() : number { return this.value;}
+    get Value(): number { return this.value; }
     /**
      * Set gauge value.
      */
-    set Value(val : number) { this.value = val;}
-    
+    set Value(val: number) { this.value = val; }
+
     /**
      * Get actual draw value (considering GaugeFullOnValueMin flag).
      */
-    protected get DrawValue() : number
-    {
+    protected get DrawValue(): number {
         const Max = this.Options.Max;
         const Min = this.Options.Min;
         const Value = this.Value;
         const GaugeFullOnValueMin = this.Options.GagueFullOnValueMin;
-        
-        let drawVal : number;
-        if( Value > Max)
+
+        let drawVal: number;
+        if (Value > Max)
             drawVal = Max;
         else if (Value < Min)
             drawVal = Min;
@@ -113,22 +108,20 @@ export abstract class Gauge1D extends PIXI.Container
     /**
      * Apply value and update gauge.
      */
-    public update() : void
-    {
+    public update(): void {
         this._update(false);
     }
 
     /**
      * Apply value and update gauge with skipping value step check.
      */
-    public updateForce() : void
-    {
+    public updateForce(): void {
         this._update(true);
     }
 
     /**
      * Function to update gauge state by value.
      */
-    protected abstract _update(skipStepCheck : boolean) : void;
+    protected abstract _update(skipStepCheck: boolean): void;
 }
 

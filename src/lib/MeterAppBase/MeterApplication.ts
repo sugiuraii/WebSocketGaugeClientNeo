@@ -23,7 +23,7 @@
  */
 
 import * as PIXI from "pixi.js";
-import {ApplicationNavBar} from "./bootstrapParts/ApplicationNavBar"
+import { ApplicationNavBar } from "./bootstrapParts/ApplicationNavBar"
 import * as WebFont from "webfontloader";
 
 import { MeterApplicationOption } from "./options/MeterApplicationOption";
@@ -31,8 +31,7 @@ import { WebsocketObjectCollection } from "./WebSocketObjectCollection";
 
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
 
-export class MeterApplication
-{   
+export class MeterApplication {
     private Option = new MeterApplicationOption();
 
     /**
@@ -41,43 +40,37 @@ export class MeterApplication
      * @param height Stage height in px.
      */
 
-    constructor(option : MeterApplicationOption)
-    {
+    constructor(option: MeterApplicationOption) {
         this.Option = option;
     }
-    
+
     /**
      * Set viewport meta tag.
      */
-    private setViewPortMetaTag()
-    {
-        let metalist = document.getElementsByTagName('meta');
+    private setViewPortMetaTag() {
+        const metalist = document.getElementsByTagName('meta');
         let hasMeta = false;
-        
-        for(let i = 0; i < metalist.length; i++) 
-        {
-            let name = metalist[i].getAttribute('name');
-            if(name && name.toLowerCase() === 'viewport') 
-            {
+
+        for (let i = 0; i < metalist.length; i++) {
+            const name = metalist[i].getAttribute('name');
+            if (name && name.toLowerCase() === 'viewport') {
                 metalist[i].setAttribute('content', VIEWPORT_ATTRIBUTE);
                 hasMeta = true;
                 break;
             }
         }
-        if(!hasMeta) 
-        {
-            let meta = document.createElement('meta');
+        if (!hasMeta) {
+            const meta = document.createElement('meta');
             meta.setAttribute('name', 'viewport');
             meta.setAttribute('content', VIEWPORT_ATTRIBUTE);
             document.getElementsByTagName('head')[0].appendChild(meta);
         }
     }
-    
+
     /**
      * Set meta tag to capable webapp.
      */
-    private setWebAppCapable() : void
-    {
+    private setWebAppCapable(): void {
         {
             const meta = document.createElement('meta');
             meta.setAttribute('name', 'apple-mobile-web-app-capable');
@@ -91,14 +84,13 @@ export class MeterApplication
             document.getElementsByTagName('head')[0].appendChild(meta);
         }
     }
-    
+
     /**
      * Start application.
      */
-    public Run()
-    {
-        const preserveDrawingBuffer = localStorage.getItem("preserveDrawingBuffer")==="true"?true:false;
-        const pixiApp = new PIXI.Application({width : this.Option.width, height : this.Option.height, preserveDrawingBuffer : preserveDrawingBuffer})
+    public Run(): void {
+        const preserveDrawingBuffer = localStorage.getItem("preserveDrawingBuffer") === "true" ? true : false;
+        const pixiApp = new PIXI.Application({ width: this.Option.width, height: this.Option.height, preserveDrawingBuffer: preserveDrawingBuffer })
 
         // Append PIXI.js application to document body
         pixiApp.view.style.width = "100vw";
@@ -106,71 +98,64 @@ export class MeterApplication
         pixiApp.view.style.pointerEvents = "none";
         document.body.appendChild(pixiApp.view);
         // Set viewport meta-tag
-        this.setViewPortMetaTag();        
+        this.setViewPortMetaTag();
         // Set fullscreen tag for android and ios
         this.setWebAppCapable();
-        
+
         const applicationnavBar = new ApplicationNavBar();
         applicationnavBar.create();
 
         const webSocketCollection = new WebsocketObjectCollection(applicationnavBar, this.Option);
-                                
+
         // Preload Fonts -> textures-> parts
-        this.preloadFonts( () => this.preloadTextures( () => this.Option.SetupPIXIMeterPanel(pixiApp, webSocketCollection)));     
+        this.preloadFonts(() => this.preloadTextures(() => this.Option.SetupPIXIMeterPanel(pixiApp, webSocketCollection)));
 
         webSocketCollection.Run();
     }
-           
-    private preloadFonts(callBack : ()=> void)
-    {
+
+    private preloadFonts(callBack: () => void) {
         const webFontFamilyWithoutOverlap = this.Option.PreloadResource.WebFontFamiliyName.Array.filter(
-            (x, i, self) => 
-            {
+            (x, i, self) => {
                 return self.indexOf(x) === i;
             }
         );
         const webFontCSSURLWithoutOverlap = this.Option.PreloadResource.WebFontCSSURL.Array.filter(
-            (x, i, self) => 
-            {
+            (x, i, self) => {
                 return self.indexOf(x) === i;
             }
         );
-        
+
         // call callBack() without loading fonts if the webFontFamily and webFoutCSSURL contains no elements.
         if (webFontFamilyWithoutOverlap.length === 0 && webFontCSSURLWithoutOverlap.length === 0)
             callBack();
-        
+
         WebFont.load(
             {
-                custom: 
-                { 
+                custom:
+                {
                     families: webFontFamilyWithoutOverlap,
-                    urls: webFontCSSURLWithoutOverlap 
+                    urls: webFontCSSURLWithoutOverlap
                 },
                 active: () => { callBack(); }
             }
         );
     }
-    
-    private preloadTextures(callBack : ()=> void)
-    {
+
+    private preloadTextures(callBack: () => void) {
         const texturePathWithoutOverlap = this.Option.PreloadResource.TexturePath.Array.filter(
-            (x, i, self) => 
-            {
+            (x, i, self) => {
                 return self.indexOf(x) === i;
             }
         );
-        
-        for (let i = 0; i < texturePathWithoutOverlap.length; i++)
-        {
+
+        for (let i = 0; i < texturePathWithoutOverlap.length; i++) {
             const texturePath = texturePathWithoutOverlap[i];
             PIXI.Loader.shared.add(texturePath);
         }
 
-        PIXI.Loader.shared.load(() => 
-        {
+        PIXI.Loader.shared.load(() => {
             callBack();
         }
         );
-    }    
+    }
 }

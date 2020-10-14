@@ -22,11 +22,6 @@
  * THE SOFTWARE.
  */
 
-// This is required to webpack font/texture/html files
-/// <reference path="../../lib/webpackRequire.ts" />
-
-import * as PIXI from "pixi.js";
-
 //For including entry point html file in webpack
 require("./LEDRevMeter-SSM.html");
 
@@ -45,6 +40,7 @@ import { SSMSwitchCode } from "../../lib/WebSocket/WebSocketCommunication";
 import { ReadModeCode } from "../../lib/WebSocket/WebSocketCommunication";
 
 import { calculateGearPosition } from "../../lib/MeterAppBase/utils/CalculateGearPosition";
+import { SSMSwitchCodeToParameterCode } from "../../lib/WebSocket/private/parameterCode/SSMSwitchCode";
 
 window.onload = function () {
     const meterapp = new LEDRevMeter_SSM();
@@ -71,7 +67,7 @@ class LEDRevMeter_SSM {
         appOption.ParameterCode.SSM.addall({ code: SSMParameterCode.Manifold_Absolute_Pressure, readmode: ReadModeCode.SLOWandFAST });
         appOption.ParameterCode.SSM.addall({ code: SSMParameterCode.Vehicle_Speed, readmode: ReadModeCode.SLOWandFAST });
         appOption.ParameterCode.SSM.addall({ code: SSMParameterCode.Coolant_Temperature, readmode: ReadModeCode.SLOW });
-        appOption.ParameterCode.SSM.addall({ code: SSMSwitchCode.getNumericCodeFromSwitchCode(SSMSwitchCode.Neutral_Position_Switch), readmode: ReadModeCode.SLOWandFAST });
+        appOption.ParameterCode.SSM.addall({ code: SSMSwitchCodeToParameterCode(SSMSwitchCode.Neutral_Position_Switch), readmode: ReadModeCode.SLOWandFAST });
 
         appOption.SetupPIXIMeterPanel = (app, ws) => {
 

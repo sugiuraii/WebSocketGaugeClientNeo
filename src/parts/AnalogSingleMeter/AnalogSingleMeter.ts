@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-/// <reference path="../../lib/webpackRequire.ts" />
 
 import { RotationNeedleGauge } from '../../lib/Graphics/PIXIGauge';
 import { RotationNeedleGaugeOptions } from '../../lib/Graphics/PIXIGauge';
@@ -116,7 +115,7 @@ export class AnalogSingleMeter extends PIXI.Container {
      * Get gauge value.
      * @return Gauge value.
      */
-    public get Value() { return this.NeedleGauge.Value }
+    public get Value(): number { return this.NeedleGauge.Value }
 
     /**
      * Set gauge value (and update needle gauge).
@@ -190,7 +189,7 @@ export class AnalogSingleMeter extends PIXI.Container {
         unitElem.position.set(210, 150);
 
         //Create meter number label
-        let numberElements: PIXI.BitmapText[] = [];
+        const numberElements: PIXI.BitmapText[] = [];
         numberElements[0] = new PIXI.BitmapText(numberLabels[0], { fontName: "Michroma", fontSize: 48, align: "center" });
         numberElements[0].anchor = new PIXI.Point(0.5, 1);
         numberElements[0].position.set(210, 372);

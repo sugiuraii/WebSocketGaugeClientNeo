@@ -22,9 +22,9 @@
  * THE SOFTWARE.
  */
 
-import {CircularGaugePanelBase} from './CircularGaugePanelBase';
-import {TextOption} from './CircularGaugePanelBase';
-import {CircularGaugePanelOptionBase} from './CircularGaugePanelBase';
+import { CircularGaugePanelBase } from './CircularGaugePanelBase';
+import { TextOption } from './CircularGaugePanelBase';
+import { CircularGaugePanelOptionBase } from './CircularGaugePanelBase';
 import * as PIXI from 'pixi.js';
 
 require("./FullCircularGaugeTexture.json");
@@ -35,16 +35,13 @@ require("../../fonts/GNU-Freefonts/FreeSansBold.otf");
 require("./CircularGaugeLabelFont.fnt");
 require("./CircularGaugeLabelFont_0.png");
 
-export class FullCircularGaugePanelOptionsBase extends CircularGaugePanelOptionBase
-{
-    constructor()
-    {
+export class FullCircularGaugePanelOptionsBase extends CircularGaugePanelOptionBase {
+    constructor() {
         super();
         this.setOption();
     }
-    
-    private setOption() : void
-    {            
+
+    private setOption(): void {
         this.RedZoneBarTexture = PIXI.Texture.from("FullCircularGauge_RedZone_Bar");
         this.YellowZoneBarTexture = PIXI.Texture.from("FullCircularGauge_YellowZone_Bar");
         this.GreenZoneBarTexture = PIXI.Texture.from("FullCircularGauge_GreenZone_Bar");
@@ -53,15 +50,15 @@ export class FullCircularGaugePanelOptionsBase extends CircularGaugePanelOptionB
         this.GridTexture = PIXI.Texture.from("FullCircularGauge_Grid");
 
         this.MasterTextStyle = new PIXI.TextStyle(
-        {
-            dropShadow : true,
-            dropShadowBlur: 15,
-            padding : 15,
-            dropShadowColor: "#FFFFFF",
-            dropShadowDistance: 0,
-            fill : "white",
-            fontFamily: "FreeSans-Bold"
-        });
+            {
+                dropShadow: true,
+                dropShadowBlur: 15,
+                padding: 15,
+                dropShadowColor: "#FFFFFF",
+                dropShadowDistance: 0,
+                fill: "white",
+                fontFamily: "FreeSans-Bold"
+            });
         this.OffsetAngle = 90;
         this.FullAngle = 270;
         this.Min = 0;
@@ -69,14 +66,14 @@ export class FullCircularGaugePanelOptionsBase extends CircularGaugePanelOptionB
         this.AngleStep = 0.1;
 
         this.ValueBarRadius = 150;
-        this.ValueBarInnerRadius = 50;        
-        this.ValueTextLabelOption.position.set(200,185);
-        this.ValueTextLabelOption.position.set(200,185);
-        this.ValueTextLabelOption.anchor.set(0.5,0.5);
+        this.ValueBarInnerRadius = 50;
+        this.ValueTextLabelOption.position.set(200, 185);
+        this.ValueTextLabelOption.position.set(200, 185);
+        this.ValueTextLabelOption.anchor.set(0.5, 0.5);
         this.ValueTextLabelOption.align = "center";
 
-        this.ZoneBarRadius = 200;        
-        this.CenterPosition.set(200,200);
+        this.ZoneBarRadius = 200;
+        this.CenterPosition.set(200, 200);
 
         this.TitleLabel = "ANGLE";
         this.TitleLabelOption = new TextOption(new PIXI.Point(200, 370), new PIXI.Point(0.5, 0.5), "center", 38);
@@ -95,47 +92,42 @@ export class FullCircularGaugePanelOptionsBase extends CircularGaugePanelOptionB
         this.GreenZoneBarFullAngle = 90;
 
         const axisLabelFontSize = 30;
-        this.AxisLabel = 
-        [   "0",
-            "45",
-            "90",
-            "135",
-            "180",
-            "225",
-            "270"
-        ];
-        this.AxisLabelOption = 
-        [
-            new TextOption(new PIXI.Point(207, 335), new PIXI.Point(0, 0.5), "left", axisLabelFontSize),
-            new TextOption(new PIXI.Point(90, 310), new PIXI.Point(1, 0.5), "right", axisLabelFontSize),
-            new TextOption(new PIXI.Point(45, 193), new PIXI.Point(1, 0.5), "right", axisLabelFontSize),
-            new TextOption(new PIXI.Point(90, 75), new PIXI.Point(1, 0.5), "right", axisLabelFontSize),
-            new TextOption(new PIXI.Point(200, 40), new PIXI.Point(0.5, 1), "center", axisLabelFontSize),
-            new TextOption(new PIXI.Point(310, 75), new PIXI.Point(0, 0.5), "left", axisLabelFontSize),
-            new TextOption(new PIXI.Point(340, 195), new PIXI.Point(0.5, 0), "center", axisLabelFontSize)                
-        ];
+        this.AxisLabel =
+            ["0",
+                "45",
+                "90",
+                "135",
+                "180",
+                "225",
+                "270"
+            ];
+        this.AxisLabelOption =
+            [
+                new TextOption(new PIXI.Point(207, 335), new PIXI.Point(0, 0.5), "left", axisLabelFontSize),
+                new TextOption(new PIXI.Point(90, 310), new PIXI.Point(1, 0.5), "right", axisLabelFontSize),
+                new TextOption(new PIXI.Point(45, 193), new PIXI.Point(1, 0.5), "right", axisLabelFontSize),
+                new TextOption(new PIXI.Point(90, 75), new PIXI.Point(1, 0.5), "right", axisLabelFontSize),
+                new TextOption(new PIXI.Point(200, 40), new PIXI.Point(0.5, 1), "center", axisLabelFontSize),
+                new TextOption(new PIXI.Point(310, 75), new PIXI.Point(0, 0.5), "left", axisLabelFontSize),
+                new TextOption(new PIXI.Point(340, 195), new PIXI.Point(0.5, 0), "center", axisLabelFontSize)
+            ];
     }
 }
 
-export class FullCircularGaugePanelBase extends CircularGaugePanelBase
-{
-    constructor(options: FullCircularGaugePanelOptionsBase)
-    {
+export class FullCircularGaugePanelBase extends CircularGaugePanelBase {
+    constructor(options: FullCircularGaugePanelOptionsBase) {
         super(options);
     }
-    
-    static get RequestedTexturePath() : string[]
-    {
+
+    static get RequestedTexturePath(): string[] {
         return ["img/FullCircularGaugeTexture.json", "img/CircularGaugeLabelFont.fnt"];
     }
 
-    static get RequestedFontFamily() : string[]
-    {
+    static get RequestedFontFamily(): string[] {
         return ["FreeSans-Bold"]
     }
 
-    static get RequestedFontCSSURL() : string[]
-    {
+    static get RequestedFontCSSURL(): string[] {
         return ['font.css'];
     }
 

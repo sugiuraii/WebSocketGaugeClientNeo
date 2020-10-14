@@ -21,9 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
- 
-// This is required to webpack font/texture/html files
-/// <reference path="../lib/webpackRequire.ts" />
 
 //Import application base class
 import {MeterApplication} from "../lib/MeterAppBase/MeterApplication";

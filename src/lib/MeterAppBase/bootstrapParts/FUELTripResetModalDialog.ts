@@ -61,7 +61,7 @@ export class FUELTripResetModalDialog
     /**
      * Create fuel/trip reset button.
      */
-    public create()
+    public create() : void
     {
          $('body').append(this.dialogHTML);
          //Assign control change event

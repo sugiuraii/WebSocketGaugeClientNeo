@@ -23,20 +23,18 @@
  */
 
 import * as PIXI from "pixi.js";
-import {Gauge1DOptions} from './GaugeBase'
-import {Gauge1D} from './GaugeBase'
+import { Gauge1DOptions } from './GaugeBase'
+import { Gauge1D } from './GaugeBase'
 
 /**
  * Progress bar option class.
  */
-export class ProgressBarOptions extends Gauge1DOptions
-{
+export class ProgressBarOptions extends Gauge1DOptions {
     /**
      * Texture of prgress bar.
      */
     public Texture: PIXI.Texture;
-    constructor()
-    {
+    constructor() {
         super();
     }
 }
@@ -44,17 +42,15 @@ export class ProgressBarOptions extends Gauge1DOptions
 /**
  * Progress bar class.
  */
-export abstract class ProgressBar extends Gauge1D
-{
+export abstract class ProgressBar extends Gauge1D {
     private progressBarOptions: ProgressBarOptions;
-    private sprite : PIXI.Sprite;
-    private spriteMask : PIXI.Graphics;
+    private sprite: PIXI.Sprite;
+    private spriteMask: PIXI.Graphics;
 
     /**
      * @param options Option to set.
      */
-    constructor(options: ProgressBarOptions)
-    {
+    constructor(options: ProgressBarOptions) {
         super(options);
         this.progressBarOptions = options;
 
@@ -62,24 +58,24 @@ export abstract class ProgressBar extends Gauge1D
         this.spriteMask = new PIXI.Graphics();
 
         //Assign mask to sprite
-        this.sprite.mask = this.spriteMask;            
+        this.sprite.mask = this.spriteMask;
 
         //Assign spirite and mask to container
         super.addChild(this.sprite);
         super.addChild(this.spriteMask);
     }
-    
+
     /**
      * Get Options.
      * @return Options.
      */
-    get Options() {return this.progressBarOptions}
-    
+    get Options(): ProgressBarOptions { return this.progressBarOptions }
+
     /**
      * Get sprite mask.
      */
     protected get SpriteMask(): PIXI.Graphics { return this.spriteMask; }
-    
+
     /**
      * Get sprite.
      */

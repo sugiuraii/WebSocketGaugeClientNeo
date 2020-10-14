@@ -21,8 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-export interface ILogWindow
-{
-    clearLog() : void;
-    appendLog(message : string) : void;
+export interface ILogWindow {
+    clearLog(): void;
+    appendLog(message: string): void;
 }

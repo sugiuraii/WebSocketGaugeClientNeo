@@ -21,11 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
- 
-// This is required to webpack font/texture/html files
-/// <reference path="../../lib/webpackRequire.ts" />
-
-import * as PIXI from "pixi.js";
 
 //For including entry point html file in webpack
 require("./LEDRevMeter-ELM327.html");
@@ -35,24 +30,22 @@ import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
 import { MeterApplicationOption } from "../../lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
-import {BoostMeter} from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
-import {WaterTempMeter} from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
-import {LEDTachoMeter} from "../../parts/LEDTachoMeter/LEDTachoMeter";
+import { BoostMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
+import { WaterTempMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
+import { LEDTachoMeter } from "../../parts/LEDTachoMeter/LEDTachoMeter";
 
 //Import enumuator of parameter code
-import {OBDIIParameterCode} from "../../lib/WebSocket/WebSocketCommunication";
-import {ReadModeCode} from "../../lib/WebSocket/WebSocketCommunication";
+import { OBDIIParameterCode } from "../../lib/WebSocket/WebSocketCommunication";
+import { ReadModeCode } from "../../lib/WebSocket/WebSocketCommunication";
 
 import { calculateGearPosition } from "../../lib/MeterAppBase/utils/CalculateGearPosition";
 
-window.onload = function()
-{
+window.onload = function () {
     const meterapp = new LEDRevMeter_ELM327();
     meterapp.Start();
 }
 
-class LEDRevMeter_ELM327
-{
+class LEDRevMeter_ELM327 {
     public Start() {
         const appOption = new MeterApplicationOption();
         appOption.width = 1280;
@@ -78,22 +71,21 @@ class LEDRevMeter_ELM327
             const stage = app.stage;
 
             const boostMeter = new BoostMeter();
-            boostMeter.position.set(850,0);
-            
+            boostMeter.position.set(850, 0);
+
             const waterTempMeter = new WaterTempMeter();
-            waterTempMeter.position.set(0,0);
-    
+            waterTempMeter.position.set(0, 0);
+
             const ledRevMeter = new LEDTachoMeter();
-            ledRevMeter.position.set(330,110);
-                    
+            ledRevMeter.position.set(330, 110);
+
             stage.addChild(boostMeter);
             stage.addChild(waterTempMeter);
             stage.addChild(ledRevMeter);
-            
-            app.ticker.add(() => 
-            {
+
+            app.ticker.add(() => {
                 const timestamp = app.ticker.lastTime;
-                const boost = ws.ELM327WS.getVal(OBDIIParameterCode.Manifold_Absolute_Pressure, timestamp)  * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;            
+                const boost = ws.ELM327WS.getVal(OBDIIParameterCode.Manifold_Absolute_Pressure, timestamp) * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;            
                 const waterTemp = ws.ELM327WS.getRawVal(OBDIIParameterCode.Coolant_Temperature);
                 const rev = ws.ELM327WS.getVal(OBDIIParameterCode.Engine_Speed, timestamp);
                 const speed = ws.ELM327WS.getRawVal(OBDIIParameterCode.Vehicle_Speed);
@@ -101,9 +93,9 @@ class LEDRevMeter_ELM327
                 const totalTrip = ws.FUELTRIPWS.getTotalTrip();
                 const totalFuelRate = ws.FUELTRIPWS.getTotalGasMilage();
                 const neutralSw = false;
-                
+
                 const geasPos = calculateGearPosition(rev, speed, neutralSw);
-                
+
                 boostMeter.Value = boost;
                 waterTempMeter.Value = waterTemp;
                 ledRevMeter.Tacho = rev;
@@ -112,10 +104,9 @@ class LEDRevMeter_ELM327
                 ledRevMeter.Trip = totalTrip;
                 ledRevMeter.Fuel = totalFuel;
                 ledRevMeter.GasMilage = totalFuelRate;
-           });
+            });
         };
         const app = new MeterApplication(appOption);
         app.Run();
     }
 }
-        

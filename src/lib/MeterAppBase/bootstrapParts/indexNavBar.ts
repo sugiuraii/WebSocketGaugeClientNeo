@@ -23,7 +23,7 @@
  */
 
 import $ from "jquery";
-import {OptionModalDialog} from './OptionModalDialog'
+import { OptionModalDialog } from './OptionModalDialog'
 
 import 'bootstrap';
 import 'jquery';
@@ -33,21 +33,18 @@ import '../../../css/bootstrap-slate/bootstrap.slate.min.css';
 /**
  * Bootstrap navbar class for index.htmls.
  */
-export class indexNavBar
-{
+export class indexNavBar {
     /**
      * Create bootstrap navbar for index.html.
      */
-    public create()
-    {
+    public create(): void {
         const optionModalDialog = new OptionModalDialog();
         optionModalDialog.create();
         $('body').prepend(this.navbarHTML);
     }
-    
-    private get navbarHTML() : string
-    {
-        const html = 
+
+    private get navbarHTML(): string {
+        const html =
             '<nav class="navbar navbar-expand-lg navbar-dark bg-primary">\n\
                 <a class="navbar-brand" href="#">Menu</a>\n\
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">\n\
@@ -63,7 +60,7 @@ export class indexNavBar
                     </ul>\
                 </div>\
             </nav>';
-                   
+
         return html;
-    }    
+    }
 }

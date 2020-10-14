@@ -22,8 +22,6 @@
  * THE SOFTWARE.
  */
 
-/// <reference path="../../lib/webpackRequire.ts" />
-
 import { CircularProgressBar } from '../../lib/Graphics/PIXIGauge';
 import { CircularProgressBarOptions } from '../../lib/Graphics/PIXIGauge';
 import { RotationNeedleGauge } from '../../lib/Graphics/PIXIGauge';
@@ -67,7 +65,7 @@ export class AnalogMeterCluster extends PIXI.Container {
     private gasMilage = 0;
     private trip = 0;
     private fuel = 0;
-    private gearPos: string = "";
+    private gearPos = "";
 
     get Tacho(): number { return this.tacho; }
     set Tacho(val: number) {
@@ -77,28 +75,28 @@ export class AnalogMeterCluster extends PIXI.Container {
         this.tachoProgressBar.update();
         this.tachoNeedleGauge.update();
     }
-    get Speed() { return this.speed; }
+    get Speed(): number { return this.speed; }
     set Speed(val: number) {
         this.speed = val;
         this.speedNeedleGauge.Value = val;
         this.speedNeedleGauge.update();
         this.speedLabel.Value = val;
     }
-    get Boost() { return this.boost; }
+    get Boost(): number { return this.boost; }
     set Boost(val: number) {
         this.boost = val;
         this.boostNeedleGauge.Value = val;
         this.boostNeedleGauge.update();
     }
 
-    get WaterTemp() { return this.waterTemp; }
+    get WaterTemp(): number { return this.waterTemp; }
     set WaterTemp(val: number) {
         this.waterTemp = val;
         this.waterTempProgressBar.Value = val;
         this.waterTempProgressBar.update();
     }
 
-    get GasMilage() { return this.gasMilage; }
+    get GasMilage(): number { return this.gasMilage; }
     set GasMilage(val: number) {
         this.gasMilage = val;
         if (val > 99)
@@ -107,18 +105,18 @@ export class AnalogMeterCluster extends PIXI.Container {
         else
             this.gasMilageLabel.Value = val;
     }
-    get Trip() { return this.trip }
+    get Trip(): number { return this.trip }
     set Trip(val: number) {
         this.trip = val;
         this.tripLabel.Value = val;
     }
-    get Fuel() { return this.fuel }
+    get Fuel(): number { return this.fuel }
     set Fuel(val: number) {
         this.fuel = val;
         this.fuelLabel.Value = val;
     }
 
-    get GearPos() { return this.gearPos }
+    get GearPos(): string { return this.gearPos }
     set GearPos(val: string) {
         this.gearPos = val;
         this.gearPosLabel.text = val;

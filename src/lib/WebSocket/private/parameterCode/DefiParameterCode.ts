@@ -22,14 +22,17 @@
  * THE SOFTWARE.
  */
 
- //Define string based enum of ParameterCode
-export enum DefiParameterCode
-{
-    Manifold_Absolute_Pressure,
-    Engine_Speed,
-    Oil_Pressure,
-    Fuel_Rail_Pressure,
-    Exhaust_Gas_Temperature,
-    Oil_Temperature,
-    Coolant_Temperature
-}
+//Define string based enum of ParameterCode
+export const DefiParameterCode =
+    {
+        Manifold_Absolute_Pressure: "Manifold_Absolute_Pressure",
+        Engine_Speed: "Engine_Speed",
+        Oil_Pressure: "Oil_Pressure",
+        Fuel_Rail_Pressure: "Fuel_Rail_Pressure",
+        Exhaust_Gas_Temperature: "Exhaust_Gas_Temperature",
+        Oil_Temperature: "Oil_Temperature",
+        Coolant_Temperature: "Coolant_Temperature"
+
+    } as const;
+
+export type DefiParameterCode = typeof DefiParameterCode[keyof typeof DefiParameterCode];
