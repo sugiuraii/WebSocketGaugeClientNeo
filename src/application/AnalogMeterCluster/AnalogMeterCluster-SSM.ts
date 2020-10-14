@@ -21,11 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
- 
-// This is required to webpack font/texture/html files 
-/// <reference path="../../lib/webpackRequire.ts" />
-
-import * as PIXI from "pixi.js";
 
 //Import application base class
 import {MeterApplication} from "../../lib/MeterAppBase/MeterApplication";
@@ -40,6 +35,7 @@ import {SSMSwitchCode} from "../../lib/WebSocket/WebSocketCommunication";
 import {ReadModeCode} from "../../lib/WebSocket/WebSocketCommunication";
 
 import {calculateGearPosition} from "../../lib/MeterAppBase/utils/CalculateGearPosition";
+import { SSMSwitchCodeToParameterCode } from "../../lib/WebSocket/private/parameterCode/SSMSwitchCode";
 
 //For including entry point html file in webpack
 require("./AnalogMeterCluster-SSM.html");
@@ -68,7 +64,7 @@ class AnalogMeterCluster_SSM
         appOption.ParameterCode.SSM.addall({code : SSMParameterCode.Manifold_Absolute_Pressure, readmode : ReadModeCode.SLOWandFAST});
         appOption.ParameterCode.SSM.addall({code : SSMParameterCode.Vehicle_Speed, readmode : ReadModeCode.SLOWandFAST});
         appOption.ParameterCode.SSM.addall({code : SSMParameterCode.Coolant_Temperature, readmode : ReadModeCode.SLOW});
-        appOption.ParameterCode.SSM.addall({code : SSMSwitchCode.getNumericCodeFromSwitchCode(SSMSwitchCode.Neutral_Position_Switch), readmode : ReadModeCode.SLOWandFAST});
+        appOption.ParameterCode.SSM.addall({code : SSMSwitchCodeToParameterCode(SSMSwitchCode.Neutral_Position_Switch), readmode : ReadModeCode.SLOWandFAST});
 
         appOption.SetupPIXIMeterPanel = (app, ws) =>
         {
