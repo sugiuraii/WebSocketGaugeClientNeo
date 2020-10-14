@@ -97,7 +97,7 @@ class AssettoCorsaSHMWSTest extends WebSocketTesterBase {
 
     public inputPhysWSSend() {
         const codeFlag = $('#physCodeFlag').val() === "true" ? true : false;
-        const codeName = AssettoCorsaSHMPhysicsParameterCode[$('#physCodeSelect').val().toString()];
+        const codeName = $('#physCodeSelect').val() as AssettoCorsaSHMPhysicsParameterCode;
         this.webSocket.SendPhysicsWSSend(codeName, codeFlag);
     }
 
@@ -108,7 +108,7 @@ class AssettoCorsaSHMWSTest extends WebSocketTesterBase {
 
     public inputGrphWSSend() {
         const codeFlag = $('#grphCodeFlag').val() === "true" ? true : false;
-        const codeName = AssettoCorsaSHMGraphicsParameterCode[$('#grphCodeSelect').val().toString()];
+        const codeName = $('#grphCodeSelect').val() as AssettoCorsaSHMGraphicsParameterCode;
         this.webSocket.SendGraphicsWSSend(codeName, codeFlag);
     }
 
@@ -118,7 +118,7 @@ class AssettoCorsaSHMWSTest extends WebSocketTesterBase {
     }
 
     public inputStaticWSSend() {
-        const codeName = AssettoCorsaSHMStaticInfoParameterCode[$('#staticCodeSelect').val().toString()];
+        const codeName = $('#staticCodeSelect').val() as AssettoCorsaSHMStaticInfoParameterCode;
         const codeFlag = $('#staticCodeFlag').val() === "true" ? true : false;
         this.webSocket.SendStaticInfoWSSend(codeName, codeFlag);
     }

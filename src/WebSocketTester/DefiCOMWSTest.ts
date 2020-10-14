@@ -87,7 +87,7 @@ export class DefiCOMWSTest extends WebSocketTesterBase {
 
     public inputWSSend(): void {
         const codeFlag = $('#codeFlag').val() === "true" ? true : false;
-        this.webSocket.SendWSSend(DefiParameterCode[$('#codeSelect').val().toString()], codeFlag);
+        this.webSocket.SendWSSend(($('#codeSelect').val() as DefiParameterCode), codeFlag);
     }
 
     public inputWSInterval(): void {

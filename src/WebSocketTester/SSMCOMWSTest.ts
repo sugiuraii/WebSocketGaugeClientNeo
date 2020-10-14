@@ -87,10 +87,10 @@ export class SSMCOMWSTest extends WebSocketTesterBase {
     }
 
     public inputWSSend(): void {
-        const codeSelect = $('#codeSelect').val().toString();
-        const codeReadmode = $('#codeReadmode').val().toString();
+        const codeSelect = $('#codeSelect').val() as SSMParameterCode;
+        const codeReadmode = $('#codeReadmode').val() as ReadModeCode;
         const codeFlag = $('#codeFlag').val() === "true" ? true : false;
-        this.webSocket.SendCOMRead(SSMParameterCode[codeSelect], ReadModeCode[codeReadmode], codeFlag);
+        this.webSocket.SendCOMRead(codeSelect, codeReadmode, codeFlag);
     }
 
     public inputWSInterval(): void {

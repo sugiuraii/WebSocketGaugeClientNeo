@@ -100,7 +100,7 @@ class ArduinoCOMWSTest extends WebSocketTesterBase
     public inputWSSend()
     {
         const codeFlag = $('#codeFlag').val() === "true" ? true : false; 
-        this.webSocket.SendWSSend(ArduinoParameterCode[$('#codeSelect').val().toString()], codeFlag);
+        this.webSocket.SendWSSend($('#codeSelect').val() as ArduinoParameterCode, codeFlag);
     }
 
     public inputWSInterval()

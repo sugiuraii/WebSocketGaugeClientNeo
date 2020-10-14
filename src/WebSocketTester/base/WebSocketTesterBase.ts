@@ -47,7 +47,7 @@ export abstract class WebSocketTesterBase
     
     public connectWebSocket() : void
     {
-        this.webSocketBase.URL = $("#serverURLBox").val().toString();
+        this.webSocketBase.URL = $("#serverURLBox").val() as string;
         this.webSocketBase.Connect();
     }
 
@@ -58,8 +58,8 @@ export abstract class WebSocketTesterBase
     
     protected assignButtonEvents() : void
     {
-        $("#connectButton").click(()=> this.connectWebSocket());
-        $("#disconnectButton").click(() => this.disconnectWebSocket());
+        $("#connectButton").on('click', ()=> this.connectWebSocket());
+        $("#disconnectButton").on('click', () => this.disconnectWebSocket());
     }
     
     protected abstract setParameterCodeSelectBox() : void;
