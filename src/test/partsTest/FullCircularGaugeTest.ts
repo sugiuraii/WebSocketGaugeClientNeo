@@ -22,60 +22,49 @@
  * THE SOFTWARE.
  */
 
-/// <reference path="../../lib/webpackRequire.ts" />
-
-import {BoostGaugePanel} from "../../parts/CircularGauges/FullCircularGaugePanel";
+import { BoostGaugePanel } from "../../parts/CircularGauges/FullCircularGaugePanel";
 import * as WebFont from "webfontloader";
 import * as PIXI from 'pixi.js';
 
 require("./FullCircularGaugeTest.html");
 
-window.onload = function()
-{
+window.onload = function () {
     WebFont.load({
-        custom: 
-        { 
+        custom:
+        {
             families: BoostGaugePanel.RequestedFontFamily,
-            urls: BoostGaugePanel.RequestedFontCSSURL 
+            urls: BoostGaugePanel.RequestedFontCSSURL
         },
-        active : function(){FullCircularGaugeTest.preloadTexture();}
+        active: function () { preloadTexture(); }
     });
 }
 
-namespace FullCircularGaugeTest
-{
-    export function preloadTexture()
-    {
-        PIXI.Loader.shared.add(BoostGaugePanel.RequestedTexturePath);;
-        PIXI.Loader.shared.load(main);
-    }
-    function main()
-    {
-        const app = new PIXI.Application({height:1366,width:1366});
-        document.body.appendChild(app.view);
-        let gaugeArray: BoostGaugePanel[] = new Array();
-        let index = 0;
-        for (let j = 0; j < 6; j++)
-        {
-            for (let i = 0; i < 6 ; i++)
-            {
-                gaugeArray.push(new BoostGaugePanel);
-                gaugeArray[index].pivot = new PIXI.Point(200,200);
-                gaugeArray[index].scale.set(0.6, 0.6);
-                gaugeArray[index].position = new PIXI.Point(240*i+150,240*j+150);
-                gaugeArray[index].Value = 0;
-                app.stage.addChild(gaugeArray[index]);
-                index++;
-            }
+function preloadTexture() {
+    PIXI.Loader.shared.add(BoostGaugePanel.RequestedTexturePath);
+    PIXI.Loader.shared.load(main);
+}
+function main() {
+    const app = new PIXI.Application({ height: 1366, width: 1366 });
+    document.body.appendChild(app.view);
+    const gaugeArray: BoostGaugePanel[] = [];
+    let index = 0;
+    for (let j = 0; j < 6; j++) {
+        for (let i = 0; i < 6; i++) {
+            gaugeArray.push(new BoostGaugePanel);
+            gaugeArray[index].pivot = new PIXI.Point(200, 200);
+            gaugeArray[index].scale.set(0.6, 0.6);
+            gaugeArray[index].position = new PIXI.Point(240 * i + 150, 240 * j + 150);
+            gaugeArray[index].Value = 0;
+            app.stage.addChild(gaugeArray[index]);
+            index++;
         }
-        app.ticker.add(() => {
-            for (let i = 0; i < gaugeArray.length; i++)
-            {
-                if (gaugeArray[i].Value + 0.01 >= 2)
-                    gaugeArray[i].Value = -1;
-                else           
-                    gaugeArray[i].Value = gaugeArray[i].Value + 0.01;
-            }
-            });
     }
+    app.ticker.add(() => {
+        for (let i = 0; i < gaugeArray.length; i++) {
+            if (gaugeArray[i].Value + 0.01 >= 2)
+                gaugeArray[i].Value = -1;
+            else
+                gaugeArray[i].Value = gaugeArray[i].Value + 0.01;
+        }
+    });
 }

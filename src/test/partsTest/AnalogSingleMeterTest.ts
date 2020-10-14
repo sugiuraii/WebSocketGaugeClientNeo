@@ -22,53 +22,41 @@
  * THE SOFTWARE.
  */
 
-/// <reference path="../../lib/webpackRequire.ts" />
 import * as PIXI from 'pixi.js';
-import {AnalogSingleMeter} from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
-import {AnalogSingleMeterOption} from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
-import * as WebFont from "webfontloader";
+import { AnalogSingleMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
+import { AnalogSingleMeterOption } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
 
 require("./AnalogSingleMeterTest.html");
 
-window.onload = function()
-{
-    AnalogSingleMeterTest.preloadTexture();
+window.onload = function () {
+    preloadTexture();
 }
-
-namespace AnalogSingleMeterTest
-{
-    export function preloadTexture()
-    {
-        PIXI.Loader.shared.add(AnalogSingleMeter.RequestedTexturePath);;
-        PIXI.Loader.shared.load(main);
-    }
-    function main()
-    {
-        const app = new PIXI.Application({height:1366,width:1366});
-        document.body.appendChild(app.view);
-        let gaugeArray: AnalogSingleMeter[] = new Array();
-        let index = 0;
-        for (let j = 0; j < 6; j++)
-        {
-            for (let i = 0; i < 6 ; i++)
-            {
-                gaugeArray.push(new AnalogSingleMeter(new AnalogSingleMeterOption()));
-                gaugeArray[index].pivot = new PIXI.Point(200,200);
-                gaugeArray[index].scale.set(1);
-                gaugeArray[index].position = new PIXI.Point(400*i+150,400*j+150);
-                gaugeArray[index].Value = 0;
-                app.stage.addChild(gaugeArray[index]);
-                index++;
-            }
+function preloadTexture(): void {
+    PIXI.Loader.shared.add(AnalogSingleMeter.RequestedTexturePath);
+    PIXI.Loader.shared.load(main);
+}
+function main(): void {
+    const app = new PIXI.Application({ height: 1366, width: 1366 });
+    document.body.appendChild(app.view);
+    const gaugeArray: AnalogSingleMeter[] = [];
+    let index = 0;
+    for (let j = 0; j < 6; j++) {
+        for (let i = 0; i < 6; i++) {
+            gaugeArray.push(new AnalogSingleMeter(new AnalogSingleMeterOption()));
+            gaugeArray[index].pivot = new PIXI.Point(200, 200);
+            gaugeArray[index].scale.set(1);
+            gaugeArray[index].position = new PIXI.Point(400 * i + 150, 400 * j + 150);
+            gaugeArray[index].Value = 0;
+            app.stage.addChild(gaugeArray[index]);
+            index++;
         }
-        app.ticker.add(() => {
-            for (let i = 0; i < gaugeArray.length; i++)
-            {
-                if (gaugeArray[i].Value + 0.01 >= 2)
-                    gaugeArray[i].Value = -1;
-                else           
-                    gaugeArray[i].Value = gaugeArray[i].Value + 0.01;
-            }
-            });
     }
+    app.ticker.add(() => {
+        for (let i = 0; i < gaugeArray.length; i++) {
+            if (gaugeArray[i].Value + 0.01 >= 2)
+                gaugeArray[i].Value = -1;
+            else
+                gaugeArray[i].Value = gaugeArray[i].Value + 0.01;
+        }
+    });
 }

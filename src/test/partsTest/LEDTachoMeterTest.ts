@@ -21,47 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
- 
-/// <reference path="../../lib/webpackRequire.ts" />
+
 import * as PIXI from 'pixi.js';
-import {LEDTachoMeter} from "../../parts/LEDTachoMeter/LEDTachoMeter";
+import { LEDTachoMeter } from "../../parts/LEDTachoMeter/LEDTachoMeter";
 import * as WebFont from "webfontloader";
 
 require("./LEDTachoMeterTest.html");
 
-window.onload = function()
-{
+window.onload = function () {
     WebFont.load({
-        custom: 
-        { 
+        custom:
+        {
             families: LEDTachoMeter.RequestedFontFamily,
-            urls: LEDTachoMeter.RequestedFontCSSURL 
+            urls: LEDTachoMeter.RequestedFontCSSURL
         },
-        active : function(){LEDTachoMeterTest.preloadTexture();}
+        active: function () { preloadTexture(); }
     });
 }
 
-namespace LEDTachoMeterTest
-{
-    export function preloadTexture()
-    {
-        PIXI.Loader.shared.add(LEDTachoMeter.RequestedTexturePath);
-        PIXI.Loader.shared.load(main);
-    }
+function preloadTexture() {
+    PIXI.Loader.shared.add(LEDTachoMeter.RequestedTexturePath);
+    PIXI.Loader.shared.load(main);
+}
 
-    function main()
-    {
-        const app = new PIXI.Application({height:1366,width:1366});
-        document.body.appendChild(app.view);
+function main() {
+    const app = new PIXI.Application({ height: 1366, width: 1366 });
+    document.body.appendChild(app.view);
 
-        const meter = new LEDTachoMeter();
-        app.stage.addChild(meter);
+    const meter = new LEDTachoMeter();
+    app.stage.addChild(meter);
 
-        app.ticker.add(function(){
-            meter.Tacho += 100;
-            if (meter.Tacho > 9000)
-                meter.Tacho = 0;
-        });
+    app.ticker.add(function () {
+        meter.Tacho += 100;
+        if (meter.Tacho > 9000)
+            meter.Tacho = 0;
+    });
 
-    }
 }
