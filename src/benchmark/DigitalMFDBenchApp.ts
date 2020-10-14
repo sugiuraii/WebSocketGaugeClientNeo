@@ -21,9 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
- 
-// This is required to webpack font/texture/html files
-/// <reference path="../lib/webpackRequire.ts" />
 
 //Import application base class
 import {MeterApplication} from "../lib/MeterAppBase/MeterApplication";
@@ -121,7 +118,7 @@ class DigitalMFDBenchApp
             const gasMilage5min = 3.0;
             const gasMilage10min = 5.0;
             const gasMilage15min = 7.0;
-            const gasMilage20min = 9.0;;
+            const gasMilage20min = 9.0;
             const gasMilage25min = 12.0;
             const gasMilage30min = 15.0;
             const totalGasMilage = 12.0;
