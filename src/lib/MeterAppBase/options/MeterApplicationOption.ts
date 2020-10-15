@@ -78,8 +78,8 @@ export class MeterApplicationOption {
     public readonly PreloadResource = new PreloadResourceCollection();
     public readonly FUELTRIPWebsocketOption = new FUELTRIPWebsocketOption();
 
-    public height: number;
-    public width: number;
+    public height = 640;
+    public width = 480;
 
-    public SetupPIXIMeterPanel: (pixiApp: PIXI.Application, wsObj: WebsocketObjectCollection) => void;
+    public SetupPIXIMeterPanel: (pixiApp: PIXI.Application, wsObj: WebsocketObjectCollection) => void = () => {/* do nothing*/};
 }

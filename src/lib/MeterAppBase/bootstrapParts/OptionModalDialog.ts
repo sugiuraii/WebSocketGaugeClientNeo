@@ -108,7 +108,8 @@ export class OptionModalDialog {
     const preserveDrawingBuffer = localStorage.getItem("preserveDrawingBuffer") === "true" ? true : false;
     $('#wsIntervalInput').val(wsInterval);
     $('#preserveDrawingBufferCheckBox').prop('checked', preserveDrawingBuffer);
-    const wsServerHostname: string = localStorage.getItem("WSServerHostname");
+
+    const wsServerHostname: string = (typeof localStorage.getItem("WSServerHostname") === "string")?(localStorage.getItem("WSServerHostname") as string):"localhost";
     const setWSServerSameAsHttpSite: boolean = localStorage.getItem("SetWSServerSameAsHttp") === "true" ? true : false;
     $('#websocketServerHostname').val(wsServerHostname);
     $('#setWSServerSameAsHttpSite').prop('checked', setWSServerSameAsHttpSite);

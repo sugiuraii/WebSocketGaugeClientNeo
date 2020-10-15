@@ -24,5 +24,5 @@
 import { WebsocketStatus } from '../WebsocketAppBackend/WebsocketStatus'
 
 export interface IStatusIndicator {
-    SetStatus(status: WebsocketStatus);
+    SetStatus(status: WebsocketStatus) : void;
 }
