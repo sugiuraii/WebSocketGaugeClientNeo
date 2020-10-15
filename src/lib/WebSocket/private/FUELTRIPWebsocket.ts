@@ -56,11 +56,13 @@ export class FUELTRIPWebsocket extends WebsocketCommon {
     get OnSectFUELTRIPPacketReceived(): (sectSpan: number, sectTrip: number[], sectGas: number[], sectGasMilage: number[]) => void { return this.onSectFUELTRIPPacketReceived; }
     set OnSectFUELTRIPPacketReceived(func: (sectSpan: number, sectTrip: number[], sectGas: number[], sectGasMilage: number[]) => void) { this.onSectFUELTRIPPacketReceived = func; }
 
-    constructor() {
-        super();
+    constructor(url : string) {
+        super(url);
         this.recordIntervalTimeEnabled = true;
         this.momentFUELTripPacketPreviousTimeStamp = window.performance.now();
         this.momentFUELTripPacketIntervalTime = 0;
+        this.onMomentFUELTRIPPacketReceived = () => {/*do nothing*/};
+        this.onSectFUELTRIPPacketReceived = () => {/*ddo nothing*/};
     }
 
     public getMomentGasMilage(timestamp: number): number {

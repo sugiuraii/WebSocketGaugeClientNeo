@@ -37,26 +37,27 @@ export class DefiCOMWebsocket extends WebsocketCommon {
     //Interpolate value buffer
     private interpolateBuffers: { [code: string]: VALInterpolationBuffer } = {};
 
-    constructor() {
-        super();
+    constructor(url : string) {
+        super(url);
         this.modePrefix = "DEFI";
         this.valPacketPreviousTimeStamp = window.performance.now();
         this.valPacketIntervalTime = 0;
+        this.onVALPacketReceived = () => {/* do nothing*/};
     }
 
-    private checkInterpolateBufferAndCreateIfEmpty(code: string): void {
+    private checkInterpolateBufferAndCreateIfEmpty(code: DefiParameterCode): void {
         if (!(code in this.interpolateBuffers))
             this.interpolateBuffers[code] = new VALInterpolationBuffer();
     }
 
     public getVal(code: DefiParameterCode, timestamp: number): number {
-        this.checkInterpolateBufferAndCreateIfEmpty(DefiParameterCode[code]);
-        return this.interpolateBuffers[DefiParameterCode[code]].getVal(timestamp);
+        this.checkInterpolateBufferAndCreateIfEmpty(code);
+        return this.interpolateBuffers[code].getVal(timestamp);
     }
 
     public getRawVal(code: DefiParameterCode): number {
-        this.checkInterpolateBufferAndCreateIfEmpty(DefiParameterCode[code]);
-        return this.interpolateBuffers[DefiParameterCode[code]].getRawVal();
+        this.checkInterpolateBufferAndCreateIfEmpty(code);
+        return this.interpolateBuffers[code].getRawVal();
     }
 
     private processVALJSONMessage(receivedJson: JSONFormats.StringVALJSONMessage): void {
@@ -74,7 +75,7 @@ export class DefiCOMWebsocket extends WebsocketCommon {
             if (Object.values(DefiParameterCode).includes(key as DefiParameterCode)) {
                 const val = Number(receivedJson.val[key]);
                 // Register to interpolate buffer
-                this.checkInterpolateBufferAndCreateIfEmpty(key);
+                this.checkInterpolateBufferAndCreateIfEmpty(key as DefiParameterCode);
                 this.interpolateBuffers[key].setVal(val);
             }
             else

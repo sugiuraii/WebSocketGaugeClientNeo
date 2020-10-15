@@ -37,26 +37,29 @@ export class ArduinoCOMWebsocket extends WebsocketCommon {
     //Interpolate value buffer
     private interpolateBuffers: { [code: string]: VALInterpolationBuffer } = {};
 
-    constructor() {
-        super();
+    constructor(url : string) {
+        super(url);
         this.modePrefix = "ARDUINO";
         this.valPacketPreviousTimeStamp = window.performance.now();
         this.valPacketIntervalTime = 0;
+        this.onVALPacketReceived = () => {
+            // do nothing.
+        };
     }
 
-    private checkInterpolateBufferAndCreateIfEmpty(code: string): void {
+    private checkInterpolateBufferAndCreateIfEmpty(code: ArduinoParameterCode): void {
         if (!(code in this.interpolateBuffers))
             this.interpolateBuffers[code] = new VALInterpolationBuffer();
     }
 
     public getVal(code: ArduinoParameterCode, timestamp: number): number {
-        this.checkInterpolateBufferAndCreateIfEmpty(ArduinoParameterCode[code]);
-        return this.interpolateBuffers[ArduinoParameterCode[code]].getVal(timestamp);
+        this.checkInterpolateBufferAndCreateIfEmpty(code);
+        return this.interpolateBuffers[code].getVal(timestamp);
     }
 
     public getRawVal(code: ArduinoParameterCode): number {
-        this.checkInterpolateBufferAndCreateIfEmpty(ArduinoParameterCode[code]);
-        return this.interpolateBuffers[ArduinoParameterCode[code]].getRawVal();
+        this.checkInterpolateBufferAndCreateIfEmpty(code);
+        return this.interpolateBuffers[code].getRawVal();
     }
 
     private processVALJSONMessage(receivedJson: JSONFormats.StringVALJSONMessage): void {
@@ -74,7 +77,7 @@ export class ArduinoCOMWebsocket extends WebsocketCommon {
             if (Object.values(ArduinoParameterCode).includes(key as ArduinoParameterCode)) {
                 const val = Number(receivedJson.val[key]);
                 // Register to interpolate buffer
-                this.checkInterpolateBufferAndCreateIfEmpty(key);
+                this.checkInterpolateBufferAndCreateIfEmpty(key as ArduinoParameterCode);
                 this.interpolateBuffers[key].setVal(val);
             }
             else

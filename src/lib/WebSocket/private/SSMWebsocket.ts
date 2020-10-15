@@ -41,19 +41,20 @@ export class SSMWebsocket extends WebsocketCommon {
     //Switch data buffer    
     private switchFlagBuffers: { [code: string]: boolean } = {};
 
-    constructor() {
-        super();
+    constructor(url : string) {
+        super(url);
         this.modePrefix = "SSM";
         this.valPacketPreviousTimeStamp = window.performance.now();
         this.valPacketIntervalTime = 0;
+        this.onVALPacketReceived = () => {/* do nothing*/};
     }
 
-    private checkInterpolateBufferAndCreateIfEmpty(code: string): void {
+    private checkInterpolateBufferAndCreateIfEmpty(code: SSMParameterCode): void {
         if (!(code in this.interpolateBuffers))
             this.interpolateBuffers[code] = new VALInterpolationBuffer();
     }
 
-    private checkSwitchFlagBuffersAndCreateIfEmpty(code: string): void {
+    private checkSwitchFlagBuffersAndCreateIfEmpty(code: SSMSwitchCode): void {
         if (!(code in this.switchFlagBuffers))
             this.switchFlagBuffers[code] = false;
     }
@@ -65,15 +66,13 @@ export class SSMWebsocket extends WebsocketCommon {
     }
 
     public getRawVal(code: SSMParameterCode): number {
-        const codeStr = SSMParameterCode[code];
-        this.checkInterpolateBufferAndCreateIfEmpty(codeStr);
-        return this.interpolateBuffers[codeStr].getRawVal();
+        this.checkInterpolateBufferAndCreateIfEmpty(code);
+        return this.interpolateBuffers[code].getRawVal();
     }
 
     public getSwitchFlag(code: SSMSwitchCode): boolean {
-        const codeStr = SSMSwitchCode[code];
-        this.checkSwitchFlagBuffersAndCreateIfEmpty[codeStr];
-        return this.switchFlagBuffers[codeStr];
+        this.checkSwitchFlagBuffersAndCreateIfEmpty(code);
+        return this.switchFlagBuffers[code];
     }
 
     public SendCOMRead(code: SSMParameterCode, readmode: ReadModeCode, flag: boolean): void {
@@ -117,7 +116,7 @@ export class SSMWebsocket extends WebsocketCommon {
             if (Object.values(SSMParameterCode).includes(key as SSMParameterCode)) {
                 const val = Number(valStr);
                 // Register to interpolate buffer
-                this.checkInterpolateBufferAndCreateIfEmpty(key);
+                this.checkInterpolateBufferAndCreateIfEmpty(key as SSMParameterCode);
                 this.interpolateBuffers[key].setVal(val);
             }
             else if (Object.values(SSMSwitchCode).includes(key as SSMSwitchCode)) {

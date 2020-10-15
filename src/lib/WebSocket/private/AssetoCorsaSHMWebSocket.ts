@@ -48,12 +48,14 @@ export class AssettoCorsaSHMWebsocket extends WebsocketCommon {
 
     private stringBuffers: { [code: string]: string } = {};
 
-    constructor() {
-        super();
+    constructor(url : string) {
+        super(url);
         this.modePrefix = "ACSHM";
         this.recordIntervalTimeEnabled = true;
         this.valPacketPreviousTimeStamp = window.performance.now();
         this.valPacketIntervalTime = 0;
+        this.onVALPacketReceivedByCode = {};
+        this.onVALPacketReceived = () =>{/* do nothing*/};
     }
 
     public SendPhysicsWSSend(code: AssettoCorsaSHMPhysicsParameterCode, flag: boolean): void {
@@ -103,7 +105,7 @@ export class AssettoCorsaSHMWebsocket extends WebsocketCommon {
         this.WebSocket.send(jsonstr);
     }
 
-    private checkInterpolateBufferAndCreateIfEmpty(codeName: string): void {
+    private checkInterpolateBufferAndCreateIfEmpty(codeName: AssettoCorsaSHMNumericalVALCode): void {
         if (!(codeName in this.valueInterpolateBuffers))
             this.valueInterpolateBuffers[codeName] = new Interpolation.VALInterpolationBuffer();
     }
@@ -152,7 +154,7 @@ export class AssettoCorsaSHMWebsocket extends WebsocketCommon {
             {
                 const val = Number(receivedJson.val[key]);
                 // Register to interpolate buffer
-                this.checkInterpolateBufferAndCreateIfEmpty(AssettoCorsaSHMNumericalVALCode[key]);
+                this.checkInterpolateBufferAndCreateIfEmpty(key as AssettoCorsaSHMNumericalVALCode);
                 this.valueInterpolateBuffers[key].setVal(val);
             }
             else if (Object.values(AssettoCorsaSHMStringVALCode).includes(key as AssettoCorsaSHMStringVALCode)) //Val is string.

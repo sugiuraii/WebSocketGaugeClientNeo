@@ -38,28 +38,27 @@ export class ELM327COMWebsocket extends WebsocketCommon {
     //Interpolate value buffer
     private interpolateBuffers: { [code: string]: VALInterpolationBuffer } = {};
 
-    constructor() {
-        super();
+    constructor(url : string) {
+        super(url);
         this.modePrefix = "ELM327";
         this.valPacketPreviousTimeStamp = window.performance.now();
         this.valPacketIntervalTime = 0;
+        this.onVALPacketReceived = () => {/* do nothing*/};
     }
 
-    private checkInterpolateBufferAndCreateIfEmpty(code: string): void {
+    private checkInterpolateBufferAndCreateIfEmpty(code: OBDIIParameterCode): void {
         if (!(code in this.interpolateBuffers))
             this.interpolateBuffers[code] = new VALInterpolationBuffer();
     }
 
     public getVal(code: OBDIIParameterCode, timestamp: number): number {
-        const codeStr = OBDIIParameterCode[code];
-        this.checkInterpolateBufferAndCreateIfEmpty(codeStr);
-        return this.interpolateBuffers[codeStr].getVal(timestamp);
+        this.checkInterpolateBufferAndCreateIfEmpty(code);
+        return this.interpolateBuffers[code].getVal(timestamp);
     }
 
     public getRawVal(code: OBDIIParameterCode): number {
-        const codeStr = OBDIIParameterCode[code];
-        this.checkInterpolateBufferAndCreateIfEmpty(codeStr);
-        return this.interpolateBuffers[codeStr].getRawVal();
+        this.checkInterpolateBufferAndCreateIfEmpty(code);
+        return this.interpolateBuffers[code].getRawVal();
     }
 
     public SendCOMRead(code: OBDIIParameterCode, readmode: ReadModeCode, flag: boolean): void {
@@ -103,7 +102,7 @@ export class ELM327COMWebsocket extends WebsocketCommon {
             if (Object.values(OBDIIParameterCode).includes(key as OBDIIParameterCode)) {
                 const val = Number(valStr);
                 // Register to interpolate buffer
-                this.checkInterpolateBufferAndCreateIfEmpty(key);
+                this.checkInterpolateBufferAndCreateIfEmpty(key as OBDIIParameterCode);
                 this.interpolateBuffers[key].setVal(val);
             }
             else

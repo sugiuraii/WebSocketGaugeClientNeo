@@ -25,18 +25,18 @@
 import * as JSONFormats from "./JSONFormats";
 
 export abstract class WebsocketCommon {
-    protected modePrefix: string;
-    private websocket: WebSocket;
+    protected modePrefix = "";
+    private readonly websocket: WebSocket;
     private isConnetced = false;
-    private url: string;
-    private onRESPacketReceived: (message: string) => void;
-    private onERRPacketReceived: (message: string) => void;
-    private onWebsocketOpen: () => void;
-    private onWebsocketClose: () => void;
-    private onWebsocketError: (message: string) => void;
+    private onRESPacketReceived: (message: string) => void = () => {/*do nothing.*/};
+    private onERRPacketReceived: (message: string) => void = () => {/*do nothing.*/};
+    private onWebsocketOpen: () => void = () => {/*do nothing.*/};
+    private onWebsocketClose: () => void = () => {/*do nothing.*/};
+    private onWebsocketError: (message: string) => void = () => {/*do nothing.*/};
 
-    constructor() {
+    constructor(url : string) {
         this.onWebsocketError = (msg: string) => alert(msg);
+        this.websocket = new WebSocket(url);
     }
 
     protected abstract parseIncomingMessage(msg: string): void;
@@ -44,7 +44,6 @@ export abstract class WebsocketCommon {
     * Connect websocket.
     */
     public Connect(): void {
-        this.websocket = new WebSocket(this.url);
         if (this.websocket === null) {
             if (typeof (this.onWebsocketError) !== "undefined")
                 this.onWebsocketError("Websocket is not supported.");
@@ -109,8 +108,7 @@ export abstract class WebsocketCommon {
 
     public get ModePrefix(): string { return this.modePrefix; }
     protected get WebSocket(): WebSocket { return this.websocket; }
-    public get URL(): string { return this.url; }
-    public set URL(val: string) { this.url = val; }
+    public get URL(): string { return this.websocket.url; }
     public get OnRESPacketReceived(): (message: string) => void { return this.onRESPacketReceived; }
     public set OnRESPacketReceived(func: (message: string) => void) { this.onRESPacketReceived = func; }
     public get OnERRPacketReceived(): (message: string) => void { return this.onERRPacketReceived; }
