@@ -43,14 +43,14 @@ export class SSMWebsocketBackend {
 
    private readonly webSocketServerURL: string;
 
-   private indicatorUpdateIntervalID: number;
+   private indicatorUpdateIntervalID = 0;
 
    constructor(serverurl: string, paramCode: { code: SSMParameterCode, readmode: ReadModeCode }[], loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
-      this.ssmWS = new SSMWebsocket();
+      this.ssmWS = new SSMWebsocket(serverurl);
       this.parameterCodeList = paramCode;
       this.loggerWindow = loggerWindow;
       this.statusIndicator = statusIndicator;
-      this.webSocketServerURL = serverurl;
+      this.webSocketServerURL = this.ssmWS.URL;
 
       this.ssmWS.OnWebsocketError = (message: string) => this.loggerWindow.appendLog(this.logPrefix + " websocket error : " + message);
    }
@@ -85,8 +85,6 @@ export class SSMWebsocketBackend {
       const LogWindow = this.loggerWindow;
       const webSocketObj = this.ssmWS;
       const logPrefix = this.logPrefix;
-
-      webSocketObj.URL = this.webSocketServerURL;
 
       webSocketObj.OnWebsocketOpen = () => {
          LogWindow.appendLog(logPrefix + " is connected. SendWSSend/Interval after " + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");

@@ -44,13 +44,13 @@ export class FUELTRIPWebsocketBackend {
 
     private readonly webSocketServerURL: string;
 
-    private indicatorUpdateIntervalID: number;
+    private indicatorUpdateIntervalID  = 0;
 
     constructor(serverurl: string, loggerWindow: ILogWindow, fueltripSectSpan: number, fueltripSectStoremax: number, statusIndicator: IStatusIndicator) {
-        this.fueltripWS = new FUELTRIPWebsocket();
+        this.fueltripWS = new FUELTRIPWebsocket(serverurl);
         this.loggerWindow = loggerWindow;
         this.statusIndicator = statusIndicator;
-        this.webSocketServerURL = serverurl;
+        this.webSocketServerURL = this.fueltripWS.URL;
         this.fueltripSectSpan = fueltripSectSpan;
         this.fueltripSectStoreMax = fueltripSectStoremax;
 
@@ -104,8 +104,6 @@ export class FUELTRIPWebsocketBackend {
         const logPrefix = this.logPrefix;
         const sectSpan = this.fueltripSectSpan;
         const sectStoreMax = this.fueltripSectStoreMax;
-
-        wsObj.URL = this.webSocketServerURL;
 
         wsObj.OnWebsocketOpen = () => {
             logWindow.appendLog(logPrefix + " is connected. Send SECT_SPAN and SECT_STOREMAX after " + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " ms.");

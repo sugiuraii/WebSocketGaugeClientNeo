@@ -43,14 +43,14 @@ export class DefiWebsocketBackend {
 
    private readonly webSocketServerURL: string;
 
-   private indicatorUpdateIntervalID: number;
+   private indicatorUpdateIntervalID = 0;
 
    constructor(serverurl: string, codeList: DefiParameterCode[], loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
-      this.defiWS = new DefiCOMWebsocket();
+      this.defiWS = new DefiCOMWebsocket(serverurl);
       this.parameterCodeList = codeList;
       this.loggerWindow = loggerWindow;
       this.statusIndicator = statusIndicator;
-      this.webSocketServerURL = serverurl;
+      this.webSocketServerURL = this.defiWS.URL;
 
       this.defiWS.OnWebsocketError = (message: string) => this.loggerWindow.appendLog(this.logPrefix + " websocket error : " + message);
    }
@@ -81,8 +81,6 @@ export class DefiWebsocketBackend {
       const LogWindow = this.loggerWindow;
       const webSocketObj = this.defiWS;
       const logPrefix = this.logPrefix;
-
-      webSocketObj.URL = this.webSocketServerURL;
 
       webSocketObj.OnWebsocketOpen = () => {
          LogWindow.appendLog(logPrefix + " is connected. SendWSSend/Interval after " + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");

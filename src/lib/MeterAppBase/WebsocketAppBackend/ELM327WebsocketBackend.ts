@@ -43,14 +43,14 @@ export class ELM327WebsocketBackend {
 
    private readonly webSocketServerURL: string;
 
-   private indicatorUpdateIntervalID: number;
+   private indicatorUpdateIntervalID = 0;
 
    constructor(serverurl: string, paramCode: { code: OBDIIParameterCode, readmode: ReadModeCode }[], loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
-      this.elm327WS = new ELM327COMWebsocket();
+      this.elm327WS = new ELM327COMWebsocket(serverurl);
       this.parameterCodeList = paramCode;
       this.loggerWindow = loggerWindow;
       this.statusIndicator = statusIndicator;
-      this.webSocketServerURL = serverurl;
+      this.webSocketServerURL = this.elm327WS.URL;
 
       this.elm327WS.OnWebsocketError = (message: string) => this.loggerWindow.appendLog(this.logPrefix + " websocket error : " + message);
    }
@@ -81,8 +81,6 @@ export class ELM327WebsocketBackend {
       const LogWindow = this.loggerWindow;
       const webSocketObj = this.elm327WS;
       const logPrefix = this.logPrefix;
-
-      webSocketObj.URL = this.webSocketServerURL;
 
       webSocketObj.OnWebsocketOpen = () => {
          LogWindow.appendLog(logPrefix + " is connected. SendWSSend/Interval after " + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
