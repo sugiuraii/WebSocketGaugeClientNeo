@@ -17,6 +17,7 @@
     "contributors": [],
     "dependencies": {
         "@types/jquery": "^3.5.2",
+        "@types/webfontloader": "^1.6.32",
         "autoprefixer": "^9.8.6",
         "bootstrap": "^4.5.2",
         "css-loader": "^3.6.0",
