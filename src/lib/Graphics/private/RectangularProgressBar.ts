@@ -77,6 +77,7 @@ export class RectangularProgressBar extends ProgressBar {
     constructor(options: RectangularProgressBarOptions) {
         super(options);
         this.rectangularProgressBarOptions = options;
+        this.currBarPixel = 0;
     }
 
     /**

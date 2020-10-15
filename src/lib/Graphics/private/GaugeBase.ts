@@ -47,6 +47,7 @@ export class Gauge1DOptions {
     constructor() {
         this.Max = 100;
         this.Min = 0;
+        this.GagueFullOnValueMin = false;
     }
 }
 

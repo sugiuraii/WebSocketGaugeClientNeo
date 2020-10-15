@@ -36,6 +36,7 @@ class NeedleGaugeOptions extends Gauge1DOptions {
     public Texture: PIXI.Texture;
     constructor() {
         super();
+        this.Texture = PIXI.Texture.EMPTY;
     }
 }
 
@@ -116,6 +117,7 @@ export class RotationNeedleGauge extends NeedleGauge {
     constructor(options: RotationNeedleGaugeOptions) {
         super(options);
         this.rotationNeedleGaugeOptions = options;
+        this.currAngle = options.OffsetAngle;
     }
 
     /**

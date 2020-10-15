@@ -36,6 +36,7 @@ export class ProgressBarOptions extends Gauge1DOptions {
     public Texture: PIXI.Texture;
     constructor() {
         super();
+        this.Texture = PIXI.Texture.EMPTY;
     }
 }
 

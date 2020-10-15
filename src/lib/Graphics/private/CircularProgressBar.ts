@@ -65,6 +65,8 @@ export class CircularProgressBarOptions extends ProgressBarOptions {
         this.AngleStep = 0.1;
         this.AntiClockwise = false;
         this.Center = new PIXI.Point(0, 0);
+        this.Radius = 0;
+        this.InnerRadius = 0;
     }
 }
 
@@ -82,6 +84,7 @@ export class CircularProgressBar extends ProgressBar {
     constructor(options: CircularProgressBarOptions) {
         super(options);
         this.circularProgressbarOptions = options;
+        this.currAngle = options.OffsetAngle;
     }
 
     /**
