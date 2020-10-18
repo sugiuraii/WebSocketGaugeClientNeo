@@ -26,7 +26,8 @@ import * as JSONFormats from "./JSONFormats";
 
 export abstract class WebsocketCommon {
     protected modePrefix = "";
-    private readonly websocket: WebSocket;
+    private websocket: WebSocket | undefined;
+    private readonly url : string;
     private isConnetced = false;
     private onRESPacketReceived: (message: string) => void = () => {/*do nothing.*/};
     private onERRPacketReceived: (message: string) => void = () => {/*do nothing.*/};
@@ -36,7 +37,7 @@ export abstract class WebsocketCommon {
 
     constructor(url : string) {
         this.onWebsocketError = (msg: string) => alert(msg);
-        this.websocket = new WebSocket(url);
+        this.url = url;
     }
 
     protected abstract parseIncomingMessage(msg: string): void;
@@ -44,6 +45,11 @@ export abstract class WebsocketCommon {
     * Connect websocket.
     */
     public Connect(): void {
+        if(this.isConnetced)
+            throw Error("Websocket is already connected.");
+        
+        this.websocket = new WebSocket(this.url);
+
         if (this.websocket === null) {
             if (typeof (this.onWebsocketError) !== "undefined")
                 this.onWebsocketError("Websocket is not supported.");
@@ -78,8 +84,8 @@ export abstract class WebsocketCommon {
     * Send reset packet.
     */
     public SendReset(): void {
-        if (!this.isConnetced)
-            return;
+        if (!this.isConnetced || this.websocket === undefined)
+            throw Error("Websocket is not connected.");
 
         const jsonstr: string = JSON.stringify(new JSONFormats.ResetJSONMessage());
         this.websocket.send(jsonstr);
@@ -89,9 +95,10 @@ export abstract class WebsocketCommon {
     * Close websocket.
     */
     public Close(): void {
-        if (this.websocket) {
-            this.websocket.close();
-        }
+        if (!this.isConnetced || this.websocket === undefined)
+            throw Error("Websocket is not connected.");
+        
+        this.websocket.close();
         this.isConnetced = false;
     }
 
@@ -107,8 +114,13 @@ export abstract class WebsocketCommon {
     }
 
     public get ModePrefix(): string { return this.modePrefix; }
-    protected get WebSocket(): WebSocket { return this.websocket; }
-    public get URL(): string { return this.websocket.url; }
+    protected get WebSocket(): WebSocket {
+        if(this.websocket === undefined)
+            throw Error("Websocket is not initialized. Connect once before refere websocket object.");
+        return this.websocket;
+    }
+    
+    public get URL(): string { return this.url; }
     public get OnRESPacketReceived(): (message: string) => void { return this.onRESPacketReceived; }
     public set OnRESPacketReceived(func: (message: string) => void) { this.onRESPacketReceived = func; }
     public get OnERRPacketReceived(): (message: string) => void { return this.onERRPacketReceived; }
