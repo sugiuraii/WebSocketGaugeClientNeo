@@ -48,16 +48,13 @@ export abstract class WebsocketCommon {
     * Connect websocket.
     */
     public Connect(): void {
-        if (this.isConnetced)
-            throw Error("Websocket is already connected.");
-
         this.websocket = new WebSocket(this.url);
-
         if (this.websocket === null) {
             if (typeof (this.onWebsocketError) !== "undefined")
                 this.onWebsocketError("Websocket is not supported.");
             return;
         }
+        this.isConnetced = true;
 
         // when data is comming from the server, this metod is called
         this.websocket.onmessage = (evt) => {
@@ -76,11 +73,10 @@ export abstract class WebsocketCommon {
         };
         // when the connection is closed, this method is called
         this.websocket.onclose = () => {
+            this.isConnetced = false;
             if (typeof (this.onWebsocketClose) !== "undefined")
                 this.onWebsocketClose();
         };
-
-        this.isConnetced = true;
     }
 
     /**
