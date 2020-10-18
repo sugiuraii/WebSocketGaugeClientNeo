@@ -130,7 +130,5 @@ export class FullCircularGaugePanelBase extends CircularGaugePanelBase {
     static get RequestedFontCSSURL(): string[] {
         return ['font.css'];
     }
-
-
 }
 

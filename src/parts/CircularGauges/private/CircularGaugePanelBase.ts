@@ -83,52 +83,66 @@ export class TextOption {
 }
 
 export abstract class CircularGaugePanelOptionBase {
-    public ValueTextLabel: PIXI.BitmapText;
-    public ValueTextLabelOption: BitmapTextOption = new BitmapTextOption();
+    public ValueTextLabelOption: BitmapTextOption;
     public ValueNumberRoundDigit = 1;
 
     public MasterTextStyle: PIXI.TextStyle;
 
-    public OffsetAngle: number;
-    public FullAngle: number;
-    public Min: number;
-    public Max: number;
-    public GaugeFullOnValueMin: boolean;
-    public AntiClockWise: boolean;
-    public AngleStep: number;
-    public ValueBarRadius: number;
-    public ValueBarInnerRadius: number;
+    public OffsetAngle = 0;
+    public FullAngle = 180;
+    public Min = 0;
+    public Max = 100;
+    public GaugeFullOnValueMin = false;
+    public AntiClockWise = false;
+    public AngleStep = 1;
+    public ValueBarRadius = 100;
+    public ValueBarInnerRadius = 50;
 
-    public TitleLabel: string;
-    public TitleLabelOption: TextOption;
-    public UnitLabel: string;
-    public UnitLabelOption: TextOption;
+    public TitleLabel = "";
+    public TitleLabelOption = new TextOption();
+    public UnitLabel = "";
+    public UnitLabelOption = new TextOption();
 
     public AxisLabel: string[] = [];
     public AxisLabelOption: TextOption[] = [];
 
-    public RedZoneBarEnable: boolean;
-    public YellowZoneBarEnable: boolean;
-    public GreenZoneBarEnable: boolean;
-    public RedZoneBarOffsetAngle: number;
-    public YellowZoneBarOffsetAngle: number;
-    public GreenZoneBarOffsetAngle: number;
-    public RedZoneBarFullAngle: number;
-    public YellowZoneBarFullAngle: number;
-    public GreenZoneBarFullAngle: number;
-    public ZoneBarRadius: number;
+    public RedZoneBarEnable = false;
+    public YellowZoneBarEnable = false;
+    public GreenZoneBarEnable = false;
+    public RedZoneBarOffsetAngle = 135;
+    public YellowZoneBarOffsetAngle = 90;
+    public GreenZoneBarOffsetAngle = 45;
+    public RedZoneBarFullAngle = 45;
+    public YellowZoneBarFullAngle = 45;
+    public GreenZoneBarFullAngle = 45;
+    public ZoneBarRadius = 100;
 
     public CenterPosition = new PIXI.Point();
 
-    public RedZoneBarTexture: PIXI.Texture;
-    public YellowZoneBarTexture: PIXI.Texture;
-    public GreenZoneBarTexture: PIXI.Texture;
-    public ValueBarTexture: PIXI.Texture;
-    public BackTexture: PIXI.Texture;
-    public GridTexture: PIXI.Texture;
+    public RedZoneBarTexture = PIXI.Texture.EMPTY;
+    public YellowZoneBarTexture = PIXI.Texture.EMPTY;
+    public GreenZoneBarTexture = PIXI.Texture.EMPTY;
+    public ValueBarTexture = PIXI.Texture.EMPTY;
+    public BackTexture = PIXI.Texture.EMPTY;
+    public GridTexture = PIXI.Texture.EMPTY;
+
+    constructor() {
+        this.MasterTextStyle = new PIXI.TextStyle(
+            {
+                dropShadow: true,
+                dropShadowBlur: 15,
+                padding: 15,
+                dropShadowColor: "#FFFFFF",
+                dropShadowDistance: 0,
+                fill: "white",
+                fontFamily: "FreeSans-Bold"
+            });
+        this.ValueTextLabelOption = new BitmapTextOption();
+    }
 }
 
 export abstract class CircularGaugePanelBase extends PIXI.Container {
+    private valueTextLabel: PIXI.BitmapText;
     private valueProgressBar: CircularProgressBar;
     private Options: CircularGaugePanelOptionBase;
 
@@ -137,18 +151,20 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
         this.valueProgressBar.Value = value;
         this.valueProgressBar.update();
 
-        if (value.toFixed(this.Options.ValueNumberRoundDigit).toString() !== this.Options.ValueTextLabel.text)
-            this.Options.ValueTextLabel.text = value.toFixed(this.Options.ValueNumberRoundDigit).toString();
+        if (value.toFixed(this.Options.ValueNumberRoundDigit).toString() !== this.valueTextLabel.text)
+            this.valueTextLabel.text = value.toFixed(this.Options.ValueNumberRoundDigit).toString();
     }
 
     constructor(options: CircularGaugePanelOptionBase) {
         super();
         this.Options = options;
         this.createBackContainer();
-        this.createValueProgressBar();
+        const ValueProgressBar = this.createValueProgressBar()
+        this.valueProgressBar = ValueProgressBar.progressBar;
+        this.valueTextLabel = ValueProgressBar.valueLabel;
     }
 
-    private createValueProgressBar(): void {
+    private createValueProgressBar(): { progressBar: CircularProgressBar, valueLabel: PIXI.BitmapText } {
         const valueProgressBarOption = new CircularProgressBarOptions();
         valueProgressBarOption.OffsetAngle = this.Options.OffsetAngle;
         valueProgressBarOption.FullAngle = this.Options.FullAngle;
@@ -163,17 +179,19 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
         valueProgressBarOption.InnerRadius = this.Options.ValueBarInnerRadius;
 
         valueProgressBarOption.Texture = this.Options.ValueBarTexture;
-        this.valueProgressBar = new CircularProgressBar(valueProgressBarOption);
-        super.addChild(this.valueProgressBar);
+        const valueProgressBar = new CircularProgressBar(valueProgressBarOption);
+        super.addChild(valueProgressBar);
 
         const valueTextLabelOption = this.Options.ValueTextLabelOption;
         const valueTextLabelStyle = {
             fontName: valueTextLabelOption.fontName, fontSize: valueTextLabelOption.fontSize, align: valueTextLabelOption.align
         };
-        this.Options.ValueTextLabel = new PIXI.BitmapText(this.Options.Min.toFixed(this.Options.ValueNumberRoundDigit).toString(), valueTextLabelStyle);
-        this.Options.ValueTextLabel.position = valueTextLabelOption.position;
-        this.Options.ValueTextLabel.anchor = new PIXI.Point(valueTextLabelOption.anchor.x, valueTextLabelOption.anchor.y);
-        super.addChild(this.Options.ValueTextLabel);
+        const valueTextLabel = new PIXI.BitmapText(this.Options.Min.toFixed(this.Options.ValueNumberRoundDigit).toString(), valueTextLabelStyle);
+        valueTextLabel.position = valueTextLabelOption.position;
+        valueTextLabel.anchor = new PIXI.Point(valueTextLabelOption.anchor.x, valueTextLabelOption.anchor.y);
+        super.addChild(valueTextLabel);
+
+        return { progressBar: valueProgressBar, valueLabel: valueTextLabel };
     }
 
     protected setAxisLabel(axisLabel: string[]): void {

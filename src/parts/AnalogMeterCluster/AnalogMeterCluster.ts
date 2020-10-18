@@ -160,7 +160,7 @@ export class AnalogMeterCluster extends PIXI.Container {
         this.boostNeedleGauge = BoostMeter.boostNeedleGauge;
     }
 
-    private createTachoMeter(): {container : PIXI.Container, progressBar : CircularProgressBar, needleGauge : RotationNeedleGauge, gasmilageLabel : NumericIndicator, tripLabel : NumericIndicator, fuelLabel : NumericIndicator, gearPosLabel : NumericIndicator} {
+    private createTachoMeter(): { container: PIXI.Container, progressBar: CircularProgressBar, needleGauge: RotationNeedleGauge, gasmilageLabel: NumericIndicator, tripLabel: NumericIndicator, fuelLabel: NumericIndicator, gearPosLabel: NumericIndicator } {
         const tachoMax = 9000;
         const tachoMin = 0;
         const tachoValDefalut = 0;
@@ -181,7 +181,7 @@ export class AnalogMeterCluster extends PIXI.Container {
         const tachoProgressBar = new CircularProgressBar(tachoProgressBarOptions);
         tachoProgressBar.pivot.set(193, 193);
         tachoProgressBar.position.set(300, 300);
-        tachoContainer.addChild(this.tachoProgressBar);
+        tachoContainer.addChild(tachoProgressBar);
         tachoProgressBar.Value = tachoValDefalut;
         tachoProgressBar.updateForce();
 
@@ -194,7 +194,7 @@ export class AnalogMeterCluster extends PIXI.Container {
         const tachoNeedleGauge = new RotationNeedleGauge(tachoNeedleGaugeOptions);
         tachoNeedleGauge.pivot.set(15, 15);
         tachoNeedleGauge.position.set(300, 300);
-        tachoContainer.addChild(this.tachoNeedleGauge);
+        tachoContainer.addChild(tachoNeedleGauge);
         tachoNeedleGauge.Value = tachoValDefalut;
         tachoNeedleGauge.updateForce();
 
@@ -233,10 +233,10 @@ export class AnalogMeterCluster extends PIXI.Container {
         gearPosLabel.scale.set(0.9);
         tachoContainer.addChild(gearPosLabel);
 
-        return {container : tachoContainer, progressBar : tachoProgressBar, needleGauge : tachoNeedleGauge, gasmilageLabel : gasMilageLabel, tripLabel : tripLabel, fuelLabel : fuelLabel, gearPosLabel : gearPosLabel};
+        return { container: tachoContainer, progressBar: tachoProgressBar, needleGauge: tachoNeedleGauge, gasmilageLabel: gasMilageLabel, tripLabel: tripLabel, fuelLabel: fuelLabel, gearPosLabel: gearPosLabel };
     }
 
-    private createSpeedMeter(): {container : PIXI.Container, speedNeedleGauge : RotationNeedleGauge, speedLabel : NumericIndicator, waterTempProgressBar : CircularProgressBar} {
+    private createSpeedMeter(): { container: PIXI.Container, speedNeedleGauge: RotationNeedleGauge, speedLabel: NumericIndicator, waterTempProgressBar: CircularProgressBar } {
         const speedMax = 280;
         const speedMin = 0;
         const speedValDefault = 0;
@@ -269,7 +269,7 @@ export class AnalogMeterCluster extends PIXI.Container {
         const waterTempProgressBar = new CircularProgressBar(waterTempProgressBarOptions);
         waterTempProgressBar.pivot.set(162, 162);
         waterTempProgressBar.position.set(300, 300);
-        speedMeterContainer.addChild(this.waterTempProgressBar);
+        speedMeterContainer.addChild(waterTempProgressBar);
         waterTempProgressBar.Value = waterTempValDefault;
         waterTempProgressBar.updateForce();
 
@@ -282,7 +282,7 @@ export class AnalogMeterCluster extends PIXI.Container {
         const speedNeedleGauge = new RotationNeedleGauge(speedNeedleGaugeOptions);
         speedNeedleGauge.pivot.set(15, 15);
         speedNeedleGauge.position.set(300, 300);
-        speedMeterContainer.addChild(this.speedNeedleGauge);
+        speedMeterContainer.addChild(speedNeedleGauge);
         speedNeedleGauge.Value = speedValDefault;
         speedNeedleGauge.updateForce();
 
@@ -291,10 +291,10 @@ export class AnalogMeterCluster extends PIXI.Container {
         shaftSprite.position.set(300, 300);
         speedMeterContainer.addChild(shaftSprite);
 
-        return {container : speedMeterContainer, speedNeedleGauge : speedNeedleGauge, speedLabel : speedLabel, waterTempProgressBar : waterTempProgressBar};
+        return { container: speedMeterContainer, speedNeedleGauge: speedNeedleGauge, speedLabel: speedLabel, waterTempProgressBar: waterTempProgressBar };
     }
 
-    private createBoostMeter() : {container : PIXI.Container, boostNeedleGauge : RotationNeedleGauge} {
+    private createBoostMeter(): { container: PIXI.Container, boostNeedleGauge: RotationNeedleGauge } {
         const boostMax = 2.0;
         const boostMin = -1.0;
         const boostValDefault = 0.0;
@@ -316,8 +316,8 @@ export class AnalogMeterCluster extends PIXI.Container {
         boostNeedleGauge.position.set(220, 220);
         boostNeedleGauge.Value = boostValDefault;
         boostNeedleGauge.updateForce();
-        boostMeterContainer.addChild(this.boostNeedleGauge);
+        boostMeterContainer.addChild(boostNeedleGauge);
 
-        return {container : boostMeterContainer, boostNeedleGauge : boostNeedleGauge};
+        return { container: boostMeterContainer, boostNeedleGauge: boostNeedleGauge };
     }
 }
