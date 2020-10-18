@@ -101,10 +101,7 @@ export class MilageGraphPanel extends PIXI.Container {
 
     constructor() {
         super();
-        this.create();
-    }
 
-    private create() {
         const backTexture = PIXI.Texture.from("MilageGraph_Back");
         const backSprite = new PIXI.Sprite(backTexture);
         super.addChild(backSprite);
