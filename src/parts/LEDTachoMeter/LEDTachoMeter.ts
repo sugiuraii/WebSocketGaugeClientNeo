@@ -39,7 +39,7 @@ require("./LEDMeterFont_45px_0.png");
 require("./LEDMeterFont_30px_0.png");
 
 export class LEDTachoMeter extends PIXI.Container {
-    private tachoProgressBar;
+    private tachoProgressBar : CircularProgressBar;
     private speedLabel: NumericIndicator;
     private gasMilageLabel: NumericIndicator;
     private tripLabel: NumericIndicator;
