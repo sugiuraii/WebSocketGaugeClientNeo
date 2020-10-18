@@ -37,7 +37,7 @@ export class ArduinoCOMWebsocket extends WebsocketCommon {
     //Interpolate value buffer
     private interpolateBuffers: { [code: string]: VALInterpolationBuffer } = {};
 
-    constructor(url : string) {
+    constructor(url? : string) {
         super(url);
         this.modePrefix = "ARDUINO";
         this.valPacketPreviousTimeStamp = window.performance.now();

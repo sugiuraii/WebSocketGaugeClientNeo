@@ -41,7 +41,7 @@ export class SSMWebsocket extends WebsocketCommon {
     //Switch data buffer    
     private switchFlagBuffers: { [code: string]: boolean } = {};
 
-    constructor(url : string) {
+    constructor(url? : string) {
         super(url);
         this.modePrefix = "SSM";
         this.valPacketPreviousTimeStamp = window.performance.now();

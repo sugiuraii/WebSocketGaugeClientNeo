@@ -37,7 +37,7 @@ export class DefiCOMWebsocket extends WebsocketCommon {
     //Interpolate value buffer
     private interpolateBuffers: { [code: string]: VALInterpolationBuffer } = {};
 
-    constructor(url : string) {
+    constructor(url? : string) {
         super(url);
         this.modePrefix = "DEFI";
         this.valPacketPreviousTimeStamp = window.performance.now();

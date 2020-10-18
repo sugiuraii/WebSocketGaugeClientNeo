@@ -48,7 +48,7 @@ export class AssettoCorsaSHMWebsocket extends WebsocketCommon {
 
     private stringBuffers: { [code: string]: string } = {};
 
-    constructor(url : string) {
+    constructor(url? : string) {
         super(url);
         this.modePrefix = "ACSHM";
         this.recordIntervalTimeEnabled = true;
