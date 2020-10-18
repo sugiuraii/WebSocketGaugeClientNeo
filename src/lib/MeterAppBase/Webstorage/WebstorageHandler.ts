@@ -31,7 +31,7 @@ export class WebstorageHandler {
         if (localStorage.getItem("WSInterval") === null)
             return 0;
         else {
-            const interval = parseInt(localStorage.getItem("WSInterval"));
+            const interval = Number(localStorage.getItem("WSInterval"));
             return interval;
         }
     }

@@ -34,22 +34,57 @@ import { ApplicationNavBar } from "./bootstrapParts/ApplicationNavBar"
 export class WebsocketObjectCollection {
     private readonly AppOption: MeterApplicationOption;
 
-    private readonly defiWS: DefiWebsocketBackend;
-    private readonly ssmWS: SSMWebsocketBackend;
-    private readonly arduinoWS: ArduinoWebsocketBackend;
-    private readonly elm327WS: ELM327WebsocketBackend;
-    private readonly fueltripWS: FUELTRIPWebsocketBackend;
-    private readonly assettoCorsaWS: AssettoCorsaSHMWebsocketBackend;
+    private readonly defiWS: DefiWebsocketBackend | undefined;
+    private readonly ssmWS: SSMWebsocketBackend | undefined;
+    private readonly arduinoWS: ArduinoWebsocketBackend | undefined;
+    private readonly elm327WS: ELM327WebsocketBackend | undefined;
+    private readonly fueltripWS: FUELTRIPWebsocketBackend | undefined;
+    private readonly assettoCorsaWS: AssettoCorsaSHMWebsocketBackend | undefined;
 
-    get DefiWS(): DefiWebsocketBackend { return this.defiWS }
-    get SSMWS(): SSMWebsocketBackend { return this.ssmWS }
-    get ArduinoWS(): ArduinoWebsocketBackend { return this.arduinoWS }
-    get ELM327WS(): ELM327WebsocketBackend { return this.elm327WS }
-    get FUELTRIPWS(): FUELTRIPWebsocketBackend { return this.fueltripWS }
-    get AssettoCorsaWS(): AssettoCorsaSHMWebsocketBackend { return this.assettoCorsaWS }
+    get DefiWS(): DefiWebsocketBackend {
+        if (this.defiWS != undefined)
+            return this.defiWS as DefiWebsocketBackend;
+        else
+            throw ReferenceError("DefiWSBackend is not defined.");
+    }
+
+    get SSMWS(): SSMWebsocketBackend {
+        if (this.ssmWS != undefined)
+            return this.ssmWS as SSMWebsocketBackend;
+        else
+            throw ReferenceError("SSMWSBackennd is not defined.");
+    }
+
+    get ArduinoWS(): ArduinoWebsocketBackend {
+        if (this.arduinoWS != undefined)
+            return this.arduinoWS as ArduinoWebsocketBackend;
+        else
+            throw ReferenceError("ArduinoWSBackennd is not defined.");
+    }
+
+    get ELM327WS(): ELM327WebsocketBackend {
+        if (this.elm327WS != undefined)
+            return this.elm327WS as ELM327WebsocketBackend;
+        else
+            throw ReferenceError("ELM327WSBackennd is not defined.");
+    }
+
+    get FUELTRIPWS(): FUELTRIPWebsocketBackend {
+        if (this.fueltripWS != undefined)
+            return this.fueltripWS as FUELTRIPWebsocketBackend;
+        else
+            throw ReferenceError("FUELTRIPWSBackennd is not defined.");
+    }
+
+    get AssettoCorsaWS(): AssettoCorsaSHMWebsocketBackend {
+        if (this.assettoCorsaWS != undefined)
+            return this.assettoCorsaWS as AssettoCorsaSHMWebsocketBackend;
+        else
+            throw ReferenceError("AssettoCorsaSHMWSBackennd is not defined.");
+    }
 
     private getWebsocketServerName(): string {
-        const wsServerHostname: string = localStorage.getItem("WSServerHostname");
+        const wsServerHostname: string = (typeof localStorage.getItem("WSServerHostname") === "string") ? localStorage.getItem("WSServerHostname") as string : "localhost";
         const setWSServerSameAsHttpSite: boolean = localStorage.getItem("SetWSServerSameAsHttp") === "true" ? true : false;
         if (setWSServerSameAsHttpSite)
             return location.hostname;
@@ -68,21 +103,33 @@ export class WebsocketObjectCollection {
             navBar.AddWebSocketStatusIndicator("defiWSIndicator", "Defi");
             this.defiWS = new DefiWebsocketBackend(wsURL, this.AppOption.ParameterCode.Defi.Array, logDialog, navBar.GetWebSocketStatusIndicator("defiWSIndicator"));
         }
+        else
+            this.defiWS = undefined;
+
         if (appOption.WebsocketEnableFlag.SSM) {
             const wsURL = "ws://" + webSocketServerName + ":" + SSMWebsocketBackend.DEFAULT_WS_PORT.toString() + "/";
             navBar.AddWebSocketStatusIndicator("ssmWSIndicator", "SSM");
             this.ssmWS = new SSMWebsocketBackend(wsURL, this.AppOption.ParameterCode.SSM.Array, logDialog, navBar.GetWebSocketStatusIndicator("ssmWSIndicator"));
         }
+        else
+            this.ssmWS = undefined;
+
         if (appOption.WebsocketEnableFlag.Arduino) {
             const wsURL = "ws://" + webSocketServerName + ":" + ArduinoWebsocketBackend.DEFAULT_WS_PORT.toString() + "/";
             navBar.AddWebSocketStatusIndicator("arduinoWSIndicator", "Arduino");
             this.arduinoWS = new ArduinoWebsocketBackend(wsURL, this.AppOption.ParameterCode.Arduino.Array, logDialog, navBar.GetWebSocketStatusIndicator("arduinoWSIndicator"));
         }
+        else
+            this.arduinoWS = undefined;
+
         if (appOption.WebsocketEnableFlag.ELM327) {
             const wsURL = "ws://" + webSocketServerName + ":" + ELM327WebsocketBackend.DEFAULT_WS_PORT.toString() + "/";
             navBar.AddWebSocketStatusIndicator("elm327WSIndicator", "ELM327");
             this.elm327WS = new ELM327WebsocketBackend(wsURL, this.AppOption.ParameterCode.ELM327OBDII.Array, logDialog, navBar.GetWebSocketStatusIndicator("elm327WSIndicator"));
         }
+        else
+            this.elm327WS = undefined;
+
         if (appOption.WebsocketEnableFlag.FUELTRIP) {
             const wsURL = "ws://" + webSocketServerName + ":" + FUELTRIPWebsocketBackend.DEFAULT_WS_PORT.toString() + "/";
             navBar.AddWebSocketStatusIndicator("fueltripWSIndicator", "FUELTRIP");
@@ -90,6 +137,9 @@ export class WebsocketObjectCollection {
             const fuelTripSectStoreMax = appOption.FUELTRIPWebsocketOption.FUELTRIPSectStoreMax;
             this.fueltripWS = new FUELTRIPWebsocketBackend(wsURL, logDialog, fuelTripSectSpan, fuelTripSectStoreMax, navBar.GetWebSocketStatusIndicator("fueltripWSIndicator"));
         }
+        else
+            this.fueltripWS = undefined;
+
         if (appOption.WebsocketEnableFlag.AssettoCorsaSHM) {
             const wsURL = "ws://" + webSocketServerName + ":" + AssettoCorsaSHMWebsocketBackend.DEFAULT_WS_PORT.toString() + "/";
             navBar.AddWebSocketStatusIndicator("acshmWSIndicator", "AssettoCorsaSHM");
@@ -99,6 +149,8 @@ export class WebsocketObjectCollection {
                 this.AppOption.ParameterCode.AssettoCorsaStaticInfo.Array,
                 logDialog, navBar.GetWebSocketStatusIndicator("acshmWSIndicator"));
         }
+        else
+            this.assettoCorsaWS = undefined;
     }
 
     public Run(): void {
