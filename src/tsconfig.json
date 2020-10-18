@@ -6,7 +6,8 @@
         "module": "commonjs",
         "esModuleInterop": true,
         "jsx": "react",
-        // Strict
+        // Strict,
+        "strict": true,
         "noUnusedParameters":true,
         "lib":["dom", "es2017"]
     }
