@@ -22,7 +22,6 @@
  * THE SOFTWARE.
  */
 
-/// <reference path="../../lib/webpackRequire.ts" />
 import * as PIXI from 'pixi.js';
 require("./fpsCounterFont.fnt");
 require("./fpsCounterFont_0.png");
@@ -31,7 +30,7 @@ const FPSBUFFER_LENGTH = 5;
 
 export class FPSCounter extends PIXI.Container {
     private fpsText: PIXI.BitmapText;
-    private fpsbuffer: number[] = new Array();
+    private fpsbuffer: number[] = [];
 
     static get RequestedTexturePath(): string[] {
         return ["img/fpsCounterFont.fnt"];

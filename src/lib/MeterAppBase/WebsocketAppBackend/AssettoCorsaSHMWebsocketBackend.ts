@@ -44,42 +44,39 @@ export class AssettoCorsaSHMWebsocketBackend {
 
    private readonly webSocketServerURL: string;
 
-   private indicatorUpdateIntervalID: number;
+   private indicatorUpdateIntervalID = 0;
 
-   constructor(serverurl: string, physCode : AssettoCorsaSHMPhysicsParameterCode[], graphicsCode : AssettoCorsaSHMGraphicsParameterCode[], staticCode : AssettoCorsaSHMStaticInfoParameterCode[], loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
-      this.assettocorsaWS = new AssettoCorsaSHMWebsocket();
+   constructor(serverurl: string, physCode: AssettoCorsaSHMPhysicsParameterCode[], graphicsCode: AssettoCorsaSHMGraphicsParameterCode[], staticCode: AssettoCorsaSHMStaticInfoParameterCode[], loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
+      this.assettocorsaWS = new AssettoCorsaSHMWebsocket(serverurl);
       this.physicsParameterCodeList = physCode;
       this.graphicsParameterCodeList = graphicsCode;
       this.staticInfoParameterCodeList = staticCode;
       this.loggerWindow = loggerWindow;
       this.statusIndicator = statusIndicator;
-      this.webSocketServerURL = serverurl;
+      this.webSocketServerURL = this.assettocorsaWS.URL;
 
       this.assettocorsaWS.OnWebsocketError = (message: string) => this.loggerWindow.appendLog(this.logPrefix + " websocket error : " + message);
    }
 
-   public Run() {
+   public Run(): void {
       this.indicatorUpdateIntervalID = window.setInterval(() => this.setStatusIndicator(), this.WEBSOCKET_CHECK_INTERVAL);
       this.connectWebSocket();
    }
 
-   public Stop() {
+   public Stop(): void {
       clearInterval(this.indicatorUpdateIntervalID);
       this.assettocorsaWS.Close();
    }
 
-   public getVal(code : AssettoCorsaSHMNumericalVALCode, timestamp : number)
-   {
+   public getVal(code: AssettoCorsaSHMNumericalVALCode, timestamp: number): number {
       return this.assettocorsaWS.getVal(code, timestamp);
    }
 
-   public getRawVal(code : AssettoCorsaSHMNumericalVALCode)
-   {
+   public getRawVal(code: AssettoCorsaSHMNumericalVALCode): number {
       return this.assettocorsaWS.getRawVal(code);
    }
 
-   public getStringVal(code : AssettoCorsaSHMStringVALCode)
-   {
+   public getStringVal(code: AssettoCorsaSHMStringVALCode): string {
       return this.assettocorsaWS.getStringVal(code);
    }
 
@@ -92,8 +89,6 @@ export class AssettoCorsaSHMWebsocketBackend {
       const LogWindow = this.loggerWindow;
       const webSocketObj = this.assettocorsaWS;
       const logPrefix = this.logPrefix;
-
-      webSocketObj.URL = this.webSocketServerURL;
 
       webSocketObj.OnWebsocketOpen = () => {
          LogWindow.appendLog(logPrefix + " is connected. SendWSSend/Interval after " + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");

@@ -22,45 +22,41 @@
  * THE SOFTWARE.
  */
 
-/// <reference path="../lib/webpackRequire.ts" />
-
-import {FUELTRIPWebsocket} from '../lib/WebSocket/WebSocketCommunication';
-import {WebSocketTesterBase} from './base/WebSocketTesterBase';
-import * as $ from "jquery";
+import { FUELTRIPWebsocket } from '../lib/WebSocket/WebSocketCommunication';
+import { WebSocketTesterBase } from './base/WebSocketTesterBase';
+import $ from "jquery";
 require('./FUELTRIPWSTest.html');
 
 window.onload = function () {
-    let wsTest = new FUELTRIPWSTest();
+    const wsTest = new FUELTRIPWSTest();
     wsTest.main();
 }
 
 export class FUELTRIPWSTest extends WebSocketTesterBase {
     private webSocket: FUELTRIPWebsocket;
-    
-    constructor()
-    {
+
+    constructor() {
         const webSocket = new FUELTRIPWebsocket()
         super(webSocket);
         this.webSocket = webSocket;
-        
+
         this.defaultPortNo = 2014;
     }
-    
-    protected setParameterCodeSelectBox()
-    {
+
+    protected setParameterCodeSelectBox(): void {
         //FUELTRIPWSTest have no parameter code select box.
     }
-    
+
     public main(): void {
-         $('#serverURLBox').val("ws://" + this.defaultSeverAddress + ":" + this.defaultPortNo.toString() + "/");
+        $('#serverURLBox').val("ws://" + this.defaultSeverAddress + ":" + this.defaultPortNo.toString() + "/");
         this.assignButtonEvents();
         this.registerWSEvents();
     }
 
     protected assignButtonEvents(): void {
         super.assignButtonEvents();
-        $("#buttonSECTSPAN").click(() => this.inputSECTSPAN());
-        $("#buttonSECTSTOREMAX").click(() => this.inputSECTSTOREMAX());
+        $("#buttonSECTSPAN").on('click', () => this.inputSECTSPAN());
+        $("#buttonSECTSTOREMAX").on('click', () => this.inputSECTSTOREMAX());
     }
 
     protected registerWSEvents(): void {
@@ -104,13 +100,13 @@ export class FUELTRIPWSTest extends WebSocketTesterBase {
         };
     }
 
-    private inputSECTSPAN() {
+    private inputSECTSPAN(): void {
         this.webSocket.SendSectSpan(Number($('#sectSPANBox').val()));
-    };
+    }
 
-    private inputSECTSTOREMAX() {
+    private inputSECTSTOREMAX(): void {
         this.webSocket.SendSectStoreMax(Number($('#sectStoreMaxBox').val()));
-    };
+    }
 }
 
 

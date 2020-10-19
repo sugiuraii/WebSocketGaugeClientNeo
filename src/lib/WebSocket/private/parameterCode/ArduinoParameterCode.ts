@@ -22,14 +22,16 @@
  * THE SOFTWARE.
  */
 
-export enum ArduinoParameterCode
-{
-    Engine_Speed,
-    Vehicle_Speed,
-    Manifold_Absolute_Pressure,
-    Coolant_Temperature,
-    Oil_Temperature,
-    Oil_Temperature2,
-    Oil_Pressure,
-    Fuel_Rail_Pressure
-}
+export const ArduinoParameterCode =
+    {
+        Engine_Speed: "Engine_Speed",
+        Vehicle_Speed: "Vehicle_Speed",
+        Manifold_Absolute_Pressure: "Manifold_Absolute_Pressure",
+        Coolant_Temperature: "Coolant_Temperature",
+        Oil_Temperature: "Oil_Temperature",
+        Oil_Temperature2: "Oil_Temperature2",
+        Oil_Pressure: "Oil_Pressure",
+        Fuel_Rail_Pressure: "Fuel_Rail_Pressure"
+    } as const;
+
+export type ArduinoParameterCode = typeof ArduinoParameterCode[keyof typeof ArduinoParameterCode];

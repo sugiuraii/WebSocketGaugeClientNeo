@@ -22,133 +22,121 @@
  * THE SOFTWARE.
  */
 
-import {WebsocketCommon} from './WebsocketCommon';
-import {ArduinoParameterCode} from './parameterCode/ArduinoParameterCode'
-import {VALInterpolationBuffer} from './utils/Interpolation';
+import { WebsocketCommon } from './WebsocketCommon';
+import { ArduinoParameterCode } from './parameterCode/ArduinoParameterCode'
+import { VALInterpolationBuffer } from './utils/Interpolation';
 import * as JSONFormats from './JSONFormats';
-import {EnumUtils} from '../../EnumUtils';
 
-export class ArduinoCOMWebsocket extends WebsocketCommon
-{
-    private onVALPacketReceived : (intervalTime : number, val:{[code : string] : string}) => void;
+export class ArduinoCOMWebsocket extends WebsocketCommon {
+    private onVALPacketReceived: (intervalTime: number, val: { [code: string]: string }) => void;
 
     //Internal state
-    private valPacketPreviousTimeStamp : number;
-    private valPacketIntervalTime : number;
+    private valPacketPreviousTimeStamp: number;
+    private valPacketIntervalTime: number;
 
     //Interpolate value buffer
-    private interpolateBuffers: {[code: string]: VALInterpolationBuffer} = {};
+    private interpolateBuffers: { [code: string]: VALInterpolationBuffer } = {};
 
-    constructor()
-    {
-        super();
+    constructor(url? : string) {
+        super(url);
         this.modePrefix = "ARDUINO";
         this.valPacketPreviousTimeStamp = window.performance.now();
         this.valPacketIntervalTime = 0;
+        this.onVALPacketReceived = () => {
+            // do nothing.
+        };
     }
 
-    private checkInterpolateBufferAndCreateIfEmpty(code: string): void
-    {
-        if(!(code in this.interpolateBuffers))
-            this.interpolateBuffers[code] = new VALInterpolationBuffer();            
+    private checkInterpolateBufferAndCreateIfEmpty(code: ArduinoParameterCode): void {
+        if (!(code in this.interpolateBuffers))
+            this.interpolateBuffers[code] = new VALInterpolationBuffer();
     }
 
-    public getVal(code : ArduinoParameterCode, timestamp : number) : number
-    {
-        this.checkInterpolateBufferAndCreateIfEmpty(ArduinoParameterCode[code]);
-        return this.interpolateBuffers[ArduinoParameterCode[code]].getVal(timestamp);
+    public getVal(code: ArduinoParameterCode, timestamp: number): number {
+        this.checkInterpolateBufferAndCreateIfEmpty(code);
+        return this.interpolateBuffers[code].getVal(timestamp);
     }
 
-    public getRawVal(code : ArduinoParameterCode) : number
-    {
-        this.checkInterpolateBufferAndCreateIfEmpty(ArduinoParameterCode[code]);
-        return this.interpolateBuffers[ArduinoParameterCode[code]].getRawVal();
+    public getRawVal(code: ArduinoParameterCode): number {
+        this.checkInterpolateBufferAndCreateIfEmpty(code);
+        return this.interpolateBuffers[code].getRawVal();
     }
 
-    private processVALJSONMessage(receivedJson: JSONFormats.StringVALJSONMessage) : void
-    {
+    private processVALJSONMessage(receivedJson: JSONFormats.StringVALJSONMessage): void {
         //Update interval time
-        var nowTime = window.performance.now();
+        const nowTime = window.performance.now();
         this.valPacketIntervalTime = nowTime - this.valPacketPreviousTimeStamp;
         this.valPacketPreviousTimeStamp = nowTime;
 
         // Invoke VALPacketReceived Event
-        if ( typeof(this.onVALPacketReceived) !== "undefined" )
+        if (typeof (this.onVALPacketReceived) !== "undefined")
             this.onVALPacketReceived(this.valPacketIntervalTime, receivedJson.val);
-        
+
         // Store value into interpolation buffers
-        for (let key in receivedJson.val)
-        {
-            if(EnumUtils.IsEnumContaninsKey(ArduinoParameterCode, key))
-            {
-                const val: number = Number(receivedJson.val[key]);
+        for (const key in receivedJson.val) {
+            if (Object.values(ArduinoParameterCode).includes(key as ArduinoParameterCode)) {
+                const val = Number(receivedJson.val[key]);
                 // Register to interpolate buffer
-                this.checkInterpolateBufferAndCreateIfEmpty(key);
+                this.checkInterpolateBufferAndCreateIfEmpty(key as ArduinoParameterCode);
                 this.interpolateBuffers[key].setVal(val);
             }
             else
                 throw Error("VAL JSON key of" + key + "is not found in ArduinoParameterCode.");
         }
     }
-    
-    private processERRJSONMessage(receivedJson: JSONFormats.ErrorJSONMessage)
-    {
+
+    private processERRJSONMessage(receivedJson: JSONFormats.ErrorJSONMessage) {
         if (typeof (this.OnERRPacketReceived) !== "undefined")
             this.OnERRPacketReceived(receivedJson.msg);
     }
-    
-    private processRESJSONMessage(receivedJson: JSONFormats.ResponseJSONMessage)
-    {
-        if(typeof (this.OnRESPacketReceived) !== "undefined")
+
+    private processRESJSONMessage(receivedJson: JSONFormats.ResponseJSONMessage) {
+        if (typeof (this.OnRESPacketReceived) !== "undefined")
             this.OnRESPacketReceived(receivedJson.msg);
     }
-    
-    protected parseIncomingMessage(msg : string) : void
-    {
-        const receivedJson : any = JSON.parse(msg);
-        const modeCode : string = (<JSONFormats.IJSONMessage>receivedJson).mode;
-        switch (modeCode)
-        {
-            case ("VAL") :
-                this.processVALJSONMessage(<JSONFormats.StringVALJSONMessage>receivedJson);
+
+    protected parseIncomingMessage(msg: string): void {
+        const receivedJsonObj: JSONFormats.IJSONMessage | JSONFormats.StringVALJSONMessage | JSONFormats.ErrorJSONMessage | JSONFormats.ResponseJSONMessage = JSON.parse(msg);
+        const modeCode = receivedJsonObj.mode;
+        switch (modeCode) {
+            case ("VAL"):
+                this.processVALJSONMessage(receivedJsonObj as JSONFormats.StringVALJSONMessage);
                 break;
-            case("ERR"):
-                this.processERRJSONMessage(<JSONFormats.ErrorJSONMessage>receivedJson);
+            case ("ERR"):
+                this.processERRJSONMessage(receivedJsonObj as JSONFormats.ErrorJSONMessage);
                 break;
-            case("RES"):
-                this.processRESJSONMessage(<JSONFormats.ResponseJSONMessage>receivedJson);
+            case ("RES"):
+                this.processRESJSONMessage(receivedJsonObj as JSONFormats.ResponseJSONMessage);
                 break;
             default:
                 this.OnWebsocketError("Unknown mode packet received. " + msg);
-        };
+        }
     }
 
-    public SendWSSend(code : ArduinoParameterCode, flag : boolean) : void
-    {
+    public SendWSSend(code: ArduinoParameterCode, flag: boolean): void {
         if (!this.IsConnetced)
             return;
 
-        let sendWSSendObj = new JSONFormats.SendWSSendJSONMessage();          
+        const sendWSSendObj = new JSONFormats.SendWSSendJSONMessage();
         sendWSSendObj.mode = this.modePrefix + "_WS_SEND";
         sendWSSendObj.code = ArduinoParameterCode[code];
         sendWSSendObj.flag = flag;
-        let jsonstr: string = JSON.stringify(sendWSSendObj);
+        const jsonstr = JSON.stringify(sendWSSendObj);
         this.WebSocket.send(jsonstr);
     }
 
-    public SendWSInterval(interval : number) : void
-    {
+    public SendWSInterval(interval: number): void {
         if (!this.IsConnetced)
             return;
 
-        let sendWSIntervalObj = new JSONFormats.SendWSIntervalJSONMessage();
+        const sendWSIntervalObj = new JSONFormats.SendWSIntervalJSONMessage();
         sendWSIntervalObj.mode = this.modePrefix + "_WS_INTERVAL";
-        sendWSIntervalObj.interval = interval;           
-        var jsonstr = JSON.stringify(sendWSIntervalObj);
+        sendWSIntervalObj.interval = interval;
+        const jsonstr = JSON.stringify(sendWSIntervalObj);
         this.WebSocket.send(jsonstr);
     }
 
-    public get OnVALPacketReceived() {return this.onVALPacketReceived};
-    public set OnVALPacketReceived(func) {this.onVALPacketReceived = func };
+    public get OnVALPacketReceived(): (intervalTime: number, val: { [code: string]: string }) => void { return this.onVALPacketReceived }
+    public set OnVALPacketReceived(func: (intervalTime: number, val: { [code: string]: string }) => void) { this.onVALPacketReceived = func }
     public get VALPacketIntervalTime(): number { return this.valPacketIntervalTime; }
 }

@@ -21,49 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-/// <reference path="../lib/webpackRequire.ts" />
 
-import {ELM327COMWebsocket} from "../lib/WebSocket/WebSocketCommunication";
-import {OBDIIParameterCode} from "../lib/WebSocket/WebSocketCommunication";
-import {ReadModeCode} from "../lib/WebSocket/WebSocketCommunication";
-import {WebSocketTesterBase} from "./base/WebSocketTesterBase";
-import {EnumUtils} from "../lib/EnumUtils";
+import { ELM327COMWebsocket } from "../lib/WebSocket/WebSocketCommunication";
+import { OBDIIParameterCode } from "../lib/WebSocket/WebSocketCommunication";
+import { ReadModeCode } from "../lib/WebSocket/WebSocketCommunication";
+import { WebSocketTesterBase } from "./base/WebSocketTesterBase";
 
-import * as $ from "jquery";
+import $ from "jquery";
 require('./ELM327COMWSTest.html');
 
 window.onload = function () {
-    let wsTest = new ELM327COMWSTest();
+    const wsTest = new ELM327COMWSTest();
     wsTest.main();
 }
 
 export class ELM327COMWSTest extends WebSocketTesterBase {
-    
+
     private webSocket: ELM327COMWebsocket;
-    constructor()
-    {
+    constructor() {
         const webSocket = new ELM327COMWebsocket();
         super(webSocket);
         this.webSocket = webSocket;
         this.defaultPortNo = 2016;
     }
 
-    protected setParameterCodeSelectBox() {
-        EnumUtils.EnumToKeyStrArray(OBDIIParameterCode).forEach(code => $('#codeSelect').append($('<option>').html(code).val(code)));
+    protected setParameterCodeSelectBox(): void {
+        Object.values(OBDIIParameterCode).forEach(code => $('#codeSelect').append($('<option>').html(code).val(code)));
     }
-    
+
     protected assignButtonEvents(): void {
         super.assignButtonEvents();
-        $("#buttonWSSend").click(() => this.inputWSSend());
-        $("#buttonWSInterval").click(() => this.inputWSInterval());
+        $("#buttonWSSend").on('click', () => this.inputWSSend());
+        $("#buttonWSInterval").on('click', () => this.inputWSInterval());
     }
-    
+
     protected registerWSEvents(): void {
-        this.webSocket.OnVALPacketReceived = (intervalTime: number, val: {[code: string]: string}) => {
+        this.webSocket.OnVALPacketReceived = (intervalTime: number, val: { [code: string]: string }) => {
             $('#spanInterval').text(intervalTime.toFixed(2));
             //clear
             $('#divVAL').html("");
-            for (var key in val) {
+            for (const key in val) {
                 $('#divVAL').append(key + " : " + val[key] + "<br>");
             }
         }
@@ -89,16 +86,16 @@ export class ELM327COMWSTest extends WebSocketTesterBase {
         };
     }
 
-    public inputWSSend() {
-        const codeSelect = $('#codeSelect').val().toString();
-        const codeReadmode = $('#codeReadmode').val().toString();
-        const codeFlag = $('#codeFlag').val() === "true" ? true:false;
-        this.webSocket.SendCOMRead(OBDIIParameterCode[codeSelect], ReadModeCode[codeReadmode], codeFlag);
-    };
+    public inputWSSend(): void {
+        const codeSelect = $('#codeSelect').val() as OBDIIParameterCode;
+        const codeReadmode = $('#codeReadmode').val() as ReadModeCode;
+        const codeFlag = $('#codeFlag').val() === "true" ? true : false;
+        this.webSocket.SendCOMRead(codeSelect, codeReadmode, codeFlag);
+    }
 
-    public inputWSInterval() {
+    public inputWSInterval(): void {
         const WSinterval = Number($('#WSInterval').val());
         this.webSocket.SendSlowreadInterval(WSinterval);
-    };
+    }
 }
 

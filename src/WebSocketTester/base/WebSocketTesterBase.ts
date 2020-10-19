@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import * as $ from "jquery";
+import $ from "jquery";
 import {WebsocketCommon} from '../../lib/WebSocket/WebSocketCommunication';
 
 export abstract class WebSocketTesterBase
@@ -47,19 +47,19 @@ export abstract class WebSocketTesterBase
     
     public connectWebSocket() : void
     {
-        this.webSocketBase.URL = $("#serverURLBox").val().toString();
+        this.webSocketBase.URL = $("#serverURLBox").val() as string;
         this.webSocketBase.Connect();
-    };
+    }
 
-    public disconnectWebSocket()
+    public disconnectWebSocket() : void
     {
         this.webSocketBase.Close();
-    };
+    }
     
     protected assignButtonEvents() : void
     {
-        $("#connectButton").click(()=> this.connectWebSocket());
-        $("#disconnectButton").click(() => this.disconnectWebSocket());
+        $("#connectButton").on('click', ()=> this.connectWebSocket());
+        $("#disconnectButton").on('click', () => this.disconnectWebSocket());
     }
     
     protected abstract setParameterCodeSelectBox() : void;

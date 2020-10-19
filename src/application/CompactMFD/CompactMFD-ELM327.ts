@@ -21,10 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-// This line is required to bundle font/texture/html files by webpack file-loader (do not delete)
-/// <reference path="../../lib/webpackRequire.ts" />
-
-import * as PIXI from "pixi.js";
 
 // Set entry point html file to bundle by webpack
 require("./CompactMFD-ELM327.html");

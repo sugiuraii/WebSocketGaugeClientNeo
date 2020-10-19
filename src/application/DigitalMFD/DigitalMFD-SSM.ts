@@ -22,11 +22,6 @@
  * THE SOFTWARE.
  */
 
-// ws is required to webpack font/texture/html files
-/// <reference path="../../lib/webpackRequire.ts" />
-
-import * as PIXI from "pixi.js";
-
 //Import application base class
 import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
 import { MeterApplicationOption } from "../../lib/MeterAppBase/options/MeterApplicationOption";
@@ -45,7 +40,8 @@ import { SSMParameterCode } from "../../lib/WebSocket/WebSocketCommunication";
 import { SSMSwitchCode } from "../../lib/WebSocket/WebSocketCommunication";
 import { ReadModeCode } from "../../lib/WebSocket/WebSocketCommunication";
 
-import {calculateGearPosition} from "../../lib/MeterAppBase/utils/CalculateGearPosition";
+import { calculateGearPosition } from "../../lib/MeterAppBase/utils/CalculateGearPosition";
+import { SSMSwitchCodeToParameterCode } from "../../lib/WebSocket/private/parameterCode/SSMSwitchCode";
 
 //For including entry point html file in webpack
 require("./DigitalMFD-SSM.html");
@@ -85,10 +81,10 @@ class DigitalMFD_SSM {
         appOption.ParameterCode.SSM.addall({ code: SSMParameterCode.Battery_Voltage, readmode: ReadModeCode.SLOW });
         appOption.ParameterCode.SSM.addall({ code: SSMParameterCode.Throttle_Opening_Angle, readmode: ReadModeCode.SLOWandFAST });
         appOption.ParameterCode.SSM.addall({ code: SSMParameterCode.Air_Fuel_Sensor_1, readmode: ReadModeCode.SLOWandFAST });
-        appOption.ParameterCode.SSM.addall({ code: SSMSwitchCode.getNumericCodeFromSwitchCode(SSMSwitchCode.Neutral_Position_Switch), readmode: ReadModeCode.SLOWandFAST });
+        appOption.ParameterCode.SSM.addall({ code: SSMSwitchCodeToParameterCode(SSMSwitchCode.Neutral_Position_Switch), readmode: ReadModeCode.SLOWandFAST });
 
         appOption.SetupPIXIMeterPanel = (app, ws) => {
-            
+
             const stage = app.stage;
 
             const digiTachoPanel = new DigiTachoPanel();

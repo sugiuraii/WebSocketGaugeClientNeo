@@ -21,54 +21,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
- 
-/// <reference path="../../lib/webpackRequire.ts" />
- 
-import {DigiTachoPanel} from "../../parts/DigiTachoPanel/DigiTachoPanel";
-import * as WebFont from  "webfontloader";
+
+
+import { DigiTachoPanel } from "../../parts/DigiTachoPanel/DigiTachoPanel";
 import * as PIXI from 'pixi.js';
 
 require("./DigiTachoTest.html");
 
-window.onload = function()
-{
-    DigiTachoTest.preloadTexture();
+window.onload = function () {
+    preloadTexture();
 }
 
-namespace DigiTachoTest
-{
-    export function preloadTexture()
-    {
-        PIXI.Loader.shared.add(DigiTachoPanel.RequestedTexturePath);
-        PIXI.Loader.shared.load(main);
-    }
-    function main()
-    {
-        const app = new PIXI.Application({height:1366,width:1366});
-        document.body.appendChild(app.view);
-        let gaugeArray: DigiTachoPanel[] = new Array();
-        let index = 0;
-        for (let j = 0; j < 6; j++)
-        {
-            for (let i = 0; i < 6 ; i++)
-            {
-                gaugeArray.push(new DigiTachoPanel());
-                gaugeArray[index].pivot = new PIXI.Point(300,200);
-                gaugeArray[index].scale.set(0.65, 0.65);
-                gaugeArray[index].position = new PIXI.Point(400*i+150,240*j+150);
-                gaugeArray[index].Tacho = 0;
-                app.stage.addChild(gaugeArray[index]);
-                index++;
-            }
+function preloadTexture() {
+    PIXI.Loader.shared.add(DigiTachoPanel.RequestedTexturePath);
+    PIXI.Loader.shared.load(main);
+}
+function main() {
+    const app = new PIXI.Application({ height: 1366, width: 1366 });
+    document.body.appendChild(app.view);
+    const gaugeArray: DigiTachoPanel[] = [];
+    let index = 0;
+    for (let j = 0; j < 6; j++) {
+        for (let i = 0; i < 6; i++) {
+            gaugeArray.push(new DigiTachoPanel());
+            gaugeArray[index].pivot = new PIXI.Point(300, 200);
+            gaugeArray[index].scale.set(0.65, 0.65);
+            gaugeArray[index].position = new PIXI.Point(400 * i + 150, 240 * j + 150);
+            gaugeArray[index].Tacho = 0;
+            app.stage.addChild(gaugeArray[index]);
+            index++;
         }
-        app.ticker.add(() => {
-            for (let i = 0; i < gaugeArray.length; i++)
-            {
-                if (gaugeArray[i].Tacho + 100 >= 9000)
-                    gaugeArray[i].Tacho = 0;
-                else           
-                    gaugeArray[i].Tacho+=100;
-            }
-        });
     }
+    app.ticker.add(() => {
+        for (let i = 0; i < gaugeArray.length; i++) {
+            if (gaugeArray[i].Tacho + 100 >= 9000)
+                gaugeArray[i].Tacho = 0;
+            else
+                gaugeArray[i].Tacho += 100;
+        }
+    });
 }

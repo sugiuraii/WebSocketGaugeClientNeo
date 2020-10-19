@@ -22,8 +22,6 @@
  * THE SOFTWARE.
  */
 
-/// <reference path="../../lib/webpackRequire.ts" />
-
 import { RectangularProgressBar, RectangularProgressBarOptions } from '../../lib/Graphics/PIXIGauge';
 import * as PIXI from 'pixi.js';
 
@@ -44,10 +42,10 @@ export class MilageGraphPanel extends PIXI.Container {
     private fuelLabel: PIXI.BitmapText;
     private gasMilageLabel: PIXI.BitmapText;
 
-    private momentGasMilage: number = 0;
-    private trip: number = 0;
-    private fuel: number = 0;
-    private gasMilage: number = 0;
+    private momentGasMilage = 0;
+    private trip = 0;
+    private fuel = 0;
+    private gasMilage = 0;
     private sectGasMilage: { [spankey: string]: number } = {};
 
     private sectSpan: string[] = ["5min", "10min", "15min", "20min", "25min", "30min"];
@@ -71,13 +69,13 @@ export class MilageGraphPanel extends PIXI.Container {
         this.momentGasMilageBar.update();
     }
 
-    public get Fuel(): number { return this.fuel };
+    public get Fuel(): number { return this.fuel }
     public set Fuel(val: number) {
         this.fuel = val;
         this.fuelLabel.text = this.fuel.toFixed(2)
     }
 
-    public get Trip(): number { return this.trip };
+    public get Trip(): number { return this.trip }
     public set Trip(val: number) {
         this.trip = val;
         this.tripLabel.text = this.trip.toFixed(1);
@@ -103,10 +101,7 @@ export class MilageGraphPanel extends PIXI.Container {
 
     constructor() {
         super();
-        this.create();
-    }
 
-    private create() {
         const backTexture = PIXI.Texture.from("MilageGraph_Back");
         const backSprite = new PIXI.Sprite(backTexture);
         super.addChild(backSprite);
@@ -147,12 +142,12 @@ export class MilageGraphPanel extends PIXI.Container {
 
         this.tripLabel = new PIXI.BitmapText("0.0", { fontName: "FreeSans_45px", fontSize: 45, align: "right" });
         this.tripLabel.anchor = new PIXI.Point(1, 1);
-        this.tripLabel.position.set(610, 115);
+        this.tripLabel.position.set(600, 115);
         super.addChild(this.tripLabel);
 
         this.fuelLabel = new PIXI.BitmapText("0.00", { fontName: "FreeSans_45px", fontSize: 45, align: "right" });
         this.fuelLabel.anchor = new PIXI.Point(1, 1);
-        this.fuelLabel.position.set(610, 170);
+        this.fuelLabel.position.set(600, 170);
         super.addChild(this.fuelLabel);
 
         this.gasMilageLabel = new PIXI.BitmapText("0.00", { fontName: "FreeSans_68px", fontSize: 68, align: "right" });

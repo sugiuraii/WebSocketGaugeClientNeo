@@ -23,7 +23,6 @@
  */
 
 import { ELM327COMWebsocket, OBDIIParameterCode, ReadModeCode } from "../../WebSocket/WebSocketCommunication";
-import { WebstorageHandler } from "../Webstorage/WebstorageHandler";
 import { ILogWindow } from "../interfaces/ILogWindow";
 import { IStatusIndicator } from "../interfaces/IStatusIndicator";
 
@@ -44,35 +43,33 @@ export class ELM327WebsocketBackend {
 
    private readonly webSocketServerURL: string;
 
-   private indicatorUpdateIntervalID: number;
+   private indicatorUpdateIntervalID = 0;
 
-   constructor(serverurl: string, paramCode : { code: OBDIIParameterCode, readmode: ReadModeCode }[], loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
-      this.elm327WS = new ELM327COMWebsocket();
+   constructor(serverurl: string, paramCode: { code: OBDIIParameterCode, readmode: ReadModeCode }[], loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
+      this.elm327WS = new ELM327COMWebsocket(serverurl);
       this.parameterCodeList = paramCode;
       this.loggerWindow = loggerWindow;
       this.statusIndicator = statusIndicator;
-      this.webSocketServerURL = serverurl;
+      this.webSocketServerURL = this.elm327WS.URL;
 
       this.elm327WS.OnWebsocketError = (message: string) => this.loggerWindow.appendLog(this.logPrefix + " websocket error : " + message);
    }
 
-   public Run() {
+   public Run(): void {
       this.indicatorUpdateIntervalID = window.setInterval(() => this.setStatusIndicator(), this.WEBSOCKET_CHECK_INTERVAL);
       this.connectWebSocket();
    }
 
-   public Stop() {
+   public Stop(): void {
       clearInterval(this.indicatorUpdateIntervalID);
       this.elm327WS.Close();
    }
 
-   public getVal(code : OBDIIParameterCode, timestamp : number)
-   {
+   public getVal(code: OBDIIParameterCode, timestamp: number): number {
       return this.elm327WS.getVal(code, timestamp);
    }
 
-   public getRawVal(code : OBDIIParameterCode)
-   {
+   public getRawVal(code: OBDIIParameterCode): number {
       return this.elm327WS.getRawVal(code);
    }
 
@@ -84,8 +81,6 @@ export class ELM327WebsocketBackend {
       const LogWindow = this.loggerWindow;
       const webSocketObj = this.elm327WS;
       const logPrefix = this.logPrefix;
-
-      webSocketObj.URL = this.webSocketServerURL;
 
       webSocketObj.OnWebsocketOpen = () => {
          LogWindow.appendLog(logPrefix + " is connected. SendWSSend/Interval after " + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");

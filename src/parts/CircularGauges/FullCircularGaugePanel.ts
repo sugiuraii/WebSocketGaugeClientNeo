@@ -22,15 +22,13 @@
  * THE SOFTWARE.
  */
 
-import {FullCircularGaugePanelBase} from "./private/FullCircularGaugePanelBase"
-import {FullCircularGaugePanelOptionsBase} from "./private/FullCircularGaugePanelBase"
+import { FullCircularGaugePanelBase } from "./private/FullCircularGaugePanelBase"
+import { FullCircularGaugePanelOptionsBase } from "./private/FullCircularGaugePanelBase"
 
-export class BoostGaugePanel extends FullCircularGaugePanelBase
-{
-    constructor()
-    {
-        let options = new FullCircularGaugePanelOptionsBase();
-        
+export class BoostGaugePanel extends FullCircularGaugePanelBase {
+    constructor() {
+        const options = new FullCircularGaugePanelOptionsBase();
+
         options.TitleLabel = "TURBO BOOST";
         options.UnitLabel = "x100kPa";
         options.Min = -1.0;
@@ -45,26 +43,24 @@ export class BoostGaugePanel extends FullCircularGaugePanelBase
         options.YellowZoneBarFullAngle = 45;
         options.GreenZoneBarFullAngle = 90;
         options.ValueNumberRoundDigit = 1;
-        
-        options.AxisLabel = 
-        [   "-1.0",
-            "-0.5",
-            "0",
-            "+0.5",
-            "+1.0",
-            "+1.5",
-            "+2.0"
-        ];
-        
+
+        options.AxisLabel =
+            ["-1.0",
+                "-0.5",
+                "0",
+                "+0.5",
+                "+1.0",
+                "+1.5",
+                "+2.0"
+            ];
+
         super(options);
     }
 }
 
-export class AirFuelGaugePanel extends FullCircularGaugePanelBase
-{
-    constructor()
-    {
-        let options = new FullCircularGaugePanelOptionsBase();
+export class AirFuelGaugePanel extends FullCircularGaugePanelBase {
+    constructor() {
+        const options = new FullCircularGaugePanelOptionsBase();
 
         options.TitleLabel = "Air/Fuel Ratio";
         options.Min = 8;
@@ -76,28 +72,26 @@ export class AirFuelGaugePanel extends FullCircularGaugePanelBase
         options.GreenZoneBarOffsetAngle = 135;
         options.GreenZoneBarFullAngle = 90;
         options.GaugeFullOnValueMin = true;
-        options.UnitLabel="A/F";
+        options.UnitLabel = "A/F";
         options.ValueNumberRoundDigit = 1;
-        options.AxisLabel = 
-        [   "20",
-            "18",
-            "16",
-            "14",
-            "12",
-            "10",
-            "8"
-        ];
-        
+        options.AxisLabel =
+            ["20",
+                "18",
+                "16",
+                "14",
+                "12",
+                "10",
+                "8"
+            ];
+
         super(options);
     }
 }
 
-export class WaterTempGaugePanel extends FullCircularGaugePanelBase
-{
-    constructor()
-    {
-        let options = new FullCircularGaugePanelOptionsBase();
-        
+export class WaterTempGaugePanel extends FullCircularGaugePanelBase {
+    constructor() {
+        const options = new FullCircularGaugePanelOptionsBase();
+
         options.TitleLabel = "WATER TEMP";
         options.UnitLabel = "degC";
         options.Min = 0;
@@ -110,27 +104,25 @@ export class WaterTempGaugePanel extends FullCircularGaugePanelBase
         options.RedZoneBarFullAngle = 42;
         options.YellowZoneBarFullAngle = 22.5;
         options.ValueNumberRoundDigit = 0;
-        
-        options.AxisLabel = 
-        [   "0",
-            "20",
-            "40",
-            "60",
-            "80",
-            "100",
-            "120"
-        ];
-        
+
+        options.AxisLabel =
+            ["0",
+                "20",
+                "40",
+                "60",
+                "80",
+                "100",
+                "120"
+            ];
+
         super(options);
     }
 }
 
-export class EngineOilTempGaugePanel extends FullCircularGaugePanelBase
-{
-    constructor()
-    {
-        let options = new FullCircularGaugePanelOptionsBase();
-        
+export class EngineOilTempGaugePanel extends FullCircularGaugePanelBase {
+    constructor() {
+        const options = new FullCircularGaugePanelOptionsBase();
+
         options.TitleLabel = "ENG. OIL TEMP";
         options.UnitLabel = "degC";
         options.Min = 30;
@@ -143,27 +135,25 @@ export class EngineOilTempGaugePanel extends FullCircularGaugePanelBase
         options.RedZoneBarFullAngle = 42;
         options.YellowZoneBarFullAngle = 22.5;
         options.ValueNumberRoundDigit = 0;
-        
-        options.AxisLabel = 
-        [   "30",
-            "50",
-            "70",
-            "90",
-            "110",
-            "130",
-            "150"
-        ];
-        
+
+        options.AxisLabel =
+            ["30",
+                "50",
+                "70",
+                "90",
+                "110",
+                "130",
+                "150"
+            ];
+
         super(options);
     }
 }
 
-export class  BatteryVoltageGaugePanel extends FullCircularGaugePanelBase
-{
-    constructor()
-    {
-        let options = new FullCircularGaugePanelOptionsBase();
-        
+export class BatteryVoltageGaugePanel extends FullCircularGaugePanelBase {
+    constructor() {
+        const options = new FullCircularGaugePanelOptionsBase();
+
         options.TitleLabel = "BATTERY VOLT";
         options.UnitLabel = "V";
         options.Min = 9;
@@ -172,27 +162,25 @@ export class  BatteryVoltageGaugePanel extends FullCircularGaugePanelBase
         options.YellowZoneBarEnable = false;
         options.GreenZoneBarEnable = false;
         options.ValueNumberRoundDigit = 1;
-        
-        options.AxisLabel = 
-        [   "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15"
-        ];
-        
+
+        options.AxisLabel =
+            ["9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14",
+                "15"
+            ];
+
         super(options);
     }
 }
 
-export class  MassAirFlowGaugePanel extends FullCircularGaugePanelBase
-{
-    constructor()
-    {
-        let options = new FullCircularGaugePanelOptionsBase();
-        
+export class MassAirFlowGaugePanel extends FullCircularGaugePanelBase {
+    constructor() {
+        const options = new FullCircularGaugePanelOptionsBase();
+
         options.TitleLabel = "MASS AIRFLOW";
         options.UnitLabel = "x10g/s";
         options.Min = 0;
@@ -201,17 +189,17 @@ export class  MassAirFlowGaugePanel extends FullCircularGaugePanelBase
         options.YellowZoneBarEnable = false;
         options.GreenZoneBarEnable = false;
         options.ValueNumberRoundDigit = 0;
-        
-        options.AxisLabel = 
-        [   "0",
-            "10",
-            "20",
-            "30",
-            "40",
-            "50",
-            "60"
-        ];
-        
+
+        options.AxisLabel =
+            ["0",
+                "10",
+                "20",
+                "30",
+                "40",
+                "50",
+                "60"
+            ];
+
         super(options);
     }
 }

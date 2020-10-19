@@ -22,9 +22,12 @@
  * THE SOFTWARE.
  */
 
-export enum ReadModeCode
-{
-    SLOW,
-    FAST,
-    SLOWandFAST
-}
+export const ReadModeCode =
+    {
+        SLOW: "SLOW",
+        FAST: "FAST",
+        SLOWandFAST: "SLOWandFAST"
+    } as const;
+
+export type ReadModeCode = typeof ReadModeCode[keyof typeof ReadModeCode];
+

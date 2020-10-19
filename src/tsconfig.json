@@ -3,6 +3,12 @@
     {
         "target": "es5",
         "sourceMap": true,
-        "module": "commonjs"
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "jsx": "react",
+        // Strict,
+        "strict": true,
+        "noUnusedParameters":true,
+        "lib":["dom", "es2017"]
     }
 }

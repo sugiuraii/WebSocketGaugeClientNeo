@@ -22,11 +22,6 @@
  * THE SOFTWARE.
  */
 
-// This is required to webpack font/texture/html files 
-/// <reference path="../../lib/webpackRequire.ts" />
-
-import * as PIXI from "pixi.js";
-
 //Import application base class
 import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
 import { MeterApplicationOption } from "../../lib/MeterAppBase/options/MeterApplicationOption";

@@ -22,58 +22,50 @@
  * THE SOFTWARE.
  */
 
-import {VALInterpolationBuffer} from "./utils/Interpolation";
+import { VALInterpolationBuffer } from "./utils/Interpolation";
 import * as JSONFormats from "./JSONFormats";
-import {WebsocketCommon} from "./WebsocketCommon";
-import {ReadModeCode} from "./parameterCode/ReadModeCode";
-import {OBDIIParameterCode} from "./parameterCode/OBDIIParameterCode";
-import {EnumUtils} from "../../EnumUtils";
+import { WebsocketCommon } from "./WebsocketCommon";
+import { ReadModeCode } from "./parameterCode/ReadModeCode";
+import { OBDIIParameterCode } from "./parameterCode/OBDIIParameterCode";
 
-export class ELM327COMWebsocket extends WebsocketCommon
-{
-    private onVALPacketReceived : (intervalTime : number, val:{[code : string] : string}) => void;
+export class ELM327COMWebsocket extends WebsocketCommon {
+    private onVALPacketReceived: (intervalTime: number, val: { [code: string]: string }) => void;
 
     //Internal state
-    private valPacketPreviousTimeStamp : number;
-    private valPacketIntervalTime : number;
+    private valPacketPreviousTimeStamp: number;
+    private valPacketIntervalTime: number;
 
     //Interpolate value buffer
-    private interpolateBuffers: {[code: string]: VALInterpolationBuffer} = {};
-    
-    constructor()
-    {
-        super();
+    private interpolateBuffers: { [code: string]: VALInterpolationBuffer } = {};
+
+    constructor(url? : string) {
+        super(url);
         this.modePrefix = "ELM327";
         this.valPacketPreviousTimeStamp = window.performance.now();
         this.valPacketIntervalTime = 0;
+        this.onVALPacketReceived = () => {/* do nothing*/};
     }
 
-    private checkInterpolateBufferAndCreateIfEmpty(code: string): void
-    {
-        if(!(code in this.interpolateBuffers))
-            this.interpolateBuffers[code] = new VALInterpolationBuffer();            
+    private checkInterpolateBufferAndCreateIfEmpty(code: OBDIIParameterCode): void {
+        if (!(code in this.interpolateBuffers))
+            this.interpolateBuffers[code] = new VALInterpolationBuffer();
     }
 
-    public getVal(code : OBDIIParameterCode, timestamp : number) : number
-    {
-        const codeStr = OBDIIParameterCode[code];
-        this.checkInterpolateBufferAndCreateIfEmpty(codeStr);
-        return this.interpolateBuffers[codeStr].getVal(timestamp);
+    public getVal(code: OBDIIParameterCode, timestamp: number): number {
+        this.checkInterpolateBufferAndCreateIfEmpty(code);
+        return this.interpolateBuffers[code].getVal(timestamp);
     }
 
-    public getRawVal(code : OBDIIParameterCode) : number
-    {
-        const codeStr = OBDIIParameterCode[code];
-        this.checkInterpolateBufferAndCreateIfEmpty(codeStr);
-        return this.interpolateBuffers[codeStr].getRawVal();
+    public getRawVal(code: OBDIIParameterCode): number {
+        this.checkInterpolateBufferAndCreateIfEmpty(code);
+        return this.interpolateBuffers[code].getRawVal();
     }
-    
-    public SendCOMRead(code: OBDIIParameterCode, readmode: ReadModeCode, flag: boolean): void
-    {
+
+    public SendCOMRead(code: OBDIIParameterCode, readmode: ReadModeCode, flag: boolean): void {
         if (!this.IsConnetced)
             return;
 
-        let sendCOMReadObj = new JSONFormats.SendCOMReadJSONMessage();
+        const sendCOMReadObj = new JSONFormats.SendCOMReadJSONMessage();
         sendCOMReadObj.mode = this.modePrefix + "_COM_READ";
         sendCOMReadObj.code = OBDIIParameterCode[code];
         sendCOMReadObj.read_mode = ReadModeCode[readmode];
@@ -82,79 +74,71 @@ export class ELM327COMWebsocket extends WebsocketCommon
         this.WebSocket.send(jsonstr);
     }
 
-    public SendSlowreadInterval(interval : number)
-    {
+    public SendSlowreadInterval(interval: number): void {
         if (!this.IsConnetced)
             return;
 
-        let sendSlowreadIntervalObj = new JSONFormats.SendSlowReadIntervalJSONMessage();
+        const sendSlowreadIntervalObj = new JSONFormats.SendSlowReadIntervalJSONMessage();
         sendSlowreadIntervalObj.mode = this.modePrefix + "_SLOWREAD_INTERVAL";
         sendSlowreadIntervalObj.interval = interval;
         const jsonstr = JSON.stringify(sendSlowreadIntervalObj);
         this.WebSocket.send(jsonstr);
     }
 
-    private processVALJSONMessage(receivedJson: JSONFormats.StringVALJSONMessage) : void
-    {
+    private processVALJSONMessage(receivedJson: JSONFormats.StringVALJSONMessage): void {
         //Update interval time
-        var nowTime = window.performance.now();
+        const nowTime = window.performance.now();
         this.valPacketIntervalTime = nowTime - this.valPacketPreviousTimeStamp;
         this.valPacketPreviousTimeStamp = nowTime;
 
         // Invoke VALPacketReceived Event
-        if ( typeof(this.onVALPacketReceived) !== "undefined" )
+        if (typeof (this.onVALPacketReceived) !== "undefined")
             this.onVALPacketReceived(this.valPacketIntervalTime, receivedJson.val);
-        
+
         // Store value into interpolation buffers
-        for (let key in receivedJson.val)
-        {            
-            const valStr : string = receivedJson.val[key];
-            
-            if(EnumUtils.IsEnumContaninsKey(OBDIIParameterCode, key))
-            {
-                const val: number = Number(valStr);
+        for (const key in receivedJson.val) {
+            const valStr: string = receivedJson.val[key];
+
+            if (Object.values(OBDIIParameterCode).includes(key as OBDIIParameterCode)) {
+                const val = Number(valStr);
                 // Register to interpolate buffer
-                this.checkInterpolateBufferAndCreateIfEmpty(key);
+                this.checkInterpolateBufferAndCreateIfEmpty(key as OBDIIParameterCode);
                 this.interpolateBuffers[key].setVal(val);
             }
             else
                 throw EvalError("Key of VAL message is not found in OBDIIParameterCode. key=" + key);
         }
     }
-    
-    private processERRJSONMessage(receivedJson: JSONFormats.ErrorJSONMessage)
-    {
+
+    private processERRJSONMessage(receivedJson: JSONFormats.ErrorJSONMessage) {
         if (typeof (this.OnERRPacketReceived) !== "undefined")
             this.OnERRPacketReceived(receivedJson.msg);
     }
-    
-    private processRESJSONMessage(receivedJson: JSONFormats.ResponseJSONMessage)
-    {
-        if(typeof (this.OnRESPacketReceived) !== "undefined")
+
+    private processRESJSONMessage(receivedJson: JSONFormats.ResponseJSONMessage) {
+        if (typeof (this.OnRESPacketReceived) !== "undefined")
             this.OnRESPacketReceived(receivedJson.msg);
     }
-    
-    protected parseIncomingMessage(msg : string) : void
-    {
-        const receivedJson : any = JSON.parse(msg);
-        const modeCode : string = (<JSONFormats.IJSONMessage>receivedJson).mode;
-        switch (modeCode)
-        {
-            case ("VAL") :
-                this.processVALJSONMessage(<JSONFormats.StringVALJSONMessage>receivedJson);
+
+    protected parseIncomingMessage(msg: string): void {
+        const receivedJsonObj: JSONFormats.IJSONMessage | JSONFormats.StringVALJSONMessage | JSONFormats.ErrorJSONMessage | JSONFormats.ResponseJSONMessage = JSON.parse(msg);
+        const modeCode: string = receivedJsonObj.mode;
+        switch (modeCode) {
+            case ("VAL"):
+                this.processVALJSONMessage(receivedJsonObj as JSONFormats.StringVALJSONMessage);
                 break;
-            case("ERR"):
-                this.processERRJSONMessage(<JSONFormats.ErrorJSONMessage>receivedJson);
+            case ("ERR"):
+                this.processERRJSONMessage(receivedJsonObj as JSONFormats.ErrorJSONMessage);
                 break;
-            case("RES"):
-                this.processRESJSONMessage(<JSONFormats.ResponseJSONMessage>receivedJson);
+            case ("RES"):
+                this.processRESJSONMessage(receivedJsonObj as JSONFormats.ResponseJSONMessage);
                 break;
             default:
                 this.OnWebsocketError("Unknown mode packet received. " + msg);
-        };
+        }
     }
 
-    public get OnVALPacketReceived() {return this.onVALPacketReceived};
-    public set OnVALPacketReceived(func) {this.onVALPacketReceived = func };
+    public get OnVALPacketReceived(): (intervalTime: number, val: { [code: string]: string }) => void { return this.onVALPacketReceived }
+    public set OnVALPacketReceived(func: (intervalTime: number, val: { [code: string]: string }) => void) { this.onVALPacketReceived = func }
     public get VALPacketIntervalTime(): number { return this.valPacketIntervalTime; }
 }

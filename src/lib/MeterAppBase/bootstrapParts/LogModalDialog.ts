@@ -22,20 +22,18 @@
  * THE SOFTWARE.
  */
 
-import * as $ from 'jquery';
-import {ILogWindow} from '../interfaces/ILogWindow';
+import $ from "jquery";
+import { ILogWindow } from '../interfaces/ILogWindow';
 
-export class LogModalDialog implements ILogWindow
-{
-    private writeDate = false;
-    
-    public get WriteDate() {return this.writeDate}
-    public set WriteDate(flag: boolean) {this.writeDate = flag}
-    
-    private dialogHTML() : string
-    {
-        const html =         
-        '<div class="modal fade" id="logModal" tabindex="-1" role="dialog" aria-labelledby="logModalLabel" aria-hidden="true">\
+export class LogModalDialog implements ILogWindow {
+  private writeDate = false;
+
+  public get WriteDate(): boolean { return this.writeDate }
+  public set WriteDate(flag: boolean) { this.writeDate = flag }
+
+  private dialogHTML(): string {
+    const html =
+      '<div class="modal fade" id="logModal" tabindex="-1" role="dialog" aria-labelledby="logModalLabel" aria-hidden="true">\
           <div class="modal-dialog" role="document">\
             <div class="modal-content">\
               <div class="modal-header">\
@@ -52,35 +50,31 @@ export class LogModalDialog implements ILogWindow
             </div>\
           </div>\
         </div>';
-        
-        return html;
-    }
-    
-    private getTimeString() : string
-    {
-        return new Date().toLocaleString();
-    }
 
-    public clearLog() : void
-    {
-        $('#logContents').empty();
-    }
+    return html;
+  }
 
-    public appendLog(message : string) : void
-    {
-        let strToAppend : string;
-        if (this.writeDate)
-            strToAppend = this.getTimeString() + "<br>";
-        else
-            strToAppend = "";
+  private getTimeString(): string {
+    return new Date().toLocaleString();
+  }
 
-        strToAppend += (message + "<br>");
+  public clearLog(): void {
+    $('#logContents').empty();
+  }
 
-        $('#logContents').append(strToAppend);
-    }
-    
-    public create()
-    {
-        $('body').append(this.dialogHTML);
-    }
+  public appendLog(message: string): void {
+    let strToAppend: string;
+    if (this.writeDate)
+      strToAppend = this.getTimeString() + "<br>";
+    else
+      strToAppend = "";
+
+    strToAppend += (message + "<br>");
+
+    $('#logContents').append(strToAppend);
+  }
+
+  public create(): void {
+    $('body').append(this.dialogHTML);
+  }
 }

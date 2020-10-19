@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import * as $ from 'jquery';
+import $ from 'jquery';
 
 import { FUELTripResetModalDialog } from "./FUELTripResetModalDialog"
 import { LogModalDialog } from "./LogModalDialog"
@@ -38,14 +38,14 @@ import { WebsocketStatus } from '../WebsocketAppBackend/WebsocketStatus'
 class WebsocketStatusIndicator implements IStatusIndicator {
 
     private readonly elementID: string;
-    private isEnabled: boolean = true;
+    private isEnabled = true;
 
     constructor(elementID: string) {
         this.elementID = elementID;
     }
 
     public SetStatus(status: WebsocketStatus) {
-        let cssClass: string = "";
+        let cssClass = "";
         const elementID = this.elementID;
 
         if (!this.isEnabled)
@@ -87,15 +87,14 @@ export class ApplicationNavBar {
 
     private isCreated = false;
 
-    public get LogModalDialog() { return this.logModalDialog }
-    public get FUELTRIPModalDialog() { return this.fuelTripResetModalDialog }
+    public get LogModalDialog(): LogModalDialog { return this.logModalDialog }
+    public get FUELTRIPModalDialog(): FUELTripResetModalDialog { return this.fuelTripResetModalDialog }
 
-    public GetWebSocketStatusIndicator(id: string) : IStatusIndicator
-    {
+    public GetWebSocketStatusIndicator(id: string): IStatusIndicator {
         return this.webSocketIndicators[id];
     }
-    
-    public AddWebSocketStatusIndicator(id: string, caption: string) {
+
+    public AddWebSocketStatusIndicator(id: string, caption: string): void {
         if (this.webSocketIndicators[id] != undefined)
             throw Error("Indicator of id=" + id + " already exists.");
         else if ($('#' + id).length != 0)
@@ -111,7 +110,7 @@ export class ApplicationNavBar {
     /**
      * Create bootstrap navbar for index.html.
      */
-    public create() {
+    public create(): void {
         if (this.isCreated)
             throw Error("Application NavBar is already created");
 
@@ -138,7 +137,8 @@ export class ApplicationNavBar {
                             <a class="nav-link" href="../index.html">\n\
                                 Home\
                             </a>\
-                        </li>\                        <li class="nav-item">\
+                        </li>\
+                        <li class="nav-item">\
                             <a class="nav-link" data-toggle="modal" data-target="#optionModal">\n\
                                 Options\
                             </a>\

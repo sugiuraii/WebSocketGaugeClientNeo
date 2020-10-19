@@ -22,8 +22,6 @@
  * THE SOFTWARE.
  */
 
-/// <reference path="../../lib/webpackRequire.ts" />
-
 import { CircularProgressBar, CircularProgressBarOptions, NumericIndicator, BitmapTextNumericIndicator } from '../../lib/Graphics/PIXIGauge';
 import * as PIXI from 'pixi.js';
 
@@ -41,7 +39,7 @@ require("./LEDMeterFont_45px_0.png");
 require("./LEDMeterFont_30px_0.png");
 
 export class LEDTachoMeter extends PIXI.Container {
-    private tachoProgressBar;
+    private tachoProgressBar : CircularProgressBar;
     private speedLabel: NumericIndicator;
     private gasMilageLabel: NumericIndicator;
     private tripLabel: NumericIndicator;
@@ -53,7 +51,7 @@ export class LEDTachoMeter extends PIXI.Container {
     private gasMilage = 0;
     private trip = 0;
     private fuel = 0;
-    private gearPos: string = "";
+    private gearPos = "";
 
     static get RequestedTexturePath(): string[] {
         return ["img/LEDTachoMeterTexture.json", "img/LEDMeterFont_100px.fnt", "img/LEDMeterFont_88px.fnt", "img/LEDMeterFont_45px.fnt", "img/LEDMeterFont_30px.fnt"];
@@ -74,12 +72,12 @@ export class LEDTachoMeter extends PIXI.Container {
         this.changeRedZoneProgressBarColor();
         this.tachoProgressBar.update();
     }
-    get Speed() { return this.speed; }
+    get Speed(): number { return this.speed; }
     set Speed(val: number) {
         this.speed = val;
         this.speedLabel.text = val.toFixed(0);
     }
-    get GasMilage() { return this.gasMilage; }
+    get GasMilage(): number { return this.gasMilage; }
     set GasMilage(val: number) {
         this.gasMilage = val;
         if (val > 99)
@@ -87,18 +85,18 @@ export class LEDTachoMeter extends PIXI.Container {
         else
             this.gasMilageLabel.text = val.toFixed(2);
     }
-    get Trip() { return this.trip }
+    get Trip(): number { return this.trip }
     set Trip(val: number) {
         this.trip = val;
         this.tripLabel.text = val.toFixed(1);
     }
-    get Fuel() { return this.fuel }
+    get Fuel(): number { return this.fuel }
     set Fuel(val: number) {
         this.fuel = val;
         this.fuelLabel.text = val.toFixed(2);
     }
 
-    get GearPos() { return this.gearPos }
+    get GearPos(): string { return this.gearPos }
     set GearPos(val: string) {
         this.gearPos = val;
         this.gearPosLabel.text = val;

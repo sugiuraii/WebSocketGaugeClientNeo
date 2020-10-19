@@ -21,17 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-/// <reference path="../lib/webpackRequire.ts" />
 
 import {DefiParameterCode} from '../lib/WebSocket/WebSocketCommunication';
 import {DefiCOMWSTest} from "./DefiCOMWSTest"
-import {EnumUtils} from '../lib/EnumUtils'
 
-import * as $ from "jquery";
+import $ from "jquery";
 require('./DefiCOMWSInterpolateTest.html');
 
 window.onload = () => {
-    let wsTest = new DefiCOMWSTestInterpolate();
+    const wsTest = new DefiCOMWSTestInterpolate();
     wsTest.main();
 }
 
@@ -50,13 +48,13 @@ class DefiCOMWSTestInterpolate extends DefiCOMWSTest
 
     public showInterpolateVal(timestamp: number) {
         $('#divInterpolatedVAL').html("");
-        EnumUtils.EnumToKeyStrArray(DefiParameterCode).forEach(key => 
+        Object.values(DefiParameterCode).forEach(key => 
             {
-                const val: number = this.WebSocket.getVal(DefiParameterCode[key], timestamp);
+                const val = this.WebSocket.getVal(DefiParameterCode[key], timestamp);
                 if (typeof (val) !== "undefined")
                     $('#divInterpolatedVAL').append(key + " : " + val + "<br>");
 
             });
-        window.requestAnimationFrame((timestamp: number) => this.showInterpolateVal(timestamp));
+        window.requestAnimationFrame((timestamp) => this.showInterpolateVal(timestamp));
     }
 } 

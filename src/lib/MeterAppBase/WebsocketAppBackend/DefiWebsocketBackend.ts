@@ -28,7 +28,7 @@ import { ILogWindow } from "../interfaces/ILogWindow";
 import { IStatusIndicator } from "../interfaces/IStatusIndicator";
 
 export class DefiWebsocketBackend {
-   
+
    public static readonly DEFAULT_WS_PORT = 2012;
 
    private readonly logPrefix = "Defi";
@@ -43,34 +43,32 @@ export class DefiWebsocketBackend {
 
    private readonly webSocketServerURL: string;
 
-   private indicatorUpdateIntervalID: number;
+   private indicatorUpdateIntervalID = 0;
 
-   constructor(serverurl: string, codeList : DefiParameterCode[], loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
-      this.defiWS = new DefiCOMWebsocket();
+   constructor(serverurl: string, codeList: DefiParameterCode[], loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
+      this.defiWS = new DefiCOMWebsocket(serverurl);
       this.parameterCodeList = codeList;
       this.loggerWindow = loggerWindow;
       this.statusIndicator = statusIndicator;
-      this.webSocketServerURL = serverurl;
+      this.webSocketServerURL = this.defiWS.URL;
 
       this.defiWS.OnWebsocketError = (message: string) => this.loggerWindow.appendLog(this.logPrefix + " websocket error : " + message);
    }
 
-   public getVal(code : DefiParameterCode, timestamp : number)
-   {
+   public getVal(code: DefiParameterCode, timestamp: number): number {
       return this.defiWS.getVal(code, timestamp);
    }
 
-   public getRawVal(code : DefiParameterCode)
-   {
+   public getRawVal(code: DefiParameterCode): number {
       return this.defiWS.getRawVal(code);
    }
 
-   public Run() {
+   public Run(): void {
       this.indicatorUpdateIntervalID = window.setInterval(() => this.setStatusIndicator(), this.WEBSOCKET_CHECK_INTERVAL);
       this.connectWebSocket();
    }
 
-   public Stop() {
+   public Stop(): void {
       clearInterval(this.indicatorUpdateIntervalID);
       this.defiWS.Close();
    }
@@ -83,8 +81,6 @@ export class DefiWebsocketBackend {
       const LogWindow = this.loggerWindow;
       const webSocketObj = this.defiWS;
       const logPrefix = this.logPrefix;
-
-      webSocketObj.URL = this.webSocketServerURL;
 
       webSocketObj.OnWebsocketOpen = () => {
          LogWindow.appendLog(logPrefix + " is connected. SendWSSend/Interval after " + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");

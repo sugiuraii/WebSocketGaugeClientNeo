@@ -22,21 +22,17 @@
  * THE SOFTWARE.
  */
 
-export class WebstorageHandler
-{
-    public static SetWSIntervalToLocalStorage(interval: number)
-    {
+export class WebstorageHandler {
+    public static SetWSIntervalToLocalStorage(interval: number): void {
         localStorage.setItem("WSInterval", interval.toString());
     }
-    
-    public static GetWSIntervalFromLocalStorage() : number
-    {
+
+    public static GetWSIntervalFromLocalStorage(): number {
         if (localStorage.getItem("WSInterval") === null)
             return 0;
-        else
-        {
-            const interval = parseInt(localStorage.getItem("WSInterval"));
-            return interval;    
+        else {
+            const interval = Number(localStorage.getItem("WSInterval"));
+            return interval;
         }
     }
 }

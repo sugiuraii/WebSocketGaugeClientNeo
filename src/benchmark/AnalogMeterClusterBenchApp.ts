@@ -21,9 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
- 
-// This is required to webpack font/texture/html files
-/// <reference path="../lib/webpackRequire.ts" />
 
 //Import application base class
 import {MeterApplication} from "../lib/MeterAppBase/MeterApplication";
@@ -57,7 +54,7 @@ class AnalogMeterClusterBenchApp
         appOption.PreloadResource.TexturePath.addall(AnalogMeterCluster.RequestedTexturePath);
         appOption.PreloadResource.TexturePath.addall(FPSCounter.RequestedTexturePath);
 
-        appOption.SetupPIXIMeterPanel = (app, ws) =>
+        appOption.SetupPIXIMeterPanel = (app) =>
         {
             const meterCluster = new AnalogMeterCluster();
             const stage = app.stage;

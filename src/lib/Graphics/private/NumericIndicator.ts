@@ -24,81 +24,74 @@
 
 import * as PIXI from 'pixi.js';
 
-export interface NumericIndicator
-{
-    NumberOfDecimalPlace : number;
-    ShowPlusSign : boolean;
-    Value : number;
-    text : string;
+export interface NumericIndicator {
+    NumberOfDecimalPlace: number;
+    ShowPlusSign: boolean;
+    Value: number;
+    text: string;
 }
 
-export class BitmapTextNumericIndicator extends PIXI.BitmapText implements NumericIndicator
-{
-    private value : number = 0;
-    
+export class BitmapTextNumericIndicator extends PIXI.BitmapText implements NumericIndicator {
+    private value = 0;
+
     /**
      * Number of decimal place to show.
      */
-    public NumberOfDecimalPlace : number = 0;
-    
-    /**
-     * Flag to show + sign when value is larger than 0. 
-     */
-    public ShowPlusSign : boolean = false;
-    
-    /**
-     * Set indicator value.
-     */
-    public set Value(val : number)
-    {
-        this.value = val;
-        let showText : string = val.toFixed(this.NumberOfDecimalPlace);
-        
-        if (this.ShowPlusSign && val > 0)
-        {
-                showText = "+".concat(showText);
-        }
-        
-        this.text = showText;
-    }    
-    /**
-     * Get indicator value.
-     */
-    public get Value() : number { return this.value }
-}
+    public NumberOfDecimalPlace = 0;
 
-export class TextNumericIndicator extends PIXI.Text implements NumericIndicator
-{
-    private value : number = 0;
-    /**
-     * Number of decimal place to show.
-     */
-    public NumberOfDecimalPlace : number = 0;
-    
     /**
      * Flag to show + sign when value is larger than 0. 
      */
-    public ShowPlusSign : boolean = false;
-    
+    public ShowPlusSign = false;
+
     /**
      * Set indicator value.
      */
-    public set Value(val : number)
-    {
+    public set Value(val: number) {
         this.value = val;
-        let showText : string = val.toFixed(this.NumberOfDecimalPlace);
-        
-        if (this.ShowPlusSign && val > 0)
-        {
+        let showText: string = val.toFixed(this.NumberOfDecimalPlace);
+
+        if (this.ShowPlusSign && val > 0) {
             showText = "+".concat(showText);
         }
-        
+
         this.text = showText;
-    }    
+    }
     /**
      * Get indicator value.
      */
-    public get Value() : number { return this.value }
+    public get Value(): number { return this.value }
+}
+
+export class TextNumericIndicator extends PIXI.Text implements NumericIndicator {
+    private value = 0;
+    /**
+     * Number of decimal place to show.
+     */
+    public NumberOfDecimalPlace = 0;
+
+    /**
+     * Flag to show + sign when value is larger than 0. 
+     */
+    public ShowPlusSign = false;
+
+    /**
+     * Set indicator value.
+     */
+    public set Value(val: number) {
+        this.value = val;
+        let showText: string = val.toFixed(this.NumberOfDecimalPlace);
+
+        if (this.ShowPlusSign && val > 0) {
+            showText = "+".concat(showText);
+        }
+
+        this.text = showText;
+    }
+    /**
+     * Get indicator value.
+     */
+    public get Value(): number { return this.value }
 }
 
 

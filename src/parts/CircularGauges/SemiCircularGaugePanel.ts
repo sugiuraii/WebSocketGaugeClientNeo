@@ -22,15 +22,13 @@
  * THE SOFTWARE.
  */
 
-import {SemiCircularGaugePanelBase} from "./private/SemiCircularGaugePanelBase"
-import {SemiCircularGaugePanelOptionBase} from "./private/SemiCircularGaugePanelBase"
+import { SemiCircularGaugePanelBase } from "./private/SemiCircularGaugePanelBase"
+import { SemiCircularGaugePanelOptionBase } from "./private/SemiCircularGaugePanelBase"
 
-export class ThrottleGaugePanel extends SemiCircularGaugePanelBase
-{
-    constructor()
-    {
-        let options = new SemiCircularGaugePanelOptionBase();
-        
+export class ThrottleGaugePanel extends SemiCircularGaugePanelBase {
+    constructor() {
+        const options = new SemiCircularGaugePanelOptionBase();
+
         options.TitleLabel = "THROTTLE";
         options.Min = 0;
         options.Max = 100;
@@ -38,18 +36,16 @@ export class ThrottleGaugePanel extends SemiCircularGaugePanelBase
         options.RedZoneBarEnable = false;
         options.YellowZoneBarEnable = false;
         options.GreenZoneBarEnable = false;
-        options.AxisLabel = ["0","25","50","75","100"];
-        
+        options.AxisLabel = ["0", "25", "50", "75", "100"];
+
         super(options);
     }
 }
 
-export class WaterTempGaugePanel extends SemiCircularGaugePanelBase
-{
-    constructor()
-    {
-        let options = new SemiCircularGaugePanelOptionBase();
-        
+export class WaterTempGaugePanel extends SemiCircularGaugePanelBase {
+    constructor() {
+        const options = new SemiCircularGaugePanelOptionBase();
+
         options.TitleLabel = "WATER TEMP";
         options.Min = 40;
         options.Max = 120;
@@ -61,18 +57,16 @@ export class WaterTempGaugePanel extends SemiCircularGaugePanelBase
         options.YellowZoneBarOffsetAngle = 292.5;
         options.YellowZoneBarFullAngle = 22.5;
         options.GreenZoneBarEnable = false;
-        options.AxisLabel = ["40","60","80","100","120"];
-        
+        options.AxisLabel = ["40", "60", "80", "100", "120"];
+
         super(options);
     }
 }
 
-export class EngineOilTempGaugePanel extends SemiCircularGaugePanelBase
-{
-    constructor()
-    {
-        let options = new SemiCircularGaugePanelOptionBase();
-        
+export class EngineOilTempGaugePanel extends SemiCircularGaugePanelBase {
+    constructor() {
+        const options = new SemiCircularGaugePanelOptionBase();
+
         options.TitleLabel = "ENG. OIL TEMP";
         options.Min = 50;
         options.Max = 150;
@@ -84,18 +78,16 @@ export class EngineOilTempGaugePanel extends SemiCircularGaugePanelBase
         options.YellowZoneBarOffsetAngle = 292.5;
         options.YellowZoneBarFullAngle = 22.5;
         options.GreenZoneBarEnable = false;
-        options.AxisLabel = ["50","75","100","125","150"];
-                
+        options.AxisLabel = ["50", "75", "100", "125", "150"];
+
         super(options);
     }
 }
 
-export class BatteryVoltageGaugePanel extends SemiCircularGaugePanelBase
-{
-    constructor()
-    {
-        let options = new SemiCircularGaugePanelOptionBase();
-        
+export class BatteryVoltageGaugePanel extends SemiCircularGaugePanelBase {
+    constructor() {
+        const options = new SemiCircularGaugePanelOptionBase();
+
         options.TitleLabel = "BATTERY VOLT";
         options.Min = 11;
         options.Max = 15;
@@ -103,18 +95,16 @@ export class BatteryVoltageGaugePanel extends SemiCircularGaugePanelBase
         options.RedZoneBarEnable = false;
         options.YellowZoneBarEnable = false;
         options.GreenZoneBarEnable = false;
-        options.AxisLabel = ["11","12","13","14","15"];
+        options.AxisLabel = ["11", "12", "13", "14", "15"];
         options.ValueNumberRoundDigit = 1;
-        
+
         super(options);
     }
 }
 
-export class AirFuelGaugePanel extends SemiCircularGaugePanelBase
-{
-    constructor()
-    {
-        let options = new SemiCircularGaugePanelOptionBase();
+export class AirFuelGaugePanel extends SemiCircularGaugePanelBase {
+    constructor() {
+        const options = new SemiCircularGaugePanelOptionBase();
 
         options.TitleLabel = "Air/Fuel Ratio";
         options.Min = 10;
@@ -126,26 +116,24 @@ export class AirFuelGaugePanel extends SemiCircularGaugePanelBase
         options.GreenZoneBarOffsetAngle = 180;
         options.GreenZoneBarFullAngle = 90;
         options.GaugeFullOnValueMin = true;
-        options.UnitLabel="A/F";
+        options.UnitLabel = "A/F";
         options.ValueNumberRoundDigit = 1;
-        options.AxisLabel = 
-        [   "18",
-            "16",
-            "14",
-            "12",
-            "10"
-        ];
-        
+        options.AxisLabel =
+            ["18",
+                "16",
+                "14",
+                "12",
+                "10"
+            ];
+
         super(options);
     }
 }
 
-export class BoostGaugePanel extends SemiCircularGaugePanelBase
-{
-    constructor()
-    {
-        let options = new SemiCircularGaugePanelOptionBase();
-        
+export class BoostGaugePanel extends SemiCircularGaugePanelBase {
+    constructor() {
+        const options = new SemiCircularGaugePanelOptionBase();
+
         options.TitleLabel = "TURBO BOOST";
         options.UnitLabel = "x100kPa";
         options.Min = -0.5;
@@ -158,26 +146,24 @@ export class BoostGaugePanel extends SemiCircularGaugePanelBase
         options.GreenZoneBarOffsetAngle = 180;
         options.GreenZoneBarFullAngle = 45;
         options.ValueNumberRoundDigit = 1;
-        
-        options.AxisLabel = 
-        [   
-            "-0.5",
-            "0",
-            "+0.5",
-            "+1.0",
-            "+1.5"
-        ];
-        
+
+        options.AxisLabel =
+            [
+                "-0.5",
+                "0",
+                "+0.5",
+                "+1.0",
+                "+1.5"
+            ];
+
         super(options);
     }
 }
 
-export class MassAirFlowGaugePanel extends SemiCircularGaugePanelBase
-{
-    constructor()
-    {
-        let options = new SemiCircularGaugePanelOptionBase();
-        
+export class MassAirFlowGaugePanel extends SemiCircularGaugePanelBase {
+    constructor() {
+        const options = new SemiCircularGaugePanelOptionBase();
+
         options.TitleLabel = "MASS AIRFLOW";
         options.Min = 0;
         options.Max = 40;
@@ -185,9 +171,9 @@ export class MassAirFlowGaugePanel extends SemiCircularGaugePanelBase
         options.RedZoneBarEnable = false;
         options.YellowZoneBarEnable = false;
         options.GreenZoneBarEnable = false;
-        options.AxisLabel = ["0","10","20","30","40"];
+        options.AxisLabel = ["0", "10", "20", "30", "40"];
         options.ValueNumberRoundDigit = 0;
-        
+
         super(options);
     }
 }

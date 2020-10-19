@@ -21,45 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
- 
-/// <reference path="../../lib/webpackRequire.ts" />
+
 import * as PIXI from 'pixi.js';
 import * as WebFont from "webfontloader";
-import {AnalogMeterCluster} from '../../parts/AnalogMeterCluster/AnalogMeterCluster';
+import { AnalogMeterCluster } from '../../parts/AnalogMeterCluster/AnalogMeterCluster';
 
 require("./AnalogMeterClusterTest.html");
 
-window.onload = function()
-{
+window.onload = function () {
     WebFont.load({
-        custom: 
-        { 
+        custom:
+        {
             families: AnalogMeterCluster.RequestedFontFamily,
-            urls: AnalogMeterCluster.RequestedFontCSSURL 
+            urls: AnalogMeterCluster.RequestedFontCSSURL
         },
-        active: function () {AnalogMeterClusterTest.preloadTexture();}
+        active: function () { preloadTexture(); }
     });
 }
-namespace AnalogMeterClusterTest
-{
-    export function preloadTexture()
-    {
-        PIXI.Loader.shared.add(AnalogMeterCluster.RequestedTexturePath);
-        PIXI.Loader.shared.load(main);
-    }
 
-    function main()
-    {
-        const app = new PIXI.Application({height:1366,width:1366});
-        document.body.appendChild(app.view);
+function preloadTexture(): void {
+    PIXI.Loader.shared.add(AnalogMeterCluster.RequestedTexturePath);
+    PIXI.Loader.shared.load(main);
+}
 
-        const meterCluster = new AnalogMeterCluster();
-        app.stage.addChild(meterCluster);
+function main(): void {
+    const app = new PIXI.Application({ height: 1366, width: 1366 });
+    document.body.appendChild(app.view);
 
-        app.ticker.add(function(){
-            meterCluster.Speed += 1;
-            if (meterCluster.Speed > 280)
-                meterCluster.Speed = 0;
-        });
-    }
+    const meterCluster = new AnalogMeterCluster();
+    app.stage.addChild(meterCluster);
+
+    app.ticker.add(function () {
+        meterCluster.Speed += 1;
+        if (meterCluster.Speed > 280)
+            meterCluster.Speed = 0;
+    });
 }

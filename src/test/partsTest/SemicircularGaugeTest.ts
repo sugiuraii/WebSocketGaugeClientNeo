@@ -21,62 +21,51 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
- 
-/// <reference path="../../lib/webpackRequire.ts" />
+
 import * as PIXI from 'pixi.js';
-import {ThrottleGaugePanel} from "../../parts/CircularGauges/SemiCircularGaugePanel";
+import { ThrottleGaugePanel } from "../../parts/CircularGauges/SemiCircularGaugePanel";
 import * as WebFont from "webfontloader";
 
 require("./SemiCircularGaugeTest.html");
 
-window.onload = function()
-{
-   
+window.onload = function () {
+
     WebFont.load({
-        custom: 
-        { 
+        custom:
+        {
             families: ThrottleGaugePanel.RequestedFontFamily,
-            urls: ThrottleGaugePanel.RequestedFontCSSURL 
+            urls: ThrottleGaugePanel.RequestedFontCSSURL
         },
-        active : function(){SemiCircularGaugeTest.preloadTexture();}
+        active: function () { preloadTexture(); }
     });
 }
 
-namespace SemiCircularGaugeTest
-{
-    export function preloadTexture()
-    {
-        PIXI.Loader.shared.add(ThrottleGaugePanel.RequestedTexturePath);;
-        PIXI.Loader.shared.load(main);
-    }
-    function main()
-    {
-        const app = new PIXI.Application({height:1366,width:1366});
-        document.body.appendChild(app.view);
-        let gaugeArray: ThrottleGaugePanel[] = new Array();
-        let index = 0;
-        for (let j = 0; j < 6; j++)
-        {
-            for (let i = 0; i < 6 ; i++)
-            {
-                gaugeArray.push(new ThrottleGaugePanel());
-                gaugeArray[index].pivot = new PIXI.Point(200,200);
-                gaugeArray[index].scale.set(0.6, 0.6);
-                gaugeArray[index].position = new PIXI.Point(240*i+150,200*j+150);
-                gaugeArray[index].Value = 0;
-                app.stage.addChild(gaugeArray[index]);
-                index++;
-            }
-        }
-        app.ticker.add(() => {
-            for (let i = 0; i < gaugeArray.length; i++)
-            {
-                if (gaugeArray[i].Value + 1 >= 100)
-                    gaugeArray[i].Value = 0;
-                else           
-                    gaugeArray[i].Value += 1;
-            }
-            });
-    }
+function preloadTexture() {
+    PIXI.Loader.shared.add(ThrottleGaugePanel.RequestedTexturePath);
+    PIXI.Loader.shared.load(main);
 }
-
+function main() {
+    const app = new PIXI.Application({ height: 1366, width: 1366 });
+    document.body.appendChild(app.view);
+    const gaugeArray: ThrottleGaugePanel[] = [];
+    let index = 0;
+    for (let j = 0; j < 6; j++) {
+        for (let i = 0; i < 6; i++) {
+            gaugeArray.push(new ThrottleGaugePanel());
+            gaugeArray[index].pivot = new PIXI.Point(200, 200);
+            gaugeArray[index].scale.set(0.6, 0.6);
+            gaugeArray[index].position = new PIXI.Point(240 * i + 150, 200 * j + 150);
+            gaugeArray[index].Value = 0;
+            app.stage.addChild(gaugeArray[index]);
+            index++;
+        }
+    }
+    app.ticker.add(() => {
+        for (let i = 0; i < gaugeArray.length; i++) {
+            if (gaugeArray[i].Value + 1 >= 100)
+                gaugeArray[i].Value = 0;
+            else
+                gaugeArray[i].Value += 1;
+        }
+    });
+}

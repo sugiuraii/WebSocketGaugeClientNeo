@@ -43,53 +43,48 @@ export class SSMWebsocketBackend {
 
    private readonly webSocketServerURL: string;
 
-   private indicatorUpdateIntervalID: number;
+   private indicatorUpdateIntervalID = 0;
 
-   constructor(serverurl: string, paramCode : { code: SSMParameterCode, readmode: ReadModeCode }[], loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
-      this.ssmWS = new SSMWebsocket();
+   constructor(serverurl: string, paramCode: { code: SSMParameterCode, readmode: ReadModeCode }[], loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
+      this.ssmWS = new SSMWebsocket(serverurl);
       this.parameterCodeList = paramCode;
       this.loggerWindow = loggerWindow;
       this.statusIndicator = statusIndicator;
-      this.webSocketServerURL = serverurl;
+      this.webSocketServerURL = this.ssmWS.URL;
 
       this.ssmWS.OnWebsocketError = (message: string) => this.loggerWindow.appendLog(this.logPrefix + " websocket error : " + message);
    }
 
-   public Run() {
+   public Run(): void {
       this.indicatorUpdateIntervalID = window.setInterval(() => this.setStatusIndicator(), this.WEBSOCKET_CHECK_INTERVAL);
       this.connectWebSocket();
    }
 
-   public Stop() {
+   public Stop(): void {
       clearInterval(this.indicatorUpdateIntervalID);
       this.ssmWS.Close();
    }
 
-   public getVal(code : SSMParameterCode, timestamp : number)
-   {
+   public getVal(code: SSMParameterCode, timestamp: number): number {
       return this.ssmWS.getVal(code, timestamp);
    }
 
-   public getRawVal(code : SSMParameterCode)
-   {
+   public getRawVal(code: SSMParameterCode): number {
       return this.ssmWS.getRawVal(code);
    }
 
-   public getSwitchFlag(code : SSMSwitchCode)
-   {
+   public getSwitchFlag(code: SSMSwitchCode): boolean {
       return this.ssmWS.getSwitchFlag(code);
    }
 
-   private setStatusIndicator() {
+   private setStatusIndicator(): void {
       this.statusIndicator.SetStatus(this.ssmWS.getReadyState());
    }
 
-   private connectWebSocket() {
+   private connectWebSocket(): void {
       const LogWindow = this.loggerWindow;
       const webSocketObj = this.ssmWS;
       const logPrefix = this.logPrefix;
-
-      webSocketObj.URL = this.webSocketServerURL;
 
       webSocketObj.OnWebsocketOpen = () => {
          LogWindow.appendLog(logPrefix + " is connected. SendWSSend/Interval after " + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");

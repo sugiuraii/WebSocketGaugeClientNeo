@@ -22,8 +22,6 @@
  * THE SOFTWARE.
  */
 
-/// <reference path="../../lib/webpackRequire.ts" />
-
 import { RectangularProgressBar, RectangularProgressBarOptions } from '../../lib/Graphics/PIXIGauge';
 import { BitmapTextNumericIndicator } from '../../lib/Graphics/PIXIGauge';
 import { NumericIndicator } from '../../lib/Graphics/PIXIGauge';
@@ -47,9 +45,9 @@ export class DigiTachoPanel extends PIXI.Container {
     private speedLabel: NumericIndicator;
     private geasposLabel: PIXI.BitmapText;
 
-    private speed: number = 0;
-    private tacho: number = 0;
-    private gearPos: string = "N";
+    private speed = 0;
+    private tacho = 0;
+    private gearPos = "N";
 
     static get RequestedTexturePath(): string[] {
         return ["img/DigiTachoTexture.json", "img/GearPosFont.fnt", "img/SpeedMeterFont.fnt"];
@@ -84,10 +82,13 @@ export class DigiTachoPanel extends PIXI.Container {
 
     constructor() {
         super();
-        this.create();
+        const gaugeset = this.create();
+        this.tachoProgressBar = gaugeset.tachoProgressBar;
+        this.speedLabel = gaugeset.speedLabel;
+        this.geasposLabel = gaugeset.gearLabel;
     }
 
-    private create(): void {
+    private create(): { tachoProgressBar: RectangularProgressBar, speedLabel: BitmapTextNumericIndicator, gearLabel: PIXI.BitmapText } {
         const backTexture = PIXI.Texture.from("DigiTachoBack");
         const tachoProgressBarTexture = PIXI.Texture.from("DigiTachoBar");
 
@@ -107,23 +108,23 @@ export class DigiTachoPanel extends PIXI.Container {
         tachoProgressBarOption.PixelStep = 8;
         tachoProgressBarOption.MaskHeight = 246;
         tachoProgressBarOption.MaskWidth = 577;
+
         const tachoProgressBar = new RectangularProgressBar(tachoProgressBarOption);
-        this.tachoProgressBar = tachoProgressBar;
         tachoProgressBar.position.set(10, 6);
 
         super.addChild(tachoProgressBar);
 
         const speedTextLabel = new BitmapTextNumericIndicator(this.speed.toString(), { fontName: "FreeSans", fontSize: 185, align: "right" });
-        this.speedLabel = speedTextLabel;
         speedTextLabel.position.set(485, 320);
         speedTextLabel.anchor = new PIXI.Point(1, 1);
         speedTextLabel.NumberOfDecimalPlace = 0;
         super.addChild(speedTextLabel);
 
         const gearTextLabel = new PIXI.BitmapText(this.gearPos, { fontName: "Audiowide", fontSize: 125, align: "center" });
-        this.geasposLabel = gearTextLabel;
         gearTextLabel.position.set(66, 62);
         gearTextLabel.anchor = new PIXI.Point(0.5, 0.5);
         super.addChild(gearTextLabel);
+
+        return {tachoProgressBar : tachoProgressBar, speedLabel : speedTextLabel, gearLabel : gearTextLabel} ;
     }
 }

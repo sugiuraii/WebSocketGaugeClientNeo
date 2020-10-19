@@ -22,30 +22,26 @@
  * THE SOFTWARE.
  */
 
-import * as $ from 'jquery';
+import $ from "jquery";
 
-export class OptionModalDialog
-{
-    /**
-     * Event listener on WSIntervalSpinner is changed.
-     */
-    private onWSIntervalSpinnerValueChanged : (val : number) => void = (val : number) => 
-    {
-        localStorage.setItem("WSInterval", val.toString());
-    };
+export class OptionModalDialog {
+  /**
+   * Event listener on WSIntervalSpinner is changed.
+   */
+  private onWSIntervalSpinnerValueChanged: (val: number) => void = (val: number) => {
+    localStorage.setItem("WSInterval", val.toString());
+  };
 
-    /**
-     * Event listener on PIXI.js related option switch is changed.
-     */    
-    private onPIXIpreserveDrawingBufferSwitchChanged : (preserveDrawingBuffer : boolean)=> void = (preserveDrawingBuffer : boolean) =>
-    {
-        localStorage.setItem("preserveDrawingBuffer", preserveDrawingBuffer?"true":"false");
-    };
+  /**
+   * Event listener on PIXI.js related option switch is changed.
+   */
+  private onPIXIpreserveDrawingBufferSwitchChanged: (preserveDrawingBuffer: boolean) => void = (preserveDrawingBuffer: boolean) => {
+    localStorage.setItem("preserveDrawingBuffer", preserveDrawingBuffer ? "true" : "false");
+  };
 
-    private get dialogHTML() : string
-    {
-        const optionModalDialogHTML = 
-        '<div class="modal fade" id="optionModal" tabindex="-1" role="dialog">\
+  private get dialogHTML(): string {
+    const optionModalDialogHTML =
+      '<div class="modal fade" id="optionModal" tabindex="-1" role="dialog">\
             <div class="modal-dialog" role="document">\
               <div class="modal-content">\
                 <div class="modal-header">\
@@ -86,51 +82,49 @@ export class OptionModalDialog
             </div>\
           </div>\
         ';
-        
-        return optionModalDialogHTML;
-    }
-    
-    private setInitialValue()
-    {
-      if(!localStorage.getItem("WSServerHostname"))
-        localStorage.setItem("WSServerHostname",location.hostname);
-      if(!localStorage.getItem("SetWSServerSameAsHttp"))
-        localStorage.setItem("SetWSServerSameAsHttp","true");
-      if(!localStorage.getItem("WSInterval"))
-        localStorage.setItem("WSInterval","0");
-      if(!localStorage.getItem("preserveDrawingBuffer"))
-        localStorage.setItem("preserveDrawingBuffer", "false");
-    }
 
-    public create()
-    {
-        $('body').append(this.dialogHTML);
-        
-        // Set default value if keys are not found on webstorage.
-        this.setInitialValue();
-        
-        //Load stored value from webstorage
-        const wsInterval = Number(localStorage.getItem("WSInterval"));
-        const preserveDrawingBuffer = localStorage.getItem("preserveDrawingBuffer")==="true"?true:false;
-        $('#wsIntervalInput').val(wsInterval);
-        $('#preserveDrawingBufferCheckBox').prop('checked', preserveDrawingBuffer);
-        const wsServerHostname : string = localStorage.getItem("WSServerHostname");
-        const setWSServerSameAsHttpSite : boolean = localStorage.getItem("SetWSServerSameAsHttp")==="true"?true:false;
-        $('#websocketServerHostname').val(wsServerHostname);
-        $('#setWSServerSameAsHttpSite').prop('checked',setWSServerSameAsHttpSite);
-        $('#websocketServerHostname').prop('disabled',setWSServerSameAsHttpSite);
+    return optionModalDialogHTML;
+  }
 
-        //Assign control change event
-        $('#wsIntervalInput').on('change', ()=>{this.onWSIntervalSpinnerValueChanged(Number($('#wsIntervalInput').val()))});
-        $('#preserveDrawingBufferCheckBox').on('change', () => {this.onPIXIpreserveDrawingBufferSwitchChanged(Boolean($('#preserveDrawingBufferCheckBox').prop('checked')))});
-        $('#websocketServerHostname').on('change', ()=>localStorage.setItem("WSServerHostname",String($('#websocketServerHostname').val())));
-        $('#setWSServerSameAsHttpSite').on('change', ()=> 
-        {
-          const setWSServerSameAsHttpSite : boolean = $('#setWSServerSameAsHttpSite').prop('checked');
-          localStorage.setItem("SetWSServerSameAsHttp",setWSServerSameAsHttpSite?"true":"false");
-          $('#websocketServerHostname').prop('disabled',setWSServerSameAsHttpSite);
-        })
-    }
-    
+  private setInitialValue() {
+    if (!localStorage.getItem("WSServerHostname"))
+      localStorage.setItem("WSServerHostname", location.hostname);
+    if (!localStorage.getItem("SetWSServerSameAsHttp"))
+      localStorage.setItem("SetWSServerSameAsHttp", "true");
+    if (!localStorage.getItem("WSInterval"))
+      localStorage.setItem("WSInterval", "0");
+    if (!localStorage.getItem("preserveDrawingBuffer"))
+      localStorage.setItem("preserveDrawingBuffer", "false");
+  }
+
+  public create(): void {
+    $('body').append(this.dialogHTML);
+
+    // Set default value if keys are not found on webstorage.
+    this.setInitialValue();
+
+    //Load stored value from webstorage
+    const wsInterval = Number(localStorage.getItem("WSInterval"));
+    const preserveDrawingBuffer = localStorage.getItem("preserveDrawingBuffer") === "true" ? true : false;
+    $('#wsIntervalInput').val(wsInterval);
+    $('#preserveDrawingBufferCheckBox').prop('checked', preserveDrawingBuffer);
+
+    const wsServerHostname: string = (typeof localStorage.getItem("WSServerHostname") === "string")?(localStorage.getItem("WSServerHostname") as string):"localhost";
+    const setWSServerSameAsHttpSite: boolean = localStorage.getItem("SetWSServerSameAsHttp") === "true" ? true : false;
+    $('#websocketServerHostname').val(wsServerHostname);
+    $('#setWSServerSameAsHttpSite').prop('checked', setWSServerSameAsHttpSite);
+    $('#websocketServerHostname').prop('disabled', setWSServerSameAsHttpSite);
+
+    //Assign control change event
+    $('#wsIntervalInput').on('change', () => { this.onWSIntervalSpinnerValueChanged(Number($('#wsIntervalInput').val())) });
+    $('#preserveDrawingBufferCheckBox').on('change', () => { this.onPIXIpreserveDrawingBufferSwitchChanged(Boolean($('#preserveDrawingBufferCheckBox').prop('checked'))) });
+    $('#websocketServerHostname').on('change', () => localStorage.setItem("WSServerHostname", String($('#websocketServerHostname').val())));
+    $('#setWSServerSameAsHttpSite').on('change', () => {
+      const setWSServerSameAsHttpSite: boolean = $('#setWSServerSameAsHttpSite').prop('checked');
+      localStorage.setItem("SetWSServerSameAsHttp", setWSServerSameAsHttpSite ? "true" : "false");
+      $('#websocketServerHostname').prop('disabled', setWSServerSameAsHttpSite);
+    })
+  }
+
 }
-    
+

@@ -22,11 +22,6 @@
  * THE SOFTWARE.
  */
 
-// This is required to webpack font/texture/html files
-/// <reference path="../../lib/webpackRequire.ts" />
-
-import * as PIXI from "pixi.js";
-
 //For including entry point html file in webpack
 require("./AnalogTripleMeter-Arduino.html");
 

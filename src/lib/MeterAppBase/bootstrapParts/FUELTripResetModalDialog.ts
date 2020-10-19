@@ -21,21 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
- 
-import * as $ from 'jquery';
-import {FUELTRIPWebsocket} from '../../WebSocket/WebSocketCommunication';
 
-export class FUELTripResetModalDialog
-{
-    private fuelTripWebSocket: FUELTRIPWebsocket;
-    
-    public set FUELTRIPWebsocket(wsObj : FUELTRIPWebsocket) {this.fuelTripWebSocket = wsObj}
-    public get FUELTRIPWebsocket(): FUELTRIPWebsocket {return this.fuelTripWebSocket}
-    
-    private get dialogHTML() : string 
-    {
-        const html =         
-        '<div class="modal fade" id="fuelTripResetModal" tabindex="-1" role="dialog" aria-labelledby="fuelTripResetModalLabel" aria-hidden="true">\
+import $ from 'jquery';
+import { FUELTRIPWebsocket } from '../../WebSocket/WebSocketCommunication';
+
+export class FUELTripResetModalDialog {
+  private fuelTripWebSocket: FUELTRIPWebsocket | undefined;
+
+  public set FUELTRIPWebsocket(wsObj: FUELTRIPWebsocket) { this.fuelTripWebSocket = wsObj }
+  public get FUELTRIPWebsocket(): FUELTRIPWebsocket {
+    if (this.fuelTripWebSocket === undefined)
+      throw Error("FUELTRIP websocket is refered. But not undefined.");
+    else
+      return this.fuelTripWebSocket;
+  }
+
+  private get dialogHTML(): string {
+    const html =
+      '<div class="modal fade" id="fuelTripResetModal" tabindex="-1" role="dialog" aria-labelledby="fuelTripResetModalLabel" aria-hidden="true">\
           <div class="modal-dialog" role="document">\
             <div class="modal-content">\
               <div class="modal-header">\
@@ -54,17 +57,19 @@ export class FUELTripResetModalDialog
             </div>\
           </div>\
         </div>';
-        
-        return html;
-    }
-    
-    /**
-     * Create fuel/trip reset button.
-     */
-    public create()
-    {
-         $('body').append(this.dialogHTML);
-         //Assign control change event
-         $('#fuelTripResetButton').on('click', () => {this.fuelTripWebSocket.SendReset()});
-    }
+
+    return html;
+  }
+
+  /**
+   * Create fuel/trip reset button.
+   */
+  public create(): void {
+    $('body').append(this.dialogHTML);
+    //Assign control change event
+    $('#fuelTripResetButton').on('click', () => {
+      if (!(this.fuelTripWebSocket === undefined))
+        this.fuelTripWebSocket.SendReset();
+    });
+  }
 }
