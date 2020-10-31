@@ -39,7 +39,7 @@ const LogDialog: FunctionComponent<LogDialogProps> = (p) => {
             <Modal.Title>Log</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            {p.log}
+            <p>{p.log}</p>
         </Modal.Body>
         <Modal.Footer>
             <Button variant="secondary" onClick={p.onClose}>Close</Button>
