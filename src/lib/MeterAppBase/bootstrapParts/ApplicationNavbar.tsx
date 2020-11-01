@@ -22,18 +22,23 @@
  * THE SOFTWARE.
  */
 
-import { OptionDialog, OptionDialogFormContents } from './OptionDialog'
-import React, { FunctionComponent, useState, Fragment } from 'react';
-import { Navbar, Nav } from 'react-bootstrap';
 
-type IndexNavbarProps =
+import { OptionDialog, OptionDialogFormContents } from './OptionDialog'
+import { WSIntervalOptionDialog } from './WSIntervalOptionDialog'
+import React, { FunctionComponent, useState, Fragment } from 'react';
+import { Navbar, Nav } from 'react-bootstrap'
+
+type ApplicationNavbarProps =
     {
-        defaultOptionDialogContent : OptionDialogFormContents,
-        onOptionDialogSet: (content: OptionDialogFormContents) => void
+        defaultOptionDialogContent: OptionDialogFormContents,
+        defaultWSInterval: number,
+        onOptionDialogSet: (content: OptionDialogFormContents) => void,
+        onWSIntervalDialogSet: (wsInterval: number) => void
     };
 
-const IndexNavbar: FunctionComponent<IndexNavbarProps> = (p) => {
-    const [showDialog, SetShowDialog] = useState(false);
+export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) => {
+    const [showOptionDialog, setShowOptionDialog] = useState(false);
+    const [showWSIntervalDialog, setShowWSIntervalDialog] = useState(false);
 
     return (
         <Fragment>
@@ -42,18 +47,26 @@ const IndexNavbar: FunctionComponent<IndexNavbarProps> = (p) => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link onClick={() => SetShowDialog(true)}>Option</Nav.Link>
+                        <Nav.Link onClick={() => setShowOptionDialog(true)}>Option</Nav.Link>
+                    </Nav>
+                    <Nav className="mr-auto">
+                        <Nav.Link onClick={() => setShowWSIntervalDialog(true)}>WSInterval</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
-            <OptionDialog onCancel={() => SetShowDialog(false)}
+            <OptionDialog onCancel={() => setShowOptionDialog(false)}
                 onSet={(d) => {
-                    SetShowDialog(false);
+                    setShowOptionDialog(false);
                     p.onOptionDialogSet(d);
                 }}
-                show={showDialog} defaultFormContent={p.defaultOptionDialogContent} />
+                show={showOptionDialog} defaultFormContent={p.defaultOptionDialogContent} />
+            <WSIntervalOptionDialog show={showWSIntervalDialog} interval={p.defaultWSInterval} onCancel={() => setShowWSIntervalDialog(false)}
+                onSet={(newinterval) => {
+                    setShowWSIntervalDialog(false);
+                    p.onWSIntervalDialogSet(newinterval);
+                }} />
         </Fragment>
     );
 };
 
-export default IndexNavbar;
+export default ApplicationNavbar;

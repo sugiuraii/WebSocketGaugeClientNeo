@@ -29,10 +29,10 @@ type WSIntervalOptionDialogProps = {
     show : boolean,
     interval : number,
     onCancel : () => void,
-    onSet : (newInterval : number) => void;
+    onSet : (newInterval : number) => void
 }
 
-const OptionDialog : FunctionComponent<WSIntervalOptionDialogProps> = (p) => {
+export const WSIntervalOptionDialog : FunctionComponent<WSIntervalOptionDialogProps> = (p) => {
     const [interval, setInterval] = useState(p.interval);
 
     return (
@@ -56,4 +56,4 @@ const OptionDialog : FunctionComponent<WSIntervalOptionDialogProps> = (p) => {
     );
 };
 
-export default OptionDialog;
+export default WSIntervalOptionDialog;
