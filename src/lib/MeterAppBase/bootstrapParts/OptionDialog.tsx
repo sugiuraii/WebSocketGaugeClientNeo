@@ -38,7 +38,7 @@ type OptionDialogProps = {
     }) => void;
 }
 
-const OptionDialog: FunctionComponent<OptionDialogProps> = (p) => {
+export const OptionDialog: FunctionComponent<OptionDialogProps> = (p) => {
     const [host, setHost] = useState(p.host);
     const [wsHostSameAsHttpHost, setWSHostSameAsHttpHost] = useState(p.wsHostSameAsHttpHost);
     const [pixijsPreserveDrawingBuffer, setPIXIJSPreserveDrawingBuffer] = useState(p.pixijsPreserveDrawingBuffer);
