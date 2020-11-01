@@ -22,20 +22,14 @@
  * THE SOFTWARE.
  */
 
-import { OptionDialog } from './OptionDialog'
+import { OptionDialog, OptionDialogFormContents } from './OptionDialog'
 import React, { FunctionComponent, useState, Fragment } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 
 type IndexNavbarProps =
     {
-        host: string,
-        wsHostSameAsHttpHost: boolean,
-        pixijsPreserveDrawingBuffer: boolean,
-        onOptionDialogSet: (dat: {
-            host: string,
-            wsHostSameAsHttpHost: boolean,
-            pixijsPreserveDrawingBuffer: boolean
-        }) => void;
+        defaultOptionDialogContent : OptionDialogFormContents
+        onOptionDialogSet: (content: OptionDialogFormContents) => void;
     };
 
 const IndexNavbar: FunctionComponent<IndexNavbarProps> = (p) => {
@@ -55,9 +49,9 @@ const IndexNavbar: FunctionComponent<IndexNavbarProps> = (p) => {
             <OptionDialog onCancel={() => SetShowDialog(false)}
                 onSet={(d) => {
                     SetShowDialog(false);
-                    p.onOptionDialogSet({ host: d.host, wsHostSameAsHttpHost: d.wsHostSameAsHttpHost, pixijsPreserveDrawingBuffer: d.pixijsPreserveDrawingBuffer });
+                    p.onOptionDialogSet(d);
                 }}
-                show={showDialog} host={p.host} wsHostSameAsHttpHost={p.wsHostSameAsHttpHost} pixijsPreserveDrawingBuffer={p.pixijsPreserveDrawingBuffer} />
+                show={showDialog} defaultFormContent={p.defaultOptionDialogContent} />
         </Fragment>
     );
 };

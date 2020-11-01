@@ -27,21 +27,21 @@ import { Modal, Form, Button } from 'react-bootstrap';
 
 type OptionDialogProps = {
     show: boolean,
+    defaultFormContent : OptionDialogFormContents,
+    onCancel: () => void,
+    onSet: (dat: OptionDialogFormContents) => void;
+}
+
+export type OptionDialogFormContents = {
     host: string,
     wsHostSameAsHttpHost: boolean,
-    pixijsPreserveDrawingBuffer: boolean,
-    onCancel: () => void,
-    onSet: (dat: {
-        host: string,
-        wsHostSameAsHttpHost: boolean,
-        pixijsPreserveDrawingBuffer: boolean
-    }) => void;
+    pixijsPreserveDrawingBuffer: boolean
 }
 
 export const OptionDialog: FunctionComponent<OptionDialogProps> = (p) => {
-    const [host, setHost] = useState(p.host);
-    const [wsHostSameAsHttpHost, setWSHostSameAsHttpHost] = useState(p.wsHostSameAsHttpHost);
-    const [pixijsPreserveDrawingBuffer, setPIXIJSPreserveDrawingBuffer] = useState(p.pixijsPreserveDrawingBuffer);
+    const [host, setHost] = useState(p.defaultFormContent.host);
+    const [wsHostSameAsHttpHost, setWSHostSameAsHttpHost] = useState(p.defaultFormContent.wsHostSameAsHttpHost);
+    const [pixijsPreserveDrawingBuffer, setPIXIJSPreserveDrawingBuffer] = useState(p.defaultFormContent.pixijsPreserveDrawingBuffer);
 
     return (
         <Modal show={p.show} >
