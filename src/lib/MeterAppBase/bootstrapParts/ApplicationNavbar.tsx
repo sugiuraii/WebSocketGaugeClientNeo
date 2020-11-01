@@ -25,15 +25,18 @@
 
 import { OptionDialog, OptionDialogFormContents } from './OptionDialog'
 import { WSIntervalOptionDialog } from './WSIntervalOptionDialog'
+import { WebsocketStatusIndicator }  from './WebsocketStatusIndicator'
 import React, { FunctionComponent, useState, Fragment } from 'react';
 import { Navbar, Nav } from 'react-bootstrap'
+import { WebsocketStatus } from '../WebsocketAppBackend/WebsocketStatus';
 
 type ApplicationNavbarProps =
     {
         defaultOptionDialogContent: OptionDialogFormContents,
         defaultWSInterval: number,
         onOptionDialogSet: (content: OptionDialogFormContents) => void,
-        onWSIntervalDialogSet: (wsInterval: number) => void
+        onWSIntervalDialogSet: (wsInterval: number) => void,
+        websocketStatusList: { [name: string]: { isEnabled: boolean, status: WebsocketStatus } }
     };
 
 export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) => {
@@ -52,6 +55,7 @@ export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) 
                     <Nav className="mr-auto">
                         <Nav.Link onClick={() => setShowWSIntervalDialog(true)}>WSInterval</Nav.Link>
                     </Nav>
+                    <WebsocketStatusIndicator statusList={p.websocketStatusList} />
                 </Navbar.Collapse>
             </Navbar>
             <OptionDialog onCancel={() => setShowOptionDialog(false)}

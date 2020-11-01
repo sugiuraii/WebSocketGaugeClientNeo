@@ -26,28 +26,25 @@ import React, { FunctionComponent } from 'react';
 import { Badge } from 'react-bootstrap';
 import { WebsocketStatus } from '../WebsocketAppBackend/WebsocketStatus'
 
-type WebsocketStatusIndicatorProps = 
-{
-    statusList : {[name : string] : {isEnabled: boolean, status : WebsocketStatus} }
-}
-
-export const WebsocketStatusIndicator : FunctionComponent<WebsocketStatusIndicatorProps> = (p) =>
-{
-    const badges : JSX.Element[] = [];
-    for(const name in p.statusList)
+type WebsocketStatusIndicatorProps =
     {
+        statusList: { [name: string]: { isEnabled: boolean, status: WebsocketStatus } }
+    }
+
+export const WebsocketStatusIndicator: FunctionComponent<WebsocketStatusIndicatorProps> = (p) => {
+    const badges: JSX.Element[] = [];
+    for (const name in p.statusList) {
         const variant = getBadgeVariant(p.statusList[name].isEnabled, p.statusList[name].status);
         badges.push(<Badge variant={variant}>{name}</Badge>);
     }
-    return(
+    return (
         <div>
             {badges}
         </div>
     );
 }
 
-function getBadgeVariant(isEnabled : boolean, status : WebsocketStatus)  : string
-{
+function getBadgeVariant(isEnabled: boolean, status: WebsocketStatus): string {
     if (!isEnabled)
         return "dark";
     else {
@@ -66,3 +63,4 @@ function getBadgeVariant(isEnabled : boolean, status : WebsocketStatus)  : strin
     }
 }
 
+export default WebsocketStatusIndicator;
