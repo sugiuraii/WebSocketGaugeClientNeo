@@ -22,24 +22,28 @@
  * THE SOFTWARE.
  */
 
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, Fragment } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
 type LogDialogProps = 
 {
     show : boolean,
-    log : string,
+    logList : string[],
     onClose: () => void;
 }
 
-const LogDialog: FunctionComponent<LogDialogProps> = (p) => {
+export const LogDialog: FunctionComponent<LogDialogProps> = (p) => {
+    const logContents : JSX.Element[] = [];
+    for(const logline in p.logList)
+        logContents.push(<Fragment>{logline}<br/></Fragment>);
+
     return(
         <Modal show={p.show} >
         <Modal.Header closeButton onHide={p.onClose}>
             <Modal.Title>Log</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <p>{p.log}</p>
+            <p>{logContents}</p>
         </Modal.Body>
         <Modal.Footer>
             <Button variant="secondary" onClick={p.onClose}>Close</Button>

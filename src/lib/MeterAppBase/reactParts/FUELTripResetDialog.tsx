@@ -30,7 +30,7 @@ type FUELTripResetDialogProps = {
     onClose: (reset: boolean) => void;
 };
 
-const FUELTripResetDialog: FunctionComponent<FUELTripResetDialogProps> = (p) => {
+export const FUELTripResetDialog: FunctionComponent<FUELTripResetDialogProps> = (p) => {
     return (
         <Modal show={p.show} >
             <Modal.Header closeButton onHide={() => p.onClose(false)}>

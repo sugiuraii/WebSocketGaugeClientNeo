@@ -25,7 +25,9 @@
 
 import { OptionDialog, OptionDialogFormContents } from './OptionDialog'
 import { WSIntervalOptionDialog } from './WSIntervalOptionDialog'
-import { WebsocketStatusIndicator }  from './WebsocketStatusIndicator'
+import { FUELTripResetDialog } from './FUELTripResetDialog'
+import { LogDialog } from './LogDialog'
+import { WebsocketStatusIndicator } from './WebsocketStatusIndicator'
 import React, { FunctionComponent, useState, Fragment } from 'react';
 import { Navbar, Nav } from 'react-bootstrap'
 import { WebsocketStatus } from '../WebsocketAppBackend/WebsocketStatus';
@@ -34,14 +36,18 @@ type ApplicationNavbarProps =
     {
         defaultOptionDialogContent: OptionDialogFormContents,
         defaultWSInterval: number,
+        logList: string[],
         onOptionDialogSet: (content: OptionDialogFormContents) => void,
         onWSIntervalDialogSet: (wsInterval: number) => void,
+        onFUELTripResetDialogSet: (reset: boolean) => void,
         websocketStatusList: { [name: string]: { isEnabled: boolean, status: WebsocketStatus } }
     };
 
 export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) => {
     const [showOptionDialog, setShowOptionDialog] = useState(false);
     const [showWSIntervalDialog, setShowWSIntervalDialog] = useState(false);
+    const [showFUELTripResetDialog, setShowFUELTripResetDialog] = useState(false);
+    const [showLogDialog, setShowLogDialog] = useState(false);
 
     return (
         <Fragment>
@@ -50,10 +56,19 @@ export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) 
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
+                        <Nav.Link href="../index.html">Home</Nav.Link>
+                    </Nav>
+                    <Nav className="mr-auto">
                         <Nav.Link onClick={() => setShowOptionDialog(true)}>Option</Nav.Link>
                     </Nav>
                     <Nav className="mr-auto">
                         <Nav.Link onClick={() => setShowWSIntervalDialog(true)}>WSInterval</Nav.Link>
+                    </Nav>
+                    <Nav className="mr-auto">
+                        <Nav.Link onClick={() => setShowFUELTripResetDialog(true)}>Fuel/Trip reset</Nav.Link>
+                    </Nav>
+                    <Nav className="mr-auto">
+                        <Nav.Link onClick={() => setShowLogDialog(true)}>Log</Nav.Link>
                     </Nav>
                     <WebsocketStatusIndicator statusList={p.websocketStatusList} />
                 </Navbar.Collapse>
@@ -69,6 +84,12 @@ export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) 
                     setShowWSIntervalDialog(false);
                     p.onWSIntervalDialogSet(newinterval);
                 }} />
+            <FUELTripResetDialog show={showFUELTripResetDialog}
+                onClose={(reset) => {
+                    setShowFUELTripResetDialog(false);
+                    p.onFUELTripResetDialogSet(reset);
+                }} />
+            <LogDialog show={showLogDialog} logList={p.logList} onClose={() => setShowLogDialog(false)} />
         </Fragment>
     );
 };
