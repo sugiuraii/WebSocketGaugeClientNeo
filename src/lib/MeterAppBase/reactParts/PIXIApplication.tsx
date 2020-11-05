@@ -28,7 +28,8 @@ import * as PIXI from "pixi.js";
 type PIXIApplicationProps =
     {
         application: PIXI.Application,
-        class?: string
+        className?: string,
+        style? : {[key : string] : string}
     }
 
 export const PIXIApplication: FunctionComponent<PIXIApplicationProps> = (p) => {
@@ -62,7 +63,7 @@ export const PIXIApplication: FunctionComponent<PIXIApplicationProps> = (p) => {
 
     return (
         <div>
-            <div ref={pixiAppRef} className={p.class} />
+            <div ref={pixiAppRef} className={p.className} style={p.style} />
         </div>
     );
 };
