@@ -23,16 +23,44 @@
  */
 
 export class WebstorageHandler {
-    public static SetWSIntervalToLocalStorage(interval: number): void {
+
+    public get WebsocketServerHome() : string
+    {
+        const wsServerHostname = localStorage.getItem("WSServerHostname");
+        return wsServerHostname === null ? location.hostname : wsServerHostname;
+    }
+
+    public set WebsocketServerHome(host : string)
+    {
+        localStorage.setItem("WSServerHostname", host);
+    }
+
+    public get WSServerSameAsHttp() : boolean
+    {
+        const wsServerSameAsHttp = localStorage.getItem("SetWSServerSameAsHttp");
+        return wsServerSameAsHttp === null? true : wsServerSameAsHttp === "true";
+    }
+
+    public set WSServerSameAsHttp(flag : boolean)
+    {
+        localStorage.setItem("SetWSServerSameAsHttp", flag?"true":"false");
+    }
+
+    public get WSInterval() : number
+    {
+        const wsInterval = localStorage.getItem("WSInterval");
+        return wsInterval === null ? 0 : Number(wsInterval);
+    }
+
+    public set WSInterval(interval : number)
+    {
         localStorage.setItem("WSInterval", interval.toString());
     }
 
-    public static GetWSIntervalFromLocalStorage(): number {
-        if (localStorage.getItem("WSInterval") === null)
-            return 0;
-        else {
-            const interval = Number(localStorage.getItem("WSInterval"));
-            return interval;
-        }
+    public get PreserveDrawingBuffer() : boolean
+    {
+        const preserveDrawingBuffer = localStorage.getItem("preserveDrawingBuffer")
+        return (preserveDrawingBuffer === null) ? false : preserveDrawingBuffer === "true";
     }
 }
+
