@@ -59,8 +59,13 @@ export class WebstorageHandler {
 
     public get PreserveDrawingBuffer() : boolean
     {
-        const preserveDrawingBuffer = localStorage.getItem("preserveDrawingBuffer")
+        const preserveDrawingBuffer = localStorage.getItem("preserveDrawingBuffer");
         return (preserveDrawingBuffer === null) ? false : preserveDrawingBuffer === "true";
+    }
+
+    public set PreserveDrawingBuffer(flag : boolean)
+    {
+        localStorage.setItem("preserveDrawingBuffer", flag?"true":"false");
     }
 }
 
