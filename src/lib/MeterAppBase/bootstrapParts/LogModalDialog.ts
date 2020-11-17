@@ -23,9 +23,9 @@
  */
 
 import $ from "jquery";
-import { ILogWindow } from '../interfaces/ILogWindow';
+import { ILogger } from '../interfaces/ILogger';
 
-export class LogModalDialog implements ILogWindow {
+export class LogModalDialog implements ILogger {
   private writeDate = false;
 
   public get WriteDate(): boolean { return this.writeDate }

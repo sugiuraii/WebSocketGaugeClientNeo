@@ -24,7 +24,7 @@
 
 import { DefiCOMWebsocket, DefiParameterCode } from "../../WebSocket/WebSocketCommunication";
 import { WebstorageHandler } from "../Webstorage/WebstorageHandler";
-import { ILogWindow } from "../interfaces/ILogWindow";
+import { ILogger } from "../interfaces/ILogger";
 import { IStatusIndicator } from "../interfaces/IStatusIndicator";
 
 export class DefiWebsocketBackend {
@@ -38,21 +38,21 @@ export class DefiWebsocketBackend {
 
    private readonly defiWS: DefiCOMWebsocket;
    private readonly parameterCodeList: DefiParameterCode[];
-   private readonly loggerWindow: ILogWindow;
+   private readonly logger: ILogger;
    private readonly statusIndicator: IStatusIndicator;
 
    private readonly webSocketServerURL: string;
 
    private indicatorUpdateIntervalID = 0;
 
-   constructor(serverurl: string, codeList: DefiParameterCode[], loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
+   constructor(serverurl: string, codeList: DefiParameterCode[], logger: ILogger, statusIndicator: IStatusIndicator) {
       this.defiWS = new DefiCOMWebsocket(serverurl);
       this.parameterCodeList = codeList;
-      this.loggerWindow = loggerWindow;
+      this.logger = logger;
       this.statusIndicator = statusIndicator;
       this.webSocketServerURL = this.defiWS.URL;
 
-      this.defiWS.OnWebsocketError = (message: string) => this.loggerWindow.appendLog(this.logPrefix + " websocket error : " + message);
+      this.defiWS.OnWebsocketError = (message: string) => this.logger.appendLog(this.logPrefix + " websocket error : " + message);
    }
 
    public getVal(code: DefiParameterCode, timestamp: number): number {
@@ -78,37 +78,38 @@ export class DefiWebsocketBackend {
    }
 
    private connectWebSocket() {
-      const LogWindow = this.loggerWindow;
+      const logger = this.logger;
       const webSocketObj = this.defiWS;
       const logPrefix = this.logPrefix;
+      const webStorage = new WebstorageHandler();
 
       webSocketObj.OnWebsocketOpen = () => {
-         LogWindow.appendLog(logPrefix + " is connected. SendWSSend/Interval after " + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
+         logger.appendLog(logPrefix + " is connected. SendWSSend/Interval after " + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
          window.setTimeout(() => {
             //SendWSSend
             this.parameterCodeList.forEach(item => webSocketObj.SendWSSend(item, true));
 
             //SendWSInterval from spinner
-            webSocketObj.SendWSInterval(WebstorageHandler.GetWSIntervalFromLocalStorage());
+            webSocketObj.SendWSInterval(webStorage.WSInterval);
 
          }, this.WAITTIME_BEFORE_SENDWSSEND);
       }
       webSocketObj.OnWebsocketClose = () => {
-         LogWindow.appendLog(logPrefix + " is disconnected. Reconnect after " + this.WAITTIME_BEFORE_RECONNECT.toString() + "msec...");
+         logger.appendLog(logPrefix + " is disconnected. Reconnect after " + this.WAITTIME_BEFORE_RECONNECT.toString() + "msec...");
          window.setTimeout(() => webSocketObj.Connect(), this.WAITTIME_BEFORE_RECONNECT);
       }
 
       webSocketObj.OnWebsocketError = (message: string) => {
-         LogWindow.appendLog(logPrefix + " websocket error : " + message);
+         logger.appendLog(logPrefix + " websocket error : " + message);
       }
       webSocketObj.OnRESPacketReceived = (message: string) => {
-         LogWindow.appendLog(logPrefix + " RES message : " + message);
+         logger.appendLog(logPrefix + " RES message : " + message);
       }
       webSocketObj.OnERRPacketReceived = (message: string) => {
-         LogWindow.appendLog(logPrefix + " ERR message : " + message);
+         logger.appendLog(logPrefix + " ERR message : " + message);
       }
 
-      LogWindow.appendLog(logPrefix + " connect...");
+      logger.appendLog(logPrefix + " connect...");
       webSocketObj.Connect();
    }
 }
