@@ -24,11 +24,11 @@
 
 import React, { FunctionComponent } from 'react';
 import { Badge } from 'react-bootstrap';
-import { WebsocketStatus } from '../WebsocketAppBackend/WebsocketStatus'
+import { WebsocketConnectionStatus } from '../WebsocketAppBackend/WebsocketConnectionStatus'
 
 type WebsocketStatusIndicatorProps =
     {
-        statusList: { [name: string]: { isEnabled: boolean, status: WebsocketStatus } }
+        statusList: { [name: string]: { isEnabled: boolean, status: WebsocketConnectionStatus } }
     }
 
 export const WebsocketStatusIndicator: FunctionComponent<WebsocketStatusIndicatorProps> = (p) => {
@@ -44,18 +44,18 @@ export const WebsocketStatusIndicator: FunctionComponent<WebsocketStatusIndicato
     );
 }
 
-function getBadgeVariant(isEnabled: boolean, status: WebsocketStatus): string {
+function getBadgeVariant(isEnabled: boolean, status: WebsocketConnectionStatus): string {
     if (!isEnabled)
         return "dark";
     else {
         switch (status) {
-            case WebsocketStatus.Connecting:
+            case WebsocketConnectionStatus.Connecting:
                 return "info";
-            case WebsocketStatus.Open:
+            case WebsocketConnectionStatus.Open:
                 return "success";
-            case WebsocketStatus.Closing:
+            case WebsocketConnectionStatus.Closing:
                 return "warning";
-            case WebsocketStatus.Closed:
+            case WebsocketConnectionStatus.Closed:
                 return "danger";
             default:
                 throw Error("Unknown websocket stauts is assigned to WebsocketIndicator.")

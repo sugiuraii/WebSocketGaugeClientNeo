@@ -33,7 +33,7 @@ import 'jquery';
 import 'popper.js';
 import '../../../css/bootstrap-slate/bootstrap.slate.min.css';
 import { IStatusIndicator } from '../interfaces/IStatusIndicator';
-import { WebsocketStatus } from '../WebsocketAppBackend/WebsocketStatus'
+import { WebsocketConnectionStatus } from '../WebsocketAppBackend/WebsocketConnectionStatus'
 
 class WebsocketStatusIndicator implements IStatusIndicator {
 
@@ -44,7 +44,7 @@ class WebsocketStatusIndicator implements IStatusIndicator {
         this.elementID = elementID;
     }
 
-    public SetStatus(status: WebsocketStatus) {
+    public SetStatus(status: WebsocketConnectionStatus) {
         let cssClass = "";
         const elementID = this.elementID;
 
@@ -53,16 +53,16 @@ class WebsocketStatusIndicator implements IStatusIndicator {
             cssClass = "badge badge-dark";
         else {
             switch (status) {
-                case WebsocketStatus.Connecting:
+                case WebsocketConnectionStatus.Connecting:
                     cssClass = "badge badge-info";
                     break;
-                case WebsocketStatus.Open:
+                case WebsocketConnectionStatus.Open:
                     cssClass = "badge badge-success";
                     break;
-                case WebsocketStatus.Closing:
+                case WebsocketConnectionStatus.Closing:
                     cssClass = "badge badge-warning";
                     break;
-                case WebsocketStatus.Closed:
+                case WebsocketConnectionStatus.Closed:
                     cssClass = "badge badge-danger";
                     break;
                 default:

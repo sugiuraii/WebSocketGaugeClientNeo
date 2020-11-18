@@ -23,21 +23,21 @@
  */
 
 import { IStatusIndicator } from "../interfaces/IStatusIndicator";
-import { WebsocketStatus } from "../WebsocketAppBackend/WebsocketStatus";
+import { WebsocketConnectionStatus } from "../WebsocketAppBackend/WebsocketConnectionStatus";
 
 export class WebSocketStatusIndicator implements IStatusIndicator {
-    private status = WebsocketStatus.Closed;
+    private status = WebsocketConnectionStatus.Closed;
     private enabled = false;
 
-    public get IndicatorState(): { isEnabled: boolean, status: WebsocketStatus } { return { isEnabled: this.enabled, status: this.status } }
+    public get IndicatorState(): { isEnabled: boolean, status: WebsocketConnectionStatus } { return { isEnabled: this.enabled, status: this.status } }
 
-    public get Status(): WebsocketStatus { return this.status }
+    public get Status(): WebsocketConnectionStatus { return this.status }
     public get Enabled(): boolean { return this.enabled }
 
     SetEnabled(enabled: boolean): void {
         this.enabled = enabled;
     }
-    SetStatus(status: WebsocketStatus): void {
+    SetStatus(status: WebsocketConnectionStatus): void {
         this.status = status;
     }
 }
