@@ -25,7 +25,7 @@
 import { DefiCOMWebsocket, DefiParameterCode } from "../../WebSocket/WebSocketCommunication";
 import { WebstorageHandler } from "../Webstorage/WebstorageHandler";
 import { ILogger } from "../interfaces/ILogger";
-import { IStatusIndicator } from "../interfaces/IStatusIndicator";
+import { WebsocketState } from "./WebsocketState";
 
 export class DefiWebsocketBackend {
 
@@ -39,17 +39,17 @@ export class DefiWebsocketBackend {
    private readonly defiWS: DefiCOMWebsocket;
    private readonly parameterCodeList: DefiParameterCode[];
    private readonly logger: ILogger;
-   private readonly statusIndicator: IStatusIndicator;
+   private readonly state: WebsocketState;
 
    private readonly webSocketServerURL: string;
 
    private indicatorUpdateIntervalID = 0;
 
-   constructor(serverurl: string, codeList: DefiParameterCode[], logger: ILogger, statusIndicator: IStatusIndicator) {
+   constructor(serverurl: string, codeList: DefiParameterCode[], logger: ILogger, state: WebsocketState) {
       this.defiWS = new DefiCOMWebsocket(serverurl);
       this.parameterCodeList = codeList;
       this.logger = logger;
-      this.statusIndicator = statusIndicator;
+      this.state = state;
       this.webSocketServerURL = this.defiWS.URL;
 
       this.defiWS.OnWebsocketError = (message: string) => this.logger.appendLog(this.logPrefix + " websocket error : " + message);
@@ -74,7 +74,7 @@ export class DefiWebsocketBackend {
    }
 
    private setStatusIndicator() {
-      this.statusIndicator.SetStatus(this.defiWS.getReadyState());
+      this.state.connectionStatus = this.defiWS.getReadyState();
    }
 
    private connectWebSocket() {

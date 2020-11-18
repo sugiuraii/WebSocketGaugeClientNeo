@@ -30,7 +30,7 @@ import { LogDialog } from './LogDialog'
 import { WebsocketStatusIndicator } from './WebsocketStatusIndicator'
 import React, { FunctionComponent, useState, Fragment } from 'react';
 import { Navbar, Nav } from 'react-bootstrap'
-import { WebsocketConnectionStatus } from '../WebsocketAppBackend/WebsocketConnectionStatus';
+import { WebsocketState } from '../WebsocketAppBackend/WebsocketState'
 
 type ApplicationNavbarProps =
     {
@@ -40,7 +40,7 @@ type ApplicationNavbarProps =
         onOptionDialogSet: (content: OptionDialogFormContents) => void,
         onWSIntervalDialogSet: (wsInterval: number) => void,
         onFUELTripResetDialogSet: (reset: boolean) => void,
-        websocketStatusList: { [name: string]: { isEnabled: boolean, status: WebsocketConnectionStatus } }
+        websocketStatusList: { [name: string]: WebsocketState }
     };
 
 export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) => {

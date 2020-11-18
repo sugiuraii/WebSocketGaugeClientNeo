@@ -25,7 +25,7 @@ import { AssettoCorsaSHMWebsocket, AssettoCorsaSHMNumericalVALCode, AssettoCorsa
 import { AssettoCorsaSHMGraphicsParameterCode, AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMStaticInfoParameterCode } from "../../WebSocket/WebSocketCommunication";
 import { WebstorageHandler } from "../Webstorage/WebstorageHandler";
 import { ILogger } from "../interfaces/ILogger";
-import { IStatusIndicator } from "../interfaces/IStatusIndicator";
+import { WebsocketState } from "./WebsocketState";
 
 export class AssettoCorsaSHMWebsocketBackend {
    public static readonly DEFAULT_WS_PORT = 2017;
@@ -40,19 +40,19 @@ export class AssettoCorsaSHMWebsocketBackend {
    private readonly graphicsParameterCodeList: AssettoCorsaSHMGraphicsParameterCode[];
    private readonly staticInfoParameterCodeList: AssettoCorsaSHMStaticInfoParameterCode[];
    private readonly logger: ILogger;
-   private readonly statusIndicator: IStatusIndicator;
+   private readonly state: WebsocketState;
 
    private readonly webSocketServerURL: string;
 
    private indicatorUpdateIntervalID = 0;
 
-   constructor(serverurl: string, physCode: AssettoCorsaSHMPhysicsParameterCode[], graphicsCode: AssettoCorsaSHMGraphicsParameterCode[], staticCode: AssettoCorsaSHMStaticInfoParameterCode[], logger: ILogger, statusIndicator: IStatusIndicator) {
+   constructor(serverurl: string, physCode: AssettoCorsaSHMPhysicsParameterCode[], graphicsCode: AssettoCorsaSHMGraphicsParameterCode[], staticCode: AssettoCorsaSHMStaticInfoParameterCode[], logger: ILogger, state: WebsocketState) {
       this.assettocorsaWS = new AssettoCorsaSHMWebsocket(serverurl);
       this.physicsParameterCodeList = physCode;
       this.graphicsParameterCodeList = graphicsCode;
       this.staticInfoParameterCodeList = staticCode;
       this.logger = logger;
-      this.statusIndicator = statusIndicator;
+      this.state = state;
       this.webSocketServerURL = this.assettocorsaWS.URL;
 
       this.assettocorsaWS.OnWebsocketError = (message: string) => this.logger.appendLog(this.logPrefix + " websocket error : " + message);
@@ -82,7 +82,7 @@ export class AssettoCorsaSHMWebsocketBackend {
 
 
    private setStatusIndicator() {
-      this.statusIndicator.SetStatus(this.assettocorsaWS.getReadyState());
+      this.state.connectionStatus = this.assettocorsaWS.getReadyState();
    }
 
    private connectWebSocket() {

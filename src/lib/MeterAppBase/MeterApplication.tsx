@@ -31,12 +31,13 @@ import { WebstorageHandler } from "./Webstorage/WebstorageHandler";
 import { WebsocketObjectCollection } from "./WebSocketObjectCollection";
 import { MeterApplicationOption } from "./options/MeterApplicationOption";
 import { ApplicationNavbar } from './reactParts/ApplicationNavbar';
+import { StringListLogger } from "./utils/StringListLogger";
 
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
 
 export class MeterApplication {
     private Option = new MeterApplicationOption();
-    
+    private Logger = new StringListLogger();
     constructor(option: MeterApplicationOption) {
         this.Option = option;
     }
@@ -57,7 +58,7 @@ export class MeterApplication {
         // Set fullscreen tag for android and ios
         this.setWebAppCapable();
 
-        const webSocketCollection = new WebsocketObjectCollection(applicationnavBar, this.Option);
+        const webSocketCollection = new WebsocketObjectCollection(this.Logger, this.Option);
 
         const rootElement = document.getElementById("root");
         ReactDOM.render(
@@ -70,12 +71,11 @@ export class MeterApplication {
                     webStorage.WebsocketServerHome = c.host;
                 }}
                 onWSIntervalDialogSet = {interval => webStorage.WSInterval = interval}
-                onFUELTripResetDialogSet = { () => webSocketCollection.FUELTRIPWS. }
-                
+                onFUELTripResetDialogSet = { () => webSocketCollection.FUELTRIPWS.SendReset() }
+                logList = {this.Logger.Content}
+                websocketStatusList = {webSocketCollection.WebsocketStates}
             />
-        
             , rootElement);
-
 
         // Preload Fonts -> textures-> parts
         this.preloadFonts(() => this.preloadTextures(() => this.Option.SetupPIXIMeterPanel(pixiApp, webSocketCollection)));

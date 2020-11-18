@@ -24,7 +24,7 @@
 
 import { ELM327COMWebsocket, OBDIIParameterCode, ReadModeCode } from "../../WebSocket/WebSocketCommunication";
 import { ILogger } from "../interfaces/ILogger";
-import { IStatusIndicator } from "../interfaces/IStatusIndicator";
+import { WebsocketState } from "./WebsocketState";
 
 export class ELM327WebsocketBackend {
    public static readonly DEFAULT_WS_PORT = 2016;
@@ -39,17 +39,17 @@ export class ELM327WebsocketBackend {
    private readonly elm327WS: ELM327COMWebsocket;
    private readonly parameterCodeList: { code: OBDIIParameterCode, readmode: ReadModeCode }[];
    private readonly logger: ILogger;
-   private readonly statusIndicator: IStatusIndicator;
+   private readonly state: WebsocketState;
 
    private readonly webSocketServerURL: string;
 
    private indicatorUpdateIntervalID = 0;
 
-   constructor(serverurl: string, paramCode: { code: OBDIIParameterCode, readmode: ReadModeCode }[], logger: ILogger, statusIndicator: IStatusIndicator) {
+   constructor(serverurl: string, paramCode: { code: OBDIIParameterCode, readmode: ReadModeCode }[], logger: ILogger, state: WebsocketState) {
       this.elm327WS = new ELM327COMWebsocket(serverurl);
       this.parameterCodeList = paramCode;
       this.logger = logger;
-      this.statusIndicator = statusIndicator;
+      this.state = state;
       this.webSocketServerURL = this.elm327WS.URL;
 
       this.elm327WS.OnWebsocketError = (message: string) => this.logger.appendLog(this.logPrefix + " websocket error : " + message);
@@ -74,7 +74,7 @@ export class ELM327WebsocketBackend {
    }
 
    private setStatusIndicator() {
-      this.statusIndicator.SetStatus(this.elm327WS.getReadyState());
+      this.state.connectionStatus = this.elm327WS.getReadyState();
    }
 
    private connectWebSocket() {

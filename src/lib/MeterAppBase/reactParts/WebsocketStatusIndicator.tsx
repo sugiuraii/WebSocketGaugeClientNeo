@@ -25,16 +25,17 @@
 import React, { FunctionComponent } from 'react';
 import { Badge } from 'react-bootstrap';
 import { WebsocketConnectionStatus } from '../WebsocketAppBackend/WebsocketConnectionStatus'
+import { WebsocketState } from '../WebsocketAppBackend/WebsocketState';
 
 type WebsocketStatusIndicatorProps =
     {
-        statusList: { [name: string]: { isEnabled: boolean, status: WebsocketConnectionStatus } }
+        statusList: { [name: string]: WebsocketState }
     }
 
 export const WebsocketStatusIndicator: FunctionComponent<WebsocketStatusIndicatorProps> = (p) => {
     const badges: JSX.Element[] = [];
     for (const name in p.statusList) {
-        const variant = getBadgeVariant(p.statusList[name].isEnabled, p.statusList[name].status);
+        const variant = getBadgeVariant(p.statusList[name].isEnabled, p.statusList[name].connectionStatus);
         badges.push(<Badge variant={variant}>{name}</Badge>);
     }
     return (
