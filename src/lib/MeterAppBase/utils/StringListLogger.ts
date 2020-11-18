@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { ILogger } from "../interfaces/ILogger";
+import { ILogger } from "./ILogger";
 
 export class StringListLogger implements ILogger {
     private readonly content = Array<string>();

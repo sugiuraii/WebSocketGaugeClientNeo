@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { WebsocketConnectionStatus } from '../WebsocketAppBackend/WebsocketConnectionStatus'
+import { WebsocketConnectionStatus } from '../../WebsocketAppBackend/WebsocketConnectionStatus'
 
 export interface IStatusIndicator {
     SetEnabled(enabled : boolean) : void;

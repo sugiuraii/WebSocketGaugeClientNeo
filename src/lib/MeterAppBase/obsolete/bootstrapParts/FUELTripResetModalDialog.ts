@@ -22,30 +22,37 @@
  * THE SOFTWARE.
  */
 
-import $ from "jquery";
-import { ILogger } from '../interfaces/ILogger';
+import $ from 'jquery';
+import { FUELTRIPWebsocket } from '../../../WebSocket/WebSocketCommunication';
 
-export class LogModalDialog implements ILogger {
-  private writeDate = false;
+export class FUELTripResetModalDialog {
+  private fuelTripWebSocket: FUELTRIPWebsocket | undefined;
 
-  public get WriteDate(): boolean { return this.writeDate }
-  public set WriteDate(flag: boolean) { this.writeDate = flag }
+  public set FUELTRIPWebsocket(wsObj: FUELTRIPWebsocket) { this.fuelTripWebSocket = wsObj }
+  public get FUELTRIPWebsocket(): FUELTRIPWebsocket {
+    if (this.fuelTripWebSocket === undefined)
+      throw Error("FUELTRIP websocket is refered. But not undefined.");
+    else
+      return this.fuelTripWebSocket;
+  }
 
-  private dialogHTML(): string {
+  private get dialogHTML(): string {
     const html =
-      '<div class="modal fade" id="logModal" tabindex="-1" role="dialog" aria-labelledby="logModalLabel" aria-hidden="true">\
+      '<div class="modal fade" id="fuelTripResetModal" tabindex="-1" role="dialog" aria-labelledby="fuelTripResetModalLabel" aria-hidden="true">\
           <div class="modal-dialog" role="document">\
             <div class="modal-content">\
               <div class="modal-header">\
-                <h5 class="modal-title" id="logModalLabel">Log window</h5>\
+                <h5 class="modal-title" id="fuelTripResetModalLabel">Fuel and Trip reset.</h5>\
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">\
                   <span aria-hidden="true">&times;</span>\
                 </button>\
               </div>\
-              <div id="logContents" class="modal-body">\
+              <div class="modal-body">\
+                <p>Reset fuel and trip?</p>\
               </div>\
               <div class="modal-footer">\
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>\
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>\
+                <button type="button" id="fuelTripResetButton" data-dismiss="modal" class="btn btn-primary">Reset</button>\
               </div>\
             </div>\
           </div>\
@@ -54,27 +61,15 @@ export class LogModalDialog implements ILogger {
     return html;
   }
 
-  private getTimeString(): string {
-    return new Date().toLocaleString();
-  }
-
-  public clearLog(): void {
-    $('#logContents').empty();
-  }
-
-  public appendLog(message: string): void {
-    let strToAppend: string;
-    if (this.writeDate)
-      strToAppend = this.getTimeString() + "<br>";
-    else
-      strToAppend = "";
-
-    strToAppend += (message + "<br>");
-
-    $('#logContents').append(strToAppend);
-  }
-
+  /**
+   * Create fuel/trip reset button.
+   */
   public create(): void {
     $('body').append(this.dialogHTML);
+    //Assign control change event
+    $('#fuelTripResetButton').on('click', () => {
+      if (!(this.fuelTripWebSocket === undefined))
+        this.fuelTripWebSocket.SendReset();
+    });
   }
 }

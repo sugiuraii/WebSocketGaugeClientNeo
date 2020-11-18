@@ -24,7 +24,7 @@
 
 import { DefiCOMWebsocket, DefiParameterCode } from "../../WebSocket/WebSocketCommunication";
 import { WebstorageHandler } from "../Webstorage/WebstorageHandler";
-import { ILogger } from "../interfaces/ILogger";
+import { ILogger } from "../utils/ILogger";
 import { WebsocketState } from "./WebsocketState";
 
 export class DefiWebsocketBackend {

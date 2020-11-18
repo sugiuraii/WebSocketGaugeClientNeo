@@ -23,7 +23,7 @@
  */
 
 import { FUELTRIPWebsocket } from "../../WebSocket/WebSocketCommunication";
-import { ILogger } from "../interfaces/ILogger";
+import { ILogger } from "../utils/ILogger";
 import { WebsocketState } from "./WebsocketState";
 
 export class FUELTRIPWebsocketBackend {

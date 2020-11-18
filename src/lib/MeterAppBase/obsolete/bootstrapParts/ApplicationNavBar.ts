@@ -33,7 +33,7 @@ import 'jquery';
 import 'popper.js';
 import '../../../css/bootstrap-slate/bootstrap.slate.min.css';
 import { IStatusIndicator } from '../interfaces/IStatusIndicator';
-import { WebsocketConnectionStatus } from '../WebsocketAppBackend/WebsocketConnectionStatus'
+import { WebsocketConnectionStatus } from '../../WebsocketAppBackend/WebsocketConnectionStatus'
 
 class WebsocketStatusIndicator implements IStatusIndicator {
 

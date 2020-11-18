@@ -23,7 +23,7 @@
  */
 
 import { ELM327COMWebsocket, OBDIIParameterCode, ReadModeCode } from "../../WebSocket/WebSocketCommunication";
-import { ILogger } from "../interfaces/ILogger";
+import { ILogger } from "../utils/ILogger";
 import { WebsocketState } from "./WebsocketState";
 
 export class ELM327WebsocketBackend {

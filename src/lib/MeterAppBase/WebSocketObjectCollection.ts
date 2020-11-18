@@ -29,7 +29,7 @@ import { ELM327WebsocketBackend } from "./WebsocketAppBackend/ELM327WebsocketBac
 import { AssettoCorsaSHMWebsocketBackend } from "./WebsocketAppBackend/AssettoCorsaSHMWebsocketBackend";
 import { FUELTRIPWebsocketBackend } from "./WebsocketAppBackend/FUELTRIPWebsocketBackend";
 import { MeterApplicationOption } from "./options/MeterApplicationOption"
-import { ILogger } from "./interfaces/ILogger";
+import { ILogger } from "./utils/ILogger";
 import { WebsocketState } from "./WebsocketAppBackend/WebsocketState";
 import { WebsocketConnectionStatus } from "./WebsocketAppBackend/WebsocketConnectionStatus";
 

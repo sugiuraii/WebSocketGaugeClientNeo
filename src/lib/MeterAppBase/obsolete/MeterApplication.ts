@@ -26,8 +26,8 @@ import * as PIXI from "pixi.js";
 import { ApplicationNavBar } from "./bootstrapParts/ApplicationNavBar"
 import * as WebFont from "webfontloader";
 
-import { MeterApplicationOption } from "./options/MeterApplicationOption";
-import { WebsocketObjectCollection } from "./WebSocketObjectCollection";
+import { MeterApplicationOption } from "../options/MeterApplicationOption";
+import { WebsocketObjectCollection } from "../WebSocketObjectCollection";
 
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
 

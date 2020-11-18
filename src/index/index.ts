@@ -24,7 +24,7 @@
 
 require('./index.html');
 
-import {indexNavBar} from '../lib/MeterAppBase/bootstrapParts/indexNavBar'
+import {indexNavBar} from '../lib/MeterAppBase/obsolete/bootstrapParts/indexNavBar'
 
 window.onload = () =>
 {
