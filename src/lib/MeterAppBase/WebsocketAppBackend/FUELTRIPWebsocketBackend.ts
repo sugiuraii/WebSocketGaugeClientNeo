@@ -66,7 +66,9 @@ export class FUELTRIPWebsocketBackend {
         clearInterval(this.indicatorUpdateIntervalID);
         this.fueltripWS.Close();
     }
-
+    public SendReset(): void {
+        this.fueltripWS.SendReset();
+    }
     public getMomentGasMilage(timestamp: number): number {
         return this.fueltripWS.getMomentGasMilage(timestamp);
     }
