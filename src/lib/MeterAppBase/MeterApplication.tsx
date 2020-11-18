@@ -24,19 +24,21 @@
 
 import * as WebFont from "webfontloader";
 import * as PIXI from "pixi.js";
-import React from "react";
+import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
 
 import { WebstorageHandler } from "./Webstorage/WebstorageHandler";
 import { WebsocketObjectCollection } from "./WebSocketObjectCollection";
 import { MeterApplicationOption } from "./options/MeterApplicationOption";
 import { ApplicationNavbar } from './reactParts/ApplicationNavbar';
+import { StringListLogger } from "./utils/StringListLogger";
+import PIXIApplication from "./reactParts/PIXIApplication";
 
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
 
 export class MeterApplication {
     private Option = new MeterApplicationOption();
-    
+    private Logger = new StringListLogger();
     constructor(option: MeterApplicationOption) {
         this.Option = option;
     }
@@ -47,20 +49,16 @@ export class MeterApplication {
         const preserveDrawingBuffer = localStorage.getItem("preserveDrawingBuffer") === "true" ? true : false;
         const pixiApp = new PIXI.Application({ width: this.Option.width, height: this.Option.height, preserveDrawingBuffer: preserveDrawingBuffer })
 
-        // Append PIXI.js application to document body
-        pixiApp.view.style.width = "100vw";
-        pixiApp.view.style.touchAction = "auto";
-        pixiApp.view.style.pointerEvents = "none";
-        document.body.appendChild(pixiApp.view);
         // Set viewport meta-tag
         this.setViewPortMetaTag();
         // Set fullscreen tag for android and ios
         this.setWebAppCapable();
 
-        const webSocketCollection = new WebsocketObjectCollection(applicationnavBar, this.Option);
+        const webSocketCollection = new WebsocketObjectCollection(this.Logger, this.Option);
 
         const rootElement = document.getElementById("root");
         ReactDOM.render(
+            <Fragment>
             <ApplicationNavbar 
                 defaultOptionDialogContent={{host : webStorage.WebsocketServerHome, wsHostSameAsHttpHost : webStorage.WSServerSameAsHttp, pixijsPreserveDrawingBuffer : webStorage.PreserveDrawingBuffer} }
                 defaultWSInterval = { webStorage.WSInterval }
@@ -70,12 +68,13 @@ export class MeterApplication {
                     webStorage.WebsocketServerHome = c.host;
                 }}
                 onWSIntervalDialogSet = {interval => webStorage.WSInterval = interval}
-                onFUELTripResetDialogSet = { () => webSocketCollection.FUELTRIPWS. }
-                
+                onFUELTripResetDialogSet = { () => webSocketCollection.FUELTRIPWS.SendReset() }
+                logList = {this.Logger.Content}
+                websocketStatusList = {webSocketCollection.WebsocketStates}
             />
-        
+            <PIXIApplication application={pixiApp} style={{width: '100vw',touchAction: 'auto', pointerEvents: 'none'}}/>
+            </Fragment>
             , rootElement);
-
 
         // Preload Fonts -> textures-> parts
         this.preloadFonts(() => this.preloadTextures(() => this.Option.SetupPIXIMeterPanel(pixiApp, webSocketCollection)));

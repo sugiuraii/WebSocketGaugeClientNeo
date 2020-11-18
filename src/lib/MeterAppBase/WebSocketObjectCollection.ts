@@ -29,7 +29,9 @@ import { ELM327WebsocketBackend } from "./WebsocketAppBackend/ELM327WebsocketBac
 import { AssettoCorsaSHMWebsocketBackend } from "./WebsocketAppBackend/AssettoCorsaSHMWebsocketBackend";
 import { FUELTRIPWebsocketBackend } from "./WebsocketAppBackend/FUELTRIPWebsocketBackend";
 import { MeterApplicationOption } from "./options/MeterApplicationOption"
-import { ApplicationNavBar } from "./bootstrapParts/ApplicationNavBar"
+import { ILogger } from "./interfaces/ILogger";
+import { WebsocketState } from "./WebsocketAppBackend/WebsocketState";
+import { WebsocketConnectionStatus } from "./WebsocketAppBackend/WebsocketConnectionStatus";
 
 export class WebsocketObjectCollection {
     private readonly AppOption: MeterApplicationOption;
@@ -40,6 +42,8 @@ export class WebsocketObjectCollection {
     private readonly elm327WS: ELM327WebsocketBackend | undefined;
     private readonly fueltripWS: FUELTRIPWebsocketBackend | undefined;
     private readonly assettoCorsaWS: AssettoCorsaSHMWebsocketBackend | undefined;
+
+    private readonly websocketStates : {[name : string] : WebsocketState} = {};
 
     get DefiWS(): DefiWebsocketBackend {
         if (this.defiWS != undefined)
@@ -92,62 +96,69 @@ export class WebsocketObjectCollection {
             return wsServerHostname;
     }
 
-    constructor(navBar: ApplicationNavBar, appOption: MeterApplicationOption) {
+    get WebsocketStates() : {[name : string] : WebsocketState } { return this.websocketStates }
+
+    constructor(logger : ILogger, appOption: MeterApplicationOption) {
         this.AppOption = appOption;
 
         const webSocketServerName = this.getWebsocketServerName();
-        const logDialog = navBar.LogModalDialog;
 
         if (appOption.WebsocketEnableFlag.Defi) {
             const wsURL = "ws://" + webSocketServerName + ":" + DefiWebsocketBackend.DEFAULT_WS_PORT.toString() + "/";
-            navBar.AddWebSocketStatusIndicator("defiWSIndicator", "Defi");
-            this.defiWS = new DefiWebsocketBackend(wsURL, this.AppOption.ParameterCode.Defi.Array, logDialog, navBar.GetWebSocketStatusIndicator("defiWSIndicator"));
+            const state : WebsocketState = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
+            this.websocketStates["Defi"] = state;
+            this.defiWS = new DefiWebsocketBackend(wsURL, this.AppOption.ParameterCode.Defi.Array, logger, state);
         }
         else
             this.defiWS = undefined;
 
         if (appOption.WebsocketEnableFlag.SSM) {
             const wsURL = "ws://" + webSocketServerName + ":" + SSMWebsocketBackend.DEFAULT_WS_PORT.toString() + "/";
-            navBar.AddWebSocketStatusIndicator("ssmWSIndicator", "SSM");
-            this.ssmWS = new SSMWebsocketBackend(wsURL, this.AppOption.ParameterCode.SSM.Array, logDialog, navBar.GetWebSocketStatusIndicator("ssmWSIndicator"));
+            const state : WebsocketState = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
+            this.websocketStates["SSM"] = state;
+            this.ssmWS = new SSMWebsocketBackend(wsURL, this.AppOption.ParameterCode.SSM.Array, logger, state);
         }
         else
             this.ssmWS = undefined;
 
         if (appOption.WebsocketEnableFlag.Arduino) {
             const wsURL = "ws://" + webSocketServerName + ":" + ArduinoWebsocketBackend.DEFAULT_WS_PORT.toString() + "/";
-            navBar.AddWebSocketStatusIndicator("arduinoWSIndicator", "Arduino");
-            this.arduinoWS = new ArduinoWebsocketBackend(wsURL, this.AppOption.ParameterCode.Arduino.Array, logDialog, navBar.GetWebSocketStatusIndicator("arduinoWSIndicator"));
+            const state : WebsocketState = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
+            this.websocketStates["Arduino"] = state;
+            this.arduinoWS = new ArduinoWebsocketBackend(wsURL, this.AppOption.ParameterCode.Arduino.Array, logger, state);
         }
         else
             this.arduinoWS = undefined;
 
         if (appOption.WebsocketEnableFlag.ELM327) {
             const wsURL = "ws://" + webSocketServerName + ":" + ELM327WebsocketBackend.DEFAULT_WS_PORT.toString() + "/";
-            navBar.AddWebSocketStatusIndicator("elm327WSIndicator", "ELM327");
-            this.elm327WS = new ELM327WebsocketBackend(wsURL, this.AppOption.ParameterCode.ELM327OBDII.Array, logDialog, navBar.GetWebSocketStatusIndicator("elm327WSIndicator"));
+            const state : WebsocketState = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
+            this.websocketStates["ELM327"] = state;
+            this.elm327WS = new ELM327WebsocketBackend(wsURL, this.AppOption.ParameterCode.ELM327OBDII.Array, logger, state);
         }
         else
             this.elm327WS = undefined;
 
         if (appOption.WebsocketEnableFlag.FUELTRIP) {
             const wsURL = "ws://" + webSocketServerName + ":" + FUELTRIPWebsocketBackend.DEFAULT_WS_PORT.toString() + "/";
-            navBar.AddWebSocketStatusIndicator("fueltripWSIndicator", "FUELTRIP");
+            const state : WebsocketState = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
+            this.websocketStates["FUELTRIP"] = state;
             const fuelTripSectSpan = appOption.FUELTRIPWebsocketOption.FUELTRIPSectSpan;
             const fuelTripSectStoreMax = appOption.FUELTRIPWebsocketOption.FUELTRIPSectStoreMax;
-            this.fueltripWS = new FUELTRIPWebsocketBackend(wsURL, logDialog, fuelTripSectSpan, fuelTripSectStoreMax, navBar.GetWebSocketStatusIndicator("fueltripWSIndicator"));
+            this.fueltripWS = new FUELTRIPWebsocketBackend(wsURL, logger, fuelTripSectSpan, fuelTripSectStoreMax, state);
         }
         else
             this.fueltripWS = undefined;
 
         if (appOption.WebsocketEnableFlag.AssettoCorsaSHM) {
             const wsURL = "ws://" + webSocketServerName + ":" + AssettoCorsaSHMWebsocketBackend.DEFAULT_WS_PORT.toString() + "/";
-            navBar.AddWebSocketStatusIndicator("acshmWSIndicator", "AssettoCorsaSHM");
+            const state : WebsocketState = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
+            this.websocketStates["AssettoCorsaSHM"] = state;
             this.assettoCorsaWS = new AssettoCorsaSHMWebsocketBackend(wsURL,
                 this.AppOption.ParameterCode.AssettoCorsaPhysics.Array,
                 this.AppOption.ParameterCode.AssettoCorsaGraphics.Array,
                 this.AppOption.ParameterCode.AssettoCorsaStaticInfo.Array,
-                logDialog, navBar.GetWebSocketStatusIndicator("acshmWSIndicator"));
+                logger, state);
         }
         else
             this.assettoCorsaWS = undefined;

@@ -21,9 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { WebsocketConnectionStatus } from '../WebsocketAppBackend/WebsocketConnectionStatus'
 
-export interface IStatusIndicator {
-    SetEnabled(enabled : boolean) : void;
-    SetStatus(status: WebsocketConnectionStatus) : void;
+import { IStatusIndicator } from "../interfaces/IStatusIndicator";
+import { WebsocketConnectionStatus } from "../WebsocketAppBackend/WebsocketConnectionStatus";
+
+export class WebSocketStatusIndicator implements IStatusIndicator {
+    private status = WebsocketConnectionStatus.Closed;
+    private enabled = false;
+
+    public get IndicatorState(): { isEnabled: boolean, status: WebsocketConnectionStatus } { return { isEnabled: this.enabled, status: this.status } }
+
+    public get Status(): WebsocketConnectionStatus { return this.status }
+    public get Enabled(): boolean { return this.enabled }
+
+    SetEnabled(enabled: boolean): void {
+        this.enabled = enabled;
+    }
+    SetStatus(status: WebsocketConnectionStatus): void {
+        this.status = status;
+    }
 }
