@@ -44,6 +44,10 @@ class WebsocketStatusIndicator implements IStatusIndicator {
         this.elementID = elementID;
     }
 
+    public SetEnabled(enabled: boolean): void {
+        this.isEnabled = enabled;
+    }
+
     public SetStatus(status: WebsocketConnectionStatus) {
         let cssClass = "";
         const elementID = this.elementID;
