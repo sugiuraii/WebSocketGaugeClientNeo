@@ -29,7 +29,7 @@ type PIXIApplicationProps =
     {
         application: PIXI.Application,
         className?: string,
-        style? : {[key : string] : string}
+        style? : React.CSSProperties
     }
 
 export const PIXIApplication: FunctionComponent<PIXIApplicationProps> = (p) => {
