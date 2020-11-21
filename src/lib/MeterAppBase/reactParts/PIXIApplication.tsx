@@ -26,11 +26,9 @@ import React, { FunctionComponent, useEffect, useRef } from "react";
 import * as PIXI from "pixi.js";
 
 type PIXIApplicationProps =
-    {
-        application: PIXI.Application,
-        className?: string,
-        style? : React.CSSProperties
-    }
+{
+    application: PIXI.Application
+}
 
 export const PIXIApplication: FunctionComponent<PIXIApplicationProps> = (p) => {
     const pixiAppRef = useRef<HTMLDivElement>(null);
@@ -63,7 +61,7 @@ export const PIXIApplication: FunctionComponent<PIXIApplicationProps> = (p) => {
 
     return (
         <div>
-            <div ref={pixiAppRef} className={p.className} style={p.style} />
+            <div ref={pixiAppRef} />
         </div>
     );
 };

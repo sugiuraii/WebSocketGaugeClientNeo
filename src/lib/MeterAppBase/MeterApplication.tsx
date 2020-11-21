@@ -48,6 +48,10 @@ export class MeterApplication {
 
         const preserveDrawingBuffer = localStorage.getItem("preserveDrawingBuffer") === "true" ? true : false;
         const pixiApp = new PIXI.Application({ width: this.Option.width, height: this.Option.height, preserveDrawingBuffer: preserveDrawingBuffer })
+        // Append PIXI.js application to document body
+        pixiApp.view.style.width = "100vw";
+        pixiApp.view.style.touchAction = "auto";
+        pixiApp.view.style.pointerEvents = "none";
 
         // Set viewport meta-tag
         this.setViewPortMetaTag();
@@ -72,7 +76,7 @@ export class MeterApplication {
                 logList = {this.Logger.Content}
                 websocketStatusList = {webSocketCollection.WebsocketStates}
             />
-            <PIXIApplication application={pixiApp} style={{width: '100vw',touchAction: 'auto', pointerEvents: 'none'}}/>
+            <PIXIApplication application={pixiApp} />
             </Fragment>
             , rootElement);
 
