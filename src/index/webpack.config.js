@@ -28,7 +28,7 @@ module.exports = {
     mode: "development",
     entry:
             {
-                "index": './index.ts'
+                "index": './index.tsx'
             },
     devtool: "source-map",
     output:
