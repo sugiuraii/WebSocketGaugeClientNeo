@@ -28,7 +28,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 
 type IndexNavbarProps =
     {
-        defaultOptionDialogContent : OptionDialogFormContents,
+        defaultOptionDialogContent: OptionDialogFormContents,
         onOptionDialogSet: (content: OptionDialogFormContents) => void
     };
 
@@ -42,7 +42,9 @@ const IndexNavbar: FunctionComponent<IndexNavbarProps> = (p) => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link onClick={() => SetShowDialog(true)}>Option</Nav.Link>
+                        <Nav.Item>
+                            <Nav.Link onClick={() => SetShowDialog(true)}>Option</Nav.Link>
+                        </Nav.Item>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

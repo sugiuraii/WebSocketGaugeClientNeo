@@ -51,24 +51,26 @@ export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) 
 
     return (
         <Fragment>
-            <Navbar bg="dark"  variant="dark" expand="lg">
+            <Navbar bg="dark" fixed="top" variant="dark" expand="lg">
                 <Navbar.Brand>Menu</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href="../index.html">Home</Nav.Link>
-                    </Nav>
-                    <Nav className="mr-auto">
-                        <Nav.Link onClick={() => setShowOptionDialog(true)}>Option</Nav.Link>
-                    </Nav>
-                    <Nav className="mr-auto">
-                        <Nav.Link onClick={() => setShowWSIntervalDialog(true)}>WSInterval</Nav.Link>
-                    </Nav>
-                    <Nav className="mr-auto">
-                        <Nav.Link onClick={() => setShowFUELTripResetDialog(true)}>Fuel/Trip reset</Nav.Link>
-                    </Nav>
-                    <Nav className="mr-auto">
-                        <Nav.Link onClick={() => setShowLogDialog(true)}>Log</Nav.Link>
+                        <Nav.Item>
+                            <Nav.Link href="../index.html">Home</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link onClick={() => setShowOptionDialog(true)}>Option</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link onClick={() => setShowWSIntervalDialog(true)}>WSInterval</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link onClick={() => setShowFUELTripResetDialog(true)}>Fuel/Trip reset</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link onClick={() => setShowLogDialog(true)}>Log</Nav.Link>
+                        </Nav.Item>
                     </Nav>
                     <WebsocketStatusIndicator statusList={p.websocketStatusList} />
                 </Navbar.Collapse>
