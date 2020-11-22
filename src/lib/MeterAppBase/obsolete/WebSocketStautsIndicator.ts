@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { IStatusIndicator } from "../obsolete/interfaces/IStatusIndicator";
+import { IStatusIndicator } from "./interfaces/IStatusIndicator";
 import { WebsocketConnectionStatus } from "../WebsocketAppBackend/WebsocketConnectionStatus";
 
 export class WebSocketStatusIndicator implements IStatusIndicator {
