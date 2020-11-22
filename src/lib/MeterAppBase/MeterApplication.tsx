@@ -35,6 +35,7 @@ import { StringListLogger } from "./utils/StringListLogger";
 import PIXIApplication from "./reactParts/PIXIApplication";
 
 import 'bootswatch/dist/slate/bootstrap.min.css';
+const BOOTSTRAP_CSS_FILENAME = "bootstrap.min.css";
 
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
 
@@ -59,10 +60,13 @@ export class MeterApplication {
         this.setViewPortMetaTag();
         // Set fullscreen tag for android and ios
         this.setWebAppCapable();
+        // Load bootstrap css
+        this.loadBootStrapCSS();
 
         const webSocketCollection = new WebsocketObjectCollection(this.Logger, this.Option);
 
-        const rootElement = document.getElementById("root");
+        // Crete react components
+        const rootElement = document.createElement('div'); 
         ReactDOM.render(
             <Fragment>
             <ApplicationNavbar 
@@ -81,6 +85,10 @@ export class MeterApplication {
             <PIXIApplication application={pixiApp} />
             </Fragment>
             , rootElement);
+        
+        // Add react components to html body
+        document.body.appendChild(rootElement);
+
 
         // Preload Fonts -> textures-> parts
         this.preloadFonts(() => this.preloadTextures(() => this.Option.SetupPIXIMeterPanel(pixiApp, webSocketCollection)));
@@ -132,6 +140,15 @@ export class MeterApplication {
             callBack();
         }
         );
+    }
+
+    private loadBootStrapCSS() {
+        const head = document.getElementsByTagName('head')[0];
+        const link = document.createElement('link');
+        link.setAttribute('rel','stylesheet');
+        link.setAttribute('type','text/css');
+        link.setAttribute('href',BOOTSTRAP_CSS_FILENAME);
+        head.appendChild(link);
     }
 
     private setViewPortMetaTag() {
