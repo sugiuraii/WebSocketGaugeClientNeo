@@ -48,7 +48,7 @@ function createThumbNail(htmlpath, pngpath)
     const page = await browser.newPage();
     await page.setViewport({ width: 600, height: 400 })
     await page.goto(`file:`+path.join(__dirname, htmlpath));
-    await page.waitFor(1000);
+    await page.waitFor(3000);
     await page.screenshot({path: pngpath});
   
     await browser.close();
