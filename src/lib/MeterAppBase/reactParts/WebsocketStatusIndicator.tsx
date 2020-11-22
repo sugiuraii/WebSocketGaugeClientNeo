@@ -36,7 +36,7 @@ export const WebsocketStatusIndicator: FunctionComponent<WebsocketStatusIndicato
     const badges: JSX.Element[] = [];
     for (const name in p.statusList) {
         const variant = getBadgeVariant(p.statusList[name].isEnabled, p.statusList[name].connectionStatus);
-        badges.push(<Badge variant={variant}>{name}</Badge>);
+        badges.push(<Badge key={name} variant={variant}>{name}</Badge>);
     }
     return (
         <div>

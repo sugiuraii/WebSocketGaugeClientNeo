@@ -34,7 +34,11 @@ type LogDialogProps =
 
 export const LogDialog: FunctionComponent<LogDialogProps> = (p) => {
     const logContents: JSX.Element[] = [];
-    p.logList.forEach(s => logContents.push(<Fragment>{s}<br /></Fragment>));
+    let key = 0;
+    p.logList.forEach(s => {
+        logContents.push(<Fragment key={key}>{s}<br /></Fragment>);
+        key++;
+    });
 
     return (
         <Modal show={p.show} >
