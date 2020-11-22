@@ -34,7 +34,7 @@ import { ApplicationNavbar } from './reactParts/ApplicationNavbar';
 import { StringListLogger } from "./utils/StringListLogger";
 import PIXIApplication from "./reactParts/PIXIApplication";
 
-import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootswatch/dist/slate/bootstrap.min.css';
 
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
 

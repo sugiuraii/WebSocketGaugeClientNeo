@@ -21,6 +21,7 @@
         "@types/webfontloader": "^1.6.32",
         "autoprefixer": "^9.8.6",
         "bootstrap": "^4.5.2",
+        "bootswatch": "^4.5.3",
         "css-loader": "^3.6.0",
         "fibers": "^4.0.3",
         "file-loader": "^4.2.0",
