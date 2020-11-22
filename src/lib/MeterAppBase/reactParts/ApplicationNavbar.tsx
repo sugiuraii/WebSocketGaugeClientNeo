@@ -51,7 +51,7 @@ export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) 
 
     return (
         <Fragment>
-            <Navbar bg="dark" fixed="top" variant="dark" expand="lg">
+            <Navbar bg="dark" fixed="top" variant="dark" expand="lg" style={{transition: "opacity .35s", opacity : "0.1"}} >
                 <Navbar.Brand>Menu</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
