@@ -32,7 +32,7 @@ type IndexNavbarProps =
         onOptionDialogSet: (content: OptionDialogFormContents) => void
     };
 
-const IndexNavbar: FunctionComponent<IndexNavbarProps> = (p) => {
+export const IndexNavbar: FunctionComponent<IndexNavbarProps> = (p) => {
     const [showDialog, SetShowDialog] = useState(false);
 
     return (

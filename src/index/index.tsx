@@ -24,10 +24,23 @@
 
 require('./index.html');
 
-import {indexNavBar} from '../lib/MeterAppBase/obsolete/bootstrapParts/indexNavBar'
+import { IndexNavbar } from '../lib/MeterAppBase/reactParts/IndexNaxbar'
+import React  from 'react'
+import ReactDOM from 'react-dom'
+import { WebstorageHandler } from '../lib/MeterAppBase/Webstorage/WebstorageHandler';
 
-window.onload = () =>
-{
-    const indexNavBar1 = new indexNavBar();
-    indexNavBar1.create();
+window.onload = () => {
+    const webStorage = new WebstorageHandler();
+
+    // Crete react components
+    const rootElement = document.createElement('div');
+    ReactDOM.render(<IndexNavbar defaultOptionDialogContent={{ host: webStorage.WebsocketServerHome, wsHostSameAsHttpHost: webStorage.WSServerSameAsHttp, pixijsPreserveDrawingBuffer: webStorage.PreserveDrawingBuffer }}
+        onOptionDialogSet={c => {
+            webStorage.PreserveDrawingBuffer = c.pixijsPreserveDrawingBuffer;
+            webStorage.WSServerSameAsHttp = c.wsHostSameAsHttpHost;
+            webStorage.WebsocketServerHome = c.host;
+        }}/>, rootElement);
+
+    // Add react components to html body
+    document.body.appendChild(rootElement);
 }
