@@ -25,30 +25,29 @@
 import React, { FunctionComponent, Fragment } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-type LogDialogProps = 
-{
-    show : boolean,
-    logList : string[],
-    onClose: () => void;
-}
+type LogDialogProps =
+    {
+        show: boolean,
+        logList: string[],
+        onClose: () => void;
+    }
 
 export const LogDialog: FunctionComponent<LogDialogProps> = (p) => {
-    const logContents : JSX.Element[] = [];
-    for(const logline in p.logList)
-        logContents.push(<Fragment>{logline}<br/></Fragment>);
+    const logContents: JSX.Element[] = [];
+    p.logList.forEach(s => logContents.push(<Fragment>{s}<br /></Fragment>));
 
-    return(
+    return (
         <Modal show={p.show} >
-        <Modal.Header closeButton onHide={p.onClose}>
-            <Modal.Title>Log</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-            <p>{logContents}</p>
-        </Modal.Body>
-        <Modal.Footer>
-            <Button variant="secondary" onClick={p.onClose}>Close</Button>
-        </Modal.Footer>
-    </Modal>
+            <Modal.Header closeButton onHide={p.onClose}>
+                <Modal.Title>Log</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <p>{logContents}</p>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={p.onClose}>Close</Button>
+            </Modal.Footer>
+        </Modal>
     );
 }
 

@@ -66,26 +66,26 @@ export class MeterApplication {
         const webSocketCollection = new WebsocketObjectCollection(this.Logger, this.Option);
 
         // Crete react components
-        const rootElement = document.createElement('div'); 
+        const rootElement = document.createElement('div');
         ReactDOM.render(
             <Fragment>
-            <ApplicationNavbar 
-                defaultOptionDialogContent={{host : webStorage.WebsocketServerHome, wsHostSameAsHttpHost : webStorage.WSServerSameAsHttp, pixijsPreserveDrawingBuffer : webStorage.PreserveDrawingBuffer} }
-                defaultWSInterval = { webStorage.WSInterval }
-                onOptionDialogSet = { c => {
-                    webStorage.PreserveDrawingBuffer = c.pixijsPreserveDrawingBuffer;
-                    webStorage.WSServerSameAsHttp = c.wsHostSameAsHttpHost;
-                    webStorage.WebsocketServerHome = c.host;
-                }}
-                onWSIntervalDialogSet = {interval => webStorage.WSInterval = interval}
-                onFUELTripResetDialogSet = { () => webSocketCollection.FUELTRIPWS.SendReset() }
-                logList = {this.Logger.Content}
-                websocketStatusList = {webSocketCollection.WebsocketStates}
-            />
-            <PIXIApplication application={pixiApp} />
+                <ApplicationNavbar
+                    defaultOptionDialogContent={{ host: webStorage.WebsocketServerHome, wsHostSameAsHttpHost: webStorage.WSServerSameAsHttp, pixijsPreserveDrawingBuffer: webStorage.PreserveDrawingBuffer }}
+                    defaultWSInterval={webStorage.WSInterval}
+                    onOptionDialogSet={c => {
+                        webStorage.PreserveDrawingBuffer = c.pixijsPreserveDrawingBuffer;
+                        webStorage.WSServerSameAsHttp = c.wsHostSameAsHttpHost;
+                        webStorage.WebsocketServerHome = c.host;
+                    }}
+                    onWSIntervalDialogSet={interval => webStorage.WSInterval = interval}
+                    onFUELTripResetDialogSet={() => webSocketCollection.FUELTRIPWS.SendReset()}
+                    logList={this.Logger.Content}
+                    websocketStatusList={webSocketCollection.WebsocketStates}
+                />
+                <PIXIApplication application={pixiApp} />
             </Fragment>
             , rootElement);
-        
+
         // Add react components to html body
         document.body.appendChild(rootElement);
 
@@ -145,9 +145,9 @@ export class MeterApplication {
     private loadBootStrapCSS() {
         const head = document.getElementsByTagName('head')[0];
         const link = document.createElement('link');
-        link.setAttribute('rel','stylesheet');
-        link.setAttribute('type','text/css');
-        link.setAttribute('href',BOOTSTRAP_CSS_FILENAME);
+        link.setAttribute('rel', 'stylesheet');
+        link.setAttribute('type', 'text/css');
+        link.setAttribute('href', BOOTSTRAP_CSS_FILENAME);
         head.appendChild(link);
     }
 
