@@ -49,9 +49,11 @@ export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) 
     const [showFUELTripResetDialog, setShowFUELTripResetDialog] = useState(false);
     const [showLogDialog, setShowLogDialog] = useState(false);
 
+    const [mouseOver, setMouseOver] = useState(false);
+
     return (
         <Fragment>
-            <Navbar bg="dark" fixed="top" variant="dark" expand="lg" style={{transition: "opacity .35s", opacity : "0.1"}} >
+            <Navbar bg="dark" fixed="top" variant="dark" expand="lg" style={{ transition: "opacity .35s", opacity: mouseOver ? "1.0" : "0.1" }} onMouseOver={() => setMouseOver(true)} onMouseLeave={() => setMouseOver(false)} >
                 <Navbar.Brand>Menu</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
