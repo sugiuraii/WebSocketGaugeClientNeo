@@ -44,7 +44,7 @@ export const WSIntervalOptionDialog : FunctionComponent<WSIntervalOptionDialogPr
                 <Form>
                     <Form.Group controlId="formWSInterval">
                         <Form.Label>Defi/Arduino websocket message interval</Form.Label>
-                        <Form.Control type="number" min={0} value={p.interval} onChange={(evt) => setInterval(Number(evt.target.value))} />
+                        <Form.Control type="number" min={0} value={interval} onChange={(evt) => setInterval(Number(evt.target.value))} />
                     </Form.Group>
                 </Form>
             </Modal.Body>
