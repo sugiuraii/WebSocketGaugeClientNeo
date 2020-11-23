@@ -27,7 +27,7 @@ import { Modal, Form, Button } from 'react-bootstrap';
 
 type OptionDialogProps = {
     show: boolean,
-    defaultFormContent : OptionDialogFormContents,
+    defaultFormContent: OptionDialogFormContents,
     onCancel: () => void,
     onSet: (dat: OptionDialogFormContents) => void;
 }
@@ -42,6 +42,16 @@ export const OptionDialog: FunctionComponent<OptionDialogProps> = (p) => {
     const [host, setHost] = useState(p.defaultFormContent.host);
     const [wsHostSameAsHttpHost, setWSHostSameAsHttpHost] = useState(p.defaultFormContent.wsHostSameAsHttpHost);
     const [pixijsPreserveDrawingBuffer, setPIXIJSPreserveDrawingBuffer] = useState(p.defaultFormContent.pixijsPreserveDrawingBuffer);
+
+    const handleCancel = () => {
+        // Reset forms
+        setHost(p.defaultFormContent.host);
+        setWSHostSameAsHttpHost(p.defaultFormContent.wsHostSameAsHttpHost);
+        setPIXIJSPreserveDrawingBuffer(p.defaultFormContent.pixijsPreserveDrawingBuffer);
+        p.onCancel();
+    };
+
+    const handleSet = () => p.onSet({ host: host, wsHostSameAsHttpHost: wsHostSameAsHttpHost, pixijsPreserveDrawingBuffer: pixijsPreserveDrawingBuffer });
 
     return (
         <Modal show={p.show} >
@@ -63,8 +73,8 @@ export const OptionDialog: FunctionComponent<OptionDialogProps> = (p) => {
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={p.onCancel}>Close</Button>
-                <Button variant="primary" onClick={() => p.onSet({ host: host, wsHostSameAsHttpHost: wsHostSameAsHttpHost, pixijsPreserveDrawingBuffer: pixijsPreserveDrawingBuffer })}>Set</Button>
+                <Button variant="secondary" onClick={handleCancel}>Cancel</Button>
+                <Button variant="primary" onClick={handleSet}>Set</Button>
             </Modal.Footer>
         </Modal>
     );

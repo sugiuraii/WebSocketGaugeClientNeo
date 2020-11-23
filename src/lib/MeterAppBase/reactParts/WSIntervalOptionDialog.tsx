@@ -26,14 +26,20 @@ import React, { FunctionComponent, useState } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
 
 type WSIntervalOptionDialogProps = {
-    show : boolean,
-    interval : number,
-    onCancel : () => void,
-    onSet : (newInterval : number) => void
+    show: boolean,
+    interval: number,
+    onCancel: () => void,
+    onSet: (newInterval: number) => void
 }
 
-export const WSIntervalOptionDialog : FunctionComponent<WSIntervalOptionDialogProps> = (p) => {
+export const WSIntervalOptionDialog: FunctionComponent<WSIntervalOptionDialogProps> = (p) => {
     const [interval, setInterval] = useState(p.interval);
+    const handleCancel = () => {
+        // Reset field on cancel.
+        setInterval(p.interval);
+        p.onCancel();
+    };
+    const handleSet = () => p.onSet(interval);
 
     return (
         <Modal show={p.show} >
@@ -49,8 +55,8 @@ export const WSIntervalOptionDialog : FunctionComponent<WSIntervalOptionDialogPr
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={p.onCancel}>Cancel</Button>
-                <Button variant="primary" onClick={() => p.onSet(interval)}>Set</Button>
+                <Button variant="secondary" onClick={handleCancel}>Cancel</Button>
+                <Button variant="primary" onClick={handleSet}>Set</Button>
             </Modal.Footer>
         </Modal>
     );
