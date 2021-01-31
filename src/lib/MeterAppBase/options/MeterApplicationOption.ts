@@ -81,5 +81,7 @@ export class MeterApplicationOption {
     public height = 640;
     public width = 480;
 
+    public TransparentAppBackground = false;
+
     public SetupPIXIMeterPanel: (pixiApp: PIXI.Application, wsObj: WebsocketObjectCollection) => void = () => {/* do nothing*/};
 }

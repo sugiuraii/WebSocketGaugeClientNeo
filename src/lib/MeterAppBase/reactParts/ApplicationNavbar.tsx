@@ -40,7 +40,8 @@ type ApplicationNavbarProps =
         onOptionDialogSet: (content: OptionDialogFormContents) => void,
         onWSIntervalDialogSet: (wsInterval: number) => void,
         onFUELTripResetDialogSet: (reset: boolean) => void,
-        websocketStatusList: { [name: string]: WebsocketState }
+        websocketStatusList: { [name: string]: WebsocketState },
+        opacityOnMouseOff : string
     };
 
 export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) => {
@@ -53,7 +54,7 @@ export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) 
 
     return (
         <Fragment>
-            <Navbar bg="dark" fixed="top" variant="dark" expand="lg" style={{ transition: "opacity .35s", opacity: mouseOver ? "1.0" : "0.1" }} onMouseOver={() => setMouseOver(true)} onMouseLeave={() => setMouseOver(false)} >
+            <Navbar bg="dark" fixed="top" variant="dark" expand="lg" style={{ transition: "opacity .35s", opacity: mouseOver ? "1.0" : p.opacityOnMouseOff }} onMouseOver={() => setMouseOver(true)} onMouseLeave={() => setMouseOver(false)} >
                 <Navbar.Brand>Menu</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
