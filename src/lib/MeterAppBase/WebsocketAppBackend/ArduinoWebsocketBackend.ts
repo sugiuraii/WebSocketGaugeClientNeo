@@ -28,7 +28,7 @@ import { ILogger } from "../utils/ILogger";
 import { WebsocketState } from "./WebsocketState";
 
 export class ArduinoWebsocketBackend {
-   public static readonly DEFAULT_WS_PORT = 2015;
+   public static readonly DEFAULT_WS_PORT = 2016;
 
    private readonly logPrefix = "Arduino";
    private readonly WEBSOCKET_CHECK_INTERVAL = 1000;
