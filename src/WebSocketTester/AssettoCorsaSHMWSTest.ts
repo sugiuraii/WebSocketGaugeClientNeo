@@ -41,6 +41,7 @@ class AssettoCorsaSHMWSTest extends WebSocketTesterBase {
         super(webSocket);
         this.webSocket = webSocket;
         this.defaultPortNo = 2017;
+        this.defaultWebSocketPath = "/assettocorsa_ws";
     }
 
     protected assignButtonEvents(): void {
