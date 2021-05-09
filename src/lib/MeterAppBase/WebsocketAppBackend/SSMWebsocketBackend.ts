@@ -27,7 +27,8 @@ import { ILogger } from "../utils/ILogger";
 import { WebsocketState } from "./WebsocketState";
 
 export class SSMWebsocketBackend {
-   public static readonly DEFAULT_WS_PORT = 2013;
+   public static readonly DEFAULT_WS_PORT = 2016;
+   public static readonly WS_URL_PATH = "/ssm";
 
    private readonly logPrefix = "SSM";
    private readonly WEBSOCKET_CHECK_INTERVAL = 1000;

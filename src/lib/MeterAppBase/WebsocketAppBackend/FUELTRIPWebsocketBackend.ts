@@ -28,6 +28,7 @@ import { WebsocketState } from "./WebsocketState";
 
 export class FUELTRIPWebsocketBackend {
     public static readonly DEFAULT_WS_PORT = 2014;
+    public static readonly WS_URL_PATH = "/fueltrip";
 
     private readonly logPrefix = "FUELTRIP";
     private readonly WEBSOCKET_CHECK_INTERVAL = 1000;

@@ -28,6 +28,7 @@ import { WebsocketState } from "./WebsocketState";
 
 export class ELM327WebsocketBackend {
    public static readonly DEFAULT_WS_PORT = 2016;
+   public static readonly WS_URL_PATH = "/elm327";
 
    private readonly logPrefix = "ELM327";
    private readonly WEBSOCKET_CHECK_INTERVAL = 1000;

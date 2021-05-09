@@ -29,8 +29,9 @@ export abstract class WebSocketTesterBase
 {
     private webSocketBase: WebsocketCommon;
     
-    protected defaultPortNo = 2012;
+    protected defaultPortNo = 2016;
     protected readonly defaultSeverAddress = location.hostname;
+    protected defaultWebSocketPath = "";
     
     constructor(webSocketBase: WebsocketCommon)
     {
@@ -39,7 +40,7 @@ export abstract class WebSocketTesterBase
         
     public main(): void
     {
-        $('#serverURLBox').val("ws://" + this.defaultSeverAddress + ":" + this.defaultPortNo.toString() + "/");
+        $('#serverURLBox').val("ws://" + this.defaultSeverAddress + ":" + this.defaultPortNo.toString() + this.defaultWebSocketPath);
         this.assignButtonEvents();
         this.setParameterCodeSelectBox();
         this.registerWSEvents();

@@ -29,7 +29,8 @@ import { WebsocketState } from "./WebsocketState";
 
 export class DefiWebsocketBackend {
 
-   public static readonly DEFAULT_WS_PORT = 2012;
+   public static readonly DEFAULT_WS_PORT = 2016;
+   public static readonly WS_URL_PATH = "/defi";
 
    private readonly logPrefix = "Defi";
    private readonly WEBSOCKET_CHECK_INTERVAL = 1000;

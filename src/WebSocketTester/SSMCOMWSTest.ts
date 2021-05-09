@@ -42,7 +42,7 @@ export class SSMCOMWSTest extends WebSocketTesterBase {
         const webSocket = new SSMWebsocket();
         super(webSocket);
         this.webSocket = webSocket;
-        this.defaultPortNo = 2013;
+        this.defaultWebSocketPath = "/ssm";
     }
 
     protected setParameterCodeSelectBox(): void {

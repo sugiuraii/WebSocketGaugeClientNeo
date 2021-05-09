@@ -41,6 +41,7 @@ export class FUELTRIPWSTest extends WebSocketTesterBase {
         this.webSocket = webSocket;
 
         this.defaultPortNo = 2014;
+        this.defaultWebSocketPath = "/fueltrip";
     }
 
     protected setParameterCodeSelectBox(): void {
