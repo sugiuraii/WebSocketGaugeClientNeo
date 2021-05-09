@@ -29,7 +29,8 @@ import { WebsocketState } from "./WebsocketState";
 
 export class ArduinoWebsocketBackend {
    public static readonly DEFAULT_WS_PORT = 2016;
-
+   public static readonly WS_URL_PATH = "/arduino";
+   
    private readonly logPrefix = "Arduino";
    private readonly WEBSOCKET_CHECK_INTERVAL = 1000;
    private readonly WAITTIME_BEFORE_SENDWSSEND = 3000;

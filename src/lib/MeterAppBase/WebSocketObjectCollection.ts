@@ -104,7 +104,7 @@ export class WebsocketObjectCollection {
         const webSocketServerName = this.getWebsocketServerName();
 
         if (appOption.WebsocketEnableFlag.Defi) {
-            const wsURL = "ws://" + webSocketServerName + ":" + DefiWebsocketBackend.DEFAULT_WS_PORT.toString() + "/";
+            const wsURL = "ws://" + webSocketServerName + ":" + DefiWebsocketBackend.DEFAULT_WS_PORT.toString() + DefiWebsocketBackend.WS_URL_PATH;
             const state : WebsocketState = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
             this.websocketStates["Defi"] = state;
             this.defiWS = new DefiWebsocketBackend(wsURL, this.AppOption.ParameterCode.Defi.Array, logger, state);
@@ -113,7 +113,7 @@ export class WebsocketObjectCollection {
             this.defiWS = undefined;
 
         if (appOption.WebsocketEnableFlag.SSM) {
-            const wsURL = "ws://" + webSocketServerName + ":" + SSMWebsocketBackend.DEFAULT_WS_PORT.toString() + "/";
+            const wsURL = "ws://" + webSocketServerName + ":" + SSMWebsocketBackend.DEFAULT_WS_PORT.toString() + SSMWebsocketBackend.WS_URL_PATH;
             const state : WebsocketState = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
             this.websocketStates["SSM"] = state;
             this.ssmWS = new SSMWebsocketBackend(wsURL, this.AppOption.ParameterCode.SSM.Array, logger, state);
@@ -122,7 +122,7 @@ export class WebsocketObjectCollection {
             this.ssmWS = undefined;
 
         if (appOption.WebsocketEnableFlag.Arduino) {
-            const wsURL = "ws://" + webSocketServerName + ":" + ArduinoWebsocketBackend.DEFAULT_WS_PORT.toString() + "/";
+            const wsURL = "ws://" + webSocketServerName + ":" + ArduinoWebsocketBackend.DEFAULT_WS_PORT.toString() + ArduinoWebsocketBackend.WS_URL_PATH;
             const state : WebsocketState = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
             this.websocketStates["Arduino"] = state;
             this.arduinoWS = new ArduinoWebsocketBackend(wsURL, this.AppOption.ParameterCode.Arduino.Array, logger, state);
@@ -131,7 +131,7 @@ export class WebsocketObjectCollection {
             this.arduinoWS = undefined;
 
         if (appOption.WebsocketEnableFlag.ELM327) {
-            const wsURL = "ws://" + webSocketServerName + ":" + ELM327WebsocketBackend.DEFAULT_WS_PORT.toString() + "/";
+            const wsURL = "ws://" + webSocketServerName + ":" + ELM327WebsocketBackend.DEFAULT_WS_PORT.toString() + ELM327WebsocketBackend.WS_URL_PATH;
             const state : WebsocketState = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
             this.websocketStates["ELM327"] = state;
             this.elm327WS = new ELM327WebsocketBackend(wsURL, this.AppOption.ParameterCode.ELM327OBDII.Array, logger, state);
@@ -140,7 +140,7 @@ export class WebsocketObjectCollection {
             this.elm327WS = undefined;
 
         if (appOption.WebsocketEnableFlag.FUELTRIP) {
-            const wsURL = "ws://" + webSocketServerName + ":" + FUELTRIPWebsocketBackend.DEFAULT_WS_PORT.toString() + "/";
+            const wsURL = "ws://" + webSocketServerName + ":" + FUELTRIPWebsocketBackend.DEFAULT_WS_PORT.toString() + FUELTRIPWebsocketBackend.WS_URL_PATH;
             const state : WebsocketState = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
             this.websocketStates["FUELTRIP"] = state;
             const fuelTripSectSpan = appOption.FUELTRIPWebsocketOption.FUELTRIPSectSpan;
@@ -151,7 +151,7 @@ export class WebsocketObjectCollection {
             this.fueltripWS = undefined;
 
         if (appOption.WebsocketEnableFlag.AssettoCorsaSHM) {
-            const wsURL = "ws://" + webSocketServerName + ":" + AssettoCorsaSHMWebsocketBackend.DEFAULT_WS_PORT.toString() + "/";
+            const wsURL = "ws://" + webSocketServerName + ":" + AssettoCorsaSHMWebsocketBackend.DEFAULT_WS_PORT.toString() + AssettoCorsaSHMWebsocketBackend.WS_URL_PATH;
             const state : WebsocketState = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
             this.websocketStates["AssettoCorsaSHM"] = state;
             this.assettoCorsaWS = new AssettoCorsaSHMWebsocketBackend(wsURL,
