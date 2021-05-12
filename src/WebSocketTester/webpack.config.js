@@ -47,8 +47,8 @@ module.exports = {
     module: {
         rules: [
             // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-            {test: /\.tsx?$/, loader: 'ts-loader'},
-            {test: /\.html$/, loader: "file-loader?name=[name].[ext]"}
+            {test: /\.tsx?$/, use :["style-loader", {loader: 'ts-loader'}]},
+            {test: /\.html$/, use : ["file-loader", {loader: "file-loader?name=[name].[ext]"}]}
         ]
     }
 };
