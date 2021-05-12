@@ -28,11 +28,11 @@ import * as PIXI from 'pixi.js';
 export class BitmapTextOption {
     public position = new PIXI.Point(0, 0);
     public anchor = new PIXI.Point(0, 0);
-    public align = "left";
+    public align: PIXI.TextStyleAlign = "left";
     public fontName = "FreeSans_90px";
     public fontSize = 90;
 
-    constructor(position?: PIXI.Point, anchor?: PIXI.Point, align?: string) {
+    constructor(position?: PIXI.Point, anchor?: PIXI.Point, align?: PIXI.TextStyleAlign) {
         if (typeof (align) !== "undefined")
             this.align = align;
         if (position instanceof PIXI.Point)
@@ -54,10 +54,10 @@ export class BitmapTextOption {
 export class TextOption {
     public position = new PIXI.Point(0, 0);
     public anchor = new PIXI.Point(0, 0);
-    public align = "left";
+    public align: PIXI.TextStyleAlign = 'left';
     public fontSize = 12;
     public letterSpacing = 0;
-    constructor(position?: PIXI.Point, anchor?: PIXI.Point, align?: string, fontsize?: number, letterSpacing?: number) {
+    constructor(position?: PIXI.Point, anchor?: PIXI.Point, align?: PIXI.TextStyleAlign, fontsize?: number, letterSpacing?: number) {
         if (typeof (align) !== "undefined")
             this.align = align;
         if (typeof (fontsize) !== "undefined")
