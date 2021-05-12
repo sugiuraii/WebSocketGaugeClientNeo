@@ -61,14 +61,14 @@
     },
     "scripts": {
         "build-all": "npm-run-all --parallel build-WebSocketTester build-benchmark build-application build-partsTest build-index --serial build-thumbnails",
-        "build-WebSocketTester": "cd src/WebSocketTester && npx webpack",
-        "build-benchmark": "cd src/benchmark && npx webpack",
-        "build-application": "cd src/application && npx webpack",
-        "build-partsTest": "cd src/test/partsTest && npx webpack",
+        "build-WebSocketTester": "cd src/WebSocketTester && npx webpack --progress=profile",
+        "build-benchmark": "cd src/benchmark && npx webpack --progress=profile",
+        "build-application": "cd src/application && npx webpack --progress=profile",
+        "build-partsTest": "cd src/test/partsTest && npx webpack --progress=profile",
         "build-thumbnails": "cd public_html && node thumbnails.js",
-        "build-index": "cd src/index && npx webpack",
-        "debug-benchmark": "cd src/benchmark && npx webpack-dev-server",
-        "debug-application": "cd src/application && npx webpack-dev-server",
-        "debug-partsTest": "cd src/test/partsTest && npx webpack-dev-server"
+        "build-index": "cd src/index && npx webpack --progress=profile",
+        "debug-benchmark": "cd src/benchmark && npx webpack-dev-server --progress=profile",
+        "debug-application": "cd src/application && npx webpack-dev-server --progress=profile",
+        "debug-partsTest": "cd src/test/partsTest && npx webpack-dev-server --progress=profile"
     }
 }
