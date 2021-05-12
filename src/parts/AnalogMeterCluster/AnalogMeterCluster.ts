@@ -205,30 +205,30 @@ export class AnalogMeterCluster extends PIXI.Container {
 
         const gasMilageLabel = new BitmapTextNumericIndicator("0.00", { fontName: "DSEG14_Classic_45px", fontSize: 45, align: "right" });
         gasMilageLabel.NumberOfDecimalPlace = 2;
-        gasMilageLabel.anchor = new PIXI.Point(1, 0.5);
+        gasMilageLabel.anchor.set(1, 0.5);
         gasMilageLabel.position.set(495, 335);
         gasMilageLabel.scale.set(0.9);
         tachoContainer.addChild(gasMilageLabel);
 
         const tripLabel = new BitmapTextNumericIndicator("0.0", { fontName: "DSEG14_Classic_40px", fontSize: 40, align: "right" });
         tripLabel.NumberOfDecimalPlace = 1;
-        tripLabel.anchor = new PIXI.Point(1, 0.5);
-        tripLabel.position = new PIXI.Point(505, 378);
+        tripLabel.anchor.set(1, 0.5);
+        tripLabel.position.set(505, 378);
         tripLabel.text = "0.0";
         tripLabel.scale.set(0.9);
         tachoContainer.addChild(tripLabel);
 
         const fuelLabel = new BitmapTextNumericIndicator("0.00", { fontName: "DSEG14_Classic_40px", fontSize: 40, align: "right" });
         fuelLabel.NumberOfDecimalPlace = 2;
-        fuelLabel.anchor = new PIXI.Point(1, 0.5);
-        fuelLabel.position = new PIXI.Point(505, 420);
+        fuelLabel.anchor.set(1, 0.5);
+        fuelLabel.position.set(505, 420);
         fuelLabel.text = "0.00";
         fuelLabel.scale.set(0.9);
         tachoContainer.addChild(fuelLabel);
 
         const gearPosLabel = new BitmapTextNumericIndicator("N", { fontName: "DSEG14_Classic_115px", fontSize: 115, align: "center" });
-        gearPosLabel.anchor = new PIXI.Point(0.5, 0.5);
-        gearPosLabel.position = new PIXI.Point(358, 493);
+        gearPosLabel.anchor.set(0.5, 0.5);
+        gearPosLabel.position.set(358, 493);
         gearPosLabel.text = "N";
         gearPosLabel.scale.set(0.9);
         tachoContainer.addChild(gearPosLabel);
@@ -251,7 +251,7 @@ export class AnalogMeterCluster extends PIXI.Container {
 
         const speedLabel = this.speedLabel = new BitmapTextNumericIndicator(speedValDefault.toFixed(0), { fontName: "DSEG14_Classic_60px", fontSize: 60, align: "center" });
         speedLabel.NumberOfDecimalPlace = 0;
-        speedLabel.anchor = new PIXI.Point(1, 0.5);
+        speedLabel.anchor.set(1, 0.5);
         speedLabel.position.set(355, 407);
         speedLabel.scale.set(0.9);
         speedMeterContainer.addChild(speedLabel);
