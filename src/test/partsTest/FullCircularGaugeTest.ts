@@ -51,9 +51,9 @@ function main() {
     for (let j = 0; j < 6; j++) {
         for (let i = 0; i < 6; i++) {
             gaugeArray.push(new BoostGaugePanel);
-            gaugeArray[index].pivot = new PIXI.Point(200, 200);
+            gaugeArray[index].pivot.set(200, 200);
             gaugeArray[index].scale.set(0.6, 0.6);
-            gaugeArray[index].position = new PIXI.Point(240 * i + 150, 240 * j + 150);
+            gaugeArray[index].position.set(240 * i + 150, 240 * j + 150);
             gaugeArray[index].Value = 0;
             app.stage.addChild(gaugeArray[index]);
             index++;

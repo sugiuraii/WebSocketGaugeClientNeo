@@ -141,17 +141,17 @@ export class MilageGraphPanel extends PIXI.Container {
         this.sectGasMilageBar["5min"].position.set(360, 17);
 
         this.tripLabel = new PIXI.BitmapText("0.0", { fontName: "FreeSans_45px", fontSize: 45, align: "right" });
-        this.tripLabel.anchor = new PIXI.Point(1, 1);
+        this.tripLabel.anchor.set(1, 1);
         this.tripLabel.position.set(600, 115);
         super.addChild(this.tripLabel);
 
         this.fuelLabel = new PIXI.BitmapText("0.00", { fontName: "FreeSans_45px", fontSize: 45, align: "right" });
-        this.fuelLabel.anchor = new PIXI.Point(1, 1);
+        this.fuelLabel.anchor.set(1, 1);
         this.fuelLabel.position.set(600, 170);
         super.addChild(this.fuelLabel);
 
         this.gasMilageLabel = new PIXI.BitmapText("0.00", { fontName: "FreeSans_68px", fontSize: 68, align: "right" });
-        this.gasMilageLabel.anchor = new PIXI.Point(1, 1);
+        this.gasMilageLabel.anchor.set(1, 1);
         this.gasMilageLabel.position.set(625, 270);
         super.addChild(this.gasMilageLabel);
     }

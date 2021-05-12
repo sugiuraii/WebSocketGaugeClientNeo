@@ -50,7 +50,7 @@ export class MeterApplication {
         const webStorage = new WebstorageHandler();
 
         const preserveDrawingBuffer = localStorage.getItem("preserveDrawingBuffer") === "true" ? true : false;
-        const pixiApp = new PIXI.Application({ width: this.Option.width, height: this.Option.height, preserveDrawingBuffer: preserveDrawingBuffer, transparent: this.Option.TransparentAppBackground })
+        const pixiApp = new PIXI.Application({ width: this.Option.width, height: this.Option.height, preserveDrawingBuffer: preserveDrawingBuffer, backgroundAlpha: this.Option.TransparentAppBackground ? 0 : 1 })
         // Append PIXI.js application to document body
         pixiApp.view.style.width = "100vw";
         pixiApp.view.style.touchAction = "auto";
@@ -81,7 +81,7 @@ export class MeterApplication {
                     onFUELTripResetDialogSet={() => webSocketCollection.FUELTRIPWS.SendReset()}
                     logList={this.Logger.Content}
                     websocketStatusList={webSocketCollection.WebsocketStates}
-                    opacityOnMouseOff={this.Option.TransparentAppBackground? "0" : "0.1"}
+                    opacityOnMouseOff={this.Option.TransparentAppBackground ? "0" : "0.1"}
                 />
                 <PIXIApplication application={pixiApp} />
             </Fragment>
