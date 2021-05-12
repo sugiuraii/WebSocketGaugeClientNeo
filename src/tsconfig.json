@@ -8,6 +8,7 @@
         "jsx": "react",
         // Strict,
         "strict": true,
+        "moduleResolution": "node",
         "noUnusedParameters":true,
         "lib":["dom", "es2017"]
     }

@@ -25,30 +25,30 @@
 module.exports = {
     mode: "development",
     entry:
-            {
-                "ArduinoCOMWSTest": './ArduinoCOMWSTest.ts',
-                "DefiCOMWSTest": './DefiCOMWSTest.ts',
-                "ELM327COMWSTest": './ELM327COMWSTest.ts',
-                "SSMCOMWSTest": './SSMCOMWSTest.ts',
-                "FUELTRIPWSTest": './FUELTRIPWSTest.ts',
-                "DefiCOMWSInterpolateTest": './DefiCOMWSInterpolateTest.ts',
-                "AssettoCorsaSHMWSTest": './AssettoCorsaSHMWSTest.ts'
-            },
+    {
+        "ArduinoCOMWSTest": './ArduinoCOMWSTest.ts',
+        "DefiCOMWSTest": './DefiCOMWSTest.ts',
+        "ELM327COMWSTest": './ELM327COMWSTest.ts',
+        "SSMCOMWSTest": './SSMCOMWSTest.ts',
+        "FUELTRIPWSTest": './FUELTRIPWSTest.ts',
+        "DefiCOMWSInterpolateTest": './DefiCOMWSInterpolateTest.ts',
+        "AssettoCorsaSHMWSTest": './AssettoCorsaSHMWSTest.ts'
+    },
     devtool: "source-map",
     output:
-            {
-                path: __dirname + "/../../public_html/WebSocketTester/",
-                filename: "js/[name].js"
-            },
+    {
+        path: __dirname + "/../../public_html/WebSocketTester/",
+        filename: "js/[name].js"
+    },
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.
-        extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
+        extensions: ['.ts', '.tsx', '.js']
     },
     module: {
         rules: [
             // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-            {test: /\.tsx?$/, use :["style-loader", {loader: 'ts-loader'}]},
-            {test: /\.html$/, use : ["file-loader", {loader: "file-loader?name=[name].[ext]"}]}
+            { test: /\.ts?$/, use: "ts-loader" },
+            { test: /\.html$/, use: "file-loader?name=[name].[ext]"}
         ]
     }
 };
