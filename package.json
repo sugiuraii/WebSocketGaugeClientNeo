@@ -67,8 +67,9 @@
         "build-partsTest": "cd src/test/partsTest && npx webpack --progress=profile",
         "build-thumbnails": "cd public_html && node thumbnails.js",
         "build-index": "cd src/index && npx webpack --progress=profile",
-        "debug-benchmark": "cd src/benchmark && npx webpack-dev-server --progress=profile",
-        "debug-application": "cd src/application && npx webpack-dev-server --progress=profile",
-        "debug-partsTest": "cd src/test/partsTest && npx webpack-dev-server --progress=profile"
+        "debug-server-benchmark": "cd src/benchmark && npx webpack-dev-server --progress=profile",
+        "debug-server-application": "cd src/application && npx webpack-dev-server --progress=profile",
+        "debug-server-partsTest": "cd src/test/partsTest && npx webpack-dev-server --progress=profile",
+        "debug-watch-application": "cd src/application && npx webpack --watch --progress=profile"
     }
 }
