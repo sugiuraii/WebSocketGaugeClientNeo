@@ -10,6 +10,7 @@
 /public_html/application/
 /public_html/benchmark/
 /public_html/partsTest/
+/public_html/widget/
 /node_modules/
 /nbproject/private/
 /package-lock.json
