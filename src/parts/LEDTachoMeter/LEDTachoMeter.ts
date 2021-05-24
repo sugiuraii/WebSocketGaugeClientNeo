@@ -136,27 +136,27 @@ export class LEDTachoMeter extends PIXI.Container {
         super.addChild(tachoProgressBar);
 
         const speedLabel = this.speedLabel = new BitmapTextNumericIndicator(speedValDefault.toFixed(0), { fontName: "DSEG14_Classic_88px", fontSize: 88, align: "right" });
-        speedLabel.anchor = new PIXI.Point(1, 0.5);
+        speedLabel.anchor.set(1, 0.5);
         speedLabel.position.set(410, 230);
         super.addChild(speedLabel);
 
         const gasMilageLabel = this.gasMilageLabel = new BitmapTextNumericIndicator(gasMilageValDefault.toFixed(2), { fontName: "DSEG14_Classic_45px", fontSize: 45, align: "right" });
-        gasMilageLabel.anchor = new PIXI.Point(1, 0.5);
+        gasMilageLabel.anchor.set(1, 0.5);
         gasMilageLabel.position.set(310, 360);
         super.addChild(gasMilageLabel);
 
         const tripLabel = this.tripLabel = new BitmapTextNumericIndicator(tripValDefault.toFixed(1), { fontName: "DSEG14_Classic_30px", fontSize: 30, align: "right" });
-        tripLabel.anchor = new PIXI.Point(1, 0.5);
+        tripLabel.anchor.set(1, 0.5);
         tripLabel.position.set(510, 355);
         super.addChild(tripLabel);
 
         const fuelLabel = this.fuelLabel = new BitmapTextNumericIndicator(fuelValDefault.toFixed(2), { fontName: "DSEG14_Classic_30px", fontSize: 30, align: "right" });
-        fuelLabel.anchor = new PIXI.Point(1, 0.5);
+        fuelLabel.anchor.set(1, 0.5);
         fuelLabel.position.set(510, 395);
         super.addChild(fuelLabel);
 
         const gearPosLabel = this.gearPosLabel = new BitmapTextNumericIndicator("N", { fontName: "DSEG14_Classic_100px", fontSize: 100, align: "right" });
-        gearPosLabel.anchor = new PIXI.Point(1, 0.5);
+        gearPosLabel.anchor.set(1, 0.5);
         gearPosLabel.text = "N";
         gearPosLabel.position.set(410, 495);
         super.addChild(gearPosLabel);

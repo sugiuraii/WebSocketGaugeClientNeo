@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-export enum WebsocketStatus {
+export enum WebsocketConnectionStatus {
     Connecting = WebSocket.CONNECTING,
     Open = WebSocket.OPEN,
     Closing = WebSocket.CLOSING,

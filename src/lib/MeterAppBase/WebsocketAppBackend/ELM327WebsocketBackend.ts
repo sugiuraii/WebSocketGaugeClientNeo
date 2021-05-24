@@ -23,11 +23,12 @@
  */
 
 import { ELM327COMWebsocket, OBDIIParameterCode, ReadModeCode } from "../../WebSocket/WebSocketCommunication";
-import { ILogWindow } from "../interfaces/ILogWindow";
-import { IStatusIndicator } from "../interfaces/IStatusIndicator";
+import { ILogger } from "../utils/ILogger";
+import { WebsocketState } from "./WebsocketState";
 
 export class ELM327WebsocketBackend {
    public static readonly DEFAULT_WS_PORT = 2016;
+   public static readonly WS_URL_PATH = "/elm327";
 
    private readonly logPrefix = "ELM327";
    private readonly WEBSOCKET_CHECK_INTERVAL = 1000;
@@ -38,21 +39,21 @@ export class ELM327WebsocketBackend {
 
    private readonly elm327WS: ELM327COMWebsocket;
    private readonly parameterCodeList: { code: OBDIIParameterCode, readmode: ReadModeCode }[];
-   private readonly loggerWindow: ILogWindow;
-   private readonly statusIndicator: IStatusIndicator;
+   private readonly logger: ILogger;
+   private readonly state: WebsocketState;
 
    private readonly webSocketServerURL: string;
 
    private indicatorUpdateIntervalID = 0;
 
-   constructor(serverurl: string, paramCode: { code: OBDIIParameterCode, readmode: ReadModeCode }[], loggerWindow: ILogWindow, statusIndicator: IStatusIndicator) {
+   constructor(serverurl: string, paramCode: { code: OBDIIParameterCode, readmode: ReadModeCode }[], logger: ILogger, state: WebsocketState) {
       this.elm327WS = new ELM327COMWebsocket(serverurl);
       this.parameterCodeList = paramCode;
-      this.loggerWindow = loggerWindow;
-      this.statusIndicator = statusIndicator;
+      this.logger = logger;
+      this.state = state;
       this.webSocketServerURL = this.elm327WS.URL;
 
-      this.elm327WS.OnWebsocketError = (message: string) => this.loggerWindow.appendLog(this.logPrefix + " websocket error : " + message);
+      this.elm327WS.OnWebsocketError = (message: string) => this.logger.appendLog(this.logPrefix + " websocket error : " + message);
    }
 
    public Run(): void {
@@ -74,16 +75,16 @@ export class ELM327WebsocketBackend {
    }
 
    private setStatusIndicator() {
-      this.statusIndicator.SetStatus(this.elm327WS.getReadyState());
+      this.state.connectionStatus = this.elm327WS.getReadyState();
    }
 
    private connectWebSocket() {
-      const LogWindow = this.loggerWindow;
+      const logger = this.logger;
       const webSocketObj = this.elm327WS;
       const logPrefix = this.logPrefix;
 
       webSocketObj.OnWebsocketOpen = () => {
-         LogWindow.appendLog(logPrefix + " is connected. SendWSSend/Interval after " + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
+         logger.appendLog(logPrefix + " is connected. SendWSSend/Interval after " + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
          window.setTimeout(() => {
             //SendWSSend
             this.parameterCodeList.forEach(item => {
@@ -100,21 +101,21 @@ export class ELM327WebsocketBackend {
       };
 
       webSocketObj.OnWebsocketClose = () => {
-         LogWindow.appendLog(logPrefix + " is disconnected. Reconnect after " + this.WAITTIME_BEFORE_RECONNECT.toString() + "msec...");
+         logger.appendLog(logPrefix + " is disconnected. Reconnect after " + this.WAITTIME_BEFORE_RECONNECT.toString() + "msec...");
          window.setTimeout(() => webSocketObj.Connect(), this.WAITTIME_BEFORE_RECONNECT);
       };
 
       webSocketObj.OnWebsocketError = (message: string) => {
-         LogWindow.appendLog(logPrefix + " websocket error : " + message);
+         logger.appendLog(logPrefix + " websocket error : " + message);
       }
       webSocketObj.OnRESPacketReceived = (message: string) => {
-         LogWindow.appendLog(logPrefix + " RES message : " + message);
+         logger.appendLog(logPrefix + " RES message : " + message);
       }
       webSocketObj.OnERRPacketReceived = (message: string) => {
-         LogWindow.appendLog(logPrefix + " ERR message : " + message);
+         logger.appendLog(logPrefix + " ERR message : " + message);
       }
 
-      LogWindow.appendLog(logPrefix + " connect...");
+      logger.appendLog(logPrefix + " connect...");
       webSocketObj.Connect();
    }
 }

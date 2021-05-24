@@ -42,7 +42,7 @@ export class ELM327COMWSTest extends WebSocketTesterBase {
         const webSocket = new ELM327COMWebsocket();
         super(webSocket);
         this.webSocket = webSocket;
-        this.defaultPortNo = 2016;
+        this.defaultWebSocketPath = "/elm327";
     }
 
     protected setParameterCodeSelectBox(): void {

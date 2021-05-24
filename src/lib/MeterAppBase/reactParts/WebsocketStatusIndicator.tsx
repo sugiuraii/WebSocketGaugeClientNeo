@@ -24,18 +24,19 @@
 
 import React, { FunctionComponent } from 'react';
 import { Badge } from 'react-bootstrap';
-import { WebsocketStatus } from '../WebsocketAppBackend/WebsocketStatus'
+import { WebsocketConnectionStatus } from '../WebsocketAppBackend/WebsocketConnectionStatus'
+import { WebsocketState } from '../WebsocketAppBackend/WebsocketState';
 
 type WebsocketStatusIndicatorProps =
     {
-        statusList: { [name: string]: { isEnabled: boolean, status: WebsocketStatus } }
+        statusList: { [name: string]: WebsocketState }
     }
 
 export const WebsocketStatusIndicator: FunctionComponent<WebsocketStatusIndicatorProps> = (p) => {
     const badges: JSX.Element[] = [];
     for (const name in p.statusList) {
-        const variant = getBadgeVariant(p.statusList[name].isEnabled, p.statusList[name].status);
-        badges.push(<Badge variant={variant}>{name}</Badge>);
+        const variant = getBadgeVariant(p.statusList[name].isEnabled, p.statusList[name].connectionStatus);
+        badges.push(<Badge key={name} variant={variant}>{name}</Badge>);
     }
     return (
         <div>
@@ -44,18 +45,18 @@ export const WebsocketStatusIndicator: FunctionComponent<WebsocketStatusIndicato
     );
 }
 
-function getBadgeVariant(isEnabled: boolean, status: WebsocketStatus): string {
+function getBadgeVariant(isEnabled: boolean, status: WebsocketConnectionStatus): string {
     if (!isEnabled)
         return "dark";
     else {
         switch (status) {
-            case WebsocketStatus.Connecting:
+            case WebsocketConnectionStatus.Connecting:
                 return "info";
-            case WebsocketStatus.Open:
+            case WebsocketConnectionStatus.Open:
                 return "success";
-            case WebsocketStatus.Closing:
+            case WebsocketConnectionStatus.Closing:
                 return "warning";
-            case WebsocketStatus.Closed:
+            case WebsocketConnectionStatus.Closed:
                 return "danger";
             default:
                 throw Error("Unknown websocket stauts is assigned to WebsocketIndicator.")

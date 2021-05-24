@@ -26,14 +26,20 @@ import React, { FunctionComponent, useState } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
 
 type WSIntervalOptionDialogProps = {
-    show : boolean,
-    interval : number,
-    onCancel : () => void,
-    onSet : (newInterval : number) => void
+    show: boolean,
+    interval: number,
+    onCancel: () => void,
+    onSet: (newInterval: number) => void
 }
 
-export const WSIntervalOptionDialog : FunctionComponent<WSIntervalOptionDialogProps> = (p) => {
+export const WSIntervalOptionDialog: FunctionComponent<WSIntervalOptionDialogProps> = (p) => {
     const [interval, setInterval] = useState(p.interval);
+    const handleCancel = () => {
+        // Reset field on cancel.
+        setInterval(p.interval);
+        p.onCancel();
+    };
+    const handleSet = () => p.onSet(interval);
 
     return (
         <Modal show={p.show} >
@@ -43,14 +49,14 @@ export const WSIntervalOptionDialog : FunctionComponent<WSIntervalOptionDialogPr
             <Modal.Body>
                 <Form>
                     <Form.Group controlId="formWSInterval">
-                        <Form.Label>wsIntervalInput</Form.Label>
-                        <Form.Control type="number" min={0} value={p.interval} onChange={(evt) => setInterval(Number(evt.target.value))} />
+                        <Form.Label>Defi/Arduino websocket message interval</Form.Label>
+                        <Form.Control type="number" min={0} value={interval} onChange={(evt) => setInterval(Number(evt.target.value))} />
                     </Form.Group>
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={p.onCancel}>Cancel</Button>
-                <Button variant="primary" onClick={() => p.onSet(interval)}>Set</Button>
+                <Button variant="secondary" onClick={handleCancel}>Cancel</Button>
+                <Button variant="primary" onClick={handleSet}>Set</Button>
             </Modal.Footer>
         </Modal>
     );

@@ -24,10 +24,22 @@
 
 require('./index.html');
 
-import {indexNavBar} from '../lib/MeterAppBase/bootstrapParts/indexNavBar'
+import 'bootswatch/dist/slate/bootstrap.min.css';
 
-window.onload = () =>
-{
-    const indexNavBar1 = new indexNavBar();
-    indexNavBar1.create();
+import { IndexNavbar } from '../lib/MeterAppBase/reactParts/IndexNaxbar'
+import React  from 'react'
+import ReactDOM from 'react-dom'
+import { WebstorageHandler } from '../lib/MeterAppBase/Webstorage/WebstorageHandler';
+
+window.onload = () => {
+    const webStorage = new WebstorageHandler();
+
+    // Crete react components
+    const rootElement = document.getElementById('root');
+    ReactDOM.render(<IndexNavbar defaultOptionDialogContent={{ host: webStorage.WebsocketServerHome, wsHostSameAsHttpHost: webStorage.WSServerSameAsHttp, pixijsPreserveDrawingBuffer: webStorage.PreserveDrawingBuffer }}
+        onOptionDialogSet={c => {
+            webStorage.PreserveDrawingBuffer = c.pixijsPreserveDrawingBuffer;
+            webStorage.WSServerSameAsHttp = c.wsHostSameAsHttpHost;
+            webStorage.WebsocketServerHome = c.host;
+        }}/>, rootElement);
 }

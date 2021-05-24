@@ -23,11 +23,12 @@
  */
 
 import { FUELTRIPWebsocket } from "../../WebSocket/WebSocketCommunication";
-import { ILogWindow } from "../interfaces/ILogWindow";
-import { IStatusIndicator } from "../interfaces/IStatusIndicator";
+import { ILogger } from "../utils/ILogger";
+import { WebsocketState } from "./WebsocketState";
 
 export class FUELTRIPWebsocketBackend {
     public static readonly DEFAULT_WS_PORT = 2014;
+    public static readonly WS_URL_PATH = "/fueltrip";
 
     private readonly logPrefix = "FUELTRIP";
     private readonly WEBSOCKET_CHECK_INTERVAL = 1000;
@@ -36,8 +37,8 @@ export class FUELTRIPWebsocketBackend {
 
     private readonly fueltripWS: FUELTRIPWebsocket;
 
-    private readonly loggerWindow: ILogWindow;
-    private readonly statusIndicator: IStatusIndicator;
+    private readonly logger: ILogger;
+    private readonly state: WebsocketState;
 
     private readonly fueltripSectStoreMax: number;
     private readonly fueltripSectSpan: number;
@@ -46,15 +47,15 @@ export class FUELTRIPWebsocketBackend {
 
     private indicatorUpdateIntervalID  = 0;
 
-    constructor(serverurl: string, loggerWindow: ILogWindow, fueltripSectSpan: number, fueltripSectStoremax: number, statusIndicator: IStatusIndicator) {
+    constructor(serverurl: string, logger: ILogger, fueltripSectSpan: number, fueltripSectStoremax: number, state: WebsocketState) {
         this.fueltripWS = new FUELTRIPWebsocket(serverurl);
-        this.loggerWindow = loggerWindow;
-        this.statusIndicator = statusIndicator;
+        this.logger = logger;
+        this.state = state;
         this.webSocketServerURL = this.fueltripWS.URL;
         this.fueltripSectSpan = fueltripSectSpan;
         this.fueltripSectStoreMax = fueltripSectStoremax;
 
-        this.fueltripWS.OnWebsocketError = (message: string) => this.loggerWindow.appendLog(this.logPrefix + " websocket error : " + message);
+        this.fueltripWS.OnWebsocketError = (message: string) => this.logger.appendLog(this.logPrefix + " websocket error : " + message);
     }
 
     public Run(): void {
@@ -66,7 +67,9 @@ export class FUELTRIPWebsocketBackend {
         clearInterval(this.indicatorUpdateIntervalID);
         this.fueltripWS.Close();
     }
-
+    public SendReset(): void {
+        this.fueltripWS.SendReset();
+    }
     public getMomentGasMilage(timestamp: number): number {
         return this.fueltripWS.getMomentGasMilage(timestamp);
     }
@@ -95,18 +98,18 @@ export class FUELTRIPWebsocketBackend {
         return this.fueltripWS.getSectGasMilage(sectIndex);
     }
     private setStatusIndicator(): void {
-        this.statusIndicator.SetStatus(this.fueltripWS.getReadyState());
+        this.state.connectionStatus = this.fueltripWS.getReadyState();
     }
 
     private connectWebSocket(): void {
         const wsObj = this.fueltripWS;
-        const logWindow = this.loggerWindow;
+        const logger = this.logger;
         const logPrefix = this.logPrefix;
         const sectSpan = this.fueltripSectSpan;
         const sectStoreMax = this.fueltripSectStoreMax;
 
         wsObj.OnWebsocketOpen = () => {
-            logWindow.appendLog(logPrefix + " is connected. Send SECT_SPAN and SECT_STOREMAX after " + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " ms.");
+            logger.appendLog(logPrefix + " is connected. Send SECT_SPAN and SECT_STOREMAX after " + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " ms.");
             window.setTimeout(() => {
                 wsObj.SendSectSpan(sectSpan);
                 wsObj.SendSectStoreMax(sectStoreMax);
@@ -115,21 +118,21 @@ export class FUELTRIPWebsocketBackend {
         }
 
         wsObj.OnWebsocketClose = () => {
-            logWindow.appendLog(logPrefix + " is disconnected. Reconnect after " + this.WAITTIME_BEFORE_RECONNECT.toString() + "msec...");
+            logger.appendLog(logPrefix + " is disconnected. Reconnect after " + this.WAITTIME_BEFORE_RECONNECT.toString() + "msec...");
             window.setTimeout(() => wsObj.Connect(), this.WAITTIME_BEFORE_RECONNECT);
         }
 
         wsObj.OnWebsocketError = (message: string) => {
-            logWindow.appendLog(logPrefix + " websocket error : " + message);
+            logger.appendLog(logPrefix + " websocket error : " + message);
         }
         wsObj.OnRESPacketReceived = (message: string) => {
-            logWindow.appendLog(logPrefix + " RES message : " + message);
+            logger.appendLog(logPrefix + " RES message : " + message);
         }
         wsObj.OnERRPacketReceived = (message: string) => {
-            logWindow.appendLog(logPrefix + " ERR message : " + message);
+            logger.appendLog(logPrefix + " ERR message : " + message);
         }
 
-        logWindow.appendLog(logPrefix + " connect...");
+        logger.appendLog(logPrefix + " connect...");
         wsObj.Connect();
     }
 }

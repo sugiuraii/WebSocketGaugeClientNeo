@@ -21,8 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { WebsocketStatus } from '../WebsocketAppBackend/WebsocketStatus'
 
-export interface IStatusIndicator {
-    SetStatus(status: WebsocketStatus) : void;
+import { ILogger } from "./ILogger";
+
+export class StringListLogger implements ILogger {
+    private readonly content = Array<string>();
+    
+    public get Content() : string[] { return this.content }
+
+    public clearLog(): void {
+        this.content.splice(0);
+    }
+
+    appendLog(message: string): void {
+        this.content.push(message);
+    }
+
 }

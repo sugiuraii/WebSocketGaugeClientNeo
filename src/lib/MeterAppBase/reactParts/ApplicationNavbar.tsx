@@ -30,7 +30,7 @@ import { LogDialog } from './LogDialog'
 import { WebsocketStatusIndicator } from './WebsocketStatusIndicator'
 import React, { FunctionComponent, useState, Fragment } from 'react';
 import { Navbar, Nav } from 'react-bootstrap'
-import { WebsocketStatus } from '../WebsocketAppBackend/WebsocketStatus';
+import { WebsocketState } from '../WebsocketAppBackend/WebsocketState'
 
 type ApplicationNavbarProps =
     {
@@ -40,7 +40,8 @@ type ApplicationNavbarProps =
         onOptionDialogSet: (content: OptionDialogFormContents) => void,
         onWSIntervalDialogSet: (wsInterval: number) => void,
         onFUELTripResetDialogSet: (reset: boolean) => void,
-        websocketStatusList: { [name: string]: { isEnabled: boolean, status: WebsocketStatus } }
+        websocketStatusList: { [name: string]: WebsocketState },
+        opacityOnMouseOff : string
     };
 
 export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) => {
@@ -49,26 +50,30 @@ export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) 
     const [showFUELTripResetDialog, setShowFUELTripResetDialog] = useState(false);
     const [showLogDialog, setShowLogDialog] = useState(false);
 
+    const [mouseOver, setMouseOver] = useState(false);
+
     return (
         <Fragment>
-            <Navbar bg="dark" expand="lg">
+            <Navbar bg="dark" fixed="top" variant="dark" expand="lg" style={{ transition: "opacity .35s", opacity: mouseOver ? "1.0" : p.opacityOnMouseOff }} onMouseOver={() => setMouseOver(true)} onMouseLeave={() => setMouseOver(false)} >
                 <Navbar.Brand>Menu</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href="../index.html">Home</Nav.Link>
-                    </Nav>
-                    <Nav className="mr-auto">
-                        <Nav.Link onClick={() => setShowOptionDialog(true)}>Option</Nav.Link>
-                    </Nav>
-                    <Nav className="mr-auto">
-                        <Nav.Link onClick={() => setShowWSIntervalDialog(true)}>WSInterval</Nav.Link>
-                    </Nav>
-                    <Nav className="mr-auto">
-                        <Nav.Link onClick={() => setShowFUELTripResetDialog(true)}>Fuel/Trip reset</Nav.Link>
-                    </Nav>
-                    <Nav className="mr-auto">
-                        <Nav.Link onClick={() => setShowLogDialog(true)}>Log</Nav.Link>
+                        <Nav.Item>
+                            <Nav.Link href="../index.html">Home</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link onClick={() => setShowOptionDialog(true)}>Option</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link onClick={() => setShowWSIntervalDialog(true)}>WSInterval</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link onClick={() => setShowFUELTripResetDialog(true)}>Fuel/Trip reset</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link onClick={() => setShowLogDialog(true)}>Log</Nav.Link>
+                        </Nav.Item>
                     </Nav>
                     <WebsocketStatusIndicator statusList={p.websocketStatusList} />
                 </Navbar.Collapse>

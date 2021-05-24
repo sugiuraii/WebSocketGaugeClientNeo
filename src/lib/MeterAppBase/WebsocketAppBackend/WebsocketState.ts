@@ -22,37 +22,10 @@
  * THE SOFTWARE.
  */
 
-import React, { FunctionComponent, Fragment } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";
 
-type LogDialogProps =
-    {
-        show: boolean,
-        logList: string[],
-        onClose: () => void;
-    }
-
-export const LogDialog: FunctionComponent<LogDialogProps> = (p) => {
-    const logContents: JSX.Element[] = [];
-    let key = 0;
-    p.logList.forEach(s => {
-        logContents.push(<Fragment key={key}>{s}<br /></Fragment>);
-        key++;
-    });
-
-    return (
-        <Modal show={p.show} >
-            <Modal.Header closeButton onHide={p.onClose}>
-                <Modal.Title>Log</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <p>{logContents}</p>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={p.onClose}>Close</Button>
-            </Modal.Footer>
-        </Modal>
-    );
-}
-
-export default LogDialog;
+ export type WebsocketState = 
+ {
+     isEnabled: boolean;
+     connectionStatus: WebsocketConnectionStatus;
+ };

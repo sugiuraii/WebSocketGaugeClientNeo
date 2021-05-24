@@ -22,37 +22,48 @@
  * THE SOFTWARE.
  */
 
-import React, { FunctionComponent, Fragment } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import React, { FunctionComponent, useEffect, useRef } from "react";
+import * as PIXI from "pixi.js";
 
-type LogDialogProps =
-    {
-        show: boolean,
-        logList: string[],
-        onClose: () => void;
-    }
-
-export const LogDialog: FunctionComponent<LogDialogProps> = (p) => {
-    const logContents: JSX.Element[] = [];
-    let key = 0;
-    p.logList.forEach(s => {
-        logContents.push(<Fragment key={key}>{s}<br /></Fragment>);
-        key++;
-    });
-
-    return (
-        <Modal show={p.show} >
-            <Modal.Header closeButton onHide={p.onClose}>
-                <Modal.Title>Log</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <p>{logContents}</p>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={p.onClose}>Close</Button>
-            </Modal.Footer>
-        </Modal>
-    );
+type PIXIApplicationProps =
+{
+    application: PIXI.Application
 }
 
-export default LogDialog;
+export const PIXIApplication: FunctionComponent<PIXIApplicationProps> = (p) => {
+    const pixiAppRef = useRef<HTMLDivElement>(null);
+
+    // Called on unmount
+    const unmount = () => {
+        if (!pixiAppRef.current)
+            return;
+        while (pixiAppRef.current.firstChild) {
+            pixiAppRef.current.removeChild(pixiAppRef.current.firstChild);
+        }
+    };
+
+    // Mount pixi.js application view to DOM
+    const addAppView = () => {
+        const app = p.application;
+        if (!pixiAppRef.current)
+            return;
+        pixiAppRef.current.appendChild(app.view);
+    };
+
+    /* eslint-disable react-hooks/exhaustive-deps */
+    // Called on mounr
+    useEffect(() => {
+        if (!pixiAppRef.current)
+            return;
+        addAppView();
+        return unmount;
+    }, []);
+
+    return (
+        <div>
+            <div ref={pixiAppRef} />
+        </div>
+    );
+};
+
+export default PIXIApplication;

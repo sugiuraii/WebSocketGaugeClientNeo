@@ -27,18 +27,18 @@ var webpack = require('webpack');
 module.exports = {
     mode: "development",
     entry:
-            {
-                "index": './index.ts'
-            },
+    {
+        "index": './index.tsx'
+    },
     devtool: "source-map",
     output:
-            {
-                path: __dirname + "/../../public_html/",
-                filename: "./js/[name].js"
-            },
+    {
+        path: __dirname + "/../../public_html/",
+        filename: "./js/[name].js"
+    },
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.
-        extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
+        extensions: ['.ts', '.tsx', '.js']
     },
     plugins: [
         new webpack.ProvidePlugin({
@@ -50,34 +50,34 @@ module.exports = {
     ],
     module: {
         rules: [
-            {test: /\.tsx?$/, loader: 'ts-loader'},
-            {test: /\.png$/, loader: "file-loader?name=img/[name].[ext]"},
-            {test: /\.html$/, loader: "file-loader?name=[name].[ext]"},
-            { test: /\.css$/, loader: 'style-loader!css-loader' },
-            { test: /\.svg$/, loader: 'url-loader?mimetype=image/svg+xml' },
-            { test: /\.woff$/, loader: 'url-loader?mimetype=application/font-woff' },
-            { test: /\.woff2$/, loader: 'url-loader?mimetype=application/font-woff' },
-            { test: /\.eot$/, loader: 'url-loader?mimetype=application/font-woff' },
-            { test: /\.ttf$/, loader: 'url-loader?mimetype=application/font-woff' },
+            { test: /\.tsx?$/, use: 'ts-loader' },
+            { test: /\.png$/, use: "file-loader?name=img/[name].[ext]" },
+            { test: /\.html$/, use: "file-loader?name=[name].[ext]" },
+            { test: /\.css$/, use: [{ loader: 'style-loader' }, { loader: 'css-loader' }]},
+            { test: /\.svg$/, use: 'url-loader?mimetype=image/svg+xml' },
+            { test: /\.woff$/, use: 'url-loader?mimetype=application/font-woff' },
+            { test: /\.woff2$/, use: 'url-loader?mimetype=application/font-woff' },
+            { test: /\.eot$/, use: 'url-loader?mimetype=application/font-woff' },
+            { test: /\.ttf$/, use: 'url-loader?mimetype=application/font-woff' },
             {
                 test: /\.(scss)$/,
                 use: [{
-                        loader: 'style-loader' // inject CSS to page
-                    }, {
-                        loader: 'css-loader' // translates CSS into CommonJS modules
-                    }, {
-                        loader: 'postcss-loader', // Run post css actions
-                        options: {
-                            plugins: function () { // post css plugins, can be exported to postcss.config.js
-                                return [
-                                    require('precss'),
-                                    require('autoprefixer')
-                                ];
-                            }
+                    loader: 'style-loader' // inject CSS to page
+                }, {
+                    loader: 'css-loader' // translates CSS into CommonJS modules
+                }, {
+                    loader: 'postcss-loader', // Run post css actions
+                    options: {
+                        plugins: function () { // post css plugins, can be exported to postcss.config.js
+                            return [
+                                require('precss'),
+                                require('autoprefixer')
+                            ];
                         }
-                    }, {
-                        loader: 'sass-loader' // compiles SASS to CSS
-                    }]
+                    }
+                }, {
+                    loader: 'sass-loader' // compiles SASS to CSS
+                }]
             }
         ]
     }
