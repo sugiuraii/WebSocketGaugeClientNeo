@@ -40,7 +40,7 @@ module.exports = {
     },
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.
-        extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
+        extensions: ['.ts', '.tsx', '.js']
     },
     plugins: [
         new webpack.ProvidePlugin({
@@ -56,18 +56,18 @@ module.exports = {
     ,
     module: {
         rules: [
-            { test: /\.tsx?$/, loader: 'ts-loader' },
-            { test: /\.png$/, loader: "file-loader?name=img/[name].[ext]" },
-            { test: /\.fnt$/, loader: "file-loader?name=img/[name].[ext]" }, // Bitmap font setting files
-            { type: "javascript/auto", test: /\.json$/, loader: "file-loader?name=img/[name].[ext]" },
-            { test: /\.html$/, loader: "file-loader?name=[name].[ext]" },
-            { test: /bootstrap.slate.min.css/, loader: "style-loader!css-loader" }, // for bootstrap
-            { test: /\.css$/, exclude: /bootstrap.slate.min.css/, loader: 'file-loader?name=[name].[ext]' },
-            { test: /\.svg$/, loader: 'url-loader?mimetype=image/svg+xml' },
-            { test: /\.woff$/, loader: 'url-loader?mimetype=application/font-woff' },
-            { test: /\.woff2$/, loader: 'url-loader?mimetype=application/font-woff' },
-            { test: /\.eot$/, loader: 'url-loader?mimetype=application/font-woff' },
-            { test: /\.(ttf|otf)$/, loader: "file-loader?name=fonts/[name].[ext]" },
+            { test: /\.tsx?$/, use: 'ts-loader' },
+            { test: /\.png$/, use: "file-loader?name=img/[name].[ext]" },
+            { test: /\.fnt$/, use: "file-loader?name=img/[name].[ext]" }, // Bitmap font setting files
+            { type: "javascript/auto", test: /\.json$/, use: "file-loader?name=img/[name].[ext]" },
+            { test: /\.html$/, use: "file-loader?name=[name].[ext]" },
+            { test: /bootstrap.slate.min.css/, use: [{ loader: 'style-loader' }, { loader: 'css-loader' }] }, // for bootstrap
+            { test: /\.css$/, exclude: /bootstrap.slate.min.css/, use: 'file-loader?name=[name].[ext]' },
+            { test: /\.svg$/, use: 'url-loader?mimetype=image/svg+xml' },
+            { test: /\.woff$/, use: 'url-loader?mimetype=application/font-woff' },
+            { test: /\.woff2$/, use: 'url-loader?mimetype=application/font-woff' },
+            { test: /\.eot$/, use: 'url-loader?mimetype=application/font-woff' },
+            { test: /\.(ttf|otf)$/, use: "file-loader?name=fonts/[name].[ext]" },
             {
                 test: /\.(scss)$/,
                 use: [{

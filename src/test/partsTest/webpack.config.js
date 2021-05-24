@@ -44,7 +44,7 @@ module.exports = {
     },
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.
-        extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
+        extensions: ['.ts', '.tsx', '.js']
     },
     devServer: {
         contentBase: outputPath
@@ -52,13 +52,13 @@ module.exports = {
     ,
     module: {
         rules: [
-            { test: /\.tsx?$/, loader: 'ts-loader' },
-            { test: /\.png$/, loader: "file-loader?name=img/[name].[ext]" },
-            { test: /\.fnt$/, loader: "file-loader?name=img/[name].[ext]" }, // Bitmap font setting files
-            { type: "javascript/auto", test: /\.json$/, loader: "file-loader?name=img/[name].[ext]" },
-            { test: /\.html$/, loader: "file-loader?name=[name].[ext]" },
-            { test: /\.css$/, loader: "file-loader?name=[name].[ext]" },
-            { test: /\.(ttf|otf)$/, loader: "file-loader?name=fonts/[name].[ext]" }
+            { test: /\.tsx?$/, use: 'ts-loader' },
+            { test: /\.png$/, use: "file-loader?name=img/[name].[ext]" },
+            { test: /\.fnt$/, use: "file-loader?name=img/[name].[ext]" }, // Bitmap font setting files
+            { type: "javascript/auto", test: /\.json$/, use: "file-loader?name=img/[name].[ext]" },
+            { test: /\.html$/, use: "file-loader?name=[name].[ext]" },
+            { test: /\.css$/, use: "file-loader?name=[name].[ext]" },
+            { test: /\.(ttf|otf)$/, use: "file-loader?name=fonts/[name].[ext]" }
         ]
     }
 };

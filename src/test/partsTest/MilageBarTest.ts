@@ -57,9 +57,9 @@ function preloadTexture()
             for (let i = 0; i < 6 ; i++)
             {
                 gaugeArray.push(new MilageGraphPanel);
-                gaugeArray[index].pivot = new PIXI.Point(200,200);
+                gaugeArray[index].pivot.set(200,200);
                 gaugeArray[index].scale.set(0.6, 0.6);
-                gaugeArray[index].position = new PIXI.Point(400*i+150,200*j+150);
+                gaugeArray[index].position.set(400*i+150,200*j+150);
                 gaugeArray[index].Trip = 130.0;
                 gaugeArray[index].MomentGasMilage = 20.0;
                 gaugeArray[index].Fuel = 35.0;
