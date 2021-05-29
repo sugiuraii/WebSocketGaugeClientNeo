@@ -24,6 +24,7 @@
 
 import { FUELTRIPWebsocket } from "../../WebSocket/WebSocketCommunication";
 import { ILogger } from "../utils/ILogger";
+import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";
 import { WebsocketState } from "./WebsocketState";
 
 export class FUELTRIPWebsocketBackend {
@@ -47,10 +48,10 @@ export class FUELTRIPWebsocketBackend {
 
     private indicatorUpdateIntervalID  = 0;
 
-    constructor(serverurl: string, logger: ILogger, fueltripSectSpan: number, fueltripSectStoremax: number, state: WebsocketState) {
+    constructor(serverurl: string, logger: ILogger, fueltripSectSpan: number, fueltripSectStoremax: number) {
         this.fueltripWS = new FUELTRIPWebsocket(serverurl);
         this.logger = logger;
-        this.state = state;
+        this.state = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
         this.webSocketServerURL = this.fueltripWS.URL;
         this.fueltripSectSpan = fueltripSectSpan;
         this.fueltripSectStoreMax = fueltripSectStoremax;
@@ -97,6 +98,12 @@ export class FUELTRIPWebsocketBackend {
     public getSectGasMilage(sectIndex: number): number {
         return this.fueltripWS.getSectGasMilage(sectIndex);
     }
+
+    public getWebsocketState() : WebsocketState
+    {
+       return this.state;
+    }
+
     private setStatusIndicator(): void {
         this.state.connectionStatus = this.fueltripWS.getReadyState();
     }

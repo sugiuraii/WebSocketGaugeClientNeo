@@ -24,6 +24,7 @@
 
 import { SSMWebsocket, SSMParameterCode, SSMSwitchCode, ReadModeCode } from "../../WebSocket/WebSocketCommunication";
 import { ILogger } from "../utils/ILogger";
+import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";
 import { WebsocketState } from "./WebsocketState";
 
 export class SSMWebsocketBackend {
@@ -46,11 +47,11 @@ export class SSMWebsocketBackend {
 
    private indicatorUpdateIntervalID = 0;
 
-   constructor(serverurl: string, paramCode: { code: SSMParameterCode, readmode: ReadModeCode }[], logger: ILogger, state: WebsocketState) {
+   constructor(serverurl: string, paramCode: { code: SSMParameterCode, readmode: ReadModeCode }[], logger: ILogger) {
       this.ssmWS = new SSMWebsocket(serverurl);
       this.parameterCodeList = paramCode;
       this.logger = logger;
-      this.state = state;
+      this.state = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
       this.webSocketServerURL = this.ssmWS.URL;
 
       this.ssmWS.OnWebsocketError = (message: string) => this.logger.appendLog(this.logPrefix + " websocket error : " + message);
@@ -76,6 +77,11 @@ export class SSMWebsocketBackend {
 
    public getSwitchFlag(code: SSMSwitchCode): boolean {
       return this.ssmWS.getSwitchFlag(code);
+   }
+
+   public getWebsocketState() : WebsocketState
+   {
+      return this.state;
    }
 
    private setStatusIndicator(): void {

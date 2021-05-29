@@ -26,6 +26,7 @@ import { ArduinoCOMWebsocket, ArduinoParameterCode } from "../../WebSocket/WebSo
 import { WebstorageHandler } from "../Webstorage/WebstorageHandler";
 import { ILogger } from "../utils/ILogger";
 import { WebsocketState } from "./WebsocketState";
+import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";
 
 export class ArduinoWebsocketBackend {
    public static readonly DEFAULT_WS_PORT = 2016;
@@ -45,11 +46,11 @@ export class ArduinoWebsocketBackend {
 
    private indicatorUpdateIntervalID = 0;
 
-   constructor(serverurl: string, codeList: ArduinoParameterCode[], logger: ILogger, state: WebsocketState) {
+   constructor(serverurl: string, codeList: ArduinoParameterCode[], logger: ILogger) {
       this.arduinoWS = new ArduinoCOMWebsocket(serverurl);
       this.parameterCodeList = codeList;
       this.logger = logger;
-      this.state = state;
+      this.state = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
       this.webSocketServerURL = this.arduinoWS.URL;
 
       this.arduinoWS.OnWebsocketError = (message: string) => this.logger.appendLog(this.logPrefix + " websocket error : " + message);
@@ -71,6 +72,11 @@ export class ArduinoWebsocketBackend {
 
    public getRawVal(code: ArduinoParameterCode): number {
       return this.arduinoWS.getRawVal(code);
+   }
+
+   public getWebsocketState() : WebsocketState
+   {
+      return this.state;
    }
 
    private setStatusIndicator() {
