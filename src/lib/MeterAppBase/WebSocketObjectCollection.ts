@@ -31,7 +31,6 @@ import { FUELTRIPWebsocketBackend } from "./WebsocketAppBackend/FUELTRIPWebsocke
 import { MeterApplicationOption } from "./options/MeterApplicationOption"
 import { ILogger } from "./utils/ILogger";
 import { WebsocketState } from "./WebsocketAppBackend/WebsocketState";
-import { WebsocketConnectionStatus } from "./WebsocketAppBackend/WebsocketConnectionStatus";
 
 export class WebsocketObjectCollection {
     private readonly AppOption: MeterApplicationOption;
@@ -105,60 +104,54 @@ export class WebsocketObjectCollection {
 
         if (appOption.WebsocketEnableFlag.Defi) {
             const wsURL = "ws://" + webSocketServerName + ":" + DefiWebsocketBackend.DEFAULT_WS_PORT.toString() + DefiWebsocketBackend.WS_URL_PATH;
-            const state : WebsocketState = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
-            this.websocketStates["Defi"] = state;
-            this.defiWS = new DefiWebsocketBackend(wsURL, this.AppOption.ParameterCode.Defi.Array, logger, state);
+            this.defiWS = new DefiWebsocketBackend(wsURL, this.AppOption.ParameterCode.Defi.Array, logger);
+            this.websocketStates["Defi"] = this.defiWS.getWebsocketState();
         }
         else
             this.defiWS = undefined;
 
         if (appOption.WebsocketEnableFlag.SSM) {
             const wsURL = "ws://" + webSocketServerName + ":" + SSMWebsocketBackend.DEFAULT_WS_PORT.toString() + SSMWebsocketBackend.WS_URL_PATH;
-            const state : WebsocketState = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
-            this.websocketStates["SSM"] = state;
-            this.ssmWS = new SSMWebsocketBackend(wsURL, this.AppOption.ParameterCode.SSM.Array, logger, state);
+            this.ssmWS = new SSMWebsocketBackend(wsURL, this.AppOption.ParameterCode.SSM.Array, logger);
+            this.websocketStates["SSM"] = this.ssmWS.getWebsocketState();
         }
         else
             this.ssmWS = undefined;
 
         if (appOption.WebsocketEnableFlag.Arduino) {
             const wsURL = "ws://" + webSocketServerName + ":" + ArduinoWebsocketBackend.DEFAULT_WS_PORT.toString() + ArduinoWebsocketBackend.WS_URL_PATH;
-            const state : WebsocketState = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
-            this.websocketStates["Arduino"] = state;
-            this.arduinoWS = new ArduinoWebsocketBackend(wsURL, this.AppOption.ParameterCode.Arduino.Array, logger, state);
+            this.arduinoWS = new ArduinoWebsocketBackend(wsURL, this.AppOption.ParameterCode.Arduino.Array, logger);
+            this.websocketStates["Arduino"] = this.arduinoWS.getWebsocketState();
         }
         else
             this.arduinoWS = undefined;
 
         if (appOption.WebsocketEnableFlag.ELM327) {
             const wsURL = "ws://" + webSocketServerName + ":" + ELM327WebsocketBackend.DEFAULT_WS_PORT.toString() + ELM327WebsocketBackend.WS_URL_PATH;
-            const state : WebsocketState = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
-            this.websocketStates["ELM327"] = state;
-            this.elm327WS = new ELM327WebsocketBackend(wsURL, this.AppOption.ParameterCode.ELM327OBDII.Array, logger, state);
+            this.elm327WS = new ELM327WebsocketBackend(wsURL, this.AppOption.ParameterCode.ELM327OBDII.Array, logger);
+            this.websocketStates["ELM327"] = this.elm327WS.getWebsocketState();
         }
         else
             this.elm327WS = undefined;
 
         if (appOption.WebsocketEnableFlag.FUELTRIP) {
             const wsURL = "ws://" + webSocketServerName + ":" + FUELTRIPWebsocketBackend.DEFAULT_WS_PORT.toString() + FUELTRIPWebsocketBackend.WS_URL_PATH;
-            const state : WebsocketState = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
-            this.websocketStates["FUELTRIP"] = state;
             const fuelTripSectSpan = appOption.FUELTRIPWebsocketOption.FUELTRIPSectSpan;
             const fuelTripSectStoreMax = appOption.FUELTRIPWebsocketOption.FUELTRIPSectStoreMax;
-            this.fueltripWS = new FUELTRIPWebsocketBackend(wsURL, logger, fuelTripSectSpan, fuelTripSectStoreMax, state);
+            this.fueltripWS = new FUELTRIPWebsocketBackend(wsURL, logger, fuelTripSectSpan, fuelTripSectStoreMax);
+            this.websocketStates["FUELTRIP"] = this.fueltripWS.getWebsocketState();
         }
         else
             this.fueltripWS = undefined;
 
         if (appOption.WebsocketEnableFlag.AssettoCorsaSHM) {
             const wsURL = "ws://" + webSocketServerName + ":" + AssettoCorsaSHMWebsocketBackend.DEFAULT_WS_PORT.toString() + AssettoCorsaSHMWebsocketBackend.WS_URL_PATH;
-            const state : WebsocketState = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
-            this.websocketStates["AssettoCorsaSHM"] = state;
             this.assettoCorsaWS = new AssettoCorsaSHMWebsocketBackend(wsURL,
                 this.AppOption.ParameterCode.AssettoCorsaPhysics.Array,
                 this.AppOption.ParameterCode.AssettoCorsaGraphics.Array,
                 this.AppOption.ParameterCode.AssettoCorsaStaticInfo.Array,
-                logger, state);
+                logger);
+            this.websocketStates["AssettoCorsaSHM"] = this.assettoCorsaWS.getWebsocketState();
         }
         else
             this.assettoCorsaWS = undefined;

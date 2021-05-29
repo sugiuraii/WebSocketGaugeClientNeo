@@ -26,6 +26,7 @@ import { AssettoCorsaSHMGraphicsParameterCode, AssettoCorsaSHMPhysicsParameterCo
 import { WebstorageHandler } from "../Webstorage/WebstorageHandler";
 import { ILogger } from "../utils/ILogger";
 import { WebsocketState } from "./WebsocketState";
+import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";
 
 export class AssettoCorsaSHMWebsocketBackend {
    public static readonly DEFAULT_WS_PORT = 2017;
@@ -47,13 +48,13 @@ export class AssettoCorsaSHMWebsocketBackend {
 
    private indicatorUpdateIntervalID = 0;
 
-   constructor(serverurl: string, physCode: AssettoCorsaSHMPhysicsParameterCode[], graphicsCode: AssettoCorsaSHMGraphicsParameterCode[], staticCode: AssettoCorsaSHMStaticInfoParameterCode[], logger: ILogger, state: WebsocketState) {
+   constructor(serverurl: string, physCode: AssettoCorsaSHMPhysicsParameterCode[], graphicsCode: AssettoCorsaSHMGraphicsParameterCode[], staticCode: AssettoCorsaSHMStaticInfoParameterCode[], logger: ILogger) {
       this.assettocorsaWS = new AssettoCorsaSHMWebsocket(serverurl);
       this.physicsParameterCodeList = physCode;
       this.graphicsParameterCodeList = graphicsCode;
       this.staticInfoParameterCodeList = staticCode;
       this.logger = logger;
-      this.state = state;
+      this.state = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
       this.webSocketServerURL = this.assettocorsaWS.URL;
 
       this.assettocorsaWS.OnWebsocketError = (message: string) => this.logger.appendLog(this.logPrefix + " websocket error : " + message);
@@ -80,7 +81,11 @@ export class AssettoCorsaSHMWebsocketBackend {
    public getStringVal(code: AssettoCorsaSHMStringVALCode): string {
       return this.assettocorsaWS.getStringVal(code);
    }
-
+   
+   public getWebsocketState() : WebsocketState
+   {
+      return this.state;
+   }
 
    private setStatusIndicator() {
       this.state.connectionStatus = this.assettocorsaWS.getReadyState();
