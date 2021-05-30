@@ -105,7 +105,7 @@ export class WebsocketObjectCollection {
         if (appOption.WebsocketEnableFlag.Defi) {
             const wsURL = "ws://" + webSocketServerName + ":" + DefiWebsocketBackend.DEFAULT_WS_PORT.toString() + DefiWebsocketBackend.WS_URL_PATH;
             this.defiWS = new DefiWebsocketBackend(wsURL, this.AppOption.ParameterCode.Defi.Array, logger);
-            this.websocketStates["Defi"] = this.defiWS.getWebsocketState();
+            this.websocketStates[this.defiWS.getName()] = this.defiWS.getWebsocketState();
         }
         else
             this.defiWS = undefined;
@@ -113,7 +113,7 @@ export class WebsocketObjectCollection {
         if (appOption.WebsocketEnableFlag.SSM) {
             const wsURL = "ws://" + webSocketServerName + ":" + SSMWebsocketBackend.DEFAULT_WS_PORT.toString() + SSMWebsocketBackend.WS_URL_PATH;
             this.ssmWS = new SSMWebsocketBackend(wsURL, this.AppOption.ParameterCode.SSM.Array, logger);
-            this.websocketStates["SSM"] = this.ssmWS.getWebsocketState();
+            this.websocketStates[this.ssmWS.getName()] = this.ssmWS.getWebsocketState();
         }
         else
             this.ssmWS = undefined;
@@ -121,7 +121,7 @@ export class WebsocketObjectCollection {
         if (appOption.WebsocketEnableFlag.Arduino) {
             const wsURL = "ws://" + webSocketServerName + ":" + ArduinoWebsocketBackend.DEFAULT_WS_PORT.toString() + ArduinoWebsocketBackend.WS_URL_PATH;
             this.arduinoWS = new ArduinoWebsocketBackend(wsURL, this.AppOption.ParameterCode.Arduino.Array, logger);
-            this.websocketStates["Arduino"] = this.arduinoWS.getWebsocketState();
+            this.websocketStates[this.arduinoWS.getName()] = this.arduinoWS.getWebsocketState();
         }
         else
             this.arduinoWS = undefined;
@@ -129,7 +129,7 @@ export class WebsocketObjectCollection {
         if (appOption.WebsocketEnableFlag.ELM327) {
             const wsURL = "ws://" + webSocketServerName + ":" + ELM327WebsocketBackend.DEFAULT_WS_PORT.toString() + ELM327WebsocketBackend.WS_URL_PATH;
             this.elm327WS = new ELM327WebsocketBackend(wsURL, this.AppOption.ParameterCode.ELM327OBDII.Array, logger);
-            this.websocketStates["ELM327"] = this.elm327WS.getWebsocketState();
+            this.websocketStates[this.elm327WS.getName()] = this.elm327WS.getWebsocketState();
         }
         else
             this.elm327WS = undefined;
@@ -139,7 +139,7 @@ export class WebsocketObjectCollection {
             const fuelTripSectSpan = appOption.FUELTRIPWebsocketOption.FUELTRIPSectSpan;
             const fuelTripSectStoreMax = appOption.FUELTRIPWebsocketOption.FUELTRIPSectStoreMax;
             this.fueltripWS = new FUELTRIPWebsocketBackend(wsURL, logger, fuelTripSectSpan, fuelTripSectStoreMax);
-            this.websocketStates["FUELTRIP"] = this.fueltripWS.getWebsocketState();
+            this.websocketStates[this.fueltripWS.getName()] = this.fueltripWS.getWebsocketState();
         }
         else
             this.fueltripWS = undefined;
@@ -151,7 +151,7 @@ export class WebsocketObjectCollection {
                 this.AppOption.ParameterCode.AssettoCorsaGraphics.Array,
                 this.AppOption.ParameterCode.AssettoCorsaStaticInfo.Array,
                 logger);
-            this.websocketStates["AssettoCorsaSHM"] = this.assettoCorsaWS.getWebsocketState();
+            this.websocketStates[this.assettoCorsaWS.getName()] = this.assettoCorsaWS.getWebsocketState();
         }
         else
             this.assettoCorsaWS = undefined;
