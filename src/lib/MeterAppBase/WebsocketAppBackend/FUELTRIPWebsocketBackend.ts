@@ -30,8 +30,8 @@ import { WebsocketState } from "./WebsocketState";
 export class FUELTRIPWebsocketBackend {
     public static readonly DEFAULT_WS_PORT = 2014;
     public static readonly WS_URL_PATH = "/fueltrip";
-
-    private readonly logPrefix = "FUELTRIP";
+    private readonly name = "FUELTRIP";    
+    private readonly logPrefix = this.name;
     private readonly WEBSOCKET_CHECK_INTERVAL = 1000;
     private readonly WAITTIME_BEFORE_SENDWSSEND = 3000;
     private readonly WAITTIME_BEFORE_RECONNECT = 5000;
@@ -98,10 +98,13 @@ export class FUELTRIPWebsocketBackend {
     public getSectGasMilage(sectIndex: number): number {
         return this.fueltripWS.getSectGasMilage(sectIndex);
     }
-
     public getWebsocketState() : WebsocketState
     {
        return this.state;
+    }
+    public getName() : string
+    {
+       return this.name;
     }
 
     private setStatusIndicator(): void {
