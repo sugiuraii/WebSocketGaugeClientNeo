@@ -24,10 +24,11 @@
 
 import { SSMWebsocket, SSMParameterCode, SSMSwitchCode, ReadModeCode } from "../../WebSocket/WebSocketCommunication";
 import { ILogger } from "../utils/ILogger";
+import { WebsocketAppBackend } from "./WebsocketAppBackend";
 import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";
 import { WebsocketState } from "./WebsocketState";
 
-export class SSMWebsocketBackend {
+export class SSMWebsocketBackend implements WebsocketAppBackend {
    public static readonly DEFAULT_WS_PORT = 2016;
    public static readonly WS_URL_PATH = "/ssm";
    private readonly name = "SSM";

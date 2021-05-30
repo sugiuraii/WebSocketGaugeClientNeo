@@ -24,10 +24,11 @@
 
 import { ELM327COMWebsocket, OBDIIParameterCode, ReadModeCode } from "../../WebSocket/WebSocketCommunication";
 import { ILogger } from "../utils/ILogger";
+import { WebsocketAppBackend } from "./WebsocketAppBackend";
 import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";
 import { WebsocketState } from "./WebsocketState";
 
-export class ELM327WebsocketBackend {
+export class ELM327WebsocketBackend implements WebsocketAppBackend {
    public static readonly DEFAULT_WS_PORT = 2016;
    public static readonly WS_URL_PATH = "/elm327";
    private readonly name = "ELM327";

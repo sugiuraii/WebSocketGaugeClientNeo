@@ -27,8 +27,9 @@ import { WebstorageHandler } from "../Webstorage/WebstorageHandler";
 import { ILogger } from "../utils/ILogger";
 import { WebsocketState } from "./WebsocketState";
 import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";
+import { WebsocketAppBackend } from "./WebsocketAppBackend";
 
-export class DefiWebsocketBackend {
+export class DefiWebsocketBackend implements WebsocketAppBackend {
 
    public static readonly DEFAULT_WS_PORT = 2016;
    public static readonly WS_URL_PATH = "/defi";

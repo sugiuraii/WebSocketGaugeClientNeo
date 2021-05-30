@@ -24,9 +24,9 @@
 
 import { WebsocketState } from "./WebsocketState";
 
-export interface WebsocketAppBackends {
+export interface WebsocketAppBackend {
     Run() : void;
     Stop() : void;
     getName() : string;
-    ggetWebsocketState() : WebsocketState;
+    getWebsocketState() : WebsocketState;
 }

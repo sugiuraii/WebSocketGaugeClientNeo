@@ -24,10 +24,11 @@
 
 import { FUELTRIPWebsocket } from "../../WebSocket/WebSocketCommunication";
 import { ILogger } from "../utils/ILogger";
+import { WebsocketAppBackend } from "./WebsocketAppBackend";
 import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";
 import { WebsocketState } from "./WebsocketState";
 
-export class FUELTRIPWebsocketBackend {
+export class FUELTRIPWebsocketBackend implements WebsocketAppBackend {
     public static readonly DEFAULT_WS_PORT = 2014;
     public static readonly WS_URL_PATH = "/fueltrip";
     private readonly name = "FUELTRIP";    
