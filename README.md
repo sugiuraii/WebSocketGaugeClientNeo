@@ -76,7 +76,15 @@ Build command is incuded in npm scirpt (please see `package.json`). To build,
 > npm run build-benchmark
 > npm run build-application
 ```
-
+### If build fails to construct thumbnails..
+At the final step of `build-all` script (or `build-thumbnails` script), thumbnails of application pages will be created by [puppeter](https://pptr.dev/). However, puppeter might fail to find chromium build, as following message.
+```
+UnhandledPromiseRejectionWarning: Error: Chromium revision is not downloaded.
+```
+In this case, install chromium build manually (as follows) may solve the issue.
+```
+node node_modules/puppeteer/install.js
+```
 ## <a name="custom">Making custom meter panel</a>
 There are some sample source codes of meter application in [`WebSocketGaugeClientNeo/src/application`](./src/application)directoy.
 To make your custom meter application, refer [CustomMeterApp.md](./docs/CustomMeterApp.md)
