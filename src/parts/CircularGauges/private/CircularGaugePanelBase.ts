@@ -307,6 +307,7 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
         this.addChild(backContainer);
 
         //Bake into texture
+        backContainer.cacheAsBitmapResolution = 3; // Manually set bitmap cache resolution to avoid redzone bar glitch in Firefox.
         backContainer.cacheAsBitmap = true;
     }
 }
