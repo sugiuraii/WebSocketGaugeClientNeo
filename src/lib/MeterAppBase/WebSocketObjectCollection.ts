@@ -102,15 +102,6 @@ export class WebsocketObjectCollection {
             throw ReferenceError("AssettoCorsaSHMWSBackennd is not defined.");
     }
 
-    private getWebsocketServerName(): string {
-        const wsServerHostname: string = (typeof localStorage.getItem("WSServerHostname") === "string") ? localStorage.getItem("WSServerHostname") as string : "localhost";
-        const setWSServerSameAsHttpSite: boolean = localStorage.getItem("SetWSServerSameAsHttp") === "true" ? true : false;
-        if (setWSServerSameAsHttpSite)
-            return location.hostname;
-        else
-            return wsServerHostname;
-    }
-
     get WebsocketStates() : {[name : string] : WebsocketState } { return this.websocketStates }
 
     constructor(logger : ILogger, option: WebsocketObjectCollectionOption) {
