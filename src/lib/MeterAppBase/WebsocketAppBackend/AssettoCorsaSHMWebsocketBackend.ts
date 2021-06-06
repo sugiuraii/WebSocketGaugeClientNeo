@@ -40,21 +40,22 @@ export class AssettoCorsaSHMWebsocketBackend implements WebsocketAppBackend {
    private readonly WAITTIME_BEFORE_RECONNECT = 5000;
 
    private readonly assettocorsaWS: AssettoCorsaSHMWebsocket;
-   private readonly physicsParameterCodeList: AssettoCorsaSHMPhysicsParameterCode[];
-   private readonly graphicsParameterCodeList: AssettoCorsaSHMGraphicsParameterCode[];
-   private readonly staticInfoParameterCodeList: AssettoCorsaSHMStaticInfoParameterCode[];
+   private readonly physicsParameterCodeList: AssettoCorsaSHMPhysicsParameterCode[] = [];
+   private readonly graphicsParameterCodeList: AssettoCorsaSHMGraphicsParameterCode[] = [];
+   private readonly staticInfoParameterCodeList: AssettoCorsaSHMStaticInfoParameterCode[] = [];
    private readonly logger: ILogger;
    private readonly state: WebsocketState;
 
    private readonly webSocketServerURL: string;
 
    private indicatorUpdateIntervalID = 0;
+   
+   public get PhysicsParameterCodeList(): AssettoCorsaSHMPhysicsParameterCode[] {return this.physicsParameterCodeList}
+   public get GraphicsParameterCodeList(): AssettoCorsaSHMGraphicsParameterCode[] {return this.graphicsParameterCodeList}
+   public get StaticInfoParameterCodeList(): AssettoCorsaSHMStaticInfoParameterCode[] {return this.staticInfoParameterCodeList}
 
-   constructor(serverurl: string, physCode: AssettoCorsaSHMPhysicsParameterCode[], graphicsCode: AssettoCorsaSHMGraphicsParameterCode[], staticCode: AssettoCorsaSHMStaticInfoParameterCode[], logger: ILogger) {
+   constructor(serverurl: string, logger: ILogger) {
       this.assettocorsaWS = new AssettoCorsaSHMWebsocket(serverurl);
-      this.physicsParameterCodeList = physCode;
-      this.graphicsParameterCodeList = graphicsCode;
-      this.staticInfoParameterCodeList = staticCode;
       this.logger = logger;
       this.state = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
       this.webSocketServerURL = this.assettocorsaWS.URL;

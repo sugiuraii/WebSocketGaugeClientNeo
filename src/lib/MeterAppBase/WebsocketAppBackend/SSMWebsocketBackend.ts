@@ -40,7 +40,8 @@ export class SSMWebsocketBackend implements WebsocketAppBackend {
    private readonly SLOWREAD_INTERVAL = 10;
 
    private readonly ssmWS: SSMWebsocket;
-   private readonly parameterCodeList: { code: SSMParameterCode, readmode: ReadModeCode }[];
+   private readonly parameterCodeList: { code: SSMParameterCode, readmode: ReadModeCode }[] = [];
+   public get ParameterCodeList(): { code: SSMParameterCode, readmode: ReadModeCode }[] { return this.parameterCodeList }
    private readonly logger: ILogger;
    private readonly state: WebsocketState;
 
@@ -48,9 +49,8 @@ export class SSMWebsocketBackend implements WebsocketAppBackend {
 
    private indicatorUpdateIntervalID = 0;
 
-   constructor(serverurl: string, paramCode: { code: SSMParameterCode, readmode: ReadModeCode }[], logger: ILogger) {
+   constructor(serverurl: string, logger: ILogger) {
       this.ssmWS = new SSMWebsocket(serverurl);
-      this.parameterCodeList = paramCode;
       this.logger = logger;
       this.state = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
       this.webSocketServerURL = this.ssmWS.URL;

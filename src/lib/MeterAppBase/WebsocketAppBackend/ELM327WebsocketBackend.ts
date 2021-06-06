@@ -40,7 +40,7 @@ export class ELM327WebsocketBackend implements WebsocketAppBackend {
    private readonly SLOWREAD_INTERVAL = 10;
 
    private readonly elm327WS: ELM327COMWebsocket;
-   private readonly parameterCodeList: { code: OBDIIParameterCode, readmode: ReadModeCode }[];
+   private readonly parameterCodeList: { code: OBDIIParameterCode, readmode: ReadModeCode }[] = [];
    private readonly logger: ILogger;
    private readonly state: WebsocketState;
 
@@ -48,9 +48,10 @@ export class ELM327WebsocketBackend implements WebsocketAppBackend {
 
    private indicatorUpdateIntervalID = 0;
 
-   constructor(serverurl: string, paramCode: { code: OBDIIParameterCode, readmode: ReadModeCode }[], logger: ILogger) {
+   public get ParameterCodeList(): { code: OBDIIParameterCode, readmode: ReadModeCode }[] { return this.parameterCodeList }
+
+   constructor(serverurl: string, logger: ILogger) {
       this.elm327WS = new ELM327COMWebsocket(serverurl);
-      this.parameterCodeList = paramCode;
       this.logger = logger;
       this.state = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
       this.webSocketServerURL = this.elm327WS.URL;
