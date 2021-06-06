@@ -24,21 +24,36 @@
 import { ReadModeCode } from "../WebSocket/WebSocketCommunication";
 import { WebsocketObjectCollection } from "./WebSocketObjectCollection";
 
+export class WebsocketClientMapEntry
+{
+    public readonly CodeRegisterFunctoion : (ws : WebsocketObjectCollection, readmode: ReadModeCode) => void;
+    public readonly ValueGetFunction : (ws : WebsocketObjectCollection, timeStamp : number) => number;
+    public readonly RawValueGetFunction : (ws : WebsocketObjectCollection) => number;
+
+    constructor(codeRegisterFunc: (ws: WebsocketObjectCollection, readmode: ReadModeCode) => void, valueGetFunction: (ws: WebsocketObjectCollection, timeStamp: number) => number, rawValueGetFunction: (ws: WebsocketObjectCollection) => number)
+    {
+        this.CodeRegisterFunctoion = codeRegisterFunc;
+        this.ValueGetFunction = valueGetFunction;
+        this.RawValueGetFunction = rawValueGetFunction;
+    }
+}
+
 export class WebsocketClientMapper<T> 
 {
     private readonly webSocketCollection : WebsocketObjectCollection;
-    private readonly map = new Map<T, {codeRegistFunc : (ws : WebsocketObjectCollection, readmode: ReadModeCode) => void, valFunc : (ws : WebsocketObjectCollection, timeStamp : number) => number, rawValFunc : (ws : WebsocketObjectCollection) => number }>();
+    private readonly map = new Map<T, WebsocketClientMapEntry>();
 
-    constructor(webSocketCollection : WebsocketObjectCollection)
+    constructor(webSocketCollection : WebsocketObjectCollection, map: Map<T, WebsocketClientMapEntry>)
     {
         this.webSocketCollection = webSocketCollection;
+        this.map = map;
     }
 
     public registerParameterCode(code : T, readmode: ReadModeCode) : void
     {
         const mapItem = this.map.get(code);
         if(mapItem !== undefined)
-            mapItem.codeRegistFunc(this.webSocketCollection, readmode);
+            mapItem.CodeRegisterFunctoion(this.webSocketCollection, readmode);
         else
             throw ReferenceError("Code of " + code + " is not registered websocket client map.");
     }
@@ -47,7 +62,7 @@ export class WebsocketClientMapper<T>
     {
         const mapItem = this.map.get(code);
         if(mapItem !== undefined)
-            return mapItem.valFunc(this.webSocketCollection, timeStamp);
+            return mapItem.ValueGetFunction(this.webSocketCollection, timeStamp);
         else
             throw ReferenceError("Code of " + code + " is not registered websocket client map.");
     }
@@ -56,7 +71,7 @@ export class WebsocketClientMapper<T>
     {
         const mapItem = this.map.get(code);
         if(mapItem !== undefined)
-            return mapItem.rawValFunc(this.webSocketCollection);
+            return mapItem.RawValueGetFunction(this.webSocketCollection);
         else
             throw ReferenceError("Code of " + code + " is not registered websocket client map.");
     }
