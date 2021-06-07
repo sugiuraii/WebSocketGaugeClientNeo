@@ -27,14 +27,12 @@ import { WebsocketObjectCollection } from "./WebSocketObjectCollection";
 export class WebsocketClientMapEntry
 {
     public readonly CodeRegisterFunctoion : (ws : WebsocketObjectCollection, readmode: ReadModeCode) => void;
-    public readonly ValueGetFunction : (ws : WebsocketObjectCollection, timeStamp : number) => number;
-    public readonly RawValueGetFunction : (ws : WebsocketObjectCollection) => number;
+    public readonly ValueGetFunction : (ws : WebsocketObjectCollection, timeStamp? : number) => number;
 
-    constructor(codeRegisterFunc: (ws: WebsocketObjectCollection, readmode: ReadModeCode) => void, valueGetFunction: (ws: WebsocketObjectCollection, timeStamp: number) => number, rawValueGetFunction: (ws: WebsocketObjectCollection) => number)
+    constructor(codeRegisterFunction: (ws: WebsocketObjectCollection, readmode: ReadModeCode) => void, valueGetFunction: (ws: WebsocketObjectCollection, timeStamp?: number) => number)
     {
-        this.CodeRegisterFunctoion = codeRegisterFunc;
+        this.CodeRegisterFunctoion = codeRegisterFunction;
         this.ValueGetFunction = valueGetFunction;
-        this.RawValueGetFunction = rawValueGetFunction;
     }
 }
 
@@ -58,20 +56,11 @@ export class WebsocketClientMapper<T>
             throw ReferenceError("Code of " + code + " is not registered websocket client map.");
     }
 
-    public getValue(code : T, timeStamp : number) : number
+    public getValue(code : T, timeStamp? : number) : number
     {
         const mapItem = this.map.get(code);
         if(mapItem !== undefined)
             return mapItem.ValueGetFunction(this.webSocketCollection, timeStamp);
-        else
-            throw ReferenceError("Code of " + code + " is not registered websocket client map.");
-    }
-
-    public getRawValue(code : T) : number
-    {
-        const mapItem = this.map.get(code);
-        if(mapItem !== undefined)
-            return mapItem.RawValueGetFunction(this.webSocketCollection);
         else
             throw ReferenceError("Code of " + code + " is not registered websocket client map.");
     }
