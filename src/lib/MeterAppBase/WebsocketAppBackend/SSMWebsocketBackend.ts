@@ -68,8 +68,11 @@ export class SSMWebsocketBackend implements WebsocketAppBackend {
       this.ssmWS.Close();
    }
 
-   public getVal(code: SSMParameterCode, timestamp: number): number {
-      return this.ssmWS.getVal(code, timestamp);
+   public getVal(code: SSMParameterCode, timestamp?: number): number {
+      if(timestamp === undefined)
+         return this.getRawVal(code);
+      else
+         return this.ssmWS.getVal(code, timestamp);
    }
 
    public getRawVal(code: SSMParameterCode): number {

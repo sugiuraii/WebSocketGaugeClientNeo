@@ -59,8 +59,11 @@ export class DefiWebsocketBackend implements WebsocketAppBackend {
       this.defiWS.OnWebsocketError = (message: string) => this.logger.appendLog(this.logPrefix + " websocket error : " + message);
    }
 
-   public getVal(code: DefiParameterCode, timestamp: number): number {
-      return this.defiWS.getVal(code, timestamp);
+   public getVal(code: DefiParameterCode, timestamp?: number): number {
+      if(timestamp === undefined)
+         return this.getRawVal(code);
+      else
+         return this.defiWS.getVal(code, timestamp);
    }
 
    public getRawVal(code: DefiParameterCode): number {

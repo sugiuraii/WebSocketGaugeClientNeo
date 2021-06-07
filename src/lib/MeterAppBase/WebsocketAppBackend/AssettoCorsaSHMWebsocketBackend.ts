@@ -73,8 +73,11 @@ export class AssettoCorsaSHMWebsocketBackend implements WebsocketAppBackend {
       this.assettocorsaWS.Close();
    }
 
-   public getVal(code: AssettoCorsaSHMNumericalVALCode, timestamp: number): number {
-      return this.assettocorsaWS.getVal(code, timestamp);
+   public getVal(code: AssettoCorsaSHMNumericalVALCode, timestamp?: number): number {
+      if(timestamp === undefined)
+         return this.getRawVal(code);
+      else
+         return this.assettocorsaWS.getVal(code, timestamp);
    }
 
    public getRawVal(code: AssettoCorsaSHMNumericalVALCode): number {

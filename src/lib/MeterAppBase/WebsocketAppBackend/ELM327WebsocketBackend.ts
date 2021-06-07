@@ -69,8 +69,11 @@ export class ELM327WebsocketBackend implements WebsocketAppBackend {
       this.elm327WS.Close();
    }
 
-   public getVal(code: OBDIIParameterCode, timestamp: number): number {
-      return this.elm327WS.getVal(code, timestamp);
+   public getVal(code: OBDIIParameterCode, timestamp?: number): number {
+      if(timestamp === undefined)
+         return this.getRawVal(code);
+      else
+         return this.elm327WS.getVal(code, timestamp);
    }
 
    public getRawVal(code: OBDIIParameterCode): number {

@@ -68,8 +68,11 @@ export class ArduinoWebsocketBackend implements WebsocketAppBackend {
       this.arduinoWS.Close();
    }
 
-   public getVal(code: ArduinoParameterCode, timestamp: number): number {
-      return this.arduinoWS.getVal(code, timestamp);
+   public getVal(code: ArduinoParameterCode, timestamp?: number): number {
+      if(timestamp === undefined)
+         return this.getRawVal(code);
+      else
+         return this.arduinoWS.getVal(code, timestamp);
    }
 
    public getRawVal(code: ArduinoParameterCode): number {
