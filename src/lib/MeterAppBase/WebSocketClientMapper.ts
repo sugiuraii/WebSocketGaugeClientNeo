@@ -386,3 +386,21 @@ export const DefaultDefiMap = new Map<WebsocketParameterCode, WebsocketClientMap
     ["Engine_oil_temperature", {CodeRegisterFunction : (w) => w.DefiWS.ParameterCodeList.push(DefiParameterCode.Oil_Temperature), ValueGetFunction : (w, t) => w.DefiWS.getVal(DefiParameterCode.Oil_Temperature, t)}],
     ["Coolant_Temperature", {CodeRegisterFunction : (w) => w.DefiWS.ParameterCodeList.push(DefiParameterCode.Coolant_Temperature), ValueGetFunction : (w, t) => w.DefiWS.getVal(DefiParameterCode.Coolant_Temperature, t)}],
 ]);
+
+export const SSMMapReplaceRPMAndBoostWithDefiMap = function() : Map<WebsocketParameterCode, WebsocketClientMapEntry>
+{
+    const ssmMap = new Map(DefaultSSMMap);
+    ssmMap.set("Engine_Speed", {CodeRegisterFunction : (w) => w.DefiWS.ParameterCodeList.push(DefiParameterCode.Engine_Speed), ValueGetFunction : (w, t) => w.DefiWS.getVal(DefiParameterCode.Engine_Speed, t)});
+    ssmMap.set("Manifold_Absolute_Pressure", {CodeRegisterFunction : (w) => w.ArduinoWS.ParameterCodeList.push(ArduinoParameterCode.Manifold_Absolute_Pressure), ValueGetFunction : (w, t) => w.ArduinoWS.getVal(ArduinoParameterCode.Manifold_Absolute_Pressure, t)});
+
+    return ssmMap;
+}
+
+export const ELM327MapReplaceRPMAndBoost = function() : Map<WebsocketParameterCode, WebsocketClientMapEntry>
+{
+    const elm327Map = new Map(DefaultELM327Map);
+    elm327Map.set("Engine_Speed", {CodeRegisterFunction : (w) => w.ArduinoWS.ParameterCodeList.push(ArduinoParameterCode.Engine_Speed), ValueGetFunction : (w, t) => w.ArduinoWS.getVal(ArduinoParameterCode.Engine_Speed, t)});
+    elm327Map.set("Manifold_Absolute_Pressure", {CodeRegisterFunction : (w) => w.ArduinoWS.ParameterCodeList.push(ArduinoParameterCode.Manifold_Absolute_Pressure), ValueGetFunction : (w, t) => w.ArduinoWS.getVal(ArduinoParameterCode.Manifold_Absolute_Pressure, t)});
+
+    return elm327Map;
+}
