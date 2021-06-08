@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { OBDIIParameterCode, SSMParameterCode, ReadModeCode } from "../WebSocket/WebSocketCommunication";
+import { OBDIIParameterCode, SSMParameterCode, ArduinoParameterCode, DefiParameterCode, ReadModeCode } from "../WebSocket/WebSocketCommunication";
 import { WebsocketObjectCollection } from "./WebSocketObjectCollection";
 
 export type WebsocketClientMapEntry = { CodeRegisterFunction: (ws: WebsocketObjectCollection, readmode: ReadModeCode) => void, ValueGetFunction: (ws: WebsocketObjectCollection, timeStamp?: number) => number };
@@ -364,4 +364,25 @@ export const DefaultSSMMap = new Map<WebsocketParameterCode, WebsocketClientMapE
     ["Exhaust_OCV_Duty_Left", {CodeRegisterFunction : (w, r) => w.SSMWS.ParameterCodeList.push({code : SSMParameterCode.Exhaust_OCV_Duty_Left, readmode :r}), ValueGetFunction : (w, t) => w.SSMWS.getVal(SSMParameterCode.Exhaust_OCV_Duty_Left, t)}],
     ["Exhaust_OCV_Current_Right", {CodeRegisterFunction : (w, r) => w.SSMWS.ParameterCodeList.push({code : SSMParameterCode.Exhaust_OCV_Current_Right, readmode :r}), ValueGetFunction : (w, t) => w.SSMWS.getVal(SSMParameterCode.Exhaust_OCV_Current_Right, t)}],
     ["Exhaust_OCV_Current_Left", {CodeRegisterFunction : (w, r) => w.SSMWS.ParameterCodeList.push({code : SSMParameterCode.Exhaust_OCV_Current_Left, readmode :r}), ValueGetFunction : (w, t) => w.SSMWS.getVal(SSMParameterCode.Exhaust_OCV_Current_Left, t)}],   
+]);
+
+export const DefaultArduinoMap = new Map<WebsocketParameterCode, WebsocketClientMapEntry>([
+    ["Engine_Speed", {CodeRegisterFunction : (w) => w.ArduinoWS.ParameterCodeList.push(ArduinoParameterCode.Engine_Speed), ValueGetFunction : (w, t) => w.ArduinoWS.getVal(ArduinoParameterCode.Engine_Speed, t)}],
+    ["Vehicle_Speed", {CodeRegisterFunction : (w) => w.ArduinoWS.ParameterCodeList.push(ArduinoParameterCode.Vehicle_Speed), ValueGetFunction : (w, t) => w.ArduinoWS.getVal(ArduinoParameterCode.Vehicle_Speed, t)}],
+    ["Manifold_Absolute_Pressure", {CodeRegisterFunction : (w) => w.ArduinoWS.ParameterCodeList.push(ArduinoParameterCode.Manifold_Absolute_Pressure), ValueGetFunction : (w, t) => w.ArduinoWS.getVal(ArduinoParameterCode.Manifold_Absolute_Pressure, t)}],
+    ["Coolant_Temperature", {CodeRegisterFunction : (w) => w.ArduinoWS.ParameterCodeList.push(ArduinoParameterCode.Coolant_Temperature), ValueGetFunction : (w, t) => w.ArduinoWS.getVal(ArduinoParameterCode.Coolant_Temperature, t)}],
+    ["Engine_oil_temperature", {CodeRegisterFunction : (w) => w.ArduinoWS.ParameterCodeList.push(ArduinoParameterCode.Oil_Temperature), ValueGetFunction : (w, t) => w.ArduinoWS.getVal(ArduinoParameterCode.Oil_Temperature, t)}],
+    ["Oil_Temperature2", {CodeRegisterFunction : (w) => w.ArduinoWS.ParameterCodeList.push(ArduinoParameterCode.Oil_Temperature2), ValueGetFunction : (w, t) => w.ArduinoWS.getVal(ArduinoParameterCode.Oil_Temperature2, t)}],
+    ["Oil_Pressure", {CodeRegisterFunction : (w) => w.ArduinoWS.ParameterCodeList.push(ArduinoParameterCode.Oil_Pressure), ValueGetFunction : (w, t) => w.ArduinoWS.getVal(ArduinoParameterCode.Oil_Pressure, t)}],
+    ["Fuel_Rail_Pressure", {CodeRegisterFunction : (w) => w.ArduinoWS.ParameterCodeList.push(ArduinoParameterCode.Fuel_Rail_Pressure), ValueGetFunction : (w, t) => w.ArduinoWS.getVal(ArduinoParameterCode.Fuel_Rail_Pressure, t)}]   
+]);
+
+export const DefaultDefiMap = new Map<WebsocketParameterCode, WebsocketClientMapEntry>([
+    ["Manifold_Absolute_Pressure", {CodeRegisterFunction : (w) => w.DefiWS.ParameterCodeList.push(DefiParameterCode.Manifold_Absolute_Pressure), ValueGetFunction : (w, t) => w.DefiWS.getVal(DefiParameterCode.Manifold_Absolute_Pressure, t)}],
+    ["Engine_Speed", {CodeRegisterFunction : (w) => w.DefiWS.ParameterCodeList.push(DefiParameterCode.Engine_Speed), ValueGetFunction : (w, t) => w.DefiWS.getVal(DefiParameterCode.Engine_Speed, t)}],
+    ["Oil_Pressure", {CodeRegisterFunction : (w) => w.DefiWS.ParameterCodeList.push(DefiParameterCode.Oil_Pressure), ValueGetFunction : (w, t) => w.DefiWS.getVal(DefiParameterCode.Oil_Pressure, t)}],
+    ["Fuel_Rail_Pressure", {CodeRegisterFunction : (w) => w.DefiWS.ParameterCodeList.push(DefiParameterCode.Fuel_Rail_Pressure), ValueGetFunction : (w, t) => w.DefiWS.getVal(DefiParameterCode.Fuel_Rail_Pressure, t)}],
+    ["Exhaust_Gas_Temperature", {CodeRegisterFunction : (w) => w.DefiWS.ParameterCodeList.push(DefiParameterCode.Exhaust_Gas_Temperature), ValueGetFunction : (w, t) => w.DefiWS.getVal(DefiParameterCode.Exhaust_Gas_Temperature, t)}],
+    ["Engine_oil_temperature", {CodeRegisterFunction : (w) => w.DefiWS.ParameterCodeList.push(DefiParameterCode.Oil_Temperature), ValueGetFunction : (w, t) => w.DefiWS.getVal(DefiParameterCode.Oil_Temperature, t)}],
+    ["Coolant_Temperature", {CodeRegisterFunction : (w) => w.DefiWS.ParameterCodeList.push(DefiParameterCode.Coolant_Temperature), ValueGetFunction : (w, t) => w.DefiWS.getVal(DefiParameterCode.Coolant_Temperature, t)}],
 ]);
