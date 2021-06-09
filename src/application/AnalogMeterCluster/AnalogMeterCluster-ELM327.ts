@@ -34,6 +34,8 @@ import { OBDIIParameterCode } from "../../lib/WebSocket/WebSocketCommunication";
 import { ReadModeCode } from "../../lib/WebSocket/WebSocketCommunication";
 
 import { calculateGearPosition } from "../../lib/MeterAppBase/utils/CalculateGearPosition";
+import { DefaultELM327Map } from "../../lib/MeterAppBase/WebSocketClientMapper";
+import { WebsocketObjectCollectionOption } from "../../lib/MeterAppBase/WebSocketObjectCollection";
 
 //For including entry point html file in webpack
 require("./AnalogMeterCluster-ELM327.html");
@@ -45,32 +47,27 @@ window.onload = function () {
 
 class AnalogMeterCluster_ELM327 {
     public Start() {
-        const appOption = new MeterApplicationOption();
+        const appOption = new MeterApplicationOption(DefaultELM327Map);
         appOption.width = 1100;
         appOption.height = 600;
         appOption.PreloadResource.WebFontFamiliyName.addall(AnalogMeterCluster.RequestedFontFamily);
         appOption.PreloadResource.WebFontCSSURL.addall(AnalogMeterCluster.RequestedFontCSSURL);
         appOption.PreloadResource.TexturePath.addall(AnalogMeterCluster.RequestedTexturePath);
 
-        appOption.WebsocketEnableFlag.ELM327 = true;
-        appOption.WebsocketEnableFlag.FUELTRIP = true;
+        appOption.WebSocketCollectionOption.ELM327WSEnabled = true;
+        appOption.WebSocketCollectionOption.FUELTRIPWSEnabled = true;
 
-        appOption.ParameterCode.ELM327OBDII.addall({ code: OBDIIParameterCode.Engine_Speed, readmode: ReadModeCode.SLOWandFAST });
-        appOption.ParameterCode.ELM327OBDII.addall({ code: OBDIIParameterCode.Manifold_Absolute_Pressure, readmode: ReadModeCode.SLOWandFAST });
-        appOption.ParameterCode.ELM327OBDII.addall({ code: OBDIIParameterCode.Vehicle_Speed, readmode: ReadModeCode.SLOWandFAST });
-        appOption.ParameterCode.ELM327OBDII.addall({ code: OBDIIParameterCode.Coolant_Temperature, readmode: ReadModeCode.SLOW });
-
-        appOption.SetupPIXIMeterPanel = (app, ws) => {
+        appOption.SetupPIXIMeterPanel = (app, ws, map) => {
             const stage = app.stage;
             const meterCluster = new AnalogMeterCluster();
             stage.addChild(meterCluster);
 
             app.ticker.add(() => {
                 const timestamp = app.ticker.lastTime;
-                const tacho = ws.ELM327WS.getVal(OBDIIParameterCode.Engine_Speed, timestamp);
-                const boost = ws.ELM327WS.getVal(OBDIIParameterCode.Manifold_Absolute_Pressure, timestamp) * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
-                const speed = ws.ELM327WS.getVal(OBDIIParameterCode.Vehicle_Speed, timestamp);
-                const waterTemp = ws.ELM327WS.getRawVal(OBDIIParameterCode.Coolant_Temperature);
+                const tacho = map.getValue("Engine_Speed", timestamp);
+                const boost = map.getValue("Manifold_Absolute_Pressure", timestamp) * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
+                const speed = map.getValue("Vehicle_Speed", timestamp);
+                const waterTemp = map.getValue("Coolant_Temperature");
                 const trip = ws.FUELTRIPWS.getTotalTrip();
                 const fuel = ws.FUELTRIPWS.getTotalGas();
                 const gasMilage = ws.FUELTRIPWS.getTotalGasMilage();
@@ -88,7 +85,15 @@ class AnalogMeterCluster_ELM327 {
                 meterCluster.GasMilage = gasMilage;
             });
         }
+
+        const wsOption = new WebsocketObjectCollectionOption();
+        wsOption.ELM327WSEnabled = true;
         const app = new MeterApplication(appOption);
+        app.WebSocketMapper.registerParameterCode("Engine_Speed", "SLOWandFAST");
+        app.WebSocketMapper.registerParameterCode("Manifold_Absolute_Pressure", "SLOWandFAST");
+        app.WebSocketMapper.registerParameterCode("Vehicle_Speed", "SLOWandFAST");
+        app.WebSocketMapper.registerParameterCode("Coolant_Temperature", "SLOW");
+        
         app.Run();
     }
 }
