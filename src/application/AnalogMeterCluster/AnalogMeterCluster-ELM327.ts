@@ -34,7 +34,7 @@ import { OBDIIParameterCode } from "../../lib/WebSocket/WebSocketCommunication";
 import { ReadModeCode } from "../../lib/WebSocket/WebSocketCommunication";
 
 import { calculateGearPosition } from "../../lib/MeterAppBase/utils/CalculateGearPosition";
-import { DefaultELM327Map } from "../../lib/MeterAppBase/WebSocketClientMapper";
+import { DefaultELM327Map, DefaultSSMMap } from "../../lib/MeterAppBase/WebSocketClientMapper";
 import { WebsocketObjectCollectionOption } from "../../lib/MeterAppBase/WebSocketObjectCollection";
 
 //For including entry point html file in webpack

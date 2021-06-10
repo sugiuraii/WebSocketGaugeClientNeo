@@ -89,5 +89,5 @@ export class MeterApplicationOption {
 
     public TransparentAppBackground = false;
 
-    public SetupPIXIMeterPanel: (pixiApp: PIXI.Application, wsObj: WebsocketObjectCollection, wsMapper: WebsocketClientMapper<WebsocketParameterCode>) => void = () => {/* do nothing*/};
+    public SetupPIXIMeterPanel: (pixiApp: PIXI.Application, wsObj: WebsocketObjectCollection, wsMapper: WebsocketClientMapper) => void = () => {/* do nothing*/};
 }
