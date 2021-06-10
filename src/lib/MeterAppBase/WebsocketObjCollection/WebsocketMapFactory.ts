@@ -21,188 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { OBDIIParameterCode, SSMParameterCode, ArduinoParameterCode, DefiParameterCode, ReadModeCode } from "../WebSocket/WebSocketCommunication";
-import { WebsocketObjectCollection } from "./WebSocketObjectCollection";
+import { OBDIIParameterCode, SSMParameterCode, ArduinoParameterCode, DefiParameterCode } from "../../WebSocket/WebSocketCommunication";
+import { WebsocketClientMapEntry } from "./WebsocketClientMapper";
+import { WebsocketParameterCode } from "./WebsocketParameterCode";
 
-export type WebsocketClientMapEntry = { CodeRegisterFunction: (ws: WebsocketObjectCollection, readmode: ReadModeCode) => void, ValueGetFunction: (ws: WebsocketObjectCollection, timeStamp?: number) => number };
-
-export class WebsocketClientMapper
+export class WebsocketMapFactory
 {
-    private readonly webSocketCollection: WebsocketObjectCollection;
-    private readonly map = new Map<WebsocketParameterCode, WebsocketClientMapEntry>();
-
-    constructor(webSocketCollection: WebsocketObjectCollection, map: Map<WebsocketParameterCode, WebsocketClientMapEntry>) {
-        this.webSocketCollection = webSocketCollection;
-        this.map = map;
-    }
-
-    public registerParameterCode(code: WebsocketParameterCode, readmode: ReadModeCode): void {
-        const mapItem = this.map.get(code);
-        if (mapItem !== undefined)
-            mapItem.CodeRegisterFunction(this.webSocketCollection, readmode);
-        else
-            throw ReferenceError("Code of " + code + " is not registered websocket client map.");
-    }
-
-    public getValue(code: WebsocketParameterCode, timeStamp?: number): number {
-        const mapItem = this.map.get(code);
-        if (mapItem !== undefined)
-            return mapItem.ValueGetFunction(this.webSocketCollection, timeStamp);
-        else
-            throw ReferenceError("Code of " + code + " is not registered websocket client map.");
-    }
+    public get DefaultELM327Map() : Map<WebsocketParameterCode, WebsocketClientMapEntry> { return DefaultELM327Map }
+    public get DefaultSSMMap() : Map<WebsocketParameterCode, WebsocketClientMapEntry> { return DefaultSSMMap }
+    public get DefaultArduinoMap() : Map<WebsocketParameterCode, WebsocketClientMapEntry> { return DefaultArduinoMap }
+    public get DefaultDefiMap() : Map<WebsocketParameterCode, WebsocketClientMapEntry> { return DefaultDefiMap }
+    public get SSMMapReplaceRPMAndBoostWithDefiMap() : Map<WebsocketParameterCode, WebsocketClientMapEntry> { return SSMMapReplaceRPMAndBoostWithDefiMap() }
+    public get ELM327MapReplaceRPMAndBoost() : Map<WebsocketParameterCode, WebsocketClientMapEntry> { return ELM327MapReplaceRPMAndBoost() }
 }
 
-export type WebsocketParameterCode =
-    // Copied from OBDII parameter code
-    "Engine_Load" |
-    "Coolant_Temperature" |
-    "Air_Fuel_Correction_1" |
-    "Air_Fuel_Learning_1" |
-    "Air_Fuel_Correction_2" |
-    "Air_Fuel_Learning_2" |
-    "Fuel_Tank_Pressure" |
-    "Manifold_Absolute_Pressure" |
-    "Engine_Speed" |
-    "Vehicle_Speed" |
-    "Ignition_Timing" |
-    "Intake_Air_Temperature" |
-    "Mass_Air_Flow" |
-    "Throttle_Opening_Angle" |
-    "Run_time_since_engine_start" |
-    "Distance_traveled_with_MIL_on" |
-    "Fuel_Rail_Pressure" |
-    "Fuel_Rail_Pressure_diesel" |
-    "Commanded_EGR" |
-    "EGR_Error" |
-    "Commanded_evaporative_purge" |
-    "Fuel_Level_Input" |
-    "Number_of_warmups_since_codes_cleared" |
-    "Distance_traveled_since_codes_cleared" |
-    "Evap_System_Vapor_Pressure" |
-    "Atmospheric_Pressure" |
-    "Catalyst_TemperatureBank_1_Sensor_1" |
-    "Catalyst_TemperatureBank_2_Sensor_1" |
-    "Catalyst_TemperatureBank_1_Sensor_2" |
-    "Catalyst_TemperatureBank_2_Sensor_2" |
-    "Battery_Voltage" |
-    "Absolute_load_value" |
-    "Command_equivalence_ratio" |
-    "Relative_throttle_position" |
-    "Ambient_air_temperature" |
-    "Absolute_throttle_position_B" |
-    "Absolute_throttle_position_C" |
-    "Accelerator_pedal_position_D" |
-    "Accelerator_pedal_position_E" |
-    "Accelerator_pedal_position_F" |
-    "Commanded_throttle_actuator" |
-    "Time_run_with_MIL_on" |
-    "Time_since_trouble_codes_cleared" |
-    "Ethanol_fuel_percent" |
-    "O2Sensor_1_Air_Fuel_Correction" |
-    "O2Sensor_2_Air_Fuel_Correction" |
-    "O2Sensor_3_Air_Fuel_Correction" |
-    "O2Sensor_4_Air_Fuel_Correction" |
-    "O2Sensor_5_Air_Fuel_Correction" |
-    "O2Sensor_6_Air_Fuel_Correction" |
-    "O2Sensor_7_Air_Fuel_Correction" |
-    "O2Sensor_8_Air_Fuel_Correction" |
-    "O2Sensor_1_Air_Fuel_Ratio" |
-    "O2Sensor_2_Air_Fuel_Ratio" |
-    "O2Sensor_3_Air_Fuel_Ratio" |
-    "O2Sensor_4_Air_Fuel_Ratio" |
-    "O2Sensor_5_Air_Fuel_Ratio" |
-    "O2Sensor_6_Air_Fuel_Ratio" |
-    "O2Sensor_7_Air_Fuel_Ratio" |
-    "O2Sensor_8_Air_Fuel_Ratio" |
-    "Evap_system_vapor_pressure" |
-    "Fuel_rail_absolute_pressure" |
-    "Relative_accelerator_pedal_position" |
-    "Hybrid_battery_pack_remaining_life" |
-    "Engine_oil_temperature" |
-    "Fuel_injection_timing" |
-    "Engine_fuel_rate" |
-    "Driver_demand_engine_percent_torque" |
-    "Actual_engine_percent_torque" |
-    "Engine_reference_torque" |
-    // SSM (parameter code) unique code
-    "Front_O2_Sensor_1" |
-    "Rear_O2_Sensor" |
-    "Front_O2_Sensor_2" |
-    "Air_Flow_Sensor_Voltage" |
-    "Throttle_Sensor_Voltage" |
-    "Differential_Pressure_Sensor_Voltage" |
-    "Fuel_Injection_1_Pulse_Width" |
-    "Fuel_Injection_2_Pulse_Width" |
-    "Knock_Correction" |
-    "Manifold_Relative_Pressure" |
-    "Pressure_Differential_Sensor" |
-    "CO_Adjustment" |
-    "Learned_Ignition_Timing" |
-    "Accelerator_Opening_Angle" |
-    "Fuel_Temperature" |
-    "Front_O2_Heater_1" |
-    "Rear_O2_Heater_Current" |
-    "Front_O2_Heater_2" |
-    "Fuel_Level" |
-    "Primary_Wastegate_Duty_Cycle" |
-    "Secondary_Wastegate_Duty_Cycle" |
-    "CPC_Valve_Duty_Ratio" |
-    "Tumble_Valve_Position_Sensor_Right" |
-    "Tumble_Valve_Position_Sensor_Left" |
-    "Idle_Speed_Control_Valve_Duty_Ratio" |
-    "Air_Fuel_Lean_Correction" |
-    "Air_Fuel_Heater_Duty" |
-    "Idle_Speed_Control_Valve_Step" |
-    "Number_of_Ex_Gas_Recirc_Steps" |
-    "Alternator_Duty" |
-    "Fuel_Pump_Duty" |
-    "Intake_VVT_Advance_Angle_Right" |
-    "Intake_VVT_Advance_Angle_Left" |
-    "Intake_OCV_Duty_Right" |
-    "Intake_OCV_Duty_Left" |
-    "Intake_OCV_Current_Right" |
-    "Intake_OCV_Current_Left" |
-    "Air_Fuel_Sensor_1_Current" |
-    "Air_Fuel_Sensor_2_Current" |
-    "Air_Fuel_Sensor_1_Resistance" |
-    "Air_Fuel_Sensor_2_Resistance" |
-    "Air_Fuel_Sensor_1" |
-    "Air_Fuel_Sensor_2" |
-    "Gear_Position" |
-    "A_F_Sensor_1_Heater_Current" |
-    "A_F_Sensor_2_Heater_Current" |
-    "Roughness_Monitor_Cylinder_1" |
-    "Roughness_Monitor_Cylinder_2" |
-    "Air_Fuel_Correction_3" |
-    "Air_Fuel_Learning_3" |
-    "Rear_O2_Heater_Voltage" |
-    "Air_Fuel_Adjustment_Voltage" |
-    "Roughness_Monitor_Cylinder_3" |
-    "Roughness_Monitor_Cylinder_4" |
-    "Throttle_Motor_Duty" |
-    "Throttle_Motor_Voltage" |
-    "Sub_Throttle_Sensor" |
-    "Main_Throttle_Sensor" |
-    "Sub_Accelerator_Sensor" |
-    "Main_Accelerator_Sensor" |
-    "Brake_Booster_Pressure" |
-    "Exhaust_Gas_Temperature" |
-    "Cold_Start_Injector" |
-    "SCV_Step" |
-    "Memorised_Cruise_Speed" |
-    "Exhaust_VVT_Advance_Angle_Right" |
-    "Exhaust_VVT_Advance_Angle_Left" |
-    "Exhaust_OCV_Duty_Right" |
-    "Exhaust_OCV_Duty_Left" |
-    "Exhaust_OCV_Current_Right" |
-    "Exhaust_OCV_Current_Left" |
-    // Arduino unique code
-    "Oil_Temperature2" |
-    "Oil_Pressure";
-
-
-export const DefaultELM327Map = new Map<WebsocketParameterCode, WebsocketClientMapEntry>([
+const DefaultELM327Map = new Map<WebsocketParameterCode, WebsocketClientMapEntry>([
     ["Engine_Load", { CodeRegisterFunction: (w, r) => w.ELM327WS.ParameterCodeList.push({ code: OBDIIParameterCode.Engine_Load, readmode: r }), ValueGetFunction: (w, t) => w.ELM327WS.getVal(OBDIIParameterCode.Engine_Load, t) }],
     ["Coolant_Temperature", { CodeRegisterFunction: (w, r) => w.ELM327WS.ParameterCodeList.push({ code: OBDIIParameterCode.Coolant_Temperature, readmode: r }), ValueGetFunction: (w, t) => w.ELM327WS.getVal(OBDIIParameterCode.Coolant_Temperature, t) }],
     ["Air_Fuel_Correction_1", { CodeRegisterFunction: (w, r) => w.ELM327WS.ParameterCodeList.push({ code: OBDIIParameterCode.Air_Fuel_Correction_1, readmode: r }), ValueGetFunction: (w, t) => w.ELM327WS.getVal(OBDIIParameterCode.Air_Fuel_Correction_1, t) }],
@@ -275,7 +108,7 @@ export const DefaultELM327Map = new Map<WebsocketParameterCode, WebsocketClientM
     ["Engine_reference_torque", { CodeRegisterFunction: (w, r) => w.ELM327WS.ParameterCodeList.push({ code: OBDIIParameterCode.Engine_reference_torque, readmode: r }), ValueGetFunction: (w, t) => w.ELM327WS.getVal(OBDIIParameterCode.Engine_reference_torque, t) }]
 ]);
 
-export const DefaultSSMMap = new Map<WebsocketParameterCode, WebsocketClientMapEntry>([
+const DefaultSSMMap = new Map<WebsocketParameterCode, WebsocketClientMapEntry>([
     ["Engine_Load", {CodeRegisterFunction : (w, r) => w.SSMWS.ParameterCodeList.push({code : SSMParameterCode.Engine_Load, readmode :r}), ValueGetFunction : (w, t) => w.SSMWS.getVal(SSMParameterCode.Engine_Load, t)}],
     ["Coolant_Temperature", {CodeRegisterFunction : (w, r) => w.SSMWS.ParameterCodeList.push({code : SSMParameterCode.Coolant_Temperature, readmode :r}), ValueGetFunction : (w, t) => w.SSMWS.getVal(SSMParameterCode.Coolant_Temperature, t)}],
     ["Air_Fuel_Correction_1", {CodeRegisterFunction : (w, r) => w.SSMWS.ParameterCodeList.push({code : SSMParameterCode.Air_Fuel_Correction_1, readmode :r}), ValueGetFunction : (w, t) => w.SSMWS.getVal(SSMParameterCode.Air_Fuel_Correction_1, t)}],
@@ -366,7 +199,7 @@ export const DefaultSSMMap = new Map<WebsocketParameterCode, WebsocketClientMapE
     ["Exhaust_OCV_Current_Left", {CodeRegisterFunction : (w, r) => w.SSMWS.ParameterCodeList.push({code : SSMParameterCode.Exhaust_OCV_Current_Left, readmode :r}), ValueGetFunction : (w, t) => w.SSMWS.getVal(SSMParameterCode.Exhaust_OCV_Current_Left, t)}],   
 ]);
 
-export const DefaultArduinoMap = new Map<WebsocketParameterCode, WebsocketClientMapEntry>([
+const DefaultArduinoMap = new Map<WebsocketParameterCode, WebsocketClientMapEntry>([
     ["Engine_Speed", {CodeRegisterFunction : (w) => w.ArduinoWS.ParameterCodeList.push(ArduinoParameterCode.Engine_Speed), ValueGetFunction : (w, t) => w.ArduinoWS.getVal(ArduinoParameterCode.Engine_Speed, t)}],
     ["Vehicle_Speed", {CodeRegisterFunction : (w) => w.ArduinoWS.ParameterCodeList.push(ArduinoParameterCode.Vehicle_Speed), ValueGetFunction : (w, t) => w.ArduinoWS.getVal(ArduinoParameterCode.Vehicle_Speed, t)}],
     ["Manifold_Absolute_Pressure", {CodeRegisterFunction : (w) => w.ArduinoWS.ParameterCodeList.push(ArduinoParameterCode.Manifold_Absolute_Pressure), ValueGetFunction : (w, t) => w.ArduinoWS.getVal(ArduinoParameterCode.Manifold_Absolute_Pressure, t)}],
@@ -387,7 +220,7 @@ export const DefaultDefiMap = new Map<WebsocketParameterCode, WebsocketClientMap
     ["Coolant_Temperature", {CodeRegisterFunction : (w) => w.DefiWS.ParameterCodeList.push(DefiParameterCode.Coolant_Temperature), ValueGetFunction : (w, t) => w.DefiWS.getVal(DefiParameterCode.Coolant_Temperature, t)}],
 ]);
 
-export const SSMMapReplaceRPMAndBoostWithDefiMap = function() : Map<WebsocketParameterCode, WebsocketClientMapEntry>
+const SSMMapReplaceRPMAndBoostWithDefiMap = function() : Map<WebsocketParameterCode, WebsocketClientMapEntry>
 {
     const ssmMap = new Map(DefaultSSMMap);
     ssmMap.set("Engine_Speed", {CodeRegisterFunction : (w) => w.DefiWS.ParameterCodeList.push(DefiParameterCode.Engine_Speed), ValueGetFunction : (w, t) => w.DefiWS.getVal(DefiParameterCode.Engine_Speed, t)});
@@ -396,7 +229,7 @@ export const SSMMapReplaceRPMAndBoostWithDefiMap = function() : Map<WebsocketPar
     return ssmMap;
 }
 
-export const ELM327MapReplaceRPMAndBoost = function() : Map<WebsocketParameterCode, WebsocketClientMapEntry>
+const ELM327MapReplaceRPMAndBoost = function() : Map<WebsocketParameterCode, WebsocketClientMapEntry>
 {
     const elm327Map = new Map(DefaultELM327Map);
     elm327Map.set("Engine_Speed", {CodeRegisterFunction : (w) => w.ArduinoWS.ParameterCodeList.push(ArduinoParameterCode.Engine_Speed), ValueGetFunction : (w, t) => w.ArduinoWS.getVal(ArduinoParameterCode.Engine_Speed, t)});

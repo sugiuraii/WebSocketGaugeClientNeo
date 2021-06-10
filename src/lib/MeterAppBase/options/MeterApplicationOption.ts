@@ -23,8 +23,9 @@
  */
 
 import * as PIXI from "pixi.js";
-import { WebsocketClientMapEntry, WebsocketClientMapper, WebsocketParameterCode } from "../WebSocketClientMapper";
-import { WebsocketObjectCollection, WebsocketObjectCollectionOption } from "../WebSocketObjectCollection";
+import { WebsocketClientMapEntry, WebsocketClientMapper } from "../WebsocketObjCollection/WebsocketClientMapper";
+import { WebsocketObjectCollection, WebsocketObjectCollectionOption } from "../WebsocketObjCollection/WebsocketObjectCollection";
+import { WebsocketParameterCode } from "../WebsocketObjCollection/WebsocketParameterCode";
 
 /*
 class WebsocketEnableFlag {

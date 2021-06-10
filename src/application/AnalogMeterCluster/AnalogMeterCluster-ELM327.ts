@@ -30,12 +30,11 @@ import { MeterApplicationOption } from "../../lib/MeterAppBase/options/MeterAppl
 import { AnalogMeterCluster } from "../../parts/AnalogMeterCluster/AnalogMeterCluster";
 
 //Import enumuator of parameter code
-import { OBDIIParameterCode } from "../../lib/WebSocket/WebSocketCommunication";
-import { ReadModeCode } from "../../lib/WebSocket/WebSocketCommunication";
 
 import { calculateGearPosition } from "../../lib/MeterAppBase/utils/CalculateGearPosition";
-import { DefaultELM327Map, DefaultSSMMap } from "../../lib/MeterAppBase/WebSocketClientMapper";
-import { WebsocketObjectCollectionOption } from "../../lib/MeterAppBase/WebSocketObjectCollection";
+import { WebsocketObjectCollectionOption } from "../../lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
+import { WebsocketMapFactory } from "../../lib/MeterAppBase/WebsocketObjCollection/WebsocketMapFactory";
+
 
 //For including entry point html file in webpack
 require("./AnalogMeterCluster-ELM327.html");
@@ -47,7 +46,8 @@ window.onload = function () {
 
 class AnalogMeterCluster_ELM327 {
     public Start() {
-        const appOption = new MeterApplicationOption(DefaultELM327Map);
+        const mapFactory = new WebsocketMapFactory();
+        const appOption = new MeterApplicationOption(mapFactory.ELM327MapReplaceRPMAndBoost);
         appOption.width = 1100;
         appOption.height = 600;
         appOption.PreloadResource.WebFontFamiliyName.addall(AnalogMeterCluster.RequestedFontFamily);

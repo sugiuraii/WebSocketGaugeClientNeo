@@ -28,14 +28,14 @@ import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
 
 import { WebstorageHandler } from "./Webstorage/WebstorageHandler";
-import { WebsocketObjectCollection, WebsocketObjectCollectionOption } from "./WebSocketObjectCollection";
+import { WebsocketObjectCollection, WebsocketObjectCollectionOption } from "./WebsocketObjCollection/WebsocketObjectCollection";
 import { MeterApplicationOption } from "./options/MeterApplicationOption";
 import { ApplicationNavbar } from './reactParts/ApplicationNavbar';
 import { StringListLogger } from "./utils/StringListLogger";
 import PIXIApplication from "./reactParts/PIXIApplication";
 
 import 'bootswatch/dist/slate/bootstrap.min.css';
-import { WebsocketClientMapEntry, WebsocketClientMapper, WebsocketParameterCode } from "./WebSocketClientMapper";
+import { WebsocketClientMapEntry, WebsocketClientMapper, WebsocketParameterCode } from "./WebsocketObjCollection/WebsocketClientMapper";
 const BOOTSTRAP_CSS_FILENAME = "bootstrap.min.css";
 
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";

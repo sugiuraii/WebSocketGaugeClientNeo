@@ -22,14 +22,14 @@
  * THE SOFTWARE.
  */
 
-import { DefiWebsocketBackend } from "./WebsocketAppBackend/DefiWebsocketBackend";
-import { SSMWebsocketBackend } from "./WebsocketAppBackend/SSMWebsocketBackend";
-import { ArduinoWebsocketBackend } from "./WebsocketAppBackend/ArduinoWebsocketBackend";
-import { ELM327WebsocketBackend } from "./WebsocketAppBackend/ELM327WebsocketBackend";
-import { AssettoCorsaSHMWebsocketBackend } from "./WebsocketAppBackend/AssettoCorsaSHMWebsocketBackend";
-import { FUELTRIPWebsocketBackend } from "./WebsocketAppBackend/FUELTRIPWebsocketBackend";
-import { ILogger } from "./utils/ILogger";
-import { WebsocketState } from "./WebsocketAppBackend/WebsocketState";
+import { DefiWebsocketBackend } from "../WebsocketAppBackend/DefiWebsocketBackend";
+import { SSMWebsocketBackend } from "../WebsocketAppBackend/SSMWebsocketBackend";
+import { ArduinoWebsocketBackend } from "../WebsocketAppBackend/ArduinoWebsocketBackend";
+import { ELM327WebsocketBackend } from "../WebsocketAppBackend/ELM327WebsocketBackend";
+import { AssettoCorsaSHMWebsocketBackend } from "../WebsocketAppBackend/AssettoCorsaSHMWebsocketBackend";
+import { FUELTRIPWebsocketBackend } from "../WebsocketAppBackend/FUELTRIPWebsocketBackend";
+import { ILogger } from "../utils/ILogger";
+import { WebsocketState } from "../WebsocketAppBackend/WebsocketState";
 
 export class WebsocketObjectCollectionOption
 {
