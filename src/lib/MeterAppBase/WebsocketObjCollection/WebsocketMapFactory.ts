@@ -31,8 +31,9 @@ export class WebsocketMapFactory
     public get DefaultSSMMap() : Map<WebsocketParameterCode, WebsocketClientMapEntry> { return DefaultSSMMap }
     public get DefaultArduinoMap() : Map<WebsocketParameterCode, WebsocketClientMapEntry> { return DefaultArduinoMap }
     public get DefaultDefiMap() : Map<WebsocketParameterCode, WebsocketClientMapEntry> { return DefaultDefiMap }
-    public get SSMMapReplaceRPMAndBoostWithDefiMap() : Map<WebsocketParameterCode, WebsocketClientMapEntry> { return SSMMapReplaceRPMAndBoostWithDefiMap() }
-    public get ELM327MapReplaceRPMAndBoost() : Map<WebsocketParameterCode, WebsocketClientMapEntry> { return ELM327MapReplaceRPMAndBoost() }
+    public getSSMAndDefiHybridMap(codesToMapToDefiWS : DefiParameterCode[]) : Map<WebsocketParameterCode, WebsocketClientMapEntry> { return SSMAndDefiHybridMap(codesToMapToDefiWS); }
+    public getSSMAndArduinoHybridMap(codesToMapToArduinoWS : ArduinoParameterCode[]) : Map<WebsocketParameterCode, WebsocketClientMapEntry> { return SSMAndArduinoHybridMap(codesToMapToArduinoWS); }    
+    public getELM327AndArduinoHybridMap(codesToMapToArduinoWS : ArduinoParameterCode[]) : Map<WebsocketParameterCode, WebsocketClientMapEntry> { return ELM327AndArduinoHybridMap(codesToMapToArduinoWS); }
 }
 
 const DefaultELM327Map = new Map<WebsocketParameterCode, WebsocketClientMapEntry>([
@@ -220,20 +221,41 @@ export const DefaultDefiMap = new Map<WebsocketParameterCode, WebsocketClientMap
     ["Coolant_Temperature", {CodeRegisterFunction : (w) => w.DefiWS.ParameterCodeList.push(DefiParameterCode.Coolant_Temperature), ValueGetFunction : (w, t) => w.DefiWS.getVal(DefiParameterCode.Coolant_Temperature, t)}],
 ]);
 
-const SSMMapReplaceRPMAndBoostWithDefiMap = function() : Map<WebsocketParameterCode, WebsocketClientMapEntry>
+const SSMAndDefiHybridMap = function(codeToMapToDefiWS : DefiParameterCode[]) : Map<WebsocketParameterCode, WebsocketClientMapEntry>
 {
-    const ssmMap = new Map(DefaultSSMMap);
-    ssmMap.set("Engine_Speed", {CodeRegisterFunction : (w) => w.DefiWS.ParameterCodeList.push(DefiParameterCode.Engine_Speed), ValueGetFunction : (w, t) => w.DefiWS.getVal(DefiParameterCode.Engine_Speed, t)});
-    ssmMap.set("Manifold_Absolute_Pressure", {CodeRegisterFunction : (w) => w.ArduinoWS.ParameterCodeList.push(ArduinoParameterCode.Manifold_Absolute_Pressure), ValueGetFunction : (w, t) => w.ArduinoWS.getVal(ArduinoParameterCode.Manifold_Absolute_Pressure, t)});
-
-    return ssmMap;
+    const map = new Map(DefaultSSMMap);
+    codeToMapToDefiWS.forEach(code => 
+        {
+            if(code !== "Oil_Temperature")
+                map.set(code, {CodeRegisterFunction : (w) => w.DefiWS.ParameterCodeList.push(code), ValueGetFunction : (w, t) => w.DefiWS.getVal(code, t)});
+            else
+                map.set("Engine_oil_temperature", {CodeRegisterFunction : (w) => w.DefiWS.ParameterCodeList.push("Oil_Temperature"), ValueGetFunction : (w, t) => w.DefiWS.getVal("Oil_Temperature", t)});
+        });    
+    return map;
 }
 
-const ELM327MapReplaceRPMAndBoost = function() : Map<WebsocketParameterCode, WebsocketClientMapEntry>
+const SSMAndArduinoHybridMap = function(codeToMapToArduinoWS : ArduinoParameterCode[]) : Map<WebsocketParameterCode, WebsocketClientMapEntry>
+{
+    const map = new Map(DefaultSSMMap);
+    codeToMapToArduinoWS.forEach(code => 
+        {
+            if(code !== "Oil_Temperature")
+                map.set(code, {CodeRegisterFunction : (w) => w.ArduinoWS.ParameterCodeList.push(code), ValueGetFunction : (w, t) => w.ArduinoWS.getVal(code, t)});
+            else
+                map.set("Engine_oil_temperature", {CodeRegisterFunction : (w) => w.ArduinoWS.ParameterCodeList.push("Oil_Temperature"), ValueGetFunction : (w, t) => w.ArduinoWS.getVal("Oil_Temperature", t)});
+        });    
+    return map;
+}
+
+const ELM327AndArduinoHybridMap = function(codeToMapToArduinoWS : ArduinoParameterCode[]) : Map<WebsocketParameterCode, WebsocketClientMapEntry>
 {
     const elm327Map = new Map(DefaultELM327Map);
-    elm327Map.set("Engine_Speed", {CodeRegisterFunction : (w) => w.ArduinoWS.ParameterCodeList.push(ArduinoParameterCode.Engine_Speed), ValueGetFunction : (w, t) => w.ArduinoWS.getVal(ArduinoParameterCode.Engine_Speed, t)});
-    elm327Map.set("Manifold_Absolute_Pressure", {CodeRegisterFunction : (w) => w.ArduinoWS.ParameterCodeList.push(ArduinoParameterCode.Manifold_Absolute_Pressure), ValueGetFunction : (w, t) => w.ArduinoWS.getVal(ArduinoParameterCode.Manifold_Absolute_Pressure, t)});
-
+    codeToMapToArduinoWS.forEach(code => 
+        {
+            if(code !== "Oil_Temperature")
+                elm327Map.set(code, {CodeRegisterFunction : (w) => w.ArduinoWS.ParameterCodeList.push(code), ValueGetFunction : (w, t) => w.ArduinoWS.getVal(code, t)});
+            else
+                elm327Map.set("Engine_oil_temperature", {CodeRegisterFunction : (w) => w.ArduinoWS.ParameterCodeList.push("Oil_Temperature"), ValueGetFunction : (w, t) => w.ArduinoWS.getVal("Oil_Temperature", t)});
+        });
     return elm327Map;
 }

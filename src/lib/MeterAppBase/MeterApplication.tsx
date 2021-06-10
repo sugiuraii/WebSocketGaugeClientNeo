@@ -28,14 +28,14 @@ import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
 
 import { WebstorageHandler } from "./Webstorage/WebstorageHandler";
-import { WebsocketObjectCollection, WebsocketObjectCollectionOption } from "./WebsocketObjCollection/WebsocketObjectCollection";
+import { WebsocketObjectCollection } from "./WebsocketObjCollection/WebsocketObjectCollection";
 import { MeterApplicationOption } from "./options/MeterApplicationOption";
 import { ApplicationNavbar } from './reactParts/ApplicationNavbar';
 import { StringListLogger } from "./utils/StringListLogger";
 import PIXIApplication from "./reactParts/PIXIApplication";
 
 import 'bootswatch/dist/slate/bootstrap.min.css';
-import { WebsocketClientMapEntry, WebsocketClientMapper, WebsocketParameterCode } from "./WebsocketObjCollection/WebsocketClientMapper";
+import { WebsocketClientMapper } from "./WebsocketObjCollection/WebsocketClientMapper";
 const BOOTSTRAP_CSS_FILENAME = "bootstrap.min.css";
 
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
@@ -46,13 +46,13 @@ export class MeterApplication {
 
     private readonly webSocketCollection : WebsocketObjectCollection;
     public get WebSocketCollection() : WebsocketObjectCollection { return this.webSocketCollection }
-    private readonly webSocketMapper : WebsocketClientMapper<WebsocketParameterCode>;
-    public get WebSocketMapper() : WebsocketClientMapper<WebsocketParameterCode> { return this.webSocketMapper }
+    private readonly webSocketMapper : WebsocketClientMapper;
+    public get WebSocketMapper() : WebsocketClientMapper { return this.webSocketMapper }
 
     constructor(option: MeterApplicationOption) {
         this.Option = option;
         this.webSocketCollection = new WebsocketObjectCollection(this.Logger, option.WebSocketCollectionOption);
-        this.webSocketMapper = new WebsocketClientMapper<WebsocketParameterCode>(this.webSocketCollection, option.WebSocketMapping);
+        this.webSocketMapper = new WebsocketClientMapper(this.webSocketCollection, option.WebSocketMapping);
     }
 
     public Run(): void {

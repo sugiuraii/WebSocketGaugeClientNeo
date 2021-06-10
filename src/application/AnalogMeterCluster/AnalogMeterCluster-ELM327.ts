@@ -34,6 +34,7 @@ import { AnalogMeterCluster } from "../../parts/AnalogMeterCluster/AnalogMeterCl
 import { calculateGearPosition } from "../../lib/MeterAppBase/utils/CalculateGearPosition";
 import { WebsocketObjectCollectionOption } from "../../lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
 import { WebsocketMapFactory } from "../../lib/MeterAppBase/WebsocketObjCollection/WebsocketMapFactory";
+import { ArduinoParameterCode } from "../../lib/WebSocket/WebSocketCommunication";
 
 
 //For including entry point html file in webpack
@@ -47,13 +48,14 @@ window.onload = function () {
 class AnalogMeterCluster_ELM327 {
     public Start() {
         const mapFactory = new WebsocketMapFactory();
-        const appOption = new MeterApplicationOption(mapFactory.ELM327MapReplaceRPMAndBoost);
+        const appOption = new MeterApplicationOption(mapFactory.getELM327AndArduinoHybridMap([ArduinoParameterCode.Engine_Speed, ArduinoParameterCode.Manifold_Absolute_Pressure]));
         appOption.width = 1100;
         appOption.height = 600;
         appOption.PreloadResource.WebFontFamiliyName.addall(AnalogMeterCluster.RequestedFontFamily);
         appOption.PreloadResource.WebFontCSSURL.addall(AnalogMeterCluster.RequestedFontCSSURL);
         appOption.PreloadResource.TexturePath.addall(AnalogMeterCluster.RequestedTexturePath);
 
+        appOption.WebSocketCollectionOption.ArduinoWSEnabled = true;
         appOption.WebSocketCollectionOption.ELM327WSEnabled = true;
         appOption.WebSocketCollectionOption.FUELTRIPWSEnabled = true;
 
