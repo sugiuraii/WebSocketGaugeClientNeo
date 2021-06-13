@@ -35,7 +35,6 @@ import { StringListLogger } from "./utils/StringListLogger";
 import PIXIApplication from "./reactParts/PIXIApplication";
 
 import 'bootswatch/dist/slate/bootstrap.min.css';
-import { WebsocketClientMapper } from "./WebsocketObjCollection/WebsocketClientMapper";
 const BOOTSTRAP_CSS_FILENAME = "bootstrap.min.css";
 
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
@@ -46,13 +45,10 @@ export class MeterApplication {
 
     private readonly webSocketCollection : WebsocketObjectCollection;
     public get WebSocketCollection() : WebsocketObjectCollection { return this.webSocketCollection }
-    private readonly webSocketMapper : WebsocketClientMapper;
-    public get WebSocketMapper() : WebsocketClientMapper { return this.webSocketMapper }
 
     constructor(option: MeterApplicationOption) {
         this.Option = option;
         this.webSocketCollection = new WebsocketObjectCollection(this.Logger, option.WebSocketCollectionOption);
-        this.webSocketMapper = new WebsocketClientMapper(this.webSocketCollection, option.WebSocketMapping);
     }
 
     public Run(): void {
@@ -99,7 +95,7 @@ export class MeterApplication {
 
 
         // Preload Fonts -> textures-> parts
-        this.preloadFonts(() => this.preloadTextures(() => this.Option.SetupPIXIMeterPanel(pixiApp, this.WebSocketCollection, this.WebSocketMapper)));
+        this.preloadFonts(() => this.preloadTextures(() => this.Option.SetupPIXIMeterPanel(pixiApp, this.WebSocketCollection)));
 
         this.WebSocketCollection.Run();
     }
