@@ -28,12 +28,10 @@ import { MeterApplicationOption } from "../../lib/MeterAppBase/options/MeterAppl
 
 //Import meter parts
 import { AnalogMeterCluster } from "../../parts/AnalogMeterCluster/AnalogMeterCluster";
-
-//Import enumuator of parameter code
-
-import { calculateGearPosition } from "../../lib/MeterAppBase/utils/CalculateGearPosition";
 import { WebsocketObjectCollectionOption } from "../../lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
-import { WebsocketMapFactory } from "../../lib/MeterAppBase/WebsocketObjCollection/WebsocketMapFactory";
+
+// Import AppSettings.
+import * as Settings from  "../AppSettings"
 
 //For including entry point html file in webpack
 require("./AnalogMeterCluster-ELM327.html");
@@ -55,8 +53,9 @@ class AnalogMeterCluster_ELM327 {
         appOption.WebSocketCollectionOption.ArduinoWSEnabled = true;
         appOption.WebSocketCollectionOption.ELM327WSEnabled = true;
         appOption.WebSocketCollectionOption.FUELTRIPWSEnabled = true;
-        const mapFactory = new WebsocketMapFactory();
-        appOption.WebSocketCollectionOption.WSMap = mapFactory.DefaultELM327Map;
+        appOption.WebSocketCollectionOption.WSMap = Settings.DefaultWebSocketMap;
+
+        const gearCalculator = Settings.DefaultGearPostionCalculator;
 
         appOption.SetupPIXIMeterPanel = (app, ws) => {
             const stage = app.stage;
@@ -72,15 +71,14 @@ class AnalogMeterCluster_ELM327 {
                 const trip = ws.FUELTRIPWS.getTotalTrip();
                 const fuel = ws.FUELTRIPWS.getTotalGas();
                 const gasMilage = ws.FUELTRIPWS.getTotalGasMilage();
-                const neutralSw = false;
 
-                const geasPos = calculateGearPosition(tacho, speed, neutralSw);
+                const gearPos = gearCalculator.getGearPosition(tacho, speed);
 
                 meterCluster.Tacho = tacho;
                 meterCluster.Boost = boost;
                 meterCluster.Speed = speed;
                 meterCluster.WaterTemp = waterTemp;
-                meterCluster.GearPos = geasPos;
+                meterCluster.GearPos = (gearPos === undefined)?"-":gearPos.toString();
                 meterCluster.Trip = trip;
                 meterCluster.Fuel = fuel;
                 meterCluster.GasMilage = gasMilage;
