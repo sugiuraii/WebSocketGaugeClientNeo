@@ -34,8 +34,6 @@ import { AnalogMeterCluster } from "../../parts/AnalogMeterCluster/AnalogMeterCl
 import { calculateGearPosition } from "../../lib/MeterAppBase/utils/CalculateGearPosition";
 import { WebsocketObjectCollectionOption } from "../../lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
 import { WebsocketMapFactory } from "../../lib/MeterAppBase/WebsocketObjCollection/WebsocketMapFactory";
-import { ArduinoParameterCode } from "../../lib/WebSocket/WebSocketCommunication";
-
 
 //For including entry point html file in webpack
 require("./AnalogMeterCluster-ELM327.html");
@@ -47,8 +45,7 @@ window.onload = function () {
 
 class AnalogMeterCluster_ELM327 {
     public Start() {
-        const mapFactory = new WebsocketMapFactory();
-        const appOption = new MeterApplicationOption(mapFactory.getELM327AndArduinoHybridMap([ArduinoParameterCode.Engine_Speed, ArduinoParameterCode.Manifold_Absolute_Pressure]));
+        const appOption = new MeterApplicationOption();
         appOption.width = 1100;
         appOption.height = 600;
         appOption.PreloadResource.WebFontFamiliyName.addall(AnalogMeterCluster.RequestedFontFamily);
@@ -58,18 +55,20 @@ class AnalogMeterCluster_ELM327 {
         appOption.WebSocketCollectionOption.ArduinoWSEnabled = true;
         appOption.WebSocketCollectionOption.ELM327WSEnabled = true;
         appOption.WebSocketCollectionOption.FUELTRIPWSEnabled = true;
+        const mapFactory = new WebsocketMapFactory();
+        appOption.WebSocketCollectionOption.WSMap = mapFactory.DefaultELM327Map;
 
-        appOption.SetupPIXIMeterPanel = (app, ws, map) => {
+        appOption.SetupPIXIMeterPanel = (app, ws) => {
             const stage = app.stage;
             const meterCluster = new AnalogMeterCluster();
             stage.addChild(meterCluster);
 
             app.ticker.add(() => {
                 const timestamp = app.ticker.lastTime;
-                const tacho = map.getValue("Engine_Speed", timestamp);
-                const boost = map.getValue("Manifold_Absolute_Pressure", timestamp) * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
-                const speed = map.getValue("Vehicle_Speed", timestamp);
-                const waterTemp = map.getValue("Coolant_Temperature");
+                const tacho = ws.WSMapper.getValue("Engine_Speed", timestamp);
+                const boost = ws.WSMapper.getValue("Manifold_Absolute_Pressure", timestamp) * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
+                const speed = ws.WSMapper.getValue("Vehicle_Speed", timestamp);
+                const waterTemp = ws.WSMapper.getValue("Coolant_Temperature");
                 const trip = ws.FUELTRIPWS.getTotalTrip();
                 const fuel = ws.FUELTRIPWS.getTotalGas();
                 const gasMilage = ws.FUELTRIPWS.getTotalGasMilage();
@@ -91,10 +90,10 @@ class AnalogMeterCluster_ELM327 {
         const wsOption = new WebsocketObjectCollectionOption();
         wsOption.ELM327WSEnabled = true;
         const app = new MeterApplication(appOption);
-        app.WebSocketMapper.registerParameterCode("Engine_Speed", "SLOWandFAST");
-        app.WebSocketMapper.registerParameterCode("Manifold_Absolute_Pressure", "SLOWandFAST");
-        app.WebSocketMapper.registerParameterCode("Vehicle_Speed", "SLOWandFAST");
-        app.WebSocketMapper.registerParameterCode("Coolant_Temperature", "SLOW");
+        app.WebSocketCollection.WSMapper.registerParameterCode("Engine_Speed", "SLOWandFAST");
+        app.WebSocketCollection.WSMapper.registerParameterCode("Manifold_Absolute_Pressure", "SLOWandFAST");
+        app.WebSocketCollection.WSMapper.registerParameterCode("Vehicle_Speed", "SLOWandFAST");
+        app.WebSocketCollection.WSMapper.registerParameterCode("Coolant_Temperature", "SLOW");
         
         app.Run();
     }
