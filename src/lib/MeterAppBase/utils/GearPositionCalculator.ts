@@ -22,6 +22,43 @@
  * THE SOFTWARE.
  */
 
+export class GearPositionCalculator
+{
+    private readonly gearPositionJudgeFunctions : Array<{gear : number, judgeFunction : (ratio : number) => boolean}>
+    private readonly finalGearRatio : number;
+    private readonly tireCircumference : number;
+
+    /**
+     * Constructor of GearPositionCalculator 
+     * @param finalGearRatio Final gear ratio
+     * @param tireCircumference Tire circumference (in mm)
+     * @param gearPositionJudgeFunctions gear postion judge functions.
+     */
+    constructor(finalGearRatio : number, tireCircumference : number, gearPositionJudgeFunctions : Array<{gear : number, judgeFunction : (ratio : number) => boolean}>)
+    {
+        this.finalGearRatio = finalGearRatio;
+        this.tireCircumference = tireCircumference;
+        this.gearPositionJudgeFunctions = gearPositionJudgeFunctions;
+    }
+
+    public getGearRatio(rev : number, speed : number) : number
+    {
+        return this.tireCircumference * rev * 60 / (speed * this.finalGearRatio * 1e6);
+    }
+
+    public getGearPosition(rev : number, speed : number) : number | undefined
+    {
+        const gearRatio = this.getGearRatio(rev, speed);
+        this.gearPositionJudgeFunctions.forEach( f => 
+            {
+                if(f.judgeFunction(gearRatio))
+                    return f.gear;
+            });
+        return undefined;
+    }
+}
+
+/*
 export function calculateGearPosition(rev: number, speed: number, neutralSw: boolean): string {
     if (neutralSw)
         return "N";
@@ -49,4 +86,5 @@ export function calculateGearPosition(rev: number, speed: number, neutralSw: boo
     else
         return "-";
 }
+*/
 
