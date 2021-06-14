@@ -58,33 +58,7 @@ export class GearPositionCalculator
     }
 }
 
-/*
-export function calculateGearPosition(rev: number, speed: number, neutralSw: boolean): string {
-    if (neutralSw)
-        return "N";
-
-    //Avoid divide by zero (on vehicle stop)
-    if (speed <= 0)
-        return "-";
-
-    const gear_ratio = 1 / 3.9 * rev * 60 * 0.001992 / speed;
-
-    if (gear_ratio > 4.27)
-        return "-";
-    else if (gear_ratio > 3.01)
-        return "1";
-    else if (gear_ratio > 2.07)
-        return "2";
-    else if (gear_ratio > 1.55)
-        return "3";
-    else if (gear_ratio > 1.2)
-        return "4";
-    else if (gear_ratio > 0.95)
-        return "5";
-    else if (gear_ratio > 0.73)
-        return "6";
-    else
-        return "-";
+export function CalcTireCircumference(tireWidth : number, flatRatio : number, tireInchSize : number) : number
+{
+    return (tireWidth * flatRatio/100 * 2 + tireInchSize * 25.4) * Math.PI;
 }
-*/
-
