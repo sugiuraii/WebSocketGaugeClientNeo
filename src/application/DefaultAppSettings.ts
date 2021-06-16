@@ -57,5 +57,4 @@ function createWebSocketOption() : WebsocketObjectCollectionOption
 
     return wsOption;
 }
-
-export const DefaultWebSocketMap = wsMapFactory.DefaultELM327Map;
+export const DefaultWebSocketCollectionOption = createWebSocketOption();

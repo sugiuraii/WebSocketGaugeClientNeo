@@ -28,10 +28,9 @@ import { MeterApplicationOption } from "../../lib/MeterAppBase/options/MeterAppl
 
 //Import meter parts
 import { AnalogMeterCluster } from "../../parts/AnalogMeterCluster/AnalogMeterCluster";
-import { WebsocketObjectCollectionOption } from "../../lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
 
 // Import AppSettings.
-import * as Settings from  "../AppSettings"
+import * as DefaultAppSettings from  "../DefaultAppSettings"
 
 //For including entry point html file in webpack
 require("./AnalogMeterCluster-ELM327.html");
@@ -43,19 +42,14 @@ window.onload = function () {
 
 class AnalogMeterCluster_ELM327 {
     public Start() {
-        const appOption = new MeterApplicationOption();
+        const appOption = new MeterApplicationOption(DefaultAppSettings.DefaultWebSocketCollectionOption);
         appOption.width = 1100;
         appOption.height = 600;
         appOption.PreloadResource.WebFontFamiliyName.addall(AnalogMeterCluster.RequestedFontFamily);
         appOption.PreloadResource.WebFontCSSURL.addall(AnalogMeterCluster.RequestedFontCSSURL);
         appOption.PreloadResource.TexturePath.addall(AnalogMeterCluster.RequestedTexturePath);
 
-        appOption.WebSocketCollectionOption.ArduinoWSEnabled = true;
-        appOption.WebSocketCollectionOption.ELM327WSEnabled = true;
-        appOption.WebSocketCollectionOption.FUELTRIPWSEnabled = true;
-        appOption.WebSocketCollectionOption.WSMap = Settings.DefaultWebSocketMap;
-
-        const gearCalculator = Settings.DefaultGearPostionCalculator;
+        const gearCalculator = DefaultAppSettings.DefaultGearPostionCalculator;
 
         appOption.SetupPIXIMeterPanel = (app, ws) => {
             const stage = app.stage;
@@ -85,8 +79,6 @@ class AnalogMeterCluster_ELM327 {
             });
         }
 
-        const wsOption = new WebsocketObjectCollectionOption();
-        wsOption.ELM327WSEnabled = true;
         const app = new MeterApplication(appOption);
         app.WebSocketCollection.WSMapper.registerParameterCode("Engine_Speed", "SLOWandFAST");
         app.WebSocketCollection.WSMapper.registerParameterCode("Manifold_Absolute_Pressure", "SLOWandFAST");
