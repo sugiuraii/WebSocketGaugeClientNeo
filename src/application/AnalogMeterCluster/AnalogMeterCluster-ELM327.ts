@@ -36,11 +36,11 @@ import * as DefaultAppSettings from  "../DefaultAppSettings"
 require("./AnalogMeterCluster-ELM327.html");
 
 window.onload = function () {
-    const meterapp = new AnalogMeterCluster_ELM327();
+    const meterapp = new AnalogMeterClusterApp();
     meterapp.Start();
 }
 
-class AnalogMeterCluster_ELM327 {
+class AnalogMeterClusterApp {
     public Start() {
         const appOption = new MeterApplicationOption(DefaultAppSettings.DefaultWebSocketCollectionOption);
         appOption.width = 1100;
