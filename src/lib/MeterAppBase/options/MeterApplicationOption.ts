@@ -45,8 +45,8 @@ class PreloadResourceCollection {
 }
 
 export class MeterApplicationOption {
-    public readonly PreloadResource = new PreloadResourceCollection();
-    public readonly WebSocketCollectionOption = new WebsocketObjectCollectionOption();
+    public readonly PreloadResource : PreloadResourceCollection;
+    public readonly WebSocketCollectionOption : WebsocketObjectCollectionOption;
     
     public height = 640;
     public width = 480;
@@ -54,4 +54,17 @@ export class MeterApplicationOption {
     public TransparentAppBackground = false;
 
     public SetupPIXIMeterPanel: (pixiApp: PIXI.Application, wsObj: WebsocketObjectCollection) => void = () => {/* do nothing*/};
+    
+    constructor(wsCollectionOption? :WebsocketObjectCollectionOption, preloadResource? : PreloadResourceCollection)
+    {
+        if(preloadResource === undefined)
+            this.PreloadResource = new PreloadResourceCollection();
+        else
+            this.PreloadResource = preloadResource;
+
+        if(wsCollectionOption === undefined)
+            this.WebSocketCollectionOption = new WebsocketObjectCollectionOption();
+        else
+            this.WebSocketCollectionOption = wsCollectionOption;
+    }
 }

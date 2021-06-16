@@ -29,11 +29,8 @@ import { MeterApplicationOption } from "../../lib/MeterAppBase/options/MeterAppl
 //Import meter parts
 import { AnalogMeterCluster } from "../../parts/AnalogMeterCluster/AnalogMeterCluster";
 
-//Import enumuator of parameter code
-
-import { calculateGearPosition } from "../../lib/MeterAppBase/utils/CalculateGearPosition";
-import { WebsocketObjectCollectionOption } from "../../lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
-import { WebsocketMapFactory } from "../../lib/MeterAppBase/WebsocketObjCollection/WebsocketMapFactory";
+// Import AppSettings.
+import * as DefaultAppSettings from  "../DefaultAppSettings"
 
 //For including entry point html file in webpack
 require("./AnalogMeterCluster-ELM327.html");
@@ -45,18 +42,14 @@ window.onload = function () {
 
 class AnalogMeterCluster_ELM327 {
     public Start() {
-        const appOption = new MeterApplicationOption();
+        const appOption = new MeterApplicationOption(DefaultAppSettings.DefaultWebSocketCollectionOption);
         appOption.width = 1100;
         appOption.height = 600;
         appOption.PreloadResource.WebFontFamiliyName.addall(AnalogMeterCluster.RequestedFontFamily);
         appOption.PreloadResource.WebFontCSSURL.addall(AnalogMeterCluster.RequestedFontCSSURL);
         appOption.PreloadResource.TexturePath.addall(AnalogMeterCluster.RequestedTexturePath);
 
-        appOption.WebSocketCollectionOption.ArduinoWSEnabled = true;
-        appOption.WebSocketCollectionOption.ELM327WSEnabled = true;
-        appOption.WebSocketCollectionOption.FUELTRIPWSEnabled = true;
-        const mapFactory = new WebsocketMapFactory();
-        appOption.WebSocketCollectionOption.WSMap = mapFactory.DefaultELM327Map;
+        const gearCalculator = DefaultAppSettings.DefaultGearPostionCalculator;
 
         appOption.SetupPIXIMeterPanel = (app, ws) => {
             const stage = app.stage;
@@ -72,23 +65,20 @@ class AnalogMeterCluster_ELM327 {
                 const trip = ws.FUELTRIPWS.getTotalTrip();
                 const fuel = ws.FUELTRIPWS.getTotalGas();
                 const gasMilage = ws.FUELTRIPWS.getTotalGasMilage();
-                const neutralSw = false;
 
-                const geasPos = calculateGearPosition(tacho, speed, neutralSw);
+                const gearPos = gearCalculator.getGearPosition(tacho, speed);
 
                 meterCluster.Tacho = tacho;
                 meterCluster.Boost = boost;
                 meterCluster.Speed = speed;
                 meterCluster.WaterTemp = waterTemp;
-                meterCluster.GearPos = geasPos;
+                meterCluster.GearPos = (gearPos === undefined)?"-":gearPos.toString();
                 meterCluster.Trip = trip;
                 meterCluster.Fuel = fuel;
                 meterCluster.GasMilage = gasMilage;
             });
         }
 
-        const wsOption = new WebsocketObjectCollectionOption();
-        wsOption.ELM327WSEnabled = true;
         const app = new MeterApplication(appOption);
         app.WebSocketCollection.WSMapper.registerParameterCode("Engine_Speed", "SLOWandFAST");
         app.WebSocketCollection.WSMapper.registerParameterCode("Manifold_Absolute_Pressure", "SLOWandFAST");
