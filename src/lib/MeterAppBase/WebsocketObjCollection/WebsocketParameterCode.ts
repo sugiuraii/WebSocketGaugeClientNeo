@@ -136,8 +136,6 @@ export type WebsocketParameterCode =
     "Air_Fuel_Sensor_2_Current" |
     "Air_Fuel_Sensor_1_Resistance" |
     "Air_Fuel_Sensor_2_Resistance" |
-    "Air_Fuel_Sensor_1" |
-    "Air_Fuel_Sensor_2" |
     "Gear_Position" |
     "A_F_Sensor_1_Heater_Current" |
     "A_F_Sensor_2_Heater_Current" |
