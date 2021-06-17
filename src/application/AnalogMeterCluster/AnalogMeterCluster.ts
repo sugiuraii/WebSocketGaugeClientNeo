@@ -33,7 +33,7 @@ import { AnalogMeterCluster } from "../../parts/AnalogMeterCluster/AnalogMeterCl
 import * as DefaultAppSettings from  "../DefaultAppSettings"
 
 //For including entry point html file in webpack
-require("./AnalogMeterCluster-ELM327.html");
+require("./AnalogMeterCluster.html");
 
 window.onload = function () {
     const meterapp = new AnalogMeterClusterApp();
