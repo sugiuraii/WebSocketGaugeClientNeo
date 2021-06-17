@@ -23,7 +23,7 @@
  */
 
 // Set entry point html file to bundle by webpack
-require("./CompactMFD-ELM327.html");
+require("./CompactMFD.html");
 
 //Import application base class
 import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
@@ -35,20 +35,17 @@ import { ThrottleGaugePanel } from "../../parts/CircularGauges/SemiCircularGauge
 import { DigiTachoPanel } from "../../parts/DigiTachoPanel/DigiTachoPanel";
 import { BoostGaugePanel } from "../../parts/CircularGauges/FullCircularGaugePanel";
 
-//Import enumuator of parameter code
-import { OBDIIParameterCode } from "../../lib/WebSocket/WebSocketCommunication";
-import { ReadModeCode } from "../../lib/WebSocket/WebSocketCommunication";
-
-import { calculateGearPosition } from "../../lib/MeterAppBase/utils/CalculateGearPosition";
+// Import AppSettings.
+import * as DefaultAppSettings from  "../DefaultAppSettings"
 
 window.onload = function () {
-    const meterapp = new CompactMFD_ELM327();
+    const meterapp = new CompactMFDApp();
     meterapp.Start();
 }
 
-class CompactMFD_ELM327 {
+class CompactMFDApp {
     public Start() {
-        const appOption = new MeterApplicationOption();
+        const appOption = new MeterApplicationOption(DefaultAppSettings.DefaultWebSocketCollectionOption);
         appOption.width = 720;
         appOption.height = 1280;
         appOption.PreloadResource.WebFontFamiliyName.addall(WaterTempGaugePanel.RequestedFontFamily);
@@ -63,12 +60,7 @@ class CompactMFD_ELM327 {
         appOption.PreloadResource.TexturePath.addall(DigiTachoPanel.RequestedTexturePath);
         appOption.PreloadResource.TexturePath.addall(BoostGaugePanel.RequestedTexturePath);
 
-        appOption.WebsocketEnableFlag.ELM327 = true;
-        appOption.ParameterCode.ELM327OBDII.addall({ code: OBDIIParameterCode.Engine_Speed, readmode: ReadModeCode.SLOWandFAST });
-        appOption.ParameterCode.ELM327OBDII.addall({ code: OBDIIParameterCode.Vehicle_Speed, readmode: ReadModeCode.SLOWandFAST });
-        appOption.ParameterCode.ELM327OBDII.addall({ code: OBDIIParameterCode.Throttle_Opening_Angle, readmode: ReadModeCode.SLOWandFAST });
-        appOption.ParameterCode.ELM327OBDII.addall({ code: OBDIIParameterCode.Coolant_Temperature, readmode: ReadModeCode.SLOW });
-        appOption.ParameterCode.ELM327OBDII.addall({ code: OBDIIParameterCode.Manifold_Absolute_Pressure, readmode: ReadModeCode.SLOWandFAST });
+        const gearCalculator = DefaultAppSettings.DefaultGearPostionCalculator;
 
         appOption.SetupPIXIMeterPanel = (app, ws) => {
             // Construct meter panel parts.
@@ -100,18 +92,17 @@ class CompactMFD_ELM327 {
                 // Take timestamp of animation frame. (This time stamp is needed to interpolate meter sensor reading).
                 const timestamp = app.ticker.lastTime;
                 // Get sensor information from websocket communication objects.
-                const tacho = ws.ELM327WS.getVal(OBDIIParameterCode.Engine_Speed, timestamp);
-                const speed = ws.ELM327WS.getVal(OBDIIParameterCode.Vehicle_Speed, timestamp);
-                const neutralSw = false;
-                const gearPos = calculateGearPosition(tacho, speed, neutralSw);
-                const boost = ws.ELM327WS.getVal(OBDIIParameterCode.Manifold_Absolute_Pressure, timestamp) * 0.0101972 - 1; //convert kPa to kgf/cm2 and relative pressure   
-                const waterTemp = ws.ELM327WS.getRawVal(OBDIIParameterCode.Coolant_Temperature);
-                const throttle = ws.ELM327WS.getVal(OBDIIParameterCode.Throttle_Opening_Angle, timestamp);
+                const tacho = ws.WSMapper.getValue("Engine_Speed", timestamp);
+                const speed = ws.WSMapper.getValue("Vehicle_Speed", timestamp);
+                const gearPos = gearCalculator.getGearPosition(tacho, speed);
+                const boost = ws.WSMapper.getValue("Manifold_Absolute_Pressure", timestamp) * 0.0101972 - 1; //convert kPa to kgf/cm2 and relative pressure   
+                const waterTemp = ws.WSMapper.getValue("Coolant_Temperature");
+                const throttle = ws.WSMapper.getValue("Throttle_Opening_Angle", timestamp);
 
                 // Update meter panel value by sensor data.
                 digiTachoPanel.Speed = speed;
                 digiTachoPanel.Tacho = tacho;
-                digiTachoPanel.GearPos = gearPos;
+                digiTachoPanel.GearPos = (gearPos === undefined)?"-":gearPos.toString();
                 waterTempPanel.Value = waterTemp;
                 throttlePanel.Value = throttle;
                 boostPanel.Value = boost;
@@ -119,6 +110,12 @@ class CompactMFD_ELM327 {
         };
 
         const app = new MeterApplication(appOption);
+        app.WebSocketCollection.WSMapper.registerParameterCode("Engine_Speed", "SLOWandFAST");
+        app.WebSocketCollection.WSMapper.registerParameterCode("Vehicle_Speed", "SLOWandFAST");
+        app.WebSocketCollection.WSMapper.registerParameterCode("Throttle_Opening_Angle", "SLOWandFAST");
+        app.WebSocketCollection.WSMapper.registerParameterCode("Coolant_Temperature", "SLOW");
+        app.WebSocketCollection.WSMapper.registerParameterCode("Manifold_Absolute_Pressure", "SLOWandFAST");
+         
         app.Run();
     }
 }
