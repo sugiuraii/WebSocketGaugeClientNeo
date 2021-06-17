@@ -31,8 +31,6 @@ import {AnalogMeterCluster} from "../parts/AnalogMeterCluster/AnalogMeterCluster
 
 import {FPSCounter} from "../parts/FPSIndicator/FPSCounter";
 
-import {calculateGearPosition} from "../lib/MeterAppBase/utils/CalculateGearPosition";
-
 //For including entry point html file in webpack
 require("./AnalogMeterClusterBenchApp.html");
 
@@ -99,7 +97,7 @@ class AnalogMeterClusterBenchApp
                     waterTemp = 50;
                 else
                     waterTemp += 0.1;
-                gearPos = calculateGearPosition(tacho, speed, false);
+                gearPos = "-";
                 
                 meterCluster.Tacho = tacho;
                 meterCluster.Speed = speed;
