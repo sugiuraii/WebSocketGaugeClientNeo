@@ -39,10 +39,7 @@ module.exports = {
         "CompactMFD-Arduino": './CompactMFD/CompactMFD-Arduino.ts',
         "CompactMFD-SSM": './CompactMFD/CompactMFD-SSM.ts',
         "CompactMFD-AssettoCorsaSHM": './CompactMFD/CompactMFD-AssettoCorsaSHM.ts',
-        "AnalogTripleMeter-SSM": './AnalogTripleMeter/AnalogTripleMeter-SSM.ts',
-        "AnalogTripleMeter-ELM327": './AnalogTripleMeter/AnalogTripleMeter-ELM327.ts',
-        "AnalogTripleMeter-Defi": './AnalogTripleMeter/AnalogTripleMeter-Defi.ts',
-        "AnalogTripleMeter-Arduino": './AnalogTripleMeter/AnalogTripleMeter-Arduino.ts',
+        "AnalogTripleMeter": './AnalogTripleMeter/AnalogTripleMeter.ts',
         "LEDRevMeter-SSM": './LEDRevMeter/LEDRevMeter-SSM.ts',
         "LEDRevMeter-ELM327": './LEDRevMeter/LEDRevMeter-ELM327.ts',
         "LEDRevMeter-Defi-SSM": './LEDRevMeter/LEDRevMeter-Defi-SSM.ts'
