@@ -23,7 +23,7 @@
  */
 
 //For including entry point html file in webpack
-require("./LEDRevMeter-Defi-SSM.html");
+require("./LEDRevMeter.html");
 
 //Import application base class
 import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
@@ -34,23 +34,17 @@ import { BoostMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
 import { WaterTempMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
 import { LEDTachoMeter } from "../../parts/LEDTachoMeter/LEDTachoMeter";
 
-//Import enumuator of parameter code
-import { DefiParameterCode } from "../../lib/WebSocket/WebSocketCommunication";
-import { SSMParameterCode } from "../../lib/WebSocket/WebSocketCommunication";
-import { SSMSwitchCode } from "../../lib/WebSocket/WebSocketCommunication";
-import { ReadModeCode } from "../../lib/WebSocket/WebSocketCommunication";
-
-import { calculateGearPosition } from "../../lib/MeterAppBase/utils/CalculateGearPosition";
-import { SSMSwitchCodeToParameterCode } from "../../lib/WebSocket/private/parameterCode/SSMSwitchCode";
+// Import AppSettings.
+import * as DefaultAppSettings from  "../DefaultAppSettings"
 
 window.onload = function () {
-    const meterapp = new LEDRevMeter_Defi_SSM();
+    const meterapp = new LEDRevMeterApp();
     meterapp.Start();
 }
 
-class LEDRevMeter_Defi_SSM {
+class LEDRevMeterApp {
     public Start() {
-        const appOption = new MeterApplicationOption();
+        const appOption = new MeterApplicationOption(DefaultAppSettings.DefaultWebSocketCollectionOption);
         appOption.width = 1280;
         appOption.height = 720;
 
@@ -61,16 +55,8 @@ class LEDRevMeter_Defi_SSM {
         appOption.PreloadResource.TexturePath.addall(BoostMeter.RequestedTexturePath);
         appOption.PreloadResource.TexturePath.addall(LEDTachoMeter.RequestedTexturePath);
 
-        appOption.WebsocketEnableFlag.Defi = true;
-        appOption.WebsocketEnableFlag.SSM = true;
-        appOption.WebsocketEnableFlag.FUELTRIP = true;
-
-        appOption.ParameterCode.Defi.addall(DefiParameterCode.Engine_Speed);
-        appOption.ParameterCode.Defi.addall(DefiParameterCode.Manifold_Absolute_Pressure);
-        appOption.ParameterCode.SSM.addall({ code: SSMParameterCode.Vehicle_Speed, readmode: ReadModeCode.SLOWandFAST });
-        appOption.ParameterCode.SSM.addall({ code: SSMParameterCode.Coolant_Temperature, readmode: ReadModeCode.SLOW });
-        appOption.ParameterCode.SSM.addall({ code: SSMSwitchCodeToParameterCode(SSMSwitchCode.Neutral_Position_Switch), readmode: ReadModeCode.SLOWandFAST });
-
+        const gearCalculator = DefaultAppSettings.DefaultGearPostionCalculator;
+        
         appOption.SetupPIXIMeterPanel = (app, ws) => {
 
             const stage = app.stage;
@@ -90,28 +76,32 @@ class LEDRevMeter_Defi_SSM {
 
             app.ticker.add(() => {
                 const timestamp = app.ticker.lastTime;
-                const boost = ws.DefiWS.getVal(DefiParameterCode.Manifold_Absolute_Pressure, timestamp) * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;            
-                const waterTemp = ws.SSMWS.getRawVal(SSMParameterCode.Coolant_Temperature);
-                const rev = ws.DefiWS.getVal(DefiParameterCode.Engine_Speed, timestamp);
-                const speed = ws.SSMWS.getRawVal(SSMParameterCode.Vehicle_Speed);
+                const boost = ws.WSMapper.getValue("Manifold_Absolute_Pressure", timestamp) * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;            
+                const waterTemp = ws.WSMapper.getValue("Coolant_Temperature");
+                const rev = ws.WSMapper.getValue("Engine_Speed", timestamp);
+                const speed = ws.WSMapper.getValue("Vehicle_Speed");
                 const totalFuel = ws.FUELTRIPWS.getTotalGas();
                 const totalTrip = ws.FUELTRIPWS.getTotalTrip();
                 const totalFuelRate = ws.FUELTRIPWS.getTotalGasMilage();
-                const neutralSw = ws.SSMWS.getSwitchFlag(SSMSwitchCode.Neutral_Position_Switch);
 
-                const geasPos = calculateGearPosition(rev, speed, neutralSw);
+                const gearPos = gearCalculator.getGearPosition(rev, speed);
 
                 boostMeter.Value = boost;
                 waterTempMeter.Value = waterTemp;
                 ledRevMeter.Tacho = rev;
                 ledRevMeter.Speed = speed;
-                ledRevMeter.GearPos = geasPos;
+                ledRevMeter.GearPos = (gearPos === undefined)?"-":gearPos.toString();
                 ledRevMeter.Trip = totalTrip;
                 ledRevMeter.Fuel = totalFuel;
                 ledRevMeter.GasMilage = totalFuelRate;
             });
         };
         const app = new MeterApplication(appOption);
+        app.WebSocketCollection.WSMapper.registerParameterCode("Engine_Speed", "SLOWandFAST");
+        app.WebSocketCollection.WSMapper.registerParameterCode("Manifold_Absolute_Pressure", "SLOWandFAST");
+        app.WebSocketCollection.WSMapper.registerParameterCode("Vehicle_Speed", "SLOWandFAST");
+        app.WebSocketCollection.WSMapper.registerParameterCode("Coolant_Temperature", "SLOW");
+
         app.Run();
     }
 }

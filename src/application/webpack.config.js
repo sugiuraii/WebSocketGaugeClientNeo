@@ -37,9 +37,7 @@ module.exports = {
         "CompactMFD": './CompactMFD/CompactMFD.ts',
         "CompactMFD-AssettoCorsaSHM": './CompactMFD/CompactMFD-AssettoCorsaSHM.ts',
         "AnalogTripleMeter": './AnalogTripleMeter/AnalogTripleMeter.ts',
-        "LEDRevMeter-SSM": './LEDRevMeter/LEDRevMeter-SSM.ts',
-        "LEDRevMeter-ELM327": './LEDRevMeter/LEDRevMeter-ELM327.ts',
-        "LEDRevMeter-Defi-SSM": './LEDRevMeter/LEDRevMeter-Defi-SSM.ts'
+        "LEDRevMeter": './LEDRevMeter/LEDRevMeter.ts'
     },
     devtool: "source-map",
     output:
