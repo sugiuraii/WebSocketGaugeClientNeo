@@ -4,13 +4,13 @@
  * Copyright 2017 kuniaki.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
+ * of ws software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in
+ * The above copyright notice and ws permission notice shall be included in
  * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -35,24 +35,18 @@ import { ThrottleGaugePanel } from "../../parts/CircularGauges/SemiCircularGauge
 import { DigiTachoPanel } from "../../parts/DigiTachoPanel/DigiTachoPanel";
 import { MilageGraphPanel } from "../../parts/GasMilageGraph/MilageGraph";
 
-//Import enumuator of parameter code
-import { DefiParameterCode } from "../../lib/WebSocket/WebSocketCommunication";
-import { SSMParameterCode } from "../../lib/WebSocket/WebSocketCommunication";
-import { SSMSwitchCode } from "../../lib/WebSocket/WebSocketCommunication";
-import { ReadModeCode } from "../../lib/WebSocket/WebSocketCommunication";
-
-import { calculateGearPosition } from "../../lib/MeterAppBase/utils/CalculateGearPosition";
-import { SSMSwitchCodeToParameterCode } from "../../lib/WebSocket/private/parameterCode/SSMSwitchCode";
+// Import AppSettings.
+import * as DefaultAppSettings from  "../DefaultAppSettings"
 
 //For including entry point html file in webpack
-require("./DigitalMFD-Defi-SSM.html");
+require("./DigitalMFD.html");
 
 window.onload = function () {
-    const meterapp = new DigitalMFD_Defi_SSM();
+    const meterapp = new DigitalMFDApp();
     meterapp.Start();
 }
 
-class DigitalMFD_Defi_SSM {
+class DigitalMFDApp {
     public Start() {
         const appOption = new MeterApplicationOption();
         appOption.width = 1200;
@@ -70,20 +64,7 @@ class DigitalMFD_Defi_SSM {
         appOption.PreloadResource.TexturePath.addall(DigiTachoPanel.RequestedTexturePath);
         appOption.PreloadResource.TexturePath.addall(MilageGraphPanel.RequestedTexturePath);
 
-        appOption.WebsocketEnableFlag.Defi = true;
-        appOption.WebsocketEnableFlag.SSM = true;
-        appOption.WebsocketEnableFlag.FUELTRIP = true;
-        appOption.FUELTRIPWebsocketOption.FUELTRIPSectSpan = 300;
-        appOption.FUELTRIPWebsocketOption.FUELTRIPSectStoreMax = 6;
-
-        appOption.ParameterCode.Defi.addall(DefiParameterCode.Engine_Speed);
-        appOption.ParameterCode.Defi.addall(DefiParameterCode.Manifold_Absolute_Pressure);
-        appOption.ParameterCode.SSM.addall({ code: SSMParameterCode.Vehicle_Speed, readmode: ReadModeCode.SLOWandFAST });
-        appOption.ParameterCode.SSM.addall({ code: SSMParameterCode.Coolant_Temperature, readmode: ReadModeCode.SLOW });
-        appOption.ParameterCode.SSM.addall({ code: SSMParameterCode.Battery_Voltage, readmode: ReadModeCode.SLOW });
-        appOption.ParameterCode.SSM.addall({ code: SSMParameterCode.Throttle_Opening_Angle, readmode: ReadModeCode.SLOWandFAST });
-        appOption.ParameterCode.SSM.addall({ code: SSMParameterCode.Air_Fuel_Sensor_1, readmode: ReadModeCode.SLOWandFAST });
-        appOption.ParameterCode.SSM.addall({ code: SSMSwitchCodeToParameterCode(SSMSwitchCode.Neutral_Position_Switch), readmode: ReadModeCode.SLOWandFAST });
+        const gearCalculator = DefaultAppSettings.DefaultGearPostionCalculator;
 
         appOption.SetupPIXIMeterPanel = (app, ws) => {
 
@@ -126,10 +107,9 @@ class DigitalMFD_Defi_SSM {
 
             app.ticker.add(() => {
                 const timestamp = app.ticker.lastTime;
-                const tacho = ws.DefiWS.getVal(DefiParameterCode.Engine_Speed, timestamp);
-                const speed = ws.SSMWS.getVal(SSMParameterCode.Vehicle_Speed, timestamp);
-                const neutralSw = ws.SSMWS.getSwitchFlag(SSMSwitchCode.Neutral_Position_Switch);
-                const gearPos = calculateGearPosition(tacho, speed, neutralSw);
+                const tacho = ws.WSMapper.getValue("Engine_Speed", timestamp);
+                const speed = ws.WSMapper.getValue("Vehicle_Speed", timestamp);
+                const gearPos = gearCalculator.getGearPosition(tacho, speed);
 
                 const momentGasMilage = ws.FUELTRIPWS.getMomentGasMilage(timestamp);
                 const gasMilage5min: number = ws.FUELTRIPWS.getSectGasMilage(0);
@@ -142,15 +122,15 @@ class DigitalMFD_Defi_SSM {
                 const totalFuel = ws.FUELTRIPWS.getTotalGas();
                 const totalTrip = ws.FUELTRIPWS.getTotalTrip();
 
-                const boost = ws.DefiWS.getVal(DefiParameterCode.Manifold_Absolute_Pressure, timestamp) * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
-                const airFuelRatio = ws.SSMWS.getVal(SSMParameterCode.Air_Fuel_Sensor_1, timestamp) * 14;
-                const waterTemp = ws.SSMWS.getRawVal(SSMParameterCode.Coolant_Temperature);
-                const batteryVolt = ws.SSMWS.getRawVal(SSMParameterCode.Battery_Voltage);
-                const throttle = ws.SSMWS.getVal(SSMParameterCode.Throttle_Opening_Angle, timestamp);
+                const boost = ws.WSMapper.getValue("Manifold_Absolute_Pressure", timestamp) * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
+                const airFuelRatio = ws.WSMapper.getValue("O2Sensor_1_Air_Fuel_Ratio", timestamp) * 14;
+                const waterTemp = ws.WSMapper.getValue("Coolant_Temperature");
+                const batteryVolt = ws.WSMapper.getValue("Battery_Voltage");
+                const throttle = ws.WSMapper.getValue("Throttle_Opening_Angle", timestamp);
 
                 digiTachoPanel.Speed = speed;
                 digiTachoPanel.Tacho = tacho;
-                digiTachoPanel.GearPos = gearPos;
+                digiTachoPanel.GearPos = (gearPos === undefined)?"-":gearPos.toString();
 
                 milagePanel.MomentGasMilage = momentGasMilage;
                 milagePanel.Trip = totalTrip;
@@ -171,6 +151,14 @@ class DigitalMFD_Defi_SSM {
             });
         };
         const app = new MeterApplication(appOption);
+        app.WebSocketCollection.WSMapper.registerParameterCode("Engine_Speed", "SLOWandFAST");
+        app.WebSocketCollection.WSMapper.registerParameterCode("Manifold_Absolute_Pressure", "SLOWandFAST");
+        app.WebSocketCollection.WSMapper.registerParameterCode("Vehicle_Speed", "SLOWandFAST");
+        app.WebSocketCollection.WSMapper.registerParameterCode("Coolant_Temperature", "SLOW");
+        app.WebSocketCollection.WSMapper.registerParameterCode("Battery_Voltage", "SLOW");
+        app.WebSocketCollection.WSMapper.registerParameterCode("Throttle_Opening_Angle", "SLOWandFAST");
+        app.WebSocketCollection.WSMapper.registerParameterCode("O2Sensor_1_Air_Fuel_Ratio", "SLOWandFAST");
+
         app.Run();
     }
 }

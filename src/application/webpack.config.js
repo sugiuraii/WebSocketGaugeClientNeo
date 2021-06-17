@@ -33,8 +33,7 @@ module.exports = {
         // Register meter application and set entry point typescript file.
         "AnalogMeterCluster": './AnalogMeterCluster/AnalogMeterCluster.ts',
         "AnalogMeterCluster-AssettoCorsaSHM": './AnalogMeterCluster/AnalogMeterCluster-AssettoCorsaSHM.ts',
-        "DigitalMFD-Defi-SSM": './DigitalMFD/DigitalMFD-Defi-SSM.ts',
-        "DigitalMFD-SSM": './DigitalMFD/DigitalMFD-SSM.ts',
+        "DigitalMFD": './DigitalMFD/DigitalMFD.ts',
         "CompactMFD-ELM327": './CompactMFD/CompactMFD-ELM327.ts',
         "CompactMFD-Arduino": './CompactMFD/CompactMFD-Arduino.ts',
         "CompactMFD-SSM": './CompactMFD/CompactMFD-SSM.ts',
