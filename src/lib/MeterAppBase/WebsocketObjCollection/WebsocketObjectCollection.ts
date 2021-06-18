@@ -169,7 +169,7 @@ export class WebsocketObjectCollection {
         else
             this.assettoCorsaWS = undefined;
 
-        this.wsmapper = new WebsocketClientMapper(this, option.WSMap);
+        this.wsmapper = new WebsocketClientMapper(this, option.WSMap, logger);
     }
 
     public Run(): void {

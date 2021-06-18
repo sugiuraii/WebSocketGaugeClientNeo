@@ -23,6 +23,7 @@
  */
 
 import { ReadModeCode } from "../../WebSocket/WebSocketCommunication";
+import { ILogger } from "../utils/ILogger";
 
 import { WebsocketObjectCollection } from "./WebsocketObjectCollection";
 import { WebsocketParameterCode } from "./WebsocketParameterCode";
@@ -33,10 +34,12 @@ export class WebsocketClientMapper
 {
     private readonly webSocketCollection: WebsocketObjectCollection;
     private readonly map = new Map<WebsocketParameterCode, WebsocketClientMapEntry>();
+    private readonly logger : ILogger;
 
-    constructor(webSocketCollection: WebsocketObjectCollection, map: Map<WebsocketParameterCode, WebsocketClientMapEntry>) {
+    constructor(webSocketCollection: WebsocketObjectCollection, map: Map<WebsocketParameterCode, WebsocketClientMapEntry>, logger : ILogger) {
         this.webSocketCollection = webSocketCollection;
         this.map = map;
+        this.logger = logger;
     }
 
     public registerParameterCode(code: WebsocketParameterCode, readmode: ReadModeCode): void {
@@ -44,7 +47,12 @@ export class WebsocketClientMapper
         if (mapItem !== undefined)
             mapItem.CodeRegisterFunction(this.webSocketCollection, readmode);
         else
-            throw ReferenceError("Code of " + code + " is not registered websocket client map.");
+        {
+            const logmsg = "The mapping of parameter code:" + code + " is not assigned.";
+            window.alert(logmsg);
+            this.logger.appendLog(logmsg);
+            console.error(logmsg);
+        }
     }
 
     public getValue(code: WebsocketParameterCode, timeStamp?: number): number {
@@ -52,7 +60,11 @@ export class WebsocketClientMapper
         if (mapItem !== undefined)
             return mapItem.ValueGetFunction(this.webSocketCollection, timeStamp);
         else
-            throw ReferenceError("Code of " + code + " is not registered websocket client map.");
+        {
+            const logmsg = "The mapping of parameter code:" + code + " is not assigned.";
+            console.error(logmsg);
+            return NaN;
+        }
     }
 }
 
