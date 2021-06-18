@@ -35,11 +35,11 @@ const path = require('path');
 
 createThumbNail("benchmark/AnalogMeterClusterBenchApp.html", "thumbnails/AnalogMeterClusterBenchApp.png");
 createThumbNail("benchmark/DigitalMFDBenchApp.html", "thumbnails/DigitalMFDBenchApp.png");
-createThumbNail("application/AnalogMeterCluster-Defi-SSM.html", "thumbnails/AnalogMeterCluster-Defi-SSM.png");
-createThumbNail("application/CompactMFD-SSM.html", "thumbnails/CompactMFD-SSM.png");
-createThumbNail("application/DigitalMFD-Defi-SSM.html", "thumbnails/DigitalMFD-Defi-SSM.png");
-createThumbNail("application/AnalogTripleMeter-SSM.html", "thumbnails/AnalogTripleMeter.png");
-createThumbNail("application/LEDRevMeter-SSM.html", "thumbnails/LEDRevMeter.png");
+createThumbNail("application/AnalogMeterCluster.html", "thumbnails/AnalogMeterCluster.png");
+createThumbNail("application/CompactMFD.html", "thumbnails/CompactMFD.png");
+createThumbNail("application/DigitalMFD.html", "thumbnails/DigitalMFD.png");
+createThumbNail("application/AnalogTripleMeter.html", "thumbnails/AnalogTripleMeter.png");
+createThumbNail("application/LEDRevMeter.html", "thumbnails/LEDRevMeter.png");
 
 function createThumbNail(htmlpath, pngpath)
 {
