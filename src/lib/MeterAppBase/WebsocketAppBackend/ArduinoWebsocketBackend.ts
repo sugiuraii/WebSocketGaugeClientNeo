@@ -40,7 +40,7 @@ export class ArduinoWebsocketBackend implements WebsocketAppBackend {
    private readonly WAITTIME_BEFORE_RECONNECT = 5000;
 
    private readonly arduinoWS: ArduinoCOMWebsocket;
-   private readonly parameterCodeList: ArduinoParameterCode[];
+   private readonly parameterCodeList: ArduinoParameterCode[] = [];
    private readonly logger: ILogger;
    private readonly state: WebsocketState;
 
@@ -48,13 +48,13 @@ export class ArduinoWebsocketBackend implements WebsocketAppBackend {
 
    private indicatorUpdateIntervalID = 0;
 
-   constructor(serverurl: string, codeList: ArduinoParameterCode[], logger: ILogger) {
+   public get ParameterCodeList() : ArduinoParameterCode[] { return this.parameterCodeList }
+
+   constructor(serverurl: string, logger: ILogger) {
       this.arduinoWS = new ArduinoCOMWebsocket(serverurl);
-      this.parameterCodeList = codeList;
       this.logger = logger;
       this.state = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
       this.webSocketServerURL = this.arduinoWS.URL;
-
       this.arduinoWS.OnWebsocketError = (message: string) => this.logger.appendLog(this.logPrefix + " websocket error : " + message);
    }
 
@@ -68,8 +68,11 @@ export class ArduinoWebsocketBackend implements WebsocketAppBackend {
       this.arduinoWS.Close();
    }
 
-   public getVal(code: ArduinoParameterCode, timestamp: number): number {
-      return this.arduinoWS.getVal(code, timestamp);
+   public getVal(code: ArduinoParameterCode, timestamp?: number): number {
+      if(timestamp === undefined)
+         return this.getRawVal(code);
+      else
+         return this.arduinoWS.getVal(code, timestamp);
    }
 
    public getRawVal(code: ArduinoParameterCode): number {

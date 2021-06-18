@@ -29,41 +29,27 @@ import { MeterApplicationOption } from "../../lib/MeterAppBase/options/MeterAppl
 //Import meter parts
 import { AnalogMeterCluster } from "../../parts/AnalogMeterCluster/AnalogMeterCluster";
 
-//Import enumuator of parameter code
-import { DefiParameterCode } from "../../lib/WebSocket/WebSocketCommunication";
-import { SSMParameterCode } from "../../lib/WebSocket/WebSocketCommunication";
-import { SSMSwitchCode } from "../../lib/WebSocket/WebSocketCommunication";
-import { ReadModeCode } from "../../lib/WebSocket/WebSocketCommunication";
-
-import { calculateGearPosition } from "../../lib/MeterAppBase/utils/CalculateGearPosition";
-import { SSMSwitchCodeToParameterCode } from "../../lib/WebSocket/private/parameterCode/SSMSwitchCode";
+// Import AppSettings.
+import * as DefaultAppSettings from  "../DefaultAppSettings"
 
 //For including entry point html file in webpack
-require("./AnalogMeterCluster-Defi-SSM.html");
+require("./AnalogMeterCluster.html");
 
 window.onload = function () {
-    const meterapp = new AnalogMeterCluster_Defi_SSM();
+    const meterapp = new AnalogMeterClusterApp();
     meterapp.Start();
 }
 
-class AnalogMeterCluster_Defi_SSM {
+class AnalogMeterClusterApp {
     public Start() {
-        const appOption = new MeterApplicationOption();
+        const appOption = new MeterApplicationOption(DefaultAppSettings.DefaultWebSocketCollectionOption);
         appOption.width = 1100;
         appOption.height = 600;
         appOption.PreloadResource.WebFontFamiliyName.addall(AnalogMeterCluster.RequestedFontFamily);
         appOption.PreloadResource.WebFontCSSURL.addall(AnalogMeterCluster.RequestedFontCSSURL);
         appOption.PreloadResource.TexturePath.addall(AnalogMeterCluster.RequestedTexturePath);
 
-        appOption.WebsocketEnableFlag.Defi = true;
-        appOption.WebsocketEnableFlag.SSM = true;
-        appOption.WebsocketEnableFlag.FUELTRIP = true;
-
-        appOption.ParameterCode.Defi.addall(DefiParameterCode.Engine_Speed);
-        appOption.ParameterCode.Defi.addall(DefiParameterCode.Manifold_Absolute_Pressure);
-        appOption.ParameterCode.SSM.addall({ code: SSMParameterCode.Vehicle_Speed, readmode: ReadModeCode.SLOWandFAST });
-        appOption.ParameterCode.SSM.addall({ code: SSMParameterCode.Coolant_Temperature, readmode: ReadModeCode.SLOWandFAST });
-        appOption.ParameterCode.SSM.addall({ code: SSMSwitchCodeToParameterCode(SSMSwitchCode.Neutral_Position_Switch), readmode: ReadModeCode.SLOWandFAST });
+        const gearCalculator = DefaultAppSettings.DefaultGearPostionCalculator;
 
         appOption.SetupPIXIMeterPanel = (app, ws) => {
             const stage = app.stage;
@@ -72,28 +58,33 @@ class AnalogMeterCluster_Defi_SSM {
 
             app.ticker.add(() => {
                 const timestamp = app.ticker.lastTime;
-                const tacho = ws.DefiWS.getVal(DefiParameterCode.Engine_Speed, timestamp);
-                const boost = ws.DefiWS.getVal(DefiParameterCode.Manifold_Absolute_Pressure, timestamp) * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
-                const speed = ws.SSMWS.getVal(SSMParameterCode.Vehicle_Speed, timestamp);
-                const waterTemp = ws.SSMWS.getRawVal(SSMParameterCode.Coolant_Temperature);
+                const tacho = ws.WSMapper.getValue("Engine_Speed", timestamp);
+                const boost = ws.WSMapper.getValue("Manifold_Absolute_Pressure", timestamp) * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
+                const speed = ws.WSMapper.getValue("Vehicle_Speed", timestamp);
+                const waterTemp = ws.WSMapper.getValue("Coolant_Temperature");
                 const trip = ws.FUELTRIPWS.getTotalTrip();
                 const fuel = ws.FUELTRIPWS.getTotalGas();
                 const gasMilage = ws.FUELTRIPWS.getTotalGasMilage();
-                const neutralSw = ws.SSMWS.getSwitchFlag(SSMSwitchCode.Neutral_Position_Switch);
 
-                const geasPos = calculateGearPosition(tacho, speed, neutralSw);
+                const gearPos = gearCalculator.getGearPosition(tacho, speed);
 
                 meterCluster.Tacho = tacho;
                 meterCluster.Boost = boost;
                 meterCluster.Speed = speed;
                 meterCluster.WaterTemp = waterTemp;
-                meterCluster.GearPos = geasPos;
+                meterCluster.GearPos = (gearPos === undefined)?"-":gearPos.toString();
                 meterCluster.Trip = trip;
                 meterCluster.Fuel = fuel;
                 meterCluster.GasMilage = gasMilage;
             });
-        };
+        }
+
         const app = new MeterApplication(appOption);
+        app.WebSocketCollection.WSMapper.registerParameterCode("Engine_Speed", "SLOWandFAST");
+        app.WebSocketCollection.WSMapper.registerParameterCode("Manifold_Absolute_Pressure", "SLOWandFAST");
+        app.WebSocketCollection.WSMapper.registerParameterCode("Vehicle_Speed", "SLOWandFAST");
+        app.WebSocketCollection.WSMapper.registerParameterCode("Coolant_Temperature", "SLOW");
+        
         app.Run();
     }
 }

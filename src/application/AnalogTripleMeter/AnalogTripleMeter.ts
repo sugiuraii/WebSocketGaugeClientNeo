@@ -23,7 +23,7 @@
  */
 
 //For including entry point html file in webpack
-require("./AnalogTripleMeter-Defi.html");
+require("./AnalogTripleMeter.html");
 
 //Import application base class
 import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
@@ -34,29 +34,22 @@ import { BoostMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
 import { WaterTempMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
 import { OilTempMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
 
-//Import enumuator of parameter code
-import { DefiParameterCode } from "../../lib/WebSocket/WebSocketCommunication";
+// Import AppSettings.
+import * as DefaultAppSettings from  "../DefaultAppSettings"
 
 window.onload = function () {
-    const meterapp = new AnalogTripleMeter_Defi();
+    const meterapp = new AnalogTripleMeterApp();
     meterapp.Start();
 }
 
-class AnalogTripleMeter_Defi {
+class AnalogTripleMeterApp {
     public Start() {
-        const appOption = new MeterApplicationOption();
+        const appOption = new MeterApplicationOption(DefaultAppSettings.DefaultWebSocketCollectionOption);
         appOption.width = 1280;
         appOption.height = 720;
-
         appOption.PreloadResource.WebFontFamiliyName.addall(BoostMeter.RequestedFontFamily);
         appOption.PreloadResource.WebFontCSSURL.addall(BoostMeter.RequestedFontCSSURL);
         appOption.PreloadResource.TexturePath.addall(BoostMeter.RequestedTexturePath);
-
-        appOption.WebsocketEnableFlag.Defi = true;
-
-        appOption.ParameterCode.Defi.addall(DefiParameterCode.Manifold_Absolute_Pressure);
-        appOption.ParameterCode.Defi.addall(DefiParameterCode.Coolant_Temperature);
-        appOption.ParameterCode.Defi.addall(DefiParameterCode.Oil_Temperature);
 
         appOption.SetupPIXIMeterPanel = (app, ws) => {
             const stage = app.stage;
@@ -79,10 +72,10 @@ class AnalogTripleMeter_Defi {
 
             app.ticker.add(() => {
                 const timestamp = app.ticker.lastTime;
-                const boost = ws.DefiWS.getVal(DefiParameterCode.Manifold_Absolute_Pressure, timestamp) * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
+                const boost = ws.WSMapper.getValue("Manifold_Absolute_Pressure", timestamp) * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
 
-                const waterTemp = ws.DefiWS.getRawVal(DefiParameterCode.Coolant_Temperature);
-                const oilTemp = ws.DefiWS.getRawVal(DefiParameterCode.Oil_Temperature);
+                const waterTemp = ws.WSMapper.getValue("Coolant_Temperature");
+                const oilTemp = ws.WSMapper.getValue("Engine_oil_temperature");
 
                 boostMeter.Value = boost;
                 waterTempMeter.Value = waterTemp;
@@ -90,6 +83,9 @@ class AnalogTripleMeter_Defi {
             });
         };
         const app = new MeterApplication(appOption);
+        app.WebSocketCollection.WSMapper.registerParameterCode("Manifold_Absolute_Pressure", "SLOWandFAST");
+        app.WebSocketCollection.WSMapper.registerParameterCode("Coolant_Temperature", "SLOW");
+        app.WebSocketCollection.WSMapper.registerParameterCode("Engine_oil_temperature", "SLOW");
         app.Run();
     }
 }

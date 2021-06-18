@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-//For including entry point html file in webpack
-require("./CompactMFD-SSM.html");
+// Set entry point html file to bundle by webpack
+require("./CompactMFD.html");
 
 //Import application base class
 import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
@@ -35,23 +35,17 @@ import { ThrottleGaugePanel } from "../../parts/CircularGauges/SemiCircularGauge
 import { DigiTachoPanel } from "../../parts/DigiTachoPanel/DigiTachoPanel";
 import { BoostGaugePanel } from "../../parts/CircularGauges/FullCircularGaugePanel";
 
-//Import enumuator of parameter code
-import { SSMParameterCode } from "../../lib/WebSocket/WebSocketCommunication";
-import { SSMSwitchCode } from "../../lib/WebSocket/WebSocketCommunication";
-
-import { ReadModeCode } from "../../lib/WebSocket/WebSocketCommunication";
-
-import { calculateGearPosition } from "../../lib/MeterAppBase/utils/CalculateGearPosition";
-import { SSMSwitchCodeToParameterCode } from "../../lib/WebSocket/private/parameterCode/SSMSwitchCode";
+// Import AppSettings.
+import * as DefaultAppSettings from  "../DefaultAppSettings"
 
 window.onload = function () {
-    const meterapp = new CompactMFD_SSM();
+    const meterapp = new CompactMFDApp();
     meterapp.Start();
 }
 
-class CompactMFD_SSM {
+class CompactMFDApp {
     public Start() {
-        const appOption = new MeterApplicationOption();
+        const appOption = new MeterApplicationOption(DefaultAppSettings.DefaultWebSocketCollectionOption);
         appOption.width = 720;
         appOption.height = 1280;
         appOption.PreloadResource.WebFontFamiliyName.addall(WaterTempGaugePanel.RequestedFontFamily);
@@ -66,16 +60,10 @@ class CompactMFD_SSM {
         appOption.PreloadResource.TexturePath.addall(DigiTachoPanel.RequestedTexturePath);
         appOption.PreloadResource.TexturePath.addall(BoostGaugePanel.RequestedTexturePath);
 
-        appOption.WebsocketEnableFlag.SSM = true;
-
-        appOption.ParameterCode.SSM.addall({ code: SSMParameterCode.Engine_Speed, readmode: ReadModeCode.SLOWandFAST });
-        appOption.ParameterCode.SSM.addall({ code: SSMParameterCode.Manifold_Absolute_Pressure, readmode: ReadModeCode.SLOWandFAST });
-        appOption.ParameterCode.SSM.addall({ code: SSMParameterCode.Vehicle_Speed, readmode: ReadModeCode.SLOWandFAST });
-        appOption.ParameterCode.SSM.addall({ code: SSMParameterCode.Throttle_Opening_Angle, readmode: ReadModeCode.SLOWandFAST });
-        appOption.ParameterCode.SSM.addall({ code: SSMParameterCode.Coolant_Temperature, readmode: ReadModeCode.SLOW });
-        appOption.ParameterCode.SSM.addall({ code: SSMSwitchCodeToParameterCode(SSMSwitchCode.Neutral_Position_Switch), readmode: ReadModeCode.SLOWandFAST });
+        const gearCalculator = DefaultAppSettings.DefaultGearPostionCalculator;
 
         appOption.SetupPIXIMeterPanel = (app, ws) => {
+            // Construct meter panel parts.
             const stage = app.stage;
             const digiTachoPanel = new DigiTachoPanel();
             digiTachoPanel.position.set(0, 0);
@@ -93,31 +81,41 @@ class CompactMFD_SSM {
             throttlePanel.position.set(360, 890);
             throttlePanel.scale.set(0.85);
 
+            // Put meter panel parts to stage.
             stage.addChild(digiTachoPanel);
             stage.addChild(boostPanel);
             stage.addChild(waterTempPanel);
             stage.addChild(throttlePanel);
 
+            // Define ticker method to update meter view (this ticker method will be called every frame).
             app.ticker.add(() => {
+                // Take timestamp of animation frame. (This time stamp is needed to interpolate meter sensor reading).
                 const timestamp = app.ticker.lastTime;
-                const tacho = ws.SSMWS.getVal(SSMParameterCode.Engine_Speed, timestamp);
-                const speed = ws.SSMWS.getVal(SSMParameterCode.Vehicle_Speed, timestamp);
-                const neutralSw = ws.SSMWS.getSwitchFlag(SSMSwitchCode.Neutral_Position_Switch);
-                const gearPos = calculateGearPosition(tacho, speed, neutralSw);
-                const boost = ws.SSMWS.getVal(SSMParameterCode.Manifold_Absolute_Pressure, timestamp) * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
+                // Get sensor information from websocket communication objects.
+                const tacho = ws.WSMapper.getValue("Engine_Speed", timestamp);
+                const speed = ws.WSMapper.getValue("Vehicle_Speed", timestamp);
+                const gearPos = gearCalculator.getGearPosition(tacho, speed);
+                const boost = ws.WSMapper.getValue("Manifold_Absolute_Pressure", timestamp) * 0.0101972 - 1; //convert kPa to kgf/cm2 and relative pressure   
+                const waterTemp = ws.WSMapper.getValue("Coolant_Temperature");
+                const throttle = ws.WSMapper.getValue("Throttle_Opening_Angle", timestamp);
 
-                const waterTemp = ws.SSMWS.getRawVal(SSMParameterCode.Coolant_Temperature);
-                const throttle = ws.SSMWS.getVal(SSMParameterCode.Throttle_Opening_Angle, timestamp);
-
+                // Update meter panel value by sensor data.
                 digiTachoPanel.Speed = speed;
                 digiTachoPanel.Tacho = tacho;
-                digiTachoPanel.GearPos = gearPos;
+                digiTachoPanel.GearPos = (gearPos === undefined)?"-":gearPos.toString();
                 waterTempPanel.Value = waterTemp;
                 throttlePanel.Value = throttle;
                 boostPanel.Value = boost;
             });
         };
+
         const app = new MeterApplication(appOption);
+        app.WebSocketCollection.WSMapper.registerParameterCode("Engine_Speed", "SLOWandFAST");
+        app.WebSocketCollection.WSMapper.registerParameterCode("Vehicle_Speed", "SLOWandFAST");
+        app.WebSocketCollection.WSMapper.registerParameterCode("Throttle_Opening_Angle", "SLOWandFAST");
+        app.WebSocketCollection.WSMapper.registerParameterCode("Coolant_Temperature", "SLOW");
+        app.WebSocketCollection.WSMapper.registerParameterCode("Manifold_Absolute_Pressure", "SLOWandFAST");
+         
         app.Run();
     }
 }

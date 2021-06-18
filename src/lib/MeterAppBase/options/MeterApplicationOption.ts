@@ -21,22 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import {
-    DefiParameterCode, SSMParameterCode, ArduinoParameterCode, OBDIIParameterCode, ReadModeCode,
-    AssettoCorsaSHMGraphicsParameterCode, AssettoCorsaSHMStaticInfoParameterCode, AssettoCorsaSHMPhysicsParameterCode
-} from "../../WebSocket/WebSocketCommunication";
 
 import * as PIXI from "pixi.js";
-import { WebsocketObjectCollection } from "../WebSocketObjectCollection";
-
-class WebsocketEnableFlag {
-    public Defi = false;
-    public SSM = false;
-    public Arduino = false;
-    public ELM327 = false;
-    public FUELTRIP = false;
-    public AssettoCorsaSHM = false;
-}
+import { WebsocketObjectCollection, WebsocketObjectCollectionOption } from "../WebsocketObjCollection/WebsocketObjectCollection";
 
 class AddAllArray<T>
 {
@@ -51,21 +38,6 @@ class AddAllArray<T>
     }
 }
 
-class ParameterCodeCollection {
-    public readonly Defi = new AddAllArray<DefiParameterCode>();
-    public readonly SSM = new AddAllArray<{ code: SSMParameterCode, readmode: ReadModeCode }>();
-    public readonly Arduino = new AddAllArray<ArduinoParameterCode>();
-    public readonly ELM327OBDII = new AddAllArray<{ code: OBDIIParameterCode, readmode: ReadModeCode }>();
-    public readonly AssettoCorsaPhysics = new AddAllArray<AssettoCorsaSHMPhysicsParameterCode>();
-    public readonly AssettoCorsaGraphics = new AddAllArray<AssettoCorsaSHMGraphicsParameterCode>();
-    public readonly AssettoCorsaStaticInfo = new AddAllArray<AssettoCorsaSHMStaticInfoParameterCode>();
-}
-
-class FUELTRIPWebsocketOption {
-    public FUELTRIPSectSpan = 300;
-    public FUELTRIPSectStoreMax = 6;
-}
-
 class PreloadResourceCollection {
     public readonly WebFontFamiliyName = new AddAllArray<string>();
     public readonly WebFontCSSURL = new AddAllArray<string>();
@@ -73,15 +45,26 @@ class PreloadResourceCollection {
 }
 
 export class MeterApplicationOption {
-    public readonly WebsocketEnableFlag = new WebsocketEnableFlag();
-    public readonly ParameterCode = new ParameterCodeCollection();
-    public readonly PreloadResource = new PreloadResourceCollection();
-    public readonly FUELTRIPWebsocketOption = new FUELTRIPWebsocketOption();
-
+    public readonly PreloadResource : PreloadResourceCollection;
+    public readonly WebSocketCollectionOption : WebsocketObjectCollectionOption;
+    
     public height = 640;
     public width = 480;
 
     public TransparentAppBackground = false;
 
     public SetupPIXIMeterPanel: (pixiApp: PIXI.Application, wsObj: WebsocketObjectCollection) => void = () => {/* do nothing*/};
+    
+    constructor(wsCollectionOption? :WebsocketObjectCollectionOption, preloadResource? : PreloadResourceCollection)
+    {
+        if(preloadResource === undefined)
+            this.PreloadResource = new PreloadResourceCollection();
+        else
+            this.PreloadResource = preloadResource;
+
+        if(wsCollectionOption === undefined)
+            this.WebSocketCollectionOption = new WebsocketObjectCollectionOption();
+        else
+            this.WebSocketCollectionOption = wsCollectionOption;
+    }
 }

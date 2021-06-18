@@ -28,7 +28,7 @@ import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
 
 import { WebstorageHandler } from "./Webstorage/WebstorageHandler";
-import { WebsocketObjectCollection } from "./WebSocketObjectCollection";
+import { WebsocketObjectCollection } from "./WebsocketObjCollection/WebsocketObjectCollection";
 import { MeterApplicationOption } from "./options/MeterApplicationOption";
 import { ApplicationNavbar } from './reactParts/ApplicationNavbar';
 import { StringListLogger } from "./utils/StringListLogger";
@@ -40,10 +40,15 @@ const BOOTSTRAP_CSS_FILENAME = "bootstrap.min.css";
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
 
 export class MeterApplication {
-    private Option = new MeterApplicationOption();
+    private Option : MeterApplicationOption;
     private Logger = new StringListLogger();
+
+    private readonly webSocketCollection : WebsocketObjectCollection;
+    public get WebSocketCollection() : WebsocketObjectCollection { return this.webSocketCollection }
+
     constructor(option: MeterApplicationOption) {
         this.Option = option;
+        this.webSocketCollection = new WebsocketObjectCollection(this.Logger, option.WebSocketCollectionOption);
     }
 
     public Run(): void {
@@ -63,8 +68,6 @@ export class MeterApplication {
         // Load bootstrap css
         this.loadBootStrapCSS();
 
-        const webSocketCollection = new WebsocketObjectCollection(this.Logger, this.Option);
-
         // Crete react components
         const rootElement = document.createElement('div');
         ReactDOM.render(
@@ -78,9 +81,9 @@ export class MeterApplication {
                         webStorage.WebsocketServerHome = c.host;
                     }}
                     onWSIntervalDialogSet={interval => webStorage.WSInterval = interval}
-                    onFUELTripResetDialogSet={() => webSocketCollection.FUELTRIPWS.SendReset()}
+                    onFUELTripResetDialogSet={() => this.WebSocketCollection.FUELTRIPWS.SendReset()}
                     logList={this.Logger.Content}
-                    websocketStatusList={webSocketCollection.WebsocketStates}
+                    websocketStatusList={this.WebSocketCollection.WebsocketStates}
                     opacityOnMouseOff={this.Option.TransparentAppBackground ? "0" : "0.1"}
                 />
                 <PIXIApplication application={pixiApp} />
@@ -92,9 +95,9 @@ export class MeterApplication {
 
 
         // Preload Fonts -> textures-> parts
-        this.preloadFonts(() => this.preloadTextures(() => this.Option.SetupPIXIMeterPanel(pixiApp, webSocketCollection)));
+        this.preloadFonts(() => this.preloadTextures(() => this.Option.SetupPIXIMeterPanel(pixiApp, this.WebSocketCollection)));
 
-        webSocketCollection.Run();
+        this.WebSocketCollection.Run();
     }
 
     private preloadFonts(callBack: () => void) {

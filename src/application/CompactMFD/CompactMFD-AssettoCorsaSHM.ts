@@ -60,11 +60,8 @@ class CompactMFD_AssettoCorsaSHM {
         appOption.PreloadResource.TexturePath.addall(DigiTachoPanel.RequestedTexturePath);
         appOption.PreloadResource.TexturePath.addall(BoostGaugePanel.RequestedTexturePath);
 
-        appOption.WebsocketEnableFlag.AssettoCorsaSHM = true;
-        appOption.ParameterCode.AssettoCorsaPhysics.addall([AssettoCorsaSHMPhysicsParameterCode.Rpms,
-        AssettoCorsaSHMPhysicsParameterCode.SpeedKmh,
-        AssettoCorsaSHMPhysicsParameterCode.ManifoldPressure,
-        AssettoCorsaSHMPhysicsParameterCode.Gear]);
+        appOption.WebSocketCollectionOption.AssettoCorsaWSEnabled = true;
+
         appOption.SetupPIXIMeterPanel = (app, ws) => {
             const stage = app.stage;
             const digiTachoPanel = new DigiTachoPanel();
@@ -114,6 +111,11 @@ class CompactMFD_AssettoCorsaSHM {
             });
         };
         const app = new MeterApplication(appOption);
+
+        app.WebSocketCollection.AssettoCorsaWS.PhysicsParameterCodeList.push(...[AssettoCorsaSHMPhysicsParameterCode.Rpms,
+        AssettoCorsaSHMPhysicsParameterCode.SpeedKmh,
+        AssettoCorsaSHMPhysicsParameterCode.ManifoldPressure,
+        AssettoCorsaSHMPhysicsParameterCode.Gear]);
         app.Run();
     }
 }

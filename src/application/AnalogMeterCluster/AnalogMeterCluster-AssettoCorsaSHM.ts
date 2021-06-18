@@ -50,11 +50,7 @@ class AnalogMeterCluster_AssettoCorsaSHM {
         appOption.PreloadResource.WebFontCSSURL.addall(AnalogMeterCluster.RequestedFontCSSURL);
         appOption.PreloadResource.TexturePath.addall(AnalogMeterCluster.RequestedTexturePath);
 
-        appOption.WebsocketEnableFlag.AssettoCorsaSHM = true;
-        appOption.ParameterCode.AssettoCorsaPhysics.addall(AssettoCorsaSHMPhysicsParameterCode.Rpms);
-        appOption.ParameterCode.AssettoCorsaPhysics.addall(AssettoCorsaSHMPhysicsParameterCode.SpeedKmh);
-        appOption.ParameterCode.AssettoCorsaPhysics.addall(AssettoCorsaSHMPhysicsParameterCode.ManifoldPressure);
-        appOption.ParameterCode.AssettoCorsaPhysics.addall(AssettoCorsaSHMPhysicsParameterCode.Gear);
+        appOption.WebSocketCollectionOption.AssettoCorsaWSEnabled = true;
 
         appOption.SetupPIXIMeterPanel = (app, ws) => {
             const stage = app.stage;
@@ -91,6 +87,11 @@ class AnalogMeterCluster_AssettoCorsaSHM {
             });
         }
         const app = new MeterApplication(appOption);
+        app.WebSocketCollection.AssettoCorsaWS.PhysicsParameterCodeList.push(AssettoCorsaSHMPhysicsParameterCode.Rpms);
+        app.WebSocketCollection.AssettoCorsaWS.PhysicsParameterCodeList.push(AssettoCorsaSHMPhysicsParameterCode.SpeedKmh);
+        app.WebSocketCollection.AssettoCorsaWS.PhysicsParameterCodeList.push(AssettoCorsaSHMPhysicsParameterCode.ManifoldPressure);
+        app.WebSocketCollection.AssettoCorsaWS.PhysicsParameterCodeList.push(AssettoCorsaSHMPhysicsParameterCode.Gear);
+
         app.Run();
     }
 }

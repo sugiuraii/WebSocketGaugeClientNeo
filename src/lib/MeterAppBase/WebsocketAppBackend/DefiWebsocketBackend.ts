@@ -40,7 +40,7 @@ export class DefiWebsocketBackend implements WebsocketAppBackend {
    private readonly WAITTIME_BEFORE_RECONNECT = 5000;
 
    private readonly defiWS: DefiCOMWebsocket;
-   private readonly parameterCodeList: DefiParameterCode[];
+   private readonly parameterCodeList: DefiParameterCode[] = [];
    private readonly logger: ILogger;
    private readonly state: WebsocketState;
 
@@ -48,9 +48,10 @@ export class DefiWebsocketBackend implements WebsocketAppBackend {
 
    private indicatorUpdateIntervalID = 0;
 
-   constructor(serverurl: string, codeList: DefiParameterCode[], logger: ILogger) {
+   public get ParameterCodeList() : DefiParameterCode[] { return this.parameterCodeList }
+
+   constructor(serverurl: string, logger: ILogger) {
       this.defiWS = new DefiCOMWebsocket(serverurl);
-      this.parameterCodeList = codeList;
       this.logger = logger;
       this.state = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
       this.webSocketServerURL = this.defiWS.URL;
@@ -58,8 +59,11 @@ export class DefiWebsocketBackend implements WebsocketAppBackend {
       this.defiWS.OnWebsocketError = (message: string) => this.logger.appendLog(this.logPrefix + " websocket error : " + message);
    }
 
-   public getVal(code: DefiParameterCode, timestamp: number): number {
-      return this.defiWS.getVal(code, timestamp);
+   public getVal(code: DefiParameterCode, timestamp?: number): number {
+      if(timestamp === undefined)
+         return this.getRawVal(code);
+      else
+         return this.defiWS.getVal(code, timestamp);
    }
 
    public getRawVal(code: DefiParameterCode): number {
