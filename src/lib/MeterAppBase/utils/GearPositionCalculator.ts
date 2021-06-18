@@ -49,11 +49,11 @@ export class GearPositionCalculator
     public getGearPosition(rev : number, speed : number) : number | undefined
     {
         const gearRatio = this.getGearRatio(rev, speed);
-        this.gearPositionJudgeFunctions.forEach( f => 
-            {
-                if(f.judgeFunction(gearRatio))
-                    return f.gear;
-            });
+        for(const f of this.gearPositionJudgeFunctions)
+        {
+            if(f.judgeFunction(gearRatio))
+            return f.gear;
+        }
         return undefined;
     }
 }
