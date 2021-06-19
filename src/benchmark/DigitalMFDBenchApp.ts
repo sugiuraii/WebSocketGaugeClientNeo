@@ -22,6 +22,8 @@
  * THE SOFTWARE.
  */
 
+import * as PIXI from 'pixi.js';
+
 //Import application base class
 import {MeterApplication} from "../lib/MeterAppBase/MeterApplication";
 
@@ -50,10 +52,9 @@ class DigitalMFDBenchApp
 {    
     public Run()
     {
-        const appOption = new MeterApplicationOption();
-        appOption.height = 600;
-        appOption.width = 1200;
+        const pixiAppOption : PIXI.IApplicationOptions = {width : 1200, height : 600};
 
+        const appOption = new MeterApplicationOption(pixiAppOption);
         appOption.PreloadResource.WebFontFamiliyName.addall(BoostGaugePanel.RequestedFontFamily);
         appOption.PreloadResource.WebFontFamiliyName.addall(WaterTempGaugePanel.RequestedFontFamily);
         appOption.PreloadResource.WebFontFamiliyName.addall(DigiTachoPanel.RequestedFontFamily);

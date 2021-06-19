@@ -24,6 +24,7 @@
 
 // Set entry point html file to bundle by webpack
 require("./CompactMFD.html");
+import * as PIXI from 'pixi.js';
 
 //Import application base class
 import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
@@ -45,9 +46,8 @@ window.onload = function () {
 
 class CompactMFDApp {
     public Start() {
-        const appOption = new MeterApplicationOption(DefaultAppSettings.DefaultWebSocketCollectionOption);
-        appOption.width = 720;
-        appOption.height = 1280;
+        const pixiAppOption : PIXI.IApplicationOptions = {width : 720, height : 1280};
+        const appOption = new MeterApplicationOption(pixiAppOption, DefaultAppSettings.DefaultWebSocketCollectionOption);
         appOption.PreloadResource.WebFontFamiliyName.addall(WaterTempGaugePanel.RequestedFontFamily);
         appOption.PreloadResource.WebFontFamiliyName.addall(DigiTachoPanel.RequestedFontFamily);
         appOption.PreloadResource.WebFontFamiliyName.addall(BoostGaugePanel.RequestedFontFamily);
