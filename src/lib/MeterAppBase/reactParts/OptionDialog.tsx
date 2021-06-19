@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
 
 type OptionDialogProps = {
@@ -33,25 +33,16 @@ type OptionDialogProps = {
 }
 
 export type OptionDialogFormContents = {
-    host: string,
-    wsHostSameAsHttpHost: boolean,
-    pixijsPreserveDrawingBuffer: boolean
 }
 
 export const OptionDialog: FunctionComponent<OptionDialogProps> = (p) => {
-    const [host, setHost] = useState(p.defaultFormContent.host);
-    const [wsHostSameAsHttpHost, setWSHostSameAsHttpHost] = useState(p.defaultFormContent.wsHostSameAsHttpHost);
-    const [pixijsPreserveDrawingBuffer, setPIXIJSPreserveDrawingBuffer] = useState(p.defaultFormContent.pixijsPreserveDrawingBuffer);
 
     const handleCancel = () => {
         // Reset forms
-        setHost(p.defaultFormContent.host);
-        setWSHostSameAsHttpHost(p.defaultFormContent.wsHostSameAsHttpHost);
-        setPIXIJSPreserveDrawingBuffer(p.defaultFormContent.pixijsPreserveDrawingBuffer);
         p.onCancel();
     };
 
-    const handleSet = () => p.onSet({ host: host, wsHostSameAsHttpHost: wsHostSameAsHttpHost, pixijsPreserveDrawingBuffer: pixijsPreserveDrawingBuffer });
+    const handleSet = () => p.onSet({});
 
     return (
         <Modal show={p.show} >
@@ -60,16 +51,6 @@ export const OptionDialog: FunctionComponent<OptionDialogProps> = (p) => {
             </Modal.Header>
             <Modal.Body>
                 <Form>
-                    <Form.Group controlId="formWSURL">
-                        <Form.Label>Websocket server hostname/ip</Form.Label>
-                        <Form.Control type="text" value={host} onChange={(e) => setHost(e.target.value)} />
-                    </Form.Group>
-                    <Form.Group controlId="formSetWSServerHttpSiteCheckbox">
-                        <Form.Check type='checkbox' checked={wsHostSameAsHttpHost} label="Set websocket server address same as this website." onChange={e => setWSHostSameAsHttpHost(e.currentTarget.checked)} />
-                    </Form.Group>
-                    <Form.Group controlId="formPreserveDrawingBufferCheckBox">
-                        <Form.Check type="checkbox" checked={pixijsPreserveDrawingBuffer} label="Enable preserveDrawingBuffer on pixi.js." onChange={e => setPIXIJSPreserveDrawingBuffer(e.currentTarget.checked)} />
-                    </Form.Group>
                 </Form>
             </Modal.Body>
             <Modal.Footer>
