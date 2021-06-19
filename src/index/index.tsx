@@ -36,10 +36,8 @@ window.onload = () => {
 
     // Crete react components
     const rootElement = document.getElementById('root');
-    ReactDOM.render(<IndexNavbar defaultOptionDialogContent={{ host: webStorage.WebsocketServerHome, wsHostSameAsHttpHost: webStorage.WSServerSameAsHttp, pixijsPreserveDrawingBuffer: webStorage.PreserveDrawingBuffer }}
+    ReactDOM.render(<IndexNavbar defaultOptionDialogContent={{ forceCanvas:webStorage.ForceCanvas }}
         onOptionDialogSet={c => {
-            webStorage.PreserveDrawingBuffer = c.pixijsPreserveDrawingBuffer;
-            webStorage.WSServerSameAsHttp = c.wsHostSameAsHttpHost;
-            webStorage.WebsocketServerHome = c.host;
+            webStorage.ForceCanvas = c.forceCanvas;
         }}/>, rootElement);
 }

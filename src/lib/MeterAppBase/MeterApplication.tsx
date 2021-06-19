@@ -53,6 +53,12 @@ export class MeterApplication {
 
     public Run(): void {
         const webStorage = new WebstorageHandler();
+        
+        // Override forceCanvas flag from webstorage, if Option.PIXIApplication.forceCanvas is undefinded.
+        if(this.Option.PIXIApplicationOption.forceCanvas === undefined)
+            if(webStorage.ForceCanvas)
+                this.Option.PIXIApplicationOption.forceCanvas = true; 
+
         const pixiApp = new PIXI.Application(this.Option.PIXIApplicationOption);
         // Append PIXI.js application to document body
         pixiApp.view.style.width = "100vw";
@@ -71,12 +77,10 @@ export class MeterApplication {
         ReactDOM.render(
             <Fragment>
                 <ApplicationNavbar
-                    defaultOptionDialogContent={{ host: webStorage.WebsocketServerHome, wsHostSameAsHttpHost: webStorage.WSServerSameAsHttp, pixijsPreserveDrawingBuffer: webStorage.PreserveDrawingBuffer }}
+                    defaultOptionDialogContent={{ forceCanvas : webStorage.ForceCanvas }}
                     defaultWSInterval={webStorage.WSInterval}
                     onOptionDialogSet={c => {
-                        webStorage.PreserveDrawingBuffer = c.pixijsPreserveDrawingBuffer;
-                        webStorage.WSServerSameAsHttp = c.wsHostSameAsHttpHost;
-                        webStorage.WebsocketServerHome = c.host;
+                        webStorage.ForceCanvas = c.forceCanvas;
                     }}
                     onWSIntervalDialogSet={interval => webStorage.WSInterval = interval}
                     onFUELTripResetDialogSet={() => this.WebSocketCollection.FUELTRIPWS.SendReset()}

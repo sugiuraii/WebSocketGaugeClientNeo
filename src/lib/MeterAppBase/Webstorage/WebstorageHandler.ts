@@ -23,29 +23,6 @@
  */
 
 export class WebstorageHandler {
-
-    public get WebsocketServerHome() : string
-    {
-        const wsServerHostname = localStorage.getItem("WSServerHostname");
-        return wsServerHostname === null ? location.hostname : wsServerHostname;
-    }
-
-    public set WebsocketServerHome(host : string)
-    {
-        localStorage.setItem("WSServerHostname", host);
-    }
-
-    public get WSServerSameAsHttp() : boolean
-    {
-        const wsServerSameAsHttp = localStorage.getItem("SetWSServerSameAsHttp");
-        return wsServerSameAsHttp === null? true : wsServerSameAsHttp === "true";
-    }
-
-    public set WSServerSameAsHttp(flag : boolean)
-    {
-        localStorage.setItem("SetWSServerSameAsHttp", flag?"true":"false");
-    }
-
     public get WSInterval() : number
     {
         const wsInterval = localStorage.getItem("WSInterval");
@@ -57,15 +34,15 @@ export class WebstorageHandler {
         localStorage.setItem("WSInterval", interval.toString());
     }
 
-    public get PreserveDrawingBuffer() : boolean
+    public get ForceCanvas() : boolean
     {
-        const preserveDrawingBuffer = localStorage.getItem("preserveDrawingBuffer");
-        return (preserveDrawingBuffer === null) ? false : preserveDrawingBuffer === "true";
+        const forceCanvas = localStorage.getItem("ForceCanvas");
+        return forceCanvas === null? true : forceCanvas === "true";
     }
 
-    public set PreserveDrawingBuffer(flag : boolean)
+    public set ForceCanvas(flag : boolean)
     {
-        localStorage.setItem("preserveDrawingBuffer", flag?"true":"false");
+        localStorage.setItem("ForceCanvas", flag?"true":"false");
     }
 }
 
