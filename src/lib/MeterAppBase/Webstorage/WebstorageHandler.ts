@@ -23,29 +23,6 @@
  */
 
 export class WebstorageHandler {
-
-    public get WebsocketServerHome() : string
-    {
-        const wsServerHostname = localStorage.getItem("WSServerHostname");
-        return wsServerHostname === null ? location.hostname : wsServerHostname;
-    }
-
-    public set WebsocketServerHome(host : string)
-    {
-        localStorage.setItem("WSServerHostname", host);
-    }
-
-    public get WSServerSameAsHttp() : boolean
-    {
-        const wsServerSameAsHttp = localStorage.getItem("SetWSServerSameAsHttp");
-        return wsServerSameAsHttp === null? true : wsServerSameAsHttp === "true";
-    }
-
-    public set WSServerSameAsHttp(flag : boolean)
-    {
-        localStorage.setItem("SetWSServerSameAsHttp", flag?"true":"false");
-    }
-
     public get WSInterval() : number
     {
         const wsInterval = localStorage.getItem("WSInterval");
@@ -55,17 +32,6 @@ export class WebstorageHandler {
     public set WSInterval(interval : number)
     {
         localStorage.setItem("WSInterval", interval.toString());
-    }
-
-    public get PreserveDrawingBuffer() : boolean
-    {
-        const preserveDrawingBuffer = localStorage.getItem("preserveDrawingBuffer");
-        return (preserveDrawingBuffer === null) ? false : preserveDrawingBuffer === "true";
-    }
-
-    public set PreserveDrawingBuffer(flag : boolean)
-    {
-        localStorage.setItem("preserveDrawingBuffer", flag?"true":"false");
     }
 }
 
