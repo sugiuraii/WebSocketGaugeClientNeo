@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
 
 type OptionDialogProps = {
@@ -33,16 +33,19 @@ type OptionDialogProps = {
 }
 
 export type OptionDialogFormContents = {
+    useCanvas : boolean
 }
 
 export const OptionDialog: FunctionComponent<OptionDialogProps> = (p) => {
+    const [useCanvas, setUseCanvas] = useState(p.defaultFormContent.useCanvas);
 
     const handleCancel = () => {
         // Reset forms
+        setUseCanvas(p.defaultFormContent.useCanvas);
         p.onCancel();
     };
 
-    const handleSet = () => p.onSet({});
+    const handleSet = () => p.onSet({useCanvas : useCanvas});
 
     return (
         <Modal show={p.show} >
@@ -51,6 +54,9 @@ export const OptionDialog: FunctionComponent<OptionDialogProps> = (p) => {
             </Modal.Header>
             <Modal.Body>
                 <Form>
+                    <Form.Group controlId="formSetUseCanvasCheckbox">
+                        <Form.Check type='checkbox' checked={useCanvas} label="Force to use canvas." onChange={e => setUseCanvas(e.currentTarget.checked)} />
+                    </Form.Group>
                 </Form>
             </Modal.Body>
             <Modal.Footer>
