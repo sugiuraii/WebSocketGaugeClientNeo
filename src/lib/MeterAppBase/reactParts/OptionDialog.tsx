@@ -33,19 +33,19 @@ type OptionDialogProps = {
 }
 
 export type OptionDialogFormContents = {
-    useCanvas : boolean
+    forceCanvas : boolean
 }
 
 export const OptionDialog: FunctionComponent<OptionDialogProps> = (p) => {
-    const [useCanvas, setUseCanvas] = useState(p.defaultFormContent.useCanvas);
+    const [forceCanvas, setForceCanvas] = useState(p.defaultFormContent.forceCanvas);
 
     const handleCancel = () => {
         // Reset forms
-        setUseCanvas(p.defaultFormContent.useCanvas);
+        setForceCanvas(p.defaultFormContent.forceCanvas);
         p.onCancel();
     };
 
-    const handleSet = () => p.onSet({useCanvas : useCanvas});
+    const handleSet = () => p.onSet({forceCanvas : forceCanvas});
 
     return (
         <Modal show={p.show} >
@@ -55,7 +55,7 @@ export const OptionDialog: FunctionComponent<OptionDialogProps> = (p) => {
             <Modal.Body>
                 <Form>
                     <Form.Group controlId="formSetUseCanvasCheckbox">
-                        <Form.Check type='checkbox' checked={useCanvas} label="Force to use canvas." onChange={e => setUseCanvas(e.currentTarget.checked)} />
+                        <Form.Check type='checkbox' checked={forceCanvas} label="Force to use canvas." onChange={e => setForceCanvas(e.currentTarget.checked)} />
                     </Form.Group>
                 </Form>
             </Modal.Body>
