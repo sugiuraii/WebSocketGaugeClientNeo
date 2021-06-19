@@ -33,5 +33,16 @@ export class WebstorageHandler {
     {
         localStorage.setItem("WSInterval", interval.toString());
     }
+
+    public get ForceCanvas() : boolean
+    {
+        const forceCanvas = localStorage.getItem("ForceCanvas");
+        return forceCanvas === null? true : forceCanvas === "true";
+    }
+
+    public set ForceCanvas(flag : boolean)
+    {
+        localStorage.setItem("ForceCanvas", flag?"true":"false");
+    }
 }
 
