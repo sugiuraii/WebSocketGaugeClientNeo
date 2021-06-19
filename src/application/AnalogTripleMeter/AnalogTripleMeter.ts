@@ -24,6 +24,7 @@
 
 //For including entry point html file in webpack
 require("./AnalogTripleMeter.html");
+import * as PIXI from 'pixi.js';
 
 //Import application base class
 import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
@@ -44,9 +45,9 @@ window.onload = function () {
 
 class AnalogTripleMeterApp {
     public Start() {
-        const appOption = new MeterApplicationOption(DefaultAppSettings.DefaultWebSocketCollectionOption);
-        appOption.width = 1280;
-        appOption.height = 720;
+        const pixiAppOption : PIXI.IApplicationOptions = {width : 1280, height : 720};
+
+        const appOption = new MeterApplicationOption(pixiAppOption, DefaultAppSettings.DefaultWebSocketCollectionOption);
         appOption.PreloadResource.WebFontFamiliyName.addall(BoostMeter.RequestedFontFamily);
         appOption.PreloadResource.WebFontCSSURL.addall(BoostMeter.RequestedFontCSSURL);
         appOption.PreloadResource.TexturePath.addall(BoostMeter.RequestedTexturePath);

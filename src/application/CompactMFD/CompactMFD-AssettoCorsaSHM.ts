@@ -24,6 +24,7 @@
 
 //Assign entry point html file to bundle by webpack
 require("./CompactMFD-AssettoCorsaSHM.html");
+import * as PIXI from 'pixi.js';
 
 //Import application base class
 import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
@@ -45,9 +46,9 @@ window.onload = function () {
 
 class CompactMFD_AssettoCorsaSHM {
     public Start() {
-        const appOption = new MeterApplicationOption();
-        appOption.width = 720;
-        appOption.height = 1280;
+        const pixiAppOption : PIXI.IApplicationOptions = {width : 720, height : 1280};
+
+        const appOption = new MeterApplicationOption(pixiAppOption);
         appOption.PreloadResource.WebFontFamiliyName.addall(WaterTempGaugePanel.RequestedFontFamily);
         appOption.PreloadResource.WebFontFamiliyName.addall(DigiTachoPanel.RequestedFontFamily);
         appOption.PreloadResource.WebFontFamiliyName.addall(BoostGaugePanel.RequestedFontFamily);

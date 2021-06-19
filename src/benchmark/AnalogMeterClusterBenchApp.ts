@@ -22,6 +22,8 @@
  * THE SOFTWARE.
  */
 
+import * as PIXI from 'pixi.js';
+
 //Import application base class
 import {MeterApplication} from "../lib/MeterAppBase/MeterApplication";
 import {MeterApplicationOption} from "../lib/MeterAppBase/options/MeterApplicationOption";
@@ -44,9 +46,9 @@ class AnalogMeterClusterBenchApp
 {
     public Start()
     {
-        const appOption = new MeterApplicationOption();
-        appOption.width = 1100;
-        appOption.height = 600;
+        const pixiAppOption : PIXI.IApplicationOptions = {width : 1100, height : 600};
+
+        const appOption = new MeterApplicationOption(pixiAppOption);
         appOption.PreloadResource.WebFontFamiliyName.addall(AnalogMeterCluster.RequestedFontFamily);
         appOption.PreloadResource.WebFontCSSURL.addall(AnalogMeterCluster.RequestedFontCSSURL);
         appOption.PreloadResource.TexturePath.addall(AnalogMeterCluster.RequestedTexturePath);
