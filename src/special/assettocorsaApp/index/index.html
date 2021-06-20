@@ -23,202 +23,72 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 -->
 <html>
-    <head>
-        <title>WebSocketGaugeClientNeo</title>
-        <meta charset="UTF-8">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui">
 
-        <!--
-        <link rel="stylesheet" type="text/css" href="indexmenu.css">
-        -->
-        <script type="text/javascript" src="js/index.js"></script>
-    </head>
-    <body>
-        <div id="root"></div>
-        <div class="jumbotron">
-            <h1>
-                Gauge Panel Application Sample
-            </h1>
-        </div>
-        <div class="row">
-            <div class="card col-sm-4">
-                <img class="card-img-top img-thumbnail" src="thumbnails/AnalogMeterCluster.png" alt="Card image cap">
-                <div class="card-body">
-                    <h4 class="card-title">
-                        Analog Meter Cluster
-                    </h4>
-                    <p class="card-text">
-                        Triple analog gauge cluster demonstration (speed+coolant temp, rev+trip and boost).
-                    </p>
-                    <a href="application/AnalogMeterCluster.html" class="btn btn-primary btn-lg btn-block">Start</a>
-                </div>
-            </div>
+<head>
+    <title>WebSocketGaugeClientNeo for AssettoCorsa shared memory telemetry</title>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <!--
+            <link rel="stylesheet" type="text/css" href="indexmenu.css">
+            -->
+    <script type="text/javascript" src="js/index.js"></script>
+</head>
 
-            <div class="card col-sm-4">
-                <img class="card-img-top img-thumbnail" src="thumbnails/DigitalMFD.png" alt="Card image cap">
-                <div class="card-body">
-                    <h4 class="card-title">
-                        Digital MFD
-                    </h4>
-
-                    <p class="card-text">
-                        Multi function display demo with rev, speed, fuel/trip, boost, A/F, coolant temp, battery voltage and throttle.
-                    </p>
-                    <a href="application/DigitalMFD.html" class="btn btn-primary btn-lg btn-block">Start</a>
-                </div>
-            </div>
-            <div class="card col-sm-4">
-                <img class="card-img-top img-thumbnail" src="thumbnails/CompactMFD.png" alt="Card image cap">
-                <div class="card-body">
-                    <h4 class="card-title">
-                        CompactMFD
-                    </h4>
-
-                    <p class="card-text">
-                        Mini Multi function display demo.
-                    </p>
-                    <a href="application/CompactMFD.html" class="btn btn-primary btn-lg btn-block">Start</a>
-                </div>
-            </div>
-            <div class="card col-sm-4">
-                <img class="card-img-top img-thumbnail" src="thumbnails/AnalogTripleMeter.png" alt="Card image cap">
-                <div class="card-body">
-                    <h4 class="card-title">
-                        Analog triple meter
-                    </h4>
-
-                    <p class="card-text">
-                        Triple analog meter.
-                    </p>
-                    <a href="application/AnalogTripleMeter.html" class="btn btn-primary btn-lg btn-block">Start</a>
-                </div>
-            </div>
-            <div class="card col-sm-4">
-                <img class="card-img-top img-thumbnail" src="thumbnails/LEDRevMeter.png" alt="Card image cap">
-                <div class="card-body">
-                    <h4 class="card-title">
-                        LED rev meter (with 2 analog meters)
-                    </h4>
-
-                    <p class="card-text">
-                        LED rev meter(+ Speed/Trip/Fuel indicator) with 2 analog meters.
-                    </p>
-                    <a href="application/LEDRevMeter.html" class="btn btn-primary btn-lg btn-block">Start</a>
-                </div>
-            </div>
-        </div>
-        <div class="jumbotron">
-            <h1>
-                Gauge Panel benchmark.
-            </h1>
-            <h4>
-                Graphic benchmark test without websocket communication.
-            </h4>
-        </div>
-        <div class="row">
-            <div class="card col-sm-4">
-                <img class="card-img-top img-thumbnail" src="thumbnails/AnalogMeterClusterBenchApp.png" alt="Card image cap">
-                <div class="card-body">
-                    <h4 class="card-title">
-                        Analog Meter Cluster Benchmark
-                    </h4>
-
-                    <p class="card-text">
-                        Graphic drawing benchmark test of triple analog gauge cluster.
-                    </p>
-                    <a href="benchmark/AnalogMeterClusterBenchApp.html" class="btn btn-primary btn-lg btn-block">Start</a>
-                </div>
-            </div>
-            <div class="card col-sm-4">
-                <img class="card-img-top img-thumbnail" src="thumbnails/DigitalMFDBenchApp.png" alt="Card image cap">
-                <div class="card-body">
-                    <h4 class="card-title">
-                        Digital MFD Benchmark
-                    </h4>
-
-                    <p class="card-text">
-                        Graphic drawing benchmark test of multi function display.
-                    </p>
-                    <a href="benchmark/DigitalMFDBenchApp.html" class="btn btn-primary btn-lg btn-block">Start</a>
-                </div>
-            </div>
-        </div>
-        <div class="jumbotron">
-            <h1>
-                Websocket communication test.
-            </h1>
-        </div>
-        <div class="row">
-            <div class="card col-sm-4">
-                <div class="card-body">
-                    <h4 class="card-title">
-                        DefiCOM test
-                    </h4>
-
-                    <p class="card-text">
-                        Simple websocket communication test for DefiCOM websocet.
-                    </p>
-                    <p class="badge badge-info">DefiCOM</p>
-                    <a href="WebSocketTester/DefiCOMWSTest.html" class="btn btn-primary btn-lg btn-block">Start</a>
-                </div>
-            </div>
-            <div class="card col-sm-4">
-                <div class="card-body" >
-                    <h4 class="card-title">
-                        DefiCOM test
-                    </h4>
-                    <h5 class=""card-title">
-                        (with interpolation)
-                </h5>
+<body>
+    <div id="root"></div>
+    <div class="jumbotron">
+        <h1>
+            Gauge Panel Application Sample (for AssettoCorsa shared memory)
+        </h1>
+    </div>
+    <div class="row">
+        <div class="card col-sm-4">
+            <div class="card-body">
+                <h4 class="card-title">
+                    Analog Meter Cluster
+                </h4>
                 <p class="card-text">
-                    Simple websocket communication test for DefiCOM websocet (interpolation enabled).
+                    Triple analog gauge cluster demonstration (speed+coolant temp, rev+trip and boost).
                 </p>
-                <p class="badge badge-info">DefiCOM</p>
-                <a href="WebSocketTester/DefiCOMWSInterpolateTest.html" class="btn btn-primary btn-lg btn-block">Start</a>                    
+                <a href="AnalogMeterCluster-AssettoCorsaSHM.html" class="btn btn-primary btn-lg btn-block">Start</a>
             </div>
         </div>
         <div class="card col-sm-4">
             <div class="card-body">
                 <h4 class="card-title">
-                    SSMCOM test
+                    CompactMFD
                 </h4>
 
                 <p class="card-text">
-                    Simple websocket communication test for SSMCOM websocet.
+                    Mini Multi function display demo.
                 </p>
-                <a href="WebSocketTester/SSMCOMWSTest.html" class="btn btn-primary btn-lg btn-block">Start</a>
-                <p class="badge badge-info">SSMCOM</p>
+                <a href="AnalogMeterCluster-AssettoCorsaSHM.html" class="btn btn-primary btn-lg btn-block">Start</a>
             </div>
         </div>
+    </div>
+    <div class="jumbotron">
+        <h1>
+            Websocket communication tester.
+        </h1>
+    </div>
+    <div class="row">
         <div class="card col-sm-4">
             <div class="card-body">
                 <h4 class="card-title">
-                    ArduinoCOM test
+                    AsettoCorsa shared memory telemetry websocket client test.
                 </h4>
 
                 <p class="card-text">
-                    Simple websocket communication test for ArduinoCOM websocet.
+                    Websocket communication test for AssetoCorsa shared memory telemetry.
                 </p>
-                <p class="badge badge-info">ArduinoCOM</p>
-                <a href="WebSocketTester/ArduinoCOMWSTest.html" class="btn btn-primary btn-lg btn-block">Start</a>
-            </div>
-        </div>
-        <div class="card col-sm-4">
-            <div class="card-body">
-                <h4 class="card-title">
-                    ELM327COM test
-                </h4>
-
-                <p class="card-text">
-                    Simple websocket communication test for ELM327COM websocet.
-                </p>
-                <p class="badge badge-info">ELM327COM</p>
-                <a href="WebSocketTester/ELM327COMWSTest.html" class="btn btn-primary btn-lg btn-block">Start</a>
-
+                <p class="badge badge-info">AssettoCorsaSHM</p>
+                <a href="AssettoCorsaSHMWSTest.html" class="btn btn-primary btn-lg btn-block">Start</a>
             </div>
         </div>
     </div>
 </body>
+
 </html>
