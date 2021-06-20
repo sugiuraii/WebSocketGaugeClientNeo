@@ -23,7 +23,7 @@
  */
 
 var webpack = require('webpack');
-const outputPath = __dirname + "/../../public_html/application";
+const outputPath = __dirname + "/../../../public_html/special/assettocorsaApp";
 
 module.exports = {
     mode: "development",
@@ -31,11 +31,8 @@ module.exports = {
     entry:
     {
         // Register meter application and set entry point typescript file.
-        "AnalogMeterCluster": './AnalogMeterCluster/AnalogMeterCluster.ts',
-        "DigitalMFD": './DigitalMFD/DigitalMFD.ts',
-        "CompactMFD": './CompactMFD/CompactMFD.ts',
-        "AnalogTripleMeter": './AnalogTripleMeter/AnalogTripleMeter.ts',
-        "LEDRevMeter": './LEDRevMeter/LEDRevMeter.ts'
+        "AnalogMeterCluster-AssettoCorsaSHM": './AnalogMeterCluster/AnalogMeterCluster-AssettoCorsaSHM.ts',
+        "CompactMFD-AssettoCorsaSHM": './CompactMFD/CompactMFD-AssettoCorsaSHM.ts',
     },
     devtool: "source-map",
     output:
