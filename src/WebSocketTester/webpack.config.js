@@ -32,7 +32,6 @@ module.exports = {
         "SSMCOMWSTest": './SSMCOMWSTest.ts',
         "FUELTRIPWSTest": './FUELTRIPWSTest.ts',
         "DefiCOMWSInterpolateTest": './DefiCOMWSInterpolateTest.ts',
-        "AssettoCorsaSHMWSTest": './AssettoCorsaSHMWSTest.ts'
     },
     devtool: "source-map",
     output:
