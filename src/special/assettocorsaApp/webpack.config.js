@@ -33,6 +33,9 @@ module.exports = {
         // Register meter application and set entry point typescript file.
         "AnalogMeterCluster-AssettoCorsaSHM": './AnalogMeterCluster/AnalogMeterCluster-AssettoCorsaSHM.ts',
         "CompactMFD-AssettoCorsaSHM": './CompactMFD/CompactMFD-AssettoCorsaSHM.ts',
+        "index" : './index/index.tsx',
+        "AssettoCorsaSHMWSTest": 'tester/AssettoCorsaSHMWSTest.ts'
+        
     },
     devtool: "source-map",
     output:
