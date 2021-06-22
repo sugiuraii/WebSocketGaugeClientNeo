@@ -23,7 +23,7 @@
  */
 
 var webpack = require('webpack');
-const outputPath = __dirname + "/../../public_html/application";
+const outputPath = __dirname + "/../../../public_html/special/assettocorsa";
 
 module.exports = {
     mode: "development",
@@ -31,17 +31,16 @@ module.exports = {
     entry:
     {
         // Register meter application and set entry point typescript file.
-        "AnalogMeterCluster": './AnalogMeterCluster/AnalogMeterCluster.ts',
-        "DigitalMFD": './DigitalMFD/DigitalMFD.ts',
-        "CompactMFD": './CompactMFD/CompactMFD.ts',
-        "AnalogTripleMeter": './AnalogTripleMeter/AnalogTripleMeter.ts',
-        "LEDRevMeter": './LEDRevMeter/LEDRevMeter.ts'
+        "AnalogMeterCluster-AssettoCorsaSHM": './AnalogMeterCluster/AnalogMeterCluster-AssettoCorsaSHM.ts',
+        "CompactMFD-AssettoCorsaSHM": './CompactMFD/CompactMFD-AssettoCorsaSHM.ts',
+        "index" : './index/index.tsx',
+        "AssettoCorsaSHMWSTest": './tester/AssettoCorsaSHMWSTest.ts'
     },
     devtool: "source-map",
     output:
     {
         path: outputPath,
-        filename: "./js/[name].js"
+        filename: (pathData) => pathData.chunk.name === "index"? "./js/[name].js" : "./app/js/[name].js"
     },
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.
@@ -61,17 +60,18 @@ module.exports = {
     module: {
         rules: [
             { test: /\.tsx?$/, use: 'ts-loader' },
-            { test: /\.png$/, use: "file-loader?name=img/[name].[ext]" },
-            { test: /\.fnt$/, use: "file-loader?name=img/[name].[ext]" }, // Bitmap font setting files
-            { type: "javascript/auto", test: /\.json$/, use: "file-loader?name=img/[name].[ext]" },
-            { test: /\.html$/, use: "file-loader?name=[name].[ext]" },
-            { test: /bootstrap.slate.min.css/, use: [{ loader: 'style-loader' }, { loader: 'css-loader' }] },// for bootstrap
-            { test: /\.css$/, exclude: /bootstrap.slate.min.css/, use: 'file-loader?name=[name].[ext]' },
+            { test: /\.png$/, use: "file-loader?name=app/img/[name].[ext]" },
+            { test: /\.fnt$/, use: "file-loader?name=app/img/[name].[ext]" }, // Bitmap font setting files
+            { type: "javascript/auto", test: /\.json$/, use: "file-loader?name=app/img/[name].[ext]" },
+            { test: /index.html/, use: "file-loader?name=[name].[ext]" },
+            { test: /\.html$/, exclude: /index.html/, use: "file-loader?name=app/[name].[ext]" },
+            { test: /bootstrap.min.css/, use: [{ loader: 'style-loader' }, { loader: 'css-loader' }] },// for bootstrap
+            { test: /\.css$/, exclude: /bootstrap.min.css/, use: 'file-loader?name=app/[name].[ext]' },
             { test: /\.svg$/, use: 'url-loader?mimetype=image/svg+xml' },
             { test: /\.woff$/, use: 'url-loader?mimetype=application/font-woff' },
             { test: /\.woff2$/, use: 'url-loader?mimetype=application/font-woff' },
             { test: /\.eot$/, use: 'url-loader?mimetype=application/font-woff' },
-            { test: /\.(ttf|otf)$/, use: "file-loader?name=fonts/[name].[ext]" },
+            { test: /\.(ttf|otf)$/, use: "file-loader?name=app/fonts/[name].[ext]" },
             {
                 test: /\.(scss)$/,
                 use: [{
