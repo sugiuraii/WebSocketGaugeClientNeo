@@ -1,0 +1,29 @@
+// WebSocket  settings.
+{
+    //  Flags to enable websocket clients
+    "WebSocketEnable" :
+    {
+        "ELM327" : true,
+        "Defi" : false,
+        "SSM" : false,
+        "Arduino" : false
+    },
+
+    // Set true to access to FuelTripLogger
+    "FuelTripLoggerEnabled" : true,
+    
+    /*
+        Set mapping mode.
+        Do not forget to enable corresponding websocket clients in "WebSocketEnable".
+
+        Following mapping modes are available.(See src/lib/MeterAppBase/WebsocketObjCollection/WebsocketMappingFactory.ts)
+        "DefalutELM327Map"          : Use only ELM327
+        "DefalutSSMMap"             : Use only SSM (Subaru select monitor)
+        "DefalutDefiMap"            : Use only Defi link
+        "DefalutArduino7Map"        : Use only Arduino
+        "ELM327andArduinoHybridMap" : Use Arduino on selected code(select in HybridWebSocketMapSettinng.jsonc), use ELM327 on other codes.
+        "SSMandArduinoHybridMap"    : Use Arduino on selected code(select in HybridWebSocketMapSettinng.jsonc), use SSM on other codes.
+        "SSMandDefiHybridMap"       : Use Defilink on selected code(select in HybridWebSocketMapSettinng.jsonc), use SSM on other codes.
+    */
+    "Mapping" : "DefaultELM327Map"
+}

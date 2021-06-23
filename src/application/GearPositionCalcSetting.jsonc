@@ -1,0 +1,25 @@
+// Gear position calculation settings.
+{
+    /**
+    * Example of gear position calculator
+    * Subaru impreza WRX STi, GDBA, JDM, 2000
+    * Final = 3.9
+    * Tire => 225/45R17
+    */
+    "TireParameter" :
+    {
+        "TireWidth" : 225,
+        "FlatRatio" : 45,
+        "TireInchSize" : 17
+    },
+    "FinalGearRatio" : 3.9,
+    "GearRatio" :
+    [
+        {"gear" : 1, "max" : 4.27, "min" : 3.01},
+        {"gear" : 2, "max" : 3.01, "min" : 2.07},
+        {"gear" : 3, "max" : 2.07, "min" : 1.55},
+        {"gear" : 4, "max" : 1.55, "min" : 1.2},
+        {"gear" : 5, "max" : 1.2, "min" : 0.95},
+        {"gear" : 6, "max" : 0.95, "min" : 0.73}
+    ]
+}

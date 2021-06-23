@@ -1,0 +1,27 @@
+// Settings for hybrid mapping.
+{
+    "ELM327AndArduinoHybridMap":
+    {
+        /*
+            Set codes to map to Arduino
+            Available ArduinoParameterCode : "Coolant_Temperature" | "Manifold_Absolute_Pressure" | "Engine_Speed" | "Vehicle_Speed" | "Fuel_Rail_Pressure" | "Oil_Temperature2" | "Oil_Pressure" | "Oil_Temperature"
+        */
+        "CodesToMapToArduino" : ["Engine_Speed", "Manifold_Absolute_Pressure", "Coolant_Temperature"]
+    },
+    "SSMAndArduinoHybridMap":    
+    {
+        /*
+            Set codes to map to Arduino
+            Available ArduinoParameterCode : "Coolant_Temperature" | "Manifold_Absolute_Pressure" | "Engine_Speed" | "Vehicle_Speed" | "Fuel_Rail_Pressure" | "Oil_Temperature2" | "Oil_Pressure" | "Oil_Temperature"
+        */
+        "CodesToMapToArduino" : ["Engine_Speed", "Manifold_Absolute_Pressure"]
+    },
+    "SSMAndDefiHybridMap":
+    {
+        /*
+            Set codes to map to Defi link
+            Available DefiParameterCode : "Coolant_Temperature" | "Manifold_Absolute_Pressure" | "Engine_Speed" | "Fuel_Rail_Pressure" | "Exhaust_Gas_Temperature" | "Oil_Pressure" | "Oil_Temperature"
+        */
+        "CodesToMapToDefi" : ["Engine_Speed", "Manifold_Absolute_Pressure"]
+    }
+}
