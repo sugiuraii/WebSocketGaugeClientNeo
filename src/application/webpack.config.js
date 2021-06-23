@@ -63,6 +63,7 @@ module.exports = {
             { test: /\.tsx?$/, use: 'ts-loader' },
             { test: /\.png$/, use: "file-loader?name=img/[name].[ext]" },
             { test: /\.fnt$/, use: "file-loader?name=img/[name].[ext]" }, // Bitmap font setting files
+            { type: "javascript/auto", test: /\.appconfig.jsonc$/, use: "file-loader?name=config/[name].[ext]" },
             { type: "javascript/auto", test: /\.json$/, use: "file-loader?name=img/[name].[ext]" },
             { test: /\.html$/, use: "file-loader?name=[name].[ext]" },
             { test: /bootstrap.slate.min.css/, use: [{ loader: 'style-loader' }, { loader: 'css-loader' }] },// for bootstrap

@@ -28,6 +28,10 @@ import { WebsocketObjectCollectionOption } from "../lib/MeterAppBase/WebsocketOb
 
 const wsMapFactory = new WebsocketMapFactory();
 
+require('./GearPositionCalcSetting.appconfig.jsonc');
+require('./HybridWebSocketMapSetting.appconfig.jsonc');
+require('./WebSocketSetting.appconfig.jsonc');
+
 /**
  * Example of gear position calculator
  * Subaru impreza WRX STi, GDBA, JDM, 2000
