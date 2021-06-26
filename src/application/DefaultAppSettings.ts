@@ -27,8 +27,7 @@ import { WebsocketMapFactory } from "../lib/MeterAppBase/WebsocketObjCollection/
 import { WebsocketObjectCollectionOption } from "../lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
 
 import * as jsonc from "jsonc-parser";
-
-const wsMapFactory = new WebsocketMapFactory();
+import { ArduinoParameterCode, DefiParameterCode } from "../lib/WebSocket/WebSocketCommunication";
 
 require('./GearPositionCalcSetting.appconfig.jsonc');
 type GearPositionCalcSetting =
@@ -58,26 +57,74 @@ type WebSocketSetting =
     };
 
 require('./HybridWebSocketMapSetting.appconfig.jsonc');
+type HybridWebSocketMapSetting =
+    {
+        ELM327AndArduinoHybridMap: {
+            CodesToMapToArduino: ArduinoParameterCode[]
+        },
+        SSMAndArduinoHybridMap:
+        {
+            CodesToMapToArduino: ArduinoParameterCode[]
+        },
+        SSMAndDefiHybridMap:
+        {
+            CodesToMapToDefi: DefiParameterCode[]
+        }
+    };
 
-export const getGearPositionCalculator = async () : Promise<GearPositionCalculator>  => {
-    const setting : GearPositionCalcSetting  = jsonc.parse(await(await fetch("./config/GearPositionCalcSetting.appconfig.jsonc")).text());
-    const gearPosJudgeFunctions : Array<{gear : number, judgeFunction : (ratio : number) => boolean}> = [];
-    
-    for(const v of setting.GearRatio)
-        gearPosJudgeFunctions.push({gear : v.gear, judgeFunction : (ratio) => ratio >= v.min && ratio <= v.max});
+export const getGearPositionCalculator = async (): Promise<GearPositionCalculator> => {
+    const setting: GearPositionCalcSetting = jsonc.parse(await (await fetch("./config/GearPositionCalcSetting.appconfig.jsonc")).text());
+    const gearPosJudgeFunctions: Array<{ gear: number, judgeFunction: (ratio: number) => boolean }> = [];
+
+    for (const v of setting.GearRatio)
+        gearPosJudgeFunctions.push({ gear: v.gear, judgeFunction: (ratio) => ratio >= v.min && ratio <= v.max });
 
     return new GearPositionCalculator(setting.FinalGearRatio, CalcTireCircumference(setting.TireParameter.TireWidth, setting.TireParameter.FlatRatio, setting.TireParameter.TireInchSize), gearPosJudgeFunctions);
 }
 
-/**
- * Default websocket mapping (ELM327 default)
- */
-function createWebSocketOption(): WebsocketObjectCollectionOption {
+export const getWebsocketCollectionOption = async (): Promise<WebsocketObjectCollectionOption> => {
+    const wssetting: WebSocketSetting = jsonc.parse(await (await fetch("./config/WebSocketSetting.appconfig.jsonc")).text());
+    const hybridmapsetting: HybridWebSocketMapSetting = jsonc.parse(await (await fetch("./config/HybridWebSocketMapSetting.appconfig.jsonc")).text());
+
     const wsOption = new WebsocketObjectCollectionOption();
-    wsOption.ELM327WSEnabled = true;
-    wsOption.FUELTRIPWSEnabled = true;
-    wsOption.WSMap = wsMapFactory.DefaultELM327Map;
+    if (wssetting.WebSocketEnable.Defi)
+        wsOption.DefiWSEnabled = true;
+    if (wssetting.WebSocketEnable.SSM)
+        wsOption.SSMWSEnabled = true;
+    if (wssetting.WebSocketEnable.Arduino)
+        wsOption.ArduinoWSEnabled = true;
+    if (wssetting.WebSocketEnable.ELM327)
+        wsOption.ELM327WSEnabled = true;
+
+    if (wssetting.FuelTripLoggerEnabled)
+        wsOption.FUELTRIPWSEnabled = true;
+    const wsMapFactory = new WebsocketMapFactory();
+
+    switch (wssetting.Mapping) {
+        case "DefalutELM327Map":
+            wsOption.WSMap = wsMapFactory.DefaultELM327Map;
+            break;
+        case "DefalutSSMMap":
+            wsOption.WSMap = wsMapFactory.DefaultSSMMap;
+            break;
+        case "DefalutDefiMap":
+            wsOption.WSMap = wsMapFactory.DefaultDefiMap;
+            break;
+        case "DefalutArduino7Map":
+            wsOption.WSMap = wsMapFactory.DefaultArduinoMap;
+            break;
+        case "ELM327andArduinoHybridMap":
+            wsOption.WSMap = wsMapFactory.getELM327AndArduinoHybridMap(hybridmapsetting.ELM327AndArduinoHybridMap.CodesToMapToArduino);
+            break;
+        case "SSMandArduinoHybridMap":
+            wsOption.WSMap = wsMapFactory.getSSMAndArduinoHybridMap(hybridmapsetting.SSMAndArduinoHybridMap.CodesToMapToArduino);
+            break;
+        case "SSMandDefiHybridMap":
+            wsOption.WSMap = wsMapFactory.getSSMAndDefiHybridMap(hybridmapsetting.SSMAndDefiHybridMap.CodesToMapToDefi);
+            break;
+        default:
+            throw TypeError("Invalid websocket map type.");
+    }
 
     return wsOption;
 }
-export const DefaultWebSocketCollectionOption = createWebSocketOption();
