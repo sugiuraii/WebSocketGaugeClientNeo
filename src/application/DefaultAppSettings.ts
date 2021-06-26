@@ -26,34 +26,53 @@ import { GearPositionCalculator, CalcTireCircumference } from "../lib/MeterAppBa
 import { WebsocketMapFactory } from "../lib/MeterAppBase/WebsocketObjCollection/WebsocketMapFactory";
 import { WebsocketObjectCollectionOption } from "../lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
 
+import * as jsonc from "jsonc-parser";
+
 const wsMapFactory = new WebsocketMapFactory();
 
 require('./GearPositionCalcSetting.appconfig.jsonc');
-require('./HybridWebSocketMapSetting.appconfig.jsonc');
+type GearPositionCalcSetting =
+    {
+        TireParameter:
+        {
+            TireWidth: number,
+            FlatRatio: number,
+            TireInchSize: number
+        },
+        FinalGearRatio: number,
+        GearRatio: { gear: number, max: number, min: number }[]
+    };
+
 require('./WebSocketSetting.appconfig.jsonc');
+type WebSocketSetting =
+    {
+        WebSocketEnable:
+        {
+            ELM327: boolean,
+            Defi: boolean,
+            SSM: boolean,
+            Arduino: boolean
+        },
+        FuelTripLoggerEnabled: boolean,
+        Mapping: string
+    };
 
-/**
- * Example of gear position calculator
- * Subaru impreza WRX STi, GDBA, JDM, 2000
- * Final = 3.9
- * Tire => 225/45R17
- */
-export const DefaultGearPostionCalculator = new GearPositionCalculator(3.9, CalcTireCircumference(225, 45, 17),
-    [
-        {gear : 1, judgeFunction : (r) => r < 4.27 && r > 3.01},
-        {gear : 2, judgeFunction : (r) => r > 2.07},
-        {gear : 3, judgeFunction : (r) => r > 1.55},
-        {gear : 4, judgeFunction : (r) => r > 1.2},
-        {gear : 5, judgeFunction : (r) => r > 0.95},
-        {gear : 6, judgeFunction : (r) => r > 0.73}        
-    ]);
+require('./HybridWebSocketMapSetting.appconfig.jsonc');
 
+export const getGearPositionCalculator = async () : Promise<GearPositionCalculator>  => {
+    const setting : GearPositionCalcSetting  = jsonc.parse(await(await fetch("./config/GearPositionCalcSetting.appconfig.jsonc")).text());
+    const gearPosJudgeFunctions : Array<{gear : number, judgeFunction : (ratio : number) => boolean}> = [];
+    
+    for(const v of setting.GearRatio)
+        gearPosJudgeFunctions.push({gear : v.gear, judgeFunction : (ratio) => ratio >= v.min && ratio <= v.max});
+
+    return new GearPositionCalculator(setting.FinalGearRatio, CalcTireCircumference(setting.TireParameter.TireWidth, setting.TireParameter.FlatRatio, setting.TireParameter.TireInchSize), gearPosJudgeFunctions);
+}
 
 /**
  * Default websocket mapping (ELM327 default)
  */
-function createWebSocketOption() : WebsocketObjectCollectionOption
-{
+function createWebSocketOption(): WebsocketObjectCollectionOption {
     const wsOption = new WebsocketObjectCollectionOption();
     wsOption.ELM327WSEnabled = true;
     wsOption.FUELTRIPWSEnabled = true;
