@@ -101,16 +101,16 @@ export const getWebsocketCollectionOption = async (): Promise<WebsocketObjectCol
     const wsMapFactory = new WebsocketMapFactory();
 
     switch (wssetting.Mapping) {
-        case "DefalutELM327Map":
+        case "DefaultELM327Map":
             wsOption.WSMap = wsMapFactory.DefaultELM327Map;
             break;
-        case "DefalutSSMMap":
+        case "DefaultSSMMap":
             wsOption.WSMap = wsMapFactory.DefaultSSMMap;
             break;
-        case "DefalutDefiMap":
+        case "DefaultDefiMap":
             wsOption.WSMap = wsMapFactory.DefaultDefiMap;
             break;
-        case "DefalutArduino7Map":
+        case "DefaultArduino7Map":
             wsOption.WSMap = wsMapFactory.DefaultArduinoMap;
             break;
         case "ELM327andArduinoHybridMap":
@@ -123,7 +123,7 @@ export const getWebsocketCollectionOption = async (): Promise<WebsocketObjectCol
             wsOption.WSMap = wsMapFactory.getSSMAndDefiHybridMap(hybridmapsetting.SSMAndDefiHybridMap.CodesToMapToDefi);
             break;
         default:
-            throw TypeError("Invalid websocket map type.");
+            throw TypeError("Invalid websocket map type in WebSocketSetting.appconfig.jsonc.");
     }
 
     return wsOption;
