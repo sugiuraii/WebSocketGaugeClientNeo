@@ -44,9 +44,9 @@ window.onload = function () {
 }
 
 class LEDRevMeterApp {
-    public Start() {
+    public async Start() {
         const pixiAppOption : PIXI.IApplicationOptions = {width : 1280, height : 720};
-        const appOption = new MeterApplicationOption(pixiAppOption, DefaultAppSettings.DefaultWebSocketCollectionOption);
+        const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
 
         appOption.PreloadResource.WebFontFamiliyName.addall(BoostMeter.RequestedFontFamily);
         appOption.PreloadResource.WebFontFamiliyName.addall(LEDTachoMeter.RequestedFontFamily);
@@ -55,7 +55,7 @@ class LEDRevMeterApp {
         appOption.PreloadResource.TexturePath.addall(BoostMeter.RequestedTexturePath);
         appOption.PreloadResource.TexturePath.addall(LEDTachoMeter.RequestedTexturePath);
 
-        const gearCalculator = DefaultAppSettings.DefaultGearPostionCalculator;
+        const gearCalculator = await DefaultAppSettings.getGearPositionCalculator();
         
         appOption.SetupPIXIMeterPanel = (app, ws) => {
 

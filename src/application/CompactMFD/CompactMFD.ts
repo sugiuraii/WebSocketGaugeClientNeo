@@ -45,9 +45,9 @@ window.onload = function () {
 }
 
 class CompactMFDApp {
-    public Start() {
+    public async Start() {
         const pixiAppOption : PIXI.IApplicationOptions = {width : 720, height : 1280};
-        const appOption = new MeterApplicationOption(pixiAppOption, DefaultAppSettings.DefaultWebSocketCollectionOption);
+        const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
         appOption.PreloadResource.WebFontFamiliyName.addall(WaterTempGaugePanel.RequestedFontFamily);
         appOption.PreloadResource.WebFontFamiliyName.addall(DigiTachoPanel.RequestedFontFamily);
         appOption.PreloadResource.WebFontFamiliyName.addall(BoostGaugePanel.RequestedFontFamily);
@@ -60,7 +60,7 @@ class CompactMFDApp {
         appOption.PreloadResource.TexturePath.addall(DigiTachoPanel.RequestedTexturePath);
         appOption.PreloadResource.TexturePath.addall(BoostGaugePanel.RequestedTexturePath);
 
-        const gearCalculator = DefaultAppSettings.DefaultGearPostionCalculator;
+        const gearCalculator = await DefaultAppSettings.getGearPositionCalculator();
 
         appOption.SetupPIXIMeterPanel = (app, ws) => {
             // Construct meter panel parts.
