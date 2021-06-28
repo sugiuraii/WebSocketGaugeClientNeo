@@ -40,24 +40,24 @@ const BOOTSTRAP_CSS_FILENAME = "bootstrap.min.css";
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
 
 export class MeterApplication {
-    private Option : MeterApplicationOption;
+    private Option: MeterApplicationOption;
     private Logger = new StringListLogger();
 
-    private readonly webSocketCollection : WebsocketObjectCollection;
-    public get WebSocketCollection() : WebsocketObjectCollection { return this.webSocketCollection }
+    private readonly webSocketCollection: WebsocketObjectCollection;
+    public get WebSocketCollection(): WebsocketObjectCollection { return this.webSocketCollection }
 
     constructor(option: MeterApplicationOption) {
         this.Option = option;
         this.webSocketCollection = new WebsocketObjectCollection(this.Logger, option.WebSocketCollectionOption);
     }
 
-    public Run(): void {
+    public async Run(): Promise<void> {
         const webStorage = new WebstorageHandler();
-        
+
         // Override forceCanvas flag from webstorage, if Option.PIXIApplication.forceCanvas is undefinded.
-        if(this.Option.PIXIApplicationOption.forceCanvas === undefined)
-            if(webStorage.ForceCanvas)
-                this.Option.PIXIApplicationOption.forceCanvas = true; 
+        if (this.Option.PIXIApplicationOption.forceCanvas === undefined)
+            if (webStorage.ForceCanvas)
+                this.Option.PIXIApplicationOption.forceCanvas = true;
 
         const pixiApp = new PIXI.Application(this.Option.PIXIApplicationOption);
         // Append PIXI.js application to document body
@@ -77,7 +77,7 @@ export class MeterApplication {
         ReactDOM.render(
             <Fragment>
                 <ApplicationNavbar
-                    defaultOptionDialogContent={{ forceCanvas : webStorage.ForceCanvas }}
+                    defaultOptionDialogContent={{ forceCanvas: webStorage.ForceCanvas }}
                     defaultWSInterval={webStorage.WSInterval}
                     onOptionDialogSet={c => {
                         webStorage.ForceCanvas = c.forceCanvas;
@@ -97,12 +97,13 @@ export class MeterApplication {
 
 
         // Preload Fonts -> textures-> parts
-        this.preloadFonts(() => this.preloadTextures(() => this.Option.SetupPIXIMeterPanel(pixiApp, this.WebSocketCollection)));
-
+        await this.preloadFonts();
+        await this.preloadTextures();
+        this.Option.SetupPIXIMeterPanel(pixiApp, this.WebSocketCollection);
         this.WebSocketCollection.Run();
     }
 
-    private preloadFonts(callBack: () => void) {
+    private async preloadFonts() {
         const webFontFamilyWithoutOverlap = this.Option.PreloadResource.WebFontFamiliyName.Array.filter(
             (x, i, self) => {
                 return self.indexOf(x) === i;
@@ -114,23 +115,24 @@ export class MeterApplication {
             }
         );
 
-        // call callBack() without loading fonts if the webFontFamily and webFoutCSSURL contains no elements.
-        if (webFontFamilyWithoutOverlap.length === 0 && webFontCSSURLWithoutOverlap.length === 0)
-            callBack();
+        return new Promise<void>((resolve) => {
+            // call callBack() without loading fonts if the webFontFamily and webFoutCSSURL contains no elements.
+            if (webFontFamilyWithoutOverlap.length === 0 && webFontCSSURLWithoutOverlap.length === 0)
+                resolve();
 
-        WebFont.load(
-            {
-                custom:
+            WebFont.load(
                 {
-                    families: webFontFamilyWithoutOverlap,
-                    urls: webFontCSSURLWithoutOverlap
-                },
-                active: () => { callBack(); }
-            }
-        );
+                    custom:
+                    {
+                        families: webFontFamilyWithoutOverlap,
+                        urls: webFontCSSURLWithoutOverlap
+                    },
+                    active: () => { resolve(); }
+                });
+        });
     }
 
-    private preloadTextures(callBack: () => void) {
+    private async preloadTextures() {
         const texturePathWithoutOverlap = this.Option.PreloadResource.TexturePath.Array.filter(
             (x, i, self) => {
                 return self.indexOf(x) === i;
@@ -142,10 +144,11 @@ export class MeterApplication {
             PIXI.Loader.shared.add(texturePath);
         }
 
-        PIXI.Loader.shared.load(() => {
-            callBack();
-        }
-        );
+        return new Promise<void>((resolve) => {
+            PIXI.Loader.shared.load(() => {
+                resolve();
+            });
+        });
     }
 
     private loadBootStrapCSS() {
