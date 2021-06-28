@@ -44,10 +44,10 @@ window.onload = function () {
 }
 
 class AnalogTripleMeterApp {
-    public Start() {
+    public async Start() {
         const pixiAppOption : PIXI.IApplicationOptions = {width : 1280, height : 720};
 
-        const appOption = new MeterApplicationOption(pixiAppOption, DefaultAppSettings.DefaultWebSocketCollectionOption);
+        const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
         appOption.PreloadResource.WebFontFamiliyName.addall(BoostMeter.RequestedFontFamily);
         appOption.PreloadResource.WebFontCSSURL.addall(BoostMeter.RequestedFontCSSURL);
         appOption.PreloadResource.TexturePath.addall(BoostMeter.RequestedTexturePath);

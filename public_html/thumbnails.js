@@ -22,35 +22,52 @@
  * THE SOFTWARE.
  */
 
+const puppeteer = require("puppeteer");
+const express = require("express");
+const fs =  require("fs");
+
+// Set target list
+const targetList = [
+  { htmlPath: "benchmark/AnalogMeterClusterBenchApp.html", pngPath: "thumbnails/AnalogMeterClusterBenchApp.png" },
+  { htmlPath: "benchmark/DigitalMFDBenchApp.html", pngPath: "thumbnails/DigitalMFDBenchApp.png" },
+  { htmlPath: "application/AnalogMeterCluster.html", pngPath: "thumbnails/AnalogMeterCluster.png" },
+  { htmlPath: "application/CompactMFD.html", pngPath: "thumbnails/CompactMFD.png" },
+  { htmlPath: "application/DigitalMFD.html", pngPath: "thumbnails/DigitalMFD.png" },
+  { htmlPath: "application/AnalogTripleMeter.html", pngPath: "thumbnails/AnalogTripleMeter.png" },
+  { htmlPath: "application/LEDRevMeter.html", pngPath: "thumbnails/LEDRevMeter.png" }
+];
+
+// Set thumbnail size
+const viewport = { width: 600, height: 400 };
+
+// Build local web server by express
+const app = express();
+const port = 8080;
+app.use(express.static('./'));
+const http = app.listen(port, () => {
+  console.log('Server started on port:' + port);
+});
+
 // Creare thuumbnails directory.
-var fs = require('fs');
-var dir = './thumbnails';
-
-if (!fs.existsSync(dir)){
-    fs.mkdirSync(dir);
+const dir = './thumbnails';
+if (!fs.existsSync(dir)) {
+  fs.mkdirSync(dir);
 }
 
-const puppeteer = require('puppeteer');
-const path = require('path');
-
-createThumbNail("benchmark/AnalogMeterClusterBenchApp.html", "thumbnails/AnalogMeterClusterBenchApp.png");
-createThumbNail("benchmark/DigitalMFDBenchApp.html", "thumbnails/DigitalMFDBenchApp.png");
-createThumbNail("application/AnalogMeterCluster.html", "thumbnails/AnalogMeterCluster.png");
-createThumbNail("application/CompactMFD.html", "thumbnails/CompactMFD.png");
-createThumbNail("application/DigitalMFD.html", "thumbnails/DigitalMFD.png");
-createThumbNail("application/AnalogTripleMeter.html", "thumbnails/AnalogTripleMeter.png");
-createThumbNail("application/LEDRevMeter.html", "thumbnails/LEDRevMeter.png");
-
-function createThumbNail(htmlpath, pngpath)
-{
-    (async () => {
-    const browser = await puppeteer.launch({args:['--allow-file-access', '--allow-file-access-from-files', '--headless' ,'--use-gl=swiftshader']});
-    const page = await browser.newPage();
-    await page.setViewport({ width: 600, height: 400 })
-    await page.goto(`file:`+path.join(__dirname, htmlpath));
-    await page.waitFor(3000);
-    await page.screenshot({path: pngpath});
-  
-    await browser.close();
-    })();
+const createSingleThumbNail = async (htmlpath, pngpath) => {
+  const browser = await puppeteer.launch({ headless: false, args: ['--allow-file-access', '--allow-file-access-from-files', '--use-gl=swiftshader'] });
+  const page = await browser.newPage();
+  await page.setViewport(viewport);
+  await page.goto("http://127.0.0.1:" + port.toString() + "/" + htmlpath, {waitUntil: 'networkidle2'});
+  await page.waitForTimeout(1000);
+  await page.screenshot({ path: pngpath });
+  await browser.close();
 }
+
+const makeThunbnails = async () => {
+  for(const target of targetList)
+    await createSingleThumbNail(target.htmlPath, target.pngPath);
+  http.close();
+}
+
+makeThunbnails();

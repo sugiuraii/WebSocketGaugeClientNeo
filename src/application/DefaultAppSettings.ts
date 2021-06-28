@@ -26,35 +26,105 @@ import { GearPositionCalculator, CalcTireCircumference } from "../lib/MeterAppBa
 import { WebsocketMapFactory } from "../lib/MeterAppBase/WebsocketObjCollection/WebsocketMapFactory";
 import { WebsocketObjectCollectionOption } from "../lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
 
-const wsMapFactory = new WebsocketMapFactory();
+import * as jsonc from "jsonc-parser";
+import { ArduinoParameterCode, DefiParameterCode } from "../lib/WebSocket/WebSocketCommunication";
 
-/**
- * Example of gear position calculator
- * Subaru impreza WRX STi, GDBA, JDM, 2000
- * Final = 3.9
- * Tire => 225/45R17
- */
-export const DefaultGearPostionCalculator = new GearPositionCalculator(3.9, CalcTireCircumference(225, 45, 17),
-    [
-        {gear : 1, judgeFunction : (r) => r < 4.27 && r > 3.01},
-        {gear : 2, judgeFunction : (r) => r > 2.07},
-        {gear : 3, judgeFunction : (r) => r > 1.55},
-        {gear : 4, judgeFunction : (r) => r > 1.2},
-        {gear : 5, judgeFunction : (r) => r > 0.95},
-        {gear : 6, judgeFunction : (r) => r > 0.73}        
-    ]);
+require('./GearPositionCalcSetting.appconfig.jsonc');
+type GearPositionCalcSetting =
+    {
+        TireParameter:
+        {
+            TireWidth: number,
+            FlatRatio: number,
+            TireInchSize: number
+        },
+        FinalGearRatio: number,
+        GearRatio: { gear: number, max: number, min: number }[]
+    };
 
+require('./WebSocketSetting.appconfig.jsonc');
+type WebSocketSetting =
+    {
+        WebSocketEnable:
+        {
+            ELM327: boolean,
+            Defi: boolean,
+            SSM: boolean,
+            Arduino: boolean
+        },
+        FuelTripLoggerEnabled: boolean,
+        Mapping: string
+    };
 
-/**
- * Default websocket mapping (ELM327 default)
- */
-function createWebSocketOption() : WebsocketObjectCollectionOption
-{
+require('./HybridWebSocketMapSetting.appconfig.jsonc');
+type HybridWebSocketMapSetting =
+    {
+        ELM327AndArduinoHybridMap: {
+            CodesToMapToArduino: ArduinoParameterCode[]
+        },
+        SSMAndArduinoHybridMap:
+        {
+            CodesToMapToArduino: ArduinoParameterCode[]
+        },
+        SSMAndDefiHybridMap:
+        {
+            CodesToMapToDefi: DefiParameterCode[]
+        }
+    };
+
+export const getGearPositionCalculator = async (): Promise<GearPositionCalculator> => {
+    const setting: GearPositionCalcSetting = jsonc.parse(await (await fetch("./config/GearPositionCalcSetting.appconfig.jsonc")).text());
+    const gearPosJudgeFunctions: Array<{ gear: number, judgeFunction: (ratio: number) => boolean }> = [];
+
+    for (const v of setting.GearRatio)
+        gearPosJudgeFunctions.push({ gear: v.gear, judgeFunction: (ratio) => ratio >= v.min && ratio <= v.max });
+
+    return new GearPositionCalculator(setting.FinalGearRatio, CalcTireCircumference(setting.TireParameter.TireWidth, setting.TireParameter.FlatRatio, setting.TireParameter.TireInchSize), gearPosJudgeFunctions);
+}
+
+export const getWebsocketCollectionOption = async (): Promise<WebsocketObjectCollectionOption> => {
+    const wssetting: WebSocketSetting = jsonc.parse(await (await fetch("./config/WebSocketSetting.appconfig.jsonc")).text());
+    const hybridmapsetting: HybridWebSocketMapSetting = jsonc.parse(await (await fetch("./config/HybridWebSocketMapSetting.appconfig.jsonc")).text());
+
     const wsOption = new WebsocketObjectCollectionOption();
-    wsOption.ELM327WSEnabled = true;
-    wsOption.FUELTRIPWSEnabled = true;
-    wsOption.WSMap = wsMapFactory.DefaultELM327Map;
+    if (wssetting.WebSocketEnable.Defi)
+        wsOption.DefiWSEnabled = true;
+    if (wssetting.WebSocketEnable.SSM)
+        wsOption.SSMWSEnabled = true;
+    if (wssetting.WebSocketEnable.Arduino)
+        wsOption.ArduinoWSEnabled = true;
+    if (wssetting.WebSocketEnable.ELM327)
+        wsOption.ELM327WSEnabled = true;
+
+    if (wssetting.FuelTripLoggerEnabled)
+        wsOption.FUELTRIPWSEnabled = true;
+    const wsMapFactory = new WebsocketMapFactory();
+
+    switch (wssetting.Mapping) {
+        case "DefaultELM327Map":
+            wsOption.WSMap = wsMapFactory.DefaultELM327Map;
+            break;
+        case "DefaultSSMMap":
+            wsOption.WSMap = wsMapFactory.DefaultSSMMap;
+            break;
+        case "DefaultDefiMap":
+            wsOption.WSMap = wsMapFactory.DefaultDefiMap;
+            break;
+        case "DefaultArduino7Map":
+            wsOption.WSMap = wsMapFactory.DefaultArduinoMap;
+            break;
+        case "ELM327andArduinoHybridMap":
+            wsOption.WSMap = wsMapFactory.getELM327AndArduinoHybridMap(hybridmapsetting.ELM327AndArduinoHybridMap.CodesToMapToArduino);
+            break;
+        case "SSMandArduinoHybridMap":
+            wsOption.WSMap = wsMapFactory.getSSMAndArduinoHybridMap(hybridmapsetting.SSMAndArduinoHybridMap.CodesToMapToArduino);
+            break;
+        case "SSMandDefiHybridMap":
+            wsOption.WSMap = wsMapFactory.getSSMAndDefiHybridMap(hybridmapsetting.SSMAndDefiHybridMap.CodesToMapToDefi);
+            break;
+        default:
+            throw TypeError("Invalid websocket map type in WebSocketSetting.appconfig.jsonc.");
+    }
 
     return wsOption;
 }
-export const DefaultWebSocketCollectionOption = createWebSocketOption();

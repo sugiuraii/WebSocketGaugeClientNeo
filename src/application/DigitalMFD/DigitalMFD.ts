@@ -49,9 +49,9 @@ window.onload = function () {
 }
 
 class DigitalMFDApp {
-    public Start() {
+    public async  Start() {
         const pixiAppOption : PIXI.IApplicationOptions = {width : 1200, height : 600};
-        const appOption = new MeterApplicationOption(pixiAppOption, DefaultAppSettings.DefaultWebSocketCollectionOption);
+        const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
         appOption.PreloadResource.WebFontFamiliyName.addall(BoostGaugePanel.RequestedFontFamily);
         appOption.PreloadResource.WebFontFamiliyName.addall(WaterTempGaugePanel.RequestedFontFamily);
         appOption.PreloadResource.WebFontFamiliyName.addall(DigiTachoPanel.RequestedFontFamily);
@@ -65,7 +65,7 @@ class DigitalMFDApp {
         appOption.PreloadResource.TexturePath.addall(DigiTachoPanel.RequestedTexturePath);
         appOption.PreloadResource.TexturePath.addall(MilageGraphPanel.RequestedTexturePath);
 
-        const gearCalculator = DefaultAppSettings.DefaultGearPostionCalculator;
+        const gearCalculator = await DefaultAppSettings.getGearPositionCalculator();
 
         appOption.SetupPIXIMeterPanel = (app, ws) => {
 
