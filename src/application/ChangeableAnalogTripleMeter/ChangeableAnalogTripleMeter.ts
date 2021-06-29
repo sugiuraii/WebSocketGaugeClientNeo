@@ -29,11 +29,10 @@ import * as PIXI from 'pixi.js';
 //Import application base class
 import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
 import { MeterApplicationOption } from "../../lib/MeterAppBase/options/MeterApplicationOption";
+import { WebsocketParameterCode } from '../../lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode';
 
 //Import meter parts
-import { BoostMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
-import { WaterTempMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
-import { OilTempMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
+import { AnalogSingleMeter, BatteryVoltageMeter, BoostMeter, RevMeter, VacuumMeter, WaterTempMeter, OilTempMeter, OilPressureMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
 
 // Import AppSettings.
 import * as DefaultAppSettings from  "../DefaultAppSettings"
@@ -44,6 +43,29 @@ window.onload = function () {
 }
 
 class ChangeableAnalogTripleMeterApp {
+    private readonly UseVacuumMeterInsteadOfBoost = false;
+
+    private getMeter(code : WebsocketParameterCode) : AnalogSingleMeter
+    {
+        switch(code)
+        {
+            case "Engine_Speed":
+                return new RevMeter();
+            case "Manifold_Absolute_Pressure" : 
+                return this.UseVacuumMeterInsteadOfBoost?new VacuumMeter(): new BoostMeter();
+            case "Coolant_Temperature" :
+                return new WaterTempMeter();
+            case "Engine_oil_temperature" :
+                return new OilTempMeter();
+            case "Battery_Voltage" :
+                return new BatteryVoltageMeter();
+            case "Oil_Pressure" :
+                return new OilPressureMeter();
+            default :
+                throw new Error("Analog single meter is not defined on selected code.");
+        }
+    }
+    
     public async Start() {
         const pixiAppOption : PIXI.IApplicationOptions = {width : 1280, height : 720};
 
