@@ -48,22 +48,22 @@ class ChangeableAnalogTripleMeterApp {
     private readonly UseVacuumMeterInsteadOfBoost = false;
     private readonly ParameterCodeListToUse : WebsocketParameterCode[] = ["Engine_Speed", "Manifold_Absolute_Pressure", "Coolant_Temperature"];
     
-    private getMeter(code : WebsocketParameterCode) : {meter : AnalogSingleMeter, readmode: ReadModeCode, getValFunc : (timestamp : number, ws : WebsocketObjectCollection) => number}
+    private getMeter(code : WebsocketParameterCode) : {meterParts : AnalogSingleMeter, readmode: ReadModeCode, getValFunc : (timestamp : number, ws : WebsocketObjectCollection) => number}
     {
         switch(code)
         {
             case "Engine_Speed":
-                return {meter : new RevMeter(), readmode : "SLOWandFAST", getValFunc : (ts, ws) => ws.WSMapper.getValue(code, ts)};
+                return {meterParts : new RevMeter(), readmode : "SLOWandFAST", getValFunc : (ts, ws) => ws.WSMapper.getValue(code, ts)};
             case "Manifold_Absolute_Pressure" : 
-                return {meter : this.UseVacuumMeterInsteadOfBoost?new VacuumMeter(): new BoostMeter(), readmode : "SLOWandFAST", getValFunc :(ts, ws) => ws.WSMapper.getValue(code, ts) * 0.0101972 - 1 /* convert kPa to kgf/cm2 and relative pressure */ };
+                return {meterParts : this.UseVacuumMeterInsteadOfBoost?new VacuumMeter(): new BoostMeter(), readmode : "SLOWandFAST", getValFunc :(ts, ws) => ws.WSMapper.getValue(code, ts) * 0.0101972 - 1 /* convert kPa to kgf/cm2 and relative pressure */ };
             case "Coolant_Temperature" :
-                return {meter : new WaterTempMeter(), readmode : "SLOW", getValFunc : (ts, ws) => ws.WSMapper.getValue(code, ts)};
+                return {meterParts : new WaterTempMeter(), readmode : "SLOW", getValFunc : (_, ws) => ws.WSMapper.getValue(code)};
             case "Engine_oil_temperature" :
-                return {meter : new OilTempMeter(), readmode : "SLOW", getValFunc : (ts, ws) => ws.WSMapper.getValue(code, ts)};
+                return {meterParts : new OilTempMeter(), readmode : "SLOW", getValFunc : (_, ws) => ws.WSMapper.getValue(code)};
             case "Battery_Voltage" :
-                return {meter : new BatteryVoltageMeter(), readmode : "SLOW", getValFunc : (ts, ws) => ws.WSMapper.getValue(code, ts)};
+                return {meterParts : new BatteryVoltageMeter(), readmode : "SLOW", getValFunc : (_, ws) => ws.WSMapper.getValue(code)};
             case "Oil_Pressure" :
-                return {meter : new OilPressureMeter(), readmode : "SLOWandFAST", getValFunc : (ts, ws) => ws.WSMapper.getValue(code, ts)};
+                return {meterParts : new OilPressureMeter(), readmode : "SLOWandFAST", getValFunc : (ts, ws) => ws.WSMapper.getValue(code, ts)};
             default :
                 throw new Error("Analog single meter is not defined on selected code.");
         }
@@ -76,6 +76,9 @@ class ChangeableAnalogTripleMeterApp {
         appOption.PreloadResource.WebFontFamiliyName.addall(BoostMeter.RequestedFontFamily);
         appOption.PreloadResource.WebFontCSSURL.addall(BoostMeter.RequestedFontCSSURL);
         appOption.PreloadResource.TexturePath.addall(BoostMeter.RequestedTexturePath);
+        const meter0 = this.getMeter(this.ParameterCodeListToUse[0]);
+        const meter1 = this.getMeter(this.ParameterCodeListToUse[1]);
+        const meter2 = this.getMeter(this.ParameterCodeListToUse[2]);
 
         appOption.SetupPIXIMeterPanel = (app, ws) => {
             const stage = app.stage;
@@ -83,35 +86,25 @@ class ChangeableAnalogTripleMeterApp {
             stage.pivot.set(600, 200);
             stage.position.set(app.screen.width / 2, app.screen.height / 2);
 
-            const meter1 = this.getMeter(this.ParameterCodeListToUse[0]);
-            meter1.position.set(0, 0);
-
-            const meter2 = this.getMeter(this.ParameterCodeListToUse[1]);
-            meter2.position.set(400, 0);
-
-            const meter3 = this.getMeter(this.ParameterCodeListToUse[3]);
-            meter3.position.set(800, 0);
-
-            stage.addChild(meter1);
-            stage.addChild(meter2);
-            stage.addChild(meter3);
+            meter0.meterParts.position.set(0, 0);
+            meter1.meterParts.position.set(400, 0);
+            meter2.meterParts.position.set(800, 0);
+            stage.addChild(meter0.meterParts);
+            stage.addChild(meter1.meterParts);
+            stage.addChild(meter2.meterParts);
 
             app.ticker.add(() => {
                 const timestamp = app.ticker.lastTime;
-                const boost = ws.WSMapper.getValue("Manifold_Absolute_Pressure", timestamp) * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
 
-                const waterTemp = ws.WSMapper.getValue("Coolant_Temperature");
-                const oilTemp = ws.WSMapper.getValue("Engine_oil_temperature");
-
-                meter1.Value = boost;
-                meter2.Value = waterTemp;
-                meter3.Value = oilTemp;
+                meter0.meterParts.Value = meter0.getValFunc(timestamp, ws);
+                meter1.meterParts.Value = meter0.getValFunc(timestamp, ws);
+                meter2.meterParts.Value = meter0.getValFunc(timestamp, ws);
             });
         };
         const app = new MeterApplication(appOption);
-        app.WebSocketCollection.WSMapper.registerParameterCode("Manifold_Absolute_Pressure", "SLOWandFAST");
-        app.WebSocketCollection.WSMapper.registerParameterCode("Coolant_Temperature", "SLOW");
-        app.WebSocketCollection.WSMapper.registerParameterCode("Engine_oil_temperature", "SLOW");
+        app.WebSocketCollection.WSMapper.registerParameterCode(this.ParameterCodeListToUse[0], meter0.readmode);
+        app.WebSocketCollection.WSMapper.registerParameterCode(this.ParameterCodeListToUse[1], meter1.readmode);
+        app.WebSocketCollection.WSMapper.registerParameterCode(this.ParameterCodeListToUse[2], meter2.readmode);
         app.Run();
     }
 }
