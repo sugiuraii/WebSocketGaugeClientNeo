@@ -29,7 +29,9 @@ import * as PIXI from 'pixi.js';
 //Import application base class
 import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
 import { MeterApplicationOption } from "../../lib/MeterAppBase/options/MeterApplicationOption";
+import { WebsocketObjectCollection } from '../../lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection';
 import { WebsocketParameterCode } from '../../lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode';
+import { ReadModeCode } from '../../lib/WebSocket/WebSocketCommunication';
 
 //Import meter parts
 import { AnalogSingleMeter, BatteryVoltageMeter, BoostMeter, RevMeter, VacuumMeter, WaterTempMeter, OilTempMeter, OilPressureMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
@@ -44,23 +46,24 @@ window.onload = function () {
 
 class ChangeableAnalogTripleMeterApp {
     private readonly UseVacuumMeterInsteadOfBoost = false;
-
-    private getMeter(code : WebsocketParameterCode) : AnalogSingleMeter
+    private readonly ParameterCodeListToUse : WebsocketParameterCode[] = ["Engine_Speed", "Manifold_Absolute_Pressure", "Coolant_Temperature"];
+    
+    private getMeter(code : WebsocketParameterCode) : {meter : AnalogSingleMeter, readmode: ReadModeCode, getValFunc : (timestamp : number, ws : WebsocketObjectCollection) => number}
     {
         switch(code)
         {
             case "Engine_Speed":
-                return new RevMeter();
+                return {meter : new RevMeter(), readmode : "SLOWandFAST", getValFunc : (ts, ws) => ws.WSMapper.getValue(code, ts)};
             case "Manifold_Absolute_Pressure" : 
-                return this.UseVacuumMeterInsteadOfBoost?new VacuumMeter(): new BoostMeter();
+                return {meter : this.UseVacuumMeterInsteadOfBoost?new VacuumMeter(): new BoostMeter(), readmode : "SLOWandFAST", getValFunc :(ts, ws) => ws.WSMapper.getValue(code, ts)};
             case "Coolant_Temperature" :
-                return new WaterTempMeter();
+                return {meter : new WaterTempMeter(), readmode : "SLOW", getValFunc : (ts, ws) => ws.WSMapper.getValue(code, ts)};
             case "Engine_oil_temperature" :
-                return new OilTempMeter();
+                return {meter : new OilTempMeter(), readmode : "SLOW", getValFunc : (ts, ws) => ws.WSMapper.getValue(code, ts)};
             case "Battery_Voltage" :
-                return new BatteryVoltageMeter();
+                return {meter : new BatteryVoltageMeter(), readmode : "SLOW", getValFunc : (ts, ws) => ws.WSMapper.getValue(code, ts)};
             case "Oil_Pressure" :
-                return new OilPressureMeter();
+                return {meter : new OilPressureMeter(), readmode : "SLOWandFAST", getValFunc : (ts, ws) => ws.WSMapper.getValue(code, ts)};
             default :
                 throw new Error("Analog single meter is not defined on selected code.");
         }
@@ -80,18 +83,18 @@ class ChangeableAnalogTripleMeterApp {
             stage.pivot.set(600, 200);
             stage.position.set(app.screen.width / 2, app.screen.height / 2);
 
-            const boostMeter = new BoostMeter();
-            boostMeter.position.set(800, 0);
+            const meter1 = this.getMeter(this.ParameterCodeListToUse[0]);
+            meter1.position.set(0, 0);
 
-            const waterTempMeter = new WaterTempMeter();
-            waterTempMeter.position.set(0, 0);
+            const meter2 = this.getMeter(this.ParameterCodeListToUse[1]);
+            meter2.position.set(400, 0);
 
-            const oilTempMeter = new OilTempMeter();
-            oilTempMeter.position.set(400, 0);
+            const meter3 = this.getMeter(this.ParameterCodeListToUse[3]);
+            meter3.position.set(800, 0);
 
-            stage.addChild(boostMeter);
-            stage.addChild(waterTempMeter);
-            stage.addChild(oilTempMeter);
+            stage.addChild(meter1);
+            stage.addChild(meter2);
+            stage.addChild(meter3);
 
             app.ticker.add(() => {
                 const timestamp = app.ticker.lastTime;
@@ -100,9 +103,9 @@ class ChangeableAnalogTripleMeterApp {
                 const waterTemp = ws.WSMapper.getValue("Coolant_Temperature");
                 const oilTemp = ws.WSMapper.getValue("Engine_oil_temperature");
 
-                boostMeter.Value = boost;
-                waterTempMeter.Value = waterTemp;
-                oilTempMeter.Value = oilTemp;
+                meter1.Value = boost;
+                meter2.Value = waterTemp;
+                meter3.Value = oilTemp;
             });
         };
         const app = new MeterApplication(appOption);

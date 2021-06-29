@@ -238,8 +238,8 @@ export class BoostMeter extends AnalogSingleMeter {
 export class RevMeter extends AnalogSingleMeter {
     constructor() {
         const option = new AnalogSingleMeterOption();
-        option.Max = 0;
-        option.Min = -1.0;
+        option.Max = 12000;
+        option.Min = 0;
         option.Title = "Rev";
         option.Unit = "x1000rpm";
         option.ScaleLabel = ["0", "2", "4", "6", "8", "10", "12"];
