@@ -55,7 +55,7 @@ class ChangeableAnalogTripleMeterApp {
             case "Engine_Speed":
                 return {meter : new RevMeter(), readmode : "SLOWandFAST", getValFunc : (ts, ws) => ws.WSMapper.getValue(code, ts)};
             case "Manifold_Absolute_Pressure" : 
-                return {meter : this.UseVacuumMeterInsteadOfBoost?new VacuumMeter(): new BoostMeter(), readmode : "SLOWandFAST", getValFunc :(ts, ws) => ws.WSMapper.getValue(code, ts)};
+                return {meter : this.UseVacuumMeterInsteadOfBoost?new VacuumMeter(): new BoostMeter(), readmode : "SLOWandFAST", getValFunc :(ts, ws) => ws.WSMapper.getValue(code, ts) * 0.0101972 - 1 /* convert kPa to kgf/cm2 and relative pressure */ };
             case "Coolant_Temperature" :
                 return {meter : new WaterTempMeter(), readmode : "SLOW", getValFunc : (ts, ws) => ws.WSMapper.getValue(code, ts)};
             case "Engine_oil_temperature" :
