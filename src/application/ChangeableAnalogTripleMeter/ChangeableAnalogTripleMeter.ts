@@ -48,22 +48,22 @@ class ChangeableAnalogTripleMeterApp {
     private readonly UseVacuumMeterInsteadOfBoost = false;
     private readonly ParameterCodeListToUse : WebsocketParameterCode[] = ["Engine_Speed", "Manifold_Absolute_Pressure", "Coolant_Temperature"];
     
-    private getMeter(code : WebsocketParameterCode) : {meterParts : AnalogSingleMeter, readmode: ReadModeCode, getValFunc : (timestamp : number, ws : WebsocketObjectCollection) => number}
+    private getMeter(code : WebsocketParameterCode) : {partsConstructor : () => AnalogSingleMeter, readmode: ReadModeCode, getValFunc : (timestamp : number, ws : WebsocketObjectCollection) => number}
     {
         switch(code)
         {
             case "Engine_Speed":
-                return {meterParts : new RevMeter(), readmode : "SLOWandFAST", getValFunc : (ts, ws) => ws.WSMapper.getValue(code, ts)};
+                return {partsConstructor : () => new RevMeter(), readmode : "SLOWandFAST", getValFunc : (ts, ws) => ws.WSMapper.getValue(code, ts)};
             case "Manifold_Absolute_Pressure" : 
-                return {meterParts : this.UseVacuumMeterInsteadOfBoost?new VacuumMeter(): new BoostMeter(), readmode : "SLOWandFAST", getValFunc :(ts, ws) => ws.WSMapper.getValue(code, ts) * 0.0101972 - 1 /* convert kPa to kgf/cm2 and relative pressure */ };
+                return {partsConstructor : () => this.UseVacuumMeterInsteadOfBoost?new VacuumMeter(): new BoostMeter(), readmode : "SLOWandFAST", getValFunc :(ts, ws) => ws.WSMapper.getValue(code, ts) * 0.0101972 - 1 /* convert kPa to kgf/cm2 and relative pressure */ };
             case "Coolant_Temperature" :
-                return {meterParts : new WaterTempMeter(), readmode : "SLOW", getValFunc : (_, ws) => ws.WSMapper.getValue(code)};
+                return {partsConstructor : () => new WaterTempMeter(), readmode : "SLOW", getValFunc : (_, ws) => ws.WSMapper.getValue(code)};
             case "Engine_oil_temperature" :
-                return {meterParts : new OilTempMeter(), readmode : "SLOW", getValFunc : (_, ws) => ws.WSMapper.getValue(code)};
+                return {partsConstructor : () => new OilTempMeter(), readmode : "SLOW", getValFunc : (_, ws) => ws.WSMapper.getValue(code)};
             case "Battery_Voltage" :
-                return {meterParts : new BatteryVoltageMeter(), readmode : "SLOW", getValFunc : (_, ws) => ws.WSMapper.getValue(code)};
+                return {partsConstructor : () => new BatteryVoltageMeter(), readmode : "SLOW", getValFunc : (_, ws) => ws.WSMapper.getValue(code)};
             case "Oil_Pressure" :
-                return {meterParts : new OilPressureMeter(), readmode : "SLOWandFAST", getValFunc : (ts, ws) => ws.WSMapper.getValue(code, ts)};
+                return {partsConstructor : () => new OilPressureMeter(), readmode : "SLOWandFAST", getValFunc : (ts, ws) => ws.WSMapper.getValue(code, ts)};
             default :
                 throw new Error("Analog single meter is not defined on selected code.");
         }
@@ -86,19 +86,22 @@ class ChangeableAnalogTripleMeterApp {
             stage.pivot.set(600, 200);
             stage.position.set(app.screen.width / 2, app.screen.height / 2);
 
-            meter0.meterParts.position.set(0, 0);
-            meter1.meterParts.position.set(400, 0);
-            meter2.meterParts.position.set(800, 0);
-            stage.addChild(meter0.meterParts);
-            stage.addChild(meter1.meterParts);
-            stage.addChild(meter2.meterParts);
+            const parts0 = meter0.partsConstructor();
+            const parts1 = meter1.partsConstructor();
+            const parts2 = meter2.partsConstructor();
+            parts0.position.set(0, 0);
+            parts1.position.set(400, 0);
+            parts2.position.set(800, 0);
+            stage.addChild(parts0);
+            stage.addChild(parts1);
+            stage.addChild(parts2);
 
             app.ticker.add(() => {
                 const timestamp = app.ticker.lastTime;
 
-                meter0.meterParts.Value = meter0.getValFunc(timestamp, ws);
-                meter1.meterParts.Value = meter0.getValFunc(timestamp, ws);
-                meter2.meterParts.Value = meter0.getValFunc(timestamp, ws);
+                parts0.Value = meter0.getValFunc(timestamp, ws);
+                parts1.Value = meter1.getValFunc(timestamp, ws);
+                parts2.Value = meter2.getValFunc(timestamp, ws);
             });
         };
         const app = new MeterApplication(appOption);
