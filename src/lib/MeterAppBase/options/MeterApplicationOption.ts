@@ -48,7 +48,8 @@ export class MeterApplicationOption {
     public readonly PreloadResource : PreloadResourceCollection;
     public readonly WebSocketCollectionOption : WebsocketObjectCollectionOption;
     public readonly PIXIApplicationOption : PIXI.IApplicationOptions;
-    
+    public readonly NavBarItems : JSX.Element[] = [];
+
     public SetupPIXIMeterPanel: (pixiApp: PIXI.Application, wsObj: WebsocketObjectCollection) => void = () => {/* do nothing*/};
     
     constructor(pixiApplicationOption? : PIXI.IApplicationOptions, wsCollectionOption? :WebsocketObjectCollectionOption, preloadResource? : PreloadResourceCollection)
