@@ -42,9 +42,30 @@ const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
 export class MeterApplication {
     private Option: MeterApplicationOption;
     private Logger = new StringListLogger();
+    private readonly WebStorage: WebstorageHandler = new WebstorageHandler();
 
     private readonly webSocketCollection: WebsocketObjectCollection;
     public get WebSocketCollection(): WebsocketObjectCollection { return this.webSocketCollection }
+
+    protected get RootElem() : JSX.Element 
+    {
+        return(
+        <>
+            <ApplicationNavbar
+                defaultOptionDialogContent={{ forceCanvas: this.WebStorage.ForceCanvas }}
+                defaultWSInterval={this.WebStorage.WSInterval}
+                onOptionDialogSet={c => {
+                    this.WebStorage.ForceCanvas = c.forceCanvas;
+                }}
+                onWSIntervalDialogSet={interval => this.WebStorage.WSInterval = interval}
+                onFUELTripResetDialogSet={() => this.WebSocketCollection.FUELTRIPWS.SendReset()}
+                logList={this.Logger.Content}
+                websocketStatusList={this.WebSocketCollection.WebsocketStates}
+                opacityOnMouseOff={"0.1"}
+            />
+        </>
+        );
+    }
 
     constructor(option: MeterApplicationOption) {
         this.Option = option;
@@ -52,11 +73,9 @@ export class MeterApplication {
     }
 
     public async Run(): Promise<void> {
-        const webStorage = new WebstorageHandler();
-
         // Override forceCanvas flag from webstorage, if Option.PIXIApplication.forceCanvas is undefinded.
         if (this.Option.PIXIApplicationOption.forceCanvas === undefined)
-            if (webStorage.ForceCanvas)
+            if (this.WebStorage.ForceCanvas)
                 this.Option.PIXIApplicationOption.forceCanvas = true;
 
         const pixiApp = new PIXI.Application(this.Option.PIXIApplicationOption);
@@ -75,26 +94,14 @@ export class MeterApplication {
         // Crete react components
         const rootElement = document.createElement('div');
         ReactDOM.render(
-            <Fragment>
-                <ApplicationNavbar
-                    defaultOptionDialogContent={{ forceCanvas: webStorage.ForceCanvas }}
-                    defaultWSInterval={webStorage.WSInterval}
-                    onOptionDialogSet={c => {
-                        webStorage.ForceCanvas = c.forceCanvas;
-                    }}
-                    onWSIntervalDialogSet={interval => webStorage.WSInterval = interval}
-                    onFUELTripResetDialogSet={() => this.WebSocketCollection.FUELTRIPWS.SendReset()}
-                    logList={this.Logger.Content}
-                    websocketStatusList={this.WebSocketCollection.WebsocketStates}
-                    opacityOnMouseOff={"0.1"}
-                />
+            <>
+                {this.RootElem}
                 <PIXIApplication application={pixiApp} />
-            </Fragment>
-            , rootElement);
+            </>
+        , rootElement);
 
         // Add react components to html body
         document.body.appendChild(rootElement);
-
 
         // Preload Fonts -> textures-> parts
         await this.preloadFonts();
