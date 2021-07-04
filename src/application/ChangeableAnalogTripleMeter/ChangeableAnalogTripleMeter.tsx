@@ -159,10 +159,10 @@ class ChangeableAnalogTripleMeterApp {
                     <Nav.Link onClick={() => this.dialogShow = true}>SetPanel</Nav.Link>
                 </Nav.Item>
         
-        const dialogItem = <MeterSelectDialog key={1} show={this.dialogShow} defaultFormContent={{ParameterCode : ["Engine_Speed"]}} onCancel={() => {this.dialogShow = false}} onSet={c => console.log(c)} />
+        // const dialogItem = <MeterSelectDialog key={1} show={this.dialogShow} defaultFormContent={{ParameterCode : ["Engine_Speed"]}} onCancel={() => {this.dialogShow = false}} onSet={c => console.log(c)} />
         
         appOption.NavBarItems.push(navBarItem);
-        appOption.Dialogs.push(dialogItem)
+        // appOption.Dialogs.push(dialogItem)
         
         const app = new MeterApplication(appOption);
         app.WebSocketCollection.WSMapper.registerParameterCode(this.ParameterCodeListToUse[0], meter0.readmode);
