@@ -23,14 +23,14 @@
  */
 
 
-import { OptionDialog, OptionDialogFormContents } from './OptionDialog'
-import { WSIntervalOptionDialog } from './WSIntervalOptionDialog'
-import { FUELTripResetDialog } from './FUELTripResetDialog'
-import { LogDialog } from './LogDialog'
-import { WebsocketStatusIndicator } from './WebsocketStatusIndicator'
+import { OptionDialog, OptionDialogFormContents } from '../dialog/OptionDialog'
+import { WSIntervalOptionDialog } from '../dialog/WSIntervalOptionDialog'
+import { FUELTripResetDialog } from '../dialog/FUELTripResetDialog'
+import { LogDialog } from '../dialog/LogDialog'
+import { WebsocketStatusIndicator } from '../WebsocketStatusIndicator'
 import React, { FunctionComponent, useState, Fragment } from 'react';
 import { Navbar, Nav } from 'react-bootstrap'
-import { WebsocketState } from '../WebsocketAppBackend/WebsocketState'
+import { WebsocketState } from '../../WebsocketAppBackend/WebsocketState'
 
 type ApplicationNavbarProps =
     {
@@ -41,8 +41,7 @@ type ApplicationNavbarProps =
         onWSIntervalDialogSet: (wsInterval: number) => void,
         onFUELTripResetDialogSet: (reset: boolean) => void,
         websocketStatusList: { [name: string]: WebsocketState },
-        opacityOnMouseOff : string,
-        additionalNavItem? : JSX.Element[]
+        opacityOnMouseOff : string
     };
 
 export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) => {
@@ -75,7 +74,6 @@ export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) 
                         <Nav.Item>
                             <Nav.Link onClick={() => setShowLogDialog(true)}>Log</Nav.Link>
                         </Nav.Item>
-                        {p.additionalNavItem}
                     </Nav>
                     <WebsocketStatusIndicator statusList={p.websocketStatusList} />
                 </Navbar.Collapse>
