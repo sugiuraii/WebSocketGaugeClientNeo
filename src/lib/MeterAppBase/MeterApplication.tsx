@@ -87,7 +87,6 @@ export class MeterApplication {
                     logList={this.Logger.Content}
                     websocketStatusList={this.WebSocketCollection.WebsocketStates}
                     opacityOnMouseOff={"0.1"}
-                    additionalNavItem = {this.Option.NavBarItems}
                 />
                 <PIXIApplication application={pixiApp} />
             </Fragment>

@@ -41,8 +41,7 @@ type ApplicationNavbarProps =
         onWSIntervalDialogSet: (wsInterval: number) => void,
         onFUELTripResetDialogSet: (reset: boolean) => void,
         websocketStatusList: { [name: string]: WebsocketState },
-        opacityOnMouseOff : string,
-        additionalNavItem? : JSX.Element[]
+        opacityOnMouseOff : string
     };
 
 export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) => {
@@ -75,7 +74,6 @@ export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) 
                         <Nav.Item>
                             <Nav.Link onClick={() => setShowLogDialog(true)}>Log</Nav.Link>
                         </Nav.Item>
-                        {p.additionalNavItem}
                     </Nav>
                     <WebsocketStatusIndicator statusList={p.websocketStatusList} />
                 </Navbar.Collapse>
