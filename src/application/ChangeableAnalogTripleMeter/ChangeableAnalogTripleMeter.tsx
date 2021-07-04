@@ -25,6 +25,8 @@
 //For including entry point html file in webpack
 require("./ChangeableAnalogTripleMeter.html");
 import * as PIXI from 'pixi.js';
+import { Button, Form, Modal, Nav } from 'react-bootstrap';
+import React, { FunctionComponent, useState } from 'react';
 
 //Import application base class
 import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
@@ -37,40 +39,87 @@ import { ReadModeCode } from '../../lib/WebSocket/WebSocketCommunication';
 import { AnalogSingleMeter, BatteryVoltageMeter, BoostMeter, RevMeter, VacuumMeter, WaterTempMeter, OilTempMeter, OilPressureMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
 
 // Import AppSettings.
-import * as DefaultAppSettings from  "../DefaultAppSettings"
+import * as DefaultAppSettings from "../DefaultAppSettings"
 
 window.onload = function () {
     const meterapp = new ChangeableAnalogTripleMeterApp();
     meterapp.Start();
 }
 
+type MeterSelectDialogProps = {
+    show: boolean,
+    defaultFormContent: MeterSelectDialogCotents,
+    onCancel: () => void,
+    onSet: (dat: MeterSelectDialogCotents) => void;
+}
+
+type MeterSelectDialogCotents =
+    {
+        ParameterCode: WebsocketParameterCode[]
+    };
+
+const MeterSelectDialog: FunctionComponent<MeterSelectDialogProps> = (p) => {
+    const [parameterCode, setParameterCode] = useState(p.defaultFormContent.ParameterCode);
+
+    const handleCancel = () => {
+        // Reset forms
+        setParameterCode(p.defaultFormContent.ParameterCode);
+        p.onCancel();
+    };
+
+    const handleSet = () => p.onSet({ ParameterCode: parameterCode });
+    const parameterCodeSelectOptions = Object.keys(WebsocketParameterCode).map(x => <option key={x}  value={x}>{x}</option>);
+    return (
+        <Modal show={p.show} >
+            <Modal.Header closeButton onHide={p.onCancel}>
+                <Modal.Title>Meter select</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Form.Group controlId="formBasicSelect">
+                    <Form.Label>Select parameter code</Form.Label>
+                    <Form.Control as="select"
+                        value={parameterCode[0]}
+                        onChange={e => {
+                            parameterCode[0] = e.target.value as WebsocketParameterCode;
+                            setParameterCode(parameterCode);}}>
+                            {parameterCodeSelectOptions}
+                        </Form.Control>
+                </Form.Group>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={handleCancel}>Cancel</Button>
+                <Button variant="primary" onClick={handleSet}>Set</Button>
+            </Modal.Footer>
+        </Modal>
+    );
+};
+
 class ChangeableAnalogTripleMeterApp {
     private readonly UseVacuumMeterInsteadOfBoost = false;
-    private readonly ParameterCodeListToUse : WebsocketParameterCode[] = ["Engine_Speed", "Manifold_Absolute_Pressure", "Coolant_Temperature"];
-    
-    private getMeter(code : WebsocketParameterCode) : {partsConstructor : () => AnalogSingleMeter, readmode: ReadModeCode, getValFunc : (timestamp : number, ws : WebsocketObjectCollection) => number}
-    {
-        switch(code)
-        {
+    private readonly ParameterCodeListToUse: WebsocketParameterCode[] = ["Engine_Speed", "Manifold_Absolute_Pressure", "Coolant_Temperature"];
+    private dialogShow = false;
+
+    private getMeter(code: WebsocketParameterCode): { partsConstructor: () => AnalogSingleMeter, readmode: ReadModeCode, getValFunc: (timestamp: number, ws: WebsocketObjectCollection) => number } {
+        switch (code) {
             case "Engine_Speed":
-                return {partsConstructor : () => new RevMeter(), readmode : "SLOWandFAST", getValFunc : (ts, ws) => ws.WSMapper.getValue(code, ts)};
-            case "Manifold_Absolute_Pressure" : 
-                return {partsConstructor : () => this.UseVacuumMeterInsteadOfBoost?new VacuumMeter(): new BoostMeter(), readmode : "SLOWandFAST", getValFunc :(ts, ws) => ws.WSMapper.getValue(code, ts) * 0.0101972 - 1 /* convert kPa to kgf/cm2 and relative pressure */ };
-            case "Coolant_Temperature" :
-                return {partsConstructor : () => new WaterTempMeter(), readmode : "SLOW", getValFunc : (_, ws) => ws.WSMapper.getValue(code)};
-            case "Engine_oil_temperature" :
-                return {partsConstructor : () => new OilTempMeter(), readmode : "SLOW", getValFunc : (_, ws) => ws.WSMapper.getValue(code)};
-            case "Battery_Voltage" :
-                return {partsConstructor : () => new BatteryVoltageMeter(), readmode : "SLOW", getValFunc : (_, ws) => ws.WSMapper.getValue(code)};
-            case "Oil_Pressure" :
-                return {partsConstructor : () => new OilPressureMeter(), readmode : "SLOWandFAST", getValFunc : (ts, ws) => ws.WSMapper.getValue(code, ts)};
-            default :
+                return { partsConstructor: () => new RevMeter(), readmode: "SLOWandFAST", getValFunc: (ts, ws) => ws.WSMapper.getValue(code, ts) };
+            case "Manifold_Absolute_Pressure":
+                return { partsConstructor: () => this.UseVacuumMeterInsteadOfBoost ? new VacuumMeter() : new BoostMeter(), readmode: "SLOWandFAST", getValFunc: (ts, ws) => ws.WSMapper.getValue(code, ts) * 0.0101972 - 1 /* convert kPa to kgf/cm2 and relative pressure */ };
+            case "Coolant_Temperature":
+                return { partsConstructor: () => new WaterTempMeter(), readmode: "SLOW", getValFunc: (_, ws) => ws.WSMapper.getValue(code) };
+            case "Engine_oil_temperature":
+                return { partsConstructor: () => new OilTempMeter(), readmode: "SLOW", getValFunc: (_, ws) => ws.WSMapper.getValue(code) };
+            case "Battery_Voltage":
+                return { partsConstructor: () => new BatteryVoltageMeter(), readmode: "SLOW", getValFunc: (_, ws) => ws.WSMapper.getValue(code) };
+            case "Oil_Pressure":
+                return { partsConstructor: () => new OilPressureMeter(), readmode: "SLOWandFAST", getValFunc: (ts, ws) => ws.WSMapper.getValue(code, ts) };
+            default:
                 throw new Error("Analog single meter is not defined on selected code.");
         }
     }
-    
+
     public async Start() {
-        const pixiAppOption : PIXI.IApplicationOptions = {width : 1280, height : 720};
+        const pixiAppOption: PIXI.IApplicationOptions = { width: 1280, height: 720 };
 
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
         appOption.PreloadResource.WebFontFamiliyName.addall(BoostMeter.RequestedFontFamily);
@@ -104,6 +153,17 @@ class ChangeableAnalogTripleMeterApp {
                 parts2.Value = meter2.getValFunc(timestamp, ws);
             });
         };
+        
+        const navBarItem =
+                <Nav.Item key={2}>
+                    <Nav.Link onClick={() => this.dialogShow = true}>SetPanel</Nav.Link>
+                </Nav.Item>
+        
+        const dialogItem = <MeterSelectDialog key={1} show={this.dialogShow} defaultFormContent={{ParameterCode : ["Engine_Speed"]}} onCancel={() => {this.dialogShow = false}} onSet={c => console.log(c)} />
+        
+        appOption.NavBarItems.push(navBarItem);
+        appOption.Dialogs.push(dialogItem)
+        
         const app = new MeterApplication(appOption);
         app.WebSocketCollection.WSMapper.registerParameterCode(this.ParameterCodeListToUse[0], meter0.readmode);
         app.WebSocketCollection.WSMapper.registerParameterCode(this.ParameterCodeListToUse[1], meter1.readmode);
