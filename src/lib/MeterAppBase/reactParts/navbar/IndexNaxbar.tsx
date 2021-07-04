@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { OptionDialog, OptionDialogFormContents } from './OptionDialog'
+import { OptionDialog, OptionDialogFormContents } from '../dialog/OptionDialog'
 import React, { FunctionComponent, useState, Fragment } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 

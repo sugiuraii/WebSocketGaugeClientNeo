@@ -26,7 +26,7 @@ require('./index.html');
 
 import 'bootswatch/dist/slate/bootstrap.min.css';
 
-import { IndexNavbar } from '../lib/MeterAppBase/reactParts/IndexNaxbar'
+import { IndexNavbar } from '../lib/MeterAppBase/reactParts/navbar/IndexNaxbar'
 import React  from 'react'
 import ReactDOM from 'react-dom'
 import { WebstorageHandler } from '../lib/MeterAppBase/Webstorage/WebstorageHandler';
