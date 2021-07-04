@@ -34,7 +34,7 @@ type MeterSelectDialogProps = {
     onSet: (dat: MeterSelectDialogCotents) => void;
 }
 
-type MeterSelectDialogCotents = { caption: string, selectedCode: WebsocketParameterCode }[];
+export type MeterSelectDialogCotents = { caption: string, selectedCode: WebsocketParameterCode }[];
 
 export const MeterSelectDialog: FunctionComponent<MeterSelectDialogProps> = (p) => {
     const [parameterCode, setParameterCode] = useState(p.default.map(v => v.selectedCode));
