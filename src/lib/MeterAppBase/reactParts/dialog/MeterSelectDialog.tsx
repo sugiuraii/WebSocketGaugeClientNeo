@@ -29,43 +29,53 @@ import { WebsocketParameterCode } from '../../WebsocketObjCollection/WebsocketPa
 
 type MeterSelectDialogProps = {
     show: boolean,
-    defaultFormContent: MeterSelectDialogCotents,
+    default: MeterSelectDialogCotents,
     onCancel: () => void,
     onSet: (dat: MeterSelectDialogCotents) => void;
 }
 
-type MeterSelectDialogCotents =
-    {
-        ParameterCode: WebsocketParameterCode[]
-    };
+type MeterSelectDialogCotents = { caption: string, selectedCode: WebsocketParameterCode }[];
 
 export const MeterSelectDialog: FunctionComponent<MeterSelectDialogProps> = (p) => {
-    const [parameterCode, setParameterCode] = useState(p.defaultFormContent.ParameterCode);
+    const [parameterCode, setParameterCode] = useState(p.default.map(v => v.selectedCode));
 
     const handleCancel = () => {
         // Reset forms
-        setParameterCode(p.defaultFormContent.ParameterCode);
+        setParameterCode(p.default.map(v => v.selectedCode));
         p.onCancel();
     };
 
-    const handleSet = () => p.onSet({ ParameterCode: parameterCode });
-    const parameterCodeSelectOptions = Object.keys(WebsocketParameterCode).map(x => <option key={x}  value={x}>{x}</option>);
+    // Create parameter code selector
+    const selectors: JSX.Element[] = [];
+    for (let i = 0; i < p.default.length; i++) {
+        const v = p.default[i];
+        selectors.push(
+            <Form.Group key={v.caption}>
+                <Form.Label>{v.caption}</Form.Label>
+                <Form.Control as="select"
+                    value={v.selectedCode}
+                    onChange={e => {
+                        parameterCode[i] = e.target.value as WebsocketParameterCode;
+                        setParameterCode(parameterCode);
+                    }} />
+            </Form.Group>
+        );
+    }
+
+    const handleSet = () => {
+        const newContent: MeterSelectDialogCotents = [];
+        for (let i = 0; i < p.default.length; i++)
+            newContent.push({ caption: p.default[i].caption, selectedCode: parameterCode[i] });
+        p.onSet(newContent);
+    };
+
     return (
         <Modal show={p.show} >
             <Modal.Header closeButton onHide={p.onCancel}>
                 <Modal.Title>Meter select</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Form.Group controlId="formBasicSelect">
-                    <Form.Label>Select parameter code</Form.Label>
-                    <Form.Control as="select"
-                        value={parameterCode[0]}
-                        onChange={e => {
-                            parameterCode[0] = e.target.value as WebsocketParameterCode;
-                            setParameterCode(parameterCode);}}>
-                            {parameterCodeSelectOptions}
-                        </Form.Control>
-                </Form.Group>
+                {selectors}
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleCancel}>Cancel</Button>
