@@ -30,6 +30,7 @@ import { WebsocketParameterCode } from '../../WebsocketObjCollection/WebsocketPa
 type MeterSelectDialogProps = {
     show: boolean,
     default: MeterSelectDialogCotents,
+    codesToSelect: WebsocketParameterCode[],
     onCancel: () => void,
     onSet: (dat: MeterSelectDialogCotents) => void;
 }
@@ -45,6 +46,8 @@ export const MeterSelectDialog: FunctionComponent<MeterSelectDialogProps> = (p) 
         p.onCancel();
     };
 
+    const selectOptions = p.codesToSelect.map(c => <option key={c}>{c}</option>);
+
     // Create parameter code selector
     const selectors: JSX.Element[] = [];
     for (let i = 0; i < p.default.length; i++) {
@@ -57,7 +60,9 @@ export const MeterSelectDialog: FunctionComponent<MeterSelectDialogProps> = (p) 
                     onChange={e => {
                         parameterCode[i] = e.target.value as WebsocketParameterCode;
                         setParameterCode(parameterCode);
-                    }} />
+                    }}>
+                    {selectOptions}
+                    </Form.Control>
             </Form.Group>
         );
     }
