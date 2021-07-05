@@ -31,15 +31,22 @@ import { WebsocketStatusIndicator } from '../WebsocketStatusIndicator'
 import React, { FunctionComponent, useState, Fragment } from 'react';
 import { Navbar, Nav } from 'react-bootstrap'
 import { WebsocketState } from '../../WebsocketAppBackend/WebsocketState'
+import { MeterSelectDialog, MeterSelectDialogCotents } from '../dialog/MeterSelectDialog'
 
 type ApplicationNavbarProps =
     {
         defaultOptionDialogContent: OptionDialogFormContents,
         defaultWSInterval: number,
         logList: string[],
+        optionDialogEnabled? : boolean,
         onOptionDialogSet: (content: OptionDialogFormContents) => void,
+        wsIntervalDialogEnabled? : boolean,
         onWSIntervalDialogSet: (wsInterval: number) => void,
+        fuelTripResetDialogEnabeld? : boolean,
         onFUELTripResetDialogSet: (reset: boolean) => void,
+        meterSelectDialogEnabled? : boolean,
+        onMeterSelectDialogSet: (data : MeterSelectDialogCotents) => void,
+        defaultMeterSelectDialogContennt: MeterSelectDialogCotents,
         websocketStatusList: { [name: string]: WebsocketState },
         opacityOnMouseOff : string
     };
@@ -49,7 +56,7 @@ export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) 
     const [showWSIntervalDialog, setShowWSIntervalDialog] = useState(false);
     const [showFUELTripResetDialog, setShowFUELTripResetDialog] = useState(false);
     const [showLogDialog, setShowLogDialog] = useState(false);
-
+    const [showMeterSelectDialog, setShowMeterSelectDialog] = useState(false);
     const [mouseOver, setMouseOver] = useState(false);
 
     return (
@@ -63,16 +70,19 @@ export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) 
                             <Nav.Link href="../index.html">Home</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link onClick={() => setShowOptionDialog(true)}>Option</Nav.Link>
+                            <Nav.Link disabled={p.optionDialogEnabled === false} onClick={() => setShowOptionDialog(true)}>Option</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link onClick={() => setShowWSIntervalDialog(true)}>WSInterval</Nav.Link>
+                            <Nav.Link disabled={p.wsIntervalDialogEnabled === false} onClick={() => setShowWSIntervalDialog(true)}>WSInterval</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link onClick={() => setShowFUELTripResetDialog(true)}>Fuel/Trip reset</Nav.Link>
+                            <Nav.Link disabled={p.fuelTripResetDialogEnabeld === false} onClick={() => setShowFUELTripResetDialog(true)}>Fuel/Trip reset</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
                             <Nav.Link onClick={() => setShowLogDialog(true)}>Log</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link disabled={p.meterSelectDialogEnabled === false} onClick={() => setShowMeterSelectDialog(true)}>Edit meter</Nav.Link>
                         </Nav.Item>
                     </Nav>
                     <WebsocketStatusIndicator statusList={p.websocketStatusList} />
@@ -95,6 +105,14 @@ export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) 
                     p.onFUELTripResetDialogSet(reset);
                 }} />
             <LogDialog show={showLogDialog} logList={p.logList} onClose={() => setShowLogDialog(false)} />
+            <MeterSelectDialog  show={showMeterSelectDialog} onCancel={() => setShowMeterSelectDialog(false)}
+                                onSet={(dat) => 
+                                {
+                                    setShowMeterSelectDialog(false);
+                                    p.onMeterSelectDialogSet(dat);
+                                }}
+                                default={p.defaultMeterSelectDialogContennt}
+                />
         </Fragment>
     );
 };
