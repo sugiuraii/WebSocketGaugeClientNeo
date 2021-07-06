@@ -32,6 +32,7 @@ import React, { FunctionComponent, useState, Fragment } from 'react';
 import { Navbar, Nav } from 'react-bootstrap'
 import { WebsocketState } from '../../WebsocketAppBackend/WebsocketState'
 import { MeterSelectDialog, MeterSelectDialogCotents } from '../dialog/MeterSelectDialog'
+import { WebsocketParameterCode } from '../../WebsocketObjCollection/WebsocketParameterCode'
 
 type ApplicationNavbarProps =
     {
@@ -43,6 +44,7 @@ type ApplicationNavbarProps =
         onFUELTripResetDialogSet?: (reset: boolean) => void,
         onMeterSelectDialogSet?: (data : MeterSelectDialogCotents) => void,
         defaultMeterSelectDialogContent?: MeterSelectDialogCotents,
+        parameterToSelectInMeterSelectDialog?: WebsocketParameterCode[],
         websocketStatusList: { [name: string]: WebsocketState },
         opacityOnMouseOff : string
     };
@@ -112,6 +114,7 @@ export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) 
                                     if(p.onMeterSelectDialogSet !== undefined)
                                         p.onMeterSelectDialogSet(dat);
                                 }}
+                                codesToSelect = {(p.parameterToSelectInMeterSelectDialog === undefined)?[]:p.parameterToSelectInMeterSelectDialog }
                                 default={p.defaultMeterSelectDialogContent}
                 />
             }

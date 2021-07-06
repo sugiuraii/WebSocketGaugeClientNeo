@@ -22,6 +22,8 @@
  * THE SOFTWARE.
  */
 
+import { WebsocketParameterCode } from "../WebsocketObjCollection/WebsocketParameterCode";
+
 export class WebstorageHandler {
     public get WSInterval() : number
     {
@@ -44,5 +46,17 @@ export class WebstorageHandler {
     {
         localStorage.setItem("ForceCanvas", flag?"true":"false");
     }
+
+    public get MeterSelectDialogSetting() : {meterID : string, code : WebsocketParameterCode}[] | undefined
+    {
+        const item = localStorage.getItem("MeterSelectDialogSetting");
+        return (item === null || item === undefined) ? undefined : JSON.parse(item);
+    }
+
+    public set MeterSelectDialogSetting (val : {meterID : string, code : WebsocketParameterCode}[] | undefined)
+    {
+        localStorage.setItem("MeterSelectDialogSetting", JSON.stringify(val));
+    }
+
 }
 

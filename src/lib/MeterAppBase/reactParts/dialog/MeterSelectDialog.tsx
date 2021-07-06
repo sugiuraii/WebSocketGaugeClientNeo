@@ -35,14 +35,14 @@ type MeterSelectDialogProps = {
     onSet: (dat: MeterSelectDialogCotents) => void;
 }
 
-export type MeterSelectDialogCotents = { caption: string, selectedCode: WebsocketParameterCode }[];
+export type MeterSelectDialogCotents = { meterID: string, code: WebsocketParameterCode }[];
 
 export const MeterSelectDialog: FunctionComponent<MeterSelectDialogProps> = (p) => {
-    const [parameterCode, setParameterCode] = useState(p.default.map(v => v.selectedCode));
+    const [parameterCode, setParameterCode] = useState(p.default.map(v => v.code));
 
     const handleCancel = () => {
         // Reset forms
-        setParameterCode(p.default.map(v => v.selectedCode));
+        setParameterCode(p.default.map(v => v.code));
         p.onCancel();
     };
 
@@ -53,10 +53,10 @@ export const MeterSelectDialog: FunctionComponent<MeterSelectDialogProps> = (p) 
     for (let i = 0; i < p.default.length; i++) {
         const v = p.default[i];
         selectors.push(
-            <Form.Group key={v.caption}>
-                <Form.Label>{v.caption}</Form.Label>
+            <Form.Group key={v.meterID}>
+                <Form.Label>{v.meterID}</Form.Label>
                 <Form.Control as="select"
-                    value={v.selectedCode}
+                    value={v.code}
                     onChange={e => {
                         parameterCode[i] = e.target.value as WebsocketParameterCode;
                         setParameterCode(parameterCode);
@@ -70,7 +70,7 @@ export const MeterSelectDialog: FunctionComponent<MeterSelectDialogProps> = (p) 
     const handleSet = () => {
         const newContent: MeterSelectDialogCotents = [];
         for (let i = 0; i < p.default.length; i++)
-            newContent.push({ caption: p.default[i].caption, selectedCode: parameterCode[i] });
+            newContent.push({ meterID: p.default[i].meterID, code: parameterCode[i] });
         p.onSet(newContent);
     };
 

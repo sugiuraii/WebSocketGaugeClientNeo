@@ -35,6 +35,7 @@ import { StringListLogger } from "./utils/StringListLogger";
 import PIXIApplication from "./reactParts/PIXIApplication";
 
 import 'bootswatch/dist/slate/bootstrap.min.css';
+import { WebsocketParameterCode } from "./WebsocketObjCollection/WebsocketParameterCode";
 const BOOTSTRAP_CSS_FILENAME = "bootstrap.min.css";
 
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
@@ -45,10 +46,14 @@ export class MeterApplication {
     private readonly WebStorage: WebstorageHandler = new WebstorageHandler();
 
     private readonly webSocketCollection: WebsocketObjectCollection;
+    private MeterSelectDialogSetting : {meterID : string, code : WebsocketParameterCode}[];
+    
     public get WebSocketCollection(): WebsocketObjectCollection { return this.webSocketCollection }
+
 
     protected get RootElem() : JSX.Element 
     {
+
         return(
         <>
             <ApplicationNavbar
@@ -62,6 +67,13 @@ export class MeterApplication {
                 logList={this.Logger.Content}
                 websocketStatusList={this.WebSocketCollection.WebsocketStates}
                 opacityOnMouseOff={"0.1"}
+                defaultMeterSelectDialogContent={this.MeterSelectDialogSetting}
+                parameterToSelectInMeterSelectDialog={this.Option.MeteSelectDialogOption.ParameterCodeListToSelect}
+                onMeterSelectDialogSet={(c) => 
+                    {
+                        this.MeterSelectDialogSetting = c;
+                        this.WebStorage.MeterSelectDialogSetting = c;
+                    }}
             />
         </>
         );
@@ -70,6 +82,8 @@ export class MeterApplication {
     constructor(option: MeterApplicationOption) {
         this.Option = option;
         this.webSocketCollection = new WebsocketObjectCollection(this.Logger, option.WebSocketCollectionOption);
+        this.MeterSelectDialogSetting =  (this.WebStorage.MeterSelectDialogSetting === undefined)?
+            this.Option.MeteSelectDialogOption.InitialiMeterSelectDialogSetting:this.WebStorage.MeterSelectDialogSetting;
     }
 
     public async Run(): Promise<void> {
