@@ -23,7 +23,6 @@
  */
 
 import * as PIXI from "pixi.js";
-import { MeterSelectDialogCotents } from "../reactParts/dialog/MeterSelectDialog";
 import { WebsocketObjectCollection, WebsocketObjectCollectionOption } from "../WebsocketObjCollection/WebsocketObjectCollection";
 import { WebsocketParameterCode } from "../WebsocketObjCollection/WebsocketParameterCode";
 
@@ -47,12 +46,10 @@ class PreloadResourceCollection {
 }
 
 class MeterSelectDialogOption {
-    public OnMeterSelectDialogSet : ((c : MeterSelectDialogCotents) => void) | undefined;
     public InitialiMeterSelectDialogSetting : {meterID : string, code : WebsocketParameterCode}[];
     public ParameterCodeListToSelect : WebsocketParameterCode[];
     constructor()
     {
-        this.OnMeterSelectDialogSet = undefined;
         this.InitialiMeterSelectDialogSetting = [];
         this.ParameterCodeListToSelect = [];
     }
