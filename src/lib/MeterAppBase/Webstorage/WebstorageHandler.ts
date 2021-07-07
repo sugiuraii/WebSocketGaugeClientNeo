@@ -58,5 +58,13 @@ export class WebstorageHandler {
         localStorage.setItem("MeterSelectDialogSetting", JSON.stringify(val));
     }
 
+    public Reset():void
+    {
+        if(window.confirm("Reset page setting (webstorage)?"))
+        {
+            localStorage.clear();
+            window.alert("Page setting (webstorage) is cleared. Please reload the page");
+        }
+    }
 }
 

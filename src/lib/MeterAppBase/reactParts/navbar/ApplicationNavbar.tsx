@@ -46,7 +46,8 @@ type ApplicationNavbarProps =
         defaultMeterSelectDialogContent?: MeterSelectDialogCotents,
         parameterToSelectInMeterSelectDialog?: WebsocketParameterCode[],
         websocketStatusList: { [name: string]: WebsocketState },
-        opacityOnMouseOff : string
+        opacityOnMouseOff : string,
+        onWebStorageReset:() => void
     };
 
 export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) => {
@@ -78,6 +79,9 @@ export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) 
                         </Nav.Item>
                         <Nav.Item>
                             <Nav.Link onClick={() => setShowLogDialog(true)}>Log</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link onClick={() => p.onWebStorageReset()}>Reset setting</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
                             <Nav.Link disabled={p.onMeterSelectDialogSet === undefined} onClick={() => setShowMeterSelectDialog(true)}>Edit meter</Nav.Link>
