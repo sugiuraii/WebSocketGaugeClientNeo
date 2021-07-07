@@ -50,7 +50,6 @@ export class MeterApplication {
     
     public get WebSocketCollection(): WebsocketObjectCollection { return this.webSocketCollection }
 
-
     protected get RootElem() : JSX.Element 
     {
 
@@ -74,6 +73,7 @@ export class MeterApplication {
                         this.MeterSelectDialogSetting = c;
                         this.WebStorage.MeterSelectDialogSetting = c;
                     }}
+                onWebStorageReset={()=>this.WebStorage.Reset()}
             />
         </>
         );
@@ -82,8 +82,14 @@ export class MeterApplication {
     constructor(option: MeterApplicationOption) {
         this.Option = option;
         this.webSocketCollection = new WebsocketObjectCollection(this.Logger, option.WebSocketCollectionOption);
-        this.MeterSelectDialogSetting =  (this.WebStorage.MeterSelectDialogSetting === undefined)?
-            this.Option.MeteSelectDialogOption.InitialiMeterSelectDialogSetting:this.WebStorage.MeterSelectDialogSetting;
+        if(this.WebStorage.MeterSelectDialogSetting === undefined)
+        {
+            const logmessage = "MeterDialogSetting is undefined. Overwrite with default value.";
+            this.Logger.appendLog(logmessage)
+            console.log(logmessage);
+            this.WebStorage.MeterSelectDialogSetting = this.Option.MeteSelectDialogOption.InitialiMeterSelectDialogSetting;
+        }
+        this.MeterSelectDialogSetting = this.WebStorage.MeterSelectDialogSetting;
     }
 
     public async Run(): Promise<void> {
