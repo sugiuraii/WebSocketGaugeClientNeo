@@ -47,7 +47,6 @@ window.onload = function () {
 
 class ChangeableAnalogTripleMeterApp {
     private readonly UseVacuumMeterInsteadOfBoost = false;
-    private dialogShow = false;
 
     private getMeter(code: WebsocketParameterCode | undefined): { code : WebsocketParameterCode, partsConstructor: () => AnalogSingleMeter, readmode: ReadModeCode, getValFunc: (timestamp: number, ws: WebsocketObjectCollection) => number } {
         switch (code) {
