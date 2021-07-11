@@ -29,16 +29,14 @@ import * as PIXI from 'pixi.js';
 //Import application base class
 import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
 import { MeterApplicationOption } from "../../lib/MeterAppBase/options/MeterApplicationOption";
-import { WebsocketObjectCollection } from '../../lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection';
-import { WebsocketParameterCode } from '../../lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode';
 import { WebstorageHandler } from '../../lib/MeterAppBase/Webstorage/WebstorageHandler';
-import { ReadModeCode } from '../../lib/WebSocket/WebSocketCommunication';
 
 //Import meter parts
-import { AnalogSingleMeter, BatteryVoltageMeter, BoostMeter, RevMeter, VacuumMeter, WaterTempMeter, OilTempMeter, OilPressureMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
+import { BoostMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
 
 // Import AppSettings.
 import * as DefaultAppSettings from "../DefaultAppSettings"
+import { AnalogSingleMeterFactory } from '../partsFactory/AnalogSingleMeterFactory';
 
 window.onload = function () {
     const meterapp = new ChangeableAnalogTripleMeterApp();
@@ -47,27 +45,7 @@ window.onload = function () {
 
 class ChangeableAnalogTripleMeterApp {
     private readonly UseVacuumMeterInsteadOfBoost = false;
-
-    private getMeter(code: WebsocketParameterCode | undefined): { code : WebsocketParameterCode, partsConstructor: () => AnalogSingleMeter, readmode: ReadModeCode, getValFunc: (timestamp: number, ws: WebsocketObjectCollection) => number } {
-        switch (code) {
-            case "Engine_Speed":
-                return { code : code, partsConstructor: () => new RevMeter(), readmode: "SLOWandFAST", getValFunc: (ts, ws) => ws.WSMapper.getValue(code, ts) };
-            case "Manifold_Absolute_Pressure":
-                return { code : code,  partsConstructor: () => this.UseVacuumMeterInsteadOfBoost ? new VacuumMeter() : new BoostMeter(), readmode: "SLOWandFAST", getValFunc: (ts, ws) => ws.WSMapper.getValue(code, ts) * 0.0101972 - 1 /* convert kPa to kgf/cm2 and relative pressure */ };
-            case "Coolant_Temperature":
-                return { code : code,  partsConstructor: () => new WaterTempMeter(), readmode: "SLOW", getValFunc: (_, ws) => ws.WSMapper.getValue(code) };
-            case "Engine_oil_temperature":
-                return { code : code,  partsConstructor: () => new OilTempMeter(), readmode: "SLOW", getValFunc: (_, ws) => ws.WSMapper.getValue(code) };
-            case "Battery_Voltage":
-                return { code : code,  partsConstructor: () => new BatteryVoltageMeter(), readmode: "SLOW", getValFunc: (_, ws) => ws.WSMapper.getValue(code) };
-            case "Oil_Pressure":
-                return { code : code,  partsConstructor: () => new OilPressureMeter(), readmode: "SLOWandFAST", getValFunc: (ts, ws) => ws.WSMapper.getValue(code, ts) };
-            case undefined:
-                throw new Error("getMeter() is failed by undefined code.");
-            default:
-                throw new Error("Analog single meter is not defined on selected code.");
-        }
-    }
+    private readonly AnalogSingleMeterFactory = new AnalogSingleMeterFactory();
 
     public async Start() {
         const pixiAppOption: PIXI.IApplicationOptions = { width: 1280, height: 720 };
@@ -88,9 +66,9 @@ class ChangeableAnalogTripleMeterApp {
         if(leftMeterSet === undefined || centerMeterSet === undefined || rightMeterSet === undefined)
             throw new Error("Meter code reading is failed.");
 
-        const meter0 = this.getMeter(leftMeterSet.code);
-        const meter1 = this.getMeter(centerMeterSet.code);
-        const meter2 = this.getMeter(rightMeterSet.code);
+        const meter0 = this.AnalogSingleMeterFactory.getMeter(leftMeterSet.code);
+        const meter1 = this.AnalogSingleMeterFactory.getMeter(centerMeterSet.code);
+        const meter2 = this.AnalogSingleMeterFactory.getMeter(rightMeterSet.code);
 
         appOption.SetupPIXIMeterPanel = (app, ws) => {
             const stage = app.stage;
