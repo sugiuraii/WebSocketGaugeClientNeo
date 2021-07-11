@@ -28,7 +28,8 @@ module.exports = {
     mode: "development",
     entry:
     {
-        "index": './index.tsx'
+        "index": './index.tsx',
+        "AllResetWebstorage" : "./AllResetWebstorage.tsx"
     },
     devtool: "source-map",
     output:

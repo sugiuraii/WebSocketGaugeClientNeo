@@ -45,6 +45,9 @@ export const IndexNavbar: FunctionComponent<IndexNavbarProps> = (p) => {
                         <Nav.Item>
                             <Nav.Link onClick={() => SetShowDialog(true)}>Option</Nav.Link>
                         </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link href="./AllResetWebstorage.html" >Reset webstorage (for all pages)</Nav.Link>
+                        </Nav.Item>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
