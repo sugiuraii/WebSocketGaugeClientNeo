@@ -44,6 +44,8 @@ export class Gauge1DOptions {
      */
     public GagueFullOnValueMin: boolean;
 
+    public GaugeDrawConversionFucntion : (x : number) => number = (x) => x;
+
     constructor() {
         this.Max = 100;
         this.Min = 0;
@@ -91,6 +93,7 @@ export abstract class Gauge1D extends PIXI.Container {
         const Min = this.Options.Min;
         const Value = this.Value;
         const GaugeFullOnValueMin = this.Options.GagueFullOnValueMin;
+        const conv = this.Options.GaugeDrawConversionFucntion;
 
         let drawVal: number;
         if (Value > Max)
@@ -98,7 +101,7 @@ export abstract class Gauge1D extends PIXI.Container {
         else if (Value < Min)
             drawVal = Min;
         else
-            drawVal = Value
+            drawVal = conv(Value);
 
         if (GaugeFullOnValueMin)
             drawVal = Max - drawVal + Min;
