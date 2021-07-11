@@ -58,6 +58,39 @@ export class BoostGaugePanel extends FullCircularGaugePanelBase {
     }
 }
 
+export class VacuumGaugePanel extends FullCircularGaugePanelBase {
+    constructor() {
+        const options = new FullCircularGaugePanelOptionsBase();
+
+        options.TitleLabel = "Manifold pres.";
+        options.UnitLabel = "x100kPa";
+        options.Min = -1.0;
+        options.Max = 0.5;
+        options.RedZoneBarEnable = true;
+        options.YellowZoneBarEnable = true;
+        options.GreenZoneBarEnable = true;
+        options.RedZoneBarOffsetAngle = 315;
+        options.YellowZoneBarOffsetAngle = 270;
+        options.GreenZoneBarOffsetAngle = 90;
+        options.RedZoneBarFullAngle = 42;
+        options.YellowZoneBarFullAngle = 45;
+        options.GreenZoneBarFullAngle = 90;
+        options.ValueNumberRoundDigit = 1;
+
+        options.AxisLabel =
+            ["-1.0",
+                "-0.75",
+                "-0.5",
+                "-0.25",
+                "+0",
+                "+0.25",
+                "+0.5"
+            ];
+
+        super(options);
+    }
+}
+
 export class AirFuelGaugePanel extends FullCircularGaugePanelBase {
     constructor() {
         const options = new FullCircularGaugePanelOptionsBase();
