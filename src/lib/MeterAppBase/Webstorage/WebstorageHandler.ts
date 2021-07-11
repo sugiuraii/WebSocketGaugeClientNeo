@@ -47,7 +47,7 @@ export class WebstorageHandler {
     public get ForceCanvas() : boolean
     {
         const forceCanvas = localStorage.getItem(this.getKey("ForceCanvas"));
-        return forceCanvas === null? true : forceCanvas === "true";
+        return forceCanvas === null? false : forceCanvas === "true";
     }
 
     public set ForceCanvas(flag : boolean)
