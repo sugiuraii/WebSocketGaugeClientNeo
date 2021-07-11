@@ -26,6 +26,7 @@ import { RotationNeedleGauge } from '../../lib/Graphics/PIXIGauge';
 import { RotationNeedleGaugeOptions } from '../../lib/Graphics/PIXIGauge';
 
 import * as PIXI from 'pixi.js';
+import { SingleValueGauge } from '../SingleValueGauge';
 
 // Define texture and bitmap font files to bundle by webpack file loader
 require("./AnalogSingleMeter.json");
@@ -75,7 +76,7 @@ export class AnalogSingleMeterOption {
 /**
  * Analog single meter gauge example class
  */
-export class AnalogSingleMeter extends PIXI.Container {
+export class AnalogSingleMeter extends PIXI.Container implements SingleValueGauge {
     /**
      * The variable option class to define the design (max, min, title and scale labels).
      * @see AnalogSingleMeterOption
