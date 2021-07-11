@@ -56,10 +56,11 @@ export const MeterSelectDialog: FunctionComponent<MeterSelectDialogProps> = (p) 
             <Form.Group key={v.meterID}>
                 <Form.Label>{v.meterID}</Form.Label>
                 <Form.Control as="select"
-                    value={v.code}
+                    value={parameterCode[i]}
                     onChange={e => {
-                        parameterCode[i] = e.target.value as WebsocketParameterCode;
-                        setParameterCode(parameterCode);
+                        const newParamCode = Array.from(parameterCode); // Need to re-create array to update DOM.
+                        newParamCode[i] = e.target.value as WebsocketParameterCode;
+                        setParameterCode(newParamCode);
                     }}>
                     {selectOptions}
                     </Form.Control>
