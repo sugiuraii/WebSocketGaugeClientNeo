@@ -36,6 +36,7 @@ import PIXIApplication from "./reactParts/PIXIApplication";
 
 import 'bootswatch/dist/slate/bootstrap.min.css';
 import { WebsocketParameterCode } from "./WebsocketObjCollection/WebsocketParameterCode";
+import { MeterSelectDialogCotents } from "./reactParts/dialog/MeterSelectDialog";
 const BOOTSTRAP_CSS_FILENAME = "bootstrap.min.css";
 
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
@@ -46,44 +47,42 @@ export class MeterApplication {
     private readonly WebStorage: WebstorageHandler = new WebstorageHandler();
 
     private readonly webSocketCollection: WebsocketObjectCollection;
-    private MeterSelectDialogSetting : {meterID : string, code : WebsocketParameterCode}[];
-    
+    private MeterSelectDialogSetting: { meterID: string, code: WebsocketParameterCode }[];
+
     public get WebSocketCollection(): WebsocketObjectCollection { return this.webSocketCollection }
 
-    protected get RootElem() : JSX.Element 
-    {
+    protected get RootElem(): JSX.Element {
+        const onMeterSelectDialogSet = (this.MeterSelectDialogSetting.length === 0) ? undefined : (c: MeterSelectDialogCotents) => {
+            this.MeterSelectDialogSetting = c;
+            this.WebStorage.MeterSelectDialogSetting = c;
+        };
 
-        return(
-        <>
-            <ApplicationNavbar
-                defaultOptionDialogContent={{ forceCanvas: this.WebStorage.ForceCanvas }}
-                defaultWSInterval={this.WebStorage.WSInterval}
-                onOptionDialogSet={c => {
-                    this.WebStorage.ForceCanvas = c.forceCanvas;
-                }}
-                onWSIntervalDialogSet={interval => this.WebStorage.WSInterval = interval}
-                onFUELTripResetDialogSet={() => this.WebSocketCollection.FUELTRIPWS.SendReset()}
-                logList={this.Logger.Content}
-                websocketStatusList={this.WebSocketCollection.WebsocketStates}
-                opacityOnMouseOff={"0.1"}
-                defaultMeterSelectDialogContent={this.MeterSelectDialogSetting}
-                parameterToSelectInMeterSelectDialog={this.Option.MeteSelectDialogOption.ParameterCodeListToSelect}
-                onMeterSelectDialogSet={(c) => 
-                    {
-                        this.MeterSelectDialogSetting = c;
-                        this.WebStorage.MeterSelectDialogSetting = c;
+        return (
+            <>
+                <ApplicationNavbar
+                    defaultOptionDialogContent={{ forceCanvas: this.WebStorage.ForceCanvas }}
+                    defaultWSInterval={this.WebStorage.WSInterval}
+                    onOptionDialogSet={c => {
+                        this.WebStorage.ForceCanvas = c.forceCanvas;
                     }}
-                onWebStorageReset={()=>this.WebStorage.Reset()}
-            />
-        </>
+                    onWSIntervalDialogSet={interval => this.WebStorage.WSInterval = interval}
+                    onFUELTripResetDialogSet={() => this.WebSocketCollection.FUELTRIPWS.SendReset()}
+                    logList={this.Logger.Content}
+                    websocketStatusList={this.WebSocketCollection.WebsocketStates}
+                    opacityOnMouseOff={"0.1"}
+                    defaultMeterSelectDialogContent={this.MeterSelectDialogSetting}
+                    parameterToSelectInMeterSelectDialog={this.Option.MeteSelectDialogOption.ParameterCodeListToSelect}
+                    onMeterSelectDialogSet={onMeterSelectDialogSet}
+                    onWebStorageReset={() => this.WebStorage.Reset()}
+                />
+            </>
         );
     }
 
     constructor(option: MeterApplicationOption) {
         this.Option = option;
         this.webSocketCollection = new WebsocketObjectCollection(this.Logger, option.WebSocketCollectionOption);
-        if(this.WebStorage.MeterSelectDialogSetting === undefined)
-        {
+        if (this.WebStorage.MeterSelectDialogSetting === undefined) {
             const logmessage = "MeterDialogSetting is undefined. Overwrite with default value.";
             this.Logger.appendLog(logmessage)
             console.log(logmessage);
@@ -118,7 +117,7 @@ export class MeterApplication {
                 {this.RootElem}
                 <PIXIApplication application={pixiApp} />
             </>
-        , rootElement);
+            , rootElement);
 
         // Add react components to html body
         document.body.appendChild(rootElement);
