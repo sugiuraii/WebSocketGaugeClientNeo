@@ -167,8 +167,8 @@ export class BoostGaugePanel extends SemiCircularGaugePanelBase {
 
         options.TitleLabel = "TURBO BOOST";
         options.UnitLabel = "x100kPa";
-        options.Min = -0.5;
-        options.Max = 1.5;
+        options.Min = -1.0;
+        options.Max = 2.0;
         options.RedZoneBarEnable = false;
         options.YellowZoneBarEnable = true;
         options.GreenZoneBarEnable = true;
@@ -177,14 +177,14 @@ export class BoostGaugePanel extends SemiCircularGaugePanelBase {
         options.GreenZoneBarOffsetAngle = 180;
         options.GreenZoneBarFullAngle = 45;
         options.ValueNumberRoundDigit = 1;
-
+        options.GaugeDrawValConversionFunc = (v) => (v < 0)?(1.5* v + 0.5):(0.75 * v + 0.5);
         options.AxisLabel =
             [
+                "-1.0",
                 "-0.5",
-                "0",
-                "+0.5",
+                "+0.0",
                 "+1.0",
-                "+1.5"
+                "+2.0"
             ];
 
         super(options);
