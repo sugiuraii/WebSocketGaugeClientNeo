@@ -169,13 +169,15 @@ export class BoostGaugePanel extends SemiCircularGaugePanelBase {
         options.UnitLabel = "x100kPa";
         options.Min = -1.0;
         options.Max = 2.0;
-        options.RedZoneBarEnable = false;
+        options.RedZoneBarEnable = true;
         options.YellowZoneBarEnable = true;
         options.GreenZoneBarEnable = true;
+        options.RedZoneBarOffsetAngle = 337.5;
+        options.RedZoneBarFullAngle = 22.5;
         options.YellowZoneBarOffsetAngle = 315;
-        options.YellowZoneBarFullAngle = 45;
+        options.YellowZoneBarFullAngle = 22.5;
         options.GreenZoneBarOffsetAngle = 180;
-        options.GreenZoneBarFullAngle = 45;
+        options.GreenZoneBarFullAngle = 90;
         options.ValueNumberRoundDigit = 1;
         options.GaugeDrawValConversionFunc = (v) => (v < 0)?(1.5* v + 0.5):(0.75 * v + 0.5);
         options.AxisLabel =
