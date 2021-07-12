@@ -95,13 +95,11 @@ export abstract class Gauge1D extends PIXI.Container {
         const GaugeFullOnValueMin = this.Options.GagueFullOnValueMin;
         const conv = this.Options.GaugeDrawConversionFucntion;
 
-        let drawVal: number;
-        if (Value > Max)
+        let drawVal = conv(Value);
+        if (drawVal > Max)
             drawVal = Max;
-        else if (Value < Min)
+        else if (drawVal < Min)
             drawVal = Min;
-        else
-            drawVal = conv(Value);
 
         if (GaugeFullOnValueMin)
             drawVal = Max - drawVal + Min;
