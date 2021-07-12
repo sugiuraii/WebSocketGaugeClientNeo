@@ -98,6 +98,7 @@ export abstract class CircularGaugePanelOptionBase {
     public AngleStep = 1;
     public ValueBarRadius = 100;
     public ValueBarInnerRadius = 50;
+    public GaugeDrawValConversionFunc : (x: number) => number = (x) => x;
 
     public TitleLabel = "";
     public TitleLabelOption = new TextOption();
@@ -174,6 +175,8 @@ export abstract class CircularGaugePanelBase extends PIXI.Container implements S
         valueProgressBarOption.AngleStep = this.Options.AngleStep;
         valueProgressBarOption.GagueFullOnValueMin = this.Options.GaugeFullOnValueMin;
         valueProgressBarOption.AntiClockwise = this.Options.AntiClockWise;
+
+        valueProgressBarOption.GaugeDrawConversionFucntion = this.Options.GaugeDrawValConversionFunc;
 
         valueProgressBarOption.Center = this.Options.CenterPosition;
         valueProgressBarOption.Radius = this.Options.ValueBarRadius;
