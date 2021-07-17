@@ -119,11 +119,42 @@ export class AirFuelGaugePanel extends SemiCircularGaugePanelBase {
         options.UnitLabel = "A/F";
         options.ValueNumberRoundDigit = 1;
         options.AxisLabel =
-            ["18",
+            [
+                "18",
                 "16",
                 "14",
                 "12",
                 "10"
+            ];
+
+        super(options);
+    }
+}
+
+export class VacuumGaugePanel extends SemiCircularGaugePanelBase {
+    constructor() {
+        const options = new SemiCircularGaugePanelOptionBase();
+
+        options.TitleLabel = "Manifold Pres.";
+        options.UnitLabel = "x100kPa";
+        options.Min = -1.5;
+        options.Max = 0;
+        options.RedZoneBarEnable = false;
+        options.YellowZoneBarEnable = true;
+        options.GreenZoneBarEnable = true;
+        options.YellowZoneBarOffsetAngle = 315;
+        options.YellowZoneBarFullAngle = 45;
+        options.GreenZoneBarOffsetAngle = 180;
+        options.GreenZoneBarFullAngle = 45;
+        options.ValueNumberRoundDigit = 1;
+
+        options.AxisLabel =
+            [
+                "-1.0",
+                "-0.75",
+                "-0.5",
+                "-0.25",
+                "0.0"
             ];
 
         super(options);
