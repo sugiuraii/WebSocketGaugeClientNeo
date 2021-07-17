@@ -61,6 +61,8 @@ export class AnalogSingleMeterOption {
      */
     public ScaleLabel: string[];
 
+    public GaugeDrawValConversionFunc : (x: number) => number;
+    
     /**
      * Construct AnalogSingleMeterOption with default settings.
      */
@@ -70,6 +72,7 @@ export class AnalogSingleMeterOption {
         this.Title = "Boost";
         this.Unit = "x100kPa";
         this.ScaleLabel = ["-1.0", "-0.5", "0.0", "0.5", "1.0", "1.5", "2.0"];
+        this.GaugeDrawValConversionFunc = (x) => x;
     }
 }
 
@@ -149,6 +152,9 @@ export class AnalogSingleMeter extends PIXI.Container implements SingleValueGaug
         needleGaugeOptions.OffsetAngle = 270;
         needleGaugeOptions.FullAngle = 270;
         needleGaugeOptions.Texture = PIXI.Texture.from("AnalogSingleMeter_Needle");
+
+        needleGaugeOptions.GaugeDrawConversionFucntion = option.GaugeDrawValConversionFunc;
+        
         const needleGauge = new RotationNeedleGauge(needleGaugeOptions);
         needleGauge.pivot.set(220, 15);
         needleGauge.position.set(210, 210);
