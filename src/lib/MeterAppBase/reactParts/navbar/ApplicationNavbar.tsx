@@ -23,25 +23,31 @@
  */
 
 
-import { OptionDialog, OptionDialogFormContents } from './OptionDialog'
-import { WSIntervalOptionDialog } from './WSIntervalOptionDialog'
-import { FUELTripResetDialog } from './FUELTripResetDialog'
-import { LogDialog } from './LogDialog'
-import { WebsocketStatusIndicator } from './WebsocketStatusIndicator'
+import { OptionDialog, OptionDialogFormContents } from '../dialog/OptionDialog'
+import { WSIntervalOptionDialog } from '../dialog/WSIntervalOptionDialog'
+import { FUELTripResetDialog } from '../dialog/FUELTripResetDialog'
+import { LogDialog } from '../dialog/LogDialog'
+import { WebsocketStatusIndicator } from '../WebsocketStatusIndicator'
 import React, { FunctionComponent, useState, Fragment } from 'react';
 import { Navbar, Nav } from 'react-bootstrap'
-import { WebsocketState } from '../WebsocketAppBackend/WebsocketState'
+import { WebsocketState } from '../../WebsocketAppBackend/WebsocketState'
+import { MeterSelectDialog, MeterSelectDialogCotents } from '../dialog/MeterSelectDialog'
+import { WebsocketParameterCode } from '../../WebsocketObjCollection/WebsocketParameterCode'
 
 type ApplicationNavbarProps =
     {
         defaultOptionDialogContent: OptionDialogFormContents,
         defaultWSInterval: number,
         logList: string[],
-        onOptionDialogSet: (content: OptionDialogFormContents) => void,
-        onWSIntervalDialogSet: (wsInterval: number) => void,
-        onFUELTripResetDialogSet: (reset: boolean) => void,
+        onOptionDialogSet?: (content: OptionDialogFormContents) => void,
+        onWSIntervalDialogSet?: (wsInterval: number) => void,
+        onFUELTripResetDialogSet?: (reset: boolean) => void,
+        onMeterSelectDialogSet?: (data : MeterSelectDialogCotents) => void,
+        defaultMeterSelectDialogContent?: MeterSelectDialogCotents,
+        parameterToSelectInMeterSelectDialog?: WebsocketParameterCode[],
         websocketStatusList: { [name: string]: WebsocketState },
-        opacityOnMouseOff : string
+        opacityOnMouseOff : string,
+        onWebStorageReset:() => void
     };
 
 export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) => {
@@ -49,7 +55,7 @@ export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) 
     const [showWSIntervalDialog, setShowWSIntervalDialog] = useState(false);
     const [showFUELTripResetDialog, setShowFUELTripResetDialog] = useState(false);
     const [showLogDialog, setShowLogDialog] = useState(false);
-
+    const [showMeterSelectDialog, setShowMeterSelectDialog] = useState(false);
     const [mouseOver, setMouseOver] = useState(false);
 
     return (
@@ -63,16 +69,22 @@ export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) 
                             <Nav.Link href="../index.html">Home</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link onClick={() => setShowOptionDialog(true)}>Option</Nav.Link>
+                            <Nav.Link disabled={p.onOptionDialogSet === undefined} onClick={() => setShowOptionDialog(true)}>Option</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link onClick={() => setShowWSIntervalDialog(true)}>WSInterval</Nav.Link>
+                            <Nav.Link disabled={p.onWSIntervalDialogSet === undefined} onClick={() => setShowWSIntervalDialog(true)}>WSInterval</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link onClick={() => setShowFUELTripResetDialog(true)}>Fuel/Trip reset</Nav.Link>
+                            <Nav.Link disabled={p.onFUELTripResetDialogSet === undefined} onClick={() => setShowFUELTripResetDialog(true)}>Fuel/Trip reset</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
                             <Nav.Link onClick={() => setShowLogDialog(true)}>Log</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link onClick={() => p.onWebStorageReset()}>Reset setting</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link disabled={p.onMeterSelectDialogSet === undefined} onClick={() => setShowMeterSelectDialog(true)}>Edit meter</Nav.Link>
                         </Nav.Item>
                     </Nav>
                     <WebsocketStatusIndicator statusList={p.websocketStatusList} />
@@ -81,20 +93,35 @@ export const ApplicationNavbar: FunctionComponent<ApplicationNavbarProps> = (p) 
             <OptionDialog onCancel={() => setShowOptionDialog(false)}
                 onSet={(d) => {
                     setShowOptionDialog(false);
-                    p.onOptionDialogSet(d);
+                    if(p.onOptionDialogSet !== undefined)
+                        p.onOptionDialogSet(d);
                 }}
                 show={showOptionDialog} defaultFormContent={p.defaultOptionDialogContent} />
             <WSIntervalOptionDialog show={showWSIntervalDialog} interval={p.defaultWSInterval} onCancel={() => setShowWSIntervalDialog(false)}
                 onSet={(newinterval) => {
                     setShowWSIntervalDialog(false);
-                    p.onWSIntervalDialogSet(newinterval);
+                    if(p.onWSIntervalDialogSet !== undefined)
+                        p.onWSIntervalDialogSet(newinterval);
                 }} />
             <FUELTripResetDialog show={showFUELTripResetDialog}
                 onClose={(reset) => {
                     setShowFUELTripResetDialog(false);
-                    p.onFUELTripResetDialogSet(reset);
+                    if(p.onFUELTripResetDialogSet !== undefined)
+                        p.onFUELTripResetDialogSet(reset);
                 }} />
             <LogDialog show={showLogDialog} logList={p.logList} onClose={() => setShowLogDialog(false)} />
+            { p.defaultMeterSelectDialogContent !== undefined &&
+            <MeterSelectDialog  show={showMeterSelectDialog} onCancel={() => setShowMeterSelectDialog(false)}
+                                onSet={(dat) => 
+                                {
+                                    setShowMeterSelectDialog(false);
+                                    if(p.onMeterSelectDialogSet !== undefined)
+                                        p.onMeterSelectDialogSet(dat);
+                                }}
+                                codesToSelect = {(p.parameterToSelectInMeterSelectDialog === undefined)?[]:p.parameterToSelectInMeterSelectDialog }
+                                default={p.defaultMeterSelectDialogContent}
+                />
+            }
         </Fragment>
     );
 };

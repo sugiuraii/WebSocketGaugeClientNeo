@@ -24,6 +24,7 @@
 
 import * as PIXI from "pixi.js";
 import { WebsocketObjectCollection, WebsocketObjectCollectionOption } from "../WebsocketObjCollection/WebsocketObjectCollection";
+import { WebsocketParameterCode } from "../WebsocketObjCollection/WebsocketParameterCode";
 
 class AddAllArray<T>
 {
@@ -44,10 +45,22 @@ class PreloadResourceCollection {
     public readonly TexturePath = new AddAllArray<string>();
 }
 
+class MeterSelectDialogOption {
+    public InitialiMeterSelectDialogSetting : {meterID : string, code : WebsocketParameterCode}[];
+    public ParameterCodeListToSelect : WebsocketParameterCode[];
+    constructor()
+    {
+        this.InitialiMeterSelectDialogSetting = [];
+        this.ParameterCodeListToSelect = [];
+    }
+}
+
 export class MeterApplicationOption {
     public readonly PreloadResource : PreloadResourceCollection;
     public readonly WebSocketCollectionOption : WebsocketObjectCollectionOption;
     public readonly PIXIApplicationOption : PIXI.IApplicationOptions;
+    public readonly NavBarItems : JSX.Element[] = [];
+    public readonly MeteSelectDialogOption = new MeterSelectDialogOption();
     
     public SetupPIXIMeterPanel: (pixiApp: PIXI.Application, wsObj: WebsocketObjectCollection) => void = () => {/* do nothing*/};
     

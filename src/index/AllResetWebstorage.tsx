@@ -22,22 +22,10 @@
  * THE SOFTWARE.
  */
 
-require('./index.html');
-
-import 'bootswatch/dist/slate/bootstrap.min.css';
-
-import { IndexNavbar } from '../lib/MeterAppBase/reactParts/navbar/IndexNavbar'
-import React  from 'react'
-import ReactDOM from 'react-dom'
+require('./AllResetWebstorage.html');
 import { WebstorageHandler } from '../lib/MeterAppBase/Webstorage/WebstorageHandler';
 
 window.onload = () => {
     const webStorage = new WebstorageHandler();
-
-    // Crete react components
-    const rootElement = document.getElementById('root');
-    ReactDOM.render(<IndexNavbar defaultOptionDialogContent={{ forceCanvas:webStorage.ForceCanvas }}
-        onOptionDialogSet={c => {
-            webStorage.ForceCanvas = c.forceCanvas;
-        }}/>, rootElement);
+    webStorage.ResetAll();
 }

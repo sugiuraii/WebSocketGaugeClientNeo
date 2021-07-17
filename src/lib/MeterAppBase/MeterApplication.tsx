@@ -30,11 +30,13 @@ import ReactDOM from "react-dom";
 import { WebstorageHandler } from "./Webstorage/WebstorageHandler";
 import { WebsocketObjectCollection } from "./WebsocketObjCollection/WebsocketObjectCollection";
 import { MeterApplicationOption } from "./options/MeterApplicationOption";
-import { ApplicationNavbar } from './reactParts/ApplicationNavbar';
+import { ApplicationNavbar } from './reactParts/navbar/ApplicationNavbar';
 import { StringListLogger } from "./utils/StringListLogger";
 import PIXIApplication from "./reactParts/PIXIApplication";
 
 import 'bootswatch/dist/slate/bootstrap.min.css';
+import { WebsocketParameterCode } from "./WebsocketObjCollection/WebsocketParameterCode";
+import { MeterSelectDialogCotents } from "./reactParts/dialog/MeterSelectDialog";
 const BOOTSTRAP_CSS_FILENAME = "bootstrap.min.css";
 
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
@@ -42,21 +44,57 @@ const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
 export class MeterApplication {
     private Option: MeterApplicationOption;
     private Logger = new StringListLogger();
+    private readonly WebStorage: WebstorageHandler = new WebstorageHandler();
 
     private readonly webSocketCollection: WebsocketObjectCollection;
+    private MeterSelectDialogSetting: { meterID: string, code: WebsocketParameterCode }[];
+
     public get WebSocketCollection(): WebsocketObjectCollection { return this.webSocketCollection }
+
+    protected get RootElem(): JSX.Element {
+        const onMeterSelectDialogSet = (this.MeterSelectDialogSetting.length === 0) ? undefined : (c: MeterSelectDialogCotents) => {
+            this.MeterSelectDialogSetting = c;
+            this.WebStorage.MeterSelectDialogSetting = c;
+        };
+
+        return (
+            <>
+                <ApplicationNavbar
+                    defaultOptionDialogContent={{ forceCanvas: this.WebStorage.ForceCanvas }}
+                    defaultWSInterval={this.WebStorage.WSInterval}
+                    onOptionDialogSet={c => {
+                        this.WebStorage.ForceCanvas = c.forceCanvas;
+                    }}
+                    onWSIntervalDialogSet={interval => this.WebStorage.WSInterval = interval}
+                    onFUELTripResetDialogSet={() => this.WebSocketCollection.FUELTRIPWS.SendReset()}
+                    logList={this.Logger.Content}
+                    websocketStatusList={this.WebSocketCollection.WebsocketStates}
+                    opacityOnMouseOff={"0.1"}
+                    defaultMeterSelectDialogContent={this.MeterSelectDialogSetting}
+                    parameterToSelectInMeterSelectDialog={this.Option.MeteSelectDialogOption.ParameterCodeListToSelect}
+                    onMeterSelectDialogSet={onMeterSelectDialogSet}
+                    onWebStorageReset={() => this.WebStorage.Reset()}
+                />
+            </>
+        );
+    }
 
     constructor(option: MeterApplicationOption) {
         this.Option = option;
         this.webSocketCollection = new WebsocketObjectCollection(this.Logger, option.WebSocketCollectionOption);
+        if (this.WebStorage.MeterSelectDialogSetting === undefined) {
+            const logmessage = "MeterDialogSetting is undefined. Overwrite with default value.";
+            this.Logger.appendLog(logmessage)
+            console.log(logmessage);
+            this.WebStorage.MeterSelectDialogSetting = this.Option.MeteSelectDialogOption.InitialiMeterSelectDialogSetting;
+        }
+        this.MeterSelectDialogSetting = this.WebStorage.MeterSelectDialogSetting;
     }
 
     public async Run(): Promise<void> {
-        const webStorage = new WebstorageHandler();
-
         // Override forceCanvas flag from webstorage, if Option.PIXIApplication.forceCanvas is undefinded.
         if (this.Option.PIXIApplicationOption.forceCanvas === undefined)
-            if (webStorage.ForceCanvas)
+            if (this.WebStorage.ForceCanvas)
                 this.Option.PIXIApplicationOption.forceCanvas = true;
 
         const pixiApp = new PIXI.Application(this.Option.PIXIApplicationOption);
@@ -75,26 +113,14 @@ export class MeterApplication {
         // Crete react components
         const rootElement = document.createElement('div');
         ReactDOM.render(
-            <Fragment>
-                <ApplicationNavbar
-                    defaultOptionDialogContent={{ forceCanvas: webStorage.ForceCanvas }}
-                    defaultWSInterval={webStorage.WSInterval}
-                    onOptionDialogSet={c => {
-                        webStorage.ForceCanvas = c.forceCanvas;
-                    }}
-                    onWSIntervalDialogSet={interval => webStorage.WSInterval = interval}
-                    onFUELTripResetDialogSet={() => this.WebSocketCollection.FUELTRIPWS.SendReset()}
-                    logList={this.Logger.Content}
-                    websocketStatusList={this.WebSocketCollection.WebsocketStates}
-                    opacityOnMouseOff={"0.1"}
-                />
+            <>
+                {this.RootElem}
                 <PIXIApplication application={pixiApp} />
-            </Fragment>
+            </>
             , rootElement);
 
         // Add react components to html body
         document.body.appendChild(rootElement);
-
 
         // Preload Fonts -> textures-> parts
         await this.preloadFonts();

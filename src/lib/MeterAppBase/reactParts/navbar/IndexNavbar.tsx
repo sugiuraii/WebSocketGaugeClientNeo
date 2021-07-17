@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { OptionDialog, OptionDialogFormContents } from './OptionDialog'
+import { OptionDialog, OptionDialogFormContents } from '../dialog/OptionDialog'
 import React, { FunctionComponent, useState, Fragment } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 
@@ -44,6 +44,9 @@ export const IndexNavbar: FunctionComponent<IndexNavbarProps> = (p) => {
                     <Nav className="mr-auto">
                         <Nav.Item>
                             <Nav.Link onClick={() => SetShowDialog(true)}>Option</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link href="./AllResetWebstorage.html" >Reset webstorage (for all pages)</Nav.Link>
                         </Nav.Item>
                     </Nav>
                 </Navbar.Collapse>

@@ -55,6 +55,10 @@ export class WebsocketClientMapper
         }
     }
 
+    public isParmeterCodeAvailable(code: WebsocketParameterCode): boolean {
+        return this.map.get(code) !== undefined;
+    }
+
     public getValue(code: WebsocketParameterCode, timeStamp?: number): number {
         const mapItem = this.map.get(code);
         if (mapItem !== undefined)

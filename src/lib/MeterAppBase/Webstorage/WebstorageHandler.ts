@@ -22,27 +22,66 @@
  * THE SOFTWARE.
  */
 
+import { WebsocketParameterCode } from "../WebsocketObjCollection/WebsocketParameterCode";
+
 export class WebstorageHandler {
+    private keyPrefix = location.pathname+":";
+    private keyList = ["WSInterval","ForceCanvas","MeterSelectDialogSetting"];
+
+    private getKey(keyname : string) : string
+    {
+        return this.keyPrefix + keyname;
+    }
+
     public get WSInterval() : number
     {
-        const wsInterval = localStorage.getItem("WSInterval");
-        return wsInterval === null ? 0 : Number(wsInterval);
+        const wsInterval = localStorage.getItem(this.getKey("WSInterval"));
+        return (wsInterval === null || wsInterval === undefined) ? 0 : Number(wsInterval);
     }
 
     public set WSInterval(interval : number)
     {
-        localStorage.setItem("WSInterval", interval.toString());
+        localStorage.setItem(this.getKey("WSInterval"), interval.toString());
     }
 
     public get ForceCanvas() : boolean
     {
-        const forceCanvas = localStorage.getItem("ForceCanvas");
-        return forceCanvas === null? true : forceCanvas === "true";
+        const forceCanvas = localStorage.getItem(this.getKey("ForceCanvas"));
+        return (forceCanvas === null || forceCanvas === undefined)? false : forceCanvas === "true";
     }
 
     public set ForceCanvas(flag : boolean)
     {
-        localStorage.setItem("ForceCanvas", flag?"true":"false");
+        localStorage.setItem(this.getKey("ForceCanvas"), flag?"true":"false");
+    }
+
+    public get MeterSelectDialogSetting() : {meterID : string, code : WebsocketParameterCode}[] | undefined
+    {
+        const item = localStorage.getItem(this.getKey("MeterSelectDialogSetting"));
+        return (item === null || item === undefined) ? undefined : JSON.parse(item);
+    }
+
+    public set MeterSelectDialogSetting (val : {meterID : string, code : WebsocketParameterCode}[] | undefined)
+    {
+        localStorage.setItem(this.getKey("MeterSelectDialogSetting"), JSON.stringify(val));
+    }
+
+    public Reset():void
+    {
+        if(window.confirm("Reset page setting of this page? (webstorage)?"))
+        {
+            this.keyList.forEach(k => localStorage.removeItem(this.getKey(k)));
+            window.alert("Page setting (webstorage) is cleared. Please reload the page");
+        }
+    }
+
+    public ResetAll(): void
+    {
+        if(window.confirm("Reset page setting of all pages? (webstorage)?"))
+        {
+            localStorage.clear();
+            window.alert("Page setting (webstorage) is cleared for all pages.");
+        }
     }
 }
 
