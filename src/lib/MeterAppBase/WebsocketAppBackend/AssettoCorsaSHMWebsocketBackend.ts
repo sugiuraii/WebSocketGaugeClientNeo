@@ -23,7 +23,6 @@
  */
 import { AssettoCorsaSHMWebsocket, AssettoCorsaSHMNumericalVALCode, AssettoCorsaSHMStringVALCode } from "../../WebSocket/WebSocketCommunication";
 import { AssettoCorsaSHMGraphicsParameterCode, AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMStaticInfoParameterCode } from "../../WebSocket/WebSocketCommunication";
-import { WebstorageHandler } from "../Webstorage/WebstorageHandler";
 import { ILogger } from "../utils/ILogger";
 import { WebsocketState } from "./WebsocketState";
 import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";
@@ -45,6 +44,7 @@ export class AssettoCorsaSHMWebsocketBackend implements WebsocketAppBackend {
    private readonly staticInfoParameterCodeList: AssettoCorsaSHMStaticInfoParameterCode[] = [];
    private readonly logger: ILogger;
    private readonly state: WebsocketState;
+   private readonly WSInterval : number;
 
    private readonly webSocketServerURL: string;
 
@@ -54,11 +54,12 @@ export class AssettoCorsaSHMWebsocketBackend implements WebsocketAppBackend {
    public get GraphicsParameterCodeList(): AssettoCorsaSHMGraphicsParameterCode[] {return this.graphicsParameterCodeList}
    public get StaticInfoParameterCodeList(): AssettoCorsaSHMStaticInfoParameterCode[] {return this.staticInfoParameterCodeList}
 
-   constructor(serverurl: string, logger: ILogger) {
+   constructor(serverurl: string, logger: ILogger, wsInterval : number) {
       this.assettocorsaWS = new AssettoCorsaSHMWebsocket(serverurl);
       this.logger = logger;
       this.state = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
       this.webSocketServerURL = this.assettocorsaWS.URL;
+      this.WSInterval = wsInterval;
 
       this.assettocorsaWS.OnWebsocketError = (message: string) => this.logger.appendLog(this.logPrefix + " websocket error : " + message);
    }
@@ -105,7 +106,6 @@ export class AssettoCorsaSHMWebsocketBackend implements WebsocketAppBackend {
       const Logger = this.logger;
       const webSocketObj = this.assettocorsaWS;
       const logPrefix = this.logPrefix;
-      const webStorage = new WebstorageHandler();
 
       webSocketObj.OnWebsocketOpen = () => {
          Logger.appendLog(logPrefix + " is connected. SendWSSend/Interval after " + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
@@ -116,7 +116,7 @@ export class AssettoCorsaSHMWebsocketBackend implements WebsocketAppBackend {
             this.staticInfoParameterCodeList.forEach(item => webSocketObj.SendStaticInfoWSSend(item, true));
 
             //SendWSInterval from spinner
-            webSocketObj.SendPhysicsWSInterval(webStorage.WSInterval);
+            webSocketObj.SendPhysicsWSInterval(this.WSInterval);
 
          }, this.WAITTIME_BEFORE_SENDWSSEND);
       }
