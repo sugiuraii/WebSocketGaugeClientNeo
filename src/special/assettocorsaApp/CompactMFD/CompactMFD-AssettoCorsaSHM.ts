@@ -46,7 +46,7 @@ window.onload = function () {
 
 class CompactMFD_AssettoCorsaSHM {
     public Start() {
-        const pixiAppOption : PIXI.IApplicationOptions = {width : 720, height : 1280};
+        const pixiAppOption: PIXI.IApplicationOptions = { width: 720, height: 1280 };
 
         const appOption = new MeterApplicationOption(pixiAppOption);
         appOption.PreloadResource.WebFontFamiliyName.addall(WaterTempGaugePanel.RequestedFontFamily);
@@ -110,13 +110,15 @@ class CompactMFD_AssettoCorsaSHM {
                 waterTempPanel.Value = waterTemp;
                 engineOilTempPanel.Value = engineOilTemp;
             });
-        };
-        const app = new MeterApplication(appOption);
 
-        app.WebSocketCollection.AssettoCorsaWS.PhysicsParameterCodeList.push(...[AssettoCorsaSHMPhysicsParameterCode.Rpms,
-        AssettoCorsaSHMPhysicsParameterCode.SpeedKmh,
-        AssettoCorsaSHMPhysicsParameterCode.ManifoldPressure,
-        AssettoCorsaSHMPhysicsParameterCode.Gear]);
+
+            ws.AssettoCorsaWS.PhysicsParameterCodeList.push(...[AssettoCorsaSHMPhysicsParameterCode.Rpms,
+            AssettoCorsaSHMPhysicsParameterCode.SpeedKmh,
+            AssettoCorsaSHMPhysicsParameterCode.ManifoldPressure,
+            AssettoCorsaSHMPhysicsParameterCode.Gear]);
+        };
+        
+        const app = new MeterApplication(appOption);
         app.Run();
     }
 }

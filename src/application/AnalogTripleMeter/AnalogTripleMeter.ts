@@ -82,11 +82,12 @@ class AnalogTripleMeterApp {
                 waterTempMeter.Value = waterTemp;
                 oilTempMeter.Value = oilTemp;
             });
+
+            ws.WSMapper.registerParameterCode("Manifold_Absolute_Pressure", "SLOWandFAST");
+            ws.WSMapper.registerParameterCode("Coolant_Temperature", "SLOW");
+            ws.WSMapper.registerParameterCode("Engine_oil_temperature", "SLOW");
         };
         const app = new MeterApplication(appOption);
-        app.WebSocketCollection.WSMapper.registerParameterCode("Manifold_Absolute_Pressure", "SLOWandFAST");
-        app.WebSocketCollection.WSMapper.registerParameterCode("Coolant_Temperature", "SLOW");
-        app.WebSocketCollection.WSMapper.registerParameterCode("Engine_oil_temperature", "SLOW");
         app.Run();
     }
 }

@@ -78,14 +78,14 @@ class AnalogMeterClusterApp {
                 meterCluster.Fuel = fuel;
                 meterCluster.GasMilage = gasMilage;
             });
+
+            ws.WSMapper.registerParameterCode("Engine_Speed", "SLOWandFAST");
+            ws.WSMapper.registerParameterCode("Manifold_Absolute_Pressure", "SLOWandFAST");
+            ws.WSMapper.registerParameterCode("Vehicle_Speed", "SLOWandFAST");
+            ws.WSMapper.registerParameterCode("Coolant_Temperature", "SLOW");
         }
 
         const app = new MeterApplication(appOption);
-        app.WebSocketCollection.WSMapper.registerParameterCode("Engine_Speed", "SLOWandFAST");
-        app.WebSocketCollection.WSMapper.registerParameterCode("Manifold_Absolute_Pressure", "SLOWandFAST");
-        app.WebSocketCollection.WSMapper.registerParameterCode("Vehicle_Speed", "SLOWandFAST");
-        app.WebSocketCollection.WSMapper.registerParameterCode("Coolant_Temperature", "SLOW");
-        
         app.Run();
     }
 }

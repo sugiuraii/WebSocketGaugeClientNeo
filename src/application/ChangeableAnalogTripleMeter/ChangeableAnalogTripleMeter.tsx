@@ -29,7 +29,6 @@ import * as PIXI from 'pixi.js';
 //Import application base class
 import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
 import { MeterApplicationOption } from "../../lib/MeterAppBase/options/MeterApplicationOption";
-import { WebstorageHandler } from '../../lib/MeterAppBase/Webstorage/WebstorageHandler';
 
 //Import meter parts
 import { BoostMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
@@ -38,14 +37,14 @@ import { BoostMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
 import * as DefaultAppSettings from "../DefaultAppSettings"
 import { AnalogSingleMeterFactory } from '../partsFactory/AnalogSingleMeterFactory';
 
+const useVacuumInsteadOfBoost = false;
+
 window.onload = function () {
     const meterapp = new ChangeableAnalogTripleMeterApp();
     meterapp.Start();
 }
 
 class ChangeableAnalogTripleMeterApp {
-    private readonly UseVacuumMeterInsteadOfBoost = false;
-    private readonly AnalogSingleMeterFactory = new AnalogSingleMeterFactory();
 
     public async Start() {
         const pixiAppOption: PIXI.IApplicationOptions = { width: 1280, height: 720 };
@@ -57,24 +56,24 @@ class ChangeableAnalogTripleMeterApp {
         appOption.MeteSelectDialogOption.ParameterCodeListToSelect = ["Engine_Speed", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Oil_Pressure"];
         appOption.MeteSelectDialogOption.InitialiMeterSelectDialogSetting = { ["Left"]: "Engine_Speed", ["Center"]: "Manifold_Absolute_Pressure", ["Right"]: "Coolant_Temperature" };
 
-        const webstoragehandler = new WebstorageHandler(appOption.MeteSelectDialogOption.InitialiMeterSelectDialogSetting);
-        const meterSetting = webstoragehandler.MeterSelectDialogSetting;
-        const leftMeterCode = meterSetting["Left"];
-        const centerMeterCode = meterSetting["Center"];
-        const rightMeterCode = meterSetting["Right"];
-
-        if (leftMeterCode === undefined || centerMeterCode === undefined || rightMeterCode === undefined)
-            throw new Error("Meter code reading is failed.");
-
-        const meter0 = this.AnalogSingleMeterFactory.getMeter(leftMeterCode);
-        const meter1 = this.AnalogSingleMeterFactory.getMeter(centerMeterCode);
-        const meter2 = this.AnalogSingleMeterFactory.getMeter(rightMeterCode);
-
-        appOption.SetupPIXIMeterPanel = (app, ws) => {
+        appOption.SetupPIXIMeterPanel = (app, ws, storage) => {
             const stage = app.stage;
             //Centering the top-level container
             stage.pivot.set(600, 200);
             stage.position.set(app.screen.width / 2, app.screen.height / 2);
+
+            const analogSingleMeterFactory = new AnalogSingleMeterFactory(useVacuumInsteadOfBoost);
+            const meterSetting = storage.MeterSelectDialogSetting;
+            const leftMeterCode = meterSetting["Left"];
+            const centerMeterCode = meterSetting["Center"];
+            const rightMeterCode = meterSetting["Right"];
+    
+            if (leftMeterCode === undefined || centerMeterCode === undefined || rightMeterCode === undefined)
+                throw new Error("Meter code reading is failed.");
+    
+            const meter0 = analogSingleMeterFactory.getMeter(leftMeterCode);
+            const meter1 = analogSingleMeterFactory.getMeter(centerMeterCode);
+            const meter2 = analogSingleMeterFactory.getMeter(rightMeterCode);    
 
             const parts0 = meter0.partsConstructor();
             const parts1 = meter1.partsConstructor();
@@ -85,7 +84,7 @@ class ChangeableAnalogTripleMeterApp {
             stage.addChild(parts0);
             stage.addChild(parts1);
             stage.addChild(parts2);
-
+            
             app.ticker.add(() => {
                 const timestamp = app.ticker.lastTime;
 
@@ -93,12 +92,13 @@ class ChangeableAnalogTripleMeterApp {
                 parts1.Value = meter1.getValFunc(timestamp, ws);
                 parts2.Value = meter2.getValFunc(timestamp, ws);
             });
+
+            ws.WSMapper.registerParameterCode(meter0.code, meter0.readmode);
+            ws.WSMapper.registerParameterCode(meter1.code, meter1.readmode);
+            ws.WSMapper.registerParameterCode(meter2.code, meter2.readmode);
         };
 
         const app = new MeterApplication(appOption);
-        app.WebSocketCollection.WSMapper.registerParameterCode(meter0.code, meter0.readmode);
-        app.WebSocketCollection.WSMapper.registerParameterCode(meter1.code, meter1.readmode);
-        app.WebSocketCollection.WSMapper.registerParameterCode(meter2.code, meter2.readmode);
         app.Run();
     }
 }
