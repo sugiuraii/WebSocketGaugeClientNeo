@@ -122,11 +122,11 @@ export class WebsocketObjectCollection {
 
     get WebsocketStates() : {[name : string] : WebsocketState } { return this.websocketStates }
 
-    constructor(logger : ILogger, option: WebsocketObjectCollectionOption) {
+    constructor(logger : ILogger, option: WebsocketObjectCollectionOption, wsInterval : number) {
         this.Option = option;
 
         if (this.Option.DefiWSEnabled) {
-            this.defiWS = new DefiWebsocketBackend(this.Option.DefiWSURL, logger);
+            this.defiWS = new DefiWebsocketBackend(this.Option.DefiWSURL, logger, wsInterval);
             this.websocketStates[this.defiWS.getName()] = this.defiWS.getWebsocketState();
         }
         else
@@ -140,7 +140,7 @@ export class WebsocketObjectCollection {
             this.ssmWS = undefined;
 
         if (this.Option.ArduinoWSEnabled) {
-            this.arduinoWS = new ArduinoWebsocketBackend(this.Option.ArduinoWSURL, logger);
+            this.arduinoWS = new ArduinoWebsocketBackend(this.Option.ArduinoWSURL, logger, wsInterval);
             this.websocketStates[this.arduinoWS.getName()] = this.arduinoWS.getWebsocketState();
         }
         else
@@ -163,7 +163,7 @@ export class WebsocketObjectCollection {
             this.fueltripWS = undefined;
 
         if (this.Option.AssettoCorsaWSEnabled) {
-            this.assettoCorsaWS = new AssettoCorsaSHMWebsocketBackend(this.Option.AssettoCorsaWSURL, logger);
+            this.assettoCorsaWS = new AssettoCorsaSHMWebsocketBackend(this.Option.AssettoCorsaWSURL, logger, wsInterval);
             this.websocketStates[this.assettoCorsaWS.getName()] = this.assettoCorsaWS.getWebsocketState();
         }
         else
