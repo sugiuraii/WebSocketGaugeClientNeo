@@ -35,7 +35,6 @@ import { StringListLogger } from "./utils/StringListLogger";
 import PIXIApplication from "./reactParts/PIXIApplication";
 
 import 'bootswatch/dist/slate/bootstrap.min.css';
-import { WebsocketParameterCode } from "./WebsocketObjCollection/WebsocketParameterCode";
 import { MeterSelectDialogCotents } from "./reactParts/dialog/MeterSelectDialog";
 const BOOTSTRAP_CSS_FILENAME = "bootstrap.min.css";
 
@@ -47,12 +46,12 @@ export class MeterApplication {
     private readonly WebStorage: WebstorageHandler = new WebstorageHandler();
 
     private readonly webSocketCollection: WebsocketObjectCollection;
-    private MeterSelectDialogSetting: { meterID: string, code: WebsocketParameterCode }[];
+    private MeterSelectDialogSetting: MeterSelectDialogCotents;
 
     public get WebSocketCollection(): WebsocketObjectCollection { return this.webSocketCollection }
 
     protected get RootElem(): JSX.Element {
-        const onMeterSelectDialogSet = (this.MeterSelectDialogSetting.length === 0) ? undefined : (c: MeterSelectDialogCotents) => {
+        const onMeterSelectDialogSet = (Object.keys(this.MeterSelectDialogSetting).length === 0) ? undefined : (c: MeterSelectDialogCotents) => {
             this.MeterSelectDialogSetting = c;
             this.WebStorage.MeterSelectDialogSetting = c;
         };

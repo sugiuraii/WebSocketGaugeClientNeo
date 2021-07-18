@@ -23,9 +23,10 @@
  */
 
 require('./AllResetWebstorage.html');
-import { WebstorageHandler } from '../lib/MeterAppBase/Webstorage/WebstorageHandler';
 
 window.onload = () => {
-    const webStorage = new WebstorageHandler();
-    webStorage.ResetAll();
+    if (window.confirm("Reset page setting of all pages? (webstorage)?")) {
+        localStorage.clear();
+        window.alert("Page setting (webstorage) is cleared for all pages.");
+    }
 }
