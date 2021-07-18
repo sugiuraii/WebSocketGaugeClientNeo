@@ -35,14 +35,14 @@ type MeterSelectDialogProps = {
     onSet: (dat: MeterSelectDialogCotents) => void;
 }
 
-export type MeterSelectDialogCotents = { meterID: string, code: WebsocketParameterCode }[];
+export type MeterSelectDialogCotents = { [meterID: string]: WebsocketParameterCode };
 
 export const MeterSelectDialog: FunctionComponent<MeterSelectDialogProps> = (p) => {
-    const [parameterCode, setParameterCode] = useState(p.default.map(v => v.code));
+    const [content, setContent] = useState(p.default);
 
     const handleCancel = () => {
         // Reset forms
-        setParameterCode(p.default.map(v => v.code));
+        setContent(p.default);
         p.onCancel();
     };
 
@@ -50,17 +50,17 @@ export const MeterSelectDialog: FunctionComponent<MeterSelectDialogProps> = (p) 
 
     // Create parameter code selector
     const selectors: JSX.Element[] = [];
-    for (let i = 0; i < p.default.length; i++) {
-        const v = p.default[i];
+    for (const key in content) {
+        const val = content[key];
         selectors.push(
-            <Form.Group key={v.meterID}>
-                <Form.Label>{v.meterID}</Form.Label>
+            <Form.Group key={key}>
+                <Form.Label>{key}</Form.Label>
                 <Form.Control as="select"
-                    value={parameterCode[i]}
+                    value={val}
                     onChange={e => {
-                        const newParamCode = Array.from(parameterCode); // Need to re-create array to update DOM.
-                        newParamCode[i] = e.target.value as WebsocketParameterCode;
-                        setParameterCode(newParamCode);
+                        const newContent = {...content}; // Need to re-create array to update DOM.
+                        newContent[key] = e.target.value as WebsocketParameterCode;
+                        setContent(newContent);
                     }}>
                     {selectOptions}
                     </Form.Control>
@@ -69,10 +69,7 @@ export const MeterSelectDialog: FunctionComponent<MeterSelectDialogProps> = (p) 
     }
 
     const handleSet = () => {
-        const newContent: MeterSelectDialogCotents = [];
-        for (let i = 0; i < p.default.length; i++)
-            newContent.push({ meterID: p.default[i].meterID, code: parameterCode[i] });
-        p.onSet(newContent);
+        p.onSet(content);
     };
 
     return (
