@@ -68,9 +68,6 @@ class ChangeableAnalogTripleMeterApp {
             const centerMeterCode = meterSetting["Center"];
             const rightMeterCode = meterSetting["Right"];
     
-            if (leftMeterCode === undefined || centerMeterCode === undefined || rightMeterCode === undefined)
-                throw new Error("Meter code reading is failed.");
-    
             const meter0 = analogSingleMeterFactory.getMeter(leftMeterCode);
             const meter1 = analogSingleMeterFactory.getMeter(centerMeterCode);
             const meter2 = analogSingleMeterFactory.getMeter(rightMeterCode);    
