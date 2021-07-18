@@ -49,17 +49,17 @@ class CompactMFD_AssettoCorsaSHM {
         const pixiAppOption: PIXI.IApplicationOptions = { width: 720, height: 1280 };
 
         const appOption = new MeterApplicationOption(pixiAppOption);
-        appOption.PreloadResource.WebFontFamiliyName.addall(WaterTempGaugePanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontFamiliyName.addall(DigiTachoPanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontFamiliyName.addall(BoostGaugePanel.RequestedFontFamily);
+        appOption.PreloadResource.WebFontFamiliyName.push(...WaterTempGaugePanel.RequestedFontFamily);
+        appOption.PreloadResource.WebFontFamiliyName.push(...DigiTachoPanel.RequestedFontFamily);
+        appOption.PreloadResource.WebFontFamiliyName.push(...BoostGaugePanel.RequestedFontFamily);
 
-        appOption.PreloadResource.WebFontCSSURL.addall(WaterTempGaugePanel.RequestedFontCSSURL);
-        appOption.PreloadResource.WebFontCSSURL.addall(DigiTachoPanel.RequestedFontCSSURL);
-        appOption.PreloadResource.WebFontCSSURL.addall(BoostGaugePanel.RequestedFontCSSURL);
+        appOption.PreloadResource.WebFontCSSURL.push(...WaterTempGaugePanel.RequestedFontCSSURL);
+        appOption.PreloadResource.WebFontCSSURL.push(...DigiTachoPanel.RequestedFontCSSURL);
+        appOption.PreloadResource.WebFontCSSURL.push(...BoostGaugePanel.RequestedFontCSSURL);
 
-        appOption.PreloadResource.TexturePath.addall(WaterTempGaugePanel.RequestedTexturePath);
-        appOption.PreloadResource.TexturePath.addall(DigiTachoPanel.RequestedTexturePath);
-        appOption.PreloadResource.TexturePath.addall(BoostGaugePanel.RequestedTexturePath);
+        appOption.PreloadResource.TexturePath.push(...WaterTempGaugePanel.RequestedTexturePath);
+        appOption.PreloadResource.TexturePath.push(...DigiTachoPanel.RequestedTexturePath);
+        appOption.PreloadResource.TexturePath.push(...BoostGaugePanel.RequestedTexturePath);
 
         appOption.WebSocketCollectionOption.AssettoCorsaWSEnabled = true;
 

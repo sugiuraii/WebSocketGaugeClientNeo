@@ -52,18 +52,18 @@ class DigitalMFDApp {
     public async  Start() {
         const pixiAppOption : PIXI.IApplicationOptions = {width : 1200, height : 600};
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
-        appOption.PreloadResource.WebFontFamiliyName.addall(BoostGaugePanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontFamiliyName.addall(WaterTempGaugePanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontFamiliyName.addall(DigiTachoPanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontFamiliyName.addall(MilageGraphPanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontCSSURL.addall(BoostGaugePanel.RequestedFontCSSURL);
-        appOption.PreloadResource.WebFontCSSURL.addall(WaterTempGaugePanel.RequestedFontCSSURL);
-        appOption.PreloadResource.WebFontCSSURL.addall(DigiTachoPanel.RequestedFontCSSURL);
-        appOption.PreloadResource.WebFontCSSURL.addall(MilageGraphPanel.RequestedFontCSSURL);
-        appOption.PreloadResource.TexturePath.addall(BoostGaugePanel.RequestedTexturePath);
-        appOption.PreloadResource.TexturePath.addall(WaterTempGaugePanel.RequestedTexturePath);
-        appOption.PreloadResource.TexturePath.addall(DigiTachoPanel.RequestedTexturePath);
-        appOption.PreloadResource.TexturePath.addall(MilageGraphPanel.RequestedTexturePath);
+        appOption.PreloadResource.WebFontFamiliyName.push(...BoostGaugePanel.RequestedFontFamily);
+        appOption.PreloadResource.WebFontFamiliyName.push(...WaterTempGaugePanel.RequestedFontFamily);
+        appOption.PreloadResource.WebFontFamiliyName.push(...DigiTachoPanel.RequestedFontFamily);
+        appOption.PreloadResource.WebFontFamiliyName.push(...MilageGraphPanel.RequestedFontFamily);
+        appOption.PreloadResource.WebFontCSSURL.push(...BoostGaugePanel.RequestedFontCSSURL);
+        appOption.PreloadResource.WebFontCSSURL.push(...WaterTempGaugePanel.RequestedFontCSSURL);
+        appOption.PreloadResource.WebFontCSSURL.push(...DigiTachoPanel.RequestedFontCSSURL);
+        appOption.PreloadResource.WebFontCSSURL.push(...MilageGraphPanel.RequestedFontCSSURL);
+        appOption.PreloadResource.TexturePath.push(...BoostGaugePanel.RequestedTexturePath);
+        appOption.PreloadResource.TexturePath.push(...WaterTempGaugePanel.RequestedTexturePath);
+        appOption.PreloadResource.TexturePath.push(...DigiTachoPanel.RequestedTexturePath);
+        appOption.PreloadResource.TexturePath.push(...MilageGraphPanel.RequestedTexturePath);
 
         const gearCalculator = await DefaultAppSettings.getGearPositionCalculator();
 

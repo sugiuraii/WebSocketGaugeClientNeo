@@ -50,9 +50,9 @@ class ChangeableAnalogTripleMeterApp {
         const pixiAppOption: PIXI.IApplicationOptions = { width: 1280, height: 720 };
 
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
-        appOption.PreloadResource.WebFontFamiliyName.addall(AnalogSingleMeter.RequestedFontFamily);
-        appOption.PreloadResource.WebFontCSSURL.addall(AnalogSingleMeter.RequestedFontCSSURL);
-        appOption.PreloadResource.TexturePath.addall(AnalogSingleMeter.RequestedTexturePath);
+        appOption.PreloadResource.WebFontFamiliyName.push(...AnalogSingleMeter.RequestedFontFamily);
+        appOption.PreloadResource.WebFontCSSURL.push(...AnalogSingleMeter.RequestedFontCSSURL);
+        appOption.PreloadResource.TexturePath.push(...AnalogSingleMeter.RequestedTexturePath);
         appOption.MeteSelectDialogOption.ParameterCodeListToSelect = ["Engine_Speed", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Oil_Pressure"];
         appOption.MeteSelectDialogOption.InitialiMeterSelectDialogSetting = { ["Left"]: "Engine_Speed", ["Center"]: "Manifold_Absolute_Pressure", ["Right"]: "Coolant_Temperature" };
 

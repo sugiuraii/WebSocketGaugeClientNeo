@@ -46,9 +46,9 @@ class AnalogMeterClusterApp {
     public async Start() {
         const pixiAppOption : PIXI.IApplicationOptions = {width : 1100, height : 600};
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
-        appOption.PreloadResource.WebFontFamiliyName.addall(AnalogMeterCluster.RequestedFontFamily);
-        appOption.PreloadResource.WebFontCSSURL.addall(AnalogMeterCluster.RequestedFontCSSURL);
-        appOption.PreloadResource.TexturePath.addall(AnalogMeterCluster.RequestedTexturePath);
+        appOption.PreloadResource.WebFontFamiliyName.push(...AnalogMeterCluster.RequestedFontFamily);
+        appOption.PreloadResource.WebFontCSSURL.push(...AnalogMeterCluster.RequestedFontCSSURL);
+        appOption.PreloadResource.TexturePath.push(...AnalogMeterCluster.RequestedTexturePath);
 
         const gearCalculator = await DefaultAppSettings.getGearPositionCalculator();
 
