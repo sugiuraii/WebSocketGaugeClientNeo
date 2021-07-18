@@ -55,20 +55,20 @@ class ChangeableAnalogTripleMeterApp {
         appOption.PreloadResource.WebFontCSSURL.addall(BoostMeter.RequestedFontCSSURL);
         appOption.PreloadResource.TexturePath.addall(BoostMeter.RequestedTexturePath);
         appOption.MeteSelectDialogOption.ParameterCodeListToSelect = ["Engine_Speed", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Oil_Pressure"];
-        appOption.MeteSelectDialogOption.InitialiMeterSelectDialogSetting = [{meterID : "Left", code : "Engine_Speed"}, {meterID : "Center", code : "Manifold_Absolute_Pressure"}, {meterID : "Right", code : "Coolant_Temperature"}];
+        appOption.MeteSelectDialogOption.InitialiMeterSelectDialogSetting = { ["Left"]: "Engine_Speed", ["Center"]: "Manifold_Absolute_Pressure", ["Right"]: "Coolant_Temperature" };
 
         const webstoragehandler = new WebstorageHandler();
-        const meterSetting = (webstoragehandler.MeterSelectDialogSetting === undefined)?appOption.MeteSelectDialogOption.InitialiMeterSelectDialogSetting:webstoragehandler.MeterSelectDialogSetting;
-        const leftMeterSet = meterSetting.find(v => v.meterID === "Left");
-        const centerMeterSet = meterSetting.find(v => v.meterID === "Center");
-        const rightMeterSet = meterSetting.find(v => v.meterID === "Right");
-        
-        if(leftMeterSet === undefined || centerMeterSet === undefined || rightMeterSet === undefined)
+        const meterSetting = (webstoragehandler.MeterSelectDialogSetting === undefined) ? appOption.MeteSelectDialogOption.InitialiMeterSelectDialogSetting : webstoragehandler.MeterSelectDialogSetting;
+        const leftMeterCode = meterSetting["Left"];
+        const centerMeterCode = meterSetting["Center"];
+        const rightMeterCode = meterSetting["Right"];
+
+        if (leftMeterCode === undefined || centerMeterCode === undefined || rightMeterCode === undefined)
             throw new Error("Meter code reading is failed.");
 
-        const meter0 = this.AnalogSingleMeterFactory.getMeter(leftMeterSet.code);
-        const meter1 = this.AnalogSingleMeterFactory.getMeter(centerMeterSet.code);
-        const meter2 = this.AnalogSingleMeterFactory.getMeter(rightMeterSet.code);
+        const meter0 = this.AnalogSingleMeterFactory.getMeter(leftMeterCode);
+        const meter1 = this.AnalogSingleMeterFactory.getMeter(centerMeterCode);
+        const meter2 = this.AnalogSingleMeterFactory.getMeter(rightMeterCode);
 
         appOption.SetupPIXIMeterPanel = (app, ws) => {
             const stage = app.stage;
