@@ -129,16 +129,9 @@ export class MeterApplication {
     }
 
     private async preloadFonts() {
-        const webFontFamilyWithoutOverlap = this.Option.PreloadResource.WebFontFamiliyName.Array.filter(
-            (x, i, self) => {
-                return self.indexOf(x) === i;
-            }
-        );
-        const webFontCSSURLWithoutOverlap = this.Option.PreloadResource.WebFontCSSURL.Array.filter(
-            (x, i, self) => {
-                return self.indexOf(x) === i;
-            }
-        );
+        // Use Set to remove overlaps.
+        const webFontFamilyWithoutOverlap = Array.from(new Set(this.Option.PreloadResource.WebFontFamiliyName));
+        const webFontCSSURLWithoutOverlap = Array.from(new Set(this.Option.PreloadResource.WebFontCSSURL));
 
         return new Promise<void>((resolve) => {
             // call callBack() without loading fonts if the webFontFamily and webFoutCSSURL contains no elements.
@@ -158,11 +151,8 @@ export class MeterApplication {
     }
 
     private async preloadTextures() {
-        const texturePathWithoutOverlap = this.Option.PreloadResource.TexturePath.Array.filter(
-            (x, i, self) => {
-                return self.indexOf(x) === i;
-            }
-        );
+        // Use Set to remove overlaps.
+        const texturePathWithoutOverlap = Array.from(new Set(this.Option.PreloadResource.TexturePath));
 
         for (let i = 0; i < texturePathWithoutOverlap.length; i++) {
             const texturePath = texturePathWithoutOverlap[i];

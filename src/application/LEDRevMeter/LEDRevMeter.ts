@@ -48,12 +48,12 @@ class LEDRevMeterApp {
         const pixiAppOption : PIXI.IApplicationOptions = {width : 1280, height : 720};
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
 
-        appOption.PreloadResource.WebFontFamiliyName.addall(BoostMeter.RequestedFontFamily);
-        appOption.PreloadResource.WebFontFamiliyName.addall(LEDTachoMeter.RequestedFontFamily);
-        appOption.PreloadResource.WebFontCSSURL.addall(BoostMeter.RequestedFontCSSURL);
-        appOption.PreloadResource.WebFontCSSURL.addall(LEDTachoMeter.RequestedFontCSSURL);
-        appOption.PreloadResource.TexturePath.addall(BoostMeter.RequestedTexturePath);
-        appOption.PreloadResource.TexturePath.addall(LEDTachoMeter.RequestedTexturePath);
+        appOption.PreloadResource.WebFontFamiliyName.push(...BoostMeter.RequestedFontFamily);
+        appOption.PreloadResource.WebFontFamiliyName.push(...LEDTachoMeter.RequestedFontFamily);
+        appOption.PreloadResource.WebFontCSSURL.push(...BoostMeter.RequestedFontCSSURL);
+        appOption.PreloadResource.WebFontCSSURL.push(...LEDTachoMeter.RequestedFontCSSURL);
+        appOption.PreloadResource.TexturePath.push(...BoostMeter.RequestedTexturePath);
+        appOption.PreloadResource.TexturePath.push(...LEDTachoMeter.RequestedTexturePath);
 
         const gearCalculator = await DefaultAppSettings.getGearPositionCalculator();
         
