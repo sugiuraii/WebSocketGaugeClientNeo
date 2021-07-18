@@ -43,12 +43,10 @@ const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
 export class MeterApplication {
     private Option: MeterApplicationOption;
     private Logger = new StringListLogger();
-    private readonly WebStorage: WebstorageHandler = new WebstorageHandler();
+    private readonly WebStorage: WebstorageHandler;
 
     private readonly webSocketCollection: WebsocketObjectCollection;
     private MeterSelectDialogSetting: MeterSelectDialogCotents;
-
-    public get WebSocketCollection(): WebsocketObjectCollection { return this.webSocketCollection }
 
     protected get RootElem(): JSX.Element {
         const onMeterSelectDialogSet = (Object.keys(this.MeterSelectDialogSetting).length === 0) ? undefined : (c: MeterSelectDialogCotents) => {
@@ -65,9 +63,9 @@ export class MeterApplication {
                         this.WebStorage.ForceCanvas = c.forceCanvas;
                     }}
                     onWSIntervalDialogSet={interval => this.WebStorage.WSInterval = interval}
-                    onFUELTripResetDialogSet={() => this.WebSocketCollection.FUELTRIPWS.SendReset()}
+                    onFUELTripResetDialogSet={() => this.webSocketCollection.FUELTRIPWS.SendReset()}
                     logList={this.Logger.Content}
-                    websocketStatusList={this.WebSocketCollection.WebsocketStates}
+                    websocketStatusList={this.webSocketCollection.WebsocketStates}
                     opacityOnMouseOff={"0.1"}
                     defaultMeterSelectDialogContent={this.MeterSelectDialogSetting}
                     parameterToSelectInMeterSelectDialog={this.Option.MeteSelectDialogOption.ParameterCodeListToSelect}
@@ -81,6 +79,8 @@ export class MeterApplication {
     constructor(option: MeterApplicationOption) {
         this.Option = option;
         this.webSocketCollection = new WebsocketObjectCollection(this.Logger, option.WebSocketCollectionOption);
+        this.WebStorage = new WebstorageHandler(option.MeteSelectDialogOption.InitialiMeterSelectDialogSetting);
+
         if (this.WebStorage.MeterSelectDialogSetting === undefined) {
             const logmessage = "MeterDialogSetting is undefined. Overwrite with default value.";
             this.Logger.appendLog(logmessage)
@@ -124,8 +124,8 @@ export class MeterApplication {
         // Preload Fonts -> textures-> parts
         await this.preloadFonts();
         await this.preloadTextures();
-        this.Option.SetupPIXIMeterPanel(pixiApp, this.WebSocketCollection);
-        this.WebSocketCollection.Run();
+        this.Option.SetupPIXIMeterPanel(pixiApp, this.webSocketCollection, this.WebStorage);
+        this.webSocketCollection.Run();
     }
 
     private async preloadFonts() {
