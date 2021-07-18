@@ -31,7 +31,7 @@ import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
 import { MeterApplicationOption } from "../../lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
-import { BoostMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
+import { AnalogSingleMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
 
 // Import AppSettings.
 import * as DefaultAppSettings from "../DefaultAppSettings"
@@ -50,9 +50,9 @@ class ChangeableAnalogTripleMeterApp {
         const pixiAppOption: PIXI.IApplicationOptions = { width: 1280, height: 720 };
 
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
-        appOption.PreloadResource.WebFontFamiliyName.addall(BoostMeter.RequestedFontFamily);
-        appOption.PreloadResource.WebFontCSSURL.addall(BoostMeter.RequestedFontCSSURL);
-        appOption.PreloadResource.TexturePath.addall(BoostMeter.RequestedTexturePath);
+        appOption.PreloadResource.WebFontFamiliyName.addall(AnalogSingleMeter.RequestedFontFamily);
+        appOption.PreloadResource.WebFontCSSURL.addall(AnalogSingleMeter.RequestedFontCSSURL);
+        appOption.PreloadResource.TexturePath.addall(AnalogSingleMeter.RequestedTexturePath);
         appOption.MeteSelectDialogOption.ParameterCodeListToSelect = ["Engine_Speed", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Oil_Pressure"];
         appOption.MeteSelectDialogOption.InitialiMeterSelectDialogSetting = { ["Left"]: "Engine_Speed", ["Center"]: "Manifold_Absolute_Pressure", ["Right"]: "Coolant_Temperature" };
 
