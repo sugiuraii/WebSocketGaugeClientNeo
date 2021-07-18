@@ -28,23 +28,10 @@ import { WebsocketObjectCollection, WebsocketObjectCollectionOption } from "../W
 import { WebsocketParameterCode } from "../WebsocketObjCollection/WebsocketParameterCode";
 import { WebstorageHandler } from "../Webstorage/WebstorageHandler";
 
-class AddAllArray<T>
-{
-    private readonly content = new Array<T>();
-    public get Array() { return this.content }
-
-    public addall(itemToAdd: T | Array<T>): void {
-        if (itemToAdd instanceof Array)
-            itemToAdd.forEach(e => this.content.push(e));
-        else
-            this.content.push(itemToAdd);
-    }
-}
-
 class PreloadResourceCollection {
-    public readonly WebFontFamiliyName = new AddAllArray<string>();
-    public readonly WebFontCSSURL = new AddAllArray<string>();
-    public readonly TexturePath = new AddAllArray<string>();
+    public readonly WebFontFamiliyName = new Array<string>();
+    public readonly WebFontCSSURL = new Array<string>();
+    public readonly TexturePath = new Array<string>();
 }
 
 class MeterSelectDialogOption {
