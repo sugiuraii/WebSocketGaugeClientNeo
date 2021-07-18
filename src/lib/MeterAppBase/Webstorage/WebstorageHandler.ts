@@ -74,14 +74,5 @@ export class WebstorageHandler {
             window.alert("Page setting (webstorage) is cleared. Please reload the page");
         }
     }
-
-    public ResetAll(): void
-    {
-        if(window.confirm("Reset page setting of all pages? (webstorage)?"))
-        {
-            localStorage.clear();
-            window.alert("Page setting (webstorage) is cleared for all pages.");
-        }
-    }
 }
 
