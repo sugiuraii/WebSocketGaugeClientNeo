@@ -57,8 +57,8 @@ class ChangeableAnalogTripleMeterApp {
         appOption.MeteSelectDialogOption.ParameterCodeListToSelect = ["Engine_Speed", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Oil_Pressure"];
         appOption.MeteSelectDialogOption.InitialiMeterSelectDialogSetting = { ["Left"]: "Engine_Speed", ["Center"]: "Manifold_Absolute_Pressure", ["Right"]: "Coolant_Temperature" };
 
-        const webstoragehandler = new WebstorageHandler();
-        const meterSetting = (webstoragehandler.MeterSelectDialogSetting === undefined) ? appOption.MeteSelectDialogOption.InitialiMeterSelectDialogSetting : webstoragehandler.MeterSelectDialogSetting;
+        const webstoragehandler = new WebstorageHandler(appOption.MeteSelectDialogOption.InitialiMeterSelectDialogSetting);
+        const meterSetting = webstoragehandler.MeterSelectDialogSetting;
         const leftMeterCode = meterSetting["Left"];
         const centerMeterCode = meterSetting["Center"];
         const rightMeterCode = meterSetting["Right"];

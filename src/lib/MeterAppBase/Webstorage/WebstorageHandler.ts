@@ -25,51 +25,77 @@
 import { MeterSelectDialogCotents } from "../reactParts/dialog/MeterSelectDialog";
 
 export class WebstorageHandler {
-    private keyPrefix = location.pathname+":";
-    private keyList = ["WSInterval","ForceCanvas","MeterSelectDialogSetting"];
+    private keyPrefix = location.pathname + ":";
+    private keyList = ["WSInterval", "ForceCanvas", "MeterSelectDialogSetting"];
+    private readonly defaultWSInterval = 0;
+    private readonly defaultForceCanvas = false;
+    private readonly defaultMeterSelectDialogSetting: MeterSelectDialogCotents;
 
-    private getKey(keyname : string) : string
-    {
+    constructor(defaultMeterSelectDialogSetting?: MeterSelectDialogCotents) {
+        if (defaultMeterSelectDialogSetting === undefined)
+            this.defaultMeterSelectDialogSetting = {};
+        else
+            this.defaultMeterSelectDialogSetting = defaultMeterSelectDialogSetting;
+    }
+
+    private getKey(keyname: string): string {
         return this.keyPrefix + keyname;
     }
 
-    public get WSInterval() : number
-    {
+    public get WSInterval(): number {
         const wsInterval = localStorage.getItem(this.getKey("WSInterval"));
-        return (wsInterval === null || wsInterval === undefined) ? 0 : Number(wsInterval);
+        if (wsInterval === null || wsInterval === undefined) {
+            console.log("WSInterval in webstorage returns null or undefined. Default value is applied instead.");
+            return this.defaultWSInterval;
+        }
+        else
+            return Number(wsInterval);
     }
 
-    public set WSInterval(interval : number)
-    {
+    public set WSInterval(interval: number) {
         localStorage.setItem(this.getKey("WSInterval"), interval.toString());
     }
 
-    public get ForceCanvas() : boolean
-    {
+    public get ForceCanvas(): boolean {
         const forceCanvas = localStorage.getItem(this.getKey("ForceCanvas"));
-        return (forceCanvas === null || forceCanvas === undefined)? false : forceCanvas === "true";
+        if (forceCanvas === null || forceCanvas === undefined)
+        {
+            console.log("ForceCanvas in webstorage returns null or undefined. Default value is applied instead.");
+            return this.defaultForceCanvas;
+        }
+        else
+            return forceCanvas === "true";
     }
 
-    public set ForceCanvas(flag : boolean)
-    {
-        localStorage.setItem(this.getKey("ForceCanvas"), flag?"true":"false");
+    public set ForceCanvas(flag: boolean) {
+        localStorage.setItem(this.getKey("ForceCanvas"), flag ? "true" : "false");
     }
 
-    public get MeterSelectDialogSetting() : MeterSelectDialogCotents | undefined
-    {
+    public get MeterSelectDialogSetting(): MeterSelectDialogCotents {
         const item = localStorage.getItem(this.getKey("MeterSelectDialogSetting"));
-        return (item === null || item === undefined) ? undefined : JSON.parse(item);
+        if (item === null || item === undefined)
+        {
+            console.log("MeterSelectDialogSetting in webstorage returns null or undefined. Default value is applied instead.");
+            return this.defaultMeterSelectDialogSetting;
+        }
+        else {
+            const parsedItem = JSON.parse(item);
+            if (parsedItem === undefined)
+            {
+                console.log("MeterSelectDialogSetting in webstorage returns undefined on parsing. Default value is applied instead.");
+                return this.defaultMeterSelectDialogSetting;
+            }
+            else
+                return parsedItem as MeterSelectDialogCotents;
+        }
     }
 
-    public set MeterSelectDialogSetting (val :  MeterSelectDialogCotents | undefined)
-    {
+    public set MeterSelectDialogSetting(val: MeterSelectDialogCotents) {
         localStorage.setItem(this.getKey("MeterSelectDialogSetting"), JSON.stringify(val));
     }
 
-    public Reset():void
-    {
-        if(window.confirm("Reset page setting of this page? (webstorage)?"))
-        {
+    public Reset(): void {
+        if (window.confirm("Reset page setting of this page? (webstorage)?")) {
             this.keyList.forEach(k => localStorage.removeItem(this.getKey(k)));
             window.alert("Page setting (webstorage) is cleared. Please reload the page");
         }
