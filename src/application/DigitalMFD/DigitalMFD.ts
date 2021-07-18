@@ -150,16 +150,16 @@ class DigitalMFDApp {
                 voltagePanel.Value = batteryVolt;
                 throttlePanel.Value = throttle;
             });
+            
+            ws.WSMapper.registerParameterCode("Engine_Speed", "SLOWandFAST");
+            ws.WSMapper.registerParameterCode("Manifold_Absolute_Pressure", "SLOWandFAST");
+            ws.WSMapper.registerParameterCode("Vehicle_Speed", "SLOWandFAST");
+            ws.WSMapper.registerParameterCode("Coolant_Temperature", "SLOW");
+            ws.WSMapper.registerParameterCode("Battery_Voltage", "SLOW");
+            ws.WSMapper.registerParameterCode("Throttle_Opening_Angle", "SLOWandFAST");
+            ws.WSMapper.registerParameterCode("O2Sensor_1_Air_Fuel_Ratio", "SLOWandFAST");
         };
         const app = new MeterApplication(appOption);
-        app.WebSocketCollection.WSMapper.registerParameterCode("Engine_Speed", "SLOWandFAST");
-        app.WebSocketCollection.WSMapper.registerParameterCode("Manifold_Absolute_Pressure", "SLOWandFAST");
-        app.WebSocketCollection.WSMapper.registerParameterCode("Vehicle_Speed", "SLOWandFAST");
-        app.WebSocketCollection.WSMapper.registerParameterCode("Coolant_Temperature", "SLOW");
-        app.WebSocketCollection.WSMapper.registerParameterCode("Battery_Voltage", "SLOW");
-        app.WebSocketCollection.WSMapper.registerParameterCode("Throttle_Opening_Angle", "SLOWandFAST");
-        app.WebSocketCollection.WSMapper.registerParameterCode("O2Sensor_1_Air_Fuel_Ratio", "SLOWandFAST");
-
         app.Run();
     }
 }

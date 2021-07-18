@@ -107,15 +107,15 @@ class CompactMFDApp {
                 throttlePanel.Value = throttle;
                 boostPanel.Value = boost;
             });
+
+            ws.WSMapper.registerParameterCode("Engine_Speed", "SLOWandFAST");
+            ws.WSMapper.registerParameterCode("Vehicle_Speed", "SLOWandFAST");
+            ws.WSMapper.registerParameterCode("Throttle_Opening_Angle", "SLOWandFAST");
+            ws.WSMapper.registerParameterCode("Coolant_Temperature", "SLOW");
+            ws.WSMapper.registerParameterCode("Manifold_Absolute_Pressure", "SLOWandFAST");
         };
 
-        const app = new MeterApplication(appOption);
-        app.WebSocketCollection.WSMapper.registerParameterCode("Engine_Speed", "SLOWandFAST");
-        app.WebSocketCollection.WSMapper.registerParameterCode("Vehicle_Speed", "SLOWandFAST");
-        app.WebSocketCollection.WSMapper.registerParameterCode("Throttle_Opening_Angle", "SLOWandFAST");
-        app.WebSocketCollection.WSMapper.registerParameterCode("Coolant_Temperature", "SLOW");
-        app.WebSocketCollection.WSMapper.registerParameterCode("Manifold_Absolute_Pressure", "SLOWandFAST");
-         
+        const app = new MeterApplication(appOption);         
         app.Run();
     }
 }

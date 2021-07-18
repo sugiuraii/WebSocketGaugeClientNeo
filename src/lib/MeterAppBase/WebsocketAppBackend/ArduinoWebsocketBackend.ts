@@ -23,7 +23,6 @@
  */
 
 import { ArduinoCOMWebsocket, ArduinoParameterCode } from "../../WebSocket/WebSocketCommunication";
-import { WebstorageHandler } from "../Webstorage/WebstorageHandler";
 import { ILogger } from "../utils/ILogger";
 import { WebsocketState } from "./WebsocketState";
 import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";
@@ -43,6 +42,7 @@ export class ArduinoWebsocketBackend implements WebsocketAppBackend {
    private readonly parameterCodeList: ArduinoParameterCode[] = [];
    private readonly logger: ILogger;
    private readonly state: WebsocketState;
+   private readonly WSInterval : number;
 
    private readonly webSocketServerURL: string;
 
@@ -50,11 +50,13 @@ export class ArduinoWebsocketBackend implements WebsocketAppBackend {
 
    public get ParameterCodeList() : ArduinoParameterCode[] { return this.parameterCodeList }
 
-   constructor(serverurl: string, logger: ILogger) {
+   constructor(serverurl: string, logger: ILogger, wsInterval : number) {
       this.arduinoWS = new ArduinoCOMWebsocket(serverurl);
       this.logger = logger;
       this.state = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
       this.webSocketServerURL = this.arduinoWS.URL;
+      this.WSInterval = wsInterval;
+      
       this.arduinoWS.OnWebsocketError = (message: string) => this.logger.appendLog(this.logPrefix + " websocket error : " + message);
    }
 
@@ -96,7 +98,6 @@ export class ArduinoWebsocketBackend implements WebsocketAppBackend {
       const Logger = this.logger;
       const webSocketObj = this.arduinoWS;
       const logPrefix = this.logPrefix;
-      const webStorage = new WebstorageHandler();
 
       webSocketObj.OnWebsocketOpen = () => {
          Logger.appendLog(logPrefix + " is connected. SendWSSend/Interval after " + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
@@ -105,7 +106,7 @@ export class ArduinoWebsocketBackend implements WebsocketAppBackend {
             this.parameterCodeList.forEach(item => webSocketObj.SendWSSend(item, true));
 
             //SendWSInterval from spinner
-            webSocketObj.SendWSInterval(webStorage.WSInterval);
+            webSocketObj.SendWSInterval(this.WSInterval);
 
          }, this.WAITTIME_BEFORE_SENDWSSEND);
       }

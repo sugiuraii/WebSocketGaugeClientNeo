@@ -22,19 +22,14 @@
  * THE SOFTWARE.
  */
 
-import { OptionDialog, OptionDialogFormContents } from '../dialog/OptionDialog'
-import React, { FunctionComponent, useState, Fragment } from 'react';
+import React, { FunctionComponent, Fragment } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 
 type IndexNavbarProps =
-    {
-        defaultOptionDialogContent: OptionDialogFormContents,
-        onOptionDialogSet: (content: OptionDialogFormContents) => void
-    };
+{
+};
 
-export const IndexNavbar: FunctionComponent<IndexNavbarProps> = (p) => {
-    const [showDialog, SetShowDialog] = useState(false);
-
+export const IndexNavbar: FunctionComponent<IndexNavbarProps> = () => {
     return (
         <Fragment>
             <Navbar bg="dark" variant="dark" expand="lg">
@@ -43,20 +38,11 @@ export const IndexNavbar: FunctionComponent<IndexNavbarProps> = (p) => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Item>
-                            <Nav.Link onClick={() => SetShowDialog(true)}>Option</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
                             <Nav.Link href="./AllResetWebstorage.html" >Reset webstorage (for all pages)</Nav.Link>
                         </Nav.Item>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
-            <OptionDialog onCancel={() => SetShowDialog(false)}
-                onSet={(d) => {
-                    SetShowDialog(false);
-                    p.onOptionDialogSet(d);
-                }}
-                show={showDialog} defaultFormContent={p.defaultOptionDialogContent} />
         </Fragment>
     );
 };

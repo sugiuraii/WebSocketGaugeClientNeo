@@ -45,7 +45,7 @@ window.onload = function () {
 
 class AnalogMeterCluster_AssettoCorsaSHM {
     public Start() {
-        const pixiAppOption : PIXI.IApplicationOptions = {width : 1100, height : 600};
+        const pixiAppOption: PIXI.IApplicationOptions = { width: 1100, height: 600 };
         const appOption = new MeterApplicationOption(pixiAppOption);
         appOption.PreloadResource.WebFontFamiliyName.addall(AnalogMeterCluster.RequestedFontFamily);
         appOption.PreloadResource.WebFontCSSURL.addall(AnalogMeterCluster.RequestedFontCSSURL);
@@ -86,13 +86,14 @@ class AnalogMeterCluster_AssettoCorsaSHM {
                 meterCluster.Fuel = fuel;
                 meterCluster.GasMilage = gasMilage;
             });
-        }
-        const app = new MeterApplication(appOption);
-        app.WebSocketCollection.AssettoCorsaWS.PhysicsParameterCodeList.push(AssettoCorsaSHMPhysicsParameterCode.Rpms);
-        app.WebSocketCollection.AssettoCorsaWS.PhysicsParameterCodeList.push(AssettoCorsaSHMPhysicsParameterCode.SpeedKmh);
-        app.WebSocketCollection.AssettoCorsaWS.PhysicsParameterCodeList.push(AssettoCorsaSHMPhysicsParameterCode.ManifoldPressure);
-        app.WebSocketCollection.AssettoCorsaWS.PhysicsParameterCodeList.push(AssettoCorsaSHMPhysicsParameterCode.Gear);
 
+            ws.AssettoCorsaWS.PhysicsParameterCodeList.push(AssettoCorsaSHMPhysicsParameterCode.Rpms);
+            ws.AssettoCorsaWS.PhysicsParameterCodeList.push(AssettoCorsaSHMPhysicsParameterCode.SpeedKmh);
+            ws.AssettoCorsaWS.PhysicsParameterCodeList.push(AssettoCorsaSHMPhysicsParameterCode.ManifoldPressure);
+            ws.AssettoCorsaWS.PhysicsParameterCodeList.push(AssettoCorsaSHMPhysicsParameterCode.Gear);
+        };
+
+        const app = new MeterApplication(appOption);
         app.Run();
     }
 }

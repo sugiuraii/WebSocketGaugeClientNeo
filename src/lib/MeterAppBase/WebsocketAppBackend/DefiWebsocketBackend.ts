@@ -23,7 +23,6 @@
  */
 
 import { DefiCOMWebsocket, DefiParameterCode } from "../../WebSocket/WebSocketCommunication";
-import { WebstorageHandler } from "../Webstorage/WebstorageHandler";
 import { ILogger } from "../utils/ILogger";
 import { WebsocketState } from "./WebsocketState";
 import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";
@@ -43,6 +42,7 @@ export class DefiWebsocketBackend implements WebsocketAppBackend {
    private readonly parameterCodeList: DefiParameterCode[] = [];
    private readonly logger: ILogger;
    private readonly state: WebsocketState;
+   private readonly WSInterval : number;
 
    private readonly webSocketServerURL: string;
 
@@ -50,11 +50,12 @@ export class DefiWebsocketBackend implements WebsocketAppBackend {
 
    public get ParameterCodeList() : DefiParameterCode[] { return this.parameterCodeList }
 
-   constructor(serverurl: string, logger: ILogger) {
+   constructor(serverurl: string, logger: ILogger, wsInterval : number) {
       this.defiWS = new DefiCOMWebsocket(serverurl);
       this.logger = logger;
       this.state = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
       this.webSocketServerURL = this.defiWS.URL;
+      this.WSInterval = wsInterval;
 
       this.defiWS.OnWebsocketError = (message: string) => this.logger.appendLog(this.logPrefix + " websocket error : " + message);
    }
@@ -97,7 +98,6 @@ export class DefiWebsocketBackend implements WebsocketAppBackend {
       const logger = this.logger;
       const webSocketObj = this.defiWS;
       const logPrefix = this.logPrefix;
-      const webStorage = new WebstorageHandler();
 
       webSocketObj.OnWebsocketOpen = () => {
          logger.appendLog(logPrefix + " is connected. SendWSSend/Interval after " + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
@@ -106,7 +106,7 @@ export class DefiWebsocketBackend implements WebsocketAppBackend {
             this.parameterCodeList.forEach(item => webSocketObj.SendWSSend(item, true));
 
             //SendWSInterval from spinner
-            webSocketObj.SendWSInterval(webStorage.WSInterval);
+            webSocketObj.SendWSInterval(this.WSInterval);
 
          }, this.WAITTIME_BEFORE_SENDWSSEND);
       }
