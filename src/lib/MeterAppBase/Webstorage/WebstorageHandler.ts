@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { WebsocketParameterCode } from "../WebsocketObjCollection/WebsocketParameterCode";
+import { MeterSelectDialogCotents } from "../reactParts/dialog/MeterSelectDialog";
 
 export class WebstorageHandler {
     private keyPrefix = location.pathname+":";
@@ -55,13 +55,13 @@ export class WebstorageHandler {
         localStorage.setItem(this.getKey("ForceCanvas"), flag?"true":"false");
     }
 
-    public get MeterSelectDialogSetting() : {[meterID : string] : WebsocketParameterCode} | undefined
+    public get MeterSelectDialogSetting() : MeterSelectDialogCotents | undefined
     {
         const item = localStorage.getItem(this.getKey("MeterSelectDialogSetting"));
         return (item === null || item === undefined) ? undefined : JSON.parse(item);
     }
 
-    public set MeterSelectDialogSetting (val : {[meterID : string] : WebsocketParameterCode}| undefined)
+    public set MeterSelectDialogSetting (val :  MeterSelectDialogCotents | undefined)
     {
         localStorage.setItem(this.getKey("MeterSelectDialogSetting"), JSON.stringify(val));
     }
