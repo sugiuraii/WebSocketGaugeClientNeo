@@ -35,11 +35,11 @@ class PreloadResourceCollection {
 }
 
 class MeterSelectDialogOption {
-    public InitialiMeterSelectDialogSetting : MeterSelectDialogCotents;
+    public DefaultMeterSelectDialogSetting : MeterSelectDialogCotents;
     public ParameterCodeListToSelect : WebsocketParameterCode[];
     constructor()
     {
-        this.InitialiMeterSelectDialogSetting = {};
+        this.DefaultMeterSelectDialogSetting = {};
         this.ParameterCodeListToSelect = [];
     }
 }
