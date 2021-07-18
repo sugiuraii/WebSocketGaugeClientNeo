@@ -55,13 +55,13 @@ export class WebstorageHandler {
         localStorage.setItem(this.getKey("ForceCanvas"), flag?"true":"false");
     }
 
-    public get MeterSelectDialogSetting() : {meterID : string, code : WebsocketParameterCode}[] | undefined
+    public get MeterSelectDialogSetting() : {[meterID : string] : WebsocketParameterCode} | undefined
     {
         const item = localStorage.getItem(this.getKey("MeterSelectDialogSetting"));
         return (item === null || item === undefined) ? undefined : JSON.parse(item);
     }
 
-    public set MeterSelectDialogSetting (val : {meterID : string, code : WebsocketParameterCode}[] | undefined)
+    public set MeterSelectDialogSetting (val : {[meterID : string] : WebsocketParameterCode}| undefined)
     {
         localStorage.setItem(this.getKey("MeterSelectDialogSetting"), JSON.stringify(val));
     }
