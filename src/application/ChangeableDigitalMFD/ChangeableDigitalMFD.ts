@@ -145,12 +145,6 @@ class ChangeableDigitalMFDApp {
                     const totalFuel = ws.FUELTRIPWS.getTotalGas();
                     const totalTrip = ws.FUELTRIPWS.getTotalTrip();
 
-                    const boost = ws.WSMapper.getValue("Manifold_Absolute_Pressure", timestamp) * 0.0101972 - 1 //convert kPa to kgf/cm2 and relative pressure;
-                    const airFuelRatio = ws.WSMapper.getValue("O2Sensor_1_Air_Fuel_Ratio", timestamp) * 14;
-                    const waterTemp = ws.WSMapper.getValue("Coolant_Temperature");
-                    const batteryVolt = ws.WSMapper.getValue("Battery_Voltage");
-                    const throttle = ws.WSMapper.getValue("Throttle_Opening_Angle", timestamp);
-
                     digiTachoPanel.Speed = speed;
                     digiTachoPanel.Tacho = tacho;
                     digiTachoPanel.GearPos = (gearPos === undefined)?"-":gearPos.toString();
@@ -166,11 +160,11 @@ class ChangeableDigitalMFDApp {
                     milagePanel.setSectGasMllage("25min", gasMilage25min);
                     milagePanel.setSectGasMllage("30min", gasMilage30min);
 
-                    largeTopPanelParts.Value = boost;
-                    largeBottomPanelParts.Value = airFuelRatio;
-                    smallTopPanelParts.Value = waterTemp;
-                    smallMidPanelParts.Value = batteryVolt;
-                    smallBottomPanelParts.Value = throttle;
+                    largeTopPanelParts.Value = largeTopPanel.getValFunc(timestamp, ws);
+                    largeBottomPanelParts.Value = largeBottomPanel.getValFunc(timestamp, ws);
+                    smallTopPanelParts.Value = smallTopPanel.getValFunc(timestamp, ws);
+                    smallMidPanelParts.Value = smallMidPanel.getValFunc(timestamp, ws);
+                    smallBottomPanelParts.Value = smallBottomPanel.getValFunc(timestamp, ws);
                 });
                 
                 ws.WSMapper.registerParameterCode("Engine_Speed", "SLOWandFAST");
