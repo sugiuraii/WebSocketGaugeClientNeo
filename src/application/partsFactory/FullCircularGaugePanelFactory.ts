@@ -27,6 +27,7 @@ import { WebsocketParameterCode } from "../../lib/MeterAppBase/WebsocketObjColle
 import { ReadModeCode } from "../../lib/WebSocket/WebSocketCommunication";
 import { FullCircularGaugePanelBase } from "../../parts/CircularGauges/private/FullCircularGaugePanelBase";
 import { VacuumGaugePanel, BoostGaugePanel, WaterTempGaugePanel, EngineOilTempGaugePanel, BatteryVoltageGaugePanel, MassAirFlowGaugePanel, AirFuelGaugePanel } from "../../parts/CircularGauges/FullCircularGaugePanel";
+import { MeterNotAvailableError } from "./MeterNotAvailableError";
 
 export class FullCircularGaugePanelFactory {
     private readonly UseVacuumMeterInsteadOfBoost;
@@ -54,7 +55,7 @@ export class FullCircularGaugePanelFactory {
             case undefined:
                 throw new Error("getMeter() is failed by undefined code.");
             default:
-                throw new Error("Analog single meter is not defined on selected code.");
+                throw new MeterNotAvailableError("FullCircular gauge is not defined on the parameter code of " + code);
         }
     }
 }
