@@ -33,6 +33,7 @@ module.exports = {
         // Register meter application and set entry point typescript file.
         "AnalogMeterCluster": './AnalogMeterCluster/AnalogMeterCluster.ts',
         "DigitalMFD": './DigitalMFD/DigitalMFD.ts',
+        "ChangeableDigitalMFD": './ChangeableDigitalMFD/ChangeableDigitalMFD.ts',
         "CompactMFD": './CompactMFD/CompactMFD.ts',
         "AnalogTripleMeter": './AnalogTripleMeter/AnalogTripleMeter.ts',
         "ChangeableAnalogTripleMeter": './ChangeableAnalogTripleMeter/ChangeableAnalogTripleMeter.tsx',
