@@ -25,6 +25,8 @@
 import { FullCircularGaugePanelBase } from "./private/FullCircularGaugePanelBase"
 import { FullCircularGaugePanelOptionsBase } from "./private/FullCircularGaugePanelBase"
 
+export { FullCircularGaugePanelBase } from "./private/FullCircularGaugePanelBase"
+
 export class BoostGaugePanel extends FullCircularGaugePanelBase {
     constructor() {
         const options = new FullCircularGaugePanelOptionsBase();
