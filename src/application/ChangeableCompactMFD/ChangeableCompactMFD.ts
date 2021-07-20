@@ -31,8 +31,8 @@ import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
 import { MeterApplicationOption } from "../../lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
-import { FullCircularGaugePanelBase } from "../../parts/CircularGauges/FullCircularGaugePanel";
-import { SemiCircularGaugePanelBase } from "../../parts/CircularGauges/SemiCircularGaugePanel";
+import { FullCircularGaugePanel } from "../../parts/CircularGauges/FullCircularGaugePanel";
+import { SemiCircularGaugePanel } from "../../parts/CircularGauges/SemiCircularGaugePanel";
 import { DigiTachoPanel } from "../../parts/DigiTachoPanel/DigiTachoPanel";
 
 // Import AppSettings.
@@ -53,14 +53,14 @@ class ChangeableCompactMFDApp {
     public async Start() {
         const pixiAppOption : PIXI.IApplicationOptions = {width : 720, height : 1280};
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
-        appOption.PreloadResource.WebFontFamiliyName.push(...FullCircularGaugePanelBase.RequestedFontFamily);
-        appOption.PreloadResource.WebFontFamiliyName.push(...SemiCircularGaugePanelBase.RequestedFontFamily);
+        appOption.PreloadResource.WebFontFamiliyName.push(...FullCircularGaugePanel.RequestedFontFamily);
+        appOption.PreloadResource.WebFontFamiliyName.push(...SemiCircularGaugePanel.RequestedFontFamily);
         appOption.PreloadResource.WebFontFamiliyName.push(...DigiTachoPanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontCSSURL.push(...FullCircularGaugePanelBase.RequestedFontCSSURL);
-        appOption.PreloadResource.WebFontCSSURL.push(...SemiCircularGaugePanelBase.RequestedFontCSSURL);
+        appOption.PreloadResource.WebFontCSSURL.push(...FullCircularGaugePanel.RequestedFontCSSURL);
+        appOption.PreloadResource.WebFontCSSURL.push(...SemiCircularGaugePanel.RequestedFontCSSURL);
         appOption.PreloadResource.WebFontCSSURL.push(...DigiTachoPanel.RequestedFontCSSURL);
-        appOption.PreloadResource.TexturePath.push(...FullCircularGaugePanelBase.RequestedTexturePath);
-        appOption.PreloadResource.TexturePath.push(...SemiCircularGaugePanelBase.RequestedTexturePath);
+        appOption.PreloadResource.TexturePath.push(...FullCircularGaugePanel.RequestedTexturePath);
+        appOption.PreloadResource.TexturePath.push(...SemiCircularGaugePanel.RequestedTexturePath);
         appOption.PreloadResource.TexturePath.push(...DigiTachoPanel.RequestedTexturePath);
 
         appOption.MeteSelectDialogOption.ParameterCodeListToSelect = ["Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Mass_Air_Flow", "Throttle_Opening_Angle", "O2Sensor_1_Air_Fuel_Ratio"];

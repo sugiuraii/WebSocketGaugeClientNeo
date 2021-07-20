@@ -25,7 +25,7 @@
 import { WebsocketObjectCollection } from "../../lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
 import { WebsocketParameterCode } from "../../lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode";
 import { ReadModeCode } from "../../lib/WebSocket/WebSocketCommunication";
-import { FullCircularGaugePanelBase } from "../../parts/CircularGauges/private/FullCircularGaugePanelBase";
+import { FullCircularGaugePanel } from "../../parts/CircularGauges/private/FullCircularGaugePanelBase";
 import { VacuumGaugePanel, BoostGaugePanel, WaterTempGaugePanel, EngineOilTempGaugePanel, BatteryVoltageGaugePanel, MassAirFlowGaugePanel, AirFuelGaugePanel } from "../../parts/CircularGauges/FullCircularGaugePanel";
 import { MeterNotAvailableError } from "./MeterNotAvailableError";
 
@@ -38,7 +38,7 @@ export class FullCircularGaugePanelFactory {
             this.UseVacuumMeterInsteadOfBoost = false;
     }
 
-    public getMeter(code: WebsocketParameterCode | undefined): { code: WebsocketParameterCode, createDisplayObject: () => FullCircularGaugePanelBase, readmode: ReadModeCode, getValue: (timestamp: number, ws: WebsocketObjectCollection) => number } {
+    public getMeter(code: WebsocketParameterCode | undefined): { code: WebsocketParameterCode, createDisplayObject: () => FullCircularGaugePanel, readmode: ReadModeCode, getValue: (timestamp: number, ws: WebsocketObjectCollection) => number } {
         switch (code) {
             case "Manifold_Absolute_Pressure":
                 return { code: code, createDisplayObject: () => this.UseVacuumMeterInsteadOfBoost ? new VacuumGaugePanel() : new BoostGaugePanel(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) * 0.0101972 - 1 /* convert kPa to kgf/cm2 and relative pressure */ };

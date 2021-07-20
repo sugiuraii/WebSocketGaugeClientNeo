@@ -22,12 +22,12 @@
  * THE SOFTWARE.
  */
 
-import { FullCircularGaugePanelBase } from "./private/FullCircularGaugePanelBase"
+import { FullCircularGaugePanel } from "./private/FullCircularGaugePanelBase"
 import { FullCircularGaugePanelOptionsBase } from "./private/FullCircularGaugePanelBase"
 
-export { FullCircularGaugePanelBase } from "./private/FullCircularGaugePanelBase"
+export { FullCircularGaugePanel } from "./private/FullCircularGaugePanelBase"
 
-export class BoostGaugePanel extends FullCircularGaugePanelBase {
+export class BoostGaugePanel extends FullCircularGaugePanel {
     constructor() {
         const options = new FullCircularGaugePanelOptionsBase();
 
@@ -60,7 +60,7 @@ export class BoostGaugePanel extends FullCircularGaugePanelBase {
     }
 }
 
-export class VacuumGaugePanel extends FullCircularGaugePanelBase {
+export class VacuumGaugePanel extends FullCircularGaugePanel {
     constructor() {
         const options = new FullCircularGaugePanelOptionsBase();
 
@@ -93,7 +93,7 @@ export class VacuumGaugePanel extends FullCircularGaugePanelBase {
     }
 }
 
-export class AirFuelGaugePanel extends FullCircularGaugePanelBase {
+export class AirFuelGaugePanel extends FullCircularGaugePanel {
     constructor() {
         const options = new FullCircularGaugePanelOptionsBase();
 
@@ -123,7 +123,7 @@ export class AirFuelGaugePanel extends FullCircularGaugePanelBase {
     }
 }
 
-export class WaterTempGaugePanel extends FullCircularGaugePanelBase {
+export class WaterTempGaugePanel extends FullCircularGaugePanel {
     constructor() {
         const options = new FullCircularGaugePanelOptionsBase();
 
@@ -154,7 +154,7 @@ export class WaterTempGaugePanel extends FullCircularGaugePanelBase {
     }
 }
 
-export class EngineOilTempGaugePanel extends FullCircularGaugePanelBase {
+export class EngineOilTempGaugePanel extends FullCircularGaugePanel {
     constructor() {
         const options = new FullCircularGaugePanelOptionsBase();
 
@@ -185,7 +185,7 @@ export class EngineOilTempGaugePanel extends FullCircularGaugePanelBase {
     }
 }
 
-export class BatteryVoltageGaugePanel extends FullCircularGaugePanelBase {
+export class BatteryVoltageGaugePanel extends FullCircularGaugePanel {
     constructor() {
         const options = new FullCircularGaugePanelOptionsBase();
 
@@ -212,7 +212,7 @@ export class BatteryVoltageGaugePanel extends FullCircularGaugePanelBase {
     }
 }
 
-export class MassAirFlowGaugePanel extends FullCircularGaugePanelBase {
+export class MassAirFlowGaugePanel extends FullCircularGaugePanel {
     constructor() {
         const options = new FullCircularGaugePanelOptionsBase();
 

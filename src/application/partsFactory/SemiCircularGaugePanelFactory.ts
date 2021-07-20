@@ -25,7 +25,7 @@
 import { WebsocketObjectCollection } from "../../lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
 import { WebsocketParameterCode } from "../../lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode";
 import { ReadModeCode } from "../../lib/WebSocket/WebSocketCommunication";
-import { SemiCircularGaugePanelBase } from "../../parts/CircularGauges/private/SemiCircularGaugePanelBase";
+import { SemiCircularGaugePanel } from "../../parts/CircularGauges/private/SemiCircularGaugePanelBase";
 import { VacuumGaugePanel, BoostGaugePanel, WaterTempGaugePanel, EngineOilTempGaugePanel, BatteryVoltageGaugePanel, MassAirFlowGaugePanel, ThrottleGaugePanel, AirFuelGaugePanel } from "../../parts/CircularGauges/SemiCircularGaugePanel";
 import { MeterNotAvailableError } from "./MeterNotAvailableError";
 
@@ -38,7 +38,7 @@ export class SemiCircularGaugePanelFactory {
             this.UseVacuumMeterInsteadOfBoost = false;
     }
 
-    public getMeter(code: WebsocketParameterCode | undefined): { code: WebsocketParameterCode, createDisplayObject: () => SemiCircularGaugePanelBase, readmode: ReadModeCode, getValue: (timestamp: number, ws: WebsocketObjectCollection) => number } {
+    public getMeter(code: WebsocketParameterCode | undefined): { code: WebsocketParameterCode, createDisplayObject: () => SemiCircularGaugePanel, readmode: ReadModeCode, getValue: (timestamp: number, ws: WebsocketObjectCollection) => number } {
         switch (code) {
             case "Manifold_Absolute_Pressure":
                 return { code: code, createDisplayObject: () => this.UseVacuumMeterInsteadOfBoost ? new VacuumGaugePanel() : new BoostGaugePanel(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) * 0.0101972 - 1 /* convert kPa to kgf/cm2 and relative pressure */ };
