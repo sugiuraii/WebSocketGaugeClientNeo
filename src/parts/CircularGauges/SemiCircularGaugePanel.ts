@@ -25,6 +25,8 @@
 import { SemiCircularGaugePanelBase } from "./private/SemiCircularGaugePanelBase"
 import { SemiCircularGaugePanelOptionBase } from "./private/SemiCircularGaugePanelBase"
 
+export { SemiCircularGaugePanelBase } from "./private/SemiCircularGaugePanelBase"
+
 export class ThrottleGaugePanel extends SemiCircularGaugePanelBase {
     constructor() {
         const options = new SemiCircularGaugePanelOptionBase();
@@ -179,7 +181,7 @@ export class BoostGaugePanel extends SemiCircularGaugePanelBase {
         options.GreenZoneBarOffsetAngle = 180;
         options.GreenZoneBarFullAngle = 90;
         options.ValueNumberRoundDigit = 1;
-        options.GaugeDrawValConversionFunc = (v) => (v < 0)?(1.5* v + 0.5):(0.75 * v + 0.5);
+        options.GaugeDrawValConversionFunc = (v) => (v < 0) ? (1.5 * v + 0.5) : (0.75 * v + 0.5);
         options.AxisLabel =
             [
                 "-1.0",

@@ -27,6 +27,7 @@ import { WebsocketParameterCode } from "../../lib/MeterAppBase/WebsocketObjColle
 import { ReadModeCode } from "../../lib/WebSocket/WebSocketCommunication";
 import { SemiCircularGaugePanelBase } from "../../parts/CircularGauges/private/SemiCircularGaugePanelBase";
 import { VacuumGaugePanel, BoostGaugePanel, WaterTempGaugePanel, EngineOilTempGaugePanel, BatteryVoltageGaugePanel, MassAirFlowGaugePanel, ThrottleGaugePanel, AirFuelGaugePanel } from "../../parts/CircularGauges/SemiCircularGaugePanel";
+import { MeterNotAvailableError } from "./MeterNotAvailableError";
 
 export class SemiCircularGaugePanelFactory {
     private readonly UseVacuumMeterInsteadOfBoost;
@@ -56,7 +57,8 @@ export class SemiCircularGaugePanelFactory {
             case undefined:
                 throw new Error("getMeter() is failed by undefined code.");
             default:
-                throw new Error("Analog single meter is not defined on selected code.");
+                throw new MeterNotAvailableError("SemiCircular gauge is not defined on the parameter code of " + code);
+    
         }
     }
 }
