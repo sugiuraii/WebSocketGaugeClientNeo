@@ -114,7 +114,7 @@ export class FullCircularGaugePanelOptionsBase extends CircularGaugePanelOptionB
     }
 }
 
-export class FullCircularGaugePanelBase extends CircularGaugePanelBase {
+export class FullCircularGaugePanel extends CircularGaugePanelBase {
     constructor(options: FullCircularGaugePanelOptionsBase) {
         super(options);
     }

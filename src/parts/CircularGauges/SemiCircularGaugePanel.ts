@@ -22,12 +22,12 @@
  * THE SOFTWARE.
  */
 
-import { SemiCircularGaugePanelBase } from "./private/SemiCircularGaugePanelBase"
+import { SemiCircularGaugePanel } from "./private/SemiCircularGaugePanelBase"
 import { SemiCircularGaugePanelOptionBase } from "./private/SemiCircularGaugePanelBase"
 
-export { SemiCircularGaugePanelBase } from "./private/SemiCircularGaugePanelBase"
+export { SemiCircularGaugePanel } from "./private/SemiCircularGaugePanelBase"
 
-export class ThrottleGaugePanel extends SemiCircularGaugePanelBase {
+export class ThrottleGaugePanel extends SemiCircularGaugePanel {
     constructor() {
         const options = new SemiCircularGaugePanelOptionBase();
 
@@ -44,7 +44,7 @@ export class ThrottleGaugePanel extends SemiCircularGaugePanelBase {
     }
 }
 
-export class WaterTempGaugePanel extends SemiCircularGaugePanelBase {
+export class WaterTempGaugePanel extends SemiCircularGaugePanel {
     constructor() {
         const options = new SemiCircularGaugePanelOptionBase();
 
@@ -65,7 +65,7 @@ export class WaterTempGaugePanel extends SemiCircularGaugePanelBase {
     }
 }
 
-export class EngineOilTempGaugePanel extends SemiCircularGaugePanelBase {
+export class EngineOilTempGaugePanel extends SemiCircularGaugePanel {
     constructor() {
         const options = new SemiCircularGaugePanelOptionBase();
 
@@ -86,7 +86,7 @@ export class EngineOilTempGaugePanel extends SemiCircularGaugePanelBase {
     }
 }
 
-export class BatteryVoltageGaugePanel extends SemiCircularGaugePanelBase {
+export class BatteryVoltageGaugePanel extends SemiCircularGaugePanel {
     constructor() {
         const options = new SemiCircularGaugePanelOptionBase();
 
@@ -104,7 +104,7 @@ export class BatteryVoltageGaugePanel extends SemiCircularGaugePanelBase {
     }
 }
 
-export class AirFuelGaugePanel extends SemiCircularGaugePanelBase {
+export class AirFuelGaugePanel extends SemiCircularGaugePanel {
     constructor() {
         const options = new SemiCircularGaugePanelOptionBase();
 
@@ -133,7 +133,7 @@ export class AirFuelGaugePanel extends SemiCircularGaugePanelBase {
     }
 }
 
-export class VacuumGaugePanel extends SemiCircularGaugePanelBase {
+export class VacuumGaugePanel extends SemiCircularGaugePanel {
     constructor() {
         const options = new SemiCircularGaugePanelOptionBase();
 
@@ -163,7 +163,7 @@ export class VacuumGaugePanel extends SemiCircularGaugePanelBase {
     }
 }
 
-export class BoostGaugePanel extends SemiCircularGaugePanelBase {
+export class BoostGaugePanel extends SemiCircularGaugePanel {
     constructor() {
         const options = new SemiCircularGaugePanelOptionBase();
 
@@ -195,7 +195,7 @@ export class BoostGaugePanel extends SemiCircularGaugePanelBase {
     }
 }
 
-export class MassAirFlowGaugePanel extends SemiCircularGaugePanelBase {
+export class MassAirFlowGaugePanel extends SemiCircularGaugePanel {
     constructor() {
         const options = new SemiCircularGaugePanelOptionBase();
 

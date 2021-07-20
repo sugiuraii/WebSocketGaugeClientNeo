@@ -29,8 +29,8 @@ import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
 import { MeterApplicationOption } from "../../lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
-import { FullCircularGaugePanelBase } from "../../parts/CircularGauges/FullCircularGaugePanel";
-import { SemiCircularGaugePanelBase } from "../../parts/CircularGauges/SemiCircularGaugePanel";
+import { FullCircularGaugePanel } from "../../parts/CircularGauges/FullCircularGaugePanel";
+import { SemiCircularGaugePanel } from "../../parts/CircularGauges/SemiCircularGaugePanel";
 import { DigiTachoPanel } from "../../parts/DigiTachoPanel/DigiTachoPanel";
 import { MilageGraphPanel } from "../../parts/GasMilageGraph/MilageGraph";
 
@@ -54,16 +54,16 @@ class ChangeableDigitalMFDApp {
     public async  Start() {
         const pixiAppOption : PIXI.IApplicationOptions = {width : 1200, height : 600};
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
-        appOption.PreloadResource.WebFontFamiliyName.push(...FullCircularGaugePanelBase.RequestedFontFamily);
-        appOption.PreloadResource.WebFontFamiliyName.push(...SemiCircularGaugePanelBase.RequestedFontFamily);
+        appOption.PreloadResource.WebFontFamiliyName.push(...FullCircularGaugePanel.RequestedFontFamily);
+        appOption.PreloadResource.WebFontFamiliyName.push(...SemiCircularGaugePanel.RequestedFontFamily);
         appOption.PreloadResource.WebFontFamiliyName.push(...DigiTachoPanel.RequestedFontFamily);
         appOption.PreloadResource.WebFontFamiliyName.push(...MilageGraphPanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontCSSURL.push(...FullCircularGaugePanelBase.RequestedFontCSSURL);
-        appOption.PreloadResource.WebFontCSSURL.push(...SemiCircularGaugePanelBase.RequestedFontCSSURL);
+        appOption.PreloadResource.WebFontCSSURL.push(...FullCircularGaugePanel.RequestedFontCSSURL);
+        appOption.PreloadResource.WebFontCSSURL.push(...SemiCircularGaugePanel.RequestedFontCSSURL);
         appOption.PreloadResource.WebFontCSSURL.push(...DigiTachoPanel.RequestedFontCSSURL);
         appOption.PreloadResource.WebFontCSSURL.push(...MilageGraphPanel.RequestedFontCSSURL);
-        appOption.PreloadResource.TexturePath.push(...FullCircularGaugePanelBase.RequestedTexturePath);
-        appOption.PreloadResource.TexturePath.push(...SemiCircularGaugePanelBase.RequestedTexturePath);
+        appOption.PreloadResource.TexturePath.push(...FullCircularGaugePanel.RequestedTexturePath);
+        appOption.PreloadResource.TexturePath.push(...SemiCircularGaugePanel.RequestedTexturePath);
         appOption.PreloadResource.TexturePath.push(...DigiTachoPanel.RequestedTexturePath);
         appOption.PreloadResource.TexturePath.push(...MilageGraphPanel.RequestedTexturePath);
 
@@ -99,34 +99,34 @@ class ChangeableDigitalMFDApp {
                 const smallMidPanel = smallMeterPanelFactory.getMeter(smallMidMeterCode);
                 const smallBottomPanel = smallMeterPanelFactory.getMeter(smallBottomMeterCode);
 
-                const largeTopPanelParts = largeTopPanel.partsConstructor();
-                const largeBottomPanelParts = largeBottomPanel.partsConstructor();
-                const smallTopPanelParts = smallTopPanel.partsConstructor();
-                const smallMidPanelParts = smallMidPanel.partsConstructor();
-                const smallBottomPanelParts = smallBottomPanel.partsConstructor();
+                const largeTopPanelDisplayObj = largeTopPanel.createDisplayObject();
+                const largeBottomPanelDisplayObj = largeBottomPanel.createDisplayObject();
+                const smallTopPanelDisplayObj = smallTopPanel.createDisplayObject();
+                const smallMidPanelDisplayObj = smallMidPanel.createDisplayObject();
+                const smallBottomPanelDisplayObj = smallBottomPanel.createDisplayObject();
 
-                largeTopPanelParts.position.set(600, 0);
-                largeTopPanelParts.scale.set(0.751, 0.751);
+                largeTopPanelDisplayObj.position.set(600, 0);
+                largeTopPanelDisplayObj.scale.set(0.751, 0.751);
 
-                largeBottomPanelParts.position.set(600, 310);
-                largeBottomPanelParts.scale.set(0.751, 0.751);
+                largeBottomPanelDisplayObj.position.set(600, 310);
+                largeBottomPanelDisplayObj.scale.set(0.751, 0.751);
 
-                smallTopPanelParts.position.set(900, 0);
-                smallTopPanelParts.scale.set(0.68);
+                smallTopPanelDisplayObj.position.set(900, 0);
+                smallTopPanelDisplayObj.scale.set(0.68);
 
-                smallMidPanelParts.position.set(900, 200);
-                smallMidPanelParts.scale.set(0.68);
+                smallMidPanelDisplayObj.position.set(900, 200);
+                smallMidPanelDisplayObj.scale.set(0.68);
 
-                smallBottomPanelParts.position.set(900, 400);
-                smallBottomPanelParts.scale.set(0.68);
+                smallBottomPanelDisplayObj.position.set(900, 400);
+                smallBottomPanelDisplayObj.scale.set(0.68);
 
                 stage.addChild(digiTachoPanel);
                 stage.addChild(milagePanel);
-                stage.addChild(largeTopPanelParts);
-                stage.addChild(largeBottomPanelParts);
-                stage.addChild(smallTopPanelParts);
-                stage.addChild(smallMidPanelParts);
-                stage.addChild(smallBottomPanelParts);
+                stage.addChild(largeTopPanelDisplayObj);
+                stage.addChild(largeBottomPanelDisplayObj);
+                stage.addChild(smallTopPanelDisplayObj);
+                stage.addChild(smallMidPanelDisplayObj);
+                stage.addChild(smallBottomPanelDisplayObj);
 
                 app.ticker.add(() => {
                     const timestamp = app.ticker.lastTime;
@@ -160,11 +160,11 @@ class ChangeableDigitalMFDApp {
                     milagePanel.setSectGasMllage("25min", gasMilage25min);
                     milagePanel.setSectGasMllage("30min", gasMilage30min);
 
-                    largeTopPanelParts.Value = largeTopPanel.getValFunc(timestamp, ws);
-                    largeBottomPanelParts.Value = largeBottomPanel.getValFunc(timestamp, ws);
-                    smallTopPanelParts.Value = smallTopPanel.getValFunc(timestamp, ws);
-                    smallMidPanelParts.Value = smallMidPanel.getValFunc(timestamp, ws);
-                    smallBottomPanelParts.Value = smallBottomPanel.getValFunc(timestamp, ws);
+                    largeTopPanelDisplayObj.Value = largeTopPanel.getValue(timestamp, ws);
+                    largeBottomPanelDisplayObj.Value = largeBottomPanel.getValue(timestamp, ws);
+                    smallTopPanelDisplayObj.Value = smallTopPanel.getValue(timestamp, ws);
+                    smallMidPanelDisplayObj.Value = smallMidPanel.getValue(timestamp, ws);
+                    smallBottomPanelDisplayObj.Value = smallBottomPanel.getValue(timestamp, ws);
                 });
                 
                 ws.WSMapper.registerParameterCode("Engine_Speed", "SLOWandFAST");

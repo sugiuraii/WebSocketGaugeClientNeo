@@ -110,7 +110,7 @@ export class SemiCircularGaugePanelOptionBase extends CircularGaugePanelOptionBa
     }
 }
 
-export class SemiCircularGaugePanelBase extends CircularGaugePanelBase {
+export class SemiCircularGaugePanel extends CircularGaugePanelBase {
     constructor(options: SemiCircularGaugePanelOptionBase) {
         super(options);
     }

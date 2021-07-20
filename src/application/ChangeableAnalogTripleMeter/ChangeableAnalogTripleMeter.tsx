@@ -68,31 +68,31 @@ class ChangeableAnalogTripleMeterApp {
             const centerMeterCode = meterSetting["Center"];
             const rightMeterCode = meterSetting["Right"];
     
-            const meter0 = analogSingleMeterFactory.getMeter(leftMeterCode);
-            const meter1 = analogSingleMeterFactory.getMeter(centerMeterCode);
-            const meter2 = analogSingleMeterFactory.getMeter(rightMeterCode);    
+            const leftMeter = analogSingleMeterFactory.getMeter(leftMeterCode);
+            const centerMeter = analogSingleMeterFactory.getMeter(centerMeterCode);
+            const rightMeter = analogSingleMeterFactory.getMeter(rightMeterCode);    
 
-            const parts0 = meter0.partsConstructor();
-            const parts1 = meter1.partsConstructor();
-            const parts2 = meter2.partsConstructor();
-            parts0.position.set(0, 0);
-            parts1.position.set(400, 0);
-            parts2.position.set(800, 0);
-            stage.addChild(parts0);
-            stage.addChild(parts1);
-            stage.addChild(parts2);
+            const leftMeterDisplayObject = leftMeter.createDisplayObject();
+            const centerMeterDisplayObject = centerMeter.createDisplayObject();
+            const rightMeterDisplayObject = rightMeter.createDisplayObject();
+            leftMeterDisplayObject.position.set(0, 0);
+            centerMeterDisplayObject.position.set(400, 0);
+            rightMeterDisplayObject.position.set(800, 0);
+            stage.addChild(leftMeterDisplayObject);
+            stage.addChild(centerMeterDisplayObject);
+            stage.addChild(rightMeterDisplayObject);
             
             app.ticker.add(() => {
                 const timestamp = app.ticker.lastTime;
 
-                parts0.Value = meter0.getValFunc(timestamp, ws);
-                parts1.Value = meter1.getValFunc(timestamp, ws);
-                parts2.Value = meter2.getValFunc(timestamp, ws);
+                leftMeterDisplayObject.Value = leftMeter.getValue(timestamp, ws);
+                centerMeterDisplayObject.Value = centerMeter.getValue(timestamp, ws);
+                rightMeterDisplayObject.Value = rightMeter.getValue(timestamp, ws);
             });
 
-            ws.WSMapper.registerParameterCode(meter0.code, meter0.readmode);
-            ws.WSMapper.registerParameterCode(meter1.code, meter1.readmode);
-            ws.WSMapper.registerParameterCode(meter2.code, meter2.readmode);
+            ws.WSMapper.registerParameterCode(leftMeter.code, leftMeter.readmode);
+            ws.WSMapper.registerParameterCode(centerMeter.code, centerMeter.readmode);
+            ws.WSMapper.registerParameterCode(rightMeter.code, rightMeter.readmode);
         };
 
         const app = new MeterApplication(appOption);
