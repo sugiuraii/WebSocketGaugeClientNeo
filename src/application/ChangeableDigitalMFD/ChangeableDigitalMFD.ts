@@ -160,11 +160,11 @@ class ChangeableDigitalMFDApp {
                     milagePanel.setSectGasMllage("25min", gasMilage25min);
                     milagePanel.setSectGasMllage("30min", gasMilage30min);
 
-                    largeTopPanelDisplayObj.Value = largeTopPanel.getValFunc(timestamp, ws);
-                    largeBottomPanelDisplayObj.Value = largeBottomPanel.getValFunc(timestamp, ws);
-                    smallTopPanelDisplayObj.Value = smallTopPanel.getValFunc(timestamp, ws);
-                    smallMidPanelDisplayObj.Value = smallMidPanel.getValFunc(timestamp, ws);
-                    smallBottomPanelDisplayObj.Value = smallBottomPanel.getValFunc(timestamp, ws);
+                    largeTopPanelDisplayObj.Value = largeTopPanel.getValue(timestamp, ws);
+                    largeBottomPanelDisplayObj.Value = largeBottomPanel.getValue(timestamp, ws);
+                    smallTopPanelDisplayObj.Value = smallTopPanel.getValue(timestamp, ws);
+                    smallMidPanelDisplayObj.Value = smallMidPanel.getValue(timestamp, ws);
+                    smallBottomPanelDisplayObj.Value = smallBottomPanel.getValue(timestamp, ws);
                 });
                 
                 ws.WSMapper.registerParameterCode("Engine_Speed", "SLOWandFAST");

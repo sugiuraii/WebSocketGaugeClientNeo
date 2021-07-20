@@ -122,9 +122,9 @@ class ChangeableCompactMFDApp {
                     digiTachoPanel.Tacho = tacho;
                     digiTachoPanel.GearPos = (gearPos === undefined)?"-":gearPos.toString();
 
-                    centerLargeMeterDisplayObj.Value = centerLargeMeter.getValFunc(timestamp, ws);
-                    smallLeftMeterDisplayObj.Value = smallLeftMeter.getValFunc(timestamp, ws);
-                    smallRightMeterDisplayObj.Value = smallRightMeter.getValFunc(timestamp, ws);
+                    centerLargeMeterDisplayObj.Value = centerLargeMeter.getValue(timestamp, ws);
+                    smallLeftMeterDisplayObj.Value = smallLeftMeter.getValue(timestamp, ws);
+                    smallRightMeterDisplayObj.Value = smallRightMeter.getValue(timestamp, ws);
                 });
 
                 ws.WSMapper.registerParameterCode("Engine_Speed", "SLOWandFAST");

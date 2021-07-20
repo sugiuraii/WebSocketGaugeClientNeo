@@ -85,9 +85,9 @@ class ChangeableAnalogTripleMeterApp {
             app.ticker.add(() => {
                 const timestamp = app.ticker.lastTime;
 
-                leftMeterDisplayObject.Value = leftMeter.getValFunc(timestamp, ws);
-                centerMeterDisplayObject.Value = centerMeter.getValFunc(timestamp, ws);
-                rightMeterDisplayObject.Value = rightMeter.getValFunc(timestamp, ws);
+                leftMeterDisplayObject.Value = leftMeter.getValue(timestamp, ws);
+                centerMeterDisplayObject.Value = centerMeter.getValue(timestamp, ws);
+                rightMeterDisplayObject.Value = rightMeter.getValue(timestamp, ws);
             });
 
             ws.WSMapper.registerParameterCode(leftMeter.code, leftMeter.readmode);
