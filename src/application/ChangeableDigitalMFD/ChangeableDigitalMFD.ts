@@ -99,34 +99,34 @@ class ChangeableDigitalMFDApp {
                 const smallMidPanel = smallMeterPanelFactory.getMeter(smallMidMeterCode);
                 const smallBottomPanel = smallMeterPanelFactory.getMeter(smallBottomMeterCode);
 
-                const largeTopPanelParts = largeTopPanel.partsConstructor();
-                const largeBottomPanelParts = largeBottomPanel.partsConstructor();
-                const smallTopPanelParts = smallTopPanel.partsConstructor();
-                const smallMidPanelParts = smallMidPanel.partsConstructor();
-                const smallBottomPanelParts = smallBottomPanel.partsConstructor();
+                const largeTopPanelDisplayObj = largeTopPanel.createDisplayObject();
+                const largeBottomPanelDisplayObj = largeBottomPanel.createDisplayObject();
+                const smallTopPanelDisplayObj = smallTopPanel.createDisplayObject();
+                const smallMidPanelDisplayObj = smallMidPanel.createDisplayObject();
+                const smallBottomPanelDisplayObj = smallBottomPanel.createDisplayObject();
 
-                largeTopPanelParts.position.set(600, 0);
-                largeTopPanelParts.scale.set(0.751, 0.751);
+                largeTopPanelDisplayObj.position.set(600, 0);
+                largeTopPanelDisplayObj.scale.set(0.751, 0.751);
 
-                largeBottomPanelParts.position.set(600, 310);
-                largeBottomPanelParts.scale.set(0.751, 0.751);
+                largeBottomPanelDisplayObj.position.set(600, 310);
+                largeBottomPanelDisplayObj.scale.set(0.751, 0.751);
 
-                smallTopPanelParts.position.set(900, 0);
-                smallTopPanelParts.scale.set(0.68);
+                smallTopPanelDisplayObj.position.set(900, 0);
+                smallTopPanelDisplayObj.scale.set(0.68);
 
-                smallMidPanelParts.position.set(900, 200);
-                smallMidPanelParts.scale.set(0.68);
+                smallMidPanelDisplayObj.position.set(900, 200);
+                smallMidPanelDisplayObj.scale.set(0.68);
 
-                smallBottomPanelParts.position.set(900, 400);
-                smallBottomPanelParts.scale.set(0.68);
+                smallBottomPanelDisplayObj.position.set(900, 400);
+                smallBottomPanelDisplayObj.scale.set(0.68);
 
                 stage.addChild(digiTachoPanel);
                 stage.addChild(milagePanel);
-                stage.addChild(largeTopPanelParts);
-                stage.addChild(largeBottomPanelParts);
-                stage.addChild(smallTopPanelParts);
-                stage.addChild(smallMidPanelParts);
-                stage.addChild(smallBottomPanelParts);
+                stage.addChild(largeTopPanelDisplayObj);
+                stage.addChild(largeBottomPanelDisplayObj);
+                stage.addChild(smallTopPanelDisplayObj);
+                stage.addChild(smallMidPanelDisplayObj);
+                stage.addChild(smallBottomPanelDisplayObj);
 
                 app.ticker.add(() => {
                     const timestamp = app.ticker.lastTime;
@@ -160,11 +160,11 @@ class ChangeableDigitalMFDApp {
                     milagePanel.setSectGasMllage("25min", gasMilage25min);
                     milagePanel.setSectGasMllage("30min", gasMilage30min);
 
-                    largeTopPanelParts.Value = largeTopPanel.getValFunc(timestamp, ws);
-                    largeBottomPanelParts.Value = largeBottomPanel.getValFunc(timestamp, ws);
-                    smallTopPanelParts.Value = smallTopPanel.getValFunc(timestamp, ws);
-                    smallMidPanelParts.Value = smallMidPanel.getValFunc(timestamp, ws);
-                    smallBottomPanelParts.Value = smallBottomPanel.getValFunc(timestamp, ws);
+                    largeTopPanelDisplayObj.Value = largeTopPanel.getValFunc(timestamp, ws);
+                    largeBottomPanelDisplayObj.Value = largeBottomPanel.getValFunc(timestamp, ws);
+                    smallTopPanelDisplayObj.Value = smallTopPanel.getValFunc(timestamp, ws);
+                    smallMidPanelDisplayObj.Value = smallMidPanel.getValFunc(timestamp, ws);
+                    smallBottomPanelDisplayObj.Value = smallBottomPanel.getValFunc(timestamp, ws);
                 });
                 
                 ws.WSMapper.registerParameterCode("Engine_Speed", "SLOWandFAST");

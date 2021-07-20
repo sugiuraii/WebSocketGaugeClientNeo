@@ -38,20 +38,20 @@ export class FullCircularGaugePanelFactory {
             this.UseVacuumMeterInsteadOfBoost = false;
     }
 
-    public getMeter(code: WebsocketParameterCode | undefined): { code: WebsocketParameterCode, partsConstructor: () => FullCircularGaugePanelBase, readmode: ReadModeCode, getValFunc: (timestamp: number, ws: WebsocketObjectCollection) => number } {
+    public getMeter(code: WebsocketParameterCode | undefined): { code: WebsocketParameterCode, createDisplayObject: () => FullCircularGaugePanelBase, readmode: ReadModeCode, getValFunc: (timestamp: number, ws: WebsocketObjectCollection) => number } {
         switch (code) {
             case "Manifold_Absolute_Pressure":
-                return { code: code, partsConstructor: () => this.UseVacuumMeterInsteadOfBoost ? new VacuumGaugePanel() : new BoostGaugePanel(), readmode: "SLOWandFAST", getValFunc: (ts, ws) => ws.WSMapper.getValue(code, ts) * 0.0101972 - 1 /* convert kPa to kgf/cm2 and relative pressure */ };
+                return { code: code, createDisplayObject: () => this.UseVacuumMeterInsteadOfBoost ? new VacuumGaugePanel() : new BoostGaugePanel(), readmode: "SLOWandFAST", getValFunc: (ts, ws) => ws.WSMapper.getValue(code, ts) * 0.0101972 - 1 /* convert kPa to kgf/cm2 and relative pressure */ };
             case "Coolant_Temperature":
-                return { code: code, partsConstructor: () => new WaterTempGaugePanel(), readmode: "SLOW", getValFunc: (_, ws) => ws.WSMapper.getValue(code) };
+                return { code: code, createDisplayObject: () => new WaterTempGaugePanel(), readmode: "SLOW", getValFunc: (_, ws) => ws.WSMapper.getValue(code) };
             case "Engine_oil_temperature":
-                return { code: code, partsConstructor: () => new EngineOilTempGaugePanel(), readmode: "SLOW", getValFunc: (_, ws) => ws.WSMapper.getValue(code) };
+                return { code: code, createDisplayObject: () => new EngineOilTempGaugePanel(), readmode: "SLOW", getValFunc: (_, ws) => ws.WSMapper.getValue(code) };
             case "Battery_Voltage":
-                return { code: code, partsConstructor: () => new BatteryVoltageGaugePanel(), readmode: "SLOW", getValFunc: (_, ws) => ws.WSMapper.getValue(code) };
+                return { code: code, createDisplayObject: () => new BatteryVoltageGaugePanel(), readmode: "SLOW", getValFunc: (_, ws) => ws.WSMapper.getValue(code) };
             case "Mass_Air_Flow":
-                return { code: code, partsConstructor: () => new MassAirFlowGaugePanel(), readmode: "SLOWandFAST", getValFunc: (ts, ws) => ws.WSMapper.getValue(code, ts) };
+                return { code: code, createDisplayObject: () => new MassAirFlowGaugePanel(), readmode: "SLOWandFAST", getValFunc: (ts, ws) => ws.WSMapper.getValue(code, ts) };
             case "O2Sensor_1_Air_Fuel_Ratio":
-                return { code: code, partsConstructor: () => new AirFuelGaugePanel(), readmode: "SLOWandFAST", getValFunc: (ts, ws) => ws.WSMapper.getValue(code, ts) * 14 };
+                return { code: code, createDisplayObject: () => new AirFuelGaugePanel(), readmode: "SLOWandFAST", getValFunc: (ts, ws) => ws.WSMapper.getValue(code, ts) * 14 };
             case undefined:
                 throw new Error("getMeter() is failed by undefined code.");
             default:

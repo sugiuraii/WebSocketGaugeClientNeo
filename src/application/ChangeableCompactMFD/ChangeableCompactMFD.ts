@@ -90,23 +90,23 @@ class ChangeableCompactMFDApp {
                 const smallLeftMeter = smallMeterPanelFactory.getMeter(smallLeftMeterCode);
                 const smallRightMeter = smallMeterPanelFactory.getMeter(smallRightMeterCode);
 
-                const centerLargeMeterParts = centerLargeMeter.partsConstructor();
-                centerLargeMeterParts.position.set(90, 360);
-                centerLargeMeterParts.scale.set(1.3);
+                const centerLargeMeterDisplayObj = centerLargeMeter.createDisplayObject();
+                centerLargeMeterDisplayObj.position.set(90, 360);
+                centerLargeMeterDisplayObj.scale.set(1.3);
 
-                const smallLeftMeterParts = smallLeftMeter.partsConstructor();
-                smallLeftMeterParts.position.set(0, 890);
-                smallLeftMeterParts.scale.set(0.85);
+                const smallLeftMeterDisplayObj = smallLeftMeter.createDisplayObject();
+                smallLeftMeterDisplayObj.position.set(0, 890);
+                smallLeftMeterDisplayObj.scale.set(0.85);
 
-                const smallRightMeterParts = smallRightMeter.partsConstructor();
-                smallRightMeterParts.position.set(360, 890);
-                smallRightMeterParts.scale.set(0.85);
+                const smallRightMeterDisplayObj = smallRightMeter.createDisplayObject();
+                smallRightMeterDisplayObj.position.set(360, 890);
+                smallRightMeterDisplayObj.scale.set(0.85);
 
                 // Put meter panel parts to stage.
                 stage.addChild(digiTachoPanel);
-                stage.addChild(centerLargeMeterParts);
-                stage.addChild(smallLeftMeterParts);
-                stage.addChild(smallRightMeterParts);
+                stage.addChild(centerLargeMeterDisplayObj);
+                stage.addChild(smallLeftMeterDisplayObj);
+                stage.addChild(smallRightMeterDisplayObj);
 
                 // Define ticker method to update meter view (this ticker method will be called every frame).
                 app.ticker.add(() => {
@@ -122,9 +122,9 @@ class ChangeableCompactMFDApp {
                     digiTachoPanel.Tacho = tacho;
                     digiTachoPanel.GearPos = (gearPos === undefined)?"-":gearPos.toString();
 
-                    centerLargeMeterParts.Value = centerLargeMeter.getValFunc(timestamp, ws);
-                    smallLeftMeterParts.Value = smallLeftMeter.getValFunc(timestamp, ws);
-                    smallRightMeterParts.Value = smallRightMeter.getValFunc(timestamp, ws);
+                    centerLargeMeterDisplayObj.Value = centerLargeMeter.getValFunc(timestamp, ws);
+                    smallLeftMeterDisplayObj.Value = smallLeftMeter.getValFunc(timestamp, ws);
+                    smallRightMeterDisplayObj.Value = smallRightMeter.getValFunc(timestamp, ws);
                 });
 
                 ws.WSMapper.registerParameterCode("Engine_Speed", "SLOWandFAST");
