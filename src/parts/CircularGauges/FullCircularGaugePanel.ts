@@ -238,3 +238,30 @@ export class MassAirFlowGaugePanel extends FullCircularGaugePanel {
         super(options);
     }
 }
+
+export class EngineLoadGaugePanel extends FullCircularGaugePanel {
+    constructor() {
+        const options = new FullCircularGaugePanelOptionsBase();
+
+        options.TitleLabel = "Engine Load";
+        options.UnitLabel = "%";
+        options.Min = 0;
+        options.Max = 100;
+        options.RedZoneBarEnable = false;
+        options.YellowZoneBarEnable = false;
+        options.GreenZoneBarEnable = false;
+        options.ValueNumberRoundDigit = 0;
+        options.GaugeDrawValConversionFunc = x => x < 20 ? 1.6666 * x : 0.833 * x + 16.666;
+        options.AxisLabel =
+            ["0",
+                "10",
+                "20",
+                "40",
+                "60",
+                "80",
+                "100"
+            ];
+
+        super(options);
+    }
+}

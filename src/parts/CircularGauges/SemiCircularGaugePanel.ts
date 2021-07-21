@@ -212,3 +212,21 @@ export class MassAirFlowGaugePanel extends SemiCircularGaugePanel {
         super(options);
     }
 }
+
+export class EngineLoadGaugePanel extends SemiCircularGaugePanel {
+    constructor() {
+        const options = new SemiCircularGaugePanelOptionBase();
+
+        options.TitleLabel = "Engine Load";
+        options.Min = 0;
+        options.Max = 100;
+        options.UnitLabel = "%"
+        options.RedZoneBarEnable = false;
+        options.YellowZoneBarEnable = false;
+        options.GreenZoneBarEnable = false;
+        options.AxisLabel = ["0", "25", "50", "75", "100"];
+        options.ValueNumberRoundDigit = 0;
+
+        super(options);
+    }
+}

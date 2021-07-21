@@ -25,7 +25,7 @@
 import { WebsocketObjectCollection } from "../../lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
 import { WebsocketParameterCode } from "../../lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode";
 import { ReadModeCode } from "../../lib/WebSocket/WebSocketCommunication";
-import { AirFuelRatioMeter, AnalogSingleMeter, BatteryVoltageMeter, BoostMeter, MassAirFlowMeter, OilPressureMeter, OilTempMeter, RevMeter, VacuumMeter, WaterTempMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
+import { AirFuelRatioMeter, AnalogSingleMeter, BatteryVoltageMeter, BoostMeter, EngineLoadMeter, MassAirFlowMeter, OilPressureMeter, OilTempMeter, RevMeter, VacuumMeter, WaterTempMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
 
 export class AnalogSingleMeterFactory {
     private readonly UseVacuumMeterInsteadOfBoost;
@@ -54,6 +54,8 @@ export class AnalogSingleMeterFactory {
                 return { code: code, createDisplayObject: () => new AirFuelRatioMeter(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) * 14 };
             case "Mass_Air_Flow":
                 return { code: code, createDisplayObject: () => new MassAirFlowMeter(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) / 10 }; // Convert g/s -> x10g/s
+            case "Engine_Load":
+                    return { code: code, createDisplayObject: () => new EngineLoadMeter(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) };
             case undefined:
                 throw new Error("getMeter() is failed by undefined code.");
             default:

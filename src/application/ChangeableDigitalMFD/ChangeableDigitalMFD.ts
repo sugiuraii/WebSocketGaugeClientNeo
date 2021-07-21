@@ -67,7 +67,7 @@ class ChangeableDigitalMFDApp {
         appOption.PreloadResource.TexturePath.push(...DigiTachoPanel.RequestedTexturePath);
         appOption.PreloadResource.TexturePath.push(...MilageGraphPanel.RequestedTexturePath);
 
-        appOption.MeteSelectDialogOption.ParameterCodeListToSelect = ["Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Mass_Air_Flow", "Throttle_Opening_Angle", "O2Sensor_1_Air_Fuel_Ratio"];
+        appOption.MeteSelectDialogOption.ParameterCodeListToSelect = ["Engine_Load", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Mass_Air_Flow", "Throttle_Opening_Angle", "O2Sensor_1_Air_Fuel_Ratio"];
         appOption.MeteSelectDialogOption.DefaultMeterSelectDialogSetting = { ["LargeTop"]: "Manifold_Absolute_Pressure", ["LargeBottom"]: "O2Sensor_1_Air_Fuel_Ratio", ["SmallTop"]: "Coolant_Temperature", ["SmallMiddle"]: "Battery_Voltage", ["SmallBottom"]: "Throttle_Opening_Angle" };
 
         const gearCalculator = await DefaultAppSettings.getGearPositionCalculator();

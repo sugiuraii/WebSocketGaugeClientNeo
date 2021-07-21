@@ -337,3 +337,16 @@ export class AirFuelRatioMeter extends AnalogSingleMeter {
         super(option);
     }
 }
+
+export class EngineLoadMeter extends AnalogSingleMeter {
+    constructor() {
+        const option = new AnalogSingleMeterOption();
+        option.Min = 0;
+        option.Max = 100;
+        option.Title = "Engine Load";
+        option.Unit = "percent";
+        option.GaugeDrawValConversionFunc = x => x < 20 ? 1.6666 * x : 0.833 * x + 16.666;
+        option.ScaleLabel = ["0", "10", "20", "40", "60", "80", "100"];
+        super(option);
+    }
+}
