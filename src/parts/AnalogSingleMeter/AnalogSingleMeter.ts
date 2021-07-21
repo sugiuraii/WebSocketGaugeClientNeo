@@ -325,3 +325,15 @@ export class MassAirFlowMeter extends AnalogSingleMeter {
         super(option);
     }
 }
+
+export class AirFuelRatioMeter extends AnalogSingleMeter {
+    constructor() {
+        const option = new AnalogSingleMeterOption();
+        option.Min = 10;
+        option.Max = 22;
+        option.Title = "A/F ratio";
+        option.Unit = "A/F";
+        option.ScaleLabel = ["10", "12", "14", "16", "18", "20", "22"];
+        super(option);
+    }
+}
