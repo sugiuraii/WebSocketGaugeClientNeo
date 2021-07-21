@@ -49,7 +49,7 @@ export class FullCircularGaugePanelFactory {
             case "Battery_Voltage":
                 return { code: code, createDisplayObject: () => new BatteryVoltageGaugePanel(), readmode: "SLOW", getValue: (_, ws) => ws.WSMapper.getValue(code) };
             case "Mass_Air_Flow":
-                return { code: code, createDisplayObject: () => new MassAirFlowGaugePanel(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) };
+                return { code: code, createDisplayObject: () => new MassAirFlowGaugePanel(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) / 10 };
             case "O2Sensor_1_Air_Fuel_Ratio":
                 return { code: code, createDisplayObject: () => new AirFuelGaugePanel(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) * 14 };
             case undefined:

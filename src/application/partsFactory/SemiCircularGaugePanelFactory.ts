@@ -49,7 +49,7 @@ export class SemiCircularGaugePanelFactory {
             case "Battery_Voltage":
                 return { code: code, createDisplayObject: () => new BatteryVoltageGaugePanel(), readmode: "SLOW", getValue: (_, ws) => ws.WSMapper.getValue(code) };
             case "Mass_Air_Flow":
-                return { code: code, createDisplayObject: () => new MassAirFlowGaugePanel(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) };
+                return { code: code, createDisplayObject: () => new MassAirFlowGaugePanel(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) /10 }; // Convert g/s -> x10g/s
             case "Throttle_Opening_Angle":
                 return { code: code, createDisplayObject: () => new ThrottleGaugePanel(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) };
             case "O2Sensor_1_Air_Fuel_Ratio":
