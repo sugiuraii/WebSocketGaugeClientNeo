@@ -25,7 +25,7 @@
 import { WebsocketObjectCollection } from "../../lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
 import { WebsocketParameterCode } from "../../lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode";
 import { ReadModeCode } from "../../lib/WebSocket/WebSocketCommunication";
-import { AnalogSingleMeter, BatteryVoltageMeter, BoostMeter, OilPressureMeter, OilTempMeter, RevMeter, VacuumMeter, WaterTempMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
+import { AnalogSingleMeter, BatteryVoltageMeter, BoostMeter, MassAirFlowMeter, OilPressureMeter, OilTempMeter, RevMeter, VacuumMeter, WaterTempMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
 
 export class AnalogSingleMeterFactory
 {
@@ -52,7 +52,9 @@ export class AnalogSingleMeterFactory
                 return { code : code,  createDisplayObject: () => new BatteryVoltageMeter(), readmode: "SLOW", getValue: (_, ws) => ws.WSMapper.getValue(code) };
             case "Oil_Pressure":
                 return { code : code,  createDisplayObject: () => new OilPressureMeter(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) };
-            case undefined:
+            case "Mass_Air_Flow":
+                    return { code : code,  createDisplayObject: () => new MassAirFlowMeter(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) / 10 }; // Convert g/s -> x10g/s
+                case undefined:
                 throw new Error("getMeter() is failed by undefined code.");
             default:
                 throw new Error("Analog single meter is not defined on selected code.");

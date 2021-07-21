@@ -313,3 +313,15 @@ export class OilPressureMeter extends AnalogSingleMeter {
         super(option);
     }
 }
+
+export class MassAirFlowMeter extends AnalogSingleMeter {
+    constructor() {
+        const option = new AnalogSingleMeterOption();
+        option.Min = 0;
+        option.Max = 60;
+        option.Title = "Mass airflow";
+        option.Unit = "x10kg/s";
+        option.ScaleLabel = ["0", "10", "20", "30", "40", "50", "60"];
+        super(option);
+    }
+}
