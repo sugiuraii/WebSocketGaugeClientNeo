@@ -35,7 +35,7 @@ import { DigiTachoPanel } from "../../parts/DigiTachoPanel/DigiTachoPanel";
 import { MilageGraphPanel } from "../../parts/GasMilageGraph/MilageGraph";
 
 // Import AppSettings.
-import * as DefaultAppSettings from  "../DefaultAppSettings"
+import * as DefaultAppSettings from "../DefaultAppSettings"
 import { FullCircularGaugePanelFactory } from '../partsFactory/FullCircularGaugePanelFactory';
 import { MeterNotAvailableError } from '../partsFactory/MeterNotAvailableError';
 import { SemiCircularGaugePanelFactory } from '../partsFactory/SemiCircularGaugePanelFactory';
@@ -51,8 +51,8 @@ window.onload = function () {
 }
 
 class ChangeableDigitalMFDApp {
-    public async  Start() {
-        const pixiAppOption : PIXI.IApplicationOptions = {width : 1200, height : 600};
+    public async Start() {
+        const pixiAppOption: PIXI.IApplicationOptions = { width: 1200, height: 600 };
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
         appOption.PreloadResource.WebFontFamiliyName.push(...FullCircularGaugePanel.RequestedFontFamily);
         appOption.PreloadResource.WebFontFamiliyName.push(...SemiCircularGaugePanel.RequestedFontFamily);
@@ -67,7 +67,7 @@ class ChangeableDigitalMFDApp {
         appOption.PreloadResource.TexturePath.push(...DigiTachoPanel.RequestedTexturePath);
         appOption.PreloadResource.TexturePath.push(...MilageGraphPanel.RequestedTexturePath);
 
-        appOption.MeteSelectDialogOption.ParameterCodeListToSelect = ["Engine_Load", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Mass_Air_Flow", "Throttle_Opening_Angle", "O2Sensor_1_Air_Fuel_Ratio"];
+        appOption.MeteSelectDialogOption.ParameterCodeListToSelect = ["Engine_Load", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Mass_Air_Flow", "Throttle_Opening_Angle", "O2Sensor_1_Air_Fuel_Ratio", "Intake_Air_Temperature"];
         appOption.MeteSelectDialogOption.DefaultMeterSelectDialogSetting = { ["LargeTop"]: "Manifold_Absolute_Pressure", ["LargeBottom"]: "O2Sensor_1_Air_Fuel_Ratio", ["SmallTop"]: "Coolant_Temperature", ["SmallMiddle"]: "Battery_Voltage", ["SmallBottom"]: "Throttle_Opening_Angle" };
 
         const gearCalculator = await DefaultAppSettings.getGearPositionCalculator();
@@ -91,8 +91,7 @@ class ChangeableDigitalMFDApp {
 
             const largeMeterPanelFactory = new FullCircularGaugePanelFactory(useVacuumInsteadOfBoost);
             const smallMeterPanelFactory = new SemiCircularGaugePanelFactory(useVacuumInsteadOfBoost);
-            try
-            {
+            try {
                 const largeTopPanel = largeMeterPanelFactory.getMeter(largeTopMeterCode);
                 const largeBottomPanel = largeMeterPanelFactory.getMeter(largeBottomMeterCode);
                 const smallTopPanel = smallMeterPanelFactory.getMeter(smallTopMeterCode);
@@ -147,7 +146,7 @@ class ChangeableDigitalMFDApp {
 
                     digiTachoPanel.Speed = speed;
                     digiTachoPanel.Tacho = tacho;
-                    digiTachoPanel.GearPos = (gearPos === undefined)?"-":gearPos.toString();
+                    digiTachoPanel.GearPos = (gearPos === undefined) ? "-" : gearPos.toString();
 
                     milagePanel.MomentGasMilage = momentGasMilage;
                     milagePanel.Trip = totalTrip;
@@ -166,7 +165,7 @@ class ChangeableDigitalMFDApp {
                     smallMidPanelDisplayObj.Value = smallMidPanel.getValue(timestamp, ws);
                     smallBottomPanelDisplayObj.Value = smallBottomPanel.getValue(timestamp, ws);
                 });
-                
+
                 ws.WSMapper.registerParameterCode("Engine_Speed", "SLOWandFAST");
                 ws.WSMapper.registerParameterCode("Vehicle_Speed", "SLOWandFAST");
                 ws.WSMapper.registerParameterCode(largeTopPanel.code, largeTopPanel.readmode);
@@ -175,9 +174,8 @@ class ChangeableDigitalMFDApp {
                 ws.WSMapper.registerParameterCode(smallMidPanel.code, smallMidPanel.readmode);
                 ws.WSMapper.registerParameterCode(smallBottomPanel.code, smallBottomPanel.readmode);
             }
-            catch(e)
-            {
-                if(e instanceof MeterNotAvailableError)
+            catch (e) {
+                if (e instanceof MeterNotAvailableError)
                     window.alert(e.message);
                 else
                     throw e;

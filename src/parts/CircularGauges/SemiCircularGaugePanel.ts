@@ -217,13 +217,37 @@ export class EngineLoadGaugePanel extends SemiCircularGaugePanel {
     constructor() {
         const options = new SemiCircularGaugePanelOptionBase();
 
-        options.TitleLabel = "Engine Load";
+        options.TitleLabel = "ENGINE LOAD";
         options.Min = 0;
         options.Max = 100;
         options.UnitLabel = "%"
         options.RedZoneBarEnable = false;
         options.YellowZoneBarEnable = false;
         options.GreenZoneBarEnable = false;
+        options.AxisLabel = ["0", "25", "50", "75", "100"];
+        options.ValueNumberRoundDigit = 0;
+
+        super(options);
+    }
+}
+
+export class IntakeAirTemperaturePanel extends SemiCircularGaugePanel {
+    constructor() {
+        const options = new SemiCircularGaugePanelOptionBase();
+
+        options.TitleLabel = "INTAKE TEMP.";
+        options.Min = 0;
+        options.Max = 100;
+        options.UnitLabel = "degC"
+        options.RedZoneBarEnable = true;
+        options.YellowZoneBarEnable = true;
+        options.GreenZoneBarEnable = true;
+        options.RedZoneBarOffsetAngle = 337.5;
+        options.RedZoneBarFullAngle = 22.5;
+        options.YellowZoneBarOffsetAngle = 315;
+        options.YellowZoneBarFullAngle = 22.5;
+        options.GreenZoneBarOffsetAngle = 180;
+        options.GreenZoneBarFullAngle = 90;
         options.AxisLabel = ["0", "25", "50", "75", "100"];
         options.ValueNumberRoundDigit = 0;
 

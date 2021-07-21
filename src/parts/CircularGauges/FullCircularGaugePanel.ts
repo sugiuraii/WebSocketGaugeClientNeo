@@ -243,7 +243,7 @@ export class EngineLoadGaugePanel extends FullCircularGaugePanel {
     constructor() {
         const options = new FullCircularGaugePanelOptionsBase();
 
-        options.TitleLabel = "Engine Load";
+        options.TitleLabel = "ENGINE LOAD";
         options.UnitLabel = "%";
         options.Min = 0;
         options.Max = 100;
@@ -260,6 +260,38 @@ export class EngineLoadGaugePanel extends FullCircularGaugePanel {
                 "60",
                 "80",
                 "100"
+            ];
+
+        super(options);
+    }
+}
+
+export class IntakeAirTemperatureGaugePanel extends FullCircularGaugePanel {
+    constructor() {
+        const options = new FullCircularGaugePanelOptionsBase();
+
+        options.TitleLabel = "INTAKE TEMP.";
+        options.UnitLabel = "degC";
+        options.Min = 0;
+        options.Max = 120;
+        options.RedZoneBarEnable = true;
+        options.YellowZoneBarEnable = true;
+        options.GreenZoneBarEnable = true;
+        options.RedZoneBarOffsetAngle = 292.5;
+        options.YellowZoneBarOffsetAngle = 247.5;
+        options.GreenZoneBarOffsetAngle = 90;
+        options.RedZoneBarFullAngle = 67.5;
+        options.YellowZoneBarFullAngle = 45;
+        options.GreenZoneBarFullAngle = 90;
+        options.ValueNumberRoundDigit = 0;
+        options.AxisLabel =
+            ["0",
+                "20",
+                "40",
+                "60",
+                "80",
+                "100",
+                "120"
             ];
 
         super(options);

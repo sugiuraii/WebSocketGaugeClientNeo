@@ -350,3 +350,15 @@ export class EngineLoadMeter extends AnalogSingleMeter {
         super(option);
     }
 }
+
+export class IntakeAirTemperatureMeter extends AnalogSingleMeter {
+    constructor() {
+        const option = new AnalogSingleMeterOption();
+        option.Min = 0;
+        option.Max = 120;
+        option.Title = "Intake temp.";
+        option.Unit = "degC";
+        option.ScaleLabel = ["0", "20", "40", "60", "80", "100", "120"];
+        super(option);
+    }
+}

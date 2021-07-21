@@ -26,7 +26,7 @@ import { WebsocketObjectCollection } from "../../lib/MeterAppBase/WebsocketObjCo
 import { WebsocketParameterCode } from "../../lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode";
 import { ReadModeCode } from "../../lib/WebSocket/WebSocketCommunication";
 import { FullCircularGaugePanel } from "../../parts/CircularGauges/private/FullCircularGaugePanelBase";
-import { VacuumGaugePanel, BoostGaugePanel, WaterTempGaugePanel, EngineOilTempGaugePanel, BatteryVoltageGaugePanel, MassAirFlowGaugePanel, AirFuelGaugePanel, EngineLoadGaugePanel } from "../../parts/CircularGauges/FullCircularGaugePanel";
+import { VacuumGaugePanel, BoostGaugePanel, WaterTempGaugePanel, EngineOilTempGaugePanel, BatteryVoltageGaugePanel, MassAirFlowGaugePanel, AirFuelGaugePanel, EngineLoadGaugePanel, IntakeAirTemperatureGaugePanel } from "../../parts/CircularGauges/FullCircularGaugePanel";
 import { MeterNotAvailableError } from "./MeterNotAvailableError";
 
 export class FullCircularGaugePanelFactory {
@@ -53,8 +53,10 @@ export class FullCircularGaugePanelFactory {
             case "O2Sensor_1_Air_Fuel_Ratio":
                 return { code: code, createDisplayObject: () => new AirFuelGaugePanel(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) * 14 };
             case "Engine_Load":
-                    return { code: code, createDisplayObject: () => new EngineLoadGaugePanel(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) };
-                case undefined:
+                return { code: code, createDisplayObject: () => new EngineLoadGaugePanel(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) };
+            case "Intake_Air_Temperature":
+                return { code: code, createDisplayObject: () => new IntakeAirTemperatureGaugePanel(), readmode: "SLOW", getValue: (_, ws) => ws.WSMapper.getValue(code) };
+            case undefined:
                 throw new Error("getMeter() is failed by undefined code.");
             default:
                 throw new MeterNotAvailableError("FullCircular gauge is not defined on the parameter code of " + code);

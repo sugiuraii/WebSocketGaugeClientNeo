@@ -63,7 +63,7 @@ class ChangeableCompactMFDApp {
         appOption.PreloadResource.TexturePath.push(...SemiCircularGaugePanel.RequestedTexturePath);
         appOption.PreloadResource.TexturePath.push(...DigiTachoPanel.RequestedTexturePath);
 
-        appOption.MeteSelectDialogOption.ParameterCodeListToSelect = ["Engine_Load", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Mass_Air_Flow", "Throttle_Opening_Angle", "O2Sensor_1_Air_Fuel_Ratio"];
+        appOption.MeteSelectDialogOption.ParameterCodeListToSelect = ["Engine_Load", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Mass_Air_Flow", "Throttle_Opening_Angle", "O2Sensor_1_Air_Fuel_Ratio", "Intake_Air_Temperature"];
         appOption.MeteSelectDialogOption.DefaultMeterSelectDialogSetting = { ["LargeMeter"]: "Manifold_Absolute_Pressure", ["SmallLeftMeter"]: "Coolant_Temperature", ["SmallRightMeter"]: "Battery_Voltage"};
 
         const gearCalculator = await DefaultAppSettings.getGearPositionCalculator();
