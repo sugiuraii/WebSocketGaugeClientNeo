@@ -50,34 +50,6 @@ export class MeterWidgetApplication {
     private readonly webSocketCollection: WebsocketObjectCollection;
     private MeterSelectDialogSetting: MeterSelectDialogCotents;
 
-    protected get RootElem(): JSX.Element {
-        const onMeterSelectDialogSet = (Object.keys(this.MeterSelectDialogSetting).length === 0) ? undefined : (c: MeterSelectDialogCotents) => {
-            this.MeterSelectDialogSetting = c;
-            this.WebStorage.MeterSelectDialogSetting = c;
-        };
-
-        return (
-            <>
-                <ApplicationNavbar
-                    defaultOptionDialogContent={{ forceCanvas: this.WebStorage.ForceCanvas }}
-                    defaultWSInterval={this.WebStorage.WSInterval}
-                    onOptionDialogSet={c => {
-                        this.WebStorage.ForceCanvas = c.forceCanvas;
-                    }}
-                    onWSIntervalDialogSet={interval => this.WebStorage.WSInterval = interval}
-                    onFUELTripResetDialogSet={() => this.webSocketCollection.FUELTRIPWS.SendReset()}
-                    logList={this.Logger.Content}
-                    websocketStatusList={this.webSocketCollection.WebsocketStates}
-                    opacityOnMouseOff={"0.1"}
-                    defaultMeterSelectDialogContent={this.MeterSelectDialogSetting}
-                    parameterToSelectInMeterSelectDialog={this.Option.MeteSelectDialogOption.ParameterCodeListToSelect}
-                    onMeterSelectDialogSet={onMeterSelectDialogSet}
-                    onWebStorageReset={() => this.WebStorage.Reset()}
-                />
-            </>
-        );
-    }
-
     constructor(option: MeterApplicationOption) {
         this.Option = option;
         this.WebStorage = new WebstorageHandler(option.MeteSelectDialogOption.DefaultMeterSelectDialogSetting);
@@ -115,7 +87,6 @@ export class MeterWidgetApplication {
         const rootElement = document.createElement('div');
         ReactDOM.render(
             <>
-                {this.RootElem}
                 <PIXIApplication application={pixiApp} />
             </>
             , rootElement);
