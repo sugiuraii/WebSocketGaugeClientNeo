@@ -30,7 +30,6 @@ import ReactDOM from "react-dom";
 import { WebstorageHandler } from "./Webstorage/WebstorageHandler";
 import { WebsocketObjectCollection } from "./WebsocketObjCollection/WebsocketObjectCollection";
 import { MeterApplicationOption } from "./options/MeterApplicationOption";
-import { ApplicationNavbar } from './reactParts/navbar/ApplicationNavbar';
 import { StringListLogger } from "./utils/StringListLogger";
 import PIXIApplication from "./reactParts/PIXIApplication";
 
