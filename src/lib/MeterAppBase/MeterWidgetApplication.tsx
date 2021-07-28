@@ -45,6 +45,8 @@ export class MeterWidgetApplication {
     private Logger = new StringListLogger();
     private readonly WebStorage: WebstorageHandler;
 
+    private readonly urlSearchParams = new URLSearchParams(window.location.search);
+
     private readonly webSocketCollection: WebsocketObjectCollection;
     private MeterSelectDialogSetting: MeterSelectDialogCotents;
 
