@@ -56,14 +56,14 @@ class ChangeableAnalogTripleMeterApp {
         appOption.MeteSelectDialogOption.ParameterCodeListToSelect = ["Engine_Speed", "Engine_Load", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Oil_Pressure", "Mass_Air_Flow", "O2Sensor_1_Air_Fuel_Ratio", "Intake_Air_Temperature"];
         appOption.MeteSelectDialogOption.DefaultMeterSelectDialogSetting = { ["Left"]: "Engine_Speed", ["Center"]: "Manifold_Absolute_Pressure", ["Right"]: "Coolant_Temperature" };
 
-        appOption.SetupPIXIMeterPanel = (app, ws, storage) => {
+        appOption.SetupPIXIMeterPanel = (app, ws, meterSetting) => {
             const stage = app.stage;
             //Centering the top-level container
             stage.pivot.set(600, 200);
             stage.position.set(app.screen.width / 2, app.screen.height / 2);
 
             const analogSingleMeterFactory = new AnalogSingleMeterFactory(useVacuumInsteadOfBoost);
-            const meterSetting = storage.MeterSelectDialogSetting;
+            
             const leftMeterCode = meterSetting["Left"];
             const centerMeterCode = meterSetting["Center"];
             const rightMeterCode = meterSetting["Right"];
