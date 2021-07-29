@@ -26,7 +26,6 @@ import * as PIXI from "pixi.js";
 import { MeterSelectionSetting } from "../reactParts/dialog/MeterSelectDialog";
 import { WebsocketObjectCollection, WebsocketObjectCollectionOption } from "../WebsocketObjCollection/WebsocketObjectCollection";
 import { WebsocketParameterCode } from "../WebsocketObjCollection/WebsocketParameterCode";
-import { WebstorageHandler } from "../Webstorage/WebstorageHandler";
 
 class PreloadResourceCollection {
     public readonly WebFontFamiliyName = new Array<string>();
@@ -51,7 +50,7 @@ export class MeterApplicationOption {
     public readonly NavBarItems : JSX.Element[] = [];
     public readonly MeteSelectDialogOption = new MeterSelectDialogOption();
     
-    public SetupPIXIMeterPanel: (pixiApp: PIXI.Application, wsObj: WebsocketObjectCollection, storage : WebstorageHandler) => void = () => {/* do nothing*/};
+    public SetupPIXIMeterPanel: (pixiApp: PIXI.Application, wsObj: WebsocketObjectCollection, meterSelection : MeterSelectionSetting) => void = () => {/* do nothing*/};
     
     constructor(pixiApplicationOption? : PIXI.IApplicationOptions, wsCollectionOption? :WebsocketObjectCollectionOption, preloadResource? : PreloadResourceCollection)
     {
