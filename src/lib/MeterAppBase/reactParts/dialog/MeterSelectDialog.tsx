@@ -29,13 +29,13 @@ import { WebsocketParameterCode } from '../../WebsocketObjCollection/WebsocketPa
 
 type MeterSelectDialogProps = {
     show: boolean,
-    default: MeterSelectDialogCotents,
+    default: MeterSelectionSetting,
     codesToSelect: WebsocketParameterCode[],
     onCancel: () => void,
-    onSet: (dat: MeterSelectDialogCotents) => void;
+    onSet: (dat: MeterSelectionSetting) => void;
 }
 
-export type MeterSelectDialogCotents = { [meterID: string]: WebsocketParameterCode };
+export type MeterSelectionSetting = { [meterID: string]: WebsocketParameterCode };
 
 export const MeterSelectDialog: FunctionComponent<MeterSelectDialogProps> = (p) => {
     const [content, setContent] = useState(p.default);

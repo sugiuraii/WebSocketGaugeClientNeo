@@ -31,7 +31,7 @@ import { WebsocketStatusIndicator } from '../WebsocketStatusIndicator'
 import React, { FunctionComponent, useState, Fragment } from 'react';
 import { Navbar, Nav } from 'react-bootstrap'
 import { WebsocketState } from '../../WebsocketAppBackend/WebsocketState'
-import { MeterSelectDialog, MeterSelectDialogCotents } from '../dialog/MeterSelectDialog'
+import { MeterSelectDialog, MeterSelectionSetting } from '../dialog/MeterSelectDialog'
 import { WebsocketParameterCode } from '../../WebsocketObjCollection/WebsocketParameterCode'
 
 type ApplicationNavbarProps =
@@ -42,8 +42,8 @@ type ApplicationNavbarProps =
         onOptionDialogSet?: (content: OptionDialogFormContents) => void,
         onWSIntervalDialogSet?: (wsInterval: number) => void,
         onFUELTripResetDialogSet?: (reset: boolean) => void,
-        onMeterSelectDialogSet?: (data : MeterSelectDialogCotents) => void,
-        defaultMeterSelectDialogContent?: MeterSelectDialogCotents,
+        onMeterSelectDialogSet?: (data : MeterSelectionSetting) => void,
+        defaultMeterSelectDialogContent?: MeterSelectionSetting,
         parameterToSelectInMeterSelectDialog?: WebsocketParameterCode[],
         websocketStatusList: { [name: string]: WebsocketState },
         opacityOnMouseOff : string,
