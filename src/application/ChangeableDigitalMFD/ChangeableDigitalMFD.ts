@@ -72,7 +72,7 @@ class ChangeableDigitalMFDApp {
 
         const gearCalculator = await DefaultAppSettings.getGearPositionCalculator();
 
-        appOption.SetupPIXIMeterPanel = (app, ws, storage) => {
+        appOption.SetupPIXIMeterPanel = (app, ws, meterSetting) => {
 
             const stage = app.stage;
 
@@ -82,7 +82,6 @@ class ChangeableDigitalMFDApp {
             const milagePanel = new MilageGraphPanel();
             milagePanel.position.set(0, 300);
             milagePanel.scale.set(0.94, 0.94);
-            const meterSetting = storage.MeterSelectDialogSetting;
             const largeTopMeterCode = meterSetting["LargeTop"];
             const largeBottomMeterCode = meterSetting["LargeBottom"];
             const smallTopMeterCode = meterSetting["SmallTop"];

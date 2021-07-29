@@ -34,10 +34,17 @@ import { StringListLogger } from "./utils/StringListLogger";
 import PIXIApplication from "./reactParts/PIXIApplication";
 
 import 'bootswatch/dist/slate/bootstrap.min.css';
-import { MeterSelectDialogCotents } from "./reactParts/dialog/MeterSelectDialog";
+import { MeterSelectionSetting } from "./reactParts/dialog/MeterSelectDialog";
 const BOOTSTRAP_CSS_FILENAME = "bootstrap.min.css";
 
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
+
+type URLQueryParseResult =  
+{
+    WSInterval : number;
+    ForceCanvas : number;
+    
+};
 
 export class MeterWidgetApplication {
     private Option: MeterApplicationOption;
@@ -47,11 +54,12 @@ export class MeterWidgetApplication {
     private readonly urlSearchParams = new URLSearchParams(window.location.search);
 
     private readonly webSocketCollection: WebsocketObjectCollection;
-    private MeterSelectDialogSetting: MeterSelectDialogCotents;
+    private MeterSelectDialogSetting: MeterSelectionSetting;
 
     constructor(option: MeterApplicationOption) {
         this.Option = option;
         this.WebStorage = new WebstorageHandler(option.MeteSelectDialogOption.DefaultMeterSelectDialogSetting);
+
         this.webSocketCollection = new WebsocketObjectCollection(this.Logger, option.WebSocketCollectionOption, this.WebStorage.WSInterval);
 
         if (this.WebStorage.MeterSelectDialogSetting === undefined) {
@@ -96,7 +104,7 @@ export class MeterWidgetApplication {
         // Preload Fonts -> textures-> parts
         await this.preloadFonts();
         await this.preloadTextures();
-        this.Option.SetupPIXIMeterPanel(pixiApp, this.webSocketCollection, this.WebStorage);
+        this.Option.SetupPIXIMeterPanel(pixiApp, this.webSocketCollection, this.WebStorage.MeterSelectDialogSetting);
         this.webSocketCollection.Run();
     }
 

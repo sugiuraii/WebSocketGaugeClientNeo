@@ -68,7 +68,7 @@ class ChangeableCompactMFDApp {
 
         const gearCalculator = await DefaultAppSettings.getGearPositionCalculator();
 
-        appOption.SetupPIXIMeterPanel = (app, ws, storage) => {
+        appOption.SetupPIXIMeterPanel = (app, ws, meterSetting) => {
 
             const stage = app.stage;
 
@@ -76,7 +76,6 @@ class ChangeableCompactMFDApp {
             digiTachoPanel.position.set(0, 0);
             digiTachoPanel.scale.set(1.15);
 
-            const meterSetting = storage.MeterSelectDialogSetting;
             const largeCenterMeterCode = meterSetting["LargeMeter"];
             const smallLeftMeterCode = meterSetting["SmallLeftMeter"];
             const smallRightMeterCode = meterSetting["SmallRightMeter"];
