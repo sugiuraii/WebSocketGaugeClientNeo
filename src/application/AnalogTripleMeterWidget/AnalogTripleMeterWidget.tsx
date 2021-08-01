@@ -27,7 +27,7 @@ require("./AnalogTripleMeterWidget.html");
 import * as PIXI from 'pixi.js';
 
 //Import application base class
-import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
+import { MeterWidgetApplication } from "../../lib/MeterAppBase/MeterWidgetApplication";
 import { MeterApplicationOption } from "../../lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
@@ -53,8 +53,8 @@ class AnalogTripleMeterWidgetApp {
         appOption.PreloadResource.WebFontFamiliyName.push(...AnalogSingleMeter.RequestedFontFamily);
         appOption.PreloadResource.WebFontCSSURL.push(...AnalogSingleMeter.RequestedFontCSSURL);
         appOption.PreloadResource.TexturePath.push(...AnalogSingleMeter.RequestedTexturePath);
-        appOption.MeteSelectDialogOption.ParameterCodeListToSelect = ["Engine_Speed", "Engine_Load", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Oil_Pressure", "Mass_Air_Flow", "O2Sensor_1_Air_Fuel_Ratio", "Intake_Air_Temperature"];
-        appOption.MeteSelectDialogOption.DefaultMeterSelectDialogSetting = { ["Left"]: "Engine_Speed", ["Center"]: "Manifold_Absolute_Pressure", ["Right"]: "Coolant_Temperature" };
+        //appOption.MeteSelectDialogOption.ParameterCodeListToSelect = ["Engine_Speed", "Engine_Load", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Oil_Pressure", "Mass_Air_Flow", "O2Sensor_1_Air_Fuel_Ratio", "Intake_Air_Temperature"];
+        //appOption.MeteSelectDialogOption.DefaultMeterSelectDialogSetting = { ["Left"]: "Engine_Speed", ["Center"]: "Manifold_Absolute_Pressure", ["Right"]: "Coolant_Temperature" };
 
         appOption.SetupPIXIMeterPanel = (app, ws, meterSetting) => {
             const stage = app.stage;
@@ -95,7 +95,7 @@ class AnalogTripleMeterWidgetApp {
             ws.WSMapper.registerParameterCode(rightMeter.code, rightMeter.readmode);
         };
 
-        const app = new MeterApplication(appOption);
+        const app = new MeterWidgetApplication(appOption);
         app.Run();
     }
 }

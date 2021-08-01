@@ -38,7 +38,8 @@ module.exports = {
         "ChangeableCompactMFD": './ChangeableCompactMFD/ChangeableCompactMFD.ts',
         "AnalogTripleMeter": './AnalogTripleMeter/AnalogTripleMeter.ts',
         "ChangeableAnalogTripleMeter": './ChangeableAnalogTripleMeter/ChangeableAnalogTripleMeter.tsx',
-        "LEDRevMeter": './LEDRevMeter/LEDRevMeter.ts'
+        "LEDRevMeter": './LEDRevMeter/LEDRevMeter.ts',
+        "AnalogTripleMeterWidget" : './AnalogTripleMeterWidget/AnalogTripleMeterWidget.tsx'
     },
     devtool: "source-map",
     output:
