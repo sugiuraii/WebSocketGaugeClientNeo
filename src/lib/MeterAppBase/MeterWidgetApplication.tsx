@@ -27,7 +27,6 @@ import * as PIXI from "pixi.js";
 import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
 
-import { WebstorageHandler } from "./Webstorage/WebstorageHandler";
 import { WebsocketObjectCollection } from "./WebsocketObjCollection/WebsocketObjectCollection";
 import { MeterApplicationOption } from "./options/MeterApplicationOption";
 import { StringListLogger } from "./utils/StringListLogger";
@@ -68,7 +67,6 @@ export class MeterWidgetApplication {
     private Option: MeterApplicationOption;
     private Logger = new StringListLogger();
     private readonly WebStorage: WebstorageHandler;
-
 
     private readonly webSocketCollection: WebsocketObjectCollection;
     private MeterSelectDialogSetting: MeterSelectionSetting;
