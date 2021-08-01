@@ -53,11 +53,11 @@ class URLQueryParseResult {
 
         this.WSInterval = (wsInteval === null || isNaN(Number(wsInteval))) ? 0 : Number(wsInteval);
         this.ForceCanvas = (forceCanvas === null) ? false : (forceCanvas.toLowerCase() === "true");
-        if(meterIDs.length !== paramCodes.length)
+        if (meterIDs.length !== paramCodes.length)
             throw EvalError("Number of MeterID and Param (in query) are not equal.");
-        
-        const meterSelectionSetting : MeterSelectionSetting = {};
-        for(let i = 0; i < meterIDs.length; i++)
+
+        const meterSelectionSetting: MeterSelectionSetting = {};
+        for (let i = 0; i < meterIDs.length; i++)
             meterSelectionSetting[meterIDs[i]] = (paramCodes[i]) as WebsocketParameterCode;
         this.MeterSelectionSetting = meterSelectionSetting;
     }
@@ -66,30 +66,19 @@ class URLQueryParseResult {
 export class MeterWidgetApplication {
     private Option: MeterApplicationOption;
     private Logger = new StringListLogger();
-    private readonly WebStorage: WebstorageHandler;
 
+    private readonly UrlQueryResult = new URLQueryParseResult();
     private readonly webSocketCollection: WebsocketObjectCollection;
-    private MeterSelectDialogSetting: MeterSelectionSetting;
 
     constructor(option: MeterApplicationOption) {
         this.Option = option;
-        this.WebStorage = new WebstorageHandler(option.MeteSelectDialogOption.DefaultMeterSelectDialogSetting);
-
-        this.webSocketCollection = new WebsocketObjectCollection(this.Logger, option.WebSocketCollectionOption, this.WebStorage.WSInterval);
-
-        if (this.WebStorage.MeterSelectDialogSetting === undefined) {
-            const logmessage = "MeterDialogSetting is undefined. Overwrite with default value.";
-            this.Logger.appendLog(logmessage)
-            console.log(logmessage);
-            this.WebStorage.MeterSelectDialogSetting = this.Option.MeteSelectDialogOption.DefaultMeterSelectDialogSetting;
-        }
-        this.MeterSelectDialogSetting = this.WebStorage.MeterSelectDialogSetting;
+        this.webSocketCollection = new WebsocketObjectCollection(this.Logger, option.WebSocketCollectionOption, this.UrlQueryResult.WSInterval);
     }
 
     public async Run(): Promise<void> {
-        // Override forceCanvas flag from webstorage, if Option.PIXIApplication.forceCanvas is undefinded.
+        // Override forceCanvas flag from query, if Option.PIXIApplication.forceCanvas is undefinded.
         if (this.Option.PIXIApplicationOption.forceCanvas === undefined)
-            if (this.WebStorage.ForceCanvas)
+            if (this.UrlQueryResult.ForceCanvas)
                 this.Option.PIXIApplicationOption.forceCanvas = true;
 
         const pixiApp = new PIXI.Application(this.Option.PIXIApplicationOption);
@@ -119,7 +108,7 @@ export class MeterWidgetApplication {
         // Preload Fonts -> textures-> parts
         await this.preloadFonts();
         await this.preloadTextures();
-        this.Option.SetupPIXIMeterPanel(pixiApp, this.webSocketCollection, this.WebStorage.MeterSelectDialogSetting);
+        this.Option.SetupPIXIMeterPanel(pixiApp, this.webSocketCollection, this.UrlQueryResult.MeterSelectionSetting);
         this.webSocketCollection.Run();
     }
 
