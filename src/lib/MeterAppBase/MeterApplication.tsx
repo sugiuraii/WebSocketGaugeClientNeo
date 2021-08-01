@@ -124,7 +124,7 @@ export class MeterApplication {
         // Preload Fonts -> textures-> parts
         await this.preloadFonts();
         await this.preloadTextures();
-        this.Option.SetupPIXIMeterPanel(pixiApp, this.webSocketCollection, this.WebStorage);
+        this.Option.SetupPIXIMeterPanel(pixiApp, this.webSocketCollection, this.WebStorage.MeterSelectDialogSetting);
         this.webSocketCollection.Run();
     }
 
