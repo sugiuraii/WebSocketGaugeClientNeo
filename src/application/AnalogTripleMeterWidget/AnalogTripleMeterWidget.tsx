@@ -35,7 +35,7 @@ import { AnalogSingleMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMet
 
 // Import AppSettings.
 import * as DefaultAppSettings from "../DefaultAppSettings"
-import { AnalogSingleMeterFactory } from '../partsFactory/AnalogSingleMeterFactory';
+import { AnalogSingleMeterFactory } from '../../parts/partsFactory/AnalogSingleMeterFactory';
 
 const useVacuumInsteadOfBoost = false;
 

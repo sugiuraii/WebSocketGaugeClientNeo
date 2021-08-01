@@ -36,9 +36,9 @@ import { MilageGraphPanel } from "../../parts/GasMilageGraph/MilageGraph";
 
 // Import AppSettings.
 import * as DefaultAppSettings from "../DefaultAppSettings"
-import { FullCircularGaugePanelFactory } from '../partsFactory/FullCircularGaugePanelFactory';
-import { MeterNotAvailableError } from '../partsFactory/MeterNotAvailableError';
-import { SemiCircularGaugePanelFactory } from '../partsFactory/SemiCircularGaugePanelFactory';
+import { FullCircularGaugePanelFactory } from '../../parts/partsFactory/FullCircularGaugePanelFactory';
+import { MeterNotAvailableError } from '../../parts/partsFactory/MeterNotAvailableError';
+import { SemiCircularGaugePanelFactory } from '../../parts/partsFactory/SemiCircularGaugePanelFactory';
 
 //For including entry point html file in webpack
 require("./ChangeableDigitalMFD.html");
