@@ -81,6 +81,9 @@ export class MeterWidgetApplication {
             if (this.UrlQueryResult.ForceCanvas)
                 this.Option.PIXIApplicationOption.forceCanvas = true;
 
+        // Set transparent background for widget.
+        this.Option.PIXIApplicationOption.backgroundAlpha = 0;
+
         const pixiApp = new PIXI.Application(this.Option.PIXIApplicationOption);
         // Append PIXI.js application to document body
         pixiApp.view.style.width = "100vw";
