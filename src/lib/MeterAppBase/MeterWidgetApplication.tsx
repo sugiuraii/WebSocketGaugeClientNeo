@@ -35,23 +35,40 @@ import PIXIApplication from "./reactParts/PIXIApplication";
 
 import 'bootswatch/dist/slate/bootstrap.min.css';
 import { MeterSelectionSetting } from "./reactParts/dialog/MeterSelectDialog";
+import { WebsocketParameterCode } from "./WebsocketObjCollection/WebsocketParameterCode";
 const BOOTSTRAP_CSS_FILENAME = "bootstrap.min.css";
 
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
 
-type URLQueryParseResult =  
-{
-    WSInterval : number;
-    ForceCanvas : number;
-    
-};
+class URLQueryParseResult {
+    public readonly WSInterval: number;
+    public readonly ForceCanvas: boolean;
+    public readonly MeterSelectionSetting: MeterSelectionSetting;
+
+    constructor() {
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        const wsInteval = urlSearchParams.get("WSInterval");
+        const forceCanvas = urlSearchParams.get("ForceCanvas");
+        const meterIDs = urlSearchParams.getAll("MeterID");
+        const paramCodes = urlSearchParams.getAll("Param");
+
+        this.WSInterval = (wsInteval === null || isNaN(Number(wsInteval))) ? 0 : Number(wsInteval);
+        this.ForceCanvas = (forceCanvas === null) ? false : (forceCanvas.toLowerCase() === "true");
+        if(meterIDs.length !== paramCodes.length)
+            throw EvalError("Number of MeterID and Param (in query) are not equal.");
+        
+        const meterSelectionSetting : MeterSelectionSetting = {};
+        for(let i = 0; i < meterIDs.length; i++)
+            meterSelectionSetting[meterIDs[i]] = (paramCodes[i]) as WebsocketParameterCode;
+        this.MeterSelectionSetting = meterSelectionSetting;
+    }
+}
 
 export class MeterWidgetApplication {
     private Option: MeterApplicationOption;
     private Logger = new StringListLogger();
     private readonly WebStorage: WebstorageHandler;
 
-    private readonly urlSearchParams = new URLSearchParams(window.location.search);
 
     private readonly webSocketCollection: WebsocketObjectCollection;
     private MeterSelectDialogSetting: MeterSelectionSetting;
@@ -189,5 +206,4 @@ export class MeterWidgetApplication {
             document.getElementsByTagName('head')[0].appendChild(meta);
         }
     }
-
 }
