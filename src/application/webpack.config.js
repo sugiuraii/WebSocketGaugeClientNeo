@@ -45,7 +45,8 @@ module.exports = {
         "FullCircularGaugePanelWidget" : './widget/FullCircularGaugePanelWidget/FullCircularGaugePanelWidget.tsx',
         "DigiTachoPanelWidget" : './widget/DigiTachoPanelWidget/DigiTachoPanelWidget.tsx',
         "GasMilagePanelWidget" : './widget/GasMilagePanelWidget/GasMilagePanelWidget.tsx',
-        "AnalogMeterClusterWidget" : './widget/AnalogMeterClusterWidget/AnalogMeterClusterWidget.tsx'
+        "AnalogMeterClusterWidget" : './widget/AnalogMeterClusterWidget/AnalogMeterClusterWidget.tsx',
+        "LEDRevMeterWidget" : './widget/LEDRevMeterWidget/LEDRevMeterWidget.tsx'
     },
     devtool: "source-map",
     output:
