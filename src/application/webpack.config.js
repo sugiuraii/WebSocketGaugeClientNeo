@@ -42,7 +42,8 @@ module.exports = {
         "AnalogTripleMeterWidget" : './widget/AnalogSingleMeterWidget/AnalogSingleMeterWidget.tsx',
         "SemiCircularGaugePanelWidget" : './widget/SemiCircularGaugePanelWidget/SemiCircularGaugePanelWidget.tsx',
         "FullCircularGaugePanelWidget" : './widget/FullCircularGaugePanelWidget/FullCircularGaugePanelWidget.tsx',
-        "DigiTachoPanelWidget" : './widget/DigiTachoPanelWidget/DigiTachoPanelWidget.tsx'
+        "DigiTachoPanelWidget" : './widget/DigiTachoPanelWidget/DigiTachoPanelWidget.tsx',
+        "GasMilagePanelWidget" : './widget/GasMilagePanelWidget/GasMilagePanelWidget.tsx'
     },
     devtool: "source-map",
     output:
