@@ -47,52 +47,36 @@ window.onload = function () {
 class AnalogSingleMeterWidgetApp {
 
     public async Start() {
-        const pixiAppOption: PIXI.IApplicationOptions = { width: 1280, height: 720 };
+        const pixiAppOption: PIXI.IApplicationOptions = { width: 410, height: 410 };
 
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
         appOption.PreloadResource.WebFontFamiliyName.push(...AnalogSingleMeter.RequestedFontFamily);
         appOption.PreloadResource.WebFontCSSURL.push(...AnalogSingleMeter.RequestedFontCSSURL);
         appOption.PreloadResource.TexturePath.push(...AnalogSingleMeter.RequestedTexturePath);
-        //appOption.MeteSelectDialogOption.ParameterCodeListToSelect = ["Engine_Speed", "Engine_Load", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Oil_Pressure", "Mass_Air_Flow", "O2Sensor_1_Air_Fuel_Ratio", "Intake_Air_Temperature"];
-        //appOption.MeteSelectDialogOption.DefaultMeterSelectDialogSetting = { ["Left"]: "Engine_Speed", ["Center"]: "Manifold_Absolute_Pressure", ["Right"]: "Coolant_Temperature" };
 
         appOption.SetupPIXIMeterPanel = (app, ws, meterSetting) => {
             const stage = app.stage;
             //Centering the top-level container
-            stage.pivot.set(600, 200);
-            stage.position.set(app.screen.width / 2, app.screen.height / 2);
+            stage.pivot.set(0, 0);
+            stage.position.set(0, 0);
 
             const analogSingleMeterFactory = new AnalogSingleMeterFactory(useVacuumInsteadOfBoost);
             
-            const leftMeterCode = meterSetting["Left"];
-            const centerMeterCode = meterSetting["Center"];
-            const rightMeterCode = meterSetting["Right"];
+            const meterCode = meterSetting["Meter1"];
     
-            const leftMeter = analogSingleMeterFactory.getMeter(leftMeterCode);
-            const centerMeter = analogSingleMeterFactory.getMeter(centerMeterCode);
-            const rightMeter = analogSingleMeterFactory.getMeter(rightMeterCode);    
+            const meter = analogSingleMeterFactory.getMeter(meterCode);
 
-            const leftMeterDisplayObject = leftMeter.createDisplayObject();
-            const centerMeterDisplayObject = centerMeter.createDisplayObject();
-            const rightMeterDisplayObject = rightMeter.createDisplayObject();
-            leftMeterDisplayObject.position.set(0, 0);
-            centerMeterDisplayObject.position.set(400, 0);
-            rightMeterDisplayObject.position.set(800, 0);
-            stage.addChild(leftMeterDisplayObject);
-            stage.addChild(centerMeterDisplayObject);
-            stage.addChild(rightMeterDisplayObject);
+            const meterDisplayObject = meter.createDisplayObject();
+            meterDisplayObject.position.set(0, 0);
+            stage.addChild(meterDisplayObject);
             
             app.ticker.add(() => {
                 const timestamp = app.ticker.lastTime;
 
-                leftMeterDisplayObject.Value = leftMeter.getValue(timestamp, ws);
-                centerMeterDisplayObject.Value = centerMeter.getValue(timestamp, ws);
-                rightMeterDisplayObject.Value = rightMeter.getValue(timestamp, ws);
+                meterDisplayObject.Value = meter.getValue(timestamp, ws);
             });
 
-            ws.WSMapper.registerParameterCode(leftMeter.code, leftMeter.readmode);
-            ws.WSMapper.registerParameterCode(centerMeter.code, centerMeter.readmode);
-            ws.WSMapper.registerParameterCode(rightMeter.code, rightMeter.readmode);
+            ws.WSMapper.registerParameterCode(meter.code, meter.readmode);
         };
 
         const app = new MeterWidgetApplication(appOption);
