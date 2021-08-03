@@ -23,7 +23,7 @@
  */
 
 //For including entry point html file in webpack
-require("./AnalogTripleMeterWidget.html");
+require("./AnalogSingleMeterWidget.html");
 import * as PIXI from 'pixi.js';
 
 //Import application base class
@@ -40,11 +40,11 @@ import { AnalogSingleMeterFactory } from '../../../parts/partsFactory/AnalogSing
 const useVacuumInsteadOfBoost = false;
 
 window.onload = function () {
-    const meterapp = new AnalogTripleMeterWidgetApp();
+    const meterapp = new AnalogSingleMeterWidgetApp();
     meterapp.Start();
 }
 
-class AnalogTripleMeterWidgetApp {
+class AnalogSingleMeterWidgetApp {
 
     public async Start() {
         const pixiAppOption: PIXI.IApplicationOptions = { width: 1280, height: 720 };
