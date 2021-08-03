@@ -39,7 +39,7 @@ module.exports = {
         "AnalogTripleMeter": './AnalogTripleMeter/AnalogTripleMeter.ts',
         "ChangeableAnalogTripleMeter": './ChangeableAnalogTripleMeter/ChangeableAnalogTripleMeter.tsx',
         "LEDRevMeter": './LEDRevMeter/LEDRevMeter.ts',
-        "AnalogTripleMeterWidget" : './AnalogTripleMeterWidget/AnalogTripleMeterWidget.tsx'
+        "AnalogTripleMeterWidget" : './widget/AnalogTripleMeterWidget/AnalogTripleMeterWidget.tsx'
     },
     devtool: "source-map",
     output:
