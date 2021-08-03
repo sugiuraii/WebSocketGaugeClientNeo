@@ -41,7 +41,8 @@ module.exports = {
         "LEDRevMeter": './LEDRevMeter/LEDRevMeter.ts',
         "AnalogTripleMeterWidget" : './widget/AnalogSingleMeterWidget/AnalogSingleMeterWidget.tsx',
         "SemiCircularGaugePanelWidget" : './widget/SemiCircularGaugePanelWidget/SemiCircularGaugePanelWidget.tsx',
-        "FullCircularGaugePanelWidget" : './widget/FullCircularGaugePanelWidget/FullCircularGaugePanelWidget.tsx'
+        "FullCircularGaugePanelWidget" : './widget/FullCircularGaugePanelWidget/FullCircularGaugePanelWidget.tsx',
+        "DigiTachoPanelWidget" : './widget/DigiTachoPanelWidget/DigiTachoPanelWidget.tsx'
     },
     devtool: "source-map",
     output:
