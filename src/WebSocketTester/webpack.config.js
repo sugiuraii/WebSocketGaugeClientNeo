@@ -21,6 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+const webpack = require('webpack');
+const path = require('path');
+const pjrootPath = path.resolve(__dirname, "../../")
+const outputPath = path.resolve(pjrootPath, "public_html/WebSocketTester");
 
 module.exports = {
     mode: "development",
@@ -36,7 +40,7 @@ module.exports = {
     devtool: "source-map",
     output:
     {
-        path: __dirname + "/../../public_html/WebSocketTester/",
+        path: outputPath,
         filename: "js/[name].js"
     },
     resolve: {
@@ -46,7 +50,15 @@ module.exports = {
     module: {
         rules: [
             // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-            { test: /\.ts?$/, use: "ts-loader" },
+            {
+                test: /\.ts?$/,
+                use: {
+                    loader: 'ts-loader', 
+                    options: {
+                        configFile: path.resolve(pjrootPath, 'src/tsconfig.json'),
+                    }
+                }
+            },
             { test: /\.html$/, use: "file-loader?name=[name].[ext]"}
         ]
     }

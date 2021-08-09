@@ -22,8 +22,10 @@
  * THE SOFTWARE.
  */
 
-var webpack = require('webpack');
-const outputPath = __dirname + "/../../public_html/benchmark";
+const webpack = require('webpack');
+const path = require('path');
+const pjrootPath = path.resolve(__dirname, "../../")
+const outputPath = path.resolve(pjrootPath, "public_html/benchmark");
 
 module.exports = {
     mode: "development",
@@ -56,7 +58,15 @@ module.exports = {
     ,
     module: {
         rules: [
-            { test: /\.tsx?$/, use: 'ts-loader' },
+            {
+                test: /\.tsx?$/,
+                use: {
+                    loader: 'ts-loader',
+                    options: {
+                        configFile: path.resolve(pjrootPath, 'src/tsconfig.json'),
+                    }
+                }
+            },
             { test: /\.png$/, use: "file-loader?name=img/[name].[ext]" },
             { test: /\.fnt$/, use: "file-loader?name=img/[name].[ext]" }, // Bitmap font setting files
             { type: "javascript/auto", test: /\.json$/, use: "file-loader?name=img/[name].[ext]" },

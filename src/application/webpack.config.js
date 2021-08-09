@@ -22,8 +22,10 @@
  * THE SOFTWARE.
  */
 
-var webpack = require('webpack');
-const outputPath = __dirname + "/../../public_html/application";
+const webpack = require('webpack');
+const path = require('path');
+const pjrootPath = path.resolve(__dirname, "../../")
+const outputPath = path.resolve(pjrootPath, "public_html/application");
 
 module.exports = {
     mode: "development",
@@ -40,13 +42,13 @@ module.exports = {
         "ChangeableAnalogTripleMeter": './ChangeableAnalogTripleMeter/ChangeableAnalogTripleMeter.tsx',
         "LEDRevMeter": './LEDRevMeter/LEDRevMeter.ts',
         // Widget apps
-        "AnalogTripleMeterWidget" : './widget/AnalogSingleMeterWidget/AnalogSingleMeterWidget.tsx',
-        "SemiCircularGaugePanelWidget" : './widget/SemiCircularGaugePanelWidget/SemiCircularGaugePanelWidget.tsx',
-        "FullCircularGaugePanelWidget" : './widget/FullCircularGaugePanelWidget/FullCircularGaugePanelWidget.tsx',
-        "DigiTachoPanelWidget" : './widget/DigiTachoPanelWidget/DigiTachoPanelWidget.tsx',
-        "GasMilagePanelWidget" : './widget/GasMilagePanelWidget/GasMilagePanelWidget.tsx',
-        "AnalogMeterClusterWidget" : './widget/AnalogMeterClusterWidget/AnalogMeterClusterWidget.tsx',
-        "LEDRevMeterWidget" : './widget/LEDRevMeterWidget/LEDRevMeterWidget.tsx'
+        "AnalogTripleMeterWidget": './widget/AnalogSingleMeterWidget/AnalogSingleMeterWidget.tsx',
+        "SemiCircularGaugePanelWidget": './widget/SemiCircularGaugePanelWidget/SemiCircularGaugePanelWidget.tsx',
+        "FullCircularGaugePanelWidget": './widget/FullCircularGaugePanelWidget/FullCircularGaugePanelWidget.tsx',
+        "DigiTachoPanelWidget": './widget/DigiTachoPanelWidget/DigiTachoPanelWidget.tsx',
+        "GasMilagePanelWidget": './widget/GasMilagePanelWidget/GasMilagePanelWidget.tsx',
+        "AnalogMeterClusterWidget": './widget/AnalogMeterClusterWidget/AnalogMeterClusterWidget.tsx',
+        "LEDRevMeterWidget": './widget/LEDRevMeterWidget/LEDRevMeterWidget.tsx'
     },
     devtool: "source-map",
     output:
@@ -71,7 +73,15 @@ module.exports = {
     },
     module: {
         rules: [
-            { test: /\.tsx?$/, use: 'ts-loader' },
+            {
+                test: /\.tsx?$/,
+                use: {
+                    loader: 'ts-loader', 
+                    options: {
+                        configFile: path.resolve(pjrootPath, 'src/tsconfig.json'),
+                    }
+                }
+            },
             { test: /\.png$/, use: "file-loader?name=img/[name].[ext]" },
             { test: /\.fnt$/, use: "file-loader?name=img/[name].[ext]" }, // Bitmap font setting files
             { type: "javascript/auto", test: /\.appconfig.jsonc$/, use: "file-loader?name=config/[name].[ext]" },

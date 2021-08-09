@@ -22,19 +22,22 @@
  * THE SOFTWARE.
  */
 
-var webpack = require('webpack');
+const webpack = require('webpack');
+const path = require('path');
+const pjrootPath = path.resolve(__dirname, "../../")
+const outputPath = path.resolve(pjrootPath, "public_html/");
 
 module.exports = {
     mode: "development",
     entry:
     {
         "index": './index.tsx',
-        "AllResetWebstorage" : "./AllResetWebstorage.tsx"
+        "AllResetWebstorage": "./AllResetWebstorage.tsx"
     },
     devtool: "source-map",
     output:
     {
-        path: __dirname + "/../../public_html/",
+        path: outputPath,
         filename: "./js/[name].js"
     },
     resolve: {
@@ -51,10 +54,18 @@ module.exports = {
     ],
     module: {
         rules: [
-            { test: /\.tsx?$/, use: 'ts-loader' },
+            {
+                test: /\.tsx?$/,
+                use: {
+                    loader: 'ts-loader',
+                    options: {
+                        configFile: path.resolve(pjrootPath, 'src/tsconfig.json'),
+                    }
+                }
+            },
             { test: /\.png$/, use: "file-loader?name=img/[name].[ext]" },
             { test: /\.html$/, use: "file-loader?name=[name].[ext]" },
-            { test: /\.css$/, use: [{ loader: 'style-loader' }, { loader: 'css-loader' }]},
+            { test: /\.css$/, use: [{ loader: 'style-loader' }, { loader: 'css-loader' }] },
             { test: /\.svg$/, use: 'url-loader?mimetype=image/svg+xml' },
             { test: /\.woff$/, use: 'url-loader?mimetype=application/font-woff' },
             { test: /\.woff2$/, use: 'url-loader?mimetype=application/font-woff' },
