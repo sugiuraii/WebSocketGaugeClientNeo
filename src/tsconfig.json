@@ -10,6 +10,7 @@
         "strict": true,
         "moduleResolution": "node",
         "noUnusedParameters":true,
-        "lib":["dom", "es2017"]
+        "lib":["dom", "es2017"],
+        "baseUrl": "./src"
     }
 }
