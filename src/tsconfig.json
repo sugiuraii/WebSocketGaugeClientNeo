@@ -11,6 +11,6 @@
         "moduleResolution": "node",
         "noUnusedParameters":true,
         "lib":["dom", "es2017"],
-        "baseUrl": "./src"
+        "baseUrl": "./"
     }
 }
