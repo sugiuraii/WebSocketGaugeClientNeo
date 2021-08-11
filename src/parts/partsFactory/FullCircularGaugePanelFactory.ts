@@ -22,9 +22,9 @@
  * THE SOFTWARE.
  */
 
-import { WebsocketObjectCollection } from "../../lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
-import { WebsocketParameterCode } from "../../lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode";
-import { ReadModeCode } from "../../lib/WebSocket/WebSocketCommunication";
+import { WebsocketObjectCollection } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
+import { WebsocketParameterCode } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode";
+import { ReadModeCode } from "lib/WebSocket/WebSocketCommunication";
 import { FullCircularGaugePanel } from "../CircularGauges/private/FullCircularGaugePanelBase";
 import { VacuumGaugePanel, BoostGaugePanel, WaterTempGaugePanel, EngineOilTempGaugePanel, BatteryVoltageGaugePanel, MassAirFlowGaugePanel, AirFuelGaugePanel, EngineLoadGaugePanel, IntakeAirTemperatureGaugePanel } from "../CircularGauges/FullCircularGaugePanel";
 import { MeterNotAvailableError } from "./MeterNotAvailableError";

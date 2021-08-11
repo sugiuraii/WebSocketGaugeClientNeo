@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import { RotationNeedleGauge } from '../../lib/Graphics/PIXIGauge';
-import { RotationNeedleGaugeOptions } from '../../lib/Graphics/PIXIGauge';
+import { RotationNeedleGauge } from 'lib/Graphics/PIXIGauge';
+import { RotationNeedleGaugeOptions } from 'lib/Graphics/PIXIGauge';
 
 import * as PIXI from 'pixi.js';
 import { SingleValueGauge } from '../SingleValueGauge';

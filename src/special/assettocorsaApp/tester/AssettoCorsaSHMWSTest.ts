@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import { AssettoCorsaSHMWebsocket, AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMStaticInfoParameterCode, AssettoCorsaSHMGraphicsParameterCode } from '../../../lib/WebSocket/WebSocketCommunication';
-import { AssettoCorsaSHMNumericalVALCode } from '../../../lib/WebSocket/WebSocketCommunication';
+import { AssettoCorsaSHMWebsocket, AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMStaticInfoParameterCode, AssettoCorsaSHMGraphicsParameterCode } from 'lib/WebSocket/WebSocketCommunication';
+import { AssettoCorsaSHMNumericalVALCode } from 'lib/WebSocket/WebSocketCommunication';
 import { WebSocketTesterBase } from '../../../WebSocketTester/base/WebSocketTesterBase'
 
 import $ from "jquery";
