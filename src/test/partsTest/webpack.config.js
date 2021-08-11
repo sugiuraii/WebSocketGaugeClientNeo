@@ -25,6 +25,7 @@ const webpack = require('webpack');
 const path = require('path');
 const pjrootPath = path.resolve(__dirname, "../../../")
 const outputPath = path.resolve(pjrootPath, "public_html/partsTest");
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
     entry:
@@ -46,7 +47,8 @@ module.exports = {
     },
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.
-        extensions: ['.ts', '.tsx', '.js']
+        extensions: ['.ts', '.tsx', '.js'],
+        plugins: [new TsconfigPathsPlugin({configFile: path.resolve(pjrootPath, "src/tsconfig.json")})]
     },
     devServer: {
         contentBase: outputPath
@@ -58,9 +60,6 @@ module.exports = {
                 test: /\.tsx?$/,
                 use: {
                     loader: 'ts-loader',
-                    options: {
-                        configFile: path.resolve(pjrootPath, 'src/tsconfig.json'),
-                    }
                 }
             },
             { test: /\.png$/, use: "file-loader?name=img/[name].[ext]" },

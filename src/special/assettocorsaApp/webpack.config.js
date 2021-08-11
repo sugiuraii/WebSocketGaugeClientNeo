@@ -26,6 +26,7 @@ const webpack = require('webpack');
 const path = require('path');
 const pjrootPath = path.resolve(__dirname, "../../../")
 const outputPath = path.resolve(pjrootPath, "public_html/special/assettocorsa");
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
     mode: "development",
@@ -46,7 +47,8 @@ module.exports = {
     },
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.
-        extensions: ['.ts', '.tsx', '.js']
+        extensions: ['.ts', '.tsx', '.js'],
+        plugins: [new TsconfigPathsPlugin({configFile: path.resolve(pjrootPath, "src/tsconfig.json")})]
     },
     plugins: [
         new webpack.ProvidePlugin({
@@ -64,10 +66,7 @@ module.exports = {
             {
                 test: /\.tsx?$/,
                 use: {
-                    loader: 'ts-loader', 
-                    options: {
-                        configFile: path.resolve(pjrootPath, 'src/tsconfig.json'),
-                    }
+                    loader: 'ts-loader'
                 }
             },
             { test: /\.png$/, use: "file-loader?name=app/img/[name].[ext]" },
