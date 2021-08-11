@@ -23,7 +23,7 @@
  */
 
 import * as PIXI from 'pixi.js';
-import {MilageGraphPanel} from "../../parts/GasMilageGraph/MilageGraph";
+import {MilageGraphPanel} from "parts/GasMilageGraph/MilageGraph";
 import * as WebFont from "webfontloader";
 
 require("./MilageBarTest.html");

@@ -31,7 +31,7 @@ import { MeterWidgetApplication } from "lib/MeterAppBase/MeterWidgetApplication"
 import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
-import { MilageGraphPanel } from "../../../parts/GasMilageGraph/MilageGraph";
+import { MilageGraphPanel } from "parts/GasMilageGraph/MilageGraph";
 
 // Import AppSettings.
 import * as DefaultAppSettings from "../../DefaultAppSettings"

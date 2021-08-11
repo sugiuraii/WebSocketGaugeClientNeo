@@ -29,7 +29,7 @@ import { MeterApplication } from "lib/MeterAppBase/MeterApplication";
 import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
-import { AnalogMeterCluster } from "../../../parts/AnalogMeterCluster/AnalogMeterCluster";
+import { AnalogMeterCluster } from "parts/AnalogMeterCluster/AnalogMeterCluster";
 
 
 //Import enumuator of parameter code

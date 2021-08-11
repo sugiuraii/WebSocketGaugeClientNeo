@@ -55,10 +55,10 @@ By using sthis information, webpack will bundle html file and type script file, 
 import {MeterApplicationBase} from "lib/MeterAppBase/MeterApplicationBase";
 
 //Import meter parts
-import {WaterTempGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel";
-import {ThrottleGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel";
-import {DigiTachoPanel} from "../parts/DigiTachoPanel/DigiTachoPanel";
-import {BoostGaugePanel} from "../parts/CircularGauges/FullCircularGaugePanel";
+import {WaterTempGaugePanel} from "parts/CircularGauges/SemiCircularGaugePanel";
+import {ThrottleGaugePanel} from "parts/CircularGauges/SemiCircularGaugePanel";
+import {DigiTachoPanel} from "parts/DigiTachoPanel/DigiTachoPanel";
+import {BoostGaugePanel} from "parts/CircularGauges/FullCircularGaugePanel";
 
 //Import enumuator of parameter code
 import {OBDIIParameterCode} from "lib/WebSocket/WebSocketCommunication";

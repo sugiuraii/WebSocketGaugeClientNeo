@@ -31,9 +31,9 @@ import { MeterApplication } from "lib/MeterAppBase/MeterApplication";
 import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
-import { BoostMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
-import { WaterTempMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
-import { OilTempMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
+import { BoostMeter } from "parts/AnalogSingleMeter/AnalogSingleMeter";
+import { WaterTempMeter } from "parts/AnalogSingleMeter/AnalogSingleMeter";
+import { OilTempMeter } from "parts/AnalogSingleMeter/AnalogSingleMeter";
 
 // Import AppSettings.
 import * as DefaultAppSettings from  "../DefaultAppSettings"

@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { BoostGaugePanel } from "../../parts/CircularGauges/FullCircularGaugePanel";
+import { BoostGaugePanel } from "parts/CircularGauges/FullCircularGaugePanel";
 import * as WebFont from "webfontloader";
 import * as PIXI from 'pixi.js';
 

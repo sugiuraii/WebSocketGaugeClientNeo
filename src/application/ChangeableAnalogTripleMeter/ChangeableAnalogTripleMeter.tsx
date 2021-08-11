@@ -31,11 +31,11 @@ import { MeterApplication } from "lib/MeterAppBase/MeterApplication";
 import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
-import { AnalogSingleMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
+import { AnalogSingleMeter } from "parts/AnalogSingleMeter/AnalogSingleMeter";
 
 // Import AppSettings.
 import * as DefaultAppSettings from "../DefaultAppSettings"
-import { AnalogSingleMeterFactory } from '../../parts/partsFactory/AnalogSingleMeterFactory';
+import { AnalogSingleMeterFactory } from 'parts/partsFactory/AnalogSingleMeterFactory';
 
 const useVacuumInsteadOfBoost = false;
 

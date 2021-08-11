@@ -28,15 +28,15 @@ import * as PIXI from 'pixi.js';
 import {MeterApplication} from "lib/MeterAppBase/MeterApplication";
 
 //Import meter parts
-import {BoostGaugePanel} from "../parts/CircularGauges/FullCircularGaugePanel";
-import {AirFuelGaugePanel} from "../parts/CircularGauges/FullCircularGaugePanel";
-import {WaterTempGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel";
-import {BatteryVoltageGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel";
-import {ThrottleGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel";
-import {DigiTachoPanel} from "../parts/DigiTachoPanel/DigiTachoPanel";
-import {MilageGraphPanel} from "../parts/GasMilageGraph/MilageGraph";
+import {BoostGaugePanel} from "parts/CircularGauges/FullCircularGaugePanel";
+import {AirFuelGaugePanel} from "parts/CircularGauges/FullCircularGaugePanel";
+import {WaterTempGaugePanel} from "parts/CircularGauges/SemiCircularGaugePanel";
+import {BatteryVoltageGaugePanel} from "parts/CircularGauges/SemiCircularGaugePanel";
+import {ThrottleGaugePanel} from "parts/CircularGauges/SemiCircularGaugePanel";
+import {DigiTachoPanel} from "parts/DigiTachoPanel/DigiTachoPanel";
+import {MilageGraphPanel} from "parts/GasMilageGraph/MilageGraph";
 
-import {FPSCounter} from "../parts/FPSIndicator/FPSCounter";
+import {FPSCounter} from "parts/FPSIndicator/FPSCounter";
 import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicationOption";
 
 //For including entry point html file in webpack
