@@ -35,7 +35,7 @@ import { SemiCircularGaugePanel } from 'parts/CircularGauges/SemiCircularGaugePa
 import { SemiCircularGaugePanelFactory } from 'parts/partsFactory/SemiCircularGaugePanelFactory';
 
 // Import AppSettings.
-import * as DefaultAppSettings from "../../DefaultAppSettings"
+import * as DefaultAppSettings from "application/DefaultAppSettings"
 
 const useVacuumInsteadOfBoost = false;
 

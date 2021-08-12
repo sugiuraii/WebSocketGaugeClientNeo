@@ -34,7 +34,7 @@ import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicatio
 import { MilageGraphPanel } from "parts/GasMilageGraph/MilageGraph";
 
 // Import AppSettings.
-import * as DefaultAppSettings from "../../DefaultAppSettings"
+import * as DefaultAppSettings from "application/DefaultAppSettings"
 
 window.onload = function () {
     const meterapp = new GasMilagePanelWidgetApp();

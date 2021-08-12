@@ -35,7 +35,7 @@ import { FullCircularGaugePanel } from 'parts/CircularGauges/FullCircularGaugePa
 import { FullCircularGaugePanelFactory } from 'parts/partsFactory/FullCircularGaugePanelFactory';
 
 // Import AppSettings.
-import * as DefaultAppSettings from "../../DefaultAppSettings"
+import * as DefaultAppSettings from "application/DefaultAppSettings"
 
 const useVacuumInsteadOfBoost = false;
 

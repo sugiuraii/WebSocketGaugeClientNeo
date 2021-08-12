@@ -34,7 +34,7 @@ import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicatio
 import { DigiTachoPanel } from "parts/DigiTachoPanel/DigiTachoPanel";
 
 // Import AppSettings.
-import * as DefaultAppSettings from "../../DefaultAppSettings"
+import * as DefaultAppSettings from "application/DefaultAppSettings"
 
 window.onload = function () {
     const meterapp = new DigiTachoPanelWidgetApp();
