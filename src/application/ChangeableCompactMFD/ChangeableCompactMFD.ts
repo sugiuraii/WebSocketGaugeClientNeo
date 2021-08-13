@@ -36,7 +36,7 @@ import { SemiCircularGaugePanel } from "parts/CircularGauges/SemiCircularGaugePa
 import { DigiTachoPanel } from "parts/DigiTachoPanel/DigiTachoPanel";
 
 // Import AppSettings.
-import * as DefaultAppSettings from  "../DefaultAppSettings"
+import * as DefaultAppSettings from  "application/DefaultAppSettings"
 
 import { FullCircularGaugePanelFactory } from 'parts/partsFactory/FullCircularGaugePanelFactory';
 import { MeterNotAvailableError } from 'parts/partsFactory/MeterNotAvailableError';

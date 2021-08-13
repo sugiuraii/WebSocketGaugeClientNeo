@@ -32,7 +32,7 @@ import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicatio
 import { AnalogMeterCluster } from "parts/AnalogMeterCluster/AnalogMeterCluster";
 
 // Import AppSettings.
-import * as DefaultAppSettings from  "../DefaultAppSettings"
+import * as DefaultAppSettings from  "application/DefaultAppSettings"
 
 //For including entry point html file in webpack
 require("./AnalogMeterCluster.html");

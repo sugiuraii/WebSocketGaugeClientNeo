@@ -38,7 +38,7 @@ import { DigiTachoPanel } from "parts/DigiTachoPanel/DigiTachoPanel";
 import { MilageGraphPanel } from "parts/GasMilageGraph/MilageGraph";
 
 // Import AppSettings.
-import * as DefaultAppSettings from  "../DefaultAppSettings"
+import * as DefaultAppSettings from  "application/DefaultAppSettings"
 
 //For including entry point html file in webpack
 require("./DigitalMFD.html");

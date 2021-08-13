@@ -37,7 +37,7 @@ import { DigiTachoPanel } from "parts/DigiTachoPanel/DigiTachoPanel";
 import { BoostGaugePanel } from "parts/CircularGauges/FullCircularGaugePanel";
 
 // Import AppSettings.
-import * as DefaultAppSettings from  "../DefaultAppSettings"
+import * as DefaultAppSettings from  "application/DefaultAppSettings"
 
 window.onload = function () {
     const meterapp = new CompactMFDApp();

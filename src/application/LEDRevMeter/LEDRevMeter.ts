@@ -36,7 +36,7 @@ import { WaterTempMeter } from "parts/AnalogSingleMeter/AnalogSingleMeter";
 import { LEDTachoMeter } from "parts/LEDTachoMeter/LEDTachoMeter";
 
 // Import AppSettings.
-import * as DefaultAppSettings from  "../DefaultAppSettings"
+import * as DefaultAppSettings from  "application/DefaultAppSettings"
 
 window.onload = function () {
     const meterapp = new LEDRevMeterApp();

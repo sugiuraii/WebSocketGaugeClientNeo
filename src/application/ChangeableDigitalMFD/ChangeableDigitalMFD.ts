@@ -35,7 +35,7 @@ import { DigiTachoPanel } from "parts/DigiTachoPanel/DigiTachoPanel";
 import { MilageGraphPanel } from "parts/GasMilageGraph/MilageGraph";
 
 // Import AppSettings.
-import * as DefaultAppSettings from "../DefaultAppSettings"
+import * as DefaultAppSettings from "application/DefaultAppSettings"
 import { FullCircularGaugePanelFactory } from 'parts/partsFactory/FullCircularGaugePanelFactory';
 import { MeterNotAvailableError } from 'parts/partsFactory/MeterNotAvailableError';
 import { SemiCircularGaugePanelFactory } from 'parts/partsFactory/SemiCircularGaugePanelFactory';
