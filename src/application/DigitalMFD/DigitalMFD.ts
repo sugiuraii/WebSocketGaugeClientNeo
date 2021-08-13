@@ -25,20 +25,20 @@
 import * as PIXI from 'pixi.js';
 
 //Import application base class
-import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
-import { MeterApplicationOption } from "../../lib/MeterAppBase/options/MeterApplicationOption";
+import { MeterApplication } from "lib/MeterAppBase/MeterApplication";
+import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
-import { BoostGaugePanel } from "../../parts/CircularGauges/FullCircularGaugePanel";
-import { AirFuelGaugePanel } from "../../parts/CircularGauges/FullCircularGaugePanel";
-import { WaterTempGaugePanel } from "../../parts/CircularGauges/SemiCircularGaugePanel";
-import { BatteryVoltageGaugePanel } from "../../parts/CircularGauges/SemiCircularGaugePanel";
-import { ThrottleGaugePanel } from "../../parts/CircularGauges/SemiCircularGaugePanel";
-import { DigiTachoPanel } from "../../parts/DigiTachoPanel/DigiTachoPanel";
-import { MilageGraphPanel } from "../../parts/GasMilageGraph/MilageGraph";
+import { BoostGaugePanel } from "parts/CircularGauges/FullCircularGaugePanel";
+import { AirFuelGaugePanel } from "parts/CircularGauges/FullCircularGaugePanel";
+import { WaterTempGaugePanel } from "parts/CircularGauges/SemiCircularGaugePanel";
+import { BatteryVoltageGaugePanel } from "parts/CircularGauges/SemiCircularGaugePanel";
+import { ThrottleGaugePanel } from "parts/CircularGauges/SemiCircularGaugePanel";
+import { DigiTachoPanel } from "parts/DigiTachoPanel/DigiTachoPanel";
+import { MilageGraphPanel } from "parts/GasMilageGraph/MilageGraph";
 
 // Import AppSettings.
-import * as DefaultAppSettings from  "../DefaultAppSettings"
+import * as DefaultAppSettings from  "application/DefaultAppSettings"
 
 //For including entry point html file in webpack
 require("./DigitalMFD.html");

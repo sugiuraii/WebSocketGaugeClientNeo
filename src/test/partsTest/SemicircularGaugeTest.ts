@@ -23,7 +23,7 @@
  */
 
 import * as PIXI from 'pixi.js';
-import { ThrottleGaugePanel } from "../../parts/CircularGauges/SemiCircularGaugePanel";
+import { ThrottleGaugePanel } from "parts/CircularGauges/SemiCircularGaugePanel";
 import * as WebFont from "webfontloader";
 
 require("./SemiCircularGaugeTest.html");

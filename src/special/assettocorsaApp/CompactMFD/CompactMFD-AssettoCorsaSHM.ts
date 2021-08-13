@@ -27,17 +27,17 @@ require("./CompactMFD-AssettoCorsaSHM.html");
 import * as PIXI from 'pixi.js';
 
 //Import application base class
-import { MeterApplication } from "../../../lib/MeterAppBase/MeterApplication";
-import { MeterApplicationOption } from "../../../lib/MeterAppBase/options/MeterApplicationOption";
+import { MeterApplication } from "lib/MeterAppBase/MeterApplication";
+import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
-import { BoostGaugePanel } from "../../../parts/CircularGauges/FullCircularGaugePanel";
-import { WaterTempGaugePanel } from "../../../parts/CircularGauges/SemiCircularGaugePanel";
-import { EngineOilTempGaugePanel } from "../../../parts/CircularGauges/SemiCircularGaugePanel";
-import { DigiTachoPanel } from "../../../parts/DigiTachoPanel/DigiTachoPanel";
+import { BoostGaugePanel } from "parts/CircularGauges/FullCircularGaugePanel";
+import { WaterTempGaugePanel } from "parts/CircularGauges/SemiCircularGaugePanel";
+import { EngineOilTempGaugePanel } from "parts/CircularGauges/SemiCircularGaugePanel";
+import { DigiTachoPanel } from "parts/DigiTachoPanel/DigiTachoPanel";
 
 //Import enumuator of parameter code
-import { AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMNumericalVALCode } from "../../../lib/WebSocket/WebSocketCommunication";
+import { AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMNumericalVALCode } from "lib/WebSocket/WebSocketCommunication";
 
 window.onload = function () {
     const meterapp = new CompactMFD_AssettoCorsaSHM();

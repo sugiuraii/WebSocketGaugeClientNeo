@@ -25,14 +25,14 @@
 import * as PIXI from 'pixi.js';
 
 //Import application base class
-import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
-import { MeterApplicationOption } from "../../lib/MeterAppBase/options/MeterApplicationOption";
+import { MeterApplication } from "lib/MeterAppBase/MeterApplication";
+import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
-import { AnalogMeterCluster } from "../../parts/AnalogMeterCluster/AnalogMeterCluster";
+import { AnalogMeterCluster } from "parts/AnalogMeterCluster/AnalogMeterCluster";
 
 // Import AppSettings.
-import * as DefaultAppSettings from  "../DefaultAppSettings"
+import * as DefaultAppSettings from  "application/DefaultAppSettings"
 
 //For including entry point html file in webpack
 require("./AnalogMeterCluster.html");

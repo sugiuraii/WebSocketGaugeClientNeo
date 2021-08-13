@@ -27,16 +27,16 @@ require("./AnalogTripleMeter.html");
 import * as PIXI from 'pixi.js';
 
 //Import application base class
-import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
-import { MeterApplicationOption } from "../../lib/MeterAppBase/options/MeterApplicationOption";
+import { MeterApplication } from "lib/MeterAppBase/MeterApplication";
+import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
-import { BoostMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
-import { WaterTempMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
-import { OilTempMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
+import { BoostMeter } from "parts/AnalogSingleMeter/AnalogSingleMeter";
+import { WaterTempMeter } from "parts/AnalogSingleMeter/AnalogSingleMeter";
+import { OilTempMeter } from "parts/AnalogSingleMeter/AnalogSingleMeter";
 
 // Import AppSettings.
-import * as DefaultAppSettings from  "../DefaultAppSettings"
+import * as DefaultAppSettings from  "application/DefaultAppSettings"
 
 window.onload = function () {
     const meterapp = new AnalogTripleMeterApp();

@@ -22,12 +22,12 @@
  * THE SOFTWARE.
  */
 
-import { CircularProgressBar } from '../../lib/Graphics/PIXIGauge';
-import { CircularProgressBarOptions } from '../../lib/Graphics/PIXIGauge';
-import { RotationNeedleGauge } from '../../lib/Graphics/PIXIGauge';
-import { RotationNeedleGaugeOptions } from '../../lib/Graphics/PIXIGauge';
-import { BitmapTextNumericIndicator } from '../../lib/Graphics/PIXIGauge';
-import { NumericIndicator } from '../../lib/Graphics/PIXIGauge';
+import { CircularProgressBar } from 'lib/Graphics/PIXIGauge';
+import { CircularProgressBarOptions } from 'lib/Graphics/PIXIGauge';
+import { RotationNeedleGauge } from 'lib/Graphics/PIXIGauge';
+import { RotationNeedleGaugeOptions } from 'lib/Graphics/PIXIGauge';
+import { BitmapTextNumericIndicator } from 'lib/Graphics/PIXIGauge';
+import { NumericIndicator } from 'lib/Graphics/PIXIGauge';
 
 import * as PIXI from 'pixi.js';
 

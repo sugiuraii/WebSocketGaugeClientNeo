@@ -22,12 +22,12 @@
  * THE SOFTWARE.
  */
 
-import { GearPositionCalculator, CalcTireCircumference } from "../lib/MeterAppBase/utils/GearPositionCalculator";
-import { WebsocketMapFactory } from "../lib/MeterAppBase/WebsocketObjCollection/WebsocketMapFactory";
-import { WebsocketObjectCollectionOption } from "../lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
+import { GearPositionCalculator, CalcTireCircumference } from "lib/MeterAppBase/utils/GearPositionCalculator";
+import { WebsocketMapFactory } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketMapFactory";
+import { WebsocketObjectCollectionOption } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
 
 import * as jsonc from "jsonc-parser";
-import { ArduinoParameterCode, DefiParameterCode } from "../lib/WebSocket/WebSocketCommunication";
+import { ArduinoParameterCode, DefiParameterCode } from "lib/WebSocket/WebSocketCommunication";
 
 require('./GearPositionCalcSetting.appconfig.jsonc');
 type GearPositionCalcSetting =

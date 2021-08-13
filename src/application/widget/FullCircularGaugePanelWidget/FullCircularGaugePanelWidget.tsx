@@ -27,15 +27,15 @@ require("./FullCircularGaugePanelWidget.html");
 import * as PIXI from 'pixi.js';
 
 //Import application base class
-import { MeterWidgetApplication } from "../../../lib/MeterAppBase/MeterWidgetApplication";
-import { MeterApplicationOption } from "../../../lib/MeterAppBase/options/MeterApplicationOption";
+import { MeterWidgetApplication } from "lib/MeterAppBase/MeterWidgetApplication";
+import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
-import { FullCircularGaugePanel } from '../../../parts/CircularGauges/FullCircularGaugePanel';
-import { FullCircularGaugePanelFactory } from '../../../parts/partsFactory/FullCircularGaugePanelFactory';
+import { FullCircularGaugePanel } from 'parts/CircularGauges/FullCircularGaugePanel';
+import { FullCircularGaugePanelFactory } from 'parts/partsFactory/FullCircularGaugePanelFactory';
 
 // Import AppSettings.
-import * as DefaultAppSettings from "../../DefaultAppSettings"
+import * as DefaultAppSettings from "application/DefaultAppSettings"
 
 const useVacuumInsteadOfBoost = false;
 

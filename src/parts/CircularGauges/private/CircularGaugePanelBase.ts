@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { CircularProgressBar, CircularProgressBarOptions } from '../../../lib/Graphics/PIXIGauge';
+import { CircularProgressBar, CircularProgressBarOptions } from 'lib/Graphics/PIXIGauge';
 import * as PIXI from 'pixi.js';
 import { SingleValueGauge } from '../../SingleValueGauge';
 

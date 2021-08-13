@@ -52,17 +52,17 @@ By using sthis information, webpack will bundle html file and type script file, 
 `DigitalMFD-ELM327DemoApp.ts`
 ```js
 //Import application base class
-import {MeterApplicationBase} from "../lib/MeterAppBase/MeterApplicationBase";
+import {MeterApplicationBase} from "lib/MeterAppBase/MeterApplicationBase";
 
 //Import meter parts
-import {WaterTempGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel";
-import {ThrottleGaugePanel} from "../parts/CircularGauges/SemiCircularGaugePanel";
-import {DigiTachoPanel} from "../parts/DigiTachoPanel/DigiTachoPanel";
-import {BoostGaugePanel} from "../parts/CircularGauges/FullCircularGaugePanel";
+import {WaterTempGaugePanel} from "parts/CircularGauges/SemiCircularGaugePanel";
+import {ThrottleGaugePanel} from "parts/CircularGauges/SemiCircularGaugePanel";
+import {DigiTachoPanel} from "parts/DigiTachoPanel/DigiTachoPanel";
+import {BoostGaugePanel} from "parts/CircularGauges/FullCircularGaugePanel";
 
 //Import enumuator of parameter code
-import {OBDIIParameterCode} from "../lib/WebSocket/WebSocketCommunication";
-import {ReadModeCode} from "../lib/WebSocket/WebSocketCommunication";
+import {OBDIIParameterCode} from "lib/WebSocket/WebSocketCommunication";
+import {ReadModeCode} from "lib/WebSocket/WebSocketCommunication";
 ```
 Import several modules by `import{}` statement. In meter application source, following modules should be imported.
 * `MeterApplicationBase` class
