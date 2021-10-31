@@ -35,8 +35,8 @@ type WebsocketStatusIndicatorProps =
 export const WebsocketStatusIndicator: FunctionComponent<WebsocketStatusIndicatorProps> = (p) => {
     const badges: JSX.Element[] = [];
     for (const name in p.statusList) {
-        const variant = getBadgeVariant(p.statusList[name].isEnabled, p.statusList[name].connectionStatus);
-        badges.push(<Badge key={name} variant={variant}>{name}</Badge>);
+        const bg = getBadgeBg(p.statusList[name].isEnabled, p.statusList[name].connectionStatus);
+        badges.push(<Badge key={name} bg={bg}>{name}</Badge>);
     }
     return (
         <div>
@@ -45,7 +45,7 @@ export const WebsocketStatusIndicator: FunctionComponent<WebsocketStatusIndicato
     );
 }
 
-function getBadgeVariant(isEnabled: boolean, status: WebsocketConnectionStatus): string {
+function getBadgeBg(isEnabled: boolean, status: WebsocketConnectionStatus): string {
     if (!isEnabled)
         return "dark";
     else {
