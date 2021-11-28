@@ -27,20 +27,20 @@ require("./ChangeableCompactMFD.html");
 import * as PIXI from 'pixi.js';
 
 //Import application base class
-import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
-import { MeterApplicationOption } from "../../lib/MeterAppBase/options/MeterApplicationOption";
+import { MeterApplication } from "lib/MeterAppBase/MeterApplication";
+import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
-import { FullCircularGaugePanel } from "../../parts/CircularGauges/FullCircularGaugePanel";
-import { SemiCircularGaugePanel } from "../../parts/CircularGauges/SemiCircularGaugePanel";
-import { DigiTachoPanel } from "../../parts/DigiTachoPanel/DigiTachoPanel";
+import { FullCircularGaugePanel } from "parts/CircularGauges/FullCircularGaugePanel";
+import { SemiCircularGaugePanel } from "parts/CircularGauges/SemiCircularGaugePanel";
+import { DigiTachoPanel } from "parts/DigiTachoPanel/DigiTachoPanel";
 
 // Import AppSettings.
-import * as DefaultAppSettings from  "../DefaultAppSettings"
+import * as DefaultAppSettings from  "application/DefaultAppSettings"
 
-import { FullCircularGaugePanelFactory } from '../partsFactory/FullCircularGaugePanelFactory';
-import { MeterNotAvailableError } from '../partsFactory/MeterNotAvailableError';
-import { SemiCircularGaugePanelFactory } from '../partsFactory/SemiCircularGaugePanelFactory';
+import { FullCircularGaugePanelFactory } from 'parts/partsFactory/FullCircularGaugePanelFactory';
+import { MeterNotAvailableError } from 'parts/partsFactory/MeterNotAvailableError';
+import { SemiCircularGaugePanelFactory } from 'parts/partsFactory/SemiCircularGaugePanelFactory';
 
 const useVacuumInsteadOfBoost = false;
 
@@ -68,7 +68,7 @@ class ChangeableCompactMFDApp {
 
         const gearCalculator = await DefaultAppSettings.getGearPositionCalculator();
 
-        appOption.SetupPIXIMeterPanel = (app, ws, storage) => {
+        appOption.SetupPIXIMeterPanel = (app, ws, meterSetting) => {
 
             const stage = app.stage;
 
@@ -76,7 +76,6 @@ class ChangeableCompactMFDApp {
             digiTachoPanel.position.set(0, 0);
             digiTachoPanel.scale.set(1.15);
 
-            const meterSetting = storage.MeterSelectDialogSetting;
             const largeCenterMeterCode = meterSetting["LargeMeter"];
             const smallLeftMeterCode = meterSetting["SmallLeftMeter"];
             const smallRightMeterCode = meterSetting["SmallRightMeter"];

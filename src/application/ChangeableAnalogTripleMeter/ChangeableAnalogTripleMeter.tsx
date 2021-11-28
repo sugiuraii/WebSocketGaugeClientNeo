@@ -27,15 +27,15 @@ require("./ChangeableAnalogTripleMeter.html");
 import * as PIXI from 'pixi.js';
 
 //Import application base class
-import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
-import { MeterApplicationOption } from "../../lib/MeterAppBase/options/MeterApplicationOption";
+import { MeterApplication } from "lib/MeterAppBase/MeterApplication";
+import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
-import { AnalogSingleMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
+import { AnalogSingleMeter } from "parts/AnalogSingleMeter/AnalogSingleMeter";
 
 // Import AppSettings.
-import * as DefaultAppSettings from "../DefaultAppSettings"
-import { AnalogSingleMeterFactory } from '../partsFactory/AnalogSingleMeterFactory';
+import * as DefaultAppSettings from "application/DefaultAppSettings"
+import { AnalogSingleMeterFactory } from 'parts/partsFactory/AnalogSingleMeterFactory';
 
 const useVacuumInsteadOfBoost = false;
 
@@ -56,14 +56,14 @@ class ChangeableAnalogTripleMeterApp {
         appOption.MeteSelectDialogOption.ParameterCodeListToSelect = ["Engine_Speed", "Engine_Load", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Oil_Pressure", "Mass_Air_Flow", "O2Sensor_1_Air_Fuel_Ratio", "Intake_Air_Temperature"];
         appOption.MeteSelectDialogOption.DefaultMeterSelectDialogSetting = { ["Left"]: "Engine_Speed", ["Center"]: "Manifold_Absolute_Pressure", ["Right"]: "Coolant_Temperature" };
 
-        appOption.SetupPIXIMeterPanel = (app, ws, storage) => {
+        appOption.SetupPIXIMeterPanel = (app, ws, meterSetting) => {
             const stage = app.stage;
             //Centering the top-level container
             stage.pivot.set(600, 200);
             stage.position.set(app.screen.width / 2, app.screen.height / 2);
 
             const analogSingleMeterFactory = new AnalogSingleMeterFactory(useVacuumInsteadOfBoost);
-            const meterSetting = storage.MeterSelectDialogSetting;
+            
             const leftMeterCode = meterSetting["Left"];
             const centerMeterCode = meterSetting["Center"];
             const rightMeterCode = meterSetting["Right"];

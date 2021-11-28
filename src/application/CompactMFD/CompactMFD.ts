@@ -27,17 +27,17 @@ require("./CompactMFD.html");
 import * as PIXI from 'pixi.js';
 
 //Import application base class
-import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
-import { MeterApplicationOption } from "../../lib/MeterAppBase/options/MeterApplicationOption";
+import { MeterApplication } from "lib/MeterAppBase/MeterApplication";
+import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
-import { WaterTempGaugePanel } from "../../parts/CircularGauges/SemiCircularGaugePanel";
-import { ThrottleGaugePanel } from "../../parts/CircularGauges/SemiCircularGaugePanel";
-import { DigiTachoPanel } from "../../parts/DigiTachoPanel/DigiTachoPanel";
-import { BoostGaugePanel } from "../../parts/CircularGauges/FullCircularGaugePanel";
+import { WaterTempGaugePanel } from "parts/CircularGauges/SemiCircularGaugePanel";
+import { ThrottleGaugePanel } from "parts/CircularGauges/SemiCircularGaugePanel";
+import { DigiTachoPanel } from "parts/DigiTachoPanel/DigiTachoPanel";
+import { BoostGaugePanel } from "parts/CircularGauges/FullCircularGaugePanel";
 
 // Import AppSettings.
-import * as DefaultAppSettings from  "../DefaultAppSettings"
+import * as DefaultAppSettings from  "application/DefaultAppSettings"
 
 window.onload = function () {
     const meterapp = new CompactMFDApp();

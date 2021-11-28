@@ -22,8 +22,11 @@
  * THE SOFTWARE.
  */
 
-var webpack = require('webpack');
-const outputPath = __dirname + "/../../public_html/application";
+const webpack = require('webpack');
+const path = require('path');
+const pjrootPath = path.resolve(__dirname, "../../")
+const outputPath = path.resolve(pjrootPath, "public_html/application");
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
     mode: "development",
@@ -38,7 +41,15 @@ module.exports = {
         "ChangeableCompactMFD": './ChangeableCompactMFD/ChangeableCompactMFD.ts',
         "AnalogTripleMeter": './AnalogTripleMeter/AnalogTripleMeter.ts',
         "ChangeableAnalogTripleMeter": './ChangeableAnalogTripleMeter/ChangeableAnalogTripleMeter.tsx',
-        "LEDRevMeter": './LEDRevMeter/LEDRevMeter.ts'
+        "LEDRevMeter": './LEDRevMeter/LEDRevMeter.ts',
+        // Widget apps
+        "AnalogTripleMeterWidget": './widget/AnalogSingleMeterWidget/AnalogSingleMeterWidget.tsx',
+        "SemiCircularGaugePanelWidget": './widget/SemiCircularGaugePanelWidget/SemiCircularGaugePanelWidget.tsx',
+        "FullCircularGaugePanelWidget": './widget/FullCircularGaugePanelWidget/FullCircularGaugePanelWidget.tsx',
+        "DigiTachoPanelWidget": './widget/DigiTachoPanelWidget/DigiTachoPanelWidget.tsx',
+        "GasMilagePanelWidget": './widget/GasMilagePanelWidget/GasMilagePanelWidget.tsx',
+        "AnalogMeterClusterWidget": './widget/AnalogMeterClusterWidget/AnalogMeterClusterWidget.tsx',
+        "LEDRevMeterWidget": './widget/LEDRevMeterWidget/LEDRevMeterWidget.tsx'
     },
     devtool: "source-map",
     output:
@@ -48,7 +59,8 @@ module.exports = {
     },
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.
-        extensions: ['.ts', '.tsx', '.js']
+        extensions: ['.ts', '.tsx', '.js'],
+        plugins: [new TsconfigPathsPlugin({configFile: path.resolve(pjrootPath, "src/tsconfig.json")})]
     },
     plugins: [
         new webpack.ProvidePlugin({
@@ -63,7 +75,12 @@ module.exports = {
     },
     module: {
         rules: [
-            { test: /\.tsx?$/, use: 'ts-loader' },
+            {
+                test: /\.tsx?$/,
+                use: {
+                    loader: 'ts-loader'
+                }
+            },
             { test: /\.png$/, use: "file-loader?name=img/[name].[ext]" },
             { test: /\.fnt$/, use: "file-loader?name=img/[name].[ext]" }, // Bitmap font setting files
             { type: "javascript/auto", test: /\.appconfig.jsonc$/, use: "file-loader?name=config/[name].[ext]" },

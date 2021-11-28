@@ -25,20 +25,20 @@
 import * as PIXI from 'pixi.js';
 
 //Import application base class
-import { MeterApplication } from "../../lib/MeterAppBase/MeterApplication";
-import { MeterApplicationOption } from "../../lib/MeterAppBase/options/MeterApplicationOption";
+import { MeterApplication } from "lib/MeterAppBase/MeterApplication";
+import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
-import { FullCircularGaugePanel } from "../../parts/CircularGauges/FullCircularGaugePanel";
-import { SemiCircularGaugePanel } from "../../parts/CircularGauges/SemiCircularGaugePanel";
-import { DigiTachoPanel } from "../../parts/DigiTachoPanel/DigiTachoPanel";
-import { MilageGraphPanel } from "../../parts/GasMilageGraph/MilageGraph";
+import { FullCircularGaugePanel } from "parts/CircularGauges/FullCircularGaugePanel";
+import { SemiCircularGaugePanel } from "parts/CircularGauges/SemiCircularGaugePanel";
+import { DigiTachoPanel } from "parts/DigiTachoPanel/DigiTachoPanel";
+import { MilageGraphPanel } from "parts/GasMilageGraph/MilageGraph";
 
 // Import AppSettings.
-import * as DefaultAppSettings from "../DefaultAppSettings"
-import { FullCircularGaugePanelFactory } from '../partsFactory/FullCircularGaugePanelFactory';
-import { MeterNotAvailableError } from '../partsFactory/MeterNotAvailableError';
-import { SemiCircularGaugePanelFactory } from '../partsFactory/SemiCircularGaugePanelFactory';
+import * as DefaultAppSettings from "application/DefaultAppSettings"
+import { FullCircularGaugePanelFactory } from 'parts/partsFactory/FullCircularGaugePanelFactory';
+import { MeterNotAvailableError } from 'parts/partsFactory/MeterNotAvailableError';
+import { SemiCircularGaugePanelFactory } from 'parts/partsFactory/SemiCircularGaugePanelFactory';
 
 //For including entry point html file in webpack
 require("./ChangeableDigitalMFD.html");
@@ -72,7 +72,7 @@ class ChangeableDigitalMFDApp {
 
         const gearCalculator = await DefaultAppSettings.getGearPositionCalculator();
 
-        appOption.SetupPIXIMeterPanel = (app, ws, storage) => {
+        appOption.SetupPIXIMeterPanel = (app, ws, meterSetting) => {
 
             const stage = app.stage;
 
@@ -82,7 +82,6 @@ class ChangeableDigitalMFDApp {
             const milagePanel = new MilageGraphPanel();
             milagePanel.position.set(0, 300);
             milagePanel.scale.set(0.94, 0.94);
-            const meterSetting = storage.MeterSelectDialogSetting;
             const largeTopMeterCode = meterSetting["LargeTop"];
             const largeBottomMeterCode = meterSetting["LargeBottom"];
             const smallTopMeterCode = meterSetting["SmallTop"];

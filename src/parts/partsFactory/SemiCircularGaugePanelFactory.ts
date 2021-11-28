@@ -22,11 +22,11 @@
  * THE SOFTWARE.
  */
 
-import { WebsocketObjectCollection } from "../../lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
-import { WebsocketParameterCode } from "../../lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode";
-import { ReadModeCode } from "../../lib/WebSocket/WebSocketCommunication";
-import { SemiCircularGaugePanel } from "../../parts/CircularGauges/private/SemiCircularGaugePanelBase";
-import { VacuumGaugePanel, BoostGaugePanel, WaterTempGaugePanel, EngineOilTempGaugePanel, BatteryVoltageGaugePanel, MassAirFlowGaugePanel, ThrottleGaugePanel, AirFuelGaugePanel, EngineLoadGaugePanel, IntakeAirTemperaturePanel as IntakeAirTemperatureGaugePanel } from "../../parts/CircularGauges/SemiCircularGaugePanel";
+import { WebsocketObjectCollection } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
+import { WebsocketParameterCode } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode";
+import { ReadModeCode } from "lib/WebSocket/WebSocketCommunication";
+import { SemiCircularGaugePanel } from "../CircularGauges/private/SemiCircularGaugePanelBase";
+import { VacuumGaugePanel, BoostGaugePanel, WaterTempGaugePanel, EngineOilTempGaugePanel, BatteryVoltageGaugePanel, MassAirFlowGaugePanel, ThrottleGaugePanel, AirFuelGaugePanel, EngineLoadGaugePanel, IntakeAirTemperaturePanel as IntakeAirTemperatureGaugePanel } from "../CircularGauges/SemiCircularGaugePanel";
 import { MeterNotAvailableError } from "./MeterNotAvailableError";
 
 export class SemiCircularGaugePanelFactory {

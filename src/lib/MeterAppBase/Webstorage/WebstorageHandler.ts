@@ -22,16 +22,16 @@
  * THE SOFTWARE.
  */
 
-import { MeterSelectDialogCotents } from "../reactParts/dialog/MeterSelectDialog";
+import { MeterSelectionSetting } from "../reactParts/dialog/MeterSelectDialog";
 
 export class WebstorageHandler {
     private keyPrefix = location.pathname + ":";
     private keyList = ["WSInterval", "ForceCanvas", "MeterSelectDialogSetting"];
     private readonly defaultWSInterval = 0;
     private readonly defaultForceCanvas = false;
-    private readonly defaultMeterSelectDialogSetting: MeterSelectDialogCotents;
+    private readonly defaultMeterSelectDialogSetting: MeterSelectionSetting;
 
-    constructor(defaultMeterSelectDialogSetting?: MeterSelectDialogCotents) {
+    constructor(defaultMeterSelectDialogSetting?: MeterSelectionSetting) {
         if (defaultMeterSelectDialogSetting === undefined)
             this.defaultMeterSelectDialogSetting = {};
         else
@@ -71,7 +71,7 @@ export class WebstorageHandler {
         localStorage.setItem(this.getKey("ForceCanvas"), flag ? "true" : "false");
     }
 
-    public get MeterSelectDialogSetting(): MeterSelectDialogCotents {
+    public get MeterSelectDialogSetting(): MeterSelectionSetting {
         const item = localStorage.getItem(this.getKey("MeterSelectDialogSetting"));
         if (item === null || item === undefined)
         {
@@ -86,11 +86,11 @@ export class WebstorageHandler {
                 return this.defaultMeterSelectDialogSetting;
             }
             else
-                return parsedItem as MeterSelectDialogCotents;
+                return parsedItem as MeterSelectionSetting;
         }
     }
 
-    public set MeterSelectDialogSetting(val: MeterSelectDialogCotents) {
+    public set MeterSelectDialogSetting(val: MeterSelectionSetting) {
         localStorage.setItem(this.getKey("MeterSelectDialogSetting"), JSON.stringify(val));
     }
 

@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { CircularProgressBar, CircularProgressBarOptions, NumericIndicator, BitmapTextNumericIndicator } from '../../lib/Graphics/PIXIGauge';
+import { CircularProgressBar, CircularProgressBarOptions, NumericIndicator, BitmapTextNumericIndicator } from 'lib/Graphics/PIXIGauge';
 import * as PIXI from 'pixi.js';
 
 require("./LEDTachoMeterTexture.json");

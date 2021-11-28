@@ -22,10 +22,10 @@
  * THE SOFTWARE.
  */
 
-import { WebsocketObjectCollection } from "../../lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
-import { WebsocketParameterCode } from "../../lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode";
-import { ReadModeCode } from "../../lib/WebSocket/WebSocketCommunication";
-import { AirFuelRatioMeter, AnalogSingleMeter, BatteryVoltageMeter, BoostMeter, EngineLoadMeter, IntakeAirTemperatureMeter, MassAirFlowMeter, OilPressureMeter, OilTempMeter, RevMeter, VacuumMeter, WaterTempMeter } from "../../parts/AnalogSingleMeter/AnalogSingleMeter";
+import { WebsocketObjectCollection } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
+import { WebsocketParameterCode } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode";
+import { ReadModeCode } from "lib/WebSocket/WebSocketCommunication";
+import { AirFuelRatioMeter, AnalogSingleMeter, BatteryVoltageMeter, BoostMeter, EngineLoadMeter, IntakeAirTemperatureMeter, MassAirFlowMeter, OilPressureMeter, OilTempMeter, RevMeter, VacuumMeter, WaterTempMeter } from "../AnalogSingleMeter/AnalogSingleMeter";
 
 export class AnalogSingleMeterFactory {
     private readonly UseVacuumMeterInsteadOfBoost;

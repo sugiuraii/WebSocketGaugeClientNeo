@@ -23,7 +23,7 @@
  */
 
 
-import { DigiTachoPanel } from "../../parts/DigiTachoPanel/DigiTachoPanel";
+import { DigiTachoPanel } from "parts/DigiTachoPanel/DigiTachoPanel";
 import * as PIXI from 'pixi.js';
 
 require("./DigiTachoTest.html");

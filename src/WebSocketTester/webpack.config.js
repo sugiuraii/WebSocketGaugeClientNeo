@@ -21,6 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+const webpack = require('webpack');
+const path = require('path');
+const pjrootPath = path.resolve(__dirname, "../../")
+const outputPath = path.resolve(pjrootPath, "public_html/WebSocketTester");
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
     mode: "development",
@@ -36,17 +41,23 @@ module.exports = {
     devtool: "source-map",
     output:
     {
-        path: __dirname + "/../../public_html/WebSocketTester/",
+        path: outputPath,
         filename: "js/[name].js"
     },
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.
-        extensions: ['.ts', '.tsx', '.js']
+        extensions: ['.ts', '.tsx', '.js'],
+        plugins: [new TsconfigPathsPlugin({configFile: path.resolve(pjrootPath, "src/tsconfig.json")})]
     },
     module: {
         rules: [
             // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-            { test: /\.ts?$/, use: "ts-loader" },
+            {
+                test: /\.ts?$/,
+                use: {
+                    loader: 'ts-loader'
+                }
+            },
             { test: /\.html$/, use: "file-loader?name=[name].[ext]"}
         ]
     }
