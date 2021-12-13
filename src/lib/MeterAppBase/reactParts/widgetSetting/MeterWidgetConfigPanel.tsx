@@ -26,13 +26,13 @@ import React, { Fragment } from "react";
 import { FunctionComponent, useState } from "react";
 import { Form } from "react-bootstrap";
 
-export type MeterWidgetSetPanelCommonProps =
+export type MeterWidgetConfigPanelProps =
     {
         default: { wsInterval: number, forceCanvas: boolean },
         onUpdate: (p: { wsInterval: number, forceCanvas: boolean }) => void
     }
 
-export const MeterWidgetSetPanelCommon: FunctionComponent<MeterWidgetSetPanelCommonProps> = (p) => {
+export const MeterWidgetConfigPanel: FunctionComponent<MeterWidgetConfigPanelProps> = (p) => {
     const [wsInterval, setWSInterval] = useState(p.default.wsInterval);
     const [forceCanvas, setForceCanvas] = useState(p.default.forceCanvas);
 
