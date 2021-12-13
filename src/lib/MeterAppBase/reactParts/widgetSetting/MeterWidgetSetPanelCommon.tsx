@@ -28,23 +28,32 @@ import { Form } from "react-bootstrap";
 
 export type MeterWidgetSetPanelCommonProps =
     {
-        default: { wsInteval: number, forceCanvas: boolean },
-        onUpdate: (p: { wsInteval: number, forceCanvas: boolean }) => void
+        default: { wsInterval: number, forceCanvas: boolean },
+        onUpdate: (p: { wsInterval: number, forceCanvas: boolean }) => void
     }
 
 export const MeterWidgetSetPanelCommon: FunctionComponent<MeterWidgetSetPanelCommonProps> = (p) => {
-    const [wsInterval, setWSInterval] = useState(p.default.wsInteval);
+    const [wsInterval, setWSInterval] = useState(p.default.wsInterval);
     const [forceCanvas, setForceCanvas] = useState(p.default.forceCanvas);
 
+    const handleUpdate = () => p.onUpdate({wsInterval: wsInterval, forceCanvas: forceCanvas});
     return (
         <Fragment>
             <Form>
                 <Form.Group controlId="formWSInterval">
                     <Form.Label>Defi/Arduino websocket message interval</Form.Label>
-                    <Form.Control type="number" min={0} value={wsInterval} onChange={(evt) => setWSInterval(Number(evt.target.value))} />
+                    <Form.Control type="number" min={0} value={wsInterval} onChange={(evt) => 
+                        {
+                            setWSInterval(Number(evt.target.value));
+                            handleUpdate();
+                        }}/>
                 </Form.Group>
                 <Form.Group controlId="formSetUseCanvasCheckbox">
-                    <Form.Check type='checkbox' checked={forceCanvas} label="Force to use canvas." onChange={e => setForceCanvas(e.currentTarget.checked)} />
+                    <Form.Check type='checkbox' checked={forceCanvas} label="Force to use canvas." onChange={e => 
+                        {
+                            setForceCanvas(e.currentTarget.checked);
+                            handleUpdate();
+                        }} />
                 </Form.Group>
             </Form>
         </Fragment>
