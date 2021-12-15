@@ -32,7 +32,6 @@ export type MeterWidgetCodeSelectPanelProps =
     {
         default: MeterSelectionSetting,
         codesToSelect: WebsocketParameterCode[],
-        onCancel: () => void,
         onUpdate: (dat: MeterSelectionSetting) => void;
     }
 
