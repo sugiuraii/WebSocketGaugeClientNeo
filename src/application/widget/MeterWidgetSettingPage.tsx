@@ -26,9 +26,21 @@ import { MeterWidgetConfigPage } from "lib/MeterAppBase/reactParts/widgetSetting
 import React from "react";
 import ReactDOM from "react-dom";
 
+import 'bootswatch/dist/slate/bootstrap.min.css';
+const BOOTSTRAP_CSS_FILENAME = "bootstrap.min.css";
+
 require("./MeterWidgetSettingPage.html");
+function loadBootStrapCSS() {
+    const head = document.getElementsByTagName('head')[0];
+    const link = document.createElement('link');
+    link.setAttribute('rel', 'stylesheet');
+    link.setAttribute('type', 'text/css');
+    link.setAttribute('href', BOOTSTRAP_CSS_FILENAME);
+    head.appendChild(link);
+}
 
 const rootElement = document.createElement('div');
+loadBootStrapCSS();
 
 ReactDOM.render(
     <>
@@ -38,3 +50,4 @@ ReactDOM.render(
 
 // Add react components to html body
 document.body.appendChild(rootElement);
+
