@@ -49,7 +49,9 @@ module.exports = {
         "DigiTachoPanelWidget": './widget/DigiTachoPanelWidget/DigiTachoPanelWidget.tsx',
         "GasMilagePanelWidget": './widget/GasMilagePanelWidget/GasMilagePanelWidget.tsx',
         "AnalogMeterClusterWidget": './widget/AnalogMeterClusterWidget/AnalogMeterClusterWidget.tsx',
-        "LEDRevMeterWidget": './widget/LEDRevMeterWidget/LEDRevMeterWidget.tsx'
+        "LEDRevMeterWidget": './widget/LEDRevMeterWidget/LEDRevMeterWidget.tsx',
+
+        "MeterWidgetSettingPanel": '/widget/MeterWidgetSettingPage.tsx'
     },
     devtool: "source-map",
     output:
