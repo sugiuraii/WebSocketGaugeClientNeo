@@ -24,9 +24,7 @@
 
 import React, { useState } from "react";
 import { FunctionComponent } from "react";
-import { Card, Form } from "react-bootstrap";
-import { MeterSelectionSetting } from "../dialog/MeterSelectDialog";
-import { MeterWidgetCodeSelectPanel } from "./parts/MeterWidgetCodeSelectPanel";
+import { Card } from "react-bootstrap";
 import { MeterWidgetConfigPanel } from "./parts/MeterWidgetConfigPanel";
 
 export type MeterWidgetConfigPanelProps =
@@ -37,15 +35,20 @@ export type MeterWidgetConfigPanelProps =
 
 export const MeterWidgetConfigPage: FunctionComponent<MeterWidgetConfigPanelProps> = (p) =>
 {
-    const [url, setURL] = useState(decodeURL(p.default.wsInterval, p.default.forceCanvas, p.baseURL));
+    const [wsInterval, setWSInterval] = useState(p.default.wsInterval);
+    const [forceCanvas, setForceCanvas] = useState(p.default.forceCanvas);
         
     return(
         <>
             <Card>
-                <MeterWidgetConfigPanel default={{wsInterval:p.default.wsInterval, forceCanvas:p.default.forceCanvas}} onUpdate={(x)=>setURL(decodeURL(x.wsInterval,x.forceCanvas, p.baseURL))}/>
+                <MeterWidgetConfigPanel default={{wsInterval:p.default.wsInterval, forceCanvas:p.default.forceCanvas}} onUpdate={(x)=>{
+                    setWSInterval(x.wsInterval);
+                    setForceCanvas(x.forceCanvas);
+
+                }}/>
             </Card>
             <Card>
-                {url}
+                {decodeURL(wsInterval, forceCanvas, p.baseURL)}
             </Card>
         </>
     );
