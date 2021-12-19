@@ -36,7 +36,6 @@ export const MeterWidgetConfigPanel: FunctionComponent<MeterWidgetConfigPanelPro
     const [wsInterval, setWSInterval] = useState(p.default.wsInterval);
     const [forceCanvas, setForceCanvas] = useState(p.default.forceCanvas);
 
-    const handleUpdate = () => p.onUpdate({wsInterval: wsInterval, forceCanvas: forceCanvas});
     return (
         <Fragment>
             <Form>
@@ -44,15 +43,17 @@ export const MeterWidgetConfigPanel: FunctionComponent<MeterWidgetConfigPanelPro
                     <Form.Label>Defi/Arduino websocket message interval</Form.Label>
                     <Form.Control type="number" min={0} value={wsInterval} onChange={(evt) => 
                         {
-                            setWSInterval(Number(evt.target.value));
-                            handleUpdate();
+                            const newWSInterval = Number(evt.target.value);
+                            setWSInterval(newWSInterval);
+                            p.onUpdate({wsInterval: newWSInterval, forceCanvas: forceCanvas});
                         }}/>
                 </Form.Group>
                 <Form.Group controlId="formSetUseCanvasCheckbox">
                     <Form.Check type='checkbox' checked={forceCanvas} label="Force to use canvas." onChange={e => 
                         {
-                            setForceCanvas(e.currentTarget.checked);
-                            handleUpdate();
+                            const newForceCanvas = e.currentTarget.checked;
+                            setForceCanvas(newForceCanvas);
+                            p.onUpdate({wsInterval: wsInterval, forceCanvas: newForceCanvas});
                         }} />
                 </Form.Group>
             </Form>
