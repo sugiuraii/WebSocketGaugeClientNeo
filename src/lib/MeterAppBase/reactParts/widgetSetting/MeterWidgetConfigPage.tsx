@@ -22,30 +22,36 @@
  * THE SOFTWARE.
  */
 
-import React from "react";
+import React, { useState } from "react";
 import { FunctionComponent } from "react";
-import { Card } from "react-bootstrap";
+import { Card, Form } from "react-bootstrap";
 import { MeterSelectionSetting } from "../dialog/MeterSelectDialog";
 import { MeterWidgetCodeSelectPanel } from "./parts/MeterWidgetCodeSelectPanel";
 import { MeterWidgetConfigPanel } from "./parts/MeterWidgetConfigPanel";
 
 export type MeterWidgetConfigPanelProps =
 {
-    default: { wsInterval: number, forceCanvas: boolean },
-    onUpdate
+    baseURL: string,
+    default: { wsInterval: number, forceCanvas: boolean}
 }
 
 export const MeterWidgetConfigPage: FunctionComponent<MeterWidgetConfigPanelProps> = (p) =>
 {
-    const handleUpdate = :
+    const [url, setURL] = useState(decodeURL(p.default.wsInterval, p.default.forceCanvas, p.baseURL));
+        
     return(
         <>
             <Card>
-                <MeterWidgetConfigPanel default={{wsInterval:p.default.wsInterval, forceCanvas:p.default.forceCanvas}} onUpdate={}/>
+                <MeterWidgetConfigPanel default={{wsInterval:p.default.wsInterval, forceCanvas:p.default.forceCanvas}} onUpdate={(x)=>setURL(decodeURL(x.wsInterval,x.forceCanvas, p.baseURL))}/>
             </Card>
             <Card>
-                <MeterWidgetCodeSelectPanel default={} codesToSelect={[]} onUpdate={} />
+                {url}
             </Card>
         </>
-    ):
+    );
+}
+
+function decodeURL(wsInterval: number, forceCanvas: boolean, baseURL: string) : string
+{
+    return baseURL + '?' +  "wsInterval=" + wsInterval.toString() + "&forceCanvas=" + forceCanvas;
 }
