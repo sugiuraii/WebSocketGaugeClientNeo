@@ -52,7 +52,7 @@ export const MeterWidgetConfigPageWithMeterSelect: FunctionComponent<MeterWidget
                 }}/>
             </Card>
             <Card>
-                <MeterWidgetCodeSelectPanel default={p.default.meterSelection} codesToSelect={p.codesToSelect} onUpdate={(d) => setMeterSelection(d)} />
+                <MeterWidgetCodeSelectPanel default={p.default.meterSelection} codesToSelect={p.codesToSelect} onUpdate={(d) => setMeterSelection({...d})} />
             </Card>
             <Card>
                 {decodeURL(wsInterval, forceCanvas, p.baseURL, meterSelection)}
