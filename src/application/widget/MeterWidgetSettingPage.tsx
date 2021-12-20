@@ -23,6 +23,7 @@
  */
 
 import { MeterWidgetConfigPage } from "lib/MeterAppBase/reactParts/widgetSetting/MeterWidgetConfigPage";
+import { MeterWidgetConfigPageWithMeterSelect } from "lib/MeterAppBase/reactParts/widgetSetting/MeterWidgetConfigPageWithMeterSelect";
 import React from "react";
 import ReactDOM from "react-dom";
 
@@ -45,6 +46,9 @@ loadBootStrapCSS();
 ReactDOM.render(
     <>
         <MeterWidgetConfigPage baseURL={location.href} default={{forceCanvas:false, wsInterval:0}}/>
+        <MeterWidgetConfigPageWithMeterSelect baseURL={location.href} 
+                                              codesToSelect={["Engine_Speed", "Engine_Load", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Oil_Pressure", "Mass_Air_Flow", "O2Sensor_1_Air_Fuel_Ratio", "Intake_Air_Temperature"]} 
+                                              default={{forceCanvas:false, wsInterval:0, meterSelection:{Meter1 : "Engine_Speed"}}}/>
     </>
     , rootElement);    
 
