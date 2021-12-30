@@ -30,7 +30,9 @@ import { MeterWidgetConfigPanel } from "./parts/MeterWidgetConfigPanel";
 export type MeterWidgetConfigPanelProps =
 {
     baseURL: string,
-    default: { wsInterval: number, forceCanvas: boolean}
+    default: { wsInterval: number, forceCanvas: boolean},
+    previewHeight?: string,
+    previewWidth?: string
 }
 
 export const MeterWidgetConfigPage: FunctionComponent<MeterWidgetConfigPanelProps> = (p) =>
@@ -41,6 +43,11 @@ export const MeterWidgetConfigPage: FunctionComponent<MeterWidgetConfigPanelProp
     const url = decodeURL(wsInterval, forceCanvas, p.baseURL);
     return(
         <>
+            <Card>
+                <div style={{textAlign:"center"}}>
+                    <iframe src={url} width={p.previewWidth} height={p.previewHeight}></iframe>
+                </div>
+            </Card>
             <Card>
                 <MeterWidgetConfigPanel default={{wsInterval:p.default.wsInterval, forceCanvas:p.default.forceCanvas}} onUpdate={(x)=>{
                     setWSInterval(x.wsInterval);
