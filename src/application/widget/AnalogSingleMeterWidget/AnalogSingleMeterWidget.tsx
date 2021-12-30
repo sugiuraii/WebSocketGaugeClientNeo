@@ -53,6 +53,8 @@ class AnalogSingleMeterWidgetApp {
         appOption.PreloadResource.WebFontFamiliyName.push(...AnalogSingleMeter.RequestedFontFamily);
         appOption.PreloadResource.WebFontCSSURL.push(...AnalogSingleMeter.RequestedFontCSSURL);
         appOption.PreloadResource.TexturePath.push(...AnalogSingleMeter.RequestedTexturePath);
+        appOption.MeteSelectDialogOption.ParameterCodeListToSelect = ["Engine_Speed", "Engine_Load", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Oil_Pressure", "Mass_Air_Flow", "O2Sensor_1_Air_Fuel_Ratio", "Intake_Air_Temperature"];
+        appOption.MeteSelectDialogOption.DefaultMeterSelectDialogSetting = { ["Meter1"]: "Engine_Speed" };
 
         appOption.SetupPIXIMeterPanel = (app, ws, meterSetting) => {
             const stage = app.stage;
