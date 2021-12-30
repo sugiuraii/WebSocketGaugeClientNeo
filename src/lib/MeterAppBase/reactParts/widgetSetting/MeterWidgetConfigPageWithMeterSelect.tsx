@@ -25,7 +25,7 @@
 import { WebsocketParameterCode } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode";
 import React, { useState } from "react";
 import { FunctionComponent } from "react";
-import { Card, Form } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { MeterSelectionSetting } from "../dialog/MeterSelectDialog";
 import { MeterWidgetCodeSelectPanel } from "./parts/MeterWidgetCodeSelectPanel";
 import { MeterWidgetConfigPanel } from "./parts/MeterWidgetConfigPanel";
