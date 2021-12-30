@@ -24,7 +24,7 @@
 
 import React, { useState } from "react";
 import { FunctionComponent } from "react";
-import { Card } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import { MeterWidgetConfigPanel } from "./parts/MeterWidgetConfigPanel";
 
 export type MeterWidgetConfigPanelProps =
@@ -37,7 +37,8 @@ export const MeterWidgetConfigPage: FunctionComponent<MeterWidgetConfigPanelProp
 {
     const [wsInterval, setWSInterval] = useState(p.default.wsInterval);
     const [forceCanvas, setForceCanvas] = useState(p.default.forceCanvas);
-        
+
+    const url = decodeURL(wsInterval, forceCanvas, p.baseURL);
     return(
         <>
             <Card>
@@ -48,7 +49,8 @@ export const MeterWidgetConfigPage: FunctionComponent<MeterWidgetConfigPanelProp
                 }}/>
             </Card>
             <Card>
-                {decodeURL(wsInterval, forceCanvas, p.baseURL)}
+                {url}
+                <Button variant="primary" onClick={()=>navigator.clipboard.writeText(url)}>Copy URL</Button>
             </Card>
         </>
     );

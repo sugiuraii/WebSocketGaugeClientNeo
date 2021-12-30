@@ -25,7 +25,7 @@
 import { WebsocketParameterCode } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode";
 import React, { useState } from "react";
 import { FunctionComponent } from "react";
-import { Card } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import { MeterSelectionSetting } from "../dialog/MeterSelectDialog";
 import { MeterWidgetCodeSelectPanel } from "./parts/MeterWidgetCodeSelectPanel";
 import { MeterWidgetConfigPanel } from "./parts/MeterWidgetConfigPanel";
@@ -42,7 +42,9 @@ export const MeterWidgetConfigPageWithMeterSelect: FunctionComponent<MeterWidget
     const [wsInterval, setWSInterval] = useState(p.default.wsInterval);
     const [forceCanvas, setForceCanvas] = useState(p.default.forceCanvas);
     const [meterSelection, setMeterSelection] = useState(p.default.meterSelection);
-        
+    
+    const url = decodeURL(wsInterval, forceCanvas, p.baseURL, meterSelection);
+
     return(
         <>
             <Card>
@@ -55,7 +57,8 @@ export const MeterWidgetConfigPageWithMeterSelect: FunctionComponent<MeterWidget
                 <MeterWidgetCodeSelectPanel default={p.default.meterSelection} codesToSelect={p.codesToSelect} onUpdate={(d) => setMeterSelection({...d})} />
             </Card>
             <Card>
-                {decodeURL(wsInterval, forceCanvas, p.baseURL, meterSelection)}
+                {url}
+                <Button variant="primary" onClick={()=>navigator.clipboard.writeText(url)}>Copy URL</Button>
             </Card>
         </>
     );
