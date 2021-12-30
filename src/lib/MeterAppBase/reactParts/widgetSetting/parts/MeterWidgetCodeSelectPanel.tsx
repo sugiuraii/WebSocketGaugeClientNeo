@@ -53,7 +53,7 @@ export const MeterWidgetCodeSelectPanel: FunctionComponent<MeterWidgetCodeSelect
                         const newContent = {...content}; // Need to re-create array to update DOM.
                         newContent[key] = e.target.value as WebsocketParameterCode;
                         setContent(newContent);
-                        handleUpdate();
+                        handleUpdate(newContent);
                     }}>
                     {selectOptions}
                     </Form.Control>
@@ -61,8 +61,8 @@ export const MeterWidgetCodeSelectPanel: FunctionComponent<MeterWidgetCodeSelect
         );
     }
 
-    const handleUpdate = () => {
-        p.onUpdate(content);
+    const handleUpdate = (newContent: MeterSelectionSetting) => {
+        p.onUpdate(newContent);
     };
 
     return (
