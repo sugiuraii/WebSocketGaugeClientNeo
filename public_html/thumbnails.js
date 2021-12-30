@@ -34,7 +34,16 @@ const targetList = [
   { htmlPath: "application/CompactMFD.html", pngPath: "thumbnails/CompactMFD.png" },
   { htmlPath: "application/DigitalMFD.html", pngPath: "thumbnails/DigitalMFD.png" },
   { htmlPath: "application/AnalogTripleMeter.html", pngPath: "thumbnails/AnalogTripleMeter.png" },
-  { htmlPath: "application/LEDRevMeter.html", pngPath: "thumbnails/LEDRevMeter.png" }
+  { htmlPath: "application/LEDRevMeter.html", pngPath: "thumbnails/LEDRevMeter.png" },
+
+  { htmlPath: "application/AnalogMeterClusterWidget.html", pngPath: "thumbnails/AnalogMeterClusterWidget.png" },
+  { htmlPath: "application/AnalogSingleMeterWidget.html", pngPath: "thumbnails/AnalogSingleMeterWidget.png" },
+  { htmlPath: "application/DigiTachoPanelWidget.html", pngPath: "thumbnails/DigiTachoPanelWidget.png" },
+  { htmlPath: "application/SemiCircularGaugePanelWidget.html", pngPath: "thumbnails/SemiCircularGaugePanelWidget.png" },
+  { htmlPath: "application/FullCircularGaugePanelWidget.html", pngPath: "thumbnails/FullCircularGaugePanelWidget.png" },
+  { htmlPath: "application/LEDRevMeterWidget.html", pngPath: "thumbnails/LEDRevMeterWidget.png" },
+  { htmlPath: "application/GasMilagePanelWidget.html", pngPath: "thumbnails/GasMilagePanelWidget.png" }
+
 ];
 
 // Set thumbnail size
