@@ -35,6 +35,8 @@ import PIXIApplication from "./reactParts/PIXIApplication";
 import 'bootswatch/dist/slate/bootstrap.min.css';
 import { MeterSelectionSetting } from "./reactParts/dialog/MeterSelectDialog";
 import { WebsocketParameterCode } from "./WebsocketObjCollection/WebsocketParameterCode";
+import { MeterWidgetConfigPageRenderer } from "./reactParts/widgetSetting/MeterWidgetConfigPageRenderer";
+import { MeterWidgetConfigPageWithMeterSelectRenderer } from "./reactParts/widgetSetting/MeterWidgetConfigPageWithMeterSelectRenderer";
 const BOOTSTRAP_CSS_FILENAME = "bootstrap.min.css";
 
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
@@ -75,7 +77,29 @@ export class MeterWidgetApplication {
         this.webSocketCollection = new WebsocketObjectCollection(this.Logger, option.WebSocketCollectionOption, this.UrlQueryResult.WSInterval);
     }
 
+    private renderSettingPageIfEmptyQuery()
+    {
+        const baseURL = location.href;
+        if(this.Option.MeteSelectDialogOption.ParameterCodeListToSelect.length === 0)
+        {
+            const settingPageRenderer = new MeterWidgetConfigPageRenderer();
+            settingPageRenderer.render(baseURL, this.Option.PIXIApplicationOption.width + "px", this.Option.PIXIApplicationOption.height + "px");
+        }
+        else
+        {
+            const settingPageRenderer = new MeterWidgetConfigPageWithMeterSelectRenderer();
+            settingPageRenderer.render(baseURL, this.Option.MeteSelectDialogOption.ParameterCodeListToSelect, this.Option.MeteSelectDialogOption.DefaultMeterSelectDialogSetting, this.Option.PIXIApplicationOption.width + "px", this.Option.PIXIApplicationOption.height + "px");
+        }
+    }
+
     public async Run(): Promise<void> {
+        // Show setting page if the query string is empty
+        if(window.location.search.length === 0)
+        {
+            this.renderSettingPageIfEmptyQuery();
+            return;
+        }
+
         // Override forceCanvas flag from query, if Option.PIXIApplication.forceCanvas is undefinded.
         if (this.Option.PIXIApplicationOption.forceCanvas === undefined)
             if (this.UrlQueryResult.ForceCanvas)
