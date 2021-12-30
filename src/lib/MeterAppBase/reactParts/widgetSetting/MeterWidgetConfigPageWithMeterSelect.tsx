@@ -65,7 +65,7 @@ export const MeterWidgetConfigPageWithMeterSelect: FunctionComponent<MeterWidget
             </Card>
             <Card>
                 {url}
-                <Button variant="primary" onClick={()=>navigator.clipboard.writeText(url)}>Copy URL</Button>
+                <Button variant="primary" onClick={()=>navigator.clipboard.writeText(url)}>Copy Widget URL</Button>
             </Card>
         </>
     );

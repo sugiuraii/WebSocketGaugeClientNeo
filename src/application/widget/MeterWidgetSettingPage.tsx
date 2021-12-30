@@ -47,7 +47,6 @@ const baseURL = location.protocol + "//" + location.host + "/public_html/applica
 
 ReactDOM.render(
     <>
-        <MeterWidgetConfigPage baseURL={location.href} default={{forceCanvas:false, wsInterval:0}}/>
         <MeterWidgetConfigPageWithMeterSelect previewHeight="360px" previewWidth="340px"
                                               baseURL={baseURL} 
                                               codesToSelect={["Engine_Speed", "Engine_Load", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Oil_Pressure", "Mass_Air_Flow", "O2Sensor_1_Air_Fuel_Ratio", "Intake_Air_Temperature"]} 
