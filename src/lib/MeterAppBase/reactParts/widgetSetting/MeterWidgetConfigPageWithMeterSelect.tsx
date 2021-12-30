@@ -34,7 +34,9 @@ export type MeterWidgetConfigPanelWithMeterSelectProps =
 {
     baseURL: string,
     default: { wsInterval: number, forceCanvas: boolean, meterSelection: MeterSelectionSetting},
-    codesToSelect: WebsocketParameterCode[]
+    codesToSelect: WebsocketParameterCode[],
+    previewHeight?: string,
+    previewWidth?: string
 }
 
 export const MeterWidgetConfigPageWithMeterSelect: FunctionComponent<MeterWidgetConfigPanelWithMeterSelectProps> = (p) =>
@@ -47,6 +49,11 @@ export const MeterWidgetConfigPageWithMeterSelect: FunctionComponent<MeterWidget
 
     return(
         <>
+            <Card>
+                <div style={{textAlign:"center"}}>
+                    <iframe src={url} width={p.previewWidth} height={p.previewHeight}></iframe>
+                </div>
+            </Card>
             <Card>
                 <MeterWidgetConfigPanel default={{wsInterval:p.default.wsInterval, forceCanvas:p.default.forceCanvas}} onUpdate={(x)=>{
                     setWSInterval(x.wsInterval);

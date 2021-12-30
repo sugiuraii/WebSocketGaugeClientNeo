@@ -43,10 +43,13 @@ function loadBootStrapCSS() {
 const rootElement = document.createElement('div');
 loadBootStrapCSS();
 
+const baseURL = location.protocol + "//" + location.host + "/public_html/application/AnalogSingleMeterWidget.html";
+
 ReactDOM.render(
     <>
         <MeterWidgetConfigPage baseURL={location.href} default={{forceCanvas:false, wsInterval:0}}/>
-        <MeterWidgetConfigPageWithMeterSelect baseURL={location.href} 
+        <MeterWidgetConfigPageWithMeterSelect previewHeight="360px" previewWidth="340px"
+                                              baseURL={baseURL} 
                                               codesToSelect={["Engine_Speed", "Engine_Load", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Oil_Pressure", "Mass_Air_Flow", "O2Sensor_1_Air_Fuel_Ratio", "Intake_Air_Temperature"]} 
                                               default={{forceCanvas:false, wsInterval:0, meterSelection:{Meter1 : "Engine_Speed"}}}/>
     </>
