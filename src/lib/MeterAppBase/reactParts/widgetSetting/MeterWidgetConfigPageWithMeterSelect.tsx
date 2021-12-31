@@ -25,7 +25,7 @@
 import { WebsocketParameterCode } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode";
 import React, { useState } from "react";
 import { FunctionComponent } from "react";
-import { Button, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { MeterSelectionSetting } from "../dialog/MeterSelectDialog";
 import { MeterWidgetCodeSelectPanel } from "./parts/MeterWidgetCodeSelectPanel";
 import { MeterWidgetConfigPanel } from "./parts/MeterWidgetConfigPanel";
@@ -64,8 +64,7 @@ export const MeterWidgetConfigPageWithMeterSelect: FunctionComponent<MeterWidget
                 <MeterWidgetCodeSelectPanel default={p.default.meterSelection} codesToSelect={p.codesToSelect} onUpdate={(d) => setMeterSelection({...d})} />
             </Card>
             <Card>
-                {url}
-                <Button variant="primary" onClick={()=>navigator.clipboard.writeText(url)}>Copy Widget URL</Button>
+                <a href={url}>{url}</a>
             </Card>
         </>
     );

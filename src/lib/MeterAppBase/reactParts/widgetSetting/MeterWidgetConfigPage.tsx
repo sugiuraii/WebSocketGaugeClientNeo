@@ -24,7 +24,7 @@
 
 import React, { useState } from "react";
 import { FunctionComponent } from "react";
-import { Button, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { MeterWidgetConfigPanel } from "./parts/MeterWidgetConfigPanel";
 
 export type MeterWidgetConfigPanelProps =
@@ -56,8 +56,7 @@ export const MeterWidgetConfigPage: FunctionComponent<MeterWidgetConfigPanelProp
                 }}/>
             </Card>
             <Card>
-                {url}
-                <Button variant="primary" onClick={()=>navigator.clipboard.writeText(url)}>Copy Widget URL</Button>
+               <a href={url}>{url}</a>
             </Card>
         </>
     );
