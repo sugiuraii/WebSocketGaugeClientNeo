@@ -35,6 +35,8 @@ import PIXIApplication from "./reactParts/PIXIApplication";
 import 'bootswatch/dist/slate/bootstrap.min.css';
 import { MeterSelectionSetting } from "./reactParts/dialog/MeterSelectDialog";
 import { WebsocketParameterCode } from "./WebsocketObjCollection/WebsocketParameterCode";
+import { MeterWidgetConfigPageRenderer } from "./reactParts/widgetSetting/MeterWidgetConfigPageRenderer";
+import { MeterWidgetConfigPageWithMeterSelectRenderer } from "./reactParts/widgetSetting/MeterWidgetConfigPageWithMeterSelectRenderer";
 const BOOTSTRAP_CSS_FILENAME = "bootstrap.min.css";
 
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
@@ -75,7 +77,31 @@ export class MeterWidgetApplication {
         this.webSocketCollection = new WebsocketObjectCollection(this.Logger, option.WebSocketCollectionOption, this.UrlQueryResult.WSInterval);
     }
 
+    private renderSettingPageIfEmptyQuery()
+    {
+        const baseURL = location.href;
+        const previewHeight = (this.Option.PIXIApplicationOption.height !== undefined)?(this.Option.PIXIApplicationOption.height*1.2 + "px"):undefined;
+        const previewWidth = (this.Option.PIXIApplicationOption.width !== undefined)?(this.Option.PIXIApplicationOption.width*1.1 + "px"):undefined;
+        if(this.Option.MeteSelectDialogOption.ParameterCodeListToSelect.length === 0)
+        {
+            const settingPageRenderer = new MeterWidgetConfigPageRenderer();
+            settingPageRenderer.render(baseURL, previewHeight, previewWidth);
+        }
+        else
+        {
+            const settingPageRenderer = new MeterWidgetConfigPageWithMeterSelectRenderer();
+            settingPageRenderer.render(baseURL, this.Option.MeteSelectDialogOption.ParameterCodeListToSelect, this.Option.MeteSelectDialogOption.DefaultMeterSelectDialogSetting, previewHeight, previewWidth);
+        }
+    }
+
     public async Run(): Promise<void> {
+        // Show setting page if the query string is empty
+        if(window.location.search.length === 0)
+        {
+            this.renderSettingPageIfEmptyQuery();
+            return;
+        }
+
         // Override forceCanvas flag from query, if Option.PIXIApplication.forceCanvas is undefinded.
         if (this.Option.PIXIApplicationOption.forceCanvas === undefined)
             if (this.UrlQueryResult.ForceCanvas)

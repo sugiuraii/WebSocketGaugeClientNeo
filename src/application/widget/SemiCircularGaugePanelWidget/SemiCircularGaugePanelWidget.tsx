@@ -53,6 +53,8 @@ class SemiCircularGaugePanelWidgetApp {
         appOption.PreloadResource.WebFontFamiliyName.push(...SemiCircularGaugePanel.RequestedFontFamily);
         appOption.PreloadResource.WebFontCSSURL.push(...SemiCircularGaugePanel.RequestedFontCSSURL);
         appOption.PreloadResource.TexturePath.push(...SemiCircularGaugePanel.RequestedTexturePath);
+        appOption.MeteSelectDialogOption.ParameterCodeListToSelect = ["Engine_Load", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Mass_Air_Flow", "Throttle_Opening_Angle", "O2Sensor_1_Air_Fuel_Ratio", "Intake_Air_Temperature"];
+        appOption.MeteSelectDialogOption.DefaultMeterSelectDialogSetting = { ["Meter1"]: "Manifold_Absolute_Pressure"};
 
         appOption.SetupPIXIMeterPanel = (app, ws, meterSetting) => {
             const stage = app.stage;

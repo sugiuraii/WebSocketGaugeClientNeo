@@ -43,13 +43,13 @@ module.exports = {
         "ChangeableAnalogTripleMeter": './ChangeableAnalogTripleMeter/ChangeableAnalogTripleMeter.tsx',
         "LEDRevMeter": './LEDRevMeter/LEDRevMeter.ts',
         // Widget apps
-        "AnalogTripleMeterWidget": './widget/AnalogSingleMeterWidget/AnalogSingleMeterWidget.tsx',
+        "AnalogSingleMeterWidget": './widget/AnalogSingleMeterWidget/AnalogSingleMeterWidget.tsx',
         "SemiCircularGaugePanelWidget": './widget/SemiCircularGaugePanelWidget/SemiCircularGaugePanelWidget.tsx',
         "FullCircularGaugePanelWidget": './widget/FullCircularGaugePanelWidget/FullCircularGaugePanelWidget.tsx',
         "DigiTachoPanelWidget": './widget/DigiTachoPanelWidget/DigiTachoPanelWidget.tsx',
         "GasMilagePanelWidget": './widget/GasMilagePanelWidget/GasMilagePanelWidget.tsx',
         "AnalogMeterClusterWidget": './widget/AnalogMeterClusterWidget/AnalogMeterClusterWidget.tsx',
-        "LEDRevMeterWidget": './widget/LEDRevMeterWidget/LEDRevMeterWidget.tsx'
+        "LEDRevMeterWidget": './widget/LEDRevMeterWidget/LEDRevMeterWidget.tsx',
     },
     devtool: "source-map",
     output:
