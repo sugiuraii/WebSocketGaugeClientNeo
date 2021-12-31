@@ -24,7 +24,7 @@
 
 const puppeteer = require("puppeteer");
 const express = require("express");
-const fs =  require("fs");
+const fs = require("fs");
 
 // Set target list
 const targetList = [
@@ -43,11 +43,13 @@ const targetList = [
   { htmlPath: "application/FullCircularGaugePanelWidget.html", pngPath: "thumbnails/FullCircularGaugePanelWidget.png" },
   { htmlPath: "application/LEDRevMeterWidget.html", pngPath: "thumbnails/LEDRevMeterWidget.png" },
   { htmlPath: "application/GasMilagePanelWidget.html", pngPath: "thumbnails/GasMilagePanelWidget.png" }
-
 ];
 
 // Set thumbnail size
 const viewport = { width: 600, height: 400 };
+
+// set number of concurrent jobs
+const numConcurrentJobs = 16;
 
 // Build local web server by express
 const app = express();
@@ -67,16 +69,28 @@ const createSingleThumbNail = async (htmlpath, pngpath) => {
   const browser = await puppeteer.launch({ headless: false, args: ['--allow-file-access', '--allow-file-access-from-files', '--use-gl=swiftshader'] });
   const page = await browser.newPage();
   await page.setViewport(viewport);
-  await page.goto("http://127.0.0.1:" + port.toString() + "/" + htmlpath, {waitUntil: 'networkidle2'});
+  await page.goto("http://127.0.0.1:" + port.toString() + "/" + htmlpath, { waitUntil: 'networkidle2' });
   await page.waitForTimeout(1000);
   await page.screenshot({ path: pngpath });
   await browser.close();
 }
 
+
 const makeThunbnails = async () => {
-  for(const target of targetList)
-    await createSingleThumbNail(target.htmlPath, target.pngPath);
+  const promises = [];
+  for (let i = 0; i < targetList.length; i += numConcurrentJobs) {
+    for (let j = i; j < i + numConcurrentJobs; j++) {
+      if (j < targetList.length) {
+        const target = targetList[j];
+        promises.push(createSingleThumbNail(target.htmlPath, target.pngPath));
+      }
+    }
+    for (const promise of promises) {
+      await promise;
+    }
+  }
   http.close();
 }
 
+require('events').EventEmitter.defaultMaxListeners = numConcurrentJobs + 1;
 makeThunbnails();
