@@ -45,7 +45,7 @@ export const MeterWidgetConfigPage: FunctionComponent<MeterWidgetConfigPanelProp
         <>
             <Card>
                 <div style={{textAlign:"center"}}>
-                    <iframe src={url} width={p.previewWidth} height={p.previewHeight}></iframe>
+                    <iframe src={url} width="100%" height={p.previewHeight}></iframe>
                 </div>
             </Card>
             <Card>
