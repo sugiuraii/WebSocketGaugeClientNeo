@@ -31,6 +31,7 @@ import { MeterWidgetConfigPageWithMeterSelect } from "./MeterWidgetConfigPageWit
 
 export class MeterWidgetConfigPageWithMeterSelectRenderer {
     private readonly BOOTSTRAP_CSS_FILENAME = "bootstrap.min.css";
+    private readonly VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
 
     private loadBootStrapCSS() {
         const head = document.getElementsByTagName('head')[0];
@@ -40,14 +41,35 @@ export class MeterWidgetConfigPageWithMeterSelectRenderer {
         link.setAttribute('href', this.BOOTSTRAP_CSS_FILENAME);
         head.appendChild(link);
     }
+    
+    private setViewPortMetaTag() {
+        const metalist = document.getElementsByTagName('meta');
+        let hasMeta = false;
 
-    public render(baseURL: string, codeToSelect:WebsocketParameterCode[], defaultMeterSelection: MeterSelectionSetting, previewHeight?: string, previewWidth?: string, ) {
+        for (let i = 0; i < metalist.length; i++) {
+            const name = metalist[i].getAttribute('name');
+            if (name && name.toLowerCase() === 'viewport') {
+                metalist[i].setAttribute('content', this.VIEWPORT_ATTRIBUTE);
+                hasMeta = true;
+                break;
+            }
+        }
+        if (!hasMeta) {
+            const meta = document.createElement('meta');
+            meta.setAttribute('name', 'viewport');
+            meta.setAttribute('content', this.VIEWPORT_ATTRIBUTE);
+            document.getElementsByTagName('head')[0].appendChild(meta);
+        }
+    }
+
+    public render(baseURL: string, codeToSelect:WebsocketParameterCode[], defaultMeterSelection: MeterSelectionSetting, previewAspect?:number) {
         const rootElement = document.createElement('div');
         this.loadBootStrapCSS();
-
+        this.setViewPortMetaTag();
+        
         ReactDOM.render(
             <>
-                <MeterWidgetConfigPageWithMeterSelect previewHeight={previewHeight} previewWidth={previewWidth}
+                <MeterWidgetConfigPageWithMeterSelect previewAspect={previewAspect}
                     baseURL={baseURL}
                     codesToSelect={codeToSelect}
                     default={{ forceCanvas: false, wsInterval: 0, meterSelection: defaultMeterSelection }} />

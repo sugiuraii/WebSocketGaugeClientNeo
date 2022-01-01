@@ -82,16 +82,16 @@ export class MeterWidgetApplication {
         const baseURL = location.href;
         const previewHeight = this.Option.PIXIApplicationOption.height;
         const previewWidth = this.Option.PIXIApplicationOption.width;
+        const previewAspect = (previewHeight === undefined || previewWidth === undefined)?undefined:previewHeight/previewWidth;
         if(this.Option.MeteSelectDialogOption.ParameterCodeListToSelect.length === 0)
-        {
+        {    
             const settingPageRenderer = new MeterWidgetConfigPageRenderer();
-            const previewAspect = (previewHeight === undefined || previewWidth === undefined)?undefined:previewHeight/previewWidth;
             settingPageRenderer.render(baseURL, previewAspect);
         }
         else
         {
             const settingPageRenderer = new MeterWidgetConfigPageWithMeterSelectRenderer();
-            settingPageRenderer.render(baseURL, this.Option.MeteSelectDialogOption.ParameterCodeListToSelect, this.Option.MeteSelectDialogOption.DefaultMeterSelectDialogSetting, previewHeight + "px", previewWidth + "px");
+            settingPageRenderer.render(baseURL, this.Option.MeteSelectDialogOption.ParameterCodeListToSelect, this.Option.MeteSelectDialogOption.DefaultMeterSelectDialogSetting, previewAspect);
         }
     }
 

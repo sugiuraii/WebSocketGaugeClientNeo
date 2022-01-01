@@ -23,7 +23,7 @@
  */
 
 import { WebsocketParameterCode } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FunctionComponent } from "react";
 import { Card } from "react-bootstrap";
 import { MeterSelectionSetting } from "../dialog/MeterSelectDialog";
@@ -35,8 +35,7 @@ export type MeterWidgetConfigPanelWithMeterSelectProps =
     baseURL: string,
     default: { wsInterval: number, forceCanvas: boolean, meterSelection: MeterSelectionSetting},
     codesToSelect: WebsocketParameterCode[],
-    previewHeight?: string,
-    previewWidth?: string
+    previewAspect?: number
 }
 
 export const MeterWidgetConfigPageWithMeterSelect: FunctionComponent<MeterWidgetConfigPanelWithMeterSelectProps> = (p) =>
@@ -46,12 +45,26 @@ export const MeterWidgetConfigPageWithMeterSelect: FunctionComponent<MeterWidget
     const [meterSelection, setMeterSelection] = useState(p.default.meterSelection);
     
     const url = decodeURL(wsInterval, forceCanvas, p.baseURL, meterSelection);
+    
+    // Auto tune iframe height from the aspect ratio given by previewHeight and previewWidth
+    useEffect(() => {
+        if(p.previewAspect === undefined)
+            return;
+        
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const iframeElem = document.getElementById("previewIframe")!as HTMLIFrameElement;
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const scrollWidth = iframeElem.contentDocument!.documentElement.scrollWidth;
+        const scrollHeight = scrollWidth * p.previewAspect;
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        iframeElem.style.height = scrollHeight + "px";        
+    },[p.previewAspect]);
 
     return(
         <>
             <Card>
                 <div style={{textAlign:"center"}}>
-                    <iframe src={url} width={p.previewWidth} height={p.previewHeight}></iframe>
+                    <iframe id="previewIframe" src={url} width="100%" ></iframe>
                 </div>
             </Card>
             <Card>
