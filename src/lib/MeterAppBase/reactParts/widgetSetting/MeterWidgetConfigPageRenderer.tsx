@@ -30,6 +30,12 @@ export class MeterWidgetConfigPageRenderer
 {
     private readonly BOOTSTRAP_CSS_FILENAME = "bootstrap.min.css";
     private readonly VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
+    
+    private setBackgroundColor()
+    {
+        document.body.style.backgroundColor = 'black';
+    }
+    
     private loadBootStrapCSS() 
     {
         const head = document.getElementsByTagName('head')[0];
@@ -64,6 +70,7 @@ export class MeterWidgetConfigPageRenderer
     {
         const rootElement = document.createElement('div');
         this.loadBootStrapCSS();
+        this.setBackgroundColor();
         this.setViewPortMetaTag();
         ReactDOM.render(
             <>

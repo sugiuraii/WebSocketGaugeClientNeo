@@ -24,18 +24,17 @@
 
 import React, { useEffect, useState } from "react";
 import { FunctionComponent } from "react";
-import { Card } from "react-bootstrap";
+import { Card, Container, Row, Col } from "react-bootstrap";
 import { MeterWidgetConfigPanel } from "./parts/MeterWidgetConfigPanel";
 
 export type MeterWidgetConfigPanelProps =
-{
-    baseURL: string,
-    default: { wsInterval: number, forceCanvas: boolean},
-    previewAspect?: number
-}
+    {
+        baseURL: string,
+        default: { wsInterval: number, forceCanvas: boolean },
+        previewAspect?: number
+    }
 
-export const MeterWidgetConfigPage: FunctionComponent<MeterWidgetConfigPanelProps> = (p) =>
-{
+export const MeterWidgetConfigPage: FunctionComponent<MeterWidgetConfigPanelProps> = (p) => {
     const [wsInterval, setWSInterval] = useState(p.default.wsInterval);
     const [forceCanvas, setForceCanvas] = useState(p.default.forceCanvas);
 
@@ -43,40 +42,54 @@ export const MeterWidgetConfigPage: FunctionComponent<MeterWidgetConfigPanelProp
 
     // Auto tune iframe height from the aspect ratio given by previewHeight and previewWidth
     useEffect(() => {
-        if(p.previewAspect === undefined)
+        if (p.previewAspect === undefined)
             return;
-        
+
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const iframeElem = document.getElementById("previewIframe")!as HTMLIFrameElement;
+        const iframeElem = document.getElementById("previewIframe")! as HTMLIFrameElement;
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const scrollWidth = iframeElem.contentDocument!.documentElement.scrollWidth;
         const scrollHeight = scrollWidth * p.previewAspect;
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        iframeElem.style.height = scrollHeight + "px";        
-    },[p.previewAspect]);
+        iframeElem.style.height = scrollHeight + "px";
+    }, [p.previewAspect]);
 
-    return(
+    return (
         <>
-            <Card>
-                <div style={{textAlign:"center"}}>
-                    <iframe id="previewIframe" src={url} width="100%" ></iframe>
-                </div>
-            </Card>
-            <Card>
-                <MeterWidgetConfigPanel default={{wsInterval:p.default.wsInterval, forceCanvas:p.default.forceCanvas}} onUpdate={(x)=>{
-                    setWSInterval(x.wsInterval);
-                    setForceCanvas(x.forceCanvas);
+            <Container fluid>
+                <Row>
+                    <Col>
+                        <Card>
+                            <Card.Header><h1>Widget preview</h1></Card.Header>
+                            <Card.Body>
+                                <div style={{ textAlign: "center" }}>
+                                    <iframe id="previewIframe" src={url} width="100%" ></iframe>
+                                </div>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                    <Col>
+                        <Card>
+                            <Card.Header><h1>Setting</h1></Card.Header>
+                            <Card.Body>
+                                <MeterWidgetConfigPanel default={{ wsInterval: p.default.wsInterval, forceCanvas: p.default.forceCanvas }} onUpdate={(x) => {
+                                    setWSInterval(x.wsInterval);
+                                    setForceCanvas(x.forceCanvas);
 
-                }}/>
-            </Card>
-            <Card>
-               <a href={url}>{url}</a>
-            </Card>
+                                }} />
+                            </Card.Body>
+                        </Card>
+                        <Card>
+                            <Card.Header><h1>Widget URL</h1></Card.Header>
+                            <a href={url}>{url}</a>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
         </>
     );
 }
 
-function decodeURL(wsInterval: number, forceCanvas: boolean, baseURL: string) : string
-{
-    return baseURL + '?' +  "wsInterval=" + wsInterval.toString() + "&forceCanvas=" + forceCanvas;
+function decodeURL(wsInterval: number, forceCanvas: boolean, baseURL: string): string {
+    return baseURL + '?' + "wsInterval=" + wsInterval.toString() + "&forceCanvas=" + forceCanvas;
 }

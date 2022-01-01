@@ -25,7 +25,7 @@
 import { WebsocketParameterCode } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode";
 import React, { useEffect, useState } from "react";
 import { FunctionComponent } from "react";
-import { Card } from "react-bootstrap";
+import { Card, Container, Row, Col } from "react-bootstrap";
 import { MeterSelectionSetting } from "../dialog/MeterSelectDialog";
 import { MeterWidgetCodeSelectPanel } from "./parts/MeterWidgetCodeSelectPanel";
 import { MeterWidgetConfigPanel } from "./parts/MeterWidgetConfigPanel";
@@ -62,23 +62,36 @@ export const MeterWidgetConfigPageWithMeterSelect: FunctionComponent<MeterWidget
 
     return(
         <>
-            <Card>
-                <div style={{textAlign:"center"}}>
-                    <iframe id="previewIframe" src={url} width="100%" ></iframe>
-                </div>
-            </Card>
-            <Card>
-                <MeterWidgetConfigPanel default={{wsInterval:p.default.wsInterval, forceCanvas:p.default.forceCanvas}} onUpdate={(x)=>{
-                    setWSInterval(x.wsInterval);
-                    setForceCanvas(x.forceCanvas);
-                }}/>
-            </Card>
-            <Card>
-                <MeterWidgetCodeSelectPanel default={p.default.meterSelection} codesToSelect={p.codesToSelect} onUpdate={(d) => setMeterSelection({...d})} />
-            </Card>
-            <Card>
-                <a href={url}>{url}</a>
-            </Card>
+            <Container fluid>
+                <Row>
+                    <Col>
+                        <Card>
+                            <Card.Header><h1>Widget preview</h1></Card.Header>
+                            <Card.Body>
+                                <div style={{textAlign:"center"}}>
+                                    <iframe id="previewIframe" src={url} width="100%" ></iframe>
+                                </div>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                    <Col>
+                        <Card>
+                            <Card.Header><h1>Setting</h1></Card.Header>
+                            <Card.Body>
+                                <MeterWidgetConfigPanel default={{wsInterval:p.default.wsInterval, forceCanvas:p.default.forceCanvas}} onUpdate={(x)=>{
+                                    setWSInterval(x.wsInterval);
+                                    setForceCanvas(x.forceCanvas);
+                                }}/>
+                                <MeterWidgetCodeSelectPanel default={p.default.meterSelection} codesToSelect={p.codesToSelect} onUpdate={(d) => setMeterSelection({...d})} />
+                            </Card.Body>
+                        </Card>
+                        <Card>
+                            <Card.Header><h1>Widget URL</h1></Card.Header>
+                            <a href={url}>{url}</a>
+                        </Card>
+                    </Col>
+            </Row>
+            </Container>
         </>
     );
 }
