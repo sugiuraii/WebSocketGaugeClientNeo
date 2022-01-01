@@ -64,7 +64,7 @@ export const MeterWidgetConfigPageWithMeterSelect: FunctionComponent<MeterWidget
         <>
             <Container fluid>
                 <Row>
-                    <Col>
+                    <Col sm={8}>
                         <Card>
                             <Card.Header><h1>Widget preview</h1></Card.Header>
                             <Card.Body>
@@ -74,7 +74,7 @@ export const MeterWidgetConfigPageWithMeterSelect: FunctionComponent<MeterWidget
                             </Card.Body>
                         </Card>
                     </Col>
-                    <Col>
+                    <Col sm={4}>
                         <Card>
                             <Card.Header><h1>Setting</h1></Card.Header>
                             <Card.Body>
