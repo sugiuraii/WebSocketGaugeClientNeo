@@ -60,27 +60,11 @@ export class MeterWidgetConfigPageRenderer
         }
     }
 
-    private setWebAppCapable(): void {
-        {
-            const meta = document.createElement('meta');
-            meta.setAttribute('name', 'apple-mobile-web-app-capable');
-            meta.setAttribute('content', 'yes');
-            document.getElementsByTagName('head')[0].appendChild(meta);
-        }
-        {
-            const meta = document.createElement('meta');
-            meta.setAttribute('name', 'mobile-web-app-capable');
-            meta.setAttribute('content', 'yes');
-            document.getElementsByTagName('head')[0].appendChild(meta);
-        }
-    }
-
     public render(baseURL: string, previewAspect?:number)
     {
         const rootElement = document.createElement('div');
         this.loadBootStrapCSS();
         this.setViewPortMetaTag();
-        this.setWebAppCapable();
         ReactDOM.render(
             <>
                 <MeterWidgetConfigPage  previewAspect={previewAspect}
