@@ -31,8 +31,7 @@ export type MeterWidgetConfigPanelProps =
 {
     baseURL: string,
     default: { wsInterval: number, forceCanvas: boolean},
-    previewHeight?: number,
-    previewWidth?: number
+    previewAspect?: number
 }
 
 export const MeterWidgetConfigPage: FunctionComponent<MeterWidgetConfigPanelProps> = (p) =>
@@ -44,17 +43,17 @@ export const MeterWidgetConfigPage: FunctionComponent<MeterWidgetConfigPanelProp
 
     // Auto tune iframe height from the aspect ratio given by previewHeight and previewWidth
     useEffect(() => {
-        if(p.previewHeight === undefined || p.previewWidth === undefined)
+        if(p.previewAspect === undefined)
             return;
         
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const iframeElem = document.getElementById("previewIframe")!as HTMLIFrameElement;
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const scrollWidth = iframeElem.contentDocument!.documentElement.scrollWidth;
-        const scrollHeight = scrollWidth * p.previewHeight/p.previewWidth;
+        const scrollHeight = scrollWidth * p.previewAspect;
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         iframeElem.style.height = scrollHeight + "px";        
-    });
+    },[p.previewAspect]);
 
     return(
         <>

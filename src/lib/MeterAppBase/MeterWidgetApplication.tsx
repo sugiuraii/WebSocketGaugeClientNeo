@@ -80,12 +80,13 @@ export class MeterWidgetApplication {
     private renderSettingPageIfEmptyQuery()
     {
         const baseURL = location.href;
-        const previewHeight = (this.Option.PIXIApplicationOption.height !== undefined)?(this.Option.PIXIApplicationOption.height*1.2):undefined;
-        const previewWidth = (this.Option.PIXIApplicationOption.width !== undefined)?(this.Option.PIXIApplicationOption.width*1.1):undefined;
+        const previewHeight = this.Option.PIXIApplicationOption.height;
+        const previewWidth = this.Option.PIXIApplicationOption.width;
         if(this.Option.MeteSelectDialogOption.ParameterCodeListToSelect.length === 0)
         {
             const settingPageRenderer = new MeterWidgetConfigPageRenderer();
-            settingPageRenderer.render(baseURL, previewHeight, previewWidth);
+            const previewAspect = (previewHeight === undefined || previewWidth === undefined)?undefined:previewHeight/previewWidth;
+            settingPageRenderer.render(baseURL, previewAspect);
         }
         else
         {

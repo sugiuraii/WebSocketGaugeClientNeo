@@ -75,7 +75,7 @@ export class MeterWidgetConfigPageRenderer
         }
     }
 
-    public render(baseURL: string, previewHeight?:number, previewWidth?:number)
+    public render(baseURL: string, previewAspect?:number)
     {
         const rootElement = document.createElement('div');
         this.loadBootStrapCSS();
@@ -83,7 +83,7 @@ export class MeterWidgetConfigPageRenderer
         this.setWebAppCapable();
         ReactDOM.render(
             <>
-                <MeterWidgetConfigPage  previewHeight={previewHeight} previewWidth={previewWidth}
+                <MeterWidgetConfigPage  previewAspect={previewAspect}
                                         baseURL={baseURL} 
                                         default={{forceCanvas:false, wsInterval:0}} />
             </>
