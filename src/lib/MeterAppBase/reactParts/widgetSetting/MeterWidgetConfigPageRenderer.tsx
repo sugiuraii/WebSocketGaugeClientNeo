@@ -75,7 +75,7 @@ export class MeterWidgetConfigPageRenderer
         }
     }
 
-    public render(baseURL: string, previewHeight?:string, previewWidth?:string)
+    public render(baseURL: string, previewHeight?:number, previewWidth?:number)
     {
         const rootElement = document.createElement('div');
         this.loadBootStrapCSS();

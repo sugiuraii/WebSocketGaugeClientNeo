@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FunctionComponent } from "react";
 import { Card } from "react-bootstrap";
 import { MeterWidgetConfigPanel } from "./parts/MeterWidgetConfigPanel";
@@ -31,8 +31,8 @@ export type MeterWidgetConfigPanelProps =
 {
     baseURL: string,
     default: { wsInterval: number, forceCanvas: boolean},
-    previewHeight?: string,
-    previewWidth?: string
+    previewHeight?: number,
+    previewWidth?: number
 }
 
 export const MeterWidgetConfigPage: FunctionComponent<MeterWidgetConfigPanelProps> = (p) =>
@@ -41,11 +41,26 @@ export const MeterWidgetConfigPage: FunctionComponent<MeterWidgetConfigPanelProp
     const [forceCanvas, setForceCanvas] = useState(p.default.forceCanvas);
 
     const url = decodeURL(wsInterval, forceCanvas, p.baseURL);
+
+    // Auto tune iframe height from the aspect ratio given by previewHeight and previewWidth
+    useEffect(() => {
+        if(p.previewHeight === undefined || p.previewWidth === undefined)
+            return;
+        
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const iframeElem = document.getElementById("previewIframe")!as HTMLIFrameElement;
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const scrollWidth = iframeElem.contentDocument!.documentElement.scrollWidth;
+        const scrollHeight = scrollWidth * p.previewHeight/p.previewWidth;
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        iframeElem.style.height = scrollHeight + "px";        
+    });
+
     return(
         <>
             <Card>
                 <div style={{textAlign:"center"}}>
-                    <iframe src={url} width="100%" height={p.previewHeight}></iframe>
+                    <iframe id="previewIframe" src={url} width="100%" ></iframe>
                 </div>
             </Card>
             <Card>
