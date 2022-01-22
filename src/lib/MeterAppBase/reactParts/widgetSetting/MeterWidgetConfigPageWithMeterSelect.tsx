@@ -23,9 +23,9 @@
  */
 
 import { WebsocketParameterCode } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FunctionComponent } from "react";
-import { Button, Card } from "react-bootstrap";
+import { Card, Container, Row, Col } from "react-bootstrap";
 import { MeterSelectionSetting } from "../dialog/MeterSelectDialog";
 import { MeterWidgetCodeSelectPanel } from "./parts/MeterWidgetCodeSelectPanel";
 import { MeterWidgetConfigPanel } from "./parts/MeterWidgetConfigPanel";
@@ -35,8 +35,7 @@ export type MeterWidgetConfigPanelWithMeterSelectProps =
     baseURL: string,
     default: { wsInterval: number, forceCanvas: boolean, meterSelection: MeterSelectionSetting},
     codesToSelect: WebsocketParameterCode[],
-    previewHeight?: string,
-    previewWidth?: string
+    previewAspect?: number
 }
 
 export const MeterWidgetConfigPageWithMeterSelect: FunctionComponent<MeterWidgetConfigPanelWithMeterSelectProps> = (p) =>
@@ -46,27 +45,53 @@ export const MeterWidgetConfigPageWithMeterSelect: FunctionComponent<MeterWidget
     const [meterSelection, setMeterSelection] = useState(p.default.meterSelection);
     
     const url = decodeURL(wsInterval, forceCanvas, p.baseURL, meterSelection);
+    
+    // Auto tune iframe height from the aspect ratio given by previewHeight and previewWidth
+    useEffect(() => {
+        if(p.previewAspect === undefined)
+            return;
+        
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const iframeElem = document.getElementById("previewIframe")!as HTMLIFrameElement;
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const scrollWidth = iframeElem.contentDocument!.documentElement.scrollWidth;
+        const scrollHeight = scrollWidth * p.previewAspect;
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        iframeElem.style.height = scrollHeight + "px";        
+    },[p.previewAspect]);
 
     return(
         <>
-            <Card>
-                <div style={{textAlign:"center"}}>
-                    <iframe src={url} width={p.previewWidth} height={p.previewHeight}></iframe>
-                </div>
-            </Card>
-            <Card>
-                <MeterWidgetConfigPanel default={{wsInterval:p.default.wsInterval, forceCanvas:p.default.forceCanvas}} onUpdate={(x)=>{
-                    setWSInterval(x.wsInterval);
-                    setForceCanvas(x.forceCanvas);
-                }}/>
-            </Card>
-            <Card>
-                <MeterWidgetCodeSelectPanel default={p.default.meterSelection} codesToSelect={p.codesToSelect} onUpdate={(d) => setMeterSelection({...d})} />
-            </Card>
-            <Card>
-                {url}
-                <Button variant="primary" onClick={()=>navigator.clipboard.writeText(url)}>Copy Widget URL</Button>
-            </Card>
+            <Container fluid>
+                <Row>
+                    <Col sm={8}>
+                        <Card>
+                            <Card.Header><h1>Widget preview</h1></Card.Header>
+                            <Card.Body>
+                                <div style={{textAlign:"center"}}>
+                                    <iframe id="previewIframe" src={url} width="100%" ></iframe>
+                                </div>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                    <Col sm={4}>
+                        <Card>
+                            <Card.Header><h1>Setting</h1></Card.Header>
+                            <Card.Body>
+                                <MeterWidgetConfigPanel default={{wsInterval:p.default.wsInterval, forceCanvas:p.default.forceCanvas}} onUpdate={(x)=>{
+                                    setWSInterval(x.wsInterval);
+                                    setForceCanvas(x.forceCanvas);
+                                }}/>
+                                <MeterWidgetCodeSelectPanel default={p.default.meterSelection} codesToSelect={p.codesToSelect} onUpdate={(d) => setMeterSelection({...d})} />
+                            </Card.Body>
+                        </Card>
+                        <Card>
+                            <Card.Header><h1>Widget URL</h1></Card.Header>
+                            <a href={url}>{url}</a>
+                        </Card>
+                    </Col>
+            </Row>
+            </Container>
         </>
     );
 }

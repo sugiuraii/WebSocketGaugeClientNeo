@@ -29,7 +29,13 @@ import { MeterWidgetConfigPage } from "./MeterWidgetConfigPage";
 export class MeterWidgetConfigPageRenderer
 {
     private readonly BOOTSTRAP_CSS_FILENAME = "bootstrap.min.css";
-
+    private readonly VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
+    
+    private setBackgroundColor()
+    {
+        document.body.style.backgroundColor = 'black';
+    }
+    
     private loadBootStrapCSS() 
     {
         const head = document.getElementsByTagName('head')[0];
@@ -39,15 +45,36 @@ export class MeterWidgetConfigPageRenderer
         link.setAttribute('href', this.BOOTSTRAP_CSS_FILENAME);
         head.appendChild(link);
     }
+    
+    private setViewPortMetaTag() {
+        const metalist = document.getElementsByTagName('meta');
+        let hasMeta = false;
 
-    public render(baseURL: string, previewHeight?:string, previewWidth?:string)
+        for (let i = 0; i < metalist.length; i++) {
+            const name = metalist[i].getAttribute('name');
+            if (name && name.toLowerCase() === 'viewport') {
+                metalist[i].setAttribute('content', this.VIEWPORT_ATTRIBUTE);
+                hasMeta = true;
+                break;
+            }
+        }
+        if (!hasMeta) {
+            const meta = document.createElement('meta');
+            meta.setAttribute('name', 'viewport');
+            meta.setAttribute('content', this.VIEWPORT_ATTRIBUTE);
+            document.getElementsByTagName('head')[0].appendChild(meta);
+        }
+    }
+
+    public render(baseURL: string, previewAspect?:number)
     {
         const rootElement = document.createElement('div');
         this.loadBootStrapCSS();
-
+        this.setBackgroundColor();
+        this.setViewPortMetaTag();
         ReactDOM.render(
             <>
-                <MeterWidgetConfigPage  previewHeight={previewHeight} previewWidth={previewWidth}
+                <MeterWidgetConfigPage  previewAspect={previewAspect}
                                         baseURL={baseURL} 
                                         default={{forceCanvas:false, wsInterval:0}} />
             </>
