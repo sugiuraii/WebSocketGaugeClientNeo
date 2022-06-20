@@ -58,12 +58,11 @@
         "tsconfig-paths-webpack-plugin": "^3.5.2"
     },
     "scripts": {
-        "build-all": "npm-run-all --parallel build-WebSocketTester build-benchmark build-application build-partsTest build-index --serial build-thumbnails",
+        "build-all": "npm-run-all --parallel build-WebSocketTester build-benchmark build-application build-partsTest build-index",
         "build-WebSocketTester": "cd src/WebSocketTester && npx webpack --progress=profile",
         "build-benchmark": "cd src/benchmark && npx webpack --progress=profile",
         "build-application": "cd src/application && npx webpack --progress=profile",
         "build-partsTest": "cd src/test/partsTest && npx webpack --progress=profile",
-        "build-thumbnails": "cd public_html && node thumbnails.js",
         "build-index": "cd src/index && npx webpack --progress=profile",
         "build-special-assettocorsa": "cd src/special/assettocorsaApp && npx webpack --progress=profile",
         "debug-watch-benchmark": "cd src/benchmark && npx webpack --watch --progress=profile",
