@@ -73,7 +73,7 @@ const createSingleThumbNail = async (htmlpath, pngpath) => {
   const browser = await puppeteer.launch({ headless: false, args: ['--allow-file-access', '--allow-file-access-from-files', '--use-gl=swiftshader'] });
   const page = await browser.newPage();
   await page.setViewport(viewport);
-  await page.goto("http://127.0.0.1:" + port.toString() + "/" + htmlpath, { waitUntil: 'networkidle2' });
+  await page.goto("http://127.0.0.1:" + port.toString() + "/" + htmlpath/*, { waitUntil: 'networkidle2' }*/);
   await page.waitForTimeout(1000);
   await page.screenshot({ path: pngpath });
   await browser.close();
