@@ -25,24 +25,28 @@
 const puppeteer = require("puppeteer");
 const express = require("express");
 const fs = require("fs");
+const path = require("path");
+const baseDir = path.join(path.relative(path.resolve(), "../"), "public_html");
+const thumbnailDir = path.join(baseDir, "thumbnails");
+const getPNGPath = (fileName) => path.join(thumbnailDir, fileName)
 
 // Set target list
 const targetList = [
-  { htmlPath: "benchmark/AnalogMeterClusterBenchApp.html", pngPath: "thumbnails/AnalogMeterClusterBenchApp.png" },
-  { htmlPath: "benchmark/DigitalMFDBenchApp.html", pngPath: "thumbnails/DigitalMFDBenchApp.png" },
-  { htmlPath: "application/AnalogMeterCluster.html", pngPath: "thumbnails/AnalogMeterCluster.png" },
-  { htmlPath: "application/CompactMFD.html", pngPath: "thumbnails/CompactMFD.png" },
-  { htmlPath: "application/DigitalMFD.html", pngPath: "thumbnails/DigitalMFD.png" },
-  { htmlPath: "application/AnalogTripleMeter.html", pngPath: "thumbnails/AnalogTripleMeter.png" },
-  { htmlPath: "application/LEDRevMeter.html", pngPath: "thumbnails/LEDRevMeter.png" },
+  { htmlPath: "benchmark/AnalogMeterClusterBenchApp.html", pngPath: getPNGPath("AnalogMeterClusterBenchApp.png") },
+  { htmlPath: "benchmark/DigitalMFDBenchApp.html", pngPath: getPNGPath("DigitalMFDBenchApp.png") },
+  { htmlPath: "application/AnalogMeterCluster.html", pngPath: getPNGPath("AnalogMeterCluster.png") },
+  { htmlPath: "application/CompactMFD.html", pngPath: getPNGPath("CompactMFD.png") },
+  { htmlPath: "application/DigitalMFD.html", pngPath: getPNGPath("DigitalMFD.png") },
+  { htmlPath: "application/AnalogTripleMeter.html", pngPath: getPNGPath("AnalogTripleMeter.png") },
+  { htmlPath: "application/LEDRevMeter.html", pngPath: getPNGPath("LEDRevMeter.png") },
 
-  { htmlPath: "application/AnalogMeterClusterWidget.html", pngPath: "thumbnails/AnalogMeterClusterWidget.png" },
-  { htmlPath: "application/AnalogSingleMeterWidget.html", pngPath: "thumbnails/AnalogSingleMeterWidget.png" },
-  { htmlPath: "application/DigiTachoPanelWidget.html", pngPath: "thumbnails/DigiTachoPanelWidget.png" },
-  { htmlPath: "application/SemiCircularGaugePanelWidget.html", pngPath: "thumbnails/SemiCircularGaugePanelWidget.png" },
-  { htmlPath: "application/FullCircularGaugePanelWidget.html", pngPath: "thumbnails/FullCircularGaugePanelWidget.png" },
-  { htmlPath: "application/LEDRevMeterWidget.html", pngPath: "thumbnails/LEDRevMeterWidget.png" },
-  { htmlPath: "application/GasMilagePanelWidget.html", pngPath: "thumbnails/GasMilagePanelWidget.png" }
+  { htmlPath: "application/AnalogMeterClusterWidget.html", pngPath: getPNGPath("AnalogMeterClusterWidget.png") },
+  { htmlPath: "application/AnalogSingleMeterWidget.html", pngPath: getPNGPath("AnalogSingleMeterWidget.png") },
+  { htmlPath: "application/DigiTachoPanelWidget.html", pngPath: getPNGPath("DigiTachoPanelWidget.png") },
+  { htmlPath: "application/SemiCircularGaugePanelWidget.html", pngPath: getPNGPath("SemiCircularGaugePanelWidget.png") },
+  { htmlPath: "application/FullCircularGaugePanelWidget.html", pngPath: getPNGPath("FullCircularGaugePanelWidget.png") },
+  { htmlPath: "application/LEDRevMeterWidget.html", pngPath: getPNGPath("LEDRevMeterWidget.png") },
+  { htmlPath: "application/GasMilagePanelWidget.html", pngPath: getPNGPath("GasMilagePanelWidget.png") }
 ];
 
 // Set thumbnail size
@@ -55,15 +59,14 @@ const numConcurrentJobs = 16;
 const app = express();
 const port = 8080;
 //app.use(express.static('./'));
-app.use(express.static('../public_html/'));
+app.use(express.static(baseDir));
 const http = app.listen(port, () => {
   console.log('Server started on port:' + port);
 });
 
 // Creare thuumbnails directory.
-const dir = './thumbnails';
-if (!fs.existsSync(dir)) {
-  fs.mkdirSync(dir);
+if (!fs.existsSync(thumbnailDir)) {
+  fs.mkdirSync(thumbnailDir);
 }
 
 const createSingleThumbNail = async (htmlpath, pngpath) => {
