@@ -53,7 +53,9 @@ const targetList = [
 const viewport = { width: 600, height: 400 };
 
 // set number of concurrent jobs
-const numConcurrentJobs = 16;
+const os = require('os');
+const cpuCount = os.cpus().length;
+const numConcurrentJobs = parseInt(cpuCount/4)>1?parseInt(cpuCount/4):1;
 
 // Build local web server by express
 const app = express();
