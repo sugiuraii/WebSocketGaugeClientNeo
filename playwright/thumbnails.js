@@ -72,7 +72,7 @@ if (!fs.existsSync(thumbnailDir)) {
 }
 
 const createSingleThumbNail = async (htmlpath, pngpath) => {
-  const browser = await playwright.chromium.launch({ headless: false, args: ['--allow-file-access', '--allow-file-access-from-files', '--use-gl=swiftshader'] });
+  const browser = await playwright.chromium.launch({ headless: true, args: ['--allow-file-access', '--allow-file-access-from-files', '--use-gl=swiftshader'] });
   const page = await browser.newPage();
   await page.setViewportSize(viewport);
   await page.goto("http://127.0.0.1:" + port.toString() + "/" + htmlpath, { waitUntil: "domcontentloaded" });
