@@ -1,2 +1,0 @@
-FROM --platform=linux/arm/v7 nginx
-COPY public_html /usr/share/nginx/html
