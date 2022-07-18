@@ -44,7 +44,7 @@ RUN chown -R pptruser:pptruser /home/pptruser
 WORKDIR /home/pptruser
 COPY puppeteer/ ./puppeteer/
 COPY --from=build /source/public_html ./public_html
-WORKDIR /home/pptuser/puppeteer
+WORKDIR /home/pptruser/puppeteer
 RUN ls
 RUN npm i
 RUN chown -R pptruser:pptruser /home/pptruser/puppeteer/package.json
@@ -55,6 +55,6 @@ RUN chown -R pptruser:pptruser /home/pptruser/public_html
 USER pptruser
 
 CMD ["google-chrome-stable"]
-RUN node thumbnails.js
+RUN node -e "`cat thumbnails.js`"
 #FROM nginx
 #COPY public_html /usr/share/nginx/html
