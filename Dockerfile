@@ -42,12 +42,15 @@ RUN useradd -r -g pptruser -G audio,video pptruser
 RUN mkdir -p /home/pptruser/Downloads
 RUN chown -R pptruser:pptruser /home/pptruser
 WORKDIR /home/pptruser
-COPY puppeteer/ .
+COPY puppeteer/ ./puppeteer/
+COPY --from=build /source/public_html ./public_html
+WORKDIR /home/pptuser/puppeteer
 RUN ls
 RUN npm i
-RUN chown -R pptruser:pptruser /home/pptruser/package.json
-RUN chown -R pptruser:pptruser /home/pptruser/package-lock.json
-RUN chown -R pptruser:pptruser /home/pptruser/node_modules
+RUN chown -R pptruser:pptruser /home/pptruser/puppeteer/package.json
+RUN chown -R pptruser:pptruser /home/pptruser/puppeteer/package-lock.json ; exit 0
+RUN chown -R pptruser:pptruser /home/pptruser/puppeteer/node_modules
+RUN chown -R pptruser:pptruser /home/pptruser/public_html
 # Run everything after as non-privileged user.
 USER pptruser
 
