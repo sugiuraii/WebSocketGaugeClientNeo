@@ -1,0 +1,4 @@
+# Copy only docker file
+# Build public_html before buidling docker image.
+FROM nginx
+COPY public_html /usr/share/nginx/html
