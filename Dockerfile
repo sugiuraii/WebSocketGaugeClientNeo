@@ -7,54 +7,31 @@ RUN npm i
 RUN npm install --global npm-run-all
 RUN npm run build-all
 
-# Thumbnail build container (puppeteer)
-# Ref:) https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md
-FROM node:14-slim AS thumbnails
+# Build thumbnail by playwright
+FROM mcr.microsoft.com/playwright
+ENV PWUSER pwuser
 
-# Install latest chrome dev package and fonts to support major charsets (Chinese, Japanese, Arabic, Hebrew, Thai and a few others)
-# Note: this installs the necessary libs to make the bundled version of Chromium that Puppeteer
-# installs, work.
-RUN apt-get update \
-    && apt-get install -y wget gnupg \
-    && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-    && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
-    && apt-get update \
-    && apt-get install -y google-chrome-stable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxss1 \
-      --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/*
+# Install aws-lambda-ric build dependencies
+RUN apt-get update && apt-get install -y sudo bash-completion less nano wget curl\
+ && usermod -aG sudo $PWUSER\
+ && echo '%sudo ALL=(ALL) NOPASSWD:ALL' | tee -a /etc/sudoers\
+ && npm i -g npm
 
-# If running Docker >= 1.13.0 use docker run's --init arg to reap zombie processes, otherwise
-# uncomment the following lines to have `dumb-init` as PID 1
-# ADD https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_x86_64 /usr/local/bin/dumb-init
-# RUN chmod +x /usr/local/bin/dumb-init
-# ENTRYPOINT ["dumb-init", "--"]
+USER $PWUSER
 
-# Uncomment to skip the chromium download when installing puppeteer. If you do,
-# you'll need to launch puppeteer with:
-#     browser.launch({executablePath: 'google-chrome-stable'})
-# ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+WORKDIR /home/$PWUSER/app
+COPY playwright/thumbnails.js ./
+COPY public_html/ ../public_html/
+RUN sudo chown -R $PWUSER:$PWUSER /home/$PWUSER
+COPY --chown=$PWUSER:$PWUSER . .
 
-# Install puppeteer so it's available in the container.
-# Add user so we don't need --no-sandbox.
-# same layer as npm install to keep re-chowned files from using up several hundred MBs more space
-RUN groupadd -r pptruser 
-RUN useradd -r -g pptruser -G audio,video pptruser
-RUN mkdir -p /home/pptruser/Downloads
-RUN chown -R pptruser:pptruser /home/pptruser
-WORKDIR /home/pptruser
-COPY puppeteer/ ./puppeteer/
-COPY --from=build /source/public_html ./public_html
-WORKDIR /home/pptruser/puppeteer
-RUN ls
-RUN npm i
-RUN chown -R pptruser:pptruser /home/pptruser/puppeteer/package.json
-RUN chown -R pptruser:pptruser /home/pptruser/puppeteer/package-lock.json ; exit 0
-RUN chown -R pptruser:pptruser /home/pptruser/puppeteer/node_modules
-RUN chown -R pptruser:pptruser /home/pptruser/public_html
-# Run everything after as non-privileged user.
-USER pptruser
+RUN npm init -y\
+ && npm i -D playwright @playwright/test dotenv express
 
-CMD ["google-chrome-stable"]
-RUN node -e "`cat thumbnails.js`"
+RUN node thumbnails.js
+
+# ENTRYPOINT ["node", "./sample.js"]
+
+
 #FROM nginx
 #COPY public_html /usr/share/nginx/html
