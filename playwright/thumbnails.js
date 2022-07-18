@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-const puppeteer = require("puppeteer");
+const playwright = require("playwright");
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
@@ -72,9 +72,9 @@ if (!fs.existsSync(thumbnailDir)) {
 }
 
 const createSingleThumbNail = async (htmlpath, pngpath) => {
-  const browser = await puppeteer.launch({ headless: false, args: ['--allow-file-access', '--allow-file-access-from-files', '--use-gl=swiftshader'] });
+  const browser = await playwright.chromium.launch({ headless: false, args: ['--allow-file-access', '--allow-file-access-from-files', '--use-gl=swiftshader'] });
   const page = await browser.newPage();
-  await page.setViewport(viewport);
+  await page.setViewportSize(viewport);
   await page.goto("http://127.0.0.1:" + port.toString() + "/" + htmlpath/*, { waitUntil: 'networkidle2' }*/);
   await page.waitForTimeout(1000);
   await page.screenshot({ path: pngpath });
