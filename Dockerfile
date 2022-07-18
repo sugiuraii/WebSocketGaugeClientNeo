@@ -8,7 +8,7 @@ RUN npm install --global npm-run-all
 RUN npm run build-all
 
 # Build thumbnail by playwright
-FROM mcr.microsoft.com/playwright
+FROM mcr.microsoft.com/playwright AS thumbnails
 ENV PWUSER pwuser
 
 # Install aws-lambda-ric build dependencies
@@ -23,15 +23,12 @@ WORKDIR /home/$PWUSER/app
 COPY playwright/thumbnails.js ./
 COPY public_html/ ../public_html/
 RUN sudo chown -R $PWUSER:$PWUSER /home/$PWUSER
-COPY --chown=$PWUSER:$PWUSER . .
+# COPY --chown=$PWUSER:$PWUSER . .
 
 RUN npm init -y\
  && npm i -D playwright @playwright/test dotenv express
 
 RUN node thumbnails.js
 
-# ENTRYPOINT ["node", "./sample.js"]
-
-
-#FROM nginx
-#COPY public_html /usr/share/nginx/html
+FROM nginx
+COPY --from=thumbnails /home/pwuser/public_html /usr/share/nginx/html
