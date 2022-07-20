@@ -11,7 +11,6 @@ RUN npm run build-all
 FROM mcr.microsoft.com/playwright AS thumbnails
 ENV PWUSER pwuser
 
-# Install aws-lambda-ric build dependencies
 RUN apt-get update && apt-get install -y sudo bash-completion less nano wget curl\
  && usermod -aG sudo $PWUSER\
  && echo '%sudo ALL=(ALL) NOPASSWD:ALL' | tee -a /etc/sudoers\
@@ -19,7 +18,7 @@ RUN apt-get update && apt-get install -y sudo bash-completion less nano wget cur
 
 USER $PWUSER
 
-WORKDIR /home/$PWUSER/app
+WORKDIR /home/$PWUSER/playwright
 COPY playwright/thumbnails.js ./
 COPY public_html/ ../public_html/
 RUN sudo chown -R $PWUSER:$PWUSER /home/$PWUSER
