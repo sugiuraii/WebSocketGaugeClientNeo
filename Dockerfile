@@ -1,4 +1,4 @@
-# Application build container (public_html)
+# Application build container (public_html) ----------------------
 FROM node:16-bullseye-slim AS build
 WORKDIR /source
 COPY src/ ./src
@@ -7,7 +7,7 @@ RUN npm i
 RUN npm install --global npm-run-all
 RUN npm run build-all
 
-# Build thumbnail by playwright
+# Build thumbnail by playwright ---------------------------------
 FROM mcr.microsoft.com/playwright AS thumbnails
 ENV PWUSER pwuser
 
@@ -29,5 +29,6 @@ RUN npm init -y\
 
 RUN node thumbnails.js
 
+# Finally, copy public_html and thumbnails to nginx container
 FROM nginx
 COPY --from=thumbnails /home/pwuser/public_html /usr/share/nginx/html
