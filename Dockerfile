@@ -1,5 +1,6 @@
 # Application build container (public_html) ----------------------
-FROM node:16-bullseye-slim AS build
+# Change platform option for your build architecture
+FROM --platform=linux/amd64 node:16-bullseye-slim AS build
 WORKDIR /source
 COPY src/ ./src
 COPY package.json ./
@@ -8,7 +9,8 @@ RUN npm install --global npm-run-all
 RUN npm run build-all
 
 # Build thumbnail by playwright ---------------------------------
-FROM mcr.microsoft.com/playwright AS thumbnails
+# Change platform option for your build architecture
+FROM --platform=linux/amd64 mcr.microsoft.com/playwright AS thumbnails
 ENV PWUSER pwuser
 
 RUN apt-get update && apt-get install -y sudo bash-completion less nano wget curl\
