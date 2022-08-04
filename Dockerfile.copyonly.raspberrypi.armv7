@@ -1,4 +1,5 @@
-# Copy only docker file (for arm32)
-# Build public_html before buidling docker image.
+# This docker file builds image by only copying pre-build files  (for arm32)
+# To use this, build public_html before building docker image.
+# To build image by using docker container, use Dockerfile instead.
 FROM --platform=linux/arm/v7 nginx
 COPY public_html /usr/share/nginx/html
