@@ -6,10 +6,17 @@ Install Docker and simply build by `Dockerfile`
 docker build --tag (your tag name) .
 ```
 If you want to build on non-x64 enviromnent, you may have to change `---platform` option of the `Dockerfile`.
+You need to change `--platform` on 2 lines.
 ```Docker
-# Select architecture of build platform
-# Change platform option for your build platform
-FROM --platform=linux/amd64 mcr.microsoft.com/dotnet/sdk:6.0-bullseye-slim AS build
+# Application build container (public_html) ----------------------
+# Change platform option for your build architecture
+FROM --platform=linux/amd64 node:16-bullseye-slim AS build
+```
+and
+```Docker
+# Build thumbnail by playwright ---------------------------------
+# Change platform option for your build architecture
+FROM --platform=linux/amd64 mcr.microsoft.com/playwright AS thumbnails
 ```
 
 ## How to build multi-platform image by `buildx`
