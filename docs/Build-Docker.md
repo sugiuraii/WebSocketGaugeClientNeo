@@ -1,6 +1,6 @@
 # WebSocketGaugeServer - Build Docker image
 
-## How to build image
+## Build image
 Install Docker and simply build by `Dockerfile`
 ```
 docker build --tag (your tag name) .
@@ -19,7 +19,7 @@ You need to change `--platform` on 2 lines.)
     FROM --platform=linux/amd64 mcr.microsoft.com/playwright AS thumbnails
     ```
 
-## How to build multi-platform image by `buildx`
+## Build multi-platform image by `buildx`
 `Dockerfile` of this source repository can be used to build multi-platform image with `buildx`.
 
 1.  Install qemu Docker image and setup builder
@@ -35,8 +35,8 @@ You need to change `--platform` on 2 lines.)
     # Change platform option for your build platform
     FROM --platform=linux/amd64 mcr.microsoft.com/dotnet/sdk:6.0-bullseye-slim AS build
     ```
-3.  Login to docker hub (to upload image to docker hub)
-    (This may not be needed to build the image to local)
+3.  (Optional) Login to docker hub (to upload image to docker hub)
+    (This is not needed to build the image to local)
     ```
     docker login
     ```
