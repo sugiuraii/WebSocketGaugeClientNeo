@@ -1,37 +1,5 @@
 # Build instruction
 
-## TL;DR
-0. To build docker image, skip reading this and see [Build-Docker.md](Build-Docker.md)
-1. Install node.js (16)
-2. Install `npm-run-all`
-    ```
-    npm install --global npm-run-all
-    ```
-3. Run `build-all` scrpit.
-    ```
-    npm i
-    npm run build-all
-    ```
-4. (Optional) Build thumbnail for frontpage.
-    1. cd to `playwright` sub directory.
-        ```
-        cd playwright
-        ```
-    2. Install playwright and dependencies.
-        ```
-        npm i
-        ```
-    3. Build thumbnails
-        ```
-        node thumbnails.js
-        ```
-5. Finally, you can find compiled html/js in `public_html` directory.
-
-
-## Setup build enviroment
-To build, node.js, npm and dependent packages need to be installed.
-Please follow "Build" section of README.md.
-
 ## Source code tree map
 ```
 WebSocketGaugeClientNeo/
