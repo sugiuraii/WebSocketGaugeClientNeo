@@ -22,7 +22,7 @@ USER $PWUSER
 
 WORKDIR /home/$PWUSER/playwright
 COPY playwright/thumbnails.js ./
-COPY public_html/ ../public_html/
+COPY --from=build /source/public_html ../public_html/
 RUN sudo chown -R $PWUSER:$PWUSER /home/$PWUSER
 # COPY --chown=$PWUSER:$PWUSER . .
 
