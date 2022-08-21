@@ -14,19 +14,14 @@
 * [License](#license)
 
 ## <a name="description">Description</a>
-This program is graphical dashboard gauge, web-based client for [DefiSSMCOM_WebsocketServer](https://github.com/sugiuraii/DefiSSMCOM_WebsocketServer).
+* This program is graphical dashboard gauge, web-based client for [WebSocketGaugeServer](https://sugiuraii.github.io/WebSocketGaugeServer/).
+* This program receive car sensor information from the websocket server programs, and show sensor data by WebGL based graphical gauges.
+	* This program uses [PIXI.js](http://www.pixijs.com/) as graphic library. 
+* You can make your custom gauges desigin by modifying the source code. See []().
 
-This program receive car sensor information from the websocket server programs, and show sensor data by WebGL based graphical gauges.
-
-The graphical part of this program depends on [PIXI.js](http://www.pixijs.com/). 
-
-You can make your custom gauges by modifying the source code. Please see []().
-
-## <a name="system_diagram">System diagram</a>
-![System diagram](./README.img/WebsocketServerDiagram.jpg)
 ## <a name="requirement">Requirement</a>
-* Web server PC or appliance to distribute html and javascript files to browsers.
-* Web browser to view dashboard gauges.
+* Server hardware to run [WebSocketGaugeServer](https://sugiuraii.github.io/WebSocketGaugeServer/), and host  html and javascript files (build by this source).
+* Client : Web browser to view dashboard gauges.
 	* Web browser capable of WebGL
 		* To get sufficient performance (over 30fps), currently Chrome + WebGL is recommended.
 		* You can check the operation (and grahical performance) by following demonstration pages.
@@ -47,50 +42,13 @@ You can make your custom gauges by modifying the source code. Please see []().
 		| Safari | iOS 9.3.5 | iPhone 4s <br> (Apple A5) | [54-60fps](https://www.youtube.com/watch?v=ZE71ya6LY0U) | [47fps](https://www.youtube.com/watch?v=ZE71ya6LY0U) | OK |
 		| Safari | iOS 12.1.1 | iPhone 8 <br> (Apple A11) | 60fps | 60fps | OK |
 
-## <a name="dependency">Dependency</a>
-* [Node.js (Version.8.2.1)](https://nodejs.org/)
-* [jQuery](https://jquery.com/)
-* [PIXI.js](http://www.pixijs.com/)
-* [webpack](https://webpack.github.io/)
-* [TypeScript](https://www.typescriptlang.org/)
-
 ## <a name="build">Build</a>
-This program coded by typescript. And this program uses webpack for deployment.
-Before modifying the source code (including makinig your custom meter panel or parts), node.js and dependent packages need to be installed.
+* See [Build.md](./docs/Build.md)
+* To build Docker image, see [Buil-Docker.md](./docs/Build-Docker.md)
 
-### Install node.js
-Install node.js. On windows, you can find the installer on [official node.js site](https://nodejs.org/).
-To build sources, node.js newer than 8.x is needed (since build script calls `npx` comand).
-
-### Install dependent npm packages
-Before build, please install dependent npm packages. Dependent npm packages can be installed automatically by simply running `npm install`,
-```
-> cd WebSocketGaugeClientNeo
-> npm install
-```
-### Buidling source
-Build command is incuded in npm scirpt (please see `package.json`). To build,
-```
-> cd WebSocketGaugeClientNeo
-> npm run build-WebSocketTester
-> npm run build-benchmark
-> npm run build-application
-```
-### If build fails to construct thumbnails..
-At the final step of `build-all` script (or `build-thumbnails` script), thumbnails of application pages will be created by [puppeter](https://pptr.dev/). However, puppeter might fail to find chromium build, as following message.
-```
-UnhandledPromiseRejectionWarning: Error: Chromium revision is not downloaded.
-```
-In this case, install chromium build manually (as follows) may solve the issue.
-```
-node node_modules/puppeteer/install.js
-```
 ## <a name="custom">Making custom meter panel</a>
 There are some sample source codes of meter application in [`WebSocketGaugeClientNeo/src/application`](./src/application)directoy.
 To make your custom meter application, refer [CustomMeterApp.md](./docs/CustomMeterApp.md)
-
-## <a name="install">Install</a>
-After buiding sources, compiled htmls and javascripts will be stored in `public_html` folder. Please copy these files to your web server (e.g. nginx) export directory.
 
 ## <a name="otherDocs">Other docuents</a>
 * [docs/CustomMeterApp.md](docs/CustomMeterApp.md)
@@ -100,6 +58,9 @@ After buiding sources, compiled htmls and javascripts will be stored in `public_
 * [docs/CustomMeterParts.md](docs/CustomMeterParts.md)
 * [docs/MeterPrimitive.md](docs/MeterPrimitive.md)
 	* Making own meter parts classes (with you original meter design).
+
+## <a name="system_diagram">System diagram</a>
+![System diagram](./README.img/WebsocketServerDiagram.jpg)
 
 ## <a name="license">License</a>
 [MIT License](./LICENSE)
