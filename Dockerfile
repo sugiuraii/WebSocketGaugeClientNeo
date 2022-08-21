@@ -5,7 +5,6 @@ WORKDIR /source
 COPY src/ ./src
 COPY package.json ./
 RUN npm i
-RUN npm install --global npm-run-all
 RUN npm run build-all
 
 # Build thumbnail by playwright ---------------------------------
