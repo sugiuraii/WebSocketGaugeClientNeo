@@ -2,24 +2,13 @@
 
 ![main screen](README.img/MainScreen.jpg)
 
-## Table of contents
-* [Description](#description)
-* [System diagram](#system_diagram)
-* [Requirement](#requirement)
-* [Dependency](#dependency)
-* [Install](#install)
-* [Build](#build)
-* [Making custom meter panel](#custom)
-* [Other documents](#otherDocs)
-* [License](#license)
-
-## <a name="description">Description</a>
+## Description
 * This program is graphical dashboard gauge, web-based client for [WebSocketGaugeServer](https://sugiuraii.github.io/WebSocketGaugeServer/).
 * This program receive car sensor information from the websocket server programs, and show sensor data by WebGL based graphical gauges.
 	* This program uses [PIXI.js](http://www.pixijs.com/) as graphic library. 
 * You can make your custom gauges desigin by modifying the source code. See []().
 
-## <a name="requirement">Requirement</a>
+## Requirement
 * Server hardware to run [WebSocketGaugeServer](https://sugiuraii.github.io/WebSocketGaugeServer/), and host  html and javascript files (build by this source).
 * Client : Web browser to view dashboard gauges.
 	* Web browser capable of WebGL
@@ -31,7 +20,7 @@
 
 		| Browser |	 OS	 | Hardware | fps(Test1) | fps(Test2) | comment |
 		|--------|--------|--------|--------|--------|--------|
-		| Google Chrome 59.0 | Windows 10 | Toshiba Satellite C640<br> Core i5-560M | 60fps | 60fps | OK |
+		| Google Chrome 104 | Windows 10 | Toshiba Satellite C640<br> Core i5-560M | 60fps | 60fps | OK |
         | Firefox 54.0.1 | Windows 10| Toshiba Satellite C640<br> Core i5-560M | 27fps | 27fps | Slow |
         | Firefox 64.0 | Windows 10| Toshiba Satellite C640<br> Core i5-560M | 60fps | 54-60fps | Slightly slower than Chrome, but acceptable. |
         | Microsoft Edge | Windows 10| Toshiba Satellite C640<br> Core i5-560M | - | - | Some of sprites are missing.|
@@ -42,15 +31,15 @@
 		| Safari | iOS 9.3.5 | iPhone 4s <br> (Apple A5) | [54-60fps](https://www.youtube.com/watch?v=ZE71ya6LY0U) | [47fps](https://www.youtube.com/watch?v=ZE71ya6LY0U) | OK |
 		| Safari | iOS 12.1.1 | iPhone 8 <br> (Apple A11) | 60fps | 60fps | OK |
 
-## <a name="build">Build</a>
+## Build
 * See [Build.md](./docs/Build.md)
 * To build Docker image, see [Buil-Docker.md](./docs/Build-Docker.md)
 
-## <a name="custom">Making custom meter panel</a>
+## Making custom meter panel
 There are some sample source codes of meter application in [`WebSocketGaugeClientNeo/src/application`](./src/application)directoy.
 To make your custom meter application, refer [CustomMeterApp.md](./docs/CustomMeterApp.md)
 
-## <a name="otherDocs">Other docuents</a>
+## Other docuents
 * [docs/CustomMeterApp.md](docs/CustomMeterApp.md)
 	* Making own meter application class(setting up websocket communication and place of meter parts).
 * [docs/MeterAppBuild.md](docs/MeterAppBuild.md)
@@ -59,8 +48,8 @@ To make your custom meter application, refer [CustomMeterApp.md](./docs/CustomMe
 * [docs/MeterPrimitive.md](docs/MeterPrimitive.md)
 	* Making own meter parts classes (with you original meter design).
 
-## <a name="system_diagram">System diagram</a>
+## System diagram
 ![System diagram](./README.img/WebsocketServerDiagram.jpg)
 
-## <a name="license">License</a>
+## License
 [MIT License](./LICENSE)
