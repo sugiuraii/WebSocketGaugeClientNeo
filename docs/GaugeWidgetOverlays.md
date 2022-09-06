@@ -25,6 +25,9 @@ After opening widget url by pushing "Start" button, you can modify the configura
 6. Open "Setting"
 7. Set background color -> Transparency -> 100% (for transparent background)
 8. Set "Navigation mode" to "Touch and drag", and tap back button to confirm the setting.
+
 ![Overlays2](./GaugeWidgetOverlays.img/MeterWidget4.svg)
+
 9. Setting is finished. You can show the widget by tapping application icon in Overlays menu.
 
+![Overlays3](./GaugeWidgetOverlays.img/MeterWidget5.svg)
