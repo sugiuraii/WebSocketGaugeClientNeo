@@ -24,10 +24,9 @@
 
 import { WebsocketParameterCode } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode";
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client';
 import { MeterSelectionSetting } from "../dialog/MeterSelectDialog";
 import { MeterWidgetConfigPageWithMeterSelect } from "./MeterWidgetConfigPageWithMeterSelect";
-
 
 export class MeterWidgetConfigPageWithMeterSelectRenderer {
     private readonly BOOTSTRAP_CSS_FILENAME = "bootstrap.min.css";
@@ -73,14 +72,15 @@ export class MeterWidgetConfigPageWithMeterSelectRenderer {
         this.setBackgroundColor();
         this.setViewPortMetaTag();
         
-        ReactDOM.render(
+        const rootReactElem = createRoot(rootElement);
+        rootReactElem.render(
             <>
                 <MeterWidgetConfigPageWithMeterSelect previewAspect={previewAspect}
                     baseURL={baseURL}
                     codesToSelect={codeToSelect}
                     default={{ forceCanvas: false, wsInterval: 0, meterSelection: defaultMeterSelection }} />
             </>
-            , rootElement);
+        );
 
         // Add react components to html body
         document.body.appendChild(rootElement);
