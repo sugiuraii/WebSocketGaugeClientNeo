@@ -25,7 +25,7 @@
 import * as WebFont from "webfontloader";
 import * as PIXI from "pixi.js";
 import React, { Fragment } from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 
 import { WebsocketObjectCollection } from "./WebsocketObjCollection/WebsocketObjectCollection";
 import { MeterApplicationOption } from "./options/MeterApplicationOption";
@@ -127,11 +127,12 @@ export class MeterWidgetApplication {
 
         // Crete react components
         const rootElement = document.createElement('div');
-        ReactDOM.render(
+        const rootReactElem = createRoot(rootElement);
+        rootReactElem.render(
             <>
                 <PIXIApplication application={pixiApp} />
             </>
-            , rootElement);
+        );
 
         // Add react components to html body
         document.body.appendChild(rootElement);

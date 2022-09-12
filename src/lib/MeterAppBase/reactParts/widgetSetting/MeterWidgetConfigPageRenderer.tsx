@@ -23,7 +23,7 @@
  */
 
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client';
 import { MeterWidgetConfigPage } from "./MeterWidgetConfigPage";
 
 export class MeterWidgetConfigPageRenderer
@@ -72,13 +72,14 @@ export class MeterWidgetConfigPageRenderer
         this.loadBootStrapCSS();
         this.setBackgroundColor();
         this.setViewPortMetaTag();
-        ReactDOM.render(
+        const rootReactElem = createRoot(rootElement);
+        rootReactElem.render(
             <>
                 <MeterWidgetConfigPage  previewAspect={previewAspect}
                                         baseURL={baseURL} 
                                         default={{forceCanvas:false, wsInterval:0}} />
             </>
-            , rootElement);    
+        );    
 
         // Add react components to html body
         document.body.appendChild(rootElement);
