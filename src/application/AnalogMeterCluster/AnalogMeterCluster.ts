@@ -23,7 +23,6 @@
  */
 
 import * as PIXI from 'pixi.js';
-import { Assets } from '@pixi/assets';
 
 //Import application base class
 import { MeterApplication } from "lib/MeterAppBase/MeterApplication";
@@ -47,17 +46,12 @@ class AnalogMeterClusterApp {
     public async Start() {
         const pixiAppOption : PIXI.IApplicationOptions = {width : 1100, height : 600};
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
-        //appOption.PreloadResource.WebFontFamiliyName.push(...AnalogMeterCluster.RequestedFontFamily);
-        //appOption.PreloadResource.WebFontCSSURL.push(...AnalogMeterCluster.RequestedFontCSSURL);
-        //appOption.PreloadResource.TexturePath.push(...AnalogMeterCluster.RequestedTexturePath);
 
         const gearCalculator = await DefaultAppSettings.getGearPositionCalculator();
 
         appOption.SetupPIXIMeterPanel = async (app, ws) => {
-            await Assets.load(AnalogMeterCluster.RequestedTexturePath);
-            await Assets.load('./fonts/DSEG14Classic-BoldItalic.ttf');
             const stage = app.stage;
-            const meterCluster = new AnalogMeterCluster();
+            const meterCluster = await AnalogMeterCluster.create();
             stage.addChild(meterCluster);
 
             app.ticker.add(() => {

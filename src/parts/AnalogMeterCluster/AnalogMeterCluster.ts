@@ -30,6 +30,7 @@ import { BitmapTextNumericIndicator } from 'lib/Graphics/PIXIGauge';
 import { NumericIndicator } from 'lib/Graphics/PIXIGauge';
 
 import * as PIXI from 'pixi.js';
+import { Assets } from '@pixi/assets';
 
 require("./AnalogMeterClusterTexture.json");
 require("./AnalogMeterClusterTexture.png");
@@ -121,7 +122,7 @@ export class AnalogMeterCluster extends PIXI.Container {
         this.gearPos = val;
         this.gearPosLabel.text = val;
     }
-
+    
     static get RequestedTexturePath(): string[] {
         return ["img/AnalogMeterClusterTexture.json", "img/AnalogMeterFont_115px.fnt", "img/AnalogMeterFont_45px.fnt", "img/AnalogMeterFont_40px.fnt", "img/AnalogMeterFont_60px.fnt"];
     }
@@ -133,7 +134,7 @@ export class AnalogMeterCluster extends PIXI.Container {
     static get RequestedFontCSSURL(): string[] {
         return ['font.css'];
     }
-
+    
     constructor() {
         super();
         const TachoMeter = this.createTachoMeter();
@@ -158,6 +159,17 @@ export class AnalogMeterCluster extends PIXI.Container {
         this.waterTempProgressBar = SpeedMeter.waterTempProgressBar;
 
         this.boostNeedleGauge = BoostMeter.boostNeedleGauge;
+    }
+
+    public static async create() {
+        await this.loadAssets();
+        const instance = new AnalogMeterCluster();
+        return instance;
+    }
+
+    private static async loadAssets() {
+        await Assets.load(AnalogMeterCluster.RequestedTexturePath);
+        await Assets.load('./fonts/DSEG14Classic-BoldItalic.ttf');
     }
 
     private createTachoMeter(): { container: PIXI.Container, progressBar: CircularProgressBar, needleGauge: RotationNeedleGauge, gasmilageLabel: NumericIndicator, tripLabel: NumericIndicator, fuelLabel: NumericIndicator, gearPosLabel: NumericIndicator } {
