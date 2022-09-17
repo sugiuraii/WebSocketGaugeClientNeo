@@ -49,14 +49,11 @@ class AnalogMeterClusterBenchApp
         const pixiAppOption : PIXI.IApplicationOptions = {width : 1100, height : 600};
 
         const appOption = new MeterApplicationOption(pixiAppOption);
-        appOption.PreloadResource.WebFontFamiliyName.push(...AnalogMeterCluster.RequestedFontFamily);
-        appOption.PreloadResource.WebFontCSSURL.push(...AnalogMeterCluster.RequestedFontCSSURL);
-        appOption.PreloadResource.TexturePath.push(...AnalogMeterCluster.RequestedTexturePath);
         appOption.PreloadResource.TexturePath.push(...FPSCounter.RequestedTexturePath);
 
-        appOption.SetupPIXIMeterPanel = (app) =>
+        appOption.SetupPIXIMeterPanel = async (app) =>
         {
-            const meterCluster = new AnalogMeterCluster();
+            const meterCluster = await AnalogMeterCluster.create();
             const stage = app.stage;
 
             stage.addChild(meterCluster);

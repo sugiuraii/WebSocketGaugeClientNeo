@@ -123,20 +123,9 @@ export class AnalogMeterCluster extends PIXI.Container {
         this.gearPosLabel.text = val;
     }
     
-    static get RequestedTexturePath(): string[] {
-        return ["img/AnalogMeterClusterTexture.json", "img/AnalogMeterFont_115px.fnt", "img/AnalogMeterFont_45px.fnt", "img/AnalogMeterFont_40px.fnt", "img/AnalogMeterFont_60px.fnt"];
-    }
-
-    static get RequestedFontFamily(): string[] {
-        return ["DSEG14ClassicItalic"]
-    }
-
-    static get RequestedFontCSSURL(): string[] {
-        return ['font.css'];
-    }
-    
-    constructor() {
+    private constructor() {
         super();
+        
         const TachoMeter = this.createTachoMeter();
         const SpeedMeter = this.createSpeedMeter();
         const BoostMeter = this.createBoostMeter();
@@ -162,14 +151,14 @@ export class AnalogMeterCluster extends PIXI.Container {
     }
 
     public static async create() {
-        await this.loadAssets();
+        await Assets.load(["img/AnalogMeterClusterTexture.json", "img/AnalogMeterFont_115px.fnt", "img/AnalogMeterFont_45px.fnt", "img/AnalogMeterFont_40px.fnt", "img/AnalogMeterFont_60px.fnt"]);
+        await Assets.load('./fonts/DSEG14Classic-BoldItalic.ttf');
         const instance = new AnalogMeterCluster();
         return instance;
     }
 
     private static async loadAssets() {
-        await Assets.load(AnalogMeterCluster.RequestedTexturePath);
-        await Assets.load('./fonts/DSEG14Classic-BoldItalic.ttf');
+        
     }
 
     private createTachoMeter(): { container: PIXI.Container, progressBar: CircularProgressBar, needleGauge: RotationNeedleGauge, gasmilageLabel: NumericIndicator, tripLabel: NumericIndicator, fuelLabel: NumericIndicator, gearPosLabel: NumericIndicator } {

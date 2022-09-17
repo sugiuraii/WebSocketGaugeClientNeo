@@ -29,26 +29,14 @@ import { AnalogMeterCluster } from 'parts/AnalogMeterCluster/AnalogMeterCluster'
 require("./AnalogMeterClusterTest.html");
 
 window.onload = function () {
-    WebFont.load({
-        custom:
-        {
-            families: AnalogMeterCluster.RequestedFontFamily,
-            urls: AnalogMeterCluster.RequestedFontCSSURL
-        },
-        active: function () { preloadTexture(); }
-    });
+   main();
 }
 
-function preloadTexture(): void {
-    PIXI.Loader.shared.add(AnalogMeterCluster.RequestedTexturePath);
-    PIXI.Loader.shared.load(main);
-}
-
-function main(): void {
+async function main() {
     const app = new PIXI.Application({ height: 1366, width: 1366 });
     document.body.appendChild(app.view);
 
-    const meterCluster = new AnalogMeterCluster();
+    const meterCluster = await AnalogMeterCluster.create();
     app.stage.addChild(meterCluster);
 
     app.ticker.add(function () {
