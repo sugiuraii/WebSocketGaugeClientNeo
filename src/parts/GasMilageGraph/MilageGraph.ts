@@ -24,6 +24,7 @@
 
 import { RectangularProgressBar, RectangularProgressBarOptions } from 'lib/Graphics/PIXIGauge';
 import * as PIXI from 'pixi.js';
+import { Assets } from '@pixi/assets';
 
 require("./MilageGraphTexture.json");
 require("./MilageGraphTexture.png");
@@ -49,18 +50,6 @@ export class MilageGraphPanel extends PIXI.Container {
     private sectGasMilage: { [spankey: string]: number } = {};
 
     private sectSpan: string[] = ["5min", "10min", "15min", "20min", "25min", "30min"];
-
-    static get RequestedTexturePath(): string[] {
-        return ["img/MilageGraphTexture.json", "img/MilageGraphFont_45px.fnt", "img/MilageGraphFont_68px.fnt"];
-    }
-
-    static get RequestedFontFamily(): string[] {
-        return ["FreeSans-Bold"]
-    }
-
-    static get RequestedFontCSSURL(): string[] {
-        return ['font.css'];
-    }
 
     public get MomentGasMilage(): number { return this.momentGasMilage }
     public set MomentGasMilage(val: number) {
@@ -99,7 +88,14 @@ export class MilageGraphPanel extends PIXI.Container {
         return this.sectGasMilage[sectspan];
     }
 
-    constructor() {
+    public static async create() {
+        await Assets.load(["img/MilageGraphTexture.json", "img/MilageGraphFont_45px.fnt", "img/MilageGraphFont_68px.fnt"]);
+        await Assets.load(["./fonts/FreeSansBold.otf"]);
+        const instance = new MilageGraphPanel();
+        return instance;
+    }
+
+    private constructor() {
         super();
 
         const backTexture = PIXI.Texture.from("MilageGraph_Back");
