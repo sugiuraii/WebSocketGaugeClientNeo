@@ -157,10 +157,6 @@ export class AnalogMeterCluster extends PIXI.Container {
         return instance;
     }
 
-    private static async loadAssets() {
-        
-    }
-
     private createTachoMeter(): { container: PIXI.Container, progressBar: CircularProgressBar, needleGauge: RotationNeedleGauge, gasmilageLabel: NumericIndicator, tripLabel: NumericIndicator, fuelLabel: NumericIndicator, gearPosLabel: NumericIndicator } {
         const tachoMax = 9000;
         const tachoMin = 0;
