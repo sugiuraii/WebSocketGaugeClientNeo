@@ -27,12 +27,10 @@ import { BitmapTextNumericIndicator } from 'lib/Graphics/PIXIGauge';
 import { NumericIndicator } from 'lib/Graphics/PIXIGauge';
 
 import * as PIXI from 'pixi.js';
+import { Assets } from '@pixi/assets';
 
 require("./DigiTachoTexture.json");
 require("./DigiTachoTexture.png");
-//require("../fonts/font.css");
-//require("../fonts/GNU-Freefonts/FreeSansBold.otf");
-//require("../fonts/AudioWide/Audiowide-Regular.ttf");
 
 require("./SpeedMeterFont.fnt");
 require("./SpeedMeterFont_0.png");
@@ -48,18 +46,6 @@ export class DigiTachoPanel extends PIXI.Container {
     private speed = 0;
     private tacho = 0;
     private gearPos = "N";
-
-    static get RequestedTexturePath(): string[] {
-        return ["img/DigiTachoTexture.json", "img/GearPosFont.fnt", "img/SpeedMeterFont.fnt"];
-    }
-
-    static get RequestedFontFamily(): string[] {
-        return [];
-    }
-
-    static get RequestedFontCSSURL(): string[] {
-        return [];
-    }
 
     get Speed(): number { return this.speed; }
     set Speed(speed: number) {
@@ -80,15 +66,21 @@ export class DigiTachoPanel extends PIXI.Container {
         this.geasposLabel.text = gearPos;
     }
 
-    constructor() {
+    public static async create() {
+        await Assets.load(["img/DigiTachoTexture.json", "img/GearPosFont.fnt", "img/SpeedMeterFont.fnt"]);
+        const instance = new DigiTachoPanel();
+        return instance;
+    }
+
+    private constructor() {
         super();
-        const gaugeset = this.create();
+        const gaugeset = this.buildGaugeSet();
         this.tachoProgressBar = gaugeset.tachoProgressBar;
         this.speedLabel = gaugeset.speedLabel;
         this.geasposLabel = gaugeset.gearLabel;
     }
 
-    private create(): { tachoProgressBar: RectangularProgressBar, speedLabel: BitmapTextNumericIndicator, gearLabel: PIXI.BitmapText } {
+    private buildGaugeSet(): { tachoProgressBar: RectangularProgressBar, speedLabel: BitmapTextNumericIndicator, gearLabel: PIXI.BitmapText } {
         const backTexture = PIXI.Texture.from("DigiTachoBack");
         const tachoProgressBarTexture = PIXI.Texture.from("DigiTachoBar");
 
