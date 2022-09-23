@@ -26,6 +26,7 @@ import { CircularGaugePanelBase } from './CircularGaugePanelBase';
 import { TextOption } from './CircularGaugePanelBase';
 import { CircularGaugePanelOptionBase } from './CircularGaugePanelBase';
 import * as PIXI from 'pixi.js';
+import { Assets } from '@pixi/assets';
 
 require("./SemiCircularGaugeTexture.json");
 require("./SemiCircularGaugeTexture.png");
@@ -111,22 +112,15 @@ export class SemiCircularGaugePanelOptionBase extends CircularGaugePanelOptionBa
 }
 
 export class SemiCircularGaugePanel extends CircularGaugePanelBase {
-    constructor(options: SemiCircularGaugePanelOptionBase) {
+    private constructor(options: SemiCircularGaugePanelOptionBase) {
         super(options);
     }
 
-    static get RequestedTexturePath(): string[] {
-        return ["img/SemiCircularGaugeTexture.json", "img/CircularGaugeLabelFont.fnt"];
+    public static async create(options: SemiCircularGaugePanelOptionBase) {
+        await Assets.load(["img/SemiCircularGaugeTexture.json", "img/CircularGaugeLabelFont.fnt"]);
+        await Assets.load(["./fonts/FreeSansBold.otf"]);
+        const instance = new SemiCircularGaugePanel(options);
+        return instance;
     }
-
-    static get RequestedFontFamily(): string[] {
-        return ["FreeSans-Bold"]
-    }
-
-    static get RequestedFontCSSURL(): string[] {
-        return ['font.css'];
-    }
-
-
 }
 
