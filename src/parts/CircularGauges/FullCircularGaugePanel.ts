@@ -27,8 +27,8 @@ import { FullCircularGaugePanelOptionsBase } from "./private/FullCircularGaugePa
 
 export { FullCircularGaugePanel } from "./private/FullCircularGaugePanelBase"
 
-export class BoostGaugePanel extends FullCircularGaugePanel {
-    constructor() {
+export class FullCircularGaugePanelPresets {
+    public static async BoostGaugePanel() {
         const options = new FullCircularGaugePanelOptionsBase();
 
         options.TitleLabel = "TURBO BOOST";
@@ -56,12 +56,11 @@ export class BoostGaugePanel extends FullCircularGaugePanel {
                 "+2.0"
             ];
 
-        super(options);
+        return await FullCircularGaugePanel.create(options);
     }
-}
 
-export class VacuumGaugePanel extends FullCircularGaugePanel {
-    constructor() {
+    public static async VacuumGaugePanel() {
+
         const options = new FullCircularGaugePanelOptionsBase();
 
         options.TitleLabel = "Manifold pres.";
@@ -89,12 +88,10 @@ export class VacuumGaugePanel extends FullCircularGaugePanel {
                 "+0.5"
             ];
 
-        super(options);
+        return await FullCircularGaugePanel.create(options);
     }
-}
 
-export class AirFuelGaugePanel extends FullCircularGaugePanel {
-    constructor() {
+    public static async AirFuelGaugePanel() {
         const options = new FullCircularGaugePanelOptionsBase();
 
         options.TitleLabel = "Air/Fuel Ratio";
@@ -119,12 +116,10 @@ export class AirFuelGaugePanel extends FullCircularGaugePanel {
                 "8"
             ];
 
-        super(options);
+        return await FullCircularGaugePanel.create(options);
     }
-}
 
-export class WaterTempGaugePanel extends FullCircularGaugePanel {
-    constructor() {
+    public static async WaterTempGaugePanel() {
         const options = new FullCircularGaugePanelOptionsBase();
 
         options.TitleLabel = "WATER TEMP";
@@ -150,12 +145,10 @@ export class WaterTempGaugePanel extends FullCircularGaugePanel {
                 "120"
             ];
 
-        super(options);
+        return await FullCircularGaugePanel.create(options);
     }
-}
 
-export class EngineOilTempGaugePanel extends FullCircularGaugePanel {
-    constructor() {
+    public static async EngineOilTempGaugePanel() {
         const options = new FullCircularGaugePanelOptionsBase();
 
         options.TitleLabel = "ENG. OIL TEMP";
@@ -181,12 +174,10 @@ export class EngineOilTempGaugePanel extends FullCircularGaugePanel {
                 "150"
             ];
 
-        super(options);
+        return await FullCircularGaugePanel.create(options);
     }
-}
 
-export class BatteryVoltageGaugePanel extends FullCircularGaugePanel {
-    constructor() {
+    public static async BatteryVoltageGaugePanel() {
         const options = new FullCircularGaugePanelOptionsBase();
 
         options.TitleLabel = "BATTERY VOLT";
@@ -208,12 +199,10 @@ export class BatteryVoltageGaugePanel extends FullCircularGaugePanel {
                 "15"
             ];
 
-        super(options);
+        return await FullCircularGaugePanel.create(options);
     }
-}
 
-export class MassAirFlowGaugePanel extends FullCircularGaugePanel {
-    constructor() {
+    public static async MassAirFlowGaugePanel() {
         const options = new FullCircularGaugePanelOptionsBase();
 
         options.TitleLabel = "MASS AIRFLOW";
@@ -235,12 +224,10 @@ export class MassAirFlowGaugePanel extends FullCircularGaugePanel {
                 "60"
             ];
 
-        super(options);
+        return await FullCircularGaugePanel.create(options);
     }
-}
 
-export class EngineLoadGaugePanel extends FullCircularGaugePanel {
-    constructor() {
+    public static async EngineLoadGaugePanel() {
         const options = new FullCircularGaugePanelOptionsBase();
 
         options.TitleLabel = "ENGINE LOAD";
@@ -262,12 +249,10 @@ export class EngineLoadGaugePanel extends FullCircularGaugePanel {
                 "100"
             ];
 
-        super(options);
+        return await FullCircularGaugePanel.create(options);
     }
-}
 
-export class IntakeAirTemperatureGaugePanel extends FullCircularGaugePanel {
-    constructor() {
+    public static async IntakeAirTemperatureGaugePanel() {
         const options = new FullCircularGaugePanelOptionsBase();
 
         options.TitleLabel = "INTAKE TEMP.";
@@ -294,6 +279,6 @@ export class IntakeAirTemperatureGaugePanel extends FullCircularGaugePanel {
                 "120"
             ];
 
-        super(options);
+        return await FullCircularGaugePanel.create(options);
     }
 }
