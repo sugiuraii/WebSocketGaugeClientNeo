@@ -27,8 +27,8 @@ import { SemiCircularGaugePanelOptionBase } from "./private/SemiCircularGaugePan
 
 export { SemiCircularGaugePanel } from "./private/SemiCircularGaugePanelBase"
 
-export class ThrottleGaugePanel extends SemiCircularGaugePanel {
-    constructor() {
+export class SemiCircularGaugePanelPresets {
+    public static async ThrottleGaugePanel() {
         const options = new SemiCircularGaugePanelOptionBase();
 
         options.TitleLabel = "THROTTLE";
@@ -40,12 +40,10 @@ export class ThrottleGaugePanel extends SemiCircularGaugePanel {
         options.GreenZoneBarEnable = false;
         options.AxisLabel = ["0", "25", "50", "75", "100"];
 
-        super(options);
+        return await SemiCircularGaugePanel.create(options);
     }
-}
 
-export class WaterTempGaugePanel extends SemiCircularGaugePanel {
-    constructor() {
+    public static async WaterTempGaugePanel() {
         const options = new SemiCircularGaugePanelOptionBase();
 
         options.TitleLabel = "WATER TEMP";
@@ -61,12 +59,10 @@ export class WaterTempGaugePanel extends SemiCircularGaugePanel {
         options.GreenZoneBarEnable = false;
         options.AxisLabel = ["40", "60", "80", "100", "120"];
 
-        super(options);
+        return await SemiCircularGaugePanel.create(options);
     }
-}
 
-export class EngineOilTempGaugePanel extends SemiCircularGaugePanel {
-    constructor() {
+    public static async EngineOilTempGaugePanel() {
         const options = new SemiCircularGaugePanelOptionBase();
 
         options.TitleLabel = "ENG. OIL TEMP";
@@ -82,12 +78,10 @@ export class EngineOilTempGaugePanel extends SemiCircularGaugePanel {
         options.GreenZoneBarEnable = false;
         options.AxisLabel = ["50", "75", "100", "125", "150"];
 
-        super(options);
+        return await SemiCircularGaugePanel.create(options);
     }
-}
 
-export class BatteryVoltageGaugePanel extends SemiCircularGaugePanel {
-    constructor() {
+    public static async BatteryVoltageGaugePanel() {
         const options = new SemiCircularGaugePanelOptionBase();
 
         options.TitleLabel = "BATTERY VOLT";
@@ -100,12 +94,10 @@ export class BatteryVoltageGaugePanel extends SemiCircularGaugePanel {
         options.AxisLabel = ["11", "12", "13", "14", "15"];
         options.ValueNumberRoundDigit = 1;
 
-        super(options);
+        return await SemiCircularGaugePanel.create(options);
     }
-}
 
-export class AirFuelGaugePanel extends SemiCircularGaugePanel {
-    constructor() {
+    public static async AirFuelGaugePanel() {
         const options = new SemiCircularGaugePanelOptionBase();
 
         options.TitleLabel = "Air/Fuel Ratio";
@@ -129,12 +121,10 @@ export class AirFuelGaugePanel extends SemiCircularGaugePanel {
                 "10"
             ];
 
-        super(options);
+        return await SemiCircularGaugePanel.create(options);
     }
-}
 
-export class VacuumGaugePanel extends SemiCircularGaugePanel {
-    constructor() {
+    public static async VacuumGaugePanel() {
         const options = new SemiCircularGaugePanelOptionBase();
 
         options.TitleLabel = "Manifold Pres.";
@@ -159,12 +149,10 @@ export class VacuumGaugePanel extends SemiCircularGaugePanel {
                 "0.0"
             ];
 
-        super(options);
+        return await SemiCircularGaugePanel.create(options);
     }
-}
 
-export class BoostGaugePanel extends SemiCircularGaugePanel {
-    constructor() {
+    public static async BoostGaugePanel() {
         const options = new SemiCircularGaugePanelOptionBase();
 
         options.TitleLabel = "TURBO BOOST";
@@ -191,12 +179,10 @@ export class BoostGaugePanel extends SemiCircularGaugePanel {
                 "+2.0"
             ];
 
-        super(options);
+        return await SemiCircularGaugePanel.create(options);
     }
-}
 
-export class MassAirFlowGaugePanel extends SemiCircularGaugePanel {
-    constructor() {
+    public static async MassAirFlowGaugePanel() {
         const options = new SemiCircularGaugePanelOptionBase();
 
         options.TitleLabel = "MASS AIRFLOW";
@@ -209,12 +195,10 @@ export class MassAirFlowGaugePanel extends SemiCircularGaugePanel {
         options.AxisLabel = ["0", "10", "20", "30", "40"];
         options.ValueNumberRoundDigit = 0;
 
-        super(options);
+        return await SemiCircularGaugePanel.create(options);
     }
-}
 
-export class EngineLoadGaugePanel extends SemiCircularGaugePanel {
-    constructor() {
+    public static async EngineLoadGaugePanel() {
         const options = new SemiCircularGaugePanelOptionBase();
 
         options.TitleLabel = "ENGINE LOAD";
@@ -227,12 +211,10 @@ export class EngineLoadGaugePanel extends SemiCircularGaugePanel {
         options.AxisLabel = ["0", "25", "50", "75", "100"];
         options.ValueNumberRoundDigit = 0;
 
-        super(options);
+        return await SemiCircularGaugePanel.create(options);
     }
-}
 
-export class IntakeAirTemperaturePanel extends SemiCircularGaugePanel {
-    constructor() {
+    public static async IntakeAirTemperaturePanel() {
         const options = new SemiCircularGaugePanelOptionBase();
 
         options.TitleLabel = "INTAKE TEMP.";
@@ -251,6 +233,6 @@ export class IntakeAirTemperaturePanel extends SemiCircularGaugePanel {
         options.AxisLabel = ["0", "25", "50", "75", "100"];
         options.ValueNumberRoundDigit = 0;
 
-        super(options);
+        return await SemiCircularGaugePanel.create(options);
     }
 }
