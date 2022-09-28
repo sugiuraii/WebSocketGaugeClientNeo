@@ -25,7 +25,7 @@
 import { WebsocketObjectCollection } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
 import { WebsocketParameterCode } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode";
 import { ReadModeCode } from "lib/WebSocket/WebSocketCommunication";
-import { AirFuelRatioMeter, AnalogSingleMeter, BatteryVoltageMeter, BoostMeter, EngineLoadMeter, IntakeAirTemperatureMeter, MassAirFlowMeter, OilPressureMeter, OilTempMeter, RevMeter, VacuumMeter, WaterTempMeter } from "../AnalogSingleMeter/AnalogSingleMeter";
+import { AnalogSingleMeter, AnalogSingleMeterPresets } from "../AnalogSingleMeter/AnalogSingleMeter";
 
 export class AnalogSingleMeterFactory {
     private readonly UseVacuumMeterInsteadOfBoost;
@@ -36,28 +36,28 @@ export class AnalogSingleMeterFactory {
             this.UseVacuumMeterInsteadOfBoost = false;
     }
 
-    public getMeter(code: WebsocketParameterCode | undefined): { code: WebsocketParameterCode, createDisplayObject: () => AnalogSingleMeter, readmode: ReadModeCode, getValue: (timestamp: number, ws: WebsocketObjectCollection) => number } {
+    public getMeter(code: WebsocketParameterCode | undefined): { code: WebsocketParameterCode, createDisplayObject: () => Promise<AnalogSingleMeter>, readmode: ReadModeCode, getValue: (timestamp: number, ws: WebsocketObjectCollection) => number } {
         switch (code) {
             case "Engine_Speed":
-                return { code: code, createDisplayObject: () => new RevMeter(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) };
+                return { code: code, createDisplayObject: async () => AnalogSingleMeterPresets.RevMeter(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) };
             case "Manifold_Absolute_Pressure":
-                return { code: code, createDisplayObject: () => this.UseVacuumMeterInsteadOfBoost ? new VacuumMeter() : new BoostMeter(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) * 0.0101972 - 1 /* convert kPa to kgf/cm2 and relative pressure */ };
+                return { code: code, createDisplayObject: async () => this.UseVacuumMeterInsteadOfBoost ? AnalogSingleMeterPresets.VacuumMeter() : AnalogSingleMeterPresets.BoostMeter(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) * 0.0101972 - 1 /* convert kPa to kgf/cm2 and relative pressure */ };
             case "Coolant_Temperature":
-                return { code: code, createDisplayObject: () => new WaterTempMeter(), readmode: "SLOW", getValue: (_, ws) => ws.WSMapper.getValue(code) };
+                return { code: code, createDisplayObject: async () => AnalogSingleMeterPresets.WaterTempMeter(), readmode: "SLOW", getValue: (_, ws) => ws.WSMapper.getValue(code) };
             case "Engine_oil_temperature":
-                return { code: code, createDisplayObject: () => new OilTempMeter(), readmode: "SLOW", getValue: (_, ws) => ws.WSMapper.getValue(code) };
+                return { code: code, createDisplayObject: async () => AnalogSingleMeterPresets.OilTempMeter(), readmode: "SLOW", getValue: (_, ws) => ws.WSMapper.getValue(code) };
             case "Battery_Voltage":
-                return { code: code, createDisplayObject: () => new BatteryVoltageMeter(), readmode: "SLOW", getValue: (_, ws) => ws.WSMapper.getValue(code) };
+                return { code: code, createDisplayObject: async () => AnalogSingleMeterPresets.BatteryVoltageMeter(), readmode: "SLOW", getValue: (_, ws) => ws.WSMapper.getValue(code) };
             case "Oil_Pressure":
-                return { code: code, createDisplayObject: () => new OilPressureMeter(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) };
+                return { code: code, createDisplayObject: async () => AnalogSingleMeterPresets.OilPressureMeter(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) };
             case "O2Sensor_1_Air_Fuel_Ratio":
-                return { code: code, createDisplayObject: () => new AirFuelRatioMeter(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) * 14 };
+                return { code: code, createDisplayObject: async () => AnalogSingleMeterPresets.AirFuelRatioMeter(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) * 14 };
             case "Mass_Air_Flow":
-                return { code: code, createDisplayObject: () => new MassAirFlowMeter(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) / 10 }; // Convert g/s -> x10g/s
+                return { code: code, createDisplayObject: async () => AnalogSingleMeterPresets.MassAirFlowMeter(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) / 10 }; // Convert g/s -> x10g/s
             case "Engine_Load":
-                return { code: code, createDisplayObject: () => new EngineLoadMeter(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) };
+                return { code: code, createDisplayObject: async () => AnalogSingleMeterPresets.EngineLoadMeter(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) };
             case "Intake_Air_Temperature":
-                return { code: code, createDisplayObject: () => new IntakeAirTemperatureMeter(), readmode: "SLOW", getValue: (_, ws) => ws.WSMapper.getValue(code) };
+                return { code: code, createDisplayObject: async () => AnalogSingleMeterPresets.IntakeAirTemperatureMeter(), readmode: "SLOW", getValue: (_, ws) => ws.WSMapper.getValue(code) };
             case undefined:
                 throw new Error("getMeter() is failed by undefined code.");
             default:
