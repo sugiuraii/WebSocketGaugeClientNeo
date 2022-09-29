@@ -49,7 +49,6 @@ class AnalogMeterClusterBenchApp
         const pixiAppOption : PIXI.IApplicationOptions = {width : 1100, height : 600};
 
         const appOption = new MeterApplicationOption(pixiAppOption);
-        appOption.PreloadResource.TexturePath.push(...FPSCounter.RequestedTexturePath);
 
         appOption.SetupPIXIMeterPanel = async (app) =>
         {
@@ -58,7 +57,7 @@ class AnalogMeterClusterBenchApp
 
             stage.addChild(meterCluster);
             
-            const fpsCounter = new FPSCounter();
+            const fpsCounter = await FPSCounter.create();
             fpsCounter.position.set(0,0);
             stage.addChild(fpsCounter);
             
