@@ -24,31 +24,18 @@
 
 import * as PIXI from 'pixi.js';
 import { LEDTachoMeter } from "parts/LEDTachoMeter/LEDTachoMeter";
-import * as WebFont from "webfontloader";
 
 require("./LEDTachoMeterTest.html");
 
 window.onload = function () {
-    WebFont.load({
-        custom:
-        {
-            families: LEDTachoMeter.RequestedFontFamily,
-            urls: LEDTachoMeter.RequestedFontCSSURL
-        },
-        active: function () { preloadTexture(); }
-    });
+    main();
 }
 
-function preloadTexture() {
-    PIXI.Loader.shared.add(LEDTachoMeter.RequestedTexturePath);
-    PIXI.Loader.shared.load(main);
-}
-
-function main() {
+async function main() {
     const app = new PIXI.Application({ height: 1366, width: 1366 });
     document.body.appendChild(app.view);
 
-    const meter = new LEDTachoMeter();
+    const meter = await LEDTachoMeter.create();
     app.stage.addChild(meter);
 
     app.ticker.add(function () {
