@@ -50,13 +50,10 @@ class FullCircularGaugePanelWidgetApp {
         const pixiAppOption: PIXI.IApplicationOptions = { width: 405, height: 405 };
 
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
-        appOption.PreloadResource.WebFontFamiliyName.push(...FullCircularGaugePanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontCSSURL.push(...FullCircularGaugePanel.RequestedFontCSSURL);
-        appOption.PreloadResource.TexturePath.push(...FullCircularGaugePanel.RequestedTexturePath);
         appOption.MeteSelectDialogOption.ParameterCodeListToSelect = ["Engine_Load", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Mass_Air_Flow", "Throttle_Opening_Angle", "O2Sensor_1_Air_Fuel_Ratio", "Intake_Air_Temperature"];
         appOption.MeteSelectDialogOption.DefaultMeterSelectDialogSetting = { ["Meter1"]: "Manifold_Absolute_Pressure"};
 
-        appOption.SetupPIXIMeterPanel = (app, ws, meterSetting) => {
+        appOption.SetupPIXIMeterPanel = async (app, ws, meterSetting) => {
             const stage = app.stage;
             //Centering the top-level container
             stage.pivot.set(0, 0);
@@ -68,7 +65,7 @@ class FullCircularGaugePanelWidgetApp {
     
             const meter = analogSingleMeterFactory.getMeter(meterCode);
 
-            const meterDisplayObject = meter.createDisplayObject();
+            const meterDisplayObject = await meter.createDisplayObject();
             meterDisplayObject.position.set(0, 0);
             stage.addChild(meterDisplayObject);
             
