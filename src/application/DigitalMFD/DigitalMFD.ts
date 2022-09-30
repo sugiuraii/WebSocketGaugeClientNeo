@@ -29,12 +29,9 @@ import { MeterApplication } from "lib/MeterAppBase/MeterApplication";
 import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
-import { BoostGaugePanel } from "parts/CircularGauges/FullCircularGaugePanel";
-import { AirFuelGaugePanel } from "parts/CircularGauges/FullCircularGaugePanel";
-import { WaterTempGaugePanel } from "parts/CircularGauges/SemiCircularGaugePanel";
-import { BatteryVoltageGaugePanel } from "parts/CircularGauges/SemiCircularGaugePanel";
-import { ThrottleGaugePanel } from "parts/CircularGauges/SemiCircularGaugePanel";
+import { SemiCircularGaugePanelPresets } from "parts/CircularGauges/SemiCircularGaugePanel";
 import { DigiTachoPanel } from "parts/DigiTachoPanel/DigiTachoPanel";
+import { FullCircularGaugePanelPresets } from "parts/CircularGauges/FullCircularGaugePanel";
 import { MilageGraphPanel } from "parts/GasMilageGraph/MilageGraph";
 
 // Import AppSettings.
@@ -52,49 +49,37 @@ class DigitalMFDApp {
     public async  Start() {
         const pixiAppOption : PIXI.IApplicationOptions = {width : 1200, height : 600};
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
-        appOption.PreloadResource.WebFontFamiliyName.push(...BoostGaugePanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontFamiliyName.push(...WaterTempGaugePanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontFamiliyName.push(...DigiTachoPanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontFamiliyName.push(...MilageGraphPanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontCSSURL.push(...BoostGaugePanel.RequestedFontCSSURL);
-        appOption.PreloadResource.WebFontCSSURL.push(...WaterTempGaugePanel.RequestedFontCSSURL);
-        appOption.PreloadResource.WebFontCSSURL.push(...DigiTachoPanel.RequestedFontCSSURL);
-        appOption.PreloadResource.WebFontCSSURL.push(...MilageGraphPanel.RequestedFontCSSURL);
-        appOption.PreloadResource.TexturePath.push(...BoostGaugePanel.RequestedTexturePath);
-        appOption.PreloadResource.TexturePath.push(...WaterTempGaugePanel.RequestedTexturePath);
-        appOption.PreloadResource.TexturePath.push(...DigiTachoPanel.RequestedTexturePath);
-        appOption.PreloadResource.TexturePath.push(...MilageGraphPanel.RequestedTexturePath);
 
         const gearCalculator = await DefaultAppSettings.getGearPositionCalculator();
 
-        appOption.SetupPIXIMeterPanel = (app, ws) => {
+        appOption.SetupPIXIMeterPanel = async (app, ws) => {
 
             const stage = app.stage;
 
-            const digiTachoPanel = new DigiTachoPanel();
+            const digiTachoPanel = await DigiTachoPanel.create();
             digiTachoPanel.position.set(0, 0);
 
-            const milagePanel = new MilageGraphPanel();
+            const milagePanel = await MilageGraphPanel.create();
             milagePanel.position.set(0, 300);
             milagePanel.scale.set(0.94, 0.94);
 
-            const boostPanel = new BoostGaugePanel();
+            const boostPanel = await FullCircularGaugePanelPresets.BoostGaugePanel();
             boostPanel.position.set(600, 0);
             boostPanel.scale.set(0.751, 0.751);
 
-            const airFuelPanel = new AirFuelGaugePanel();
+            const airFuelPanel = await FullCircularGaugePanelPresets.AirFuelGaugePanel();
             airFuelPanel.position.set(600, 310);
             airFuelPanel.scale.set(0.751, 0.751);
 
-            const waterTempPanel = new WaterTempGaugePanel();
+            const waterTempPanel = await SemiCircularGaugePanelPresets.WaterTempGaugePanel();
             waterTempPanel.position.set(900, 0);
             waterTempPanel.scale.set(0.68);
 
-            const voltagePanel = new BatteryVoltageGaugePanel();
+            const voltagePanel = await SemiCircularGaugePanelPresets.BatteryVoltageGaugePanel();
             voltagePanel.position.set(900, 200);
             voltagePanel.scale.set(0.68);
 
-            const throttlePanel = new ThrottleGaugePanel();
+            const throttlePanel = await SemiCircularGaugePanelPresets.ThrottleGaugePanel();
             throttlePanel.position.set(900, 400);
             throttlePanel.scale.set(0.68);
 

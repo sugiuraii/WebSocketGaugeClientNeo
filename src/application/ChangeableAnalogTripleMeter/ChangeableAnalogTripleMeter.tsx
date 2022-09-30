@@ -56,7 +56,7 @@ class ChangeableAnalogTripleMeterApp {
         appOption.MeteSelectDialogOption.ParameterCodeListToSelect = ["Engine_Speed", "Engine_Load", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Oil_Pressure", "Mass_Air_Flow", "O2Sensor_1_Air_Fuel_Ratio", "Intake_Air_Temperature"];
         appOption.MeteSelectDialogOption.DefaultMeterSelectDialogSetting = { ["Left"]: "Engine_Speed", ["Center"]: "Manifold_Absolute_Pressure", ["Right"]: "Coolant_Temperature" };
 
-        appOption.SetupPIXIMeterPanel = (app, ws, meterSetting) => {
+        appOption.SetupPIXIMeterPanel = async (app, ws, meterSetting) => {
             const stage = app.stage;
             //Centering the top-level container
             stage.pivot.set(600, 200);
@@ -72,9 +72,9 @@ class ChangeableAnalogTripleMeterApp {
             const centerMeter = analogSingleMeterFactory.getMeter(centerMeterCode);
             const rightMeter = analogSingleMeterFactory.getMeter(rightMeterCode);    
 
-            const leftMeterDisplayObject = leftMeter.createDisplayObject();
-            const centerMeterDisplayObject = centerMeter.createDisplayObject();
-            const rightMeterDisplayObject = rightMeter.createDisplayObject();
+            const leftMeterDisplayObject = await leftMeter.createDisplayObject();
+            const centerMeterDisplayObject = await centerMeter.createDisplayObject();
+            const rightMeterDisplayObject = await rightMeter.createDisplayObject();
             leftMeterDisplayObject.position.set(0, 0);
             centerMeterDisplayObject.position.set(400, 0);
             rightMeterDisplayObject.position.set(800, 0);
