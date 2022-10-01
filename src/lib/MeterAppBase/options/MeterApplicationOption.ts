@@ -50,7 +50,7 @@ export class MeterApplicationOption {
     public readonly NavBarItems : JSX.Element[] = [];
     public readonly MeteSelectDialogOption = new MeterSelectDialogOption();
     
-    public SetupPIXIMeterPanel: (pixiApp: PIXI.Application, wsObj: WebsocketObjectCollection, meterSelection : MeterSelectionSetting) => void = () => {/* do nothing*/};
+    public SetupPIXIMeterPanel: (pixiApp: PIXI.Application, wsObj: WebsocketObjectCollection, meterSelection : MeterSelectionSetting) => Promise<void> = async () => {/* do nothing*/};
     
     constructor(pixiApplicationOption? : PIXI.IApplicationOptions, wsCollectionOption? :WebsocketObjectCollectionOption, preloadResource? : PreloadResourceCollection)
     {

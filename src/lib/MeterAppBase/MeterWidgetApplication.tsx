@@ -140,7 +140,7 @@ export class MeterWidgetApplication {
         // Preload Fonts -> textures-> parts
         await this.preloadFonts();
         await this.preloadTextures();
-        this.Option.SetupPIXIMeterPanel(pixiApp, this.webSocketCollection, this.UrlQueryResult.MeterSelectionSetting);
+        await this.Option.SetupPIXIMeterPanel(pixiApp, this.webSocketCollection, this.UrlQueryResult.MeterSelectionSetting);
         
         // Set transparent background for widget, after finish loading.
         pixiApp.renderer.backgroundAlpha = 0;
