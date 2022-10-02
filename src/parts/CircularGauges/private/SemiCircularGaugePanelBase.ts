@@ -58,7 +58,7 @@ export class SemiCircularGaugePanelOptionBase extends CircularGaugePanelOptionBa
                 dropShadowColor: "#FFFFFF",
                 dropShadowDistance: 0,
                 fill: "white",
-                fontFamily: "FreeSans-Bold"
+                fontFamily: "Freesansbold"
             });
         this.OffsetAngle = 180;
         this.FullAngle = 180;

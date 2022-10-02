@@ -137,7 +137,7 @@ export abstract class CircularGaugePanelOptionBase {
                 dropShadowColor: "#FFFFFF",
                 dropShadowDistance: 0,
                 fill: "white",
-                fontFamily: "FreeSans-Bold"
+                fontFamily: "Freesansbold"
             });
         this.ValueTextLabelOption = new BitmapTextOption();
     }
