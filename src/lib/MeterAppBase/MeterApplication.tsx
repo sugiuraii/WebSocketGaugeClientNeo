@@ -22,9 +22,8 @@
  * THE SOFTWARE.
  */
 
-import * as WebFont from "webfontloader";
 import * as PIXI from "pixi.js";
-import React, { Fragment } from "react";
+import React from "react";
 import { createRoot } from 'react-dom/client';
 
 import { WebstorageHandler } from "./Webstorage/WebstorageHandler";
@@ -122,49 +121,8 @@ export class MeterApplication {
         // Add react components to html body
         document.body.appendChild(rootElement);
 
-        // Preload Fonts -> textures-> parts
-        await this.preloadFonts();
-        await this.preloadTextures();
         await this.Option.SetupPIXIMeterPanel(pixiApp, this.webSocketCollection, this.WebStorage.MeterSelectDialogSetting);
         this.webSocketCollection.Run();
-    }
-
-    private async preloadFonts() {
-        // Use Set to remove overlaps.
-        const webFontFamilyWithoutOverlap = Array.from(new Set(this.Option.PreloadResource.WebFontFamiliyName));
-        const webFontCSSURLWithoutOverlap = Array.from(new Set(this.Option.PreloadResource.WebFontCSSURL));
-
-        return new Promise<void>((resolve) => {
-            // call callBack() without loading fonts if the webFontFamily and webFoutCSSURL contains no elements.
-            if (webFontFamilyWithoutOverlap.length === 0 && webFontCSSURLWithoutOverlap.length === 0)
-                resolve();
-
-            WebFont.load(
-                {
-                    custom:
-                    {
-                        families: webFontFamilyWithoutOverlap,
-                        urls: webFontCSSURLWithoutOverlap
-                    },
-                    active: () => { resolve(); }
-                });
-        });
-    }
-
-    private async preloadTextures() {
-        // Use Set to remove overlaps.
-        const texturePathWithoutOverlap = Array.from(new Set(this.Option.PreloadResource.TexturePath));
-
-        for (let i = 0; i < texturePathWithoutOverlap.length; i++) {
-            const texturePath = texturePathWithoutOverlap[i];
-            PIXI.Loader.shared.add(texturePath);
-        }
-
-        return new Promise<void>((resolve) => {
-            PIXI.Loader.shared.load(() => {
-                resolve();
-            });
-        });
     }
 
     private loadBootStrapCSS() {
