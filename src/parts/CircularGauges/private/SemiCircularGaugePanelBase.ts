@@ -30,7 +30,6 @@ import { Assets } from '@pixi/assets';
 
 require("./SemiCircularGaugeTexture.json");
 require("./SemiCircularGaugeTexture.png");
-require("../../fonts/font.css");
 require("../../fonts/GNU-Freefonts/FreeSansBold.otf");
 
 require("./CircularGaugeLabelFont.fnt");

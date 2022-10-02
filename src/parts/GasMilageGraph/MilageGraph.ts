@@ -28,8 +28,6 @@ import { Assets } from '@pixi/assets';
 
 require("./MilageGraphTexture.json");
 require("./MilageGraphTexture.png");
-require("../fonts/font.css");
-require("../fonts/GNU-Freefonts/FreeSansBold.otf");
 
 require("./MilageGraphFont_45px.fnt");
 require("./MilageGraphFont_45px_0.png");
@@ -90,7 +88,6 @@ export class MilageGraphPanel extends PIXI.Container {
 
     public static async create() {
         await Assets.load(["img/MilageGraphTexture.json", "img/MilageGraphFont_45px.fnt", "img/MilageGraphFont_68px.fnt"]);
-        await Assets.load(["./fonts/FreeSansBold.otf"]);
         const instance = new MilageGraphPanel();
         return instance;
     }

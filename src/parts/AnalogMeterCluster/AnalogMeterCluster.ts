@@ -34,8 +34,6 @@ import { Assets } from '@pixi/assets';
 
 require("./AnalogMeterClusterTexture.json");
 require("./AnalogMeterClusterTexture.png");
-require("../fonts/font.css");
-require("../fonts/DSEG_v030/DSEG14Classic-BoldItalic.ttf");
 require("./AnalogMeterFont_115px.fnt");
 require("./AnalogMeterFont_45px.fnt");
 require("./AnalogMeterFont_40px.fnt");
@@ -152,7 +150,7 @@ export class AnalogMeterCluster extends PIXI.Container {
 
     public static async create() {
         await Assets.load(["img/AnalogMeterClusterTexture.json", "img/AnalogMeterFont_115px.fnt", "img/AnalogMeterFont_45px.fnt", "img/AnalogMeterFont_40px.fnt", "img/AnalogMeterFont_60px.fnt"]);
-        await Assets.load('./fonts/DSEG14Classic-BoldItalic.ttf');
+        //await Assets.load('./fonts/DSEG14Classic-BoldItalic.ttf');
         const instance = new AnalogMeterCluster();
         return instance;
     }
