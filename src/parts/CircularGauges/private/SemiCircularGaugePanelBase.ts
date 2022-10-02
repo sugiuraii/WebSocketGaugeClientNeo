@@ -30,7 +30,6 @@ import { Assets } from '@pixi/assets';
 
 require("./SemiCircularGaugeTexture.json");
 require("./SemiCircularGaugeTexture.png");
-require("../../fonts/font.css");
 require("../../fonts/GNU-Freefonts/FreeSansBold.otf");
 
 require("./CircularGaugeLabelFont.fnt");
@@ -43,12 +42,12 @@ export class SemiCircularGaugePanelOptionBase extends CircularGaugePanelOptionBa
     }
 
     private setOption(): void {
-        this.RedZoneBarTexture = PIXI.Texture.from("SemiCircular_Gauge1_Redzone_Bar");
-        this.YellowZoneBarTexture = PIXI.Texture.from("SemiCircular_Gauge1_Yellowzone_Bar");
-        this.GreenZoneBarTexture = PIXI.Texture.from("SemiCircular_Gauge1_Greenzone_Bar");
-        this.ValueBarTexture = PIXI.Texture.from("SemiCircular_Gauge1_Value_Bar");
-        this.BackTexture = PIXI.Texture.from("SemiCircular_Gauge1_Back");
-        this.GridTexture = PIXI.Texture.from("SemiCircular_Gauge1_Grid");
+        this.RedZoneBarTextureName = "SemiCircular_Gauge1_Redzone_Bar";
+        this.YellowZoneBarTextureName = "SemiCircular_Gauge1_Yellowzone_Bar";
+        this.GreenZoneBarTextureName = "SemiCircular_Gauge1_Greenzone_Bar";
+        this.ValueBarTextureName = "SemiCircular_Gauge1_Value_Bar";
+        this.BackTextureName = "SemiCircular_Gauge1_Back";
+        this.GridTextureName = "SemiCircular_Gauge1_Grid";
 
         this.MasterTextStyle = new PIXI.TextStyle(
             {
@@ -58,7 +57,7 @@ export class SemiCircularGaugePanelOptionBase extends CircularGaugePanelOptionBa
                 dropShadowColor: "#FFFFFF",
                 dropShadowDistance: 0,
                 fill: "white",
-                fontFamily: "FreeSans-Bold"
+                fontFamily: "Freesansbold"
             });
         this.OffsetAngle = 180;
         this.FullAngle = 180;

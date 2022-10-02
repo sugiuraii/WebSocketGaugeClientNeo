@@ -30,7 +30,6 @@ import { Assets } from '@pixi/assets';
 
 require("./FullCircularGaugeTexture.json");
 require("./FullCircularGaugeTexture.png");
-require("../../fonts/font.css");
 require("../../fonts/GNU-Freefonts/FreeSansBold.otf");
 
 require("./CircularGaugeLabelFont.fnt");
@@ -43,12 +42,12 @@ export class FullCircularGaugePanelOptionsBase extends CircularGaugePanelOptionB
     }
 
     private setOption(): void {
-        this.RedZoneBarTexture = PIXI.Texture.from("FullCircularGauge_RedZone_Bar");
-        this.YellowZoneBarTexture = PIXI.Texture.from("FullCircularGauge_YellowZone_Bar");
-        this.GreenZoneBarTexture = PIXI.Texture.from("FullCircularGauge_GreenZone_Bar");
-        this.ValueBarTexture = PIXI.Texture.from("FullCircularGauge_ValueBar");
-        this.BackTexture = PIXI.Texture.from("FullCircularGauge_Back");
-        this.GridTexture = PIXI.Texture.from("FullCircularGauge_Grid");
+        this.RedZoneBarTextureName = "FullCircularGauge_RedZone_Bar";
+        this.YellowZoneBarTextureName = "FullCircularGauge_YellowZone_Bar";
+        this.GreenZoneBarTextureName = "FullCircularGauge_GreenZone_Bar";
+        this.ValueBarTextureName = "FullCircularGauge_ValueBar";
+        this.BackTextureName = "FullCircularGauge_Back";
+        this.GridTextureName = "FullCircularGauge_Grid";
 
         this.MasterTextStyle = new PIXI.TextStyle(
             {
@@ -58,7 +57,7 @@ export class FullCircularGaugePanelOptionsBase extends CircularGaugePanelOptionB
                 dropShadowColor: "#FFFFFF",
                 dropShadowDistance: 0,
                 fill: "white",
-                fontFamily: "FreeSans-Bold"
+                fontFamily: "Freesansbold"
             });
         this.OffsetAngle = 90;
         this.FullAngle = 270;

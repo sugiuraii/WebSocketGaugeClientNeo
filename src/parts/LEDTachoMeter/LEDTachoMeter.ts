@@ -28,8 +28,6 @@ import { Assets } from '@pixi/assets';
 
 require("./LEDTachoMeterTexture.json");
 require("./LEDTachoMeterTexture.png");
-require("../fonts/font.css");
-require("../fonts/DSEG_v030/DSEG14Classic-BoldItalic.ttf");
 require("./LEDMeterFont_100px.fnt");
 require("./LEDMeterFont_88px.fnt");
 require("./LEDMeterFont_45px.fnt");
@@ -93,7 +91,6 @@ export class LEDTachoMeter extends PIXI.Container {
 
     public static async create() {
         await Assets.load(["img/LEDTachoMeterTexture.json", "img/LEDMeterFont_100px.fnt", "img/LEDMeterFont_88px.fnt", "img/LEDMeterFont_45px.fnt", "img/LEDMeterFont_30px.fnt"]);
-        await Assets.load(["./fonts/DSEG14Classic-BoldItalic.ttf"]);
         const instance = new LEDTachoMeter();
         return instance;
     }
