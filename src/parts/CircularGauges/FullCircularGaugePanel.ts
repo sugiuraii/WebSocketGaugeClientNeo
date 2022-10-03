@@ -26,6 +26,13 @@ import { Assets } from "@pixi/assets";
 import { FullCircularGaugePanelOption } from "./FullCircularGaugePanelOption"
 import { CircularGaugePanelBase } from "./private/CircularGaugePanelBase";
 
+require("./private/FullCircularGaugeTexture.json");
+require("./private/FullCircularGaugeTexture.png");
+require("../fonts/GNU-Freefonts/FreeSansBold.otf");
+
+require("./private/CircularGaugeLabelFont.fnt");
+require("./private/CircularGaugeLabelFont_0.png");
+
 export class FullCircularGaugePanel extends CircularGaugePanelBase {
     private constructor(options: FullCircularGaugePanelOption) {
         super(options);
