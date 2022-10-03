@@ -23,7 +23,8 @@
  */
 
 import * as PIXI from 'pixi.js';
-import { SemiCircularGaugePanel, SemiCircularGaugePanelPresets } from "parts/CircularGauges/SemiCircularGaugePanel";
+import { SemiCircularGaugePanel } from "parts/CircularGauges/SemiCircularGaugePanel";
+import { SemiCircularGaugePanelPresets } from 'parts/CircularGauges/SemiCircularGaugePanelPresets';
 
 require("./SemiCircularGaugeTest.html");
 

@@ -32,7 +32,7 @@ import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicatio
 
 //Import meter parts
 import { FullCircularGaugePanelPresets } from "parts/CircularGauges/FullCircularGaugePanelPresets";
-import { SemiCircularGaugePanelPresets } from "parts/CircularGauges/SemiCircularGaugePanel";
+import { SemiCircularGaugePanelPresets } from "parts/CircularGauges/SemiCircularGaugePanelPresets";
 import { DigiTachoPanel } from "parts/DigiTachoPanel/DigiTachoPanel";
 
 //Import enumuator of parameter code

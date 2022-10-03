@@ -22,18 +22,9 @@
  * THE SOFTWARE.
  */
 
-import { CircularGaugePanelBase } from './CircularGaugePanelBase';
-import { TextOption } from './CircularGaugePanelBase';
-import { CircularGaugePanelOptionBase } from './CircularGaugePanelBase';
+import { TextOption } from './private/CircularGaugePanelBase';
+import { CircularGaugePanelOptionBase } from './private/CircularGaugePanelBase';
 import * as PIXI from 'pixi.js';
-import { Assets } from '@pixi/assets';
-
-require("./SemiCircularGaugeTexture.json");
-require("./SemiCircularGaugeTexture.png");
-require("../../fonts/GNU-Freefonts/FreeSansBold.otf");
-
-require("./CircularGaugeLabelFont.fnt");
-require("./CircularGaugeLabelFont_0.png");
 
 export class SemiCircularGaugePanelOption extends CircularGaugePanelOptionBase {
     constructor() {
@@ -107,19 +98,6 @@ export class SemiCircularGaugePanelOption extends CircularGaugePanelOptionBase {
                 new TextOption(new PIXI.Point(310, 75), new PIXI.Point(0, 0.5), "left", axisLabelFontSize),
                 new TextOption(new PIXI.Point(340, 195), new PIXI.Point(0.5, 0), "center", axisLabelFontSize)
             ];
-    }
-}
-
-export class SemiCircularGaugePanel extends CircularGaugePanelBase {
-    private constructor(options: SemiCircularGaugePanelOption) {
-        super(options);
-    }
-
-    public static async create(options: SemiCircularGaugePanelOption) {
-        await Assets.load(["img/SemiCircularGaugeTexture.json", "img/CircularGaugeLabelFont.fnt"]);
-        await Assets.load(["./fonts/FreeSansBold.otf"]);
-        const instance = new SemiCircularGaugePanel(options);
-        return instance;
     }
 }
 
