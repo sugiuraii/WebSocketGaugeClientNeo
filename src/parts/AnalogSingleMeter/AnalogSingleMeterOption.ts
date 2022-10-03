@@ -22,26 +22,42 @@
  * THE SOFTWARE.
  */
 
-import { Assets } from "@pixi/assets";
-import { FullCircularGaugePanelOption } from "./FullCircularGaugePanelOption"
-import { CircularGaugePanelBase } from "./private/CircularGaugePanelBase";
+/**
+ * Setting option class for AnalogSingleMeter
+ */
+export class AnalogSingleMeterOption {
+    /**
+     * Gauge Max.
+     */
+    public Max: number;
+    /**
+     * Gauge Min.
+     */
+    public Min: number;
+    /**
+     * Gauge Title
+     */
+    public Title: string;
+    /**
+     * Gauge unit
+     */
+    public Unit: string;
+    /**
+     * Gauge scale numbers (7 ticks).
+     */
+    public ScaleLabel: string[];
 
-require("./private/FullCircularGaugeTexture.json");
-require("./private/FullCircularGaugeTexture.png");
-require("../fonts/GNU-Freefonts/FreeSansBold.otf");
-
-require("./private/CircularGaugeLabelFont.fnt");
-require("./private/CircularGaugeLabelFont_0.png");
-
-export class FullCircularGaugePanel extends CircularGaugePanelBase {
-    private constructor(options: FullCircularGaugePanelOption) {
-        super(options);
-    }
-
-    public static async create(options: FullCircularGaugePanelOption) {
-        await Assets.load(["img/FullCircularGaugeTexture.json", "img/CircularGaugeLabelFont.fnt"]);
-        await Assets.load(["./fonts/FreeSansBold.otf"]);
-        const instance = new FullCircularGaugePanel(options);
-        return instance;
+    public GaugeDrawValConversionFunc : (x: number) => number;
+    
+    /**
+     * Construct AnalogSingleMeterOption with default settings.
+     */
+    constructor() {
+        this.Max = 2.0;
+        this.Min = -1.0;
+        this.Title = "Boost";
+        this.Unit = "x100kPa";
+        this.ScaleLabel = ["-1.0", "-0.5", "0.0", "0.5", "1.0", "1.5", "2.0"];
+        this.GaugeDrawValConversionFunc = (x) => x;
     }
 }

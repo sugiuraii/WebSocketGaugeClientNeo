@@ -25,7 +25,8 @@
 import { WebsocketObjectCollection } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
 import { WebsocketParameterCode } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode";
 import { ReadModeCode } from "lib/WebSocket/WebSocketCommunication";
-import { AnalogSingleMeter, AnalogSingleMeterPresets } from "../AnalogSingleMeter/AnalogSingleMeter";
+import { AnalogSingleMeter } from "parts/AnalogSingleMeter/AnalogSingleMeter";
+import { AnalogSingleMeterPresets } from "../AnalogSingleMeter/AnalogSingleMeterPresets";
 
 export class AnalogSingleMeterFactory {
     private readonly UseVacuumMeterInsteadOfBoost;

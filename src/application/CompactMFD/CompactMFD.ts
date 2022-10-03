@@ -31,9 +31,9 @@ import { MeterApplication } from "lib/MeterAppBase/MeterApplication";
 import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
-import { SemiCircularGaugePanelPresets } from "parts/CircularGauges/SemiCircularGaugePanel";
 import { DigiTachoPanel } from "parts/DigiTachoPanel/DigiTachoPanel";
-import { FullCircularGaugePanelPresets } from "parts/CircularGauges/FullCircularGaugePanel";
+import { SemiCircularGaugePanelPresets } from "parts/CircularGauges/SemiCircularGaugePanelPresets";
+import { FullCircularGaugePanelPresets } from "parts/CircularGauges/FullCircularGaugePanelPresets";
 
 // Import AppSettings.
 import * as DefaultAppSettings from  "application/DefaultAppSettings"

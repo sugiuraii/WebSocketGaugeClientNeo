@@ -31,7 +31,7 @@ import { MeterApplication } from "lib/MeterAppBase/MeterApplication";
 import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
-import { AnalogSingleMeterPresets} from "parts/AnalogSingleMeter/AnalogSingleMeter";
+import { AnalogSingleMeterPresets} from "parts/AnalogSingleMeter/AnalogSingleMeterPresets";
 import { LEDTachoMeter } from "parts/LEDTachoMeter/LEDTachoMeter";
 
 // Import AppSettings.

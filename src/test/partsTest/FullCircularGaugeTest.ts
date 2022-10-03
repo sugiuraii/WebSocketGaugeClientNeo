@@ -22,7 +22,8 @@
  * THE SOFTWARE.
  */
 
-import { FullCircularGaugePanelPresets, FullCircularGaugePanel } from "parts/CircularGauges/FullCircularGaugePanel";
+import { FullCircularGaugePanel } from "parts/CircularGauges/FullCircularGaugePanel";
+import { FullCircularGaugePanelPresets } from "parts/CircularGauges/FullCircularGaugePanelPresets";
 import * as PIXI from 'pixi.js';
 
 require("./FullCircularGaugeTest.html");

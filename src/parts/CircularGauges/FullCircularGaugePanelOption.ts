@@ -22,32 +22,23 @@
  * THE SOFTWARE.
  */
 
-import { CircularGaugePanelBase } from './CircularGaugePanelBase';
-import { TextOption } from './CircularGaugePanelBase';
-import { CircularGaugePanelOptionBase } from './CircularGaugePanelBase';
+import { TextOption } from './private/CircularGaugePanelBase';
+import { CircularGaugePanelOptionBase } from './private/CircularGaugePanelBase';
 import * as PIXI from 'pixi.js';
-import { Assets } from '@pixi/assets';
 
-require("./SemiCircularGaugeTexture.json");
-require("./SemiCircularGaugeTexture.png");
-require("../../fonts/GNU-Freefonts/FreeSansBold.otf");
-
-require("./CircularGaugeLabelFont.fnt");
-require("./CircularGaugeLabelFont_0.png");
-
-export class SemiCircularGaugePanelOptionBase extends CircularGaugePanelOptionBase {
+export class FullCircularGaugePanelOption extends CircularGaugePanelOptionBase {
     constructor() {
         super();
         this.setOption();
     }
 
     private setOption(): void {
-        this.RedZoneBarTextureName = "SemiCircular_Gauge1_Redzone_Bar";
-        this.YellowZoneBarTextureName = "SemiCircular_Gauge1_Yellowzone_Bar";
-        this.GreenZoneBarTextureName = "SemiCircular_Gauge1_Greenzone_Bar";
-        this.ValueBarTextureName = "SemiCircular_Gauge1_Value_Bar";
-        this.BackTextureName = "SemiCircular_Gauge1_Back";
-        this.GridTextureName = "SemiCircular_Gauge1_Grid";
+        this.RedZoneBarTextureName = "FullCircularGauge_RedZone_Bar";
+        this.YellowZoneBarTextureName = "FullCircularGauge_YellowZone_Bar";
+        this.GreenZoneBarTextureName = "FullCircularGauge_GreenZone_Bar";
+        this.ValueBarTextureName = "FullCircularGauge_ValueBar";
+        this.BackTextureName = "FullCircularGauge_Back";
+        this.GridTextureName = "FullCircularGauge_Grid";
 
         this.MasterTextStyle = new PIXI.TextStyle(
             {
@@ -59,24 +50,24 @@ export class SemiCircularGaugePanelOptionBase extends CircularGaugePanelOptionBa
                 fill: "white",
                 fontFamily: "Freesansbold"
             });
-        this.OffsetAngle = 180;
-        this.FullAngle = 180;
+        this.OffsetAngle = 90;
+        this.FullAngle = 270;
         this.Min = 0;
-        this.Max = 180;
+        this.Max = 270;
         this.AngleStep = 0.1;
 
-        this.ValueBarRadius = 200;
-        this.ValueBarInnerRadius = 0;
+        this.ValueBarRadius = 150;
+        this.ValueBarInnerRadius = 50;
         this.ValueTextLabelOption.position.set(200, 185);
         this.ValueTextLabelOption.position.set(200, 185);
         this.ValueTextLabelOption.anchor.set(0.5, 0.5);
         this.ValueTextLabelOption.align = "center";
 
         this.ZoneBarRadius = 200;
-        this.CenterPosition.set(200, 195);
+        this.CenterPosition.set(200, 200);
 
         this.TitleLabel = "ANGLE";
-        this.TitleLabelOption = new TextOption(new PIXI.Point(200, 266), new PIXI.Point(0.5, 0.5), "center", 42);
+        this.TitleLabelOption = new TextOption(new PIXI.Point(200, 370), new PIXI.Point(0.5, 0.5), "center", 38);
         this.UnitLabel = "deg";
         this.UnitLabelOption = new TextOption(new PIXI.Point(200, 235), new PIXI.Point(0.5, 0.5), "center", 23);
         this.ValueNumberRoundDigit = 0;
@@ -85,23 +76,27 @@ export class SemiCircularGaugePanelOptionBase extends CircularGaugePanelOptionBa
         this.YellowZoneBarEnable = true;
         this.GreenZoneBarEnable = true;
         this.RedZoneBarOffsetAngle = 315;
-        this.RedZoneBarFullAngle = 45;
         this.YellowZoneBarOffsetAngle = 270;
+        this.GreenZoneBarOffsetAngle = 90;
+        this.RedZoneBarFullAngle = 40;
         this.YellowZoneBarFullAngle = 45;
-        this.GreenZoneBarOffsetAngle = 180;
-        this.GreenZoneBarFullAngle = 45;
+        this.GreenZoneBarFullAngle = 90;
 
-        const axisLabelFontSize = 38;
+        const axisLabelFontSize = 30;
         this.AxisLabel =
             ["0",
                 "45",
                 "90",
                 "135",
                 "180",
+                "225",
+                "270"
             ];
         this.AxisLabelOption =
             [
-                new TextOption(new PIXI.Point(60, 195), new PIXI.Point(0.5, 0), "center", axisLabelFontSize),
+                new TextOption(new PIXI.Point(207, 335), new PIXI.Point(0, 0.5), "left", axisLabelFontSize),
+                new TextOption(new PIXI.Point(90, 310), new PIXI.Point(1, 0.5), "right", axisLabelFontSize),
+                new TextOption(new PIXI.Point(45, 193), new PIXI.Point(1, 0.5), "right", axisLabelFontSize),
                 new TextOption(new PIXI.Point(90, 75), new PIXI.Point(1, 0.5), "right", axisLabelFontSize),
                 new TextOption(new PIXI.Point(200, 40), new PIXI.Point(0.5, 1), "center", axisLabelFontSize),
                 new TextOption(new PIXI.Point(310, 75), new PIXI.Point(0, 0.5), "left", axisLabelFontSize),
@@ -110,16 +105,4 @@ export class SemiCircularGaugePanelOptionBase extends CircularGaugePanelOptionBa
     }
 }
 
-export class SemiCircularGaugePanel extends CircularGaugePanelBase {
-    private constructor(options: SemiCircularGaugePanelOptionBase) {
-        super(options);
-    }
-
-    public static async create(options: SemiCircularGaugePanelOptionBase) {
-        await Assets.load(["img/SemiCircularGaugeTexture.json", "img/CircularGaugeLabelFont.fnt"]);
-        await Assets.load(["./fonts/FreeSansBold.otf"]);
-        const instance = new SemiCircularGaugePanel(options);
-        return instance;
-    }
-}
 
