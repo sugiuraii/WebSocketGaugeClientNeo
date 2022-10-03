@@ -23,13 +23,13 @@
  */
 
 import { FullCircularGaugePanel } from "./private/FullCircularGaugePanelBase"
-import { FullCircularGaugePanelOptionsBase } from "./private/FullCircularGaugePanelBase"
+import { FullCircularGaugePanelOption } from "./private/FullCircularGaugePanelBase"
 
 export { FullCircularGaugePanel } from "./private/FullCircularGaugePanelBase"
 
 export class FullCircularGaugePanelPresets {
     public static async BoostGaugePanel() {
-        const options = new FullCircularGaugePanelOptionsBase();
+        const options = new FullCircularGaugePanelOption();
 
         options.TitleLabel = "TURBO BOOST";
         options.UnitLabel = "x100kPa";
@@ -61,7 +61,7 @@ export class FullCircularGaugePanelPresets {
 
     public static async VacuumGaugePanel() {
 
-        const options = new FullCircularGaugePanelOptionsBase();
+        const options = new FullCircularGaugePanelOption();
 
         options.TitleLabel = "Manifold pres.";
         options.UnitLabel = "x100kPa";
@@ -92,7 +92,7 @@ export class FullCircularGaugePanelPresets {
     }
 
     public static async AirFuelGaugePanel() {
-        const options = new FullCircularGaugePanelOptionsBase();
+        const options = new FullCircularGaugePanelOption();
 
         options.TitleLabel = "Air/Fuel Ratio";
         options.Min = 8;
@@ -120,7 +120,7 @@ export class FullCircularGaugePanelPresets {
     }
 
     public static async WaterTempGaugePanel() {
-        const options = new FullCircularGaugePanelOptionsBase();
+        const options = new FullCircularGaugePanelOption();
 
         options.TitleLabel = "WATER TEMP";
         options.UnitLabel = "degC";
@@ -149,7 +149,7 @@ export class FullCircularGaugePanelPresets {
     }
 
     public static async EngineOilTempGaugePanel() {
-        const options = new FullCircularGaugePanelOptionsBase();
+        const options = new FullCircularGaugePanelOption();
 
         options.TitleLabel = "ENG. OIL TEMP";
         options.UnitLabel = "degC";
@@ -178,7 +178,7 @@ export class FullCircularGaugePanelPresets {
     }
 
     public static async BatteryVoltageGaugePanel() {
-        const options = new FullCircularGaugePanelOptionsBase();
+        const options = new FullCircularGaugePanelOption();
 
         options.TitleLabel = "BATTERY VOLT";
         options.UnitLabel = "V";
@@ -203,7 +203,7 @@ export class FullCircularGaugePanelPresets {
     }
 
     public static async MassAirFlowGaugePanel() {
-        const options = new FullCircularGaugePanelOptionsBase();
+        const options = new FullCircularGaugePanelOption();
 
         options.TitleLabel = "MASS AIRFLOW";
         options.UnitLabel = "x10g/s";
@@ -228,7 +228,7 @@ export class FullCircularGaugePanelPresets {
     }
 
     public static async EngineLoadGaugePanel() {
-        const options = new FullCircularGaugePanelOptionsBase();
+        const options = new FullCircularGaugePanelOption();
 
         options.TitleLabel = "ENGINE LOAD";
         options.UnitLabel = "%";
@@ -253,7 +253,7 @@ export class FullCircularGaugePanelPresets {
     }
 
     public static async IntakeAirTemperatureGaugePanel() {
-        const options = new FullCircularGaugePanelOptionsBase();
+        const options = new FullCircularGaugePanelOption();
 
         options.TitleLabel = "INTAKE TEMP.";
         options.UnitLabel = "degC";

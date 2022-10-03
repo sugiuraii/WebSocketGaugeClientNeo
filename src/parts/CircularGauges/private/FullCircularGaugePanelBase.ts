@@ -35,7 +35,7 @@ require("../../fonts/GNU-Freefonts/FreeSansBold.otf");
 require("./CircularGaugeLabelFont.fnt");
 require("./CircularGaugeLabelFont_0.png");
 
-export class FullCircularGaugePanelOptionsBase extends CircularGaugePanelOptionBase {
+export class FullCircularGaugePanelOption extends CircularGaugePanelOptionBase {
     constructor() {
         super();
         this.setOption();
@@ -115,11 +115,11 @@ export class FullCircularGaugePanelOptionsBase extends CircularGaugePanelOptionB
 }
 
 export class FullCircularGaugePanel extends CircularGaugePanelBase {
-    private constructor(options: FullCircularGaugePanelOptionsBase) {
+    private constructor(options: FullCircularGaugePanelOption) {
         super(options);
     }
 
-    public static async create(options: FullCircularGaugePanelOptionsBase) {
+    public static async create(options: FullCircularGaugePanelOption) {
         await Assets.load(["img/FullCircularGaugeTexture.json", "img/CircularGaugeLabelFont.fnt"]);
         await Assets.load(["./fonts/FreeSansBold.otf"]);
         const instance = new FullCircularGaugePanel(options);

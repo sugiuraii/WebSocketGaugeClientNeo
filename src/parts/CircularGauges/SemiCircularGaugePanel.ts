@@ -23,13 +23,13 @@
  */
 
 import { SemiCircularGaugePanel } from "./private/SemiCircularGaugePanelBase"
-import { SemiCircularGaugePanelOptionBase } from "./private/SemiCircularGaugePanelBase"
+import { SemiCircularGaugePanelOption } from "./private/SemiCircularGaugePanelBase"
 
 export { SemiCircularGaugePanel } from "./private/SemiCircularGaugePanelBase"
 
 export class SemiCircularGaugePanelPresets {
     public static async ThrottleGaugePanel() {
-        const options = new SemiCircularGaugePanelOptionBase();
+        const options = new SemiCircularGaugePanelOption();
 
         options.TitleLabel = "THROTTLE";
         options.Min = 0;
@@ -44,7 +44,7 @@ export class SemiCircularGaugePanelPresets {
     }
 
     public static async WaterTempGaugePanel() {
-        const options = new SemiCircularGaugePanelOptionBase();
+        const options = new SemiCircularGaugePanelOption();
 
         options.TitleLabel = "WATER TEMP";
         options.Min = 40;
@@ -63,7 +63,7 @@ export class SemiCircularGaugePanelPresets {
     }
 
     public static async EngineOilTempGaugePanel() {
-        const options = new SemiCircularGaugePanelOptionBase();
+        const options = new SemiCircularGaugePanelOption();
 
         options.TitleLabel = "ENG. OIL TEMP";
         options.Min = 50;
@@ -82,7 +82,7 @@ export class SemiCircularGaugePanelPresets {
     }
 
     public static async BatteryVoltageGaugePanel() {
-        const options = new SemiCircularGaugePanelOptionBase();
+        const options = new SemiCircularGaugePanelOption();
 
         options.TitleLabel = "BATTERY VOLT";
         options.Min = 11;
@@ -98,7 +98,7 @@ export class SemiCircularGaugePanelPresets {
     }
 
     public static async AirFuelGaugePanel() {
-        const options = new SemiCircularGaugePanelOptionBase();
+        const options = new SemiCircularGaugePanelOption();
 
         options.TitleLabel = "Air/Fuel Ratio";
         options.Min = 10;
@@ -125,7 +125,7 @@ export class SemiCircularGaugePanelPresets {
     }
 
     public static async VacuumGaugePanel() {
-        const options = new SemiCircularGaugePanelOptionBase();
+        const options = new SemiCircularGaugePanelOption();
 
         options.TitleLabel = "Manifold Pres.";
         options.UnitLabel = "x100kPa";
@@ -153,7 +153,7 @@ export class SemiCircularGaugePanelPresets {
     }
 
     public static async BoostGaugePanel() {
-        const options = new SemiCircularGaugePanelOptionBase();
+        const options = new SemiCircularGaugePanelOption();
 
         options.TitleLabel = "TURBO BOOST";
         options.UnitLabel = "x100kPa";
@@ -183,7 +183,7 @@ export class SemiCircularGaugePanelPresets {
     }
 
     public static async MassAirFlowGaugePanel() {
-        const options = new SemiCircularGaugePanelOptionBase();
+        const options = new SemiCircularGaugePanelOption();
 
         options.TitleLabel = "MASS AIRFLOW";
         options.Min = 0;
@@ -199,7 +199,7 @@ export class SemiCircularGaugePanelPresets {
     }
 
     public static async EngineLoadGaugePanel() {
-        const options = new SemiCircularGaugePanelOptionBase();
+        const options = new SemiCircularGaugePanelOption();
 
         options.TitleLabel = "ENGINE LOAD";
         options.Min = 0;
@@ -215,7 +215,7 @@ export class SemiCircularGaugePanelPresets {
     }
 
     public static async IntakeAirTemperaturePanel() {
-        const options = new SemiCircularGaugePanelOptionBase();
+        const options = new SemiCircularGaugePanelOption();
 
         options.TitleLabel = "INTAKE TEMP.";
         options.Min = 0;
