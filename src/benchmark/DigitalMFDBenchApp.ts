@@ -28,7 +28,7 @@ import * as PIXI from 'pixi.js';
 import {MeterApplication} from "lib/MeterAppBase/MeterApplication";
 
 //Import meter parts
-import {FullCircularGaugePanelPresets} from "parts/CircularGauges/FullCircularGaugePanel";
+import {FullCircularGaugePanelPresets} from "parts/CircularGauges/FullCircularGaugePanelPresets";
 import {SemiCircularGaugePanelPresets} from "parts/CircularGauges/SemiCircularGaugePanel";
 import {DigiTachoPanel} from "parts/DigiTachoPanel/DigiTachoPanel";
 import {MilageGraphPanel} from "parts/GasMilageGraph/MilageGraph";

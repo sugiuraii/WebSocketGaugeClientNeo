@@ -22,18 +22,9 @@
  * THE SOFTWARE.
  */
 
-import { CircularGaugePanelBase } from './CircularGaugePanelBase';
-import { TextOption } from './CircularGaugePanelBase';
-import { CircularGaugePanelOptionBase } from './CircularGaugePanelBase';
+import { TextOption } from './private/CircularGaugePanelBase';
+import { CircularGaugePanelOptionBase } from './private/CircularGaugePanelBase';
 import * as PIXI from 'pixi.js';
-import { Assets } from '@pixi/assets';
-
-require("./FullCircularGaugeTexture.json");
-require("./FullCircularGaugeTexture.png");
-require("../../fonts/GNU-Freefonts/FreeSansBold.otf");
-
-require("./CircularGaugeLabelFont.fnt");
-require("./CircularGaugeLabelFont_0.png");
 
 export class FullCircularGaugePanelOption extends CircularGaugePanelOptionBase {
     constructor() {
@@ -114,16 +105,4 @@ export class FullCircularGaugePanelOption extends CircularGaugePanelOptionBase {
     }
 }
 
-export class FullCircularGaugePanel extends CircularGaugePanelBase {
-    private constructor(options: FullCircularGaugePanelOption) {
-        super(options);
-    }
-
-    public static async create(options: FullCircularGaugePanelOption) {
-        await Assets.load(["img/FullCircularGaugeTexture.json", "img/CircularGaugeLabelFont.fnt"]);
-        await Assets.load(["./fonts/FreeSansBold.otf"]);
-        const instance = new FullCircularGaugePanel(options);
-        return instance;
-    }
-}
 
