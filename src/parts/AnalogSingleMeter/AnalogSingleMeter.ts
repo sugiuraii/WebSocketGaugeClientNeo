@@ -26,6 +26,7 @@ import { RotationNeedleGauge } from 'lib/Graphics/PIXIGauge';
 import { RotationNeedleGaugeOptions } from 'lib/Graphics/PIXIGauge';
 
 import * as PIXI from 'pixi.js';
+import { Assets } from '@pixi/assets';
 import { SingleValueGauge } from '../SingleValueGauge';
 
 // Define texture and bitmap font files to bundle by webpack file loader
@@ -87,30 +88,6 @@ export class AnalogSingleMeter extends PIXI.Container implements SingleValueGaug
     private Option: AnalogSingleMeterOption;
 
     /**
-     * Texture path required by this parts. (This static property will be refered to pre-load texture).
-     */
-    static get RequestedTexturePath(): string[] {
-        // Note : Bitmap font(*.fnt file) sholud be treated as "Texture" (not Webfont).
-        return ["img/AnalogSingleMeter.json", "img/Michroma_24px_Glow.fnt", "img/Michroma_48px_Glow.fnt"];
-    }
-
-    /**
-     * Font family name required by this parts. (This static property will be refered to pre-load webfont).
-     */
-    static get RequestedFontFamily(): string[] {
-        // No webfont(truetype) is needed on this parts. Return null array.
-        return [];
-    }
-
-    /**
-     * CSS URL(filepath) to define webfont, required by this parts. (This static property will be refered to pre-load webfont).
-     */
-    static get RequestedFontCSSURL(): string[] {
-        // No webfont(truetype) is needed on this parts. Return null array.
-        return [];
-    }
-
-    /**
      * Needle gauge object.
      */
     private NeedleGauge: RotationNeedleGauge;
@@ -129,13 +106,22 @@ export class AnalogSingleMeter extends PIXI.Container implements SingleValueGaug
         this.NeedleGauge.Value = val;
         this.NeedleGauge.update();
     }
-
+    /**
+     * Crate gauge.
+     * @param option Option settings, 
+     * @returns 
+     */
+    public static async create(option: AnalogSingleMeterOption) {
+        await Assets.load(["img/AnalogSingleMeter.json", "img/Michroma_24px_Glow.fnt", "img/Michroma_48px_Glow.fnt"]);
+        const instance = new AnalogSingleMeter(option);
+        return instance;
+    }
 
     /**
-     * Construct AnalogSingleMeter class.
+     * Construct AnalogSingleMeter class (called from create()).
      * @param option Meter setting option.
      */
-    constructor(option: AnalogSingleMeterOption) {
+    private constructor(option: AnalogSingleMeterOption) {
         // Call the constructor of PIXI.Container.
         super();
 
@@ -235,111 +221,94 @@ export class AnalogSingleMeter extends PIXI.Container implements SingleValueGaug
     }
 }
 
-export class BoostMeter extends AnalogSingleMeter {
-    // Use default setting of AnalogSingleMeter.
-    constructor() {
-        super(new AnalogSingleMeterOption());
+export class AnalogSingleMeterPresets {
+    public static async BoostMeter() {
+        const option = new AnalogSingleMeterOption();
+        return await AnalogSingleMeter.create(option);
     }
-}
 
-export class RevMeter extends AnalogSingleMeter {
-    constructor() {
+    public static async RevMeter() {
         const option = new AnalogSingleMeterOption();
         option.Max = 12000;
         option.Min = 0;
         option.Title = "Rev";
         option.Unit = "x1000rpm";
         option.ScaleLabel = ["0", "2", "4", "6", "8", "10", "12"];
-        super(option);
+        return await AnalogSingleMeter.create(option);
     }
-}
 
-export class VacuumMeter extends AnalogSingleMeter {
-    constructor() {
+    public static async VacuumMeter() {
         const option = new AnalogSingleMeterOption();
         option.Max = +0.5;
         option.Min = -1.0;
         option.Title = "Vacuum";
         option.Unit = "x100kPa";
         option.ScaleLabel = ["-1.0", "-0.75", "-0.5", "-0.25", "0.0", "0.25", "0.50"];
-        super(option);
+        return await AnalogSingleMeter.create(option);
     }
-}
 
-export class WaterTempMeter extends AnalogSingleMeter {
-    constructor() {
+    public static async WaterTempMeter() {
         const option = new AnalogSingleMeterOption();
         option.Min = 20;
         option.Max = 140;
         option.Title = "Water";
         option.Unit = "degC";
         option.ScaleLabel = ["20", "40", "60", "80", "100", "120", "140"];
-        super(option);
-    }
-}
+        return await AnalogSingleMeter.create(option);
 
-export class OilTempMeter extends AnalogSingleMeter {
-    constructor() {
+    }
+
+    public static async OilTempMeter() {
         const option = new AnalogSingleMeterOption();
         option.Min = 40;
         option.Max = 160;
         option.Title = "OilTemp";
         option.Unit = "degC";
         option.ScaleLabel = ["40", "60", "80", "100", "120", "140", "160"];
-        super(option);
+        return await AnalogSingleMeter.create(option);
     }
-}
 
-export class BatteryVoltageMeter extends AnalogSingleMeter {
-    constructor() {
+    public static async BatteryVoltageMeter() {
         const option = new AnalogSingleMeterOption();
         option.Min = 6;
         option.Max = 18;
         option.Title = "Voltage";
         option.Unit = "Volt";
         option.ScaleLabel = ["6", "8", "10", "12", "14", "16", "18"];
-        super(option);
+        return await AnalogSingleMeter.create(option);
     }
-}
 
-export class OilPressureMeter extends AnalogSingleMeter {
-    constructor() {
+    public static async OilPressureMeter() {
         const option = new AnalogSingleMeterOption();
         option.Min = 0;
         option.Max = 12;
         option.Title = "OilPres.";
         option.Unit = "x100kPa";
         option.ScaleLabel = ["0", "2", "4", "6", "8", "10", "12"];
-        super(option);
+        return await AnalogSingleMeter.create(option);        
     }
-}
 
-export class MassAirFlowMeter extends AnalogSingleMeter {
-    constructor() {
+    public static async MassAirFlowMeter() {
         const option = new AnalogSingleMeterOption();
         option.Min = 0;
         option.Max = 60;
         option.Title = "Mass airflow";
         option.Unit = "x10kg/s";
         option.ScaleLabel = ["0", "10", "20", "30", "40", "50", "60"];
-        super(option);
+        return await AnalogSingleMeter.create(option);  
     }
-}
 
-export class AirFuelRatioMeter extends AnalogSingleMeter {
-    constructor() {
+    public static async AirFuelRatioMeter() {
         const option = new AnalogSingleMeterOption();
         option.Min = 10;
         option.Max = 22;
         option.Title = "A/F ratio";
         option.Unit = "A/F";
         option.ScaleLabel = ["10", "12", "14", "16", "18", "20", "22"];
-        super(option);
+        return await AnalogSingleMeter.create(option);        
     }
-}
 
-export class EngineLoadMeter extends AnalogSingleMeter {
-    constructor() {
+    public static async EngineLoadMeter() {
         const option = new AnalogSingleMeterOption();
         option.Min = 0;
         option.Max = 100;
@@ -347,18 +316,16 @@ export class EngineLoadMeter extends AnalogSingleMeter {
         option.Unit = "percent";
         option.GaugeDrawValConversionFunc = x => x < 20 ? 1.6666 * x : 0.833 * x + 16.666;
         option.ScaleLabel = ["0", "10", "20", "40", "60", "80", "100"];
-        super(option);
+        return await AnalogSingleMeter.create(option);        
     }
-}
 
-export class IntakeAirTemperatureMeter extends AnalogSingleMeter {
-    constructor() {
+    public static async IntakeAirTemperatureMeter() {    
         const option = new AnalogSingleMeterOption();
         option.Min = 0;
         option.Max = 120;
         option.Title = "Intake temp.";
         option.Unit = "degC";
         option.ScaleLabel = ["0", "20", "40", "60", "80", "100", "120"];
-        super(option);
+        return await AnalogSingleMeter.create(option);        
     }
 }

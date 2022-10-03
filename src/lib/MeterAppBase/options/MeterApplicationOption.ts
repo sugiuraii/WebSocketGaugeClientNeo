@@ -27,12 +27,6 @@ import { MeterSelectionSetting } from "../reactParts/dialog/MeterSelectDialog";
 import { WebsocketObjectCollection, WebsocketObjectCollectionOption } from "../WebsocketObjCollection/WebsocketObjectCollection";
 import { WebsocketParameterCode } from "../WebsocketObjCollection/WebsocketParameterCode";
 
-class PreloadResourceCollection {
-    public readonly WebFontFamiliyName = new Array<string>();
-    public readonly WebFontCSSURL = new Array<string>();
-    public readonly TexturePath = new Array<string>();
-}
-
 class MeterSelectDialogOption {
     public DefaultMeterSelectDialogSetting : MeterSelectionSetting;
     public ParameterCodeListToSelect : WebsocketParameterCode[];
@@ -44,26 +38,20 @@ class MeterSelectDialogOption {
 }
 
 export class MeterApplicationOption {
-    public readonly PreloadResource : PreloadResourceCollection;
     public readonly WebSocketCollectionOption : WebsocketObjectCollectionOption;
     public readonly PIXIApplicationOption : PIXI.IApplicationOptions;
     public readonly NavBarItems : JSX.Element[] = [];
     public readonly MeteSelectDialogOption = new MeterSelectDialogOption();
     
-    public SetupPIXIMeterPanel: (pixiApp: PIXI.Application, wsObj: WebsocketObjectCollection, meterSelection : MeterSelectionSetting) => void = () => {/* do nothing*/};
+    public SetupPIXIMeterPanel: (pixiApp: PIXI.Application, wsObj: WebsocketObjectCollection, meterSelection : MeterSelectionSetting) => Promise<void> = async () => {/* do nothing*/};
     
-    constructor(pixiApplicationOption? : PIXI.IApplicationOptions, wsCollectionOption? :WebsocketObjectCollectionOption, preloadResource? : PreloadResourceCollection)
+    constructor(pixiApplicationOption? : PIXI.IApplicationOptions, wsCollectionOption? :WebsocketObjectCollectionOption)
     {
         if(pixiApplicationOption === undefined)
             this.PIXIApplicationOption = {};
         else
             this.PIXIApplicationOption = pixiApplicationOption;
         
-        if(preloadResource === undefined)
-            this.PreloadResource = new PreloadResourceCollection();
-        else
-            this.PreloadResource = preloadResource;
-
         if(wsCollectionOption === undefined)
             this.WebSocketCollectionOption = new WebsocketObjectCollectionOption();
         else

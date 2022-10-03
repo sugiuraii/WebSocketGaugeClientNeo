@@ -16,6 +16,7 @@
     "author": "K. Sugiura",
     "contributors": [],
     "dependencies": {
+        "@pixi/assets": "^6.5.3",
         "@types/jquery": "^3.5.14",
         "@types/react-bootstrap": "^0.32.30",
         "@types/webfontloader": "^1.6.34",

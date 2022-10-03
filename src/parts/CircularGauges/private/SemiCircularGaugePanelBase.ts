@@ -26,10 +26,10 @@ import { CircularGaugePanelBase } from './CircularGaugePanelBase';
 import { TextOption } from './CircularGaugePanelBase';
 import { CircularGaugePanelOptionBase } from './CircularGaugePanelBase';
 import * as PIXI from 'pixi.js';
+import { Assets } from '@pixi/assets';
 
 require("./SemiCircularGaugeTexture.json");
 require("./SemiCircularGaugeTexture.png");
-require("../../fonts/font.css");
 require("../../fonts/GNU-Freefonts/FreeSansBold.otf");
 
 require("./CircularGaugeLabelFont.fnt");
@@ -42,12 +42,12 @@ export class SemiCircularGaugePanelOptionBase extends CircularGaugePanelOptionBa
     }
 
     private setOption(): void {
-        this.RedZoneBarTexture = PIXI.Texture.from("SemiCircular_Gauge1_Redzone_Bar");
-        this.YellowZoneBarTexture = PIXI.Texture.from("SemiCircular_Gauge1_Yellowzone_Bar");
-        this.GreenZoneBarTexture = PIXI.Texture.from("SemiCircular_Gauge1_Greenzone_Bar");
-        this.ValueBarTexture = PIXI.Texture.from("SemiCircular_Gauge1_Value_Bar");
-        this.BackTexture = PIXI.Texture.from("SemiCircular_Gauge1_Back");
-        this.GridTexture = PIXI.Texture.from("SemiCircular_Gauge1_Grid");
+        this.RedZoneBarTextureName = "SemiCircular_Gauge1_Redzone_Bar";
+        this.YellowZoneBarTextureName = "SemiCircular_Gauge1_Yellowzone_Bar";
+        this.GreenZoneBarTextureName = "SemiCircular_Gauge1_Greenzone_Bar";
+        this.ValueBarTextureName = "SemiCircular_Gauge1_Value_Bar";
+        this.BackTextureName = "SemiCircular_Gauge1_Back";
+        this.GridTextureName = "SemiCircular_Gauge1_Grid";
 
         this.MasterTextStyle = new PIXI.TextStyle(
             {
@@ -57,7 +57,7 @@ export class SemiCircularGaugePanelOptionBase extends CircularGaugePanelOptionBa
                 dropShadowColor: "#FFFFFF",
                 dropShadowDistance: 0,
                 fill: "white",
-                fontFamily: "FreeSans-Bold"
+                fontFamily: "Freesansbold"
             });
         this.OffsetAngle = 180;
         this.FullAngle = 180;
@@ -111,22 +111,15 @@ export class SemiCircularGaugePanelOptionBase extends CircularGaugePanelOptionBa
 }
 
 export class SemiCircularGaugePanel extends CircularGaugePanelBase {
-    constructor(options: SemiCircularGaugePanelOptionBase) {
+    private constructor(options: SemiCircularGaugePanelOptionBase) {
         super(options);
     }
 
-    static get RequestedTexturePath(): string[] {
-        return ["img/SemiCircularGaugeTexture.json", "img/CircularGaugeLabelFont.fnt"];
+    public static async create(options: SemiCircularGaugePanelOptionBase) {
+        await Assets.load(["img/SemiCircularGaugeTexture.json", "img/CircularGaugeLabelFont.fnt"]);
+        await Assets.load(["./fonts/FreeSansBold.otf"]);
+        const instance = new SemiCircularGaugePanel(options);
+        return instance;
     }
-
-    static get RequestedFontFamily(): string[] {
-        return ["FreeSans-Bold"]
-    }
-
-    static get RequestedFontCSSURL(): string[] {
-        return ['font.css'];
-    }
-
-
 }
 

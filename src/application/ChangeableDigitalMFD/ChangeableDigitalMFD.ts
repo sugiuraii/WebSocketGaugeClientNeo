@@ -29,8 +29,6 @@ import { MeterApplication } from "lib/MeterAppBase/MeterApplication";
 import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
-import { FullCircularGaugePanel } from "parts/CircularGauges/FullCircularGaugePanel";
-import { SemiCircularGaugePanel } from "parts/CircularGauges/SemiCircularGaugePanel";
 import { DigiTachoPanel } from "parts/DigiTachoPanel/DigiTachoPanel";
 import { MilageGraphPanel } from "parts/GasMilageGraph/MilageGraph";
 
@@ -54,32 +52,20 @@ class ChangeableDigitalMFDApp {
     public async Start() {
         const pixiAppOption: PIXI.IApplicationOptions = { width: 1200, height: 600 };
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
-        appOption.PreloadResource.WebFontFamiliyName.push(...FullCircularGaugePanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontFamiliyName.push(...SemiCircularGaugePanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontFamiliyName.push(...DigiTachoPanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontFamiliyName.push(...MilageGraphPanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontCSSURL.push(...FullCircularGaugePanel.RequestedFontCSSURL);
-        appOption.PreloadResource.WebFontCSSURL.push(...SemiCircularGaugePanel.RequestedFontCSSURL);
-        appOption.PreloadResource.WebFontCSSURL.push(...DigiTachoPanel.RequestedFontCSSURL);
-        appOption.PreloadResource.WebFontCSSURL.push(...MilageGraphPanel.RequestedFontCSSURL);
-        appOption.PreloadResource.TexturePath.push(...FullCircularGaugePanel.RequestedTexturePath);
-        appOption.PreloadResource.TexturePath.push(...SemiCircularGaugePanel.RequestedTexturePath);
-        appOption.PreloadResource.TexturePath.push(...DigiTachoPanel.RequestedTexturePath);
-        appOption.PreloadResource.TexturePath.push(...MilageGraphPanel.RequestedTexturePath);
 
         appOption.MeteSelectDialogOption.ParameterCodeListToSelect = ["Engine_Load", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Mass_Air_Flow", "Throttle_Opening_Angle", "O2Sensor_1_Air_Fuel_Ratio", "Intake_Air_Temperature"];
         appOption.MeteSelectDialogOption.DefaultMeterSelectDialogSetting = { ["LargeTop"]: "Manifold_Absolute_Pressure", ["LargeBottom"]: "O2Sensor_1_Air_Fuel_Ratio", ["SmallTop"]: "Coolant_Temperature", ["SmallMiddle"]: "Battery_Voltage", ["SmallBottom"]: "Throttle_Opening_Angle" };
 
         const gearCalculator = await DefaultAppSettings.getGearPositionCalculator();
 
-        appOption.SetupPIXIMeterPanel = (app, ws, meterSetting) => {
+        appOption.SetupPIXIMeterPanel = async (app, ws, meterSetting) => {
 
             const stage = app.stage;
 
-            const digiTachoPanel = new DigiTachoPanel();
+            const digiTachoPanel = await DigiTachoPanel.create();
             digiTachoPanel.position.set(0, 0);
 
-            const milagePanel = new MilageGraphPanel();
+            const milagePanel = await MilageGraphPanel.create();
             milagePanel.position.set(0, 300);
             milagePanel.scale.set(0.94, 0.94);
             const largeTopMeterCode = meterSetting["LargeTop"];
@@ -97,11 +83,11 @@ class ChangeableDigitalMFDApp {
                 const smallMidPanel = smallMeterPanelFactory.getMeter(smallMidMeterCode);
                 const smallBottomPanel = smallMeterPanelFactory.getMeter(smallBottomMeterCode);
 
-                const largeTopPanelDisplayObj = largeTopPanel.createDisplayObject();
-                const largeBottomPanelDisplayObj = largeBottomPanel.createDisplayObject();
-                const smallTopPanelDisplayObj = smallTopPanel.createDisplayObject();
-                const smallMidPanelDisplayObj = smallMidPanel.createDisplayObject();
-                const smallBottomPanelDisplayObj = smallBottomPanel.createDisplayObject();
+                const largeTopPanelDisplayObj = await largeTopPanel.createDisplayObject();
+                const largeBottomPanelDisplayObj = await largeBottomPanel.createDisplayObject();
+                const smallTopPanelDisplayObj = await smallTopPanel.createDisplayObject();
+                const smallMidPanelDisplayObj = await smallMidPanel.createDisplayObject();
+                const smallBottomPanelDisplayObj = await smallBottomPanel.createDisplayObject();
 
                 largeTopPanelDisplayObj.position.set(600, 0);
                 largeTopPanelDisplayObj.scale.set(0.751, 0.751);

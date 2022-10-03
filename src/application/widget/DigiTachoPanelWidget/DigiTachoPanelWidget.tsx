@@ -47,19 +47,16 @@ class DigiTachoPanelWidgetApp {
         const pixiAppOption: PIXI.IApplicationOptions = { width: 600, height: 300 };
 
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
-        appOption.PreloadResource.WebFontFamiliyName.push(...DigiTachoPanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontCSSURL.push(...DigiTachoPanel.RequestedFontCSSURL);
-        appOption.PreloadResource.TexturePath.push(...DigiTachoPanel.RequestedTexturePath);
 
         const gearCalculator = await DefaultAppSettings.getGearPositionCalculator();
         
-        appOption.SetupPIXIMeterPanel = (app, ws) => {
+        appOption.SetupPIXIMeterPanel = async (app, ws) => {
             const stage = app.stage;
             //Centering the top-level container
             stage.pivot.set(0, 0);
             stage.position.set(0, 0);
     
-            const meter = new DigiTachoPanel();
+            const meter = await DigiTachoPanel.create();
             meter.position.set(0, 0);
             stage.addChild(meter);
             

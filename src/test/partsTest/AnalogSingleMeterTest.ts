@@ -29,20 +29,17 @@ import { AnalogSingleMeterOption } from "parts/AnalogSingleMeter/AnalogSingleMet
 require("./AnalogSingleMeterTest.html");
 
 window.onload = function () {
-    preloadTexture();
+    main();
 }
-function preloadTexture(): void {
-    PIXI.Loader.shared.add(AnalogSingleMeter.RequestedTexturePath);
-    PIXI.Loader.shared.load(main);
-}
-function main(): void {
+
+async function main() {
     const app = new PIXI.Application({ height: 1366, width: 1366 });
     document.body.appendChild(app.view);
     const gaugeArray: AnalogSingleMeter[] = [];
     let index = 0;
     for (let j = 0; j < 6; j++) {
         for (let i = 0; i < 6; i++) {
-            gaugeArray.push(new AnalogSingleMeter(new AnalogSingleMeterOption()));
+            gaugeArray.push(await AnalogSingleMeter.create(new AnalogSingleMeterOption()));
             gaugeArray[index].pivot.set(200, 200);
             gaugeArray[index].scale.set(1);
             gaugeArray[index].position.set(400 * i + 150, 400 * j + 150);

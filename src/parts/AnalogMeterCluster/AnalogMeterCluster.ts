@@ -30,11 +30,10 @@ import { BitmapTextNumericIndicator } from 'lib/Graphics/PIXIGauge';
 import { NumericIndicator } from 'lib/Graphics/PIXIGauge';
 
 import * as PIXI from 'pixi.js';
+import { Assets } from '@pixi/assets';
 
 require("./AnalogMeterClusterTexture.json");
 require("./AnalogMeterClusterTexture.png");
-require("../fonts/font.css");
-require("../fonts/DSEG_v030/DSEG14Classic-BoldItalic.ttf");
 require("./AnalogMeterFont_115px.fnt");
 require("./AnalogMeterFont_45px.fnt");
 require("./AnalogMeterFont_40px.fnt");
@@ -121,21 +120,10 @@ export class AnalogMeterCluster extends PIXI.Container {
         this.gearPos = val;
         this.gearPosLabel.text = val;
     }
-
-    static get RequestedTexturePath(): string[] {
-        return ["img/AnalogMeterClusterTexture.json", "img/AnalogMeterFont_115px.fnt", "img/AnalogMeterFont_45px.fnt", "img/AnalogMeterFont_40px.fnt", "img/AnalogMeterFont_60px.fnt"];
-    }
-
-    static get RequestedFontFamily(): string[] {
-        return ["DSEG14ClassicItalic"]
-    }
-
-    static get RequestedFontCSSURL(): string[] {
-        return ['font.css'];
-    }
-
-    constructor() {
+    
+    private constructor() {
         super();
+        
         const TachoMeter = this.createTachoMeter();
         const SpeedMeter = this.createSpeedMeter();
         const BoostMeter = this.createBoostMeter();
@@ -158,6 +146,13 @@ export class AnalogMeterCluster extends PIXI.Container {
         this.waterTempProgressBar = SpeedMeter.waterTempProgressBar;
 
         this.boostNeedleGauge = BoostMeter.boostNeedleGauge;
+    }
+
+    public static async create() {
+        await Assets.load(["img/AnalogMeterClusterTexture.json", "img/AnalogMeterFont_115px.fnt", "img/AnalogMeterFont_45px.fnt", "img/AnalogMeterFont_40px.fnt", "img/AnalogMeterFont_60px.fnt"]);
+        //await Assets.load('./fonts/DSEG14Classic-BoldItalic.ttf');
+        const instance = new AnalogMeterCluster();
+        return instance;
     }
 
     private createTachoMeter(): { container: PIXI.Container, progressBar: CircularProgressBar, needleGauge: RotationNeedleGauge, gasmilageLabel: NumericIndicator, tripLabel: NumericIndicator, fuelLabel: NumericIndicator, gearPosLabel: NumericIndicator } {

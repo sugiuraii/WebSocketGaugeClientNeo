@@ -28,16 +28,13 @@ import * as PIXI from 'pixi.js';
 import {MeterApplication} from "lib/MeterAppBase/MeterApplication";
 
 //Import meter parts
-import {BoostGaugePanel} from "parts/CircularGauges/FullCircularGaugePanel";
-import {AirFuelGaugePanel} from "parts/CircularGauges/FullCircularGaugePanel";
-import {WaterTempGaugePanel} from "parts/CircularGauges/SemiCircularGaugePanel";
-import {BatteryVoltageGaugePanel} from "parts/CircularGauges/SemiCircularGaugePanel";
-import {ThrottleGaugePanel} from "parts/CircularGauges/SemiCircularGaugePanel";
+import {FullCircularGaugePanelPresets} from "parts/CircularGauges/FullCircularGaugePanel";
+import {SemiCircularGaugePanelPresets} from "parts/CircularGauges/SemiCircularGaugePanel";
 import {DigiTachoPanel} from "parts/DigiTachoPanel/DigiTachoPanel";
 import {MilageGraphPanel} from "parts/GasMilageGraph/MilageGraph";
 
 import {FPSCounter} from "parts/FPSIndicator/FPSCounter";
-import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicationOption";
+import {MeterApplicationOption} from "lib/MeterAppBase/options/MeterApplicationOption";
 
 //For including entry point html file in webpack
 require("./DigitalMFDBenchApp.html");
@@ -55,51 +52,35 @@ class DigitalMFDBenchApp
         const pixiAppOption : PIXI.IApplicationOptions = {width : 1200, height : 600};
 
         const appOption = new MeterApplicationOption(pixiAppOption);
-        appOption.PreloadResource.WebFontFamiliyName.push(...BoostGaugePanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontFamiliyName.push(...WaterTempGaugePanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontFamiliyName.push(...DigiTachoPanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontFamiliyName.push(...MilageGraphPanel.RequestedFontFamily);
 
-        appOption.PreloadResource.WebFontCSSURL.push(...BoostGaugePanel.RequestedFontCSSURL);
-        appOption.PreloadResource.WebFontCSSURL.push(...WaterTempGaugePanel.RequestedFontCSSURL);
-        appOption.PreloadResource.WebFontCSSURL.push(...DigiTachoPanel.RequestedFontCSSURL);
-        appOption.PreloadResource.WebFontCSSURL.push(...MilageGraphPanel.RequestedFontCSSURL);
-        
-        appOption.PreloadResource.TexturePath.push(...BoostGaugePanel.RequestedTexturePath);
-        appOption.PreloadResource.TexturePath.push(...WaterTempGaugePanel.RequestedTexturePath);
-        appOption.PreloadResource.TexturePath.push(...DigiTachoPanel.RequestedTexturePath);
-        appOption.PreloadResource.TexturePath.push(...MilageGraphPanel.RequestedTexturePath);
-        
-        appOption.PreloadResource.TexturePath.push(...FPSCounter.RequestedTexturePath);
-
-        appOption.SetupPIXIMeterPanel = (app) =>
+        appOption.SetupPIXIMeterPanel = async (app) =>
         {
             const stage = app.stage;
 
-            const digiTachoPanel = new DigiTachoPanel();
+            const digiTachoPanel = await DigiTachoPanel.create();
             digiTachoPanel.position.set(0,0);
             
-            const milagePanel = new MilageGraphPanel();
+            const milagePanel = await MilageGraphPanel.create();
             milagePanel.position.set(0,300);
             milagePanel.scale.set(0.94,0.94);
             
-            const boostPanel = new BoostGaugePanel();
+            const boostPanel = await FullCircularGaugePanelPresets.BoostGaugePanel();
             boostPanel.position.set(600,0);
             boostPanel.scale.set(0.751,0.751);
             
-            const airFuelPanel = new AirFuelGaugePanel();
+            const airFuelPanel = await FullCircularGaugePanelPresets.AirFuelGaugePanel();
             airFuelPanel.position.set(600,310);
             airFuelPanel.scale.set(0.751, 0.751);
             
-            const waterTempPanel = new WaterTempGaugePanel();
+            const waterTempPanel = await SemiCircularGaugePanelPresets.WaterTempGaugePanel();
             waterTempPanel.position.set(900,0);
             waterTempPanel.scale.set(0.68);
             
-            const voltagePanel = new BatteryVoltageGaugePanel();
+            const voltagePanel = await SemiCircularGaugePanelPresets.BatteryVoltageGaugePanel();
             voltagePanel.position.set(900,200);
             voltagePanel.scale.set(0.68);
             
-            const throttlePanel = new ThrottleGaugePanel();
+            const throttlePanel = await SemiCircularGaugePanelPresets.ThrottleGaugePanel();
             throttlePanel.position.set(900,400);
             throttlePanel.scale.set(0.68);
             
@@ -126,7 +107,7 @@ class DigitalMFDBenchApp
             const totalFuel = 20.0;
             const totalTrip = 356.0;
     
-            const fpsCounter = new FPSCounter();
+            const fpsCounter = await FPSCounter.create();
             fpsCounter.position.set(0,0);
             stage.addChild(fpsCounter);
     

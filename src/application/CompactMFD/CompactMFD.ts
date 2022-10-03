@@ -31,10 +31,9 @@ import { MeterApplication } from "lib/MeterAppBase/MeterApplication";
 import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
-import { WaterTempGaugePanel } from "parts/CircularGauges/SemiCircularGaugePanel";
-import { ThrottleGaugePanel } from "parts/CircularGauges/SemiCircularGaugePanel";
+import { SemiCircularGaugePanelPresets } from "parts/CircularGauges/SemiCircularGaugePanel";
 import { DigiTachoPanel } from "parts/DigiTachoPanel/DigiTachoPanel";
-import { BoostGaugePanel } from "parts/CircularGauges/FullCircularGaugePanel";
+import { FullCircularGaugePanelPresets } from "parts/CircularGauges/FullCircularGaugePanel";
 
 // Import AppSettings.
 import * as DefaultAppSettings from  "application/DefaultAppSettings"
@@ -48,36 +47,25 @@ class CompactMFDApp {
     public async Start() {
         const pixiAppOption : PIXI.IApplicationOptions = {width : 720, height : 1280};
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
-        appOption.PreloadResource.WebFontFamiliyName.push(...WaterTempGaugePanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontFamiliyName.push(...DigiTachoPanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontFamiliyName.push(...BoostGaugePanel.RequestedFontFamily);
-
-        appOption.PreloadResource.WebFontCSSURL.push(...WaterTempGaugePanel.RequestedFontCSSURL);
-        appOption.PreloadResource.WebFontCSSURL.push(...DigiTachoPanel.RequestedFontCSSURL);
-        appOption.PreloadResource.WebFontCSSURL.push(...BoostGaugePanel.RequestedFontCSSURL);
-
-        appOption.PreloadResource.TexturePath.push(...WaterTempGaugePanel.RequestedTexturePath);
-        appOption.PreloadResource.TexturePath.push(...DigiTachoPanel.RequestedTexturePath);
-        appOption.PreloadResource.TexturePath.push(...BoostGaugePanel.RequestedTexturePath);
 
         const gearCalculator = await DefaultAppSettings.getGearPositionCalculator();
 
-        appOption.SetupPIXIMeterPanel = (app, ws) => {
+        appOption.SetupPIXIMeterPanel = async (app, ws) => {
             // Construct meter panel parts.
             const stage = app.stage;
-            const digiTachoPanel = new DigiTachoPanel();
+            const digiTachoPanel = await DigiTachoPanel.create();
             digiTachoPanel.position.set(0, 0);
             digiTachoPanel.scale.set(1.15);
 
-            const boostPanel = new BoostGaugePanel();
+            const boostPanel = await FullCircularGaugePanelPresets.BoostGaugePanel();
             boostPanel.position.set(90, 360);
             boostPanel.scale.set(1.3);
 
-            const waterTempPanel = new WaterTempGaugePanel();
+            const waterTempPanel = await SemiCircularGaugePanelPresets.WaterTempGaugePanel();
             waterTempPanel.position.set(0, 890);
             waterTempPanel.scale.set(0.85);
 
-            const throttlePanel = new ThrottleGaugePanel();
+            const throttlePanel = await SemiCircularGaugePanelPresets.ThrottleGaugePanel();
             throttlePanel.position.set(360, 890);
             throttlePanel.scale.set(0.85);
 

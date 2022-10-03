@@ -31,8 +31,6 @@ import { MeterApplication } from "lib/MeterAppBase/MeterApplication";
 import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
-import { FullCircularGaugePanel } from "parts/CircularGauges/FullCircularGaugePanel";
-import { SemiCircularGaugePanel } from "parts/CircularGauges/SemiCircularGaugePanel";
 import { DigiTachoPanel } from "parts/DigiTachoPanel/DigiTachoPanel";
 
 // Import AppSettings.
@@ -53,26 +51,17 @@ class ChangeableCompactMFDApp {
     public async Start() {
         const pixiAppOption : PIXI.IApplicationOptions = {width : 720, height : 1280};
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
-        appOption.PreloadResource.WebFontFamiliyName.push(...FullCircularGaugePanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontFamiliyName.push(...SemiCircularGaugePanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontFamiliyName.push(...DigiTachoPanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontCSSURL.push(...FullCircularGaugePanel.RequestedFontCSSURL);
-        appOption.PreloadResource.WebFontCSSURL.push(...SemiCircularGaugePanel.RequestedFontCSSURL);
-        appOption.PreloadResource.WebFontCSSURL.push(...DigiTachoPanel.RequestedFontCSSURL);
-        appOption.PreloadResource.TexturePath.push(...FullCircularGaugePanel.RequestedTexturePath);
-        appOption.PreloadResource.TexturePath.push(...SemiCircularGaugePanel.RequestedTexturePath);
-        appOption.PreloadResource.TexturePath.push(...DigiTachoPanel.RequestedTexturePath);
 
         appOption.MeteSelectDialogOption.ParameterCodeListToSelect = ["Engine_Load", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Mass_Air_Flow", "Throttle_Opening_Angle", "O2Sensor_1_Air_Fuel_Ratio", "Intake_Air_Temperature"];
         appOption.MeteSelectDialogOption.DefaultMeterSelectDialogSetting = { ["LargeMeter"]: "Manifold_Absolute_Pressure", ["SmallLeftMeter"]: "Coolant_Temperature", ["SmallRightMeter"]: "Battery_Voltage"};
 
         const gearCalculator = await DefaultAppSettings.getGearPositionCalculator();
 
-        appOption.SetupPIXIMeterPanel = (app, ws, meterSetting) => {
+        appOption.SetupPIXIMeterPanel = async (app, ws, meterSetting) => {
 
             const stage = app.stage;
 
-            const digiTachoPanel = new DigiTachoPanel();
+            const digiTachoPanel = await DigiTachoPanel.create();
             digiTachoPanel.position.set(0, 0);
             digiTachoPanel.scale.set(1.15);
 
@@ -89,15 +78,15 @@ class ChangeableCompactMFDApp {
                 const smallLeftMeter = smallMeterPanelFactory.getMeter(smallLeftMeterCode);
                 const smallRightMeter = smallMeterPanelFactory.getMeter(smallRightMeterCode);
 
-                const centerLargeMeterDisplayObj = centerLargeMeter.createDisplayObject();
+                const centerLargeMeterDisplayObj = await centerLargeMeter.createDisplayObject();
                 centerLargeMeterDisplayObj.position.set(90, 360);
                 centerLargeMeterDisplayObj.scale.set(1.3);
 
-                const smallLeftMeterDisplayObj = smallLeftMeter.createDisplayObject();
+                const smallLeftMeterDisplayObj = await smallLeftMeter.createDisplayObject();
                 smallLeftMeterDisplayObj.position.set(0, 890);
                 smallLeftMeterDisplayObj.scale.set(0.85);
 
-                const smallRightMeterDisplayObj = smallRightMeter.createDisplayObject();
+                const smallRightMeterDisplayObj = await smallRightMeter.createDisplayObject();
                 smallRightMeterDisplayObj.position.set(360, 890);
                 smallRightMeterDisplayObj.scale.set(0.85);
 
