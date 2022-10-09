@@ -66,5 +66,8 @@
         "debug-watch-benchmark": "cd src/benchmark && npx webpack --watch --progress=profile",
         "debug-watch-application": "cd src/application && npx webpack --watch --progress=profile",
         "debug-watch-partsTest": "cd src/test/partsTest && npx webpack --watch --progress=profile"
-    }
+    },
+    "workspaces": [
+        "packages/WebSocketCommunication"
+    ]
 }
