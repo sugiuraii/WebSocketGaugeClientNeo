@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { FUELTRIPWebsocket } from 'websocketcommunication';
+import { FUELTRIPWebsocket } from 'websocket-gauge-client-communication';
 import { WebSocketTesterBase } from './base/WebSocketTesterBase';
 import $ from "jquery";
 require('./FUELTRIPWSTest.html');

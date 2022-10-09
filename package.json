@@ -39,7 +39,7 @@
         "typescript": "^4.7.4",
         "url-loader": "^4.1.1",
         "webpack": "^5.74.0",
-        "websocketcommunication": "./packages/WebSocketCommunication"
+        "websocket-gauge-client-communication": "./packages/websocket-gauge-client-communication"
     },
     "devDependencies": {
         "@types/react": "^18.0.17",
@@ -69,6 +69,6 @@
         "debug-watch-partsTest": "cd src/test/partsTest && npx webpack --watch --progress=profile"
     },
     "workspaces": [
-        "packages/WebSocketCommunication"
+        "packages/*"
     ]
 }

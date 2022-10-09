@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { SSMWebsocket, SSMParameterCode, SSMSwitchCode, ReadModeCode } from "websocketcommunication";
+import { SSMWebsocket, SSMParameterCode, SSMSwitchCode, ReadModeCode } from "websocket-gauge-client-communication";
 import { ILogger } from "../utils/ILogger";
 import { WebsocketAppBackend } from "./WebsocketAppBackend";
 import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";

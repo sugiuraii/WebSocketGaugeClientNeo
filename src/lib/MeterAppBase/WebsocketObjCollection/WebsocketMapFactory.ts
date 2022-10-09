@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { OBDIIParameterCode, SSMParameterCode, ArduinoParameterCode, DefiParameterCode } from "websocketcommunication";
+import { OBDIIParameterCode, SSMParameterCode, ArduinoParameterCode, DefiParameterCode } from "websocket-gauge-client-communication";
 import { WebsocketClientMapEntry } from "./WebsocketClientMapper";
 import { WebsocketParameterCode } from "./WebsocketParameterCode";
 

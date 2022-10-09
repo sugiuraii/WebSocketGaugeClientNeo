@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
  
-import {ArduinoCOMWebsocket} from 'websocketcommunication';
-import {ArduinoParameterCode} from 'websocketcommunication';
+import {ArduinoCOMWebsocket} from 'websocket-gauge-client-communication';
+import {ArduinoParameterCode} from 'websocket-gauge-client-communication';
 import {WebSocketTesterBase} from './base/WebSocketTesterBase';
 
 import $ from "jquery";

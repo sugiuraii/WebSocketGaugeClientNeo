@@ -1,7 +1,7 @@
 {
-  "name": "websocketcommunication",
-  "version": "1.0.0",
-  "description": "Websocket communication library",
+  "name": "websocket-gauge-client-communication",
+  "version": "3.0.0",
+  "description": "Websocket gauge client communication library",
   "private": true,
   "files": ["dist"],
   "main": "dist/index.js",
@@ -12,6 +12,6 @@
   "devDependencies": {
     "typescript": "^4.7.4"
   },
-  "author": "",
+  "author": "K. Sugiura",
   "license": "MIT"
 }

@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import { AssettoCorsaSHMWebsocket, AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMStaticInfoParameterCode, AssettoCorsaSHMGraphicsParameterCode } from 'websocketcommunication';
-import { AssettoCorsaSHMNumericalVALCode } from 'websocketcommunication';
+import { AssettoCorsaSHMWebsocket, AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMStaticInfoParameterCode, AssettoCorsaSHMGraphicsParameterCode } from 'websocket-gauge-client-communication';
+import { AssettoCorsaSHMNumericalVALCode } from 'websocket-gauge-client-communication';
 import { WebSocketTesterBase } from '../../../WebSocketTester/base/WebSocketTesterBase'
 
 import $ from "jquery";
