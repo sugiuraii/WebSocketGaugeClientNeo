@@ -1,0 +1,16 @@
+{
+  "compilerOptions": 
+    {
+        "target": "es5",
+        "sourceMap": true,
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "jsx": "react",
+        // Strict,
+        "strict": true,
+        "moduleResolution": "node",
+        "noUnusedParameters":true,
+        "lib":["dom", "es2017"],
+        "baseUrl": "./"
+    }
+}
