@@ -22,9 +22,9 @@
  * THE SOFTWARE.
  */
 
-import { ELM327COMWebsocket } from "lib/WebSocket/WebSocketCommunication";
-import { OBDIIParameterCode } from "lib/WebSocket/WebSocketCommunication";
-import { ReadModeCode } from "lib/WebSocket/WebSocketCommunication";
+import { ELM327COMWebsocket } from "websocketcommunication";
+import { OBDIIParameterCode } from "websocketcommunication";
+import { ReadModeCode } from "websocketcommunication";
 import { WebSocketTesterBase } from "./base/WebSocketTesterBase";
 
 import $ from "jquery";

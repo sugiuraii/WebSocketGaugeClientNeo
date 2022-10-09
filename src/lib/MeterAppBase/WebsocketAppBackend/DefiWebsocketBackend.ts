@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { DefiCOMWebsocket, DefiParameterCode } from "../../WebSocket/WebSocketCommunication";
+import { DefiCOMWebsocket, DefiParameterCode } from "websocketcommunication";
 import { ILogger } from "../utils/ILogger";
 import { WebsocketState } from "./WebsocketState";
 import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";

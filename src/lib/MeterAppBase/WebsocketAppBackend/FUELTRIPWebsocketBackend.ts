@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { FUELTRIPWebsocket } from "../../WebSocket/WebSocketCommunication";
+import { FUELTRIPWebsocket } from "websocketcommunication";
 import { ILogger } from "../utils/ILogger";
 import { WebsocketAppBackend } from "./WebsocketAppBackend";
 import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";

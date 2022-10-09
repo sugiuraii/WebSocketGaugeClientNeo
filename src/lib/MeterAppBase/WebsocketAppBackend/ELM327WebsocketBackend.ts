@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { ELM327COMWebsocket, OBDIIParameterCode, ReadModeCode } from "../../WebSocket/WebSocketCommunication";
+import { ELM327COMWebsocket, OBDIIParameterCode, ReadModeCode } from "websocketcommunication";
 import { ILogger } from "../utils/ILogger";
 import { WebsocketAppBackend } from "./WebsocketAppBackend";
 import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";

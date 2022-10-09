@@ -61,8 +61,8 @@ import {DigiTachoPanel} from "parts/DigiTachoPanel/DigiTachoPanel";
 import {BoostGaugePanel} from "parts/CircularGauges/FullCircularGaugePanel";
 
 //Import enumuator of parameter code
-import {OBDIIParameterCode} from "lib/WebSocket/WebSocketCommunication";
-import {ReadModeCode} from "lib/WebSocket/WebSocketCommunication";
+import {OBDIIParameterCode} from "websocketcommunication";
+import {ReadModeCode} from "websocketcommunication";
 ```
 Import several modules by `import{}` statement. In meter application source, following modules should be imported.
 * `MeterApplicationBase` class

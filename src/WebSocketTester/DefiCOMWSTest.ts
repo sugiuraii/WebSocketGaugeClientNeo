@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import { DefiCOMWebsocket } from 'lib/WebSocket/WebSocketCommunication';
-import { DefiParameterCode } from 'lib/WebSocket/WebSocketCommunication';
+import { DefiCOMWebsocket } from 'websocketcommunication';
+import { DefiParameterCode } from 'websocketcommunication';
 import { WebSocketTesterBase } from './base/WebSocketTesterBase'
 
 import $ from "jquery";

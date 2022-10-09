@@ -24,7 +24,7 @@
 
 import { WebsocketObjectCollection } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
 import { WebsocketParameterCode } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode";
-import { ReadModeCode } from "lib/WebSocket/WebSocketCommunication";
+import { ReadModeCode } from "websocketcommunication";
 import { SemiCircularGaugePanel } from "../CircularGauges/SemiCircularGaugePanel";
 import { SemiCircularGaugePanelPresets } from "../CircularGauges/SemiCircularGaugePanelPresets";
 import { MeterNotAvailableError } from "./MeterNotAvailableError";

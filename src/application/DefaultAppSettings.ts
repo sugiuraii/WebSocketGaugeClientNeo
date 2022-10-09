@@ -27,7 +27,7 @@ import { WebsocketMapFactory } from "lib/MeterAppBase/WebsocketObjCollection/Web
 import { WebsocketObjectCollectionOption } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
 
 import * as jsonc from "jsonc-parser";
-import { ArduinoParameterCode, DefiParameterCode } from "lib/WebSocket/WebSocketCommunication";
+import { ArduinoParameterCode, DefiParameterCode } from "websocketcommunication";
 
 require('./GearPositionCalcSetting.appconfig.jsonc');
 type GearPositionCalcSetting =

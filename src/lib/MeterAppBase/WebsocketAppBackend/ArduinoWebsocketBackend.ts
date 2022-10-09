@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { ArduinoCOMWebsocket, ArduinoParameterCode } from "../../WebSocket/WebSocketCommunication";
+import { ArduinoCOMWebsocket, ArduinoParameterCode } from "websocketcommunication";
 import { ILogger } from "../utils/ILogger";
 import { WebsocketState } from "./WebsocketState";
 import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";

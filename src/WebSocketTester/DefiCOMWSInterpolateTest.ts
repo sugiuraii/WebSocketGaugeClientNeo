@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import {DefiParameterCode} from 'lib/WebSocket/WebSocketCommunication';
+import {DefiParameterCode} from 'websocketcommunication';
 import {DefiCOMWSTest} from "./DefiCOMWSTest"
 
 import $ from "jquery";
