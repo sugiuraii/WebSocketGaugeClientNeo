@@ -5,12 +5,15 @@
         "sourceMap": true,
         "module": "commonjs",
         "esModuleInterop": true,
-        "jsx": "react",
+        "skipLibCheck": true,
+        //"jsx": "react",
+        "outDir": "./dist",
         // Strict,
         "strict": true,
         "moduleResolution": "node",
         "noUnusedParameters":true,
         "lib":["dom", "es2017"],
+        "rootDir": ".",
         "baseUrl": "./"
     }
 }
