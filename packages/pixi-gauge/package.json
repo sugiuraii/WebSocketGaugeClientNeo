@@ -6,14 +6,15 @@
   "files": ["dist"],
   "main": "dist/index.js",
   "scripts": {
-    "clean": "rm -rf dist",
+    "clean": "rimraf dist",
     "build": "npm run clean ; tsc"
   },
   "dependencies": {
     "pixi.js": "^6.5.1"
   },
   "devDependencies": {
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "rimraf": "^3.0.2"
   },
   "author": "K. Sugiura",
   "license": "MIT"
