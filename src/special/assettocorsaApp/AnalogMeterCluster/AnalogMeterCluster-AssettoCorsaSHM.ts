@@ -33,7 +33,7 @@ import { AnalogMeterCluster } from "parts/AnalogMeterCluster/AnalogMeterCluster"
 
 
 //Import enumuator of parameter code
-import { AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMNumericalVALCode } from "lib/WebSocket/WebSocketCommunication";
+import { AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMNumericalVALCode } from "websocket-gauge-client-communication";
 
 //For including entry point html file in webpack
 require("./AnalogMeterCluster-AssettoCorsaSHM.html");

@@ -22,9 +22,9 @@
  * THE SOFTWARE.
  */
 
-import { RectangularProgressBar, RectangularProgressBarOptions } from 'lib/Graphics/PIXIGauge';
-import { BitmapTextNumericIndicator } from 'lib/Graphics/PIXIGauge';
-import { NumericIndicator } from 'lib/Graphics/PIXIGauge';
+import { RectangularProgressBar, RectangularProgressBarOptions } from 'pixi-gauge';
+import { BitmapTextNumericIndicator } from 'pixi-gauge';
+import { NumericIndicator } from 'pixi-gauge';
 
 import * as PIXI from 'pixi.js';
 import { Assets } from '@pixi/assets';

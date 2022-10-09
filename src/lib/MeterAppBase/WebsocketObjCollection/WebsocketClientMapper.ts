@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { ReadModeCode } from "../../WebSocket/WebSocketCommunication";
+import { ReadModeCode } from "websocket-gauge-client-communication";
 import { ILogger } from "../utils/ILogger";
 
 import { WebsocketObjectCollection } from "./WebsocketObjectCollection";

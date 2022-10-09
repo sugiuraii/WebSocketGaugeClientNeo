@@ -36,7 +36,7 @@ import { SemiCircularGaugePanelPresets } from "parts/CircularGauges/SemiCircular
 import { DigiTachoPanel } from "parts/DigiTachoPanel/DigiTachoPanel";
 
 //Import enumuator of parameter code
-import { AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMNumericalVALCode } from "lib/WebSocket/WebSocketCommunication";
+import { AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMNumericalVALCode } from "websocket-gauge-client-communication";
 
 window.onload = function () {
     const meterapp = new CompactMFD_AssettoCorsaSHM();
