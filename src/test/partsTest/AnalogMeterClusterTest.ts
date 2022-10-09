@@ -23,7 +23,6 @@
  */
 
 import * as PIXI from 'pixi.js';
-import * as WebFont from "webfontloader";
 import { AnalogMeterCluster } from 'parts/AnalogMeterCluster/AnalogMeterCluster';
 
 require("./AnalogMeterClusterTest.html");

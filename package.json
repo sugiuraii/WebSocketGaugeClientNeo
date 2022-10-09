@@ -19,7 +19,6 @@
         "@pixi/assets": "^6.5.3",
         "@types/jquery": "^3.5.14",
         "@types/react-bootstrap": "^0.32.30",
-        "@types/webfontloader": "^1.6.34",
         "autoprefixer": "^10.4.8",
         "bootstrap": "^5.2.0",
         "bootswatch": "^5.2.0",
@@ -39,7 +38,6 @@
         "ts-loader": "^9.3.1",
         "typescript": "^4.7.4",
         "url-loader": "^4.1.1",
-        "webfontloader": "^1.6.28",
         "webpack": "^5.74.0"
     },
     "devDependencies": {
