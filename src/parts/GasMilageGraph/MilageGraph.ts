@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { RectangularProgressBar, RectangularProgressBarOptions } from 'lib/Graphics/PIXIGauge';
+import { RectangularProgressBar, RectangularProgressBarOptions } from 'pixi-gauge';
 import * as PIXI from 'pixi.js';
 import { Assets } from '@pixi/assets';
 

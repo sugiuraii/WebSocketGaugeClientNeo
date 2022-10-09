@@ -39,7 +39,8 @@
         "typescript": "^4.7.4",
         "url-loader": "^4.1.1",
         "webpack": "^5.74.0",
-        "websocket-gauge-client-communication": "./packages/websocket-gauge-client-communication"
+        "websocket-gauge-client-communication": "./packages/websocket-gauge-client-communication",
+        "pixi-gauge": "./packages/pixi-gauge"
     },
     "devDependencies": {
         "@types/react": "^18.0.17",

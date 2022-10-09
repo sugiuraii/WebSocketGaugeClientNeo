@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { CircularProgressBar, CircularProgressBarOptions, NumericIndicator, BitmapTextNumericIndicator } from 'lib/Graphics/PIXIGauge';
+import { CircularProgressBar, CircularProgressBarOptions, NumericIndicator, BitmapTextNumericIndicator } from 'pixi-gauge';
 import * as PIXI from 'pixi.js';
 import { Assets } from '@pixi/assets';
 
