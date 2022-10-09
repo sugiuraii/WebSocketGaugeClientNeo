@@ -9,6 +9,9 @@
     "clean": "rm -rf dist",
     "build": "npm run clean ; tsc"
   },
+  "dependencies": {
+    "pixi.js": "^6.5.1"
+  },
   "devDependencies": {
     "typescript": "^4.7.4"
   },
