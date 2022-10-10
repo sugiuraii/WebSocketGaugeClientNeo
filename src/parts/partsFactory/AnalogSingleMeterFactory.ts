@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import { WebsocketObjectCollection } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
-import { WebsocketParameterCode } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode";
+import { WebsocketServiceCollection } from "lib/MeterAppBase/WebsocketServiceCollection/WebsocketServiceCollection";
+import { WebsocketParameterCode } from "lib/MeterAppBase/WebsocketServiceCollection/WebsocketParameterCode";
 import { ReadModeCode } from "websocket-gauge-client-communication";
 import { AnalogSingleMeter } from "parts/AnalogSingleMeter/AnalogSingleMeter";
 import { AnalogSingleMeterPresets } from "../AnalogSingleMeter/AnalogSingleMeterPresets";
@@ -37,7 +37,7 @@ export class AnalogSingleMeterFactory {
             this.UseVacuumMeterInsteadOfBoost = false;
     }
 
-    public getMeter(code: WebsocketParameterCode | undefined): { code: WebsocketParameterCode, createDisplayObject: () => Promise<AnalogSingleMeter>, readmode: ReadModeCode, getValue: (timestamp: number, ws: WebsocketObjectCollection) => number } {
+    public getMeter(code: WebsocketParameterCode | undefined): { code: WebsocketParameterCode, createDisplayObject: () => Promise<AnalogSingleMeter>, readmode: ReadModeCode, getValue: (timestamp: number, ws: WebsocketServiceCollection) => number } {
         switch (code) {
             case "Engine_Speed":
                 return { code: code, createDisplayObject: async () => AnalogSingleMeterPresets.RevMeter(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) };

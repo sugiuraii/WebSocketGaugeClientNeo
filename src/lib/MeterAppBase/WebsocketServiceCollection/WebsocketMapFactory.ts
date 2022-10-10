@@ -22,21 +22,21 @@
  * THE SOFTWARE.
  */
 import { OBDIIParameterCode, SSMParameterCode, ArduinoParameterCode, DefiParameterCode } from "websocket-gauge-client-communication";
-import { WebsocketClientMapEntry } from "./WebsocketClientMapper";
+import { WebsocketServiceMapEntry } from "./WebsocketServiceMapper";
 import { WebsocketParameterCode } from "./WebsocketParameterCode";
 
 export class WebsocketMapFactory
 {
-    public get DefaultELM327Map() : Map<WebsocketParameterCode, WebsocketClientMapEntry> { return DefaultELM327Map }
-    public get DefaultSSMMap() : Map<WebsocketParameterCode, WebsocketClientMapEntry> { return DefaultSSMMap }
-    public get DefaultArduinoMap() : Map<WebsocketParameterCode, WebsocketClientMapEntry> { return DefaultArduinoMap }
-    public get DefaultDefiMap() : Map<WebsocketParameterCode, WebsocketClientMapEntry> { return DefaultDefiMap }
-    public getSSMAndDefiHybridMap(codesToMapToDefiWS : DefiParameterCode[]) : Map<WebsocketParameterCode, WebsocketClientMapEntry> { return SSMAndDefiHybridMap(codesToMapToDefiWS); }
-    public getSSMAndArduinoHybridMap(codesToMapToArduinoWS : ArduinoParameterCode[]) : Map<WebsocketParameterCode, WebsocketClientMapEntry> { return SSMAndArduinoHybridMap(codesToMapToArduinoWS); }    
-    public getELM327AndArduinoHybridMap(codesToMapToArduinoWS : ArduinoParameterCode[]) : Map<WebsocketParameterCode, WebsocketClientMapEntry> { return ELM327AndArduinoHybridMap(codesToMapToArduinoWS); }
+    public get DefaultELM327Map() : Map<WebsocketParameterCode, WebsocketServiceMapEntry> { return DefaultELM327Map }
+    public get DefaultSSMMap() : Map<WebsocketParameterCode, WebsocketServiceMapEntry> { return DefaultSSMMap }
+    public get DefaultArduinoMap() : Map<WebsocketParameterCode, WebsocketServiceMapEntry> { return DefaultArduinoMap }
+    public get DefaultDefiMap() : Map<WebsocketParameterCode, WebsocketServiceMapEntry> { return DefaultDefiMap }
+    public getSSMAndDefiHybridMap(codesToMapToDefiWS : DefiParameterCode[]) : Map<WebsocketParameterCode, WebsocketServiceMapEntry> { return SSMAndDefiHybridMap(codesToMapToDefiWS); }
+    public getSSMAndArduinoHybridMap(codesToMapToArduinoWS : ArduinoParameterCode[]) : Map<WebsocketParameterCode, WebsocketServiceMapEntry> { return SSMAndArduinoHybridMap(codesToMapToArduinoWS); }    
+    public getELM327AndArduinoHybridMap(codesToMapToArduinoWS : ArduinoParameterCode[]) : Map<WebsocketParameterCode, WebsocketServiceMapEntry> { return ELM327AndArduinoHybridMap(codesToMapToArduinoWS); }
 }
 
-const DefaultELM327Map = new Map<WebsocketParameterCode, WebsocketClientMapEntry>([
+const DefaultELM327Map = new Map<WebsocketParameterCode, WebsocketServiceMapEntry>([
     ["Engine_Load", { CodeRegisterFunction: (w, r) => w.ELM327WS.ParameterCodeList.push({ code: OBDIIParameterCode.Engine_Load, readmode: r }), ValueGetFunction: (w, t) => w.ELM327WS.getVal(OBDIIParameterCode.Engine_Load, t) }],
     ["Coolant_Temperature", { CodeRegisterFunction: (w, r) => w.ELM327WS.ParameterCodeList.push({ code: OBDIIParameterCode.Coolant_Temperature, readmode: r }), ValueGetFunction: (w, t) => w.ELM327WS.getVal(OBDIIParameterCode.Coolant_Temperature, t) }],
     ["Air_Fuel_Correction_1", { CodeRegisterFunction: (w, r) => w.ELM327WS.ParameterCodeList.push({ code: OBDIIParameterCode.Air_Fuel_Correction_1, readmode: r }), ValueGetFunction: (w, t) => w.ELM327WS.getVal(OBDIIParameterCode.Air_Fuel_Correction_1, t) }],
@@ -109,7 +109,7 @@ const DefaultELM327Map = new Map<WebsocketParameterCode, WebsocketClientMapEntry
     ["Engine_reference_torque", { CodeRegisterFunction: (w, r) => w.ELM327WS.ParameterCodeList.push({ code: OBDIIParameterCode.Engine_reference_torque, readmode: r }), ValueGetFunction: (w, t) => w.ELM327WS.getVal(OBDIIParameterCode.Engine_reference_torque, t) }]
 ]);
 
-const DefaultSSMMap = new Map<WebsocketParameterCode, WebsocketClientMapEntry>([
+const DefaultSSMMap = new Map<WebsocketParameterCode, WebsocketServiceMapEntry>([
     ["Engine_Load", {CodeRegisterFunction : (w, r) => w.SSMWS.ParameterCodeList.push({code : SSMParameterCode.Engine_Load, readmode :r}), ValueGetFunction : (w, t) => w.SSMWS.getVal(SSMParameterCode.Engine_Load, t)}],
     ["Coolant_Temperature", {CodeRegisterFunction : (w, r) => w.SSMWS.ParameterCodeList.push({code : SSMParameterCode.Coolant_Temperature, readmode :r}), ValueGetFunction : (w, t) => w.SSMWS.getVal(SSMParameterCode.Coolant_Temperature, t)}],
     ["Air_Fuel_Correction_1", {CodeRegisterFunction : (w, r) => w.SSMWS.ParameterCodeList.push({code : SSMParameterCode.Air_Fuel_Correction_1, readmode :r}), ValueGetFunction : (w, t) => w.SSMWS.getVal(SSMParameterCode.Air_Fuel_Correction_1, t)}],
@@ -200,7 +200,7 @@ const DefaultSSMMap = new Map<WebsocketParameterCode, WebsocketClientMapEntry>([
     ["Exhaust_OCV_Current_Left", {CodeRegisterFunction : (w, r) => w.SSMWS.ParameterCodeList.push({code : SSMParameterCode.Exhaust_OCV_Current_Left, readmode :r}), ValueGetFunction : (w, t) => w.SSMWS.getVal(SSMParameterCode.Exhaust_OCV_Current_Left, t)}],   
 ]);
 
-const DefaultArduinoMap = new Map<WebsocketParameterCode, WebsocketClientMapEntry>([
+const DefaultArduinoMap = new Map<WebsocketParameterCode, WebsocketServiceMapEntry>([
     ["Engine_Speed", {CodeRegisterFunction : (w) => w.ArduinoWS.ParameterCodeList.push(ArduinoParameterCode.Engine_Speed), ValueGetFunction : (w, t) => w.ArduinoWS.getVal(ArduinoParameterCode.Engine_Speed, t)}],
     ["Vehicle_Speed", {CodeRegisterFunction : (w) => w.ArduinoWS.ParameterCodeList.push(ArduinoParameterCode.Vehicle_Speed), ValueGetFunction : (w, t) => w.ArduinoWS.getVal(ArduinoParameterCode.Vehicle_Speed, t)}],
     ["Manifold_Absolute_Pressure", {CodeRegisterFunction : (w) => w.ArduinoWS.ParameterCodeList.push(ArduinoParameterCode.Manifold_Absolute_Pressure), ValueGetFunction : (w, t) => w.ArduinoWS.getVal(ArduinoParameterCode.Manifold_Absolute_Pressure, t)}],
@@ -211,7 +211,7 @@ const DefaultArduinoMap = new Map<WebsocketParameterCode, WebsocketClientMapEntr
     ["Fuel_Rail_Pressure", {CodeRegisterFunction : (w) => w.ArduinoWS.ParameterCodeList.push(ArduinoParameterCode.Fuel_Rail_Pressure), ValueGetFunction : (w, t) => w.ArduinoWS.getVal(ArduinoParameterCode.Fuel_Rail_Pressure, t)}]   
 ]);
 
-export const DefaultDefiMap = new Map<WebsocketParameterCode, WebsocketClientMapEntry>([
+export const DefaultDefiMap = new Map<WebsocketParameterCode, WebsocketServiceMapEntry>([
     ["Manifold_Absolute_Pressure", {CodeRegisterFunction : (w) => w.DefiWS.ParameterCodeList.push(DefiParameterCode.Manifold_Absolute_Pressure), ValueGetFunction : (w, t) => w.DefiWS.getVal(DefiParameterCode.Manifold_Absolute_Pressure, t)}],
     ["Engine_Speed", {CodeRegisterFunction : (w) => w.DefiWS.ParameterCodeList.push(DefiParameterCode.Engine_Speed), ValueGetFunction : (w, t) => w.DefiWS.getVal(DefiParameterCode.Engine_Speed, t)}],
     ["Oil_Pressure", {CodeRegisterFunction : (w) => w.DefiWS.ParameterCodeList.push(DefiParameterCode.Oil_Pressure), ValueGetFunction : (w, t) => w.DefiWS.getVal(DefiParameterCode.Oil_Pressure, t)}],
@@ -221,7 +221,7 @@ export const DefaultDefiMap = new Map<WebsocketParameterCode, WebsocketClientMap
     ["Coolant_Temperature", {CodeRegisterFunction : (w) => w.DefiWS.ParameterCodeList.push(DefiParameterCode.Coolant_Temperature), ValueGetFunction : (w, t) => w.DefiWS.getVal(DefiParameterCode.Coolant_Temperature, t)}],
 ]);
 
-const SSMAndDefiHybridMap = function(codeToMapToDefiWS : DefiParameterCode[]) : Map<WebsocketParameterCode, WebsocketClientMapEntry>
+const SSMAndDefiHybridMap = function(codeToMapToDefiWS : DefiParameterCode[]) : Map<WebsocketParameterCode, WebsocketServiceMapEntry>
 {
     const map = new Map(DefaultSSMMap);
     codeToMapToDefiWS.forEach(code => 
@@ -234,7 +234,7 @@ const SSMAndDefiHybridMap = function(codeToMapToDefiWS : DefiParameterCode[]) : 
     return map;
 }
 
-const SSMAndArduinoHybridMap = function(codeToMapToArduinoWS : ArduinoParameterCode[]) : Map<WebsocketParameterCode, WebsocketClientMapEntry>
+const SSMAndArduinoHybridMap = function(codeToMapToArduinoWS : ArduinoParameterCode[]) : Map<WebsocketParameterCode, WebsocketServiceMapEntry>
 {
     const map = new Map(DefaultSSMMap);
     codeToMapToArduinoWS.forEach(code => 
@@ -247,7 +247,7 @@ const SSMAndArduinoHybridMap = function(codeToMapToArduinoWS : ArduinoParameterC
     return map;
 }
 
-const ELM327AndArduinoHybridMap = function(codeToMapToArduinoWS : ArduinoParameterCode[]) : Map<WebsocketParameterCode, WebsocketClientMapEntry>
+const ELM327AndArduinoHybridMap = function(codeToMapToArduinoWS : ArduinoParameterCode[]) : Map<WebsocketParameterCode, WebsocketServiceMapEntry>
 {
     const elm327Map = new Map(DefaultELM327Map);
     codeToMapToArduinoWS.forEach(code => 

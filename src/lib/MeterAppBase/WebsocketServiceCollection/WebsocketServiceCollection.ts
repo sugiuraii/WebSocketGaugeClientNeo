@@ -30,7 +30,7 @@ import { AssettoCorsaSHMWebsocketClientService } from "../WebsocketClientService
 import { FUELTRIPWebsocketClientService } from "../WebsocketClientService/FUELTRIPWebsocketClientService";
 import { ILogger } from "../utils/ILogger";
 import { WebsocketState } from "../WebsocketClientService/WebsocketState";
-import { WebsocketClientMapEntry, WebsocketClientMapper } from "./WebsocketClientMapper";
+import { WebsocketServiceMapEntry, WebsocketServiceMapper } from "./WebsocketServiceMapper";
 import { WebsocketParameterCode } from "./WebsocketParameterCode";
 import { WebsocketMapFactory } from "./WebsocketMapFactory";
 
@@ -50,7 +50,7 @@ export class WebsocketObjectCollectionOption
     public AssettoCorsaWSEnabled = false;
     public AssettoCorsaWSURL = "ws://" + location.hostname + ":" + AssettoCorsaSHMWebsocketClientService.DEFAULT_WS_PORT.toString() + AssettoCorsaSHMWebsocketClientService.WS_URL_PATH;
 
-    public WSMap : Map<WebsocketParameterCode, WebsocketClientMapEntry>;
+    public WSMap : Map<WebsocketParameterCode, WebsocketServiceMapEntry>;
 
     constructor()
     {
@@ -59,10 +59,10 @@ export class WebsocketObjectCollectionOption
     }
 }
 
-export class WebsocketObjectCollection {
+export class WebsocketServiceCollection {
     private readonly Option: WebsocketObjectCollectionOption;
 
-    private readonly wsmapper : WebsocketClientMapper;
+    private readonly wsmapper : WebsocketServiceMapper;
 
     private readonly defiWS: DefiWebsocketClientService | undefined;
     private readonly ssmWS: SSMWebsocketClientService | undefined;
@@ -73,7 +73,7 @@ export class WebsocketObjectCollection {
 
     private readonly websocketStates : {[name : string] : WebsocketState} = {};
 
-    public get WSMapper() : WebsocketClientMapper
+    public get WSMapper() : WebsocketServiceMapper
     {
         return this.wsmapper;
     }
@@ -169,7 +169,7 @@ export class WebsocketObjectCollection {
         else
             this.assettoCorsaWS = undefined;
 
-        this.wsmapper = new WebsocketClientMapper(this, option.WSMap, logger);
+        this.wsmapper = new WebsocketServiceMapper(this, option.WSMap, logger);
     }
 
     public Run(): void {

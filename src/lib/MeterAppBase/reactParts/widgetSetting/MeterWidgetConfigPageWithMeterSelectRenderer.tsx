@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { WebsocketParameterCode } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode";
+import { WebsocketParameterCode } from "lib/MeterAppBase/WebsocketServiceCollection/WebsocketParameterCode";
 import React from "react";
 import { createRoot } from 'react-dom/client';
 import { MeterSelectionSetting } from "../dialog/MeterSelectDialog";

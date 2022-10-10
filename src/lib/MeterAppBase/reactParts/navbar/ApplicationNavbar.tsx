@@ -32,7 +32,7 @@ import React, { FunctionComponent, useState, Fragment } from 'react';
 import { Navbar, Nav } from 'react-bootstrap'
 import { WebsocketState } from '../../WebsocketClientService/WebsocketState'
 import { MeterSelectDialog, MeterSelectionSetting } from '../dialog/MeterSelectDialog'
-import { WebsocketParameterCode } from '../../WebsocketObjCollection/WebsocketParameterCode'
+import { WebsocketParameterCode } from '../../WebsocketServiceCollection/WebsocketParameterCode'
 
 type ApplicationNavbarProps =
     {
