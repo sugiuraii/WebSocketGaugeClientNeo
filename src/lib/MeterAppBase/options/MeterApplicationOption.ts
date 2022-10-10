@@ -24,8 +24,8 @@
 
 import * as PIXI from "pixi.js";
 import { MeterSelectionSetting } from "../reactParts/dialog/MeterSelectDialog";
-import { WebsocketObjectCollection, WebsocketObjectCollectionOption } from "../WebsocketObjCollection/WebsocketObjectCollection";
-import { WebsocketParameterCode } from "../WebsocketObjCollection/WebsocketParameterCode";
+import { WebsocketServiceCollection, WebsocketObjectCollectionOption } from "../WebsocketServiceCollection/WebsocketServiceCollection";
+import { WebsocketParameterCode } from "../WebsocketServiceCollection/WebsocketParameterCode";
 
 class MeterSelectDialogOption {
     public DefaultMeterSelectDialogSetting : MeterSelectionSetting;
@@ -43,7 +43,7 @@ export class MeterApplicationOption {
     public readonly NavBarItems : JSX.Element[] = [];
     public readonly MeteSelectDialogOption = new MeterSelectDialogOption();
     
-    public SetupPIXIMeterPanel: (pixiApp: PIXI.Application, wsObj: WebsocketObjectCollection, meterSelection : MeterSelectionSetting) => Promise<void> = async () => {/* do nothing*/};
+    public SetupPIXIMeterPanel: (pixiApp: PIXI.Application, wsObj: WebsocketServiceCollection, meterSelection : MeterSelectionSetting) => Promise<void> = async () => {/* do nothing*/};
     
     constructor(pixiApplicationOption? : PIXI.IApplicationOptions, wsCollectionOption? :WebsocketObjectCollectionOption)
     {

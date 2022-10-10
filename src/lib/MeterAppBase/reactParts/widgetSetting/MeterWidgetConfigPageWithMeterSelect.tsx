@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { WebsocketParameterCode } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode";
+import { WebsocketParameterCode } from "lib/MeterAppBase/WebsocketServiceCollection/WebsocketParameterCode";
 import React, { useEffect, useState } from "react";
 import { FunctionComponent } from "react";
 import { Card, Container, Row, Col } from "react-bootstrap";

@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import { WebsocketObjectCollection } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
-import { WebsocketParameterCode } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode";
+import { WebsocketServiceCollection } from "lib/MeterAppBase/WebsocketServiceCollection/WebsocketServiceCollection";
+import { WebsocketParameterCode } from "lib/MeterAppBase/WebsocketServiceCollection/WebsocketParameterCode";
 import { ReadModeCode } from "websocket-gauge-client-communication";
 import { SemiCircularGaugePanel } from "../CircularGauges/SemiCircularGaugePanel";
 import { SemiCircularGaugePanelPresets } from "../CircularGauges/SemiCircularGaugePanelPresets";
@@ -38,7 +38,7 @@ export class SemiCircularGaugePanelFactory {
             this.UseVacuumMeterInsteadOfBoost = false;
     }
 
-    public getMeter(code: WebsocketParameterCode | undefined): { code: WebsocketParameterCode, createDisplayObject: () => Promise<SemiCircularGaugePanel>, readmode: ReadModeCode, getValue: (timestamp: number, ws: WebsocketObjectCollection) => number } {
+    public getMeter(code: WebsocketParameterCode | undefined): { code: WebsocketParameterCode, createDisplayObject: () => Promise<SemiCircularGaugePanel>, readmode: ReadModeCode, getValue: (timestamp: number, ws: WebsocketServiceCollection) => number } {
         switch (code) {
             case "Manifold_Absolute_Pressure":
                 return { code: code, createDisplayObject: async() => this.UseVacuumMeterInsteadOfBoost ? SemiCircularGaugePanelPresets.VacuumGaugePanel() : SemiCircularGaugePanelPresets.BoostGaugePanel(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) * 0.0101972 - 1 /* convert kPa to kgf/cm2 and relative pressure */ };

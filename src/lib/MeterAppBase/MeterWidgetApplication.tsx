@@ -26,14 +26,14 @@ import * as PIXI from "pixi.js";
 import React from "react";
 import { createRoot } from "react-dom/client";
 
-import { WebsocketObjectCollection } from "./WebsocketObjCollection/WebsocketObjectCollection";
+import { WebsocketServiceCollection } from "./WebsocketServiceCollection/WebsocketServiceCollection";
 import { MeterApplicationOption } from "./options/MeterApplicationOption";
 import { StringListLogger } from "./utils/StringListLogger";
 import PIXIApplication from "./reactParts/PIXIApplication";
 
 import 'bootswatch/dist/slate/bootstrap.min.css';
 import { MeterSelectionSetting } from "./reactParts/dialog/MeterSelectDialog";
-import { WebsocketParameterCode } from "./WebsocketObjCollection/WebsocketParameterCode";
+import { WebsocketParameterCode } from "./WebsocketServiceCollection/WebsocketParameterCode";
 import { MeterWidgetConfigPageRenderer } from "./reactParts/widgetSetting/MeterWidgetConfigPageRenderer";
 import { MeterWidgetConfigPageWithMeterSelectRenderer } from "./reactParts/widgetSetting/MeterWidgetConfigPageWithMeterSelectRenderer";
 const BOOTSTRAP_CSS_FILENAME = "bootstrap.min.css";
@@ -69,11 +69,11 @@ export class MeterWidgetApplication {
     private Logger = new StringListLogger();
 
     private readonly UrlQueryResult = new URLQueryParseResult();
-    private readonly webSocketCollection: WebsocketObjectCollection;
+    private readonly webSocketCollection: WebsocketServiceCollection;
 
     constructor(option: MeterApplicationOption) {
         this.Option = option;
-        this.webSocketCollection = new WebsocketObjectCollection(this.Logger, option.WebSocketCollectionOption, this.UrlQueryResult.WSInterval);
+        this.webSocketCollection = new WebsocketServiceCollection(this.Logger, option.WebSocketCollectionOption, this.UrlQueryResult.WSInterval);
     }
 
     private renderSettingPageIfEmptyQuery()

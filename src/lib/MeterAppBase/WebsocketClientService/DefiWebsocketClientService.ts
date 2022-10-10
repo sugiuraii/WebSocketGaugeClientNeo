@@ -26,9 +26,9 @@ import { DefiCOMWebsocket, DefiParameterCode } from "websocket-gauge-client-comm
 import { ILogger } from "../utils/ILogger";
 import { WebsocketState } from "./WebsocketState";
 import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";
-import { WebsocketAppBackend } from "./WebsocketAppBackend";
+import { WebsocketClientService } from "./WebsocketClientService";
 
-export class DefiWebsocketBackend implements WebsocketAppBackend {
+export class DefiWebsocketClientService implements WebsocketClientService {
 
    public static readonly DEFAULT_WS_PORT = 2016;
    public static readonly WS_URL_PATH = "/defi";

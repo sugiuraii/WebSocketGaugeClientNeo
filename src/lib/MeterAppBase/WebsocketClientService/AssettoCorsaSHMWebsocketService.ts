@@ -21,25 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
-import { ArduinoCOMWebsocket, ArduinoParameterCode } from "websocket-gauge-client-communication";
+import { AssettoCorsaSHMWebsocket, AssettoCorsaSHMNumericalVALCode, AssettoCorsaSHMStringVALCode } from "websocket-gauge-client-communication";
+import { AssettoCorsaSHMGraphicsParameterCode, AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMStaticInfoParameterCode } from "websocket-gauge-client-communication";
 import { ILogger } from "../utils/ILogger";
 import { WebsocketState } from "./WebsocketState";
 import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";
-import { WebsocketAppBackend } from "./WebsocketAppBackend";
+import { WebsocketClientService } from "./WebsocketClientService";
 
-export class ArduinoWebsocketBackend implements WebsocketAppBackend {
-   public static readonly DEFAULT_WS_PORT = 2016;
-   public static readonly WS_URL_PATH = "/arduino";
-   private readonly name = "Arduino";
-   
+export class AssettoCorsaSHMWebsocketClientService implements WebsocketClientService {
+   public static readonly DEFAULT_WS_PORT = 2017;
+   public static readonly WS_URL_PATH = "/assettocorsa_ws";
+   private readonly name = "AssettoCorsaSHM";
+
    private readonly logPrefix = this.name;
    private readonly WEBSOCKET_CHECK_INTERVAL = 1000;
    private readonly WAITTIME_BEFORE_SENDWSSEND = 3000;
    private readonly WAITTIME_BEFORE_RECONNECT = 5000;
 
-   private readonly arduinoWS: ArduinoCOMWebsocket;
-   private readonly parameterCodeList: ArduinoParameterCode[] = [];
+   private readonly assettocorsaWS: AssettoCorsaSHMWebsocket;
+   private readonly physicsParameterCodeList: AssettoCorsaSHMPhysicsParameterCode[] = [];
+   private readonly graphicsParameterCodeList: AssettoCorsaSHMGraphicsParameterCode[] = [];
+   private readonly staticInfoParameterCodeList: AssettoCorsaSHMStaticInfoParameterCode[] = [];
    private readonly logger: ILogger;
    private readonly state: WebsocketState;
    private readonly WSInterval : number;
@@ -47,17 +49,19 @@ export class ArduinoWebsocketBackend implements WebsocketAppBackend {
    private readonly webSocketServerURL: string;
 
    private indicatorUpdateIntervalID = 0;
-
-   public get ParameterCodeList() : ArduinoParameterCode[] { return this.parameterCodeList }
+   
+   public get PhysicsParameterCodeList(): AssettoCorsaSHMPhysicsParameterCode[] {return this.physicsParameterCodeList}
+   public get GraphicsParameterCodeList(): AssettoCorsaSHMGraphicsParameterCode[] {return this.graphicsParameterCodeList}
+   public get StaticInfoParameterCodeList(): AssettoCorsaSHMStaticInfoParameterCode[] {return this.staticInfoParameterCodeList}
 
    constructor(serverurl: string, logger: ILogger, wsInterval : number) {
-      this.arduinoWS = new ArduinoCOMWebsocket(serverurl);
+      this.assettocorsaWS = new AssettoCorsaSHMWebsocket(serverurl);
       this.logger = logger;
       this.state = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
-      this.webSocketServerURL = this.arduinoWS.URL;
+      this.webSocketServerURL = this.assettocorsaWS.URL;
       this.WSInterval = wsInterval;
-      
-      this.arduinoWS.OnWebsocketError = (message: string) => this.logger.appendLog(this.logPrefix + " websocket error : " + message);
+
+      this.assettocorsaWS.OnWebsocketError = (message: string) => this.logger.appendLog(this.logPrefix + " websocket error : " + message);
    }
 
    public Run(): void {
@@ -67,20 +71,24 @@ export class ArduinoWebsocketBackend implements WebsocketAppBackend {
 
    public Stop(): void {
       clearInterval(this.indicatorUpdateIntervalID);
-      this.arduinoWS.Close();
+      this.assettocorsaWS.Close();
    }
 
-   public getVal(code: ArduinoParameterCode, timestamp?: number): number {
+   public getVal(code: AssettoCorsaSHMNumericalVALCode, timestamp?: number): number {
       if(timestamp === undefined)
          return this.getRawVal(code);
       else
-         return this.arduinoWS.getVal(code, timestamp);
+         return this.assettocorsaWS.getVal(code, timestamp);
    }
 
-   public getRawVal(code: ArduinoParameterCode): number {
-      return this.arduinoWS.getRawVal(code);
+   public getRawVal(code: AssettoCorsaSHMNumericalVALCode): number {
+      return this.assettocorsaWS.getRawVal(code);
    }
 
+   public getStringVal(code: AssettoCorsaSHMStringVALCode): string {
+      return this.assettocorsaWS.getStringVal(code);
+   }
+   
    public getWebsocketState() : WebsocketState
    {
       return this.state;
@@ -91,22 +99,24 @@ export class ArduinoWebsocketBackend implements WebsocketAppBackend {
    }
 
    private setStatusIndicator() {
-      this.state.connectionStatus = this.arduinoWS.getReadyState();
+      this.state.connectionStatus = this.assettocorsaWS.getReadyState();
    }
 
    private connectWebSocket() {
       const Logger = this.logger;
-      const webSocketObj = this.arduinoWS;
+      const webSocketObj = this.assettocorsaWS;
       const logPrefix = this.logPrefix;
 
       webSocketObj.OnWebsocketOpen = () => {
          Logger.appendLog(logPrefix + " is connected. SendWSSend/Interval after " + this.WAITTIME_BEFORE_SENDWSSEND.toString() + " msec");
          window.setTimeout(() => {
             //SendWSSend
-            this.parameterCodeList.forEach(item => webSocketObj.SendWSSend(item, true));
+            this.physicsParameterCodeList.forEach(item => webSocketObj.SendPhysicsWSSend(item, true));
+            this.graphicsParameterCodeList.forEach(item => webSocketObj.SendGraphicsWSSend(item, true));
+            this.staticInfoParameterCodeList.forEach(item => webSocketObj.SendStaticInfoWSSend(item, true));
 
             //SendWSInterval from spinner
-            webSocketObj.SendWSInterval(this.WSInterval);
+            webSocketObj.SendPhysicsWSInterval(this.WSInterval);
 
          }, this.WAITTIME_BEFORE_SENDWSSEND);
       }

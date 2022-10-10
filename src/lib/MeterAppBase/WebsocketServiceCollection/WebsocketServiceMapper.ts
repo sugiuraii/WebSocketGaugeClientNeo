@@ -25,18 +25,18 @@
 import { ReadModeCode } from "websocket-gauge-client-communication";
 import { ILogger } from "../utils/ILogger";
 
-import { WebsocketObjectCollection } from "./WebsocketObjectCollection";
+import { WebsocketServiceCollection } from "./WebsocketServiceCollection";
 import { WebsocketParameterCode } from "./WebsocketParameterCode";
 
-export type WebsocketClientMapEntry = { CodeRegisterFunction: (ws: WebsocketObjectCollection, readmode: ReadModeCode) => void, ValueGetFunction: (ws: WebsocketObjectCollection, timeStamp?: number) => number };
+export type WebsocketServiceMapEntry = { CodeRegisterFunction: (ws: WebsocketServiceCollection, readmode: ReadModeCode) => void, ValueGetFunction: (ws: WebsocketServiceCollection, timeStamp?: number) => number };
 
-export class WebsocketClientMapper
+export class WebsocketServiceMapper
 {
-    private readonly webSocketCollection: WebsocketObjectCollection;
-    private readonly map = new Map<WebsocketParameterCode, WebsocketClientMapEntry>();
+    private readonly webSocketCollection: WebsocketServiceCollection;
+    private readonly map = new Map<WebsocketParameterCode, WebsocketServiceMapEntry>();
     private readonly logger : ILogger;
 
-    constructor(webSocketCollection: WebsocketObjectCollection, map: Map<WebsocketParameterCode, WebsocketClientMapEntry>, logger : ILogger) {
+    constructor(webSocketCollection: WebsocketServiceCollection, map: Map<WebsocketParameterCode, WebsocketServiceMapEntry>, logger : ILogger) {
         this.webSocketCollection = webSocketCollection;
         this.map = map;
         this.logger = logger;

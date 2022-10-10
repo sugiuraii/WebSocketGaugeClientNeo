@@ -25,7 +25,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { Modal, Button } from 'react-bootstrap';
-import { WebsocketParameterCode } from '../../WebsocketObjCollection/WebsocketParameterCode';
+import { WebsocketParameterCode } from '../../WebsocketServiceCollection/WebsocketParameterCode';
 
 type MeterSelectDialogProps = {
     show: boolean,

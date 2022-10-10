@@ -27,7 +27,7 @@ import React from "react";
 import { createRoot } from 'react-dom/client';
 
 import { WebstorageHandler } from "./Webstorage/WebstorageHandler";
-import { WebsocketObjectCollection } from "./WebsocketObjCollection/WebsocketObjectCollection";
+import { WebsocketServiceCollection } from "./WebsocketServiceCollection/WebsocketServiceCollection";
 import { MeterApplicationOption } from "./options/MeterApplicationOption";
 import { ApplicationNavbar } from './reactParts/navbar/ApplicationNavbar';
 import { StringListLogger } from "./utils/StringListLogger";
@@ -44,7 +44,7 @@ export class MeterApplication {
     private Logger = new StringListLogger();
     private readonly WebStorage: WebstorageHandler;
 
-    private readonly webSocketCollection: WebsocketObjectCollection;
+    private readonly webSocketCollection: WebsocketServiceCollection;
     private MeterSelectDialogSetting: MeterSelectionSetting;
 
     protected get RootElem(): JSX.Element {
@@ -78,7 +78,7 @@ export class MeterApplication {
     constructor(option: MeterApplicationOption) {
         this.Option = option;
         this.WebStorage = new WebstorageHandler(option.MeteSelectDialogOption.DefaultMeterSelectDialogSetting);
-        this.webSocketCollection = new WebsocketObjectCollection(this.Logger, option.WebSocketCollectionOption, this.WebStorage.WSInterval);
+        this.webSocketCollection = new WebsocketServiceCollection(this.Logger, option.WebSocketCollectionOption, this.WebStorage.WSInterval);
 
         if (this.WebStorage.MeterSelectDialogSetting === undefined) {
             const logmessage = "MeterDialogSetting is undefined. Overwrite with default value.";
