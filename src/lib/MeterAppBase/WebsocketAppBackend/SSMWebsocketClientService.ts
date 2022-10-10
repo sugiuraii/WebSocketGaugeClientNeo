@@ -24,11 +24,11 @@
 
 import { SSMWebsocket, SSMParameterCode, SSMSwitchCode, ReadModeCode } from "websocket-gauge-client-communication";
 import { ILogger } from "../utils/ILogger";
-import { WebsocketAppBackend } from "./WebsocketAppBackend";
+import { WebsocketClientService } from "./WebsocketClientService";
 import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";
 import { WebsocketState } from "./WebsocketState";
 
-export class SSMWebsocketBackend implements WebsocketAppBackend {
+export class SSMWebsocketClientService implements WebsocketClientService {
    public static readonly DEFAULT_WS_PORT = 2016;
    public static readonly WS_URL_PATH = "/ssm";
    private readonly name = "SSM";
