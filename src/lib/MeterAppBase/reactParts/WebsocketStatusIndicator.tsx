@@ -24,8 +24,8 @@
 
 import React, { FunctionComponent } from 'react';
 import { Badge } from 'react-bootstrap';
-import { WebsocketConnectionStatus } from '../WebsocketAppBackend/WebsocketConnectionStatus'
-import { WebsocketState } from '../WebsocketAppBackend/WebsocketState';
+import { WebsocketConnectionStatus } from '../WebsocketClientService/WebsocketConnectionStatus'
+import { WebsocketState } from '../WebsocketClientService/WebsocketState';
 
 type WebsocketStatusIndicatorProps =
     {

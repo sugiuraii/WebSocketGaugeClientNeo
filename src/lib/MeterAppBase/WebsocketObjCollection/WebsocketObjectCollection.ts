@@ -22,14 +22,14 @@
  * THE SOFTWARE.
  */
 
-import { DefiWebsocketClientService } from "../WebsocketAppBackend/DefiWebsocketClientService";
-import { SSMWebsocketClientService } from "../WebsocketAppBackend/SSMWebsocketClientService";
-import { ArduinoWebsocketClientService } from "../WebsocketAppBackend/ArduinoWebsocketClientService";
-import { ELM327WebsocketClientService } from "../WebsocketAppBackend/ELM327WebsocketClientService";
-import { AssettoCorsaSHMWebsocketClientService } from "../WebsocketAppBackend/AssettoCorsaSHMWebsocketService";
-import { FUELTRIPWebsocketClientService } from "../WebsocketAppBackend/FUELTRIPWebsocketClientService";
+import { DefiWebsocketClientService } from "../WebsocketClientService/DefiWebsocketClientService";
+import { SSMWebsocketClientService } from "../WebsocketClientService/SSMWebsocketClientService";
+import { ArduinoWebsocketClientService } from "../WebsocketClientService/ArduinoWebsocketClientService";
+import { ELM327WebsocketClientService } from "../WebsocketClientService/ELM327WebsocketClientService";
+import { AssettoCorsaSHMWebsocketClientService } from "../WebsocketClientService/AssettoCorsaSHMWebsocketService";
+import { FUELTRIPWebsocketClientService } from "../WebsocketClientService/FUELTRIPWebsocketClientService";
 import { ILogger } from "../utils/ILogger";
-import { WebsocketState } from "../WebsocketAppBackend/WebsocketState";
+import { WebsocketState } from "../WebsocketClientService/WebsocketState";
 import { WebsocketClientMapEntry, WebsocketClientMapper } from "./WebsocketClientMapper";
 import { WebsocketParameterCode } from "./WebsocketParameterCode";
 import { WebsocketMapFactory } from "./WebsocketMapFactory";

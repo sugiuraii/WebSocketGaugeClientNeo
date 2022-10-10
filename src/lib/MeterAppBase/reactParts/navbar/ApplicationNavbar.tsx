@@ -30,7 +30,7 @@ import { LogDialog } from '../dialog/LogDialog'
 import { WebsocketStatusIndicator } from '../WebsocketStatusIndicator'
 import React, { FunctionComponent, useState, Fragment } from 'react';
 import { Navbar, Nav } from 'react-bootstrap'
-import { WebsocketState } from '../../WebsocketAppBackend/WebsocketState'
+import { WebsocketState } from '../../WebsocketClientService/WebsocketState'
 import { MeterSelectDialog, MeterSelectionSetting } from '../dialog/MeterSelectDialog'
 import { WebsocketParameterCode } from '../../WebsocketObjCollection/WebsocketParameterCode'
 
