@@ -32,7 +32,7 @@ import { ILogger } from "../utils/ILogger";
 import { WebsocketState } from "../WebsocketClientService/WebsocketState";
 import { WebsocketServiceMapEntry, WebsocketServiceMapper } from "./WebsocketServiceMapper";
 import { WebsocketParameterCode } from "./WebsocketParameterCode";
-import { WebsocketMapFactory } from "./WebsocketMapFactory";
+import { WebsocketServiceMapFactory } from "./WebsocketServiceMapFactory";
 
 export class WebsocketObjectCollectionOption
 {
@@ -54,7 +54,7 @@ export class WebsocketObjectCollectionOption
 
     constructor()
     {
-        const mapFactory = new WebsocketMapFactory();
+        const mapFactory = new WebsocketServiceMapFactory();
         this.WSMap = mapFactory.DefaultELM327Map;
     }
 }

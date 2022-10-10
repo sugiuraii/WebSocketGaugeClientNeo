@@ -23,7 +23,7 @@
  */
 
 import { GearPositionCalculator, CalcTireCircumference } from "lib/MeterAppBase/utils/GearPositionCalculator";
-import { WebsocketMapFactory } from "lib/MeterAppBase/WebsocketServiceCollection/WebsocketMapFactory";
+import { WebsocketServiceMapFactory } from "lib/MeterAppBase/WebsocketServiceCollection/WebsocketServiceMapFactory";
 import { WebsocketObjectCollectionOption } from "lib/MeterAppBase/WebsocketServiceCollection/WebsocketServiceCollection";
 
 import * as jsonc from "jsonc-parser";
@@ -98,7 +98,7 @@ export const getWebsocketCollectionOption = async (): Promise<WebsocketObjectCol
 
     if (wssetting.FuelTripLoggerEnabled)
         wsOption.FUELTRIPWSEnabled = true;
-    const wsMapFactory = new WebsocketMapFactory();
+    const wsMapFactory = new WebsocketServiceMapFactory();
 
     switch (wssetting.Mapping) {
         case "DefaultELM327Map":

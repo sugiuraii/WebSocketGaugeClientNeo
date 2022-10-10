@@ -25,7 +25,7 @@ import { OBDIIParameterCode, SSMParameterCode, ArduinoParameterCode, DefiParamet
 import { WebsocketServiceMapEntry } from "./WebsocketServiceMapper";
 import { WebsocketParameterCode } from "./WebsocketParameterCode";
 
-export class WebsocketMapFactory
+export class WebsocketServiceMapFactory
 {
     public get DefaultELM327Map() : Map<WebsocketParameterCode, WebsocketServiceMapEntry> { return DefaultELM327Map }
     public get DefaultSSMMap() : Map<WebsocketParameterCode, WebsocketServiceMapEntry> { return DefaultSSMMap }
