@@ -27,13 +27,13 @@
 import * as PIXI from 'pixi.js';
 const DEFAULT_FADE_TIME = 0.93;
 
-export class AfterImageLayer extends PIXI.Sprite {
+export class TrailLayer extends PIXI.Sprite {
     public static app : PIXI.Application;
     public static setApp (app : PIXI.Application) {
         this.app = app;
     }
     
-    private afterImageTexture : PIXI.RenderTexture;
+    private trailImageTexture : PIXI.RenderTexture;
     private outputTexture : PIXI.RenderTexture;
     private spriteForFading = new PIXI.Sprite;
     private clearingSprite = new PIXI.Sprite(PIXI.Texture.EMPTY); // used for clearing texture
@@ -41,17 +41,17 @@ export class AfterImageLayer extends PIXI.Sprite {
     constructor(width: number, height: number) {
         super();
 
-        this.afterImageTexture = PIXI.RenderTexture.create({width : width, height : height});
+        this.trailImageTexture = PIXI.RenderTexture.create({width : width, height : height});
         this.outputTexture = PIXI.RenderTexture.create({width : width, height : height});
-        this.texture = this.afterImageTexture;
+        this.texture = this.trailImageTexture;
         this.fadeTime = 0.6;
-        AfterImageLayer.app.ticker.add(() => this.updateTexture(AfterImageLayer.app.renderer));
+        TrailLayer.app.ticker.add(() => this.updateTexture(TrailLayer.app.renderer));
     }
 
     public updateTexture(renderer : PIXI.Renderer | PIXI.AbstractRenderer) {
         // Render faded texture
         this.spriteForFading.texture = this.outputTexture;
-        renderer.render(this.spriteForFading, {renderTexture : this.afterImageTexture, clear : true});
+        renderer.render(this.spriteForFading, {renderTexture : this.trailImageTexture, clear : true});
 
         // Render container
         renderer.render(this, {renderTexture : this.outputTexture, clear : true});

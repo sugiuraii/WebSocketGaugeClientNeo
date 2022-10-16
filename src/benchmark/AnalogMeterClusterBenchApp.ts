@@ -32,7 +32,7 @@ import {MeterApplicationOption} from "lib/MeterAppBase/options/MeterApplicationO
 import {AnalogMeterCluster} from "parts/AnalogMeterCluster/AnalogMeterCluster";
 
 import {FPSCounter} from "parts/FPSIndicator/FPSCounter";
-import { AfterImageLayer } from 'lib/TrailMaker/TrailLayerMaker';
+import { TrailLayer } from 'lib/TrailMaker/TrailLayer';
 
 //For including entry point html file in webpack
 require("./AnalogMeterClusterBenchApp.html");
@@ -53,7 +53,7 @@ class AnalogMeterClusterBenchApp
 
         appOption.SetupPIXIMeterPanel = async (app) =>
         {
-            AfterImageLayer.setApp(app);
+            TrailLayer.setApp(app);
             const meterCluster = await AnalogMeterCluster.create();
             const stage = app.stage;
 

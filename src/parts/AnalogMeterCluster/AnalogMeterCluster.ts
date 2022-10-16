@@ -31,7 +31,7 @@ import { NumericIndicator } from 'pixi-gauge';
 
 import * as PIXI from 'pixi.js';
 import { Assets } from '@pixi/assets';
-import { AfterImageLayer } from 'lib/TrailMaker/TrailLayerMaker';
+import { TrailLayer } from 'lib/TrailMaker/TrailLayer';
 
 require("./AnalogMeterClusterTexture.json");
 require("./AnalogMeterClusterTexture.png");
@@ -194,7 +194,7 @@ export class AnalogMeterCluster extends PIXI.Container {
         tachoNeedleGauge.Value = tachoValDefalut;
         tachoNeedleGauge.updateForce();
 
-        const aiLayer = new AfterImageLayer(600, 600);
+        const aiLayer = new TrailLayer(600, 600);
         aiLayer.addChild(tachoNeedleGauge);
         tachoContainer.addChild(aiLayer);
 
