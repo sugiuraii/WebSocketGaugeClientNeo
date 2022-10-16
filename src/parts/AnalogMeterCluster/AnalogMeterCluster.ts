@@ -177,7 +177,7 @@ export class AnalogMeterCluster extends PIXI.Container {
         const tachoProgressBar = new CircularProgressBar(tachoProgressBarOptions);
         tachoProgressBar.pivot.set(193, 193);
         tachoProgressBar.position.set(300, 300);
-        tachoContainer.addChild(tachoProgressBar);
+        //tachoContainer.addChild(tachoProgressBar);
         tachoProgressBar.Value = tachoValDefalut;
         tachoProgressBar.updateForce();
 
@@ -196,6 +196,7 @@ export class AnalogMeterCluster extends PIXI.Container {
 
         const aiLayer = new TrailLayer(600, 600);
         aiLayer.addChild(tachoNeedleGauge);
+        aiLayer.addChild(tachoProgressBar);
         tachoContainer.addChild(aiLayer);
 
         const shaftSprite = PIXI.Sprite.from("AnalogTachoMeter_NeedleCap");
@@ -282,9 +283,13 @@ export class AnalogMeterCluster extends PIXI.Container {
         const speedNeedleGauge = new RotationNeedleGauge(speedNeedleGaugeOptions);
         speedNeedleGauge.pivot.set(15, 15);
         speedNeedleGauge.position.set(300, 300);
-        speedMeterContainer.addChild(speedNeedleGauge);
+        //speedMeterContainer.addChild(speedNeedleGauge);
         speedNeedleGauge.Value = speedValDefault;
         speedNeedleGauge.updateForce();
+
+        const aiLayer = new TrailLayer(backSprite.height, backSprite.width);
+        aiLayer.addChild(speedNeedleGauge);
+        speedMeterContainer.addChild(aiLayer);
 
         const shaftSprite = PIXI.Sprite.from("AnalogSpeedMeter_NeedleCap");
         shaftSprite.anchor.set(0.5, 0.5);
@@ -316,7 +321,11 @@ export class AnalogMeterCluster extends PIXI.Container {
         boostNeedleGauge.position.set(220, 220);
         boostNeedleGauge.Value = boostValDefault;
         boostNeedleGauge.updateForce();
-        boostMeterContainer.addChild(boostNeedleGauge);
+        //boostMeterContainer.addChild(boostNeedleGauge);
+
+        const aiLayer = new TrailLayer(backSprite.height, backSprite.width);
+        aiLayer.addChild(boostNeedleGauge);
+        boostMeterContainer.addChild(aiLayer);
 
         return { container: boostMeterContainer, boostNeedleGauge: boostNeedleGauge };
     }
