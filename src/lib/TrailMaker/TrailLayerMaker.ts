@@ -28,6 +28,11 @@ import * as PIXI from 'pixi.js';
 const DEFAULT_FADE_TIME = 0.93;
 
 export class AfterImageLayer extends PIXI.Sprite {
+    public static app : PIXI.Application;
+    public static setApp (app : PIXI.Application) {
+        this.app = app;
+    }
+    
     private afterImageTexture : PIXI.RenderTexture;
     private outputTexture : PIXI.RenderTexture;
     private spriteForFading = new PIXI.Sprite;
@@ -39,9 +44,11 @@ export class AfterImageLayer extends PIXI.Sprite {
         this.afterImageTexture = PIXI.RenderTexture.create({width : width, height : height});
         this.outputTexture = PIXI.RenderTexture.create({width : width, height : height});
         this.texture = this.afterImageTexture;
+
+        AfterImageLayer.app.ticker.add(() => this.updateTexture(AfterImageLayer.app.renderer));
     }
 
-    public updateTexture(renderer : PIXI.Renderer) {
+    public updateTexture(renderer : PIXI.Renderer | PIXI.AbstractRenderer) {
         // Render faded texture
         this.spriteForFading.texture = this.outputTexture;
         renderer.render(this.spriteForFading, {renderTexture : this.afterImageTexture, clear : true});
