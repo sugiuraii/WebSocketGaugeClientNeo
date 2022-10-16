@@ -35,10 +35,10 @@ export class TrailLayer extends PIXI.Sprite {
     
     private trailImageTexture : PIXI.RenderTexture;
     private outputTexture : PIXI.RenderTexture;
-    private trailSprite = new PIXI.Sprite;
-    private clearingSprite = new PIXI.Sprite(PIXI.Texture.EMPTY); // used for clearing texture
+    private readonly trailSprite = new PIXI.Sprite;
+    private readonly clearingSprite = new PIXI.Sprite(PIXI.Texture.EMPTY); // used for clearing texture
 
-    constructor(bufferTextureSize? : {width: number, height: number}) {
+    constructor(bufferTextureSize : {width: number, height: number}) {
         super();
         
         this.trailImageTexture = PIXI.RenderTexture.create(bufferTextureSize);
@@ -55,17 +55,6 @@ export class TrailLayer extends PIXI.Sprite {
 
         // Render container
         renderer.render(this, {renderTexture : this.outputTexture, clear : true});
-    }
-
-    public autoAdjistBufferTextureSize() {
-        const bufferTextureSize = {width : this.width, height : this.height };
-        this.trailImageTexture = PIXI.RenderTexture.create(bufferTextureSize);
-        this.outputTexture = PIXI.RenderTexture.create(bufferTextureSize);
-    }
-
-    public setBufferTextureSize(bufferTextureSize : {width : number, height : number }) {
-        this.trailImageTexture = PIXI.RenderTexture.create(bufferTextureSize);
-        this.outputTexture = PIXI.RenderTexture.create(bufferTextureSize);
     }
 
     public clear() {

@@ -194,7 +194,7 @@ export class AnalogMeterCluster extends PIXI.Container {
         tachoNeedleGauge.Value = tachoValDefalut;
         tachoNeedleGauge.updateForce();
 
-        const aiLayer = new TrailLayer(600, 600);
+        const aiLayer = new TrailLayer({height : 600, width : 600});
         aiLayer.addChild(tachoNeedleGauge);
         aiLayer.addChild(tachoProgressBar);
         tachoContainer.addChild(aiLayer);
@@ -287,7 +287,7 @@ export class AnalogMeterCluster extends PIXI.Container {
         speedNeedleGauge.Value = speedValDefault;
         speedNeedleGauge.updateForce();
 
-        const aiLayer = new TrailLayer(backSprite.height, backSprite.width);
+        const aiLayer = new TrailLayer({height : backSprite.height, width : backSprite.width});
         aiLayer.addChild(speedNeedleGauge);
         speedMeterContainer.addChild(aiLayer);
 
@@ -323,7 +323,7 @@ export class AnalogMeterCluster extends PIXI.Container {
         boostNeedleGauge.updateForce();
         //boostMeterContainer.addChild(boostNeedleGauge);
 
-        const aiLayer = new TrailLayer(backSprite.height, backSprite.width);
+        const aiLayer = new TrailLayer({height : backSprite.height, width :backSprite.width});
         aiLayer.addChild(boostNeedleGauge);
         boostMeterContainer.addChild(aiLayer);
 
