@@ -44,7 +44,7 @@ export class AfterImageLayer extends PIXI.Sprite {
         this.afterImageTexture = PIXI.RenderTexture.create({width : width, height : height});
         this.outputTexture = PIXI.RenderTexture.create({width : width, height : height});
         this.texture = this.afterImageTexture;
-
+        this.fadeTime = 0.6;
         AfterImageLayer.app.ticker.add(() => this.updateTexture(AfterImageLayer.app.renderer));
     }
 
