@@ -28,49 +28,65 @@ import * as PIXI from 'pixi.js';
 const DEFAULT_FADE_TIME = 0.93;
 
 export class TrailLayer extends PIXI.Sprite {
-    public static app : PIXI.Application;
+    private static app : PIXI.Application;
     public static setApp (app : PIXI.Application) {
         this.app = app;
     }
     
     private trailImageTexture : PIXI.RenderTexture;
     private outputTexture : PIXI.RenderTexture;
-    private spriteForFading = new PIXI.Sprite;
+    private trailSprite = new PIXI.Sprite;
     private clearingSprite = new PIXI.Sprite(PIXI.Texture.EMPTY); // used for clearing texture
 
-    constructor(width: number, height: number) {
+    constructor(bufferTextureSize? : {width: number, height: number}) {
         super();
-
-        this.trailImageTexture = PIXI.RenderTexture.create({width : width, height : height});
-        this.outputTexture = PIXI.RenderTexture.create({width : width, height : height});
+        
+        this.trailImageTexture = PIXI.RenderTexture.create(bufferTextureSize);
+        this.outputTexture = PIXI.RenderTexture.create(bufferTextureSize);
         this.texture = this.trailImageTexture;
-        this.fadeTime = 0.8;
+        this.trailAlpha = 0.8;
         TrailLayer.app.ticker.add(() => this.updateTexture(TrailLayer.app.renderer));
     }
 
-    public updateTexture(renderer : PIXI.Renderer | PIXI.AbstractRenderer) {
+    private updateTexture(renderer : PIXI.Renderer | PIXI.AbstractRenderer) {
         // Render faded texture
-        this.spriteForFading.texture = this.outputTexture;
-        renderer.render(this.spriteForFading, {renderTexture : this.trailImageTexture, clear : true});
+        this.trailSprite.texture = this.outputTexture;
+        renderer.render(this.trailSprite, {renderTexture : this.trailImageTexture, clear : true});
 
         // Render container
         renderer.render(this, {renderTexture : this.outputTexture, clear : true});
     }
 
-    public clearTexture(renderer : PIXI.Renderer) {
+    public autoAdjistBufferTextureSize() {
+        const bufferTextureSize = {width : this.width, height : this.height };
+        this.trailImageTexture = PIXI.RenderTexture.create(bufferTextureSize);
+        this.outputTexture = PIXI.RenderTexture.create(bufferTextureSize);
+    }
+
+    public setBufferTextureSize(bufferTextureSize : {width : number, height : number }) {
+        this.trailImageTexture = PIXI.RenderTexture.create(bufferTextureSize);
+        this.outputTexture = PIXI.RenderTexture.create(bufferTextureSize);
+    }
+
+    public clear() {
+        const renderer = TrailLayer.app.renderer;
         renderer.render(this.clearingSprite, {renderTexture : this.outputTexture, clear : true});
     }
 
+    public get TrailSprite() {
+        return this.trailSprite;
+    }
+
     public addFilter(f : PIXI.Filter) {
-        if (!this.spriteForFading.filters) this.spriteForFading.filters = [];
-        this.spriteForFading.filters = this.spriteForFading.filters.concat(f);
+        if (!this.trailSprite.filters) this.trailSprite.filters = [];
+        this.trailSprite.filters = this.trailSprite.filters.concat(f);
     }
 
-    public set effectTint(v : number) {
-        this.spriteForFading.tint = v;
+    public set trailTint(v : number) {
+        this.trailSprite.tint = v;
     }
 
-    public set fadeTime(v : number) {
-        this.spriteForFading.alpha = v;
+    public set trailAlpha(v : number) {
+        this.trailSprite.alpha = v;
     }
 }
