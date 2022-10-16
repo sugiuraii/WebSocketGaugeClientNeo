@@ -44,7 +44,6 @@ export class TrailLayer extends PIXI.Sprite {
         this.trailImageTexture = PIXI.RenderTexture.create(bufferTextureSize);
         this.outputTexture = PIXI.RenderTexture.create(bufferTextureSize);
         this.texture = this.trailImageTexture;
-        this.trailAlpha = 0.8;
 
         if(TrailLayer.app === undefined)
             throw Error("PIXI app is null on constructing TrailLayer. Call TralLayer.setApp() before constructing TrailLayer.");

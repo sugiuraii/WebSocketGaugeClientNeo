@@ -45,6 +45,8 @@ require("./AnalogMeterFont_45px_0.png");
 require("./AnalogMeterFont_40px_0.png");
 require("./AnalogMeterFont_60px_0.png");
 
+const TRAIL_ALPHA = 0.6;
+
 export class AnalogMeterCluster extends PIXI.Container {
     private tachoProgressBar: CircularProgressBar;
     private waterTempProgressBar: CircularProgressBar;
@@ -177,7 +179,7 @@ export class AnalogMeterCluster extends PIXI.Container {
         const tachoProgressBar = new CircularProgressBar(tachoProgressBarOptions);
         tachoProgressBar.pivot.set(193, 193);
         tachoProgressBar.position.set(300, 300);
-        //tachoContainer.addChild(tachoProgressBar);
+        tachoContainer.addChild(tachoProgressBar);
         tachoProgressBar.Value = tachoValDefalut;
         tachoProgressBar.updateForce();
 
@@ -190,14 +192,13 @@ export class AnalogMeterCluster extends PIXI.Container {
         const tachoNeedleGauge = new RotationNeedleGauge(tachoNeedleGaugeOptions);
         tachoNeedleGauge.pivot.set(15, 15);
         tachoNeedleGauge.position.set(300, 300);
-        //tachoContainer.addChild(tachoNeedleGauge);
         tachoNeedleGauge.Value = tachoValDefalut;
         tachoNeedleGauge.updateForce();
 
-        const aiLayer = new TrailLayer({height : 600, width : 600});
-        aiLayer.addChild(tachoNeedleGauge);
-        aiLayer.addChild(tachoProgressBar);
-        tachoContainer.addChild(aiLayer);
+        const trailLayer = new TrailLayer({height : 600, width : 600});
+        trailLayer.addChild(tachoNeedleGauge);
+        trailLayer.trailAlpha = TRAIL_ALPHA;
+        tachoContainer.addChild(trailLayer);
 
         const shaftSprite = PIXI.Sprite.from("AnalogTachoMeter_NeedleCap");
         shaftSprite.pivot.set(72, 72);
@@ -283,13 +284,13 @@ export class AnalogMeterCluster extends PIXI.Container {
         const speedNeedleGauge = new RotationNeedleGauge(speedNeedleGaugeOptions);
         speedNeedleGauge.pivot.set(15, 15);
         speedNeedleGauge.position.set(300, 300);
-        //speedMeterContainer.addChild(speedNeedleGauge);
         speedNeedleGauge.Value = speedValDefault;
         speedNeedleGauge.updateForce();
 
-        const aiLayer = new TrailLayer({height : backSprite.height, width : backSprite.width});
-        aiLayer.addChild(speedNeedleGauge);
-        speedMeterContainer.addChild(aiLayer);
+        const trailLayer = new TrailLayer({height : backSprite.height, width : backSprite.width});
+        trailLayer.addChild(speedNeedleGauge);
+        trailLayer.trailAlpha = TRAIL_ALPHA;
+        speedMeterContainer.addChild(trailLayer);
 
         const shaftSprite = PIXI.Sprite.from("AnalogSpeedMeter_NeedleCap");
         shaftSprite.anchor.set(0.5, 0.5);
@@ -321,11 +322,11 @@ export class AnalogMeterCluster extends PIXI.Container {
         boostNeedleGauge.position.set(220, 220);
         boostNeedleGauge.Value = boostValDefault;
         boostNeedleGauge.updateForce();
-        //boostMeterContainer.addChild(boostNeedleGauge);
 
-        const aiLayer = new TrailLayer({height : backSprite.height, width :backSprite.width});
-        aiLayer.addChild(boostNeedleGauge);
-        boostMeterContainer.addChild(aiLayer);
+        const trailLayer = new TrailLayer({height : backSprite.height, width :backSprite.width});
+        trailLayer.addChild(boostNeedleGauge);
+        trailLayer.trailAlpha = TRAIL_ALPHA;
+        boostMeterContainer.addChild(trailLayer);
 
         return { container: boostMeterContainer, boostNeedleGauge: boostNeedleGauge };
     }
