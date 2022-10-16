@@ -44,7 +44,7 @@ export class TrailLayer extends PIXI.Sprite {
         this.trailImageTexture = PIXI.RenderTexture.create({width : width, height : height});
         this.outputTexture = PIXI.RenderTexture.create({width : width, height : height});
         this.texture = this.trailImageTexture;
-        this.fadeTime = 0.6;
+        this.fadeTime = 0.8;
         TrailLayer.app.ticker.add(() => this.updateTexture(TrailLayer.app.renderer));
     }
 
