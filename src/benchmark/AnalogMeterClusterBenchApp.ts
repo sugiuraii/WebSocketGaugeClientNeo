@@ -53,7 +53,6 @@ class AnalogMeterClusterBenchApp
 
         appOption.SetupPIXIMeterPanel = async (app) =>
         {
-            TrailLayer.setApp(app);
             const meterCluster = await AnalogMeterCluster.create();
             const stage = app.stage;
 
