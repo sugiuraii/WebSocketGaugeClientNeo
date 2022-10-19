@@ -80,7 +80,7 @@ class AnalogMeterClusterBenchApp
                 if(tacho > 9000)
                     tacho = 0;
                 else
-                    tacho += 100;
+                    tacho += 500;
                 
                 if(speed > 280)
                     speed = 0;
