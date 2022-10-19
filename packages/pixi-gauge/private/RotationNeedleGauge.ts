@@ -94,25 +94,34 @@ export class RotationNeedleGaugeOptions extends NeedleGaugeOptions {
      * Rotation direction. (Anticlockwise drawing in true).
      */
     public AntiClockwise: boolean;
+    /**
+     * Minimum angle jump step to call subframe render.
+     */
+    public SubframeRenderAngleStep: number;
+
     constructor() {
         super();
         this.OffsetAngle = 0;
         this.FullAngle = 360;
         this.AngleStep = 0.1;
         this.AntiClockwise = false;
+        this.SubframeRenderAngleStep = 2;
     }
 }
 
 export class RotationNeedleGauge extends NeedleGauge {
-    private rotationNeedleGaugeOptions: RotationNeedleGaugeOptions;
-
+    private readonly rotationNeedleGaugeOptions: RotationNeedleGaugeOptions;
     private currAngle: number;
+
+    private readonly subFrameRenderCallback: Array<() => void> = []; 
 
     /**
      * Get Options.
      * @return Options.
      */
     get Options(): RotationNeedleGaugeOptions { return this.rotationNeedleGaugeOptions }
+
+    get SubFrameRenderCallback() { return this.subFrameRenderCallback } 
 
     constructor(options: RotationNeedleGaugeOptions) {
         super(options);
@@ -138,6 +147,9 @@ export class RotationNeedleGauge extends NeedleGauge {
         const value: number = this.DrawValue;
 
         const currentAngle: number = this.currAngle;
+        
+        const subFrameRenderAngleStep = this.Options.SubframeRenderAngleStep;
+        
         let angle: number;
         if (!anticlockwise)
             angle = (value - valueMin) / (valueMax - valueMin) * fullAngle + offsetAngle;
@@ -151,15 +163,26 @@ export class RotationNeedleGauge extends NeedleGauge {
         else {
             //Round into angle_resolution
             angle = Math.floor(angle / angleStep) * angleStep;
+
+            if(this.subFrameRenderCallback.length > 0) {
+                if(deltaAngle > subFrameRenderAngleStep) {
+                    const angleTickSign = (angle > currentAngle)?1:-1;
+                    const angleTick = subFrameRenderAngleStep * angleTickSign;
+                    for(let subFrameAngle = currentAngle; (angle - subFrameAngle)*angleTickSign > 0 ; subFrameAngle+=angleTick) {
+                        this.setAngle(subFrameAngle);
+                        this.SubFrameRenderCallback.forEach(f => f());
+                    }
+                }
+            }
+            this.setAngle(angle);
             //Update currentAngle
             this.currAngle = angle;
         }
-
-        const angleRad: number = Math.PI / 180 * angle;
-
-        //Set container angle
-        this.rotation = angleRad;
-
         return;
+    }
+
+    private setAngle(degAngle : number) {
+        const angleRad: number = Math.PI / 180 * degAngle;
+        this.rotation = angleRad;
     }
 }
