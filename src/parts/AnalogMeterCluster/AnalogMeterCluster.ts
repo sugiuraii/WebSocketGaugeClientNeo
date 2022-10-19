@@ -45,7 +45,7 @@ require("./AnalogMeterFont_45px_0.png");
 require("./AnalogMeterFont_40px_0.png");
 require("./AnalogMeterFont_60px_0.png");
 
-const TRAIL_ALPHA = 0.6;
+const TRAIL_ALPHA = 0.95;
 
 export class AnalogMeterCluster extends PIXI.Container {
     private tachoProgressBar: CircularProgressBar;
@@ -198,7 +198,10 @@ export class AnalogMeterCluster extends PIXI.Container {
         const trailLayer = new TrailLayer({height : 600, width : 600});
         trailLayer.addChild(tachoNeedleGauge);
         trailLayer.trailAlpha = TRAIL_ALPHA;
+        trailLayer.trailAlphaInterval = 0;
         tachoContainer.addChild(trailLayer);
+
+        tachoNeedleGauge.SubFrameRenderCallback.push(() => trailLayer.updateTexture());
 
         const shaftSprite = PIXI.Sprite.from("AnalogTachoMeter_NeedleCap");
         shaftSprite.pivot.set(72, 72);
