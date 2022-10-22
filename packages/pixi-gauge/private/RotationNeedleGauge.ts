@@ -25,7 +25,7 @@
 import { Gauge1DOptions } from './GaugeBase'
 import { Gauge1D } from './GaugeBase'
 import * as PIXI from 'pixi.js';
-import { ICircularGaugeOption } from './utils/CircularGaugeAngleCalculator';
+import { CircularGaugeAngleCalculator, ICircularGaugeOption } from './utils/CircularGaugeAngleCalculator';
 
 /**
  * Needle gauge option class.
@@ -112,9 +112,9 @@ export class RotationNeedleGaugeOptions extends NeedleGaugeOptions implements IC
 
 export class RotationNeedleGauge extends NeedleGauge {
     private readonly rotationNeedleGaugeOptions: RotationNeedleGaugeOptions;
-    private currAngle: number;
-
     private readonly subFrameRenderCallback: Array<() => void> = []; 
+
+    private readonly circularGaugeAngleCalculator : CircularGaugeAngleCalculator;
 
     /**
      * Get Options.
@@ -127,7 +127,7 @@ export class RotationNeedleGauge extends NeedleGauge {
     constructor(options: RotationNeedleGaugeOptions) {
         super(options);
         this.rotationNeedleGaugeOptions = options;
-        this.currAngle = options.OffsetAngle;
+        this.circularGaugeAngleCalculator = new CircularGaugeAngleCalculator(options, options.SubframeRenderAngleStep);
     }
 
     /**
@@ -137,53 +137,10 @@ export class RotationNeedleGauge extends NeedleGauge {
     protected _update(skipStepCheck: boolean): void {
         // Update texture reference of sprite.
         this.Sprite.texture = this.rotationNeedleGaugeOptions.Texture;
-
-        const anticlockwise: boolean = this.Options.AntiClockwise;
-        const offsetAngle: number = this.Options.OffsetAngle;
-        const fullAngle: number = this.Options.FullAngle;
-        const angleStep: number = this.Options.AngleStep;
-
-        const valueMax: number = this.Options.Max;
-        const valueMin: number = this.Options.Min;
-        const value: number = this.DrawValue;
-
-        const currentAngle: number = this.currAngle;
-        
-        const subFrameRenderAngleStep = this.Options.SubframeRenderAngleStep;
-        
-        let angle: number;
-        if (!anticlockwise)
-            angle = (value - valueMin) / (valueMax - valueMin) * fullAngle + offsetAngle;
-        else
-            angle = -(value - valueMin) / (valueMax - valueMin) * fullAngle + offsetAngle;
-
-        //Check angle displacement over the angleStep or not
-        const deltaAngle: number = Math.abs(angle - currentAngle);
-        if (!skipStepCheck && deltaAngle < angleStep)
-            return;
-        else {
-            //Round into angle_resolution
-            angle = Math.floor(angle / angleStep) * angleStep;
-
-            if(this.subFrameRenderCallback.length > 0) {
-                if(deltaAngle > subFrameRenderAngleStep) {
-                    const angleTickSign = (angle > currentAngle)?1:-1;
-                    const angleTick = subFrameRenderAngleStep * angleTickSign;
-                    for(let subFrameAngle = currentAngle; (angle - subFrameAngle)*angleTickSign > 0 ; subFrameAngle+=angleTick) {
-                        this.setAngle(subFrameAngle);
-                        this.SubFrameRenderCallback.forEach(f => f());
-                    }
-                }
-            }
-            this.setAngle(angle);
-            //Update currentAngle
-            this.currAngle = angle;
-        }
-        return;
-    }
-
-    private setAngle(degAngle : number) {
-        const angleRad: number = Math.PI / 180 * degAngle;
-        this.rotation = angleRad;
+        const drawAngleUpdate = (angle : number) => {
+            const angleRad: number = Math.PI / 180 * angle;
+            this.rotation = angleRad;
+        };
+        this.circularGaugeAngleCalculator.calcAndUpdate(this.DrawValue, skipStepCheck, drawAngleUpdate, this.subFrameRenderCallback);
     }
 }

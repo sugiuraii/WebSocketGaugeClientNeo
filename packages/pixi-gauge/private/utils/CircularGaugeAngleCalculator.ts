@@ -44,8 +44,7 @@ export class CircularGaugeAngleCalculator {
         this.currentAngle = this.CircularGaugeOption.OffsetAngle;
     }
 
-    public calcAndUpdate(value : number, skipStepCheck: boolean, doSubFrameRender: boolean, drawAngleUpdateCallback: (angle : number) => void){
-
+    public calcAndUpdate(value : number, skipStepCheck: boolean, drawAngleUpdateCallback: (angle : number) => void, subFrameRenderCallBack: Array<() => void>){
         const anticlockwise: boolean = this.CircularGaugeOption.AntiClockwise;
         const offsetAngle: number = this.CircularGaugeOption.OffsetAngle;
         const fullAngle: number = this.CircularGaugeOption.FullAngle;
@@ -72,12 +71,13 @@ export class CircularGaugeAngleCalculator {
             //Round into angle_resolution
             angle = Math.floor(angle / angleStep) * angleStep;
 
-            if(doSubFrameRender) {
+            if(subFrameRenderCallBack.length != 0) {
                 if(deltaAngle > subFrameRenderAngleStep) {
                     const angleTickSign = (angle > currentAngle)?1:-1;
                     const angleTick = subFrameRenderAngleStep * angleTickSign;
                     for(let subFrameAngle = currentAngle; (angle - subFrameAngle)*angleTickSign > 0 ; subFrameAngle+=angleTick) {
                         drawAngleUpdateCallback(subFrameAngle);
+                        subFrameRenderCallBack.forEach(f => f());
                     }
                 }
             }
