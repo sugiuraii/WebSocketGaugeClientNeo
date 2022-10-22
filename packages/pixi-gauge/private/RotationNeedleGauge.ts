@@ -25,6 +25,7 @@
 import { Gauge1DOptions } from './GaugeBase'
 import { Gauge1D } from './GaugeBase'
 import * as PIXI from 'pixi.js';
+import { ICircularGaugeOption } from './utils/CircularGaugeAngleCalculator';
 
 /**
  * Needle gauge option class.
@@ -76,7 +77,7 @@ abstract class NeedleGauge extends Gauge1D {
 /**
  * Rotation needle gauge option class.
  */
-export class RotationNeedleGaugeOptions extends NeedleGaugeOptions {
+export class RotationNeedleGaugeOptions extends NeedleGaugeOptions implements ICircularGaugeOption {
     /**
      * Offset angle (angle of value=Min)
      */
