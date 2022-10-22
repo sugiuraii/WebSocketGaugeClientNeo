@@ -35,13 +35,14 @@ export interface ICircularGaugeOption {
 export class CircularGaugeAngleCalculator {
     private readonly CircularGaugeOption : ICircularGaugeOption;
     private readonly SubFrameRenderAngleStep : number;
-
+    private readonly NumMaxSubframe : number;
     private currentAngle : number;
         
-    constructor(circularGaugeOption : ICircularGaugeOption, subFrameRenderAngleStep : number) {
+    constructor(circularGaugeOption : ICircularGaugeOption, subFrameRenderAngleStep : number, numMaxSubFrame : number) {
         this.CircularGaugeOption = circularGaugeOption;
         this.SubFrameRenderAngleStep = subFrameRenderAngleStep;
         this.currentAngle = this.CircularGaugeOption.OffsetAngle;
+        this.NumMaxSubframe = numMaxSubFrame;
     }
 
     public calcAndUpdate(value : number, skipStepCheck: boolean, drawAngleUpdateCallback: (angle : number) => void, subFrameRenderCallBack: Array<() => void>){
@@ -55,8 +56,6 @@ export class CircularGaugeAngleCalculator {
 
         const currentAngle: number = this.currentAngle;
         
-        const subFrameRenderAngleStep = this.SubFrameRenderAngleStep;
-        
         let angle: number;
         if (!anticlockwise)
             angle = (value - valueMin) / (valueMax - valueMin) * fullAngle + offsetAngle;
@@ -65,6 +64,8 @@ export class CircularGaugeAngleCalculator {
 
         //Check angle displacement over the angleStep or not
         const deltaAngle: number = Math.abs(angle - currentAngle);
+        const subFrameRenderAngleStep = this.getReScaledSubFrameAngleStepByNumMaxSubFrame(deltaAngle);
+
         if (!skipStepCheck && deltaAngle < angleStep)
             return;
         else {
@@ -82,7 +83,15 @@ export class CircularGaugeAngleCalculator {
                 }
             }
             drawAngleUpdateCallback(angle);
+            this.currentAngle = angle;
         }
         return;
+    }
+
+    private getReScaledSubFrameAngleStepByNumMaxSubFrame(deltaAngle : number) {
+        if(deltaAngle / this.SubFrameRenderAngleStep < this.NumMaxSubframe)
+            return this.SubFrameRenderAngleStep;
+        else
+            return deltaAngle / this.NumMaxSubframe;
     }
 }

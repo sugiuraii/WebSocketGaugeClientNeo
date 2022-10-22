@@ -99,7 +99,11 @@ export class RotationNeedleGaugeOptions extends NeedleGaugeOptions implements IC
      * Minimum angle jump step to call subframe render.
      */
     public SubframeRenderAngleStep: number;
-
+    /**
+     * Max number of subframe (to limit subframe rendereng to prevent performance drop)
+     */
+    public NumMaxSubframe: number;
+    
     constructor() {
         super();
         this.OffsetAngle = 0;
@@ -107,6 +111,7 @@ export class RotationNeedleGaugeOptions extends NeedleGaugeOptions implements IC
         this.AngleStep = 0.1;
         this.AntiClockwise = false;
         this.SubframeRenderAngleStep = 2;
+        this.NumMaxSubframe = 5;
     }
 }
 
@@ -127,7 +132,7 @@ export class RotationNeedleGauge extends NeedleGauge {
     constructor(options: RotationNeedleGaugeOptions) {
         super(options);
         this.rotationNeedleGaugeOptions = options;
-        this.circularGaugeAngleCalculator = new CircularGaugeAngleCalculator(options, options.SubframeRenderAngleStep);
+        this.circularGaugeAngleCalculator = new CircularGaugeAngleCalculator(options, options.SubframeRenderAngleStep, options.NumMaxSubframe);
     }
 
     /**
