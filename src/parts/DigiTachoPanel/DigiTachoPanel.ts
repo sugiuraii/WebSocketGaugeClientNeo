@@ -94,8 +94,7 @@ export class DigiTachoPanel extends PIXI.Container {
         tachoProgressBarOption.Texture = tachoProgressBarTexture;
         tachoProgressBarOption.Min = 0;
         tachoProgressBarOption.Max = 9000;
-        tachoProgressBarOption.Vertical = false;
-        tachoProgressBarOption.InvertDirection = false;
+        tachoProgressBarOption.GaugeDirection = "LeftToRight";
         tachoProgressBarOption.GagueFullOnValueMin = false;
         tachoProgressBarOption.PixelStep = 8;
         tachoProgressBarOption.Height = 246;

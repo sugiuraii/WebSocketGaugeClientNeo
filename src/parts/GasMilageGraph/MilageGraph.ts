@@ -101,7 +101,7 @@ export class MilageGraphPanel extends PIXI.Container {
 
         const momentGasMilageBarOption = new RectangularProgressBarOptions();
         momentGasMilageBarOption.Texture = PIXI.Texture.from("MilageGraph_valueBar2");
-        momentGasMilageBarOption.Vertical = true;
+        momentGasMilageBarOption.GaugeDirection = "DownToUp";
         momentGasMilageBarOption.Width = 40;
         momentGasMilageBarOption.Height = 240;
         momentGasMilageBarOption.Max = 20;
@@ -117,7 +117,7 @@ export class MilageGraphPanel extends PIXI.Container {
             const spankey: string = this.sectSpan[i];
             const sectGasMilageBarOption = new RectangularProgressBarOptions();
             sectGasMilageBarOption.Texture = sectGasMilageBarTexture;
-            sectGasMilageBarOption.Vertical = true;
+            sectGasMilageBarOption.GaugeDirection = "DownToUp";
             sectGasMilageBarOption.Width = 30;
             sectGasMilageBarOption.Height = 240;
             sectGasMilageBarOption.Max = 20;

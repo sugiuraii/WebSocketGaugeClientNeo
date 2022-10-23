@@ -25,21 +25,16 @@
 import { ProgressBarOptions } from './ProgressBarBase'
 import { ProgressBar } from './ProgressBarBase'
 import * as PIXI from 'pixi.js';
+import { GaugeDirection, ILinearGaugeOption } from './utils/LinearGaugeDisplacementCalculator';
 
 /**
  * Rectangular progressbar option class.
  */
-export class RectangularProgressBarOptions extends ProgressBarOptions {
+export class RectangularProgressBarOptions extends ProgressBarOptions implements ILinearGaugeOption {
     /**
-     * Flag to fill vertical. (true : vertical fill, false : horizontal fill).
+     * Direction of gauge.
      */
-    public Vertical: boolean;
-    /**
-     * Flag to invert filling direction.
-     * (On this flag = true : fill RIGHT to LEFT (when Vertiocal = false), fill UP to DOWN (when Vertiocal = true).
-     * (On this flag = false : fill LEFT to RIGHT (when Vertiocal = false), fill DOWN to UP (when Vertiocal = true).
-     */
-    public InvertDirection: boolean;
+    public GaugeDirection: GaugeDirection;
     /**
      * Progress bar mask width.
      */
@@ -55,8 +50,7 @@ export class RectangularProgressBarOptions extends ProgressBarOptions {
 
     constructor() {
         super();
-        this.Vertical = false;
-        this.InvertDirection = false;
+        this.GaugeDirection = "LeftToRight";
         this.Width = 100;
         this.Height = 100;
         this.PixelStep = 1;
@@ -105,8 +99,8 @@ export class RectangularProgressBar extends ProgressBar {
 
         const spriteMask: PIXI.Graphics = this.SpriteMask;
 
-        const vertical: boolean = this.Options.Vertical;
-        const invertDirection: boolean = this.Options.InvertDirection;
+        const vertical: boolean = this.Options.GaugeDirection === "DownToUp" || this.Options.GaugeDirection === "UpToDown";
+        const invertDirection: boolean = this.Options.GaugeDirection === "UpToDown" || this.Options.GaugeDirection === "RightToLeft";
 
         let pixelRange: number;
         if (vertical)

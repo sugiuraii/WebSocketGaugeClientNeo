@@ -22,9 +22,15 @@
  * THE SOFTWARE.
  */
 
+export type GaugeDirection =
+    "LeftToRight" |
+    "RightToLeft" |
+    "DownToUp" |
+    "UpToDown";
+
+
 export interface ILinearGaugeOption {
-    Vertical: boolean;
-    InvertDiraction: boolean;
+    GaugeDirection : GaugeDirection;
     Width: number;
     Height: number;
     PixelStep: number;
