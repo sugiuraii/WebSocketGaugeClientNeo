@@ -32,17 +32,23 @@ export interface ICircularGaugeOption {
     Min: number;
 }
 
+export interface ICircularGaugeSubFrameRenderOption {
+    SubFrameRenderAngleStep : number;
+    MaxDeltaAngleToRenderSubFrame : number;
+    NumMaxSubframe : number;
+}
+
 export class CircularGaugeAngleCalculator {
-    private readonly CircularGaugeOption : ICircularGaugeOption;
-    private readonly SubFrameRenderAngleStep : number;
-    private readonly NumMaxSubframe : number;
+    private readonly CircularGaugeOption : ICircularGaugeOption
+    private readonly SubFrameRenderOption : ICircularGaugeSubFrameRenderOption;
+
     private currentAngle : number;
         
-    constructor(circularGaugeOption : ICircularGaugeOption, subFrameRenderAngleStep : number, numMaxSubFrame : number) {
+    constructor(circularGaugeOption : ICircularGaugeOption & ICircularGaugeSubFrameRenderOption) {
         this.CircularGaugeOption = circularGaugeOption;
-        this.SubFrameRenderAngleStep = subFrameRenderAngleStep;
+        this.SubFrameRenderOption = circularGaugeOption;
+
         this.currentAngle = this.CircularGaugeOption.OffsetAngle;
-        this.NumMaxSubframe = numMaxSubFrame;
     }
 
     public calcAndUpdate(value : number, skipStepCheck: boolean, drawAngleUpdateCallback: (angle : number) => void, subFrameRenderCallBack: Array<() => void>){
@@ -64,7 +70,6 @@ export class CircularGaugeAngleCalculator {
 
         //Check angle displacement over the angleStep or not
         const deltaAngle: number = Math.abs(angle - currentAngle);
-        const subFrameRenderAngleStep = this.getReScaledSubFrameAngleStepByNumMaxSubFrame(deltaAngle);
 
         if (!skipStepCheck && deltaAngle < angleStep)
             return;
@@ -73,7 +78,8 @@ export class CircularGaugeAngleCalculator {
             angle = Math.floor(angle / angleStep) * angleStep;
 
             if(subFrameRenderCallBack.length != 0) {
-                if(deltaAngle > subFrameRenderAngleStep) {
+                const subFrameRenderAngleStep = this.getReScaledSubFrameAngleStepByNumMaxSubFrame(deltaAngle);
+                if(deltaAngle > subFrameRenderAngleStep && deltaAngle < this.SubFrameRenderOption.MaxDeltaAngleToRenderSubFrame) {
                     const angleTickSign = (angle > currentAngle)?1:-1;
                     const angleTick = subFrameRenderAngleStep * angleTickSign;
                     for(let subFrameAngle = currentAngle; (angle - subFrameAngle)*angleTickSign > 0 ; subFrameAngle+=angleTick) {
@@ -89,9 +95,9 @@ export class CircularGaugeAngleCalculator {
     }
 
     private getReScaledSubFrameAngleStepByNumMaxSubFrame(deltaAngle : number) {
-        if(deltaAngle / this.SubFrameRenderAngleStep < this.NumMaxSubframe)
-            return this.SubFrameRenderAngleStep;
+        if(deltaAngle / this.SubFrameRenderOption.SubFrameRenderAngleStep < this.SubFrameRenderOption.NumMaxSubframe)
+            return this.SubFrameRenderOption.SubFrameRenderAngleStep;
         else
-            return deltaAngle / this.NumMaxSubframe;
+            return deltaAngle / this.SubFrameRenderOption.NumMaxSubframe;
     }
 }

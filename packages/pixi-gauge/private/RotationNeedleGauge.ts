@@ -25,7 +25,7 @@
 import { Gauge1DOptions } from './GaugeBase'
 import { Gauge1D } from './GaugeBase'
 import * as PIXI from 'pixi.js';
-import { CircularGaugeAngleCalculator, ICircularGaugeOption } from './utils/CircularGaugeAngleCalculator';
+import { CircularGaugeAngleCalculator, ICircularGaugeOption, ICircularGaugeSubFrameRenderOption } from './utils/CircularGaugeAngleCalculator';
 
 /**
  * Needle gauge option class.
@@ -77,7 +77,7 @@ abstract class NeedleGauge extends Gauge1D {
 /**
  * Rotation needle gauge option class.
  */
-export class RotationNeedleGaugeOptions extends NeedleGaugeOptions implements ICircularGaugeOption {
+export class RotationNeedleGaugeOptions extends NeedleGaugeOptions implements ICircularGaugeOption, ICircularGaugeSubFrameRenderOption {
     /**
      * Offset angle (angle of value=Min)
      */
@@ -98,21 +98,27 @@ export class RotationNeedleGaugeOptions extends NeedleGaugeOptions implements IC
     /**
      * Minimum angle jump step to call subframe render.
      */
-    public SubframeRenderAngleStep: number;
+    public SubFrameRenderAngleStep: number;
     /**
      * Max number of subframe (to limit subframe rendereng to prevent performance drop)
      */
     public NumMaxSubframe: number;
-    
+    /**
+     * Max delta-angle (angle change between render frames) to call subframe render.
+     */
+    public MaxDeltaAngleToRenderSubFrame: number;
+
     constructor() {
         super();
         this.OffsetAngle = 0;
         this.FullAngle = 360;
         this.AngleStep = 0.1;
         this.AntiClockwise = false;
-        this.SubframeRenderAngleStep = 2;
+        this.SubFrameRenderAngleStep = 2;
         this.NumMaxSubframe = 5;
+        this.MaxDeltaAngleToRenderSubFrame = 180;
     }
+
 }
 
 export class RotationNeedleGauge extends NeedleGauge {
@@ -132,7 +138,7 @@ export class RotationNeedleGauge extends NeedleGauge {
     constructor(options: RotationNeedleGaugeOptions) {
         super(options);
         this.rotationNeedleGaugeOptions = options;
-        this.circularGaugeAngleCalculator = new CircularGaugeAngleCalculator(options, options.SubframeRenderAngleStep, options.NumMaxSubframe);
+        this.circularGaugeAngleCalculator = new CircularGaugeAngleCalculator(options);
     }
 
     /**
