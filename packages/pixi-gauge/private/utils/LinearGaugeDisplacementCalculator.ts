@@ -44,3 +44,64 @@ export interface ILinearGaugeSubFrameRenderOption {
     MaxDeltaPixelToRenderSubFrame : number;
     NumMaxSubframe : number;
 }
+
+export class LinearGaugeDisplacementCalculator {
+    private readonly LinearGaugeOption : ILinearGaugeOption
+    private readonly SubFrameRenderOption : ILinearGaugeSubFrameRenderOption;
+
+    private currentDisplacement : number;
+        
+    constructor(gaugeOption : ILinearGaugeOption & ILinearGaugeSubFrameRenderOption) {
+        this.LinearGaugeOption = gaugeOption;
+        this.SubFrameRenderOption = gaugeOption;
+
+        this.currentDisplacement = 0;
+    }
+
+    public calcAndUpdate(value : number, skipStepCheck: boolean, drawUpdateCallback: (displacement : number) => void, subFrameRenderCallBack: Array<() => void>){
+        const currentDisplacement: number = this.currentDisplacement;
+        const pixelStep: number = this.LinearGaugeOption.PixelStep;
+        
+        const height: number = this.LinearGaugeOption.Height;
+        const width: number = this.LinearGaugeOption.Width;
+        
+        const valueMax: number = this.LinearGaugeOption.Max;
+        const valueMin: number = this.LinearGaugeOption.Min;
+
+        const vertical: boolean = this.LinearGaugeOption.GaugeDirection === "DownToUp" || this.LinearGaugeOption.GaugeDirection === "UpToDown";
+        const invertDirection: boolean = this.LinearGaugeOption.GaugeDirection === "UpToDown" || this.LinearGaugeOption.GaugeDirection === "RightToLeft";
+
+        const pixelRange = vertical?height:width;
+        let displacement = (value - valueMin) / (valueMax - valueMin) * pixelRange;
+
+        // Check deltaPixel over the pixelStep
+        const deltaDisplacement: number = Math.abs(displacement - currentDisplacement);
+        
+        if (!skipStepCheck && deltaDisplacement < pixelStep)
+            return;
+        else {
+            //Round into pixelStep
+            displacement = Math.floor(displacement / pixelStep) * pixelStep;
+            if(subFrameRenderCallBack.length != 0) {
+                const subFrameRenderPixelStep = this.getReScaledSubFramePixelStepByNumMaxSubFrame(deltaDisplacement);
+                if(deltaDisplacement > subFrameRenderPixelStep && deltaDisplacement < this.SubFrameRenderOption.MaxDeltaPixelToRenderSubFrame) {
+                    const displacementTickSign = (displacement > currentDisplacement)?1:-1;
+                    const tick = subFrameRenderPixelStep * displacementTickSign;
+                    for(let subFrameDisplacement = currentDisplacement; (displacement - subFrameDisplacement)*displacementTickSign > 0 ; subFrameDisplacement+=tick) {
+                        drawUpdateCallback(subFrameDisplacement);
+                        subFrameRenderCallBack.forEach(f => f());
+                    }
+                }
+            }
+            drawUpdateCallback(displacement);
+            this.currentDisplacement = displacement;
+        }
+    }
+
+    private getReScaledSubFramePixelStepByNumMaxSubFrame(deltaDisplacement : number) {
+        if(deltaDisplacement / this.SubFrameRenderOption.SubFrameRenderPixelStep < this.SubFrameRenderOption.NumMaxSubframe)
+            return this.SubFrameRenderOption.SubFrameRenderPixelStep;
+        else
+            return deltaDisplacement / this.SubFrameRenderOption.NumMaxSubframe;
+    }
+}
