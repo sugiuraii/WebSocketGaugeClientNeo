@@ -37,7 +37,9 @@ export class TrailLayer extends PIXI.Sprite {
     private outputTexture : PIXI.RenderTexture;
     private readonly trailSprite = new PIXI.Sprite;
     private readonly clearingSprite = new PIXI.Sprite(PIXI.Texture.EMPTY); // used for clearing texture
-
+    private trailAlphaSetInterval_ = 0;
+    private trailAlpha_ = 1;
+    private trailAlphaCount = 0;
     constructor(bufferTextureSize : {width: number, height: number}) {
         super();
         
@@ -48,12 +50,23 @@ export class TrailLayer extends PIXI.Sprite {
         if(TrailLayer.app === undefined)
             throw Error("PIXI app is null on constructing TrailLayer. Call TralLayer.setApp() before constructing TrailLayer.");
         else
-            TrailLayer.app.ticker.add(() => this.updateTexture(TrailLayer.app.renderer));
+            TrailLayer.app.ticker.add(() => this.updateTexture());
     }
 
-    private updateTexture(renderer : PIXI.Renderer | PIXI.AbstractRenderer) {
+    public updateTexture() {
+        const renderer = TrailLayer.app.renderer;
         // Render faded texture
         this.trailSprite.texture = this.outputTexture;
+
+        if(this.trailAlphaCount >= this.trailAlphaSetInterval_) {
+            this.trailSprite.alpha = this.trailAlpha_;
+            this.trailAlphaCount = 0;
+        } else {
+            this.trailAlphaCount++;
+            this.trailSprite.alpha = 1;
+            
+        }
+
         renderer.render(this.trailSprite, {renderTexture : this.trailImageTexture, clear : true});
 
         // Render container
@@ -79,6 +92,10 @@ export class TrailLayer extends PIXI.Sprite {
     }
 
     public set trailAlpha(v : number) {
-        this.trailSprite.alpha = v;
+        this.trailAlpha_ = v;
+    }
+
+    public set trailAlphaInterval(v : number) {
+        this.trailAlphaSetInterval_ = v;
     }
 }
