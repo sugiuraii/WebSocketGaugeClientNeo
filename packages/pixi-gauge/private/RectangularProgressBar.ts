@@ -43,11 +43,11 @@ export class RectangularProgressBarOptions extends ProgressBarOptions {
     /**
      * Progress bar mask width.
      */
-    public MaskWidth: number;
+    public Width: number;
     /**
      * Progress bar mask height.
      */
-    public MaskHeight: number;
+    public Height: number;
     /**
      * Pixel step to change progress bar. 
      */
@@ -57,8 +57,8 @@ export class RectangularProgressBarOptions extends ProgressBarOptions {
         super();
         this.Vertical = false;
         this.InvertDirection = false;
-        this.MaskWidth = 100;
-        this.MaskHeight = 100;
+        this.Width = 100;
+        this.Height = 100;
         this.PixelStep = 1;
     }
 }
@@ -94,8 +94,8 @@ export class RectangularProgressBar extends ProgressBar {
         // Update texture reference of sprite.
         this.Sprite.texture = this.Options.Texture;
 
-        const maskHeight: number = this.Options.MaskHeight;
-        const maskWidth: number = this.Options.MaskWidth;
+        const maskHeight: number = this.Options.Height;
+        const maskWidth: number = this.Options.Width;
         const currBarPixel: number = this.currBarPixel;
         const pixelStep: number = this.Options.PixelStep;
 

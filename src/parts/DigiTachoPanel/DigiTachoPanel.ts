@@ -98,8 +98,8 @@ export class DigiTachoPanel extends PIXI.Container {
         tachoProgressBarOption.InvertDirection = false;
         tachoProgressBarOption.GagueFullOnValueMin = false;
         tachoProgressBarOption.PixelStep = 8;
-        tachoProgressBarOption.MaskHeight = 246;
-        tachoProgressBarOption.MaskWidth = 577;
+        tachoProgressBarOption.Height = 246;
+        tachoProgressBarOption.Width = 577;
 
         const tachoProgressBar = new RectangularProgressBar(tachoProgressBarOption);
         tachoProgressBar.position.set(10, 6);
