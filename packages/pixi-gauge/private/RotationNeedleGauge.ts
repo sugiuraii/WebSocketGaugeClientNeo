@@ -133,6 +133,9 @@ export class RotationNeedleGauge extends NeedleGauge {
      */
     get Options(): RotationNeedleGaugeOptions { return this.rotationNeedleGaugeOptions }
 
+    /**
+     * Call back function list to invoke subframe rendering.
+     */
     get SubFrameRenderCallback() { return this.subFrameRenderCallback } 
 
     constructor(options: RotationNeedleGaugeOptions) {

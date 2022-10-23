@@ -24,7 +24,7 @@
 import { ProgressBarOptions } from './ProgressBarBase'
 import { ProgressBar } from './ProgressBarBase'
 import * as PIXI from 'pixi.js';
-import { ICircularGaugeOption, ICircularGaugeSubFrameRenderOption } from './utils/CircularGaugeAngleCalculator';
+import { CircularGaugeAngleCalculator, ICircularGaugeOption, ICircularGaugeSubFrameRenderOption } from './utils/CircularGaugeAngleCalculator';
 
 /**
  * Option class for CircularProgressBar.
@@ -92,8 +92,8 @@ export class CircularProgressBarOptions extends ProgressBarOptions implements IC
  */
 export class CircularProgressBar extends ProgressBar {
     private circularProgressbarOptions: CircularProgressBarOptions;
-
-    private currAngle: number;
+    private readonly subFrameRenderCallback: Array<() => void> = []; 
+    private readonly circularGaugeAngleCalculator : CircularGaugeAngleCalculator;
 
     /**
      * @param options CircularProgressBarOption to set.
@@ -101,7 +101,7 @@ export class CircularProgressBar extends ProgressBar {
     constructor(options: CircularProgressBarOptions) {
         super(options);
         this.circularProgressbarOptions = options;
-        this.currAngle = options.OffsetAngle;
+        this.circularGaugeAngleCalculator = new CircularGaugeAngleCalculator(options);
     }
 
     /**
@@ -111,47 +111,18 @@ export class CircularProgressBar extends ProgressBar {
     get Options(): CircularProgressBarOptions { return this.circularProgressbarOptions }
 
     /**
-     * Update progress bar.
-     * @param skipStepCheck Skip checking angle displacement over the angleStep or not.
+     * Call back function list to invoke subframe rendering.
      */
-    protected _update(skipStepCheck: boolean): void {
-        // Update texture reference of sprite.
-        this.Sprite.texture = this.Options.Texture;
+    get SubFrameRenderCallback() { return this.subFrameRenderCallback } 
 
-        const centerPos: PIXI.Point = this.Options.Center;
-        const radius: number = this.Options.Radius;
-        const innerRadius: number = this.Options.InnerRadius;
-        const anticlockwise: boolean = this.Options.AntiClockwise;
-        const offsetAngle: number = this.Options.OffsetAngle;
-        const fullAngle: number = this.Options.FullAngle;
-        const angleStep: number = this.Options.AngleStep;
+    private drawProgressBar = (startAngle : number, endAngle : number, anticlockwise : boolean) => {
+        const centerPos = this.Options.Center;
+        const radius = this.Options.Radius;
+        const innerRadius = this.Options.InnerRadius;
 
-        const valueMax: number = this.Options.Max;
-        const valueMin: number = this.Options.Min;
-        const value: number = this.DrawValue;
+        const spriteMask = this.SpriteMask;
 
-        const spriteMask: PIXI.Graphics = this.SpriteMask;
-
-        const currentAngle: number = this.currAngle;
-        const startAngleRad: number = Math.PI / 180 * offsetAngle;
-        let endAngle: number;
-
-        if (!anticlockwise)
-            endAngle = (value - valueMin) / (valueMax - valueMin) * fullAngle + offsetAngle;
-        else
-            endAngle = -(value - valueMin) / (valueMax - valueMin) * fullAngle + offsetAngle;
-
-        //Check angle displacement over the angleStep or not 
-        const deltaAngle: number = Math.abs(endAngle - currentAngle);
-        if (!skipStepCheck && deltaAngle < angleStep)
-            return;
-        else {
-            //Round into angleresolution
-            endAngle = Math.floor(endAngle / angleStep) * angleStep;
-            //Update currentAngle
-            this.currAngle = endAngle;
-        }
-
+        const startAngleRad = Math.PI / 180 * startAngle;
         const endAngleRad: number = Math.PI / 180 * endAngle;
 
         // Draw pie-shaped mask
@@ -165,5 +136,19 @@ export class CircularProgressBar extends ProgressBar {
         spriteMask.endFill();
 
         return;
+    };
+    /**
+     * Update progress bar.
+     * @param skipStepCheck Skip checking angle displacement over the angleStep or not.
+     */
+    protected _update(skipStepCheck: boolean): void {
+        // Update texture reference of sprite.
+        this.Sprite.texture = this.Options.Texture;
+        const startAngle = this.Options.OffsetAngle;
+        const anticlockwise = this.Options.AntiClockwise;
+        const drawAngleUpdate = (endAngle : number) => {
+            this.drawProgressBar(startAngle, endAngle, anticlockwise);
+        };
+        this.circularGaugeAngleCalculator.calcAndUpdate(this.DrawValue, skipStepCheck, drawAngleUpdate, this.subFrameRenderCallback);
     }
 }
