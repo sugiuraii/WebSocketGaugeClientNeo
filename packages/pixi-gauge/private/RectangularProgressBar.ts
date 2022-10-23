@@ -25,7 +25,7 @@
 import { ProgressBarOptions } from './ProgressBarBase'
 import { ProgressBar } from './ProgressBarBase'
 import * as PIXI from 'pixi.js';
-import { GaugeDirection, ILinearGaugeOption, ILinearGaugeSubFrameRenderOption } from './utils/LinearGaugeDisplacementCalculator';
+import { GaugeDirection, ILinearGaugeOption, ILinearGaugeSubFrameRenderOption, LinearGaugeDisplacementCalculator } from './utils/LinearGaugeDisplacementCalculator';
 
 /**
  * Rectangular progressbar option class.
@@ -76,9 +76,9 @@ export class RectangularProgressBarOptions extends ProgressBarOptions implements
  * REctangular progressbar class.
  */
 export class RectangularProgressBar extends ProgressBar {
-    private rectangularProgressBarOptions: RectangularProgressBarOptions;
-
-    private currBarPixel: number;
+    private readonly rectangularProgressBarOptions: RectangularProgressBarOptions;
+    private readonly subFrameRenderCallback: Array<() => void> = [];
+    private readonly displacementCalculator : LinearGaugeDisplacementCalculator;
 
     /**
      * @param options Option to set.
@@ -86,7 +86,7 @@ export class RectangularProgressBar extends ProgressBar {
     constructor(options: RectangularProgressBarOptions) {
         super(options);
         this.rectangularProgressBarOptions = options;
-        this.currBarPixel = 0;
+        this.displacementCalculator = new LinearGaugeDisplacementCalculator(options);
     }
 
     /**
@@ -94,65 +94,38 @@ export class RectangularProgressBar extends ProgressBar {
      * @return Options.
      */
     get Options(): RectangularProgressBarOptions { return this.rectangularProgressBarOptions }
-
+    
     /**
-     * Update progress bar.
-     * @param skipStepCheck Skip checking angle displacement over the angleStep or not.
+     * Call back function list to invoke subframe rendering.
      */
-    protected _update(skipStepCheck: boolean): void {
-        // Update texture reference of sprite.
-        this.Sprite.texture = this.Options.Texture;
+     get SubFrameRenderCallback() { return this.subFrameRenderCallback } 
 
-        const maskHeight: number = this.Options.Height;
-        const maskWidth: number = this.Options.Width;
-        const currBarPixel: number = this.currBarPixel;
-        const pixelStep: number = this.Options.PixelStep;
-
-        const valueMax: number = this.Options.Max;
-        const valueMin: number = this.Options.Min;
-        const value: number = this.DrawValue;
-
-        const spriteMask: PIXI.Graphics = this.SpriteMask;
-
+    private readonly drawProgressBar = (displacement : number) => {
         const vertical: boolean = this.Options.GaugeDirection === "DownToUp" || this.Options.GaugeDirection === "UpToDown";
         const invertDirection: boolean = this.Options.GaugeDirection === "UpToDown" || this.Options.GaugeDirection === "RightToLeft";
+        const maskHeight: number = this.Options.Height;
+        const maskWidth: number = this.Options.Width;
 
-        let pixelRange: number;
-        if (vertical)
-            pixelRange = maskHeight;
-        else
-            pixelRange = maskWidth;
-
-        let barPixel = (value - valueMin) / (valueMax - valueMin) * pixelRange;
-
-        // Check deltaPixel over the pixelStep
-        const deltaPixel: number = Math.abs(barPixel - currBarPixel);
-        if (!skipStepCheck && deltaPixel < pixelStep)
-            return;
-        else {
-            //Round into pixelStep
-            barPixel = Math.floor(barPixel / pixelStep) * pixelStep;
-            this.currBarPixel = barPixel;
-        }
-
+        const spriteMask: PIXI.Graphics = this.SpriteMask;
+        
         //Define mask rectangle parameters
         let drawMaskX: number, drawMaskY: number;
         let drawMaskHeight: number, drawMaskWidth: number;
         if (vertical) {
             drawMaskX = 0;
             drawMaskWidth = maskWidth;
-            drawMaskHeight = barPixel;
+            drawMaskHeight = displacement;
             if (invertDirection) //Up to down
                 drawMaskY = 0;
             else //Down to Up
-                drawMaskY = maskHeight - barPixel;
+                drawMaskY = maskHeight - displacement;
         }
         else {
             drawMaskY = 0;
             drawMaskHeight = maskHeight;
-            drawMaskWidth = barPixel;
+            drawMaskWidth = displacement;
             if (invertDirection) //Right to left
-                drawMaskX = maskWidth - barPixel;
+                drawMaskX = maskWidth - displacement;
             else //Left to right
                 drawMaskX = 0;
         }
@@ -164,5 +137,15 @@ export class RectangularProgressBar extends ProgressBar {
         spriteMask.endFill();
 
         return;
+    }
+
+    /**
+     * Update progress bar.
+     * @param skipStepCheck Skip checking angle displacement over the angleStep or not.
+     */
+    protected _update(skipStepCheck: boolean): void {
+        // Update texture reference of sprite.
+        this.Sprite.texture = this.Options.Texture;
+        this.displacementCalculator.calcAndUpdate(this.DrawValue, skipStepCheck, this.drawProgressBar, this.SubFrameRenderCallback);
     }
 }
