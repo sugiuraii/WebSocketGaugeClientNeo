@@ -115,7 +115,7 @@ export class CircularProgressBar extends ProgressBar {
      */
     get SubFrameRenderCallback() { return this.subFrameRenderCallback } 
 
-    private drawProgressBar = (startAngle : number, endAngle : number, anticlockwise : boolean) => {
+    private readonly drawProgressBar = (startAngle : number, endAngle : number, anticlockwise : boolean) => {
         const centerPos = this.Options.Center;
         const radius = this.Options.Radius;
         const innerRadius = this.Options.InnerRadius;

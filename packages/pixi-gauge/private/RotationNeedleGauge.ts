@@ -144,6 +144,11 @@ export class RotationNeedleGauge extends NeedleGauge {
         this.circularGaugeAngleCalculator = new CircularGaugeAngleCalculator(options);
     }
 
+    private readonly drawAngleUpdate = (angle : number) => {
+        const angleRad: number = Math.PI / 180 * angle;
+        this.rotation = angleRad;
+    };
+
     /**
      * Update gauge.
      * @param skipStepCheck Skip checking angle displacement over the angleStep or not.
@@ -151,10 +156,6 @@ export class RotationNeedleGauge extends NeedleGauge {
     protected _update(skipStepCheck: boolean): void {
         // Update texture reference of sprite.
         this.Sprite.texture = this.rotationNeedleGaugeOptions.Texture;
-        const drawAngleUpdate = (angle : number) => {
-            const angleRad: number = Math.PI / 180 * angle;
-            this.rotation = angleRad;
-        };
-        this.circularGaugeAngleCalculator.calcAndUpdate(this.DrawValue, skipStepCheck, drawAngleUpdate, this.subFrameRenderCallback);
+        this.circularGaugeAngleCalculator.calcAndUpdate(this.DrawValue, skipStepCheck, this.drawAngleUpdate, this.subFrameRenderCallback);
     }
 }
