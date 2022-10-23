@@ -24,11 +24,12 @@
 import { ProgressBarOptions } from './ProgressBarBase'
 import { ProgressBar } from './ProgressBarBase'
 import * as PIXI from 'pixi.js';
+import { ICircularGaugeOption, ICircularGaugeSubFrameRenderOption } from './utils/CircularGaugeAngleCalculator';
 
 /**
  * Option class for CircularProgressBar.
  */
-export class CircularProgressBarOptions extends ProgressBarOptions {
+export class CircularProgressBarOptions extends ProgressBarOptions implements ICircularGaugeOption, ICircularGaugeSubFrameRenderOption  {
     /**
      * Offset angle (angle of value=Min)
      */
@@ -46,6 +47,18 @@ export class CircularProgressBarOptions extends ProgressBarOptions {
      * Drawing direction. (Anticlockwise drawing in true).
      */
     public AntiClockwise: boolean;
+    /**
+     * Minimum angle jump step to call subframe render.
+     */
+    public SubFrameRenderAngleStep: number;
+    /**
+     * Max number of subframe (to limit subframe rendereng to prevent performance drop)
+     */
+    public NumMaxSubframe: number;
+    /**
+     * Max delta-angle (angle change between render frames) to call subframe render.
+     */
+    public MaxDeltaAngleToRenderSubFrame: number;
     /**
      * Center position.
      */
@@ -67,6 +80,10 @@ export class CircularProgressBarOptions extends ProgressBarOptions {
         this.Center = new PIXI.Point(0, 0);
         this.Radius = 0;
         this.InnerRadius = 0;
+
+        this.SubFrameRenderAngleStep = 2;
+        this.NumMaxSubframe = 5;
+        this.MaxDeltaAngleToRenderSubFrame = 180;
     }
 }
 
