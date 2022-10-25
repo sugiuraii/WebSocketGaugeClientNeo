@@ -50,7 +50,7 @@ export class TrailLayer extends PIXI.Sprite {
         if(TrailLayer.app === undefined)
             throw Error("PIXI app is null on constructing TrailLayer. Call TralLayer.setApp() before constructing TrailLayer.");
         else
-            TrailLayer.app.ticker.add(() => this.updateTexture());
+            TrailLayer.app.ticker.add(() => this.updateTexture(), undefined, PIXI.UPDATE_PRIORITY.NORMAL - 1); // Insert updateTexture priority -1 from NORMAL
     }
 
     public updateTexture() {
@@ -63,8 +63,7 @@ export class TrailLayer extends PIXI.Sprite {
             this.trailAlphaCount = 0;
         } else {
             this.trailAlphaCount++;
-            this.trailSprite.alpha = 1;
-            
+            this.trailSprite.alpha = 1;  
         }
 
         renderer.render(this.trailSprite, {renderTexture : this.trailImageTexture, clear : true});
