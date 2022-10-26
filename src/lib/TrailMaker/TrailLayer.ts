@@ -26,6 +26,8 @@
 
 import * as PIXI from 'pixi.js';
 const DEFAULT_FADE_TIME = 0.93;
+// Need to set the priority of updateTexture() between NORMAL(=> for ticker.add()) and LOW (= rendering of application) 
+const PRIORITY_OF_UPDATETEXTURE_TICKER = PIXI.UPDATE_PRIORITY.LOW + 5;
 
 export class TrailLayer extends PIXI.Sprite {
     private static app : PIXI.Application;
@@ -50,7 +52,7 @@ export class TrailLayer extends PIXI.Sprite {
         if(TrailLayer.app === undefined)
             throw Error("PIXI app is null on constructing TrailLayer. Call TralLayer.setApp() before constructing TrailLayer.");
         else
-            TrailLayer.app.ticker.add(() => this.updateTexture(), undefined, PIXI.UPDATE_PRIORITY.NORMAL - 1); // Insert updateTexture priority -1 from NORMAL
+            TrailLayer.app.ticker.add(() => this.updateTexture(), undefined, PRIORITY_OF_UPDATETEXTURE_TICKER); // Insert updateTexture priority -1 from NORMAL
     }
 
     public updateTexture() {
