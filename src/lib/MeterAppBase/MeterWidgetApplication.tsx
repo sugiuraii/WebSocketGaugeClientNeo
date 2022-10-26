@@ -36,6 +36,7 @@ import { MeterSelectionSetting } from "./reactParts/dialog/MeterSelectDialog";
 import { WebsocketParameterCode } from "./WebsocketServiceCollection/WebsocketParameterCode";
 import { MeterWidgetConfigPageRenderer } from "./reactParts/widgetSetting/MeterWidgetConfigPageRenderer";
 import { MeterWidgetConfigPageWithMeterSelectRenderer } from "./reactParts/widgetSetting/MeterWidgetConfigPageWithMeterSelectRenderer";
+import { TrailLayer } from "lib/TrailMaker/TrailLayer";
 const BOOTSTRAP_CSS_FILENAME = "bootstrap.min.css";
 
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
@@ -116,6 +117,9 @@ export class MeterWidgetApplication {
         pixiApp.view.style.width = "100vw";
         pixiApp.view.style.touchAction = "auto";
         pixiApp.view.style.pointerEvents = "none";
+
+        // Register app to TrailLayer to enable traling.
+        TrailLayer.setApp(pixiApp);
 
         // Set viewport meta-tag
         this.setViewPortMetaTag();

@@ -32,6 +32,7 @@ import {MeterApplicationOption} from "lib/MeterAppBase/options/MeterApplicationO
 import {AnalogMeterCluster} from "parts/AnalogMeterCluster/AnalogMeterCluster";
 
 import {FPSCounter} from "parts/FPSIndicator/FPSCounter";
+import { TrailLayer } from 'lib/TrailMaker/TrailLayer';
 
 //For including entry point html file in webpack
 require("./AnalogMeterClusterBenchApp.html");
@@ -79,7 +80,7 @@ class AnalogMeterClusterBenchApp
                 if(tacho > 9000)
                     tacho = 0;
                 else
-                    tacho += 200;
+                    tacho += 500;
                 
                 if(speed > 280)
                     speed = 0;

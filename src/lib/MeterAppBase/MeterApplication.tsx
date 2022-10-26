@@ -35,6 +35,7 @@ import PIXIApplication from "./reactParts/PIXIApplication";
 
 import 'bootswatch/dist/slate/bootstrap.min.css';
 import { MeterSelectionSetting } from "./reactParts/dialog/MeterSelectDialog";
+import { TrailLayer } from "lib/TrailMaker/TrailLayer";
 const BOOTSTRAP_CSS_FILENAME = "bootstrap.min.css";
 
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
@@ -100,6 +101,9 @@ export class MeterApplication {
         pixiApp.view.style.width = "100vw";
         pixiApp.view.style.touchAction = "auto";
         pixiApp.view.style.pointerEvents = "none";
+
+        // Register app to TrailLayer to enable traling.
+        TrailLayer.setApp(pixiApp);
 
         // Set viewport meta-tag
         this.setViewPortMetaTag();
