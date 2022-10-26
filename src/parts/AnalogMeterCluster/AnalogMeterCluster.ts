@@ -67,8 +67,8 @@ export class AnalogMeterCluster extends PIXI.Container {
     private fuel = 0;
     private gearPos = "";
 
-    private trailAlpha : number;
-    private applyTrail : boolean;
+    private readonly trailAlpha : number;
+    private readonly applyTrail : boolean;
 
     get Tacho(): number { return this.tacho; }
     set Tacho(val: number) {
