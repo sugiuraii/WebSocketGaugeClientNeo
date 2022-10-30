@@ -98,9 +98,9 @@ export class LinearNeedleGauge extends NeedleGauge {
 
     private readonly calcRealDisplacement = (displacement: number) => {
         switch (this.linearNeedleGaugeOptions.GaugeDirection) {
-            case "RightToLeft": 
-                return new PIXI.Point(displacement, 0);
             case "LeftToRight":
+                return new PIXI.Point(displacement, 0);
+            case "RightToLeft": 
                 return new PIXI.Point(-displacement, 0);
             case "DownToUp":
                 return new PIXI.Point(0, -displacement);
