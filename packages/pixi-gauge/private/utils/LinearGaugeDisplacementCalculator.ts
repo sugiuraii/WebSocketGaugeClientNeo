@@ -22,17 +22,11 @@
  * THE SOFTWARE.
  */
 
-export type GaugeDirection =
-    "LeftToRight" |
-    "RightToLeft" |
-    "DownToUp" |
-    "UpToDown";
-
+import { GaugeDirection } from "../GaugeBase";
 
 export interface ILinearGaugeOption {
     GaugeDirection : GaugeDirection;
-    Width: number;
-    Height: number;
+    PixelRange : number;
     PixelStep: number;
     
     Max: number;
@@ -62,16 +56,10 @@ export class LinearGaugeDisplacementCalculator {
         const currentDisplacement: number = this.currentDisplacement;
         const pixelStep: number = this.LinearGaugeOption.PixelStep;
         
-        const height: number = this.LinearGaugeOption.Height;
-        const width: number = this.LinearGaugeOption.Width;
-        
         const valueMax: number = this.LinearGaugeOption.Max;
         const valueMin: number = this.LinearGaugeOption.Min;
 
-        const vertical: boolean = this.LinearGaugeOption.GaugeDirection === "DownToUp" || this.LinearGaugeOption.GaugeDirection === "UpToDown";
-        const invertDirection: boolean = this.LinearGaugeOption.GaugeDirection === "UpToDown" || this.LinearGaugeOption.GaugeDirection === "RightToLeft";
-
-        const pixelRange = vertical?height:width;
+        const pixelRange: number = this.LinearGaugeOption.PixelRange;
         let displacement = (value - valueMin) / (valueMax - valueMin) * pixelRange;
 
         // Check deltaPixel over the pixelStep

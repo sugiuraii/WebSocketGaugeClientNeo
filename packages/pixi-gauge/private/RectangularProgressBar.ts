@@ -25,7 +25,8 @@
 import { ProgressBarOptions } from './ProgressBarBase'
 import { ProgressBar } from './ProgressBarBase'
 import * as PIXI from 'pixi.js';
-import { GaugeDirection, ILinearGaugeOption, ILinearGaugeSubFrameRenderOption, LinearGaugeDisplacementCalculator } from './utils/LinearGaugeDisplacementCalculator';
+import { ILinearGaugeOption, ILinearGaugeSubFrameRenderOption, LinearGaugeDisplacementCalculator } from './utils/LinearGaugeDisplacementCalculator';
+import { GaugeDirection } from './GaugeBase';
 
 /**
  * Rectangular progressbar option class.
@@ -70,10 +71,16 @@ export class RectangularProgressBarOptions extends ProgressBarOptions implements
         this.MaxDeltaPixelToRenderSubFrame = 100;
         this.NumMaxSubframe = 5;
     }
+
+    public get PixelRange() : number {
+        const vertical: boolean = this.GaugeDirection === "DownToUp" || this.GaugeDirection === "UpToDown";
+        const pixelRange = vertical?this.Height:this.Width;
+        return pixelRange;
+    }
 }
 
 /**
- * REctangular progressbar class.
+ * Rectangular progressbar class.
  */
 export class RectangularProgressBar extends ProgressBar {
     private readonly rectangularProgressBarOptions: RectangularProgressBarOptions;

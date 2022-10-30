@@ -22,57 +22,9 @@
  * THE SOFTWARE.
  */
 
-import { Gauge1DOptions } from './GaugeBase'
-import { Gauge1D } from './GaugeBase'
-import * as PIXI from 'pixi.js';
+import { NeedleGauge, NeedleGaugeOptions } from './NeedleGaugeBase';
 import { CircularGaugeAngleCalculator, ICircularGaugeOption, ICircularGaugeSubFrameRenderOption } from './utils/CircularGaugeAngleCalculator';
 
-/**
- * Needle gauge option class.
- */
-class NeedleGaugeOptions extends Gauge1DOptions {
-    /**
-     * Texture of gauge needle.
-     */
-    public Texture: PIXI.Texture;
-    constructor() {
-        super();
-        this.Texture = PIXI.Texture.EMPTY;
-    }
-}
-
-/**
- * Needle gauge class.
- */
-abstract class NeedleGauge extends Gauge1D {
-    private needleGaugeOptions: NeedleGaugeOptions;
-
-    private sprite: PIXI.Sprite;
-
-    constructor(options: NeedleGaugeOptions) {
-        let needleGaugeOptions: NeedleGaugeOptions;
-        if (!(options instanceof NeedleGaugeOptions))
-            needleGaugeOptions = new NeedleGaugeOptions();
-        else
-            needleGaugeOptions = options;
-        super(needleGaugeOptions);
-        this.needleGaugeOptions = needleGaugeOptions;
-
-        this.sprite = new PIXI.Sprite();
-        this.sprite.texture = this.needleGaugeOptions.Texture;
-
-        //Assign spirite and mask to container
-        this.addChild(this.sprite);
-    }
-
-    /**
-     * Get Options.
-     * @return Options.
-     */
-    get Options(): NeedleGaugeOptions { return this.needleGaugeOptions }
-
-    get Sprite(): PIXI.Sprite { return this.sprite; }
-}
 
 /**
  * Rotation needle gauge option class.
@@ -118,14 +70,13 @@ export class RotationNeedleGaugeOptions extends NeedleGaugeOptions implements IC
         this.NumMaxSubframe = 5;
         this.MaxDeltaAngleToRenderSubFrame = 180;
     }
-
 }
 
 export class RotationNeedleGauge extends NeedleGauge {
     private readonly rotationNeedleGaugeOptions: RotationNeedleGaugeOptions;
-    private readonly subFrameRenderCallback: Array<() => void> = []; 
+    private readonly subFrameRenderCallback: Array<() => void> = [];
 
-    private readonly circularGaugeAngleCalculator : CircularGaugeAngleCalculator;
+    private readonly circularGaugeAngleCalculator: CircularGaugeAngleCalculator;
 
     /**
      * Get Options.
@@ -136,7 +87,7 @@ export class RotationNeedleGauge extends NeedleGauge {
     /**
      * Call back function list to invoke subframe rendering.
      */
-    get SubFrameRenderCallback() { return this.subFrameRenderCallback } 
+    get SubFrameRenderCallback() { return this.subFrameRenderCallback }
 
     constructor(options: RotationNeedleGaugeOptions) {
         super(options);
@@ -144,7 +95,7 @@ export class RotationNeedleGauge extends NeedleGauge {
         this.circularGaugeAngleCalculator = new CircularGaugeAngleCalculator(options);
     }
 
-    private readonly drawAngleUpdate = (angle : number) => {
+    private readonly drawAngleUpdate = (angle: number) => {
         const angleRad: number = Math.PI / 180 * angle;
         this.rotation = angleRad;
     };
