@@ -23,14 +23,13 @@
  */
 
 import { NeedleGauge, NeedleGaugeOptions } from './NeedleGaugeBase';
-import { GaugeDirection, ILinearGaugeOption, ILinearGaugeSubFrameRenderOption } from './utils/LinearGaugeDisplacementCalculator';
-
+import { GaugeDirection, ILinearGaugeOption, ILinearGaugeSubFrameRenderOption, LinearGaugeDisplacementCalculator } from './utils/LinearGaugeDisplacementCalculator';
+import * as PIXI from 'pixi.js';
 
 /**
  * Rotation needle gauge option class.
  */
 export class LinearNeedleGaugeOptions extends NeedleGaugeOptions implements ILinearGaugeOption, ILinearGaugeSubFrameRenderOption {
-
     /**
      * Direction of gauge.
      */
@@ -56,6 +55,11 @@ export class LinearNeedleGaugeOptions extends NeedleGaugeOptions implements ILin
      */
     public MaxDeltaPixelToRenderSubFrame: number;
 
+    /**
+     * Offset coordinate of needle.
+     */
+    public Offset: PIXI.Point;
+
     constructor() {
         super();
         this.GaugeDirection = "LeftToRight";
@@ -64,35 +68,51 @@ export class LinearNeedleGaugeOptions extends NeedleGaugeOptions implements ILin
         this.SubFrameRenderPixelStep = 1;
         this.MaxDeltaPixelToRenderSubFrame = 100;
         this.NumMaxSubframe = 5;
+        this.Offset = new PIXI.Point(0, 0);
     }
 }
 
-export class RotationNeedleGauge extends NeedleGauge {
-    private readonly rotationNeedleGaugeOptions: RotationNeedleGaugeOptions;
+export class LinearNeedleGauge extends NeedleGauge {
+    private readonly linearNeedleGaugeOptions: LinearNeedleGaugeOptions;
     private readonly subFrameRenderCallback: Array<() => void> = [];
 
-    private readonly circularGaugeAngleCalculator: CircularGaugeAngleCalculator;
+    private readonly displacementCalculator : LinearGaugeDisplacementCalculator;
 
     /**
      * Get Options.
      * @return Options.
      */
-    get Options(): RotationNeedleGaugeOptions { return this.rotationNeedleGaugeOptions }
+    get Options(): LinearNeedleGaugeOptions { return this.linearNeedleGaugeOptions }
 
     /**
      * Call back function list to invoke subframe rendering.
      */
     get SubFrameRenderCallback() { return this.subFrameRenderCallback }
 
-    constructor(options: RotationNeedleGaugeOptions) {
+    constructor(options: LinearNeedleGaugeOptions) {
         super(options);
-        this.rotationNeedleGaugeOptions = options;
-        this.circularGaugeAngleCalculator = new CircularGaugeAngleCalculator(options);
+        this.linearNeedleGaugeOptions = options;
+        this.displacementCalculator = new LinearGaugeDisplacementCalculator(options);
     }
 
-    private readonly drawAngleUpdate = (angle: number) => {
-        const angleRad: number = Math.PI / 180 * angle;
-        this.rotation = angleRad;
+    private readonly calcRealDisplacement = (displacement: number) => {
+        switch (this.linearNeedleGaugeOptions.GaugeDirection) {
+            case "RightToLeft": 
+                return new PIXI.Point(displacement, 0);
+            case "LeftToRight":
+                return new PIXI.Point(-displacement, 0);
+            case "DownToUp":
+                return new PIXI.Point(0, -displacement);
+            case "UpToDown":
+                return new PIXI.Point(0, displacement);
+        }
+    }
+
+    private readonly drawUpdate = (displacement: number) => {
+        const offset = this.linearNeedleGaugeOptions.Offset;
+        const realDisplacement = this.calcRealDisplacement(displacement);
+
+        this.Sprite.position = new PIXI.Point(offset.x + realDisplacement.x, offset.y + realDisplacement.y);
     };
 
     /**
@@ -101,7 +121,7 @@ export class RotationNeedleGauge extends NeedleGauge {
      */
     protected _update(skipStepCheck: boolean): void {
         // Update texture reference of sprite.
-        this.Sprite.texture = this.rotationNeedleGaugeOptions.Texture;
-        this.circularGaugeAngleCalculator.calcAndUpdate(this.DrawValue, skipStepCheck, this.drawAngleUpdate, this.subFrameRenderCallback);
+        this.Sprite.texture = this.linearNeedleGaugeOptions.Texture;
+        this.displacementCalculator.calcAndUpdate(this.DrawValue, skipStepCheck, this.drawUpdate, this.subFrameRenderCallback);
     }
 }
