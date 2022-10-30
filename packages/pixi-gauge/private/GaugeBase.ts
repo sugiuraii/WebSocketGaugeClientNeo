@@ -127,3 +127,8 @@ export abstract class Gauge1D extends PIXI.Container {
     protected abstract _update(skipStepCheck: boolean): void;
 }
 
+export type GaugeDirection =
+    "LeftToRight" |
+    "RightToLeft" |
+    "DownToUp" |
+    "UpToDown";
