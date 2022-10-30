@@ -23,8 +23,9 @@
  */
 
 import { NeedleGauge, NeedleGaugeOptions } from './NeedleGaugeBase';
-import { GaugeDirection, ILinearGaugeOption, ILinearGaugeSubFrameRenderOption, LinearGaugeDisplacementCalculator } from './utils/LinearGaugeDisplacementCalculator';
+import { ILinearGaugeOption, ILinearGaugeSubFrameRenderOption, LinearGaugeDisplacementCalculator } from './utils/LinearGaugeDisplacementCalculator';
 import * as PIXI from 'pixi.js';
+import { GaugeDirection } from './GaugeBase';
 
 /**
  * Rotation needle gauge option class.

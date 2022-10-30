@@ -31,6 +31,10 @@ export {RectangularProgressBarOptions} from './private/RectangularProgressBar'
 export {RotationNeedleGauge} from './private/RotationNeedleGauge'
 export {RotationNeedleGaugeOptions} from './private/RotationNeedleGauge'
 
+export {LinearNeedleGauge, LinearNeedleGaugeOptions} from './private/LinearNeedleGauge'
+
 export {NumericIndicator} from './private/NumericIndicator'
 export {TextNumericIndicator} from './private/NumericIndicator'
 export {BitmapTextNumericIndicator} from './private/NumericIndicator'
+
+export {GaugeDirection} from './private/GaugeBase'

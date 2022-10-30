@@ -25,7 +25,8 @@
 import { ProgressBarOptions } from './ProgressBarBase'
 import { ProgressBar } from './ProgressBarBase'
 import * as PIXI from 'pixi.js';
-import { GaugeDirection, ILinearGaugeOption, ILinearGaugeSubFrameRenderOption, LinearGaugeDisplacementCalculator } from './utils/LinearGaugeDisplacementCalculator';
+import { ILinearGaugeOption, ILinearGaugeSubFrameRenderOption, LinearGaugeDisplacementCalculator } from './utils/LinearGaugeDisplacementCalculator';
+import { GaugeDirection } from './GaugeBase';
 
 /**
  * Rectangular progressbar option class.

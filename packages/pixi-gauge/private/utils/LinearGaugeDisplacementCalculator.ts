@@ -22,12 +22,7 @@
  * THE SOFTWARE.
  */
 
-export type GaugeDirection =
-    "LeftToRight" |
-    "RightToLeft" |
-    "DownToUp" |
-    "UpToDown";
-
+import { GaugeDirection } from "../GaugeBase";
 
 export interface ILinearGaugeOption {
     GaugeDirection : GaugeDirection;
