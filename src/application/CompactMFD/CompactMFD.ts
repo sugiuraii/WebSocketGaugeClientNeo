@@ -45,9 +45,12 @@ window.onload = function () {
 
 class CompactMFDApp {
     public async Start() {
+        // Define application vieport size
         const pixiAppOption : PIXI.IApplicationOptions = {width : 720, height : 1280};
+        // Create application option class with reading websocket client setting
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
 
+        // Gear (shift) position calculation utility to calculate shift position from vehicle speed and engine speed.
         const gearCalculator = await DefaultAppSettings.getGearPositionCalculator();
 
         appOption.SetupPIXIMeterPanel = async (app, ws) => {
