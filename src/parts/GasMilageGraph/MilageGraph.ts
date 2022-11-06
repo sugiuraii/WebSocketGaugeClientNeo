@@ -22,13 +22,12 @@
  * THE SOFTWARE.
  */
 
-import { RectangularProgressBar, RectangularProgressBarOptions } from 'lib/Graphics/PIXIGauge';
+import { RectangularProgressBar, RectangularProgressBarOptions } from 'pixi-gauge';
 import * as PIXI from 'pixi.js';
+import { Assets } from '@pixi/assets';
 
 require("./MilageGraphTexture.json");
 require("./MilageGraphTexture.png");
-require("../fonts/font.css");
-require("../fonts/GNU-Freefonts/FreeSansBold.otf");
 
 require("./MilageGraphFont_45px.fnt");
 require("./MilageGraphFont_45px_0.png");
@@ -49,18 +48,6 @@ export class MilageGraphPanel extends PIXI.Container {
     private sectGasMilage: { [spankey: string]: number } = {};
 
     private sectSpan: string[] = ["5min", "10min", "15min", "20min", "25min", "30min"];
-
-    static get RequestedTexturePath(): string[] {
-        return ["img/MilageGraphTexture.json", "img/MilageGraphFont_45px.fnt", "img/MilageGraphFont_68px.fnt"];
-    }
-
-    static get RequestedFontFamily(): string[] {
-        return ["FreeSans-Bold"]
-    }
-
-    static get RequestedFontCSSURL(): string[] {
-        return ['font.css'];
-    }
 
     public get MomentGasMilage(): number { return this.momentGasMilage }
     public set MomentGasMilage(val: number) {
@@ -99,7 +86,13 @@ export class MilageGraphPanel extends PIXI.Container {
         return this.sectGasMilage[sectspan];
     }
 
-    constructor() {
+    public static async create() {
+        await Assets.load(["img/MilageGraphTexture.json", "img/MilageGraphFont_45px.fnt", "img/MilageGraphFont_68px.fnt"]);
+        const instance = new MilageGraphPanel();
+        return instance;
+    }
+
+    private constructor() {
         super();
 
         const backTexture = PIXI.Texture.from("MilageGraph_Back");
@@ -108,9 +101,9 @@ export class MilageGraphPanel extends PIXI.Container {
 
         const momentGasMilageBarOption = new RectangularProgressBarOptions();
         momentGasMilageBarOption.Texture = PIXI.Texture.from("MilageGraph_valueBar2");
-        momentGasMilageBarOption.Vertical = true;
-        momentGasMilageBarOption.MaskWidth = 40;
-        momentGasMilageBarOption.MaskHeight = 240;
+        momentGasMilageBarOption.GaugeDirection = "DownToUp";
+        momentGasMilageBarOption.Width = 40;
+        momentGasMilageBarOption.Height = 240;
         momentGasMilageBarOption.Max = 20;
         momentGasMilageBarOption.Min = 0;
 
@@ -124,9 +117,9 @@ export class MilageGraphPanel extends PIXI.Container {
             const spankey: string = this.sectSpan[i];
             const sectGasMilageBarOption = new RectangularProgressBarOptions();
             sectGasMilageBarOption.Texture = sectGasMilageBarTexture;
-            sectGasMilageBarOption.Vertical = true;
-            sectGasMilageBarOption.MaskWidth = 30;
-            sectGasMilageBarOption.MaskHeight = 240;
+            sectGasMilageBarOption.GaugeDirection = "DownToUp";
+            sectGasMilageBarOption.Width = 30;
+            sectGasMilageBarOption.Height = 240;
             sectGasMilageBarOption.Max = 20;
             sectGasMilageBarOption.Min = 0;
             this.sectGasMilageBar[spankey] = new RectangularProgressBar(sectGasMilageBarOption);

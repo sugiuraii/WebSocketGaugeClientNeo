@@ -1,1 +1,0 @@
-Notice : This folder will be depricated. Thunbnail create environment will be shited to playwright (from puppeteer), since playwright has better suppot for Docker.

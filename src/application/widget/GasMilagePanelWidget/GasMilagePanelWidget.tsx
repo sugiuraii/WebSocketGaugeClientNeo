@@ -47,14 +47,11 @@ class GasMilagePanelWidgetApp {
         const pixiAppOption: PIXI.IApplicationOptions = { width: 600, height: 300 };
 
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
-        appOption.PreloadResource.WebFontFamiliyName.push(...MilageGraphPanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontCSSURL.push(...MilageGraphPanel.RequestedFontCSSURL);
-        appOption.PreloadResource.TexturePath.push(...MilageGraphPanel.RequestedTexturePath);
         
-        appOption.SetupPIXIMeterPanel = (app, ws) => {
+        appOption.SetupPIXIMeterPanel = async (app, ws) => {
             const stage = app.stage;
 
-            const milagePanel = new MilageGraphPanel();
+            const milagePanel = await MilageGraphPanel.create();
             milagePanel.position.set(0, 0);
             milagePanel.scale.set(0.94, 0.94);
 

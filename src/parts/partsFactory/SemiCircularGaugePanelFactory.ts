@@ -22,11 +22,11 @@
  * THE SOFTWARE.
  */
 
-import { WebsocketObjectCollection } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketObjectCollection";
-import { WebsocketParameterCode } from "lib/MeterAppBase/WebsocketObjCollection/WebsocketParameterCode";
-import { ReadModeCode } from "lib/WebSocket/WebSocketCommunication";
-import { SemiCircularGaugePanel } from "../CircularGauges/private/SemiCircularGaugePanelBase";
-import { VacuumGaugePanel, BoostGaugePanel, WaterTempGaugePanel, EngineOilTempGaugePanel, BatteryVoltageGaugePanel, MassAirFlowGaugePanel, ThrottleGaugePanel, AirFuelGaugePanel, EngineLoadGaugePanel, IntakeAirTemperaturePanel as IntakeAirTemperatureGaugePanel } from "../CircularGauges/SemiCircularGaugePanel";
+import { WebsocketServiceCollection } from "lib/MeterAppBase/WebsocketServiceCollection/WebsocketServiceCollection";
+import { WebsocketParameterCode } from "lib/MeterAppBase/WebsocketServiceCollection/WebsocketParameterCode";
+import { ReadModeCode } from "websocket-gauge-client-communication";
+import { SemiCircularGaugePanel } from "../CircularGauges/SemiCircularGaugePanel";
+import { SemiCircularGaugePanelPresets } from "../CircularGauges/SemiCircularGaugePanelPresets";
 import { MeterNotAvailableError } from "./MeterNotAvailableError";
 
 export class SemiCircularGaugePanelFactory {
@@ -38,26 +38,26 @@ export class SemiCircularGaugePanelFactory {
             this.UseVacuumMeterInsteadOfBoost = false;
     }
 
-    public getMeter(code: WebsocketParameterCode | undefined): { code: WebsocketParameterCode, createDisplayObject: () => SemiCircularGaugePanel, readmode: ReadModeCode, getValue: (timestamp: number, ws: WebsocketObjectCollection) => number } {
+    public getMeter(code: WebsocketParameterCode | undefined): { code: WebsocketParameterCode, createDisplayObject: () => Promise<SemiCircularGaugePanel>, readmode: ReadModeCode, getValue: (timestamp: number, ws: WebsocketServiceCollection) => number } {
         switch (code) {
             case "Manifold_Absolute_Pressure":
-                return { code: code, createDisplayObject: () => this.UseVacuumMeterInsteadOfBoost ? new VacuumGaugePanel() : new BoostGaugePanel(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) * 0.0101972 - 1 /* convert kPa to kgf/cm2 and relative pressure */ };
+                return { code: code, createDisplayObject: async() => this.UseVacuumMeterInsteadOfBoost ? SemiCircularGaugePanelPresets.VacuumGaugePanel() : SemiCircularGaugePanelPresets.BoostGaugePanel(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) * 0.0101972 - 1 /* convert kPa to kgf/cm2 and relative pressure */ };
             case "Coolant_Temperature":
-                return { code: code, createDisplayObject: () => new WaterTempGaugePanel(), readmode: "SLOW", getValue: (_, ws) => ws.WSMapper.getValue(code) };
+                return { code: code, createDisplayObject: async() => SemiCircularGaugePanelPresets.WaterTempGaugePanel(), readmode: "SLOW", getValue: (_, ws) => ws.WSMapper.getValue(code) };
             case "Engine_oil_temperature":
-                return { code: code, createDisplayObject: () => new EngineOilTempGaugePanel(), readmode: "SLOW", getValue: (_, ws) => ws.WSMapper.getValue(code) };
+                return { code: code, createDisplayObject: async() => SemiCircularGaugePanelPresets.EngineOilTempGaugePanel(), readmode: "SLOW", getValue: (_, ws) => ws.WSMapper.getValue(code) };
             case "Battery_Voltage":
-                return { code: code, createDisplayObject: () => new BatteryVoltageGaugePanel(), readmode: "SLOW", getValue: (_, ws) => ws.WSMapper.getValue(code) };
+                return { code: code, createDisplayObject: async() => SemiCircularGaugePanelPresets.BatteryVoltageGaugePanel(), readmode: "SLOW", getValue: (_, ws) => ws.WSMapper.getValue(code) };
             case "Mass_Air_Flow":
-                return { code: code, createDisplayObject: () => new MassAirFlowGaugePanel(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) / 10 }; // Convert g/s -> x10g/s
+                return { code: code, createDisplayObject: async() => SemiCircularGaugePanelPresets.MassAirFlowGaugePanel(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) / 10 }; // Convert g/s -> x10g/s
             case "Throttle_Opening_Angle":
-                return { code: code, createDisplayObject: () => new ThrottleGaugePanel(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) };
+                return { code: code, createDisplayObject: async() => SemiCircularGaugePanelPresets.ThrottleGaugePanel(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) };
             case "O2Sensor_1_Air_Fuel_Ratio":
-                return { code: code, createDisplayObject: () => new AirFuelGaugePanel(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) * 14 };
+                return { code: code, createDisplayObject: async() => SemiCircularGaugePanelPresets.AirFuelGaugePanel(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) * 14 };
             case "Engine_Load":
-                return { code: code, createDisplayObject: () => new EngineLoadGaugePanel(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) };
+                return { code: code, createDisplayObject: async() => SemiCircularGaugePanelPresets.EngineLoadGaugePanel(), readmode: "SLOWandFAST", getValue: (ts, ws) => ws.WSMapper.getValue(code, ts) };
                 case "Intake_Air_Temperature":
-                    return { code: code, createDisplayObject: () => new IntakeAirTemperatureGaugePanel(), readmode: "SLOW", getValue: (_, ws) => ws.WSMapper.getValue(code) };
+                    return { code: code, createDisplayObject: async() => SemiCircularGaugePanelPresets.IntakeAirTemperaturePanel(), readmode: "SLOW", getValue: (_, ws) => ws.WSMapper.getValue(code) };
             case undefined:
                 throw new Error("getMeter() is failed by undefined code.");
             default:

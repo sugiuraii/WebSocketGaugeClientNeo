@@ -23,35 +23,23 @@
  */
 
 import * as PIXI from 'pixi.js';
-import { ThrottleGaugePanel } from "parts/CircularGauges/SemiCircularGaugePanel";
-import * as WebFont from "webfontloader";
+import { SemiCircularGaugePanel } from "parts/CircularGauges/SemiCircularGaugePanel";
+import { SemiCircularGaugePanelPresets } from 'parts/CircularGauges/SemiCircularGaugePanelPresets';
 
 require("./SemiCircularGaugeTest.html");
 
 window.onload = function () {
-
-    WebFont.load({
-        custom:
-        {
-            families: ThrottleGaugePanel.RequestedFontFamily,
-            urls: ThrottleGaugePanel.RequestedFontCSSURL
-        },
-        active: function () { preloadTexture(); }
-    });
+    main();
 }
 
-function preloadTexture() {
-    PIXI.Loader.shared.add(ThrottleGaugePanel.RequestedTexturePath);
-    PIXI.Loader.shared.load(main);
-}
-function main() {
+async function main() {
     const app = new PIXI.Application({ height: 1366, width: 1366 });
     document.body.appendChild(app.view);
-    const gaugeArray: ThrottleGaugePanel[] = [];
+    const gaugeArray: SemiCircularGaugePanel[] = [];
     let index = 0;
     for (let j = 0; j < 6; j++) {
         for (let i = 0; i < 6; i++) {
-            gaugeArray.push(new ThrottleGaugePanel());
+            gaugeArray.push(await SemiCircularGaugePanelPresets.ThrottleGaugePanel());
             gaugeArray[index].pivot.set(200, 200);
             gaugeArray[index].scale.set(0.6, 0.6);
             gaugeArray[index].position.set(240 * i + 150, 200 * j + 150);

@@ -28,10 +28,10 @@ import 'bootswatch/dist/slate/bootstrap.min.css';
 
 import { IndexNavbar } from 'lib/MeterAppBase/reactParts/navbar/IndexNavbar'
 import React  from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 
 window.onload = () => {
     // Crete react components
-    const rootElement = document.getElementById('root');
-    ReactDOM.render(<IndexNavbar/>, rootElement);
+    const rootElement = createRoot(document.getElementById('root')!);
+    rootElement.render(<IndexNavbar/>);
 }

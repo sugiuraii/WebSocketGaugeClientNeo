@@ -5,7 +5,7 @@ WORKDIR /source
 COPY src/ ./src
 COPY package.json ./
 RUN npm i
-RUN npm run build-all
+RUN npm run build-full
 
 # Build thumbnail by playwright ---------------------------------
 # Change platform option for your build architecture

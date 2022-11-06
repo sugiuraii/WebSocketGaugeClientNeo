@@ -22,19 +22,19 @@
  * THE SOFTWARE.
  */
 
-import { CircularProgressBar } from 'lib/Graphics/PIXIGauge';
-import { CircularProgressBarOptions } from 'lib/Graphics/PIXIGauge';
-import { RotationNeedleGauge } from 'lib/Graphics/PIXIGauge';
-import { RotationNeedleGaugeOptions } from 'lib/Graphics/PIXIGauge';
-import { BitmapTextNumericIndicator } from 'lib/Graphics/PIXIGauge';
-import { NumericIndicator } from 'lib/Graphics/PIXIGauge';
+import { CircularProgressBar } from 'pixi-gauge';
+import { CircularProgressBarOptions } from 'pixi-gauge';
+import { RotationNeedleGauge } from 'pixi-gauge';
+import { RotationNeedleGaugeOptions } from 'pixi-gauge';
+import { BitmapTextNumericIndicator } from 'pixi-gauge';
+import { NumericIndicator } from 'pixi-gauge';
 
 import * as PIXI from 'pixi.js';
+import { Assets } from '@pixi/assets';
+import { TrailLayer } from 'lib/TrailMaker/TrailLayer';
 
 require("./AnalogMeterClusterTexture.json");
 require("./AnalogMeterClusterTexture.png");
-require("../fonts/font.css");
-require("../fonts/DSEG_v030/DSEG14Classic-BoldItalic.ttf");
 require("./AnalogMeterFont_115px.fnt");
 require("./AnalogMeterFont_45px.fnt");
 require("./AnalogMeterFont_40px.fnt");
@@ -66,6 +66,9 @@ export class AnalogMeterCluster extends PIXI.Container {
     private trip = 0;
     private fuel = 0;
     private gearPos = "";
+
+    private readonly trailAlpha : number;
+    private readonly applyTrail : boolean;
 
     get Tacho(): number { return this.tacho; }
     set Tacho(val: number) {
@@ -121,21 +124,11 @@ export class AnalogMeterCluster extends PIXI.Container {
         this.gearPos = val;
         this.gearPosLabel.text = val;
     }
-
-    static get RequestedTexturePath(): string[] {
-        return ["img/AnalogMeterClusterTexture.json", "img/AnalogMeterFont_115px.fnt", "img/AnalogMeterFont_45px.fnt", "img/AnalogMeterFont_40px.fnt", "img/AnalogMeterFont_60px.fnt"];
-    }
-
-    static get RequestedFontFamily(): string[] {
-        return ["DSEG14ClassicItalic"]
-    }
-
-    static get RequestedFontCSSURL(): string[] {
-        return ['font.css'];
-    }
-
-    constructor() {
+    
+    private constructor(applyTrail : boolean, trailAlpha : number) {
         super();
+        this.applyTrail = applyTrail;
+        this.trailAlpha = trailAlpha;
         const TachoMeter = this.createTachoMeter();
         const SpeedMeter = this.createSpeedMeter();
         const BoostMeter = this.createBoostMeter();
@@ -158,6 +151,13 @@ export class AnalogMeterCluster extends PIXI.Container {
         this.waterTempProgressBar = SpeedMeter.waterTempProgressBar;
 
         this.boostNeedleGauge = BoostMeter.boostNeedleGauge;
+    }
+
+    public static async create(applyTrail = true, trailAlpha = 0.95) {
+        await Assets.load(["img/AnalogMeterClusterTexture.json", "img/AnalogMeterFont_115px.fnt", "img/AnalogMeterFont_45px.fnt", "img/AnalogMeterFont_40px.fnt", "img/AnalogMeterFont_60px.fnt"]);
+        //await Assets.load('./fonts/DSEG14Classic-BoldItalic.ttf');
+        const instance = new AnalogMeterCluster(applyTrail, trailAlpha);
+        return instance;
     }
 
     private createTachoMeter(): { container: PIXI.Container, progressBar: CircularProgressBar, needleGauge: RotationNeedleGauge, gasmilageLabel: NumericIndicator, tripLabel: NumericIndicator, fuelLabel: NumericIndicator, gearPosLabel: NumericIndicator } {
@@ -194,9 +194,16 @@ export class AnalogMeterCluster extends PIXI.Container {
         const tachoNeedleGauge = new RotationNeedleGauge(tachoNeedleGaugeOptions);
         tachoNeedleGauge.pivot.set(15, 15);
         tachoNeedleGauge.position.set(300, 300);
-        tachoContainer.addChild(tachoNeedleGauge);
         tachoNeedleGauge.Value = tachoValDefalut;
         tachoNeedleGauge.updateForce();
+        if(this.applyTrail) {
+            const trailLayer = new TrailLayer({height : 600, width : 600});
+            trailLayer.addChild(tachoNeedleGauge);
+            trailLayer.trailAlpha = this.trailAlpha;
+            tachoContainer.addChild(trailLayer);
+            tachoNeedleGauge.SubFrameRenderCallback.push(() => trailLayer.updateTexture());
+        } else
+            tachoContainer.addChild(tachoNeedleGauge);
 
         const shaftSprite = PIXI.Sprite.from("AnalogTachoMeter_NeedleCap");
         shaftSprite.pivot.set(72, 72);
@@ -282,10 +289,16 @@ export class AnalogMeterCluster extends PIXI.Container {
         const speedNeedleGauge = new RotationNeedleGauge(speedNeedleGaugeOptions);
         speedNeedleGauge.pivot.set(15, 15);
         speedNeedleGauge.position.set(300, 300);
-        speedMeterContainer.addChild(speedNeedleGauge);
         speedNeedleGauge.Value = speedValDefault;
         speedNeedleGauge.updateForce();
-
+        if(this.applyTrail) {
+            const trailLayer = new TrailLayer({height : backSprite.height, width : backSprite.width});
+            trailLayer.addChild(speedNeedleGauge);
+            trailLayer.trailAlpha = this.trailAlpha;
+            speedMeterContainer.addChild(trailLayer);
+        } else
+            speedMeterContainer.addChild(speedNeedleGauge);
+        
         const shaftSprite = PIXI.Sprite.from("AnalogSpeedMeter_NeedleCap");
         shaftSprite.anchor.set(0.5, 0.5);
         shaftSprite.position.set(300, 300);
@@ -316,7 +329,13 @@ export class AnalogMeterCluster extends PIXI.Container {
         boostNeedleGauge.position.set(220, 220);
         boostNeedleGauge.Value = boostValDefault;
         boostNeedleGauge.updateForce();
-        boostMeterContainer.addChild(boostNeedleGauge);
+        if(this.applyTrail) {
+            const trailLayer = new TrailLayer({height : backSprite.height, width :backSprite.width});
+            trailLayer.addChild(boostNeedleGauge);
+            trailLayer.trailAlpha = this.trailAlpha;
+            boostMeterContainer.addChild(trailLayer);
+        } else
+            boostMeterContainer.addChild(boostNeedleGauge);
 
         return { container: boostMeterContainer, boostNeedleGauge: boostNeedleGauge };
     }

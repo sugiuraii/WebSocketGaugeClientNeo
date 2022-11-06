@@ -31,9 +31,7 @@ import { MeterApplication } from "lib/MeterAppBase/MeterApplication";
 import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
-import { BoostMeter } from "parts/AnalogSingleMeter/AnalogSingleMeter";
-import { WaterTempMeter } from "parts/AnalogSingleMeter/AnalogSingleMeter";
-import { OilTempMeter } from "parts/AnalogSingleMeter/AnalogSingleMeter";
+import { AnalogSingleMeterPresets } from "parts/AnalogSingleMeter/AnalogSingleMeterPresets";
 
 // Import AppSettings.
 import * as DefaultAppSettings from  "application/DefaultAppSettings"
@@ -48,23 +46,20 @@ class AnalogTripleMeterApp {
         const pixiAppOption : PIXI.IApplicationOptions = {width : 1280, height : 720};
 
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
-        appOption.PreloadResource.WebFontFamiliyName.push(...BoostMeter.RequestedFontFamily);
-        appOption.PreloadResource.WebFontCSSURL.push(...BoostMeter.RequestedFontCSSURL);
-        appOption.PreloadResource.TexturePath.push(...BoostMeter.RequestedTexturePath);
 
-        appOption.SetupPIXIMeterPanel = (app, ws) => {
+        appOption.SetupPIXIMeterPanel = async (app, ws) => {
             const stage = app.stage;
             //Centering the top-level container
             stage.pivot.set(600, 200);
             stage.position.set(app.screen.width / 2, app.screen.height / 2);
 
-            const boostMeter = new BoostMeter();
+            const boostMeter = await AnalogSingleMeterPresets.BoostMeter();
             boostMeter.position.set(800, 0);
 
-            const waterTempMeter = new WaterTempMeter();
+            const waterTempMeter = await AnalogSingleMeterPresets.WaterTempMeter();
             waterTempMeter.position.set(0, 0);
 
-            const oilTempMeter = new OilTempMeter();
+            const oilTempMeter = await AnalogSingleMeterPresets.OilTempMeter();
             oilTempMeter.position.set(400, 0);
 
             stage.addChild(boostMeter);

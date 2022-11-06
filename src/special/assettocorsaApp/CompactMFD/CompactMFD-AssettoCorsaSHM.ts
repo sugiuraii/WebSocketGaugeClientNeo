@@ -31,13 +31,12 @@ import { MeterApplication } from "lib/MeterAppBase/MeterApplication";
 import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicationOption";
 
 //Import meter parts
-import { BoostGaugePanel } from "parts/CircularGauges/FullCircularGaugePanel";
-import { WaterTempGaugePanel } from "parts/CircularGauges/SemiCircularGaugePanel";
-import { EngineOilTempGaugePanel } from "parts/CircularGauges/SemiCircularGaugePanel";
+import { FullCircularGaugePanelPresets } from "parts/CircularGauges/FullCircularGaugePanelPresets";
+import { SemiCircularGaugePanelPresets } from "parts/CircularGauges/SemiCircularGaugePanelPresets";
 import { DigiTachoPanel } from "parts/DigiTachoPanel/DigiTachoPanel";
 
 //Import enumuator of parameter code
-import { AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMNumericalVALCode } from "lib/WebSocket/WebSocketCommunication";
+import { AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMNumericalVALCode } from "websocket-gauge-client-communication";
 
 window.onload = function () {
     const meterapp = new CompactMFD_AssettoCorsaSHM();
@@ -49,35 +48,23 @@ class CompactMFD_AssettoCorsaSHM {
         const pixiAppOption: PIXI.IApplicationOptions = { width: 720, height: 1280 };
 
         const appOption = new MeterApplicationOption(pixiAppOption);
-        appOption.PreloadResource.WebFontFamiliyName.push(...WaterTempGaugePanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontFamiliyName.push(...DigiTachoPanel.RequestedFontFamily);
-        appOption.PreloadResource.WebFontFamiliyName.push(...BoostGaugePanel.RequestedFontFamily);
-
-        appOption.PreloadResource.WebFontCSSURL.push(...WaterTempGaugePanel.RequestedFontCSSURL);
-        appOption.PreloadResource.WebFontCSSURL.push(...DigiTachoPanel.RequestedFontCSSURL);
-        appOption.PreloadResource.WebFontCSSURL.push(...BoostGaugePanel.RequestedFontCSSURL);
-
-        appOption.PreloadResource.TexturePath.push(...WaterTempGaugePanel.RequestedTexturePath);
-        appOption.PreloadResource.TexturePath.push(...DigiTachoPanel.RequestedTexturePath);
-        appOption.PreloadResource.TexturePath.push(...BoostGaugePanel.RequestedTexturePath);
-
         appOption.WebSocketCollectionOption.AssettoCorsaWSEnabled = true;
 
-        appOption.SetupPIXIMeterPanel = (app, ws) => {
+        appOption.SetupPIXIMeterPanel = async (app, ws) => {
             const stage = app.stage;
-            const digiTachoPanel = new DigiTachoPanel();
+            const digiTachoPanel = await DigiTachoPanel.create();
             digiTachoPanel.position.set(0, 0);
             digiTachoPanel.scale.set(1.15);
 
-            const boostPanel = new BoostGaugePanel();
+            const boostPanel = await FullCircularGaugePanelPresets.BoostGaugePanel();
             boostPanel.position.set(90, 360);
             boostPanel.scale.set(1.3);
 
-            const waterTempPanel = new WaterTempGaugePanel();
+            const waterTempPanel = await SemiCircularGaugePanelPresets.WaterTempGaugePanel();
             waterTempPanel.position.set(0, 890);
             waterTempPanel.scale.set(0.85);
 
-            const engineOilTempPanel = new EngineOilTempGaugePanel();
+            const engineOilTempPanel = await SemiCircularGaugePanelPresets.EngineOilTempGaugePanel();
             engineOilTempPanel.position.set(360, 890);
             engineOilTempPanel.scale.set(0.85);
 
