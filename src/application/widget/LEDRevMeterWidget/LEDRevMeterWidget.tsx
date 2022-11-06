@@ -46,17 +46,13 @@ class LEDRevMeterWidgetApp {
         const pixiAppOption : PIXI.IApplicationOptions = {width : 610, height : 600};
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
 
-        appOption.PreloadResource.WebFontFamiliyName.push(...LEDTachoMeter.RequestedFontFamily);
-        appOption.PreloadResource.WebFontCSSURL.push(...LEDTachoMeter.RequestedFontCSSURL);
-        appOption.PreloadResource.TexturePath.push(...LEDTachoMeter.RequestedTexturePath);
-
         const gearCalculator = await DefaultAppSettings.getGearPositionCalculator();
         
-        appOption.SetupPIXIMeterPanel = (app, ws) => {
+        appOption.SetupPIXIMeterPanel = async(app, ws) => {
 
             const stage = app.stage;
 
-            const ledRevMeter = new LEDTachoMeter();
+            const ledRevMeter = await LEDTachoMeter.create();
             ledRevMeter.position.set(0, 0);
 
             stage.addChild(ledRevMeter);

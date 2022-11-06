@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { CircularProgressBar, CircularProgressBarOptions } from 'lib/Graphics/PIXIGauge';
+import { CircularProgressBar, CircularProgressBarOptions } from 'pixi-gauge';
 import * as PIXI from 'pixi.js';
 import { SingleValueGauge } from '../../SingleValueGauge';
 
@@ -121,12 +121,12 @@ export abstract class CircularGaugePanelOptionBase {
 
     public CenterPosition = new PIXI.Point();
 
-    public RedZoneBarTexture = PIXI.Texture.EMPTY;
-    public YellowZoneBarTexture = PIXI.Texture.EMPTY;
-    public GreenZoneBarTexture = PIXI.Texture.EMPTY;
-    public ValueBarTexture = PIXI.Texture.EMPTY;
-    public BackTexture = PIXI.Texture.EMPTY;
-    public GridTexture = PIXI.Texture.EMPTY;
+    public RedZoneBarTextureName = "";
+    public YellowZoneBarTextureName = "";
+    public GreenZoneBarTextureName = "";
+    public ValueBarTextureName = "";
+    public BackTextureName = "";
+    public GridTextureName = "";
 
     constructor() {
         this.MasterTextStyle = new PIXI.TextStyle(
@@ -137,7 +137,7 @@ export abstract class CircularGaugePanelOptionBase {
                 dropShadowColor: "#FFFFFF",
                 dropShadowDistance: 0,
                 fill: "white",
-                fontFamily: "FreeSans-Bold"
+                fontFamily: "Freesansbold"
             });
         this.ValueTextLabelOption = new BitmapTextOption();
     }
@@ -182,7 +182,7 @@ export abstract class CircularGaugePanelBase extends PIXI.Container implements S
         valueProgressBarOption.Radius = this.Options.ValueBarRadius;
         valueProgressBarOption.InnerRadius = this.Options.ValueBarInnerRadius;
 
-        valueProgressBarOption.Texture = this.Options.ValueBarTexture;
+        valueProgressBarOption.Texture = PIXI.Texture.from(this.Options.ValueBarTextureName);
         const valueProgressBar = new CircularProgressBar(valueProgressBarOption);
         super.addChild(valueProgressBar);
 
@@ -218,18 +218,18 @@ export abstract class CircularGaugePanelBase extends PIXI.Container implements S
         const zoneBarRadius = this.Options.ZoneBarRadius;
 
         //Add backSprite
-        const backTexture = this.Options.BackTexture;
+        const backTexture = this.Options.BackTextureName;
         const backSprite = new PIXI.Sprite();
-        backSprite.texture = backTexture;
+        backSprite.texture = PIXI.Texture.from(backTexture);
         backContainer.addChild(backSprite);
 
         //Add redzoneBar
         if (this.Options.RedZoneBarEnable) {
-            const redZoneBarTexture = this.Options.RedZoneBarTexture;
+            const redZoneBarTexture = this.Options.RedZoneBarTextureName;
             const redzoneBarOption = new CircularProgressBarOptions();
             redzoneBarOption.OffsetAngle = this.Options.RedZoneBarOffsetAngle;
             redzoneBarOption.FullAngle = this.Options.RedZoneBarFullAngle;
-            redzoneBarOption.Texture = redZoneBarTexture;
+            redzoneBarOption.Texture = PIXI.Texture.from(redZoneBarTexture);
             redzoneBarOption.Center = centerPosition;
             redzoneBarOption.Radius = zoneBarRadius;
             redzoneBarOption.InnerRadius = 0;
@@ -241,11 +241,11 @@ export abstract class CircularGaugePanelBase extends PIXI.Container implements S
 
         //Add yellowzoneBar
         if (this.Options.YellowZoneBarEnable) {
-            const yellowZoneBarTexture = this.Options.YellowZoneBarTexture;
+            const yellowZoneBarTexture = this.Options.YellowZoneBarTextureName;
             const yellowzoneBarOption = new CircularProgressBarOptions();
             yellowzoneBarOption.OffsetAngle = this.Options.YellowZoneBarOffsetAngle;
             yellowzoneBarOption.FullAngle = this.Options.YellowZoneBarFullAngle;
-            yellowzoneBarOption.Texture = yellowZoneBarTexture;
+            yellowzoneBarOption.Texture = PIXI.Texture.from(yellowZoneBarTexture);
             yellowzoneBarOption.Center = centerPosition;
             yellowzoneBarOption.Radius = zoneBarRadius;
             yellowzoneBarOption.InnerRadius = 0;
@@ -257,11 +257,11 @@ export abstract class CircularGaugePanelBase extends PIXI.Container implements S
 
         //Add greenZoneBar
         if (this.Options.GreenZoneBarEnable) {
-            const greenZoneBarTexture = this.Options.GreenZoneBarTexture;
+            const greenZoneBarTexture = this.Options.GreenZoneBarTextureName;
             const greenzoneBarOption = new CircularProgressBarOptions();
             greenzoneBarOption.OffsetAngle = this.Options.GreenZoneBarOffsetAngle;
             greenzoneBarOption.FullAngle = this.Options.GreenZoneBarFullAngle;
-            greenzoneBarOption.Texture = greenZoneBarTexture;
+            greenzoneBarOption.Texture = PIXI.Texture.from(greenZoneBarTexture);
             greenzoneBarOption.Center = centerPosition;
             greenzoneBarOption.Radius = zoneBarRadius;
             greenzoneBarOption.InnerRadius = 0;
@@ -272,9 +272,9 @@ export abstract class CircularGaugePanelBase extends PIXI.Container implements S
         }
 
         //Add gridSprite
-        const gridTexture = this.Options.GridTexture;
+        const gridTexture = this.Options.GridTextureName;
         const gridSprite = new PIXI.Sprite();
-        gridSprite.texture = gridTexture;
+        gridSprite.texture = PIXI.Texture.from(gridTexture);
         backContainer.addChild(gridSprite);
 
         //Set Title and unit text

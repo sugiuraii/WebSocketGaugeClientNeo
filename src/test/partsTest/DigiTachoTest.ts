@@ -29,21 +29,17 @@ import * as PIXI from 'pixi.js';
 require("./DigiTachoTest.html");
 
 window.onload = function () {
-    preloadTexture();
+    main();
 }
 
-function preloadTexture() {
-    PIXI.Loader.shared.add(DigiTachoPanel.RequestedTexturePath);
-    PIXI.Loader.shared.load(main);
-}
-function main() {
+async function main() {
     const app = new PIXI.Application({ height: 1366, width: 1366 });
     document.body.appendChild(app.view);
     const gaugeArray: DigiTachoPanel[] = [];
     let index = 0;
     for (let j = 0; j < 6; j++) {
         for (let i = 0; i < 6; i++) {
-            gaugeArray.push(new DigiTachoPanel());
+            gaugeArray.push(await DigiTachoPanel.create());
             gaugeArray[index].pivot.set(300, 200);
             gaugeArray[index].scale.set(0.65, 0.65);
             gaugeArray[index].position.set(400 * i + 150, 240 * j + 150);

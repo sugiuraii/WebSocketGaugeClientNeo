@@ -32,6 +32,7 @@ import {MeterApplicationOption} from "lib/MeterAppBase/options/MeterApplicationO
 import {AnalogMeterCluster} from "parts/AnalogMeterCluster/AnalogMeterCluster";
 
 import {FPSCounter} from "parts/FPSIndicator/FPSCounter";
+import { TrailLayer } from 'lib/TrailMaker/TrailLayer';
 
 //For including entry point html file in webpack
 require("./AnalogMeterClusterBenchApp.html");
@@ -49,19 +50,15 @@ class AnalogMeterClusterBenchApp
         const pixiAppOption : PIXI.IApplicationOptions = {width : 1100, height : 600};
 
         const appOption = new MeterApplicationOption(pixiAppOption);
-        appOption.PreloadResource.WebFontFamiliyName.push(...AnalogMeterCluster.RequestedFontFamily);
-        appOption.PreloadResource.WebFontCSSURL.push(...AnalogMeterCluster.RequestedFontCSSURL);
-        appOption.PreloadResource.TexturePath.push(...AnalogMeterCluster.RequestedTexturePath);
-        appOption.PreloadResource.TexturePath.push(...FPSCounter.RequestedTexturePath);
 
-        appOption.SetupPIXIMeterPanel = (app) =>
+        appOption.SetupPIXIMeterPanel = async (app) =>
         {
-            const meterCluster = new AnalogMeterCluster();
+            const meterCluster = await AnalogMeterCluster.create();
             const stage = app.stage;
 
             stage.addChild(meterCluster);
             
-            const fpsCounter = new FPSCounter();
+            const fpsCounter = await FPSCounter.create();
             fpsCounter.position.set(0,0);
             stage.addChild(fpsCounter);
             
@@ -83,7 +80,7 @@ class AnalogMeterClusterBenchApp
                 if(tacho > 9000)
                     tacho = 0;
                 else
-                    tacho += 200;
+                    tacho += 500;
                 
                 if(speed > 280)
                     speed = 0;

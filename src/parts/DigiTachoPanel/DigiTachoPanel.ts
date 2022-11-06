@@ -22,17 +22,16 @@
  * THE SOFTWARE.
  */
 
-import { RectangularProgressBar, RectangularProgressBarOptions } from 'lib/Graphics/PIXIGauge';
-import { BitmapTextNumericIndicator } from 'lib/Graphics/PIXIGauge';
-import { NumericIndicator } from 'lib/Graphics/PIXIGauge';
+import { RectangularProgressBar, RectangularProgressBarOptions } from 'pixi-gauge';
+import { BitmapTextNumericIndicator } from 'pixi-gauge';
+import { NumericIndicator } from 'pixi-gauge';
 
 import * as PIXI from 'pixi.js';
+import { Assets } from '@pixi/assets';
+import { TrailLayer } from 'lib/TrailMaker/TrailLayer';
 
 require("./DigiTachoTexture.json");
 require("./DigiTachoTexture.png");
-//require("../fonts/font.css");
-//require("../fonts/GNU-Freefonts/FreeSansBold.otf");
-//require("../fonts/AudioWide/Audiowide-Regular.ttf");
 
 require("./SpeedMeterFont.fnt");
 require("./SpeedMeterFont_0.png");
@@ -49,17 +48,8 @@ export class DigiTachoPanel extends PIXI.Container {
     private tacho = 0;
     private gearPos = "N";
 
-    static get RequestedTexturePath(): string[] {
-        return ["img/DigiTachoTexture.json", "img/GearPosFont.fnt", "img/SpeedMeterFont.fnt"];
-    }
-
-    static get RequestedFontFamily(): string[] {
-        return [];
-    }
-
-    static get RequestedFontCSSURL(): string[] {
-        return [];
-    }
+    private readonly trailAlpha : number;
+    private readonly applyTrail : boolean;
 
     get Speed(): number { return this.speed; }
     set Speed(speed: number) {
@@ -80,15 +70,23 @@ export class DigiTachoPanel extends PIXI.Container {
         this.geasposLabel.text = gearPos;
     }
 
-    constructor() {
+    public static async create(applyTrail = true, trailAlpha = 0.95) {
+        await Assets.load(["img/DigiTachoTexture.json", "img/GearPosFont.fnt", "img/SpeedMeterFont.fnt"]);
+        const instance = new DigiTachoPanel(applyTrail, trailAlpha);
+        return instance;
+    }
+
+    private constructor(applyTrail : boolean, trailAlpha : number) {
         super();
-        const gaugeset = this.create();
+        this.applyTrail = applyTrail;
+        this.trailAlpha = trailAlpha;
+        const gaugeset = this.buildGaugeSet();
         this.tachoProgressBar = gaugeset.tachoProgressBar;
         this.speedLabel = gaugeset.speedLabel;
         this.geasposLabel = gaugeset.gearLabel;
     }
 
-    private create(): { tachoProgressBar: RectangularProgressBar, speedLabel: BitmapTextNumericIndicator, gearLabel: PIXI.BitmapText } {
+    private buildGaugeSet(): { tachoProgressBar: RectangularProgressBar, speedLabel: BitmapTextNumericIndicator, gearLabel: PIXI.BitmapText } {
         const backTexture = PIXI.Texture.from("DigiTachoBack");
         const tachoProgressBarTexture = PIXI.Texture.from("DigiTachoBar");
 
@@ -102,17 +100,22 @@ export class DigiTachoPanel extends PIXI.Container {
         tachoProgressBarOption.Texture = tachoProgressBarTexture;
         tachoProgressBarOption.Min = 0;
         tachoProgressBarOption.Max = 9000;
-        tachoProgressBarOption.Vertical = false;
-        tachoProgressBarOption.InvertDirection = false;
+        tachoProgressBarOption.GaugeDirection = "LeftToRight";
         tachoProgressBarOption.GagueFullOnValueMin = false;
         tachoProgressBarOption.PixelStep = 8;
-        tachoProgressBarOption.MaskHeight = 246;
-        tachoProgressBarOption.MaskWidth = 577;
+        tachoProgressBarOption.Height = 246;
+        tachoProgressBarOption.Width = 577;
 
         const tachoProgressBar = new RectangularProgressBar(tachoProgressBarOption);
         tachoProgressBar.position.set(10, 6);
-
-        super.addChild(tachoProgressBar);
+        
+        if(this.applyTrail) {
+            const trailLayer = new TrailLayer({height : backSprite.height, width : backSprite.width});
+            trailLayer.addChild(tachoProgressBar);
+            trailLayer.trailAlpha = this.trailAlpha;
+            super.addChild(trailLayer);
+        } else
+            super.addChild(tachoProgressBar);
 
         const speedTextLabel = new BitmapTextNumericIndicator(this.speed.toString(), { fontName: "FreeSans", fontSize: 185, align: "right" });
         speedTextLabel.position.set(485, 320);

@@ -81,8 +81,8 @@ In this example, first make the master container class of "AnalogSingleMeter" (e
 ### <a name="import">Import dependent libraries and resources (textures and bitmap fonts)</a>
 ```js
 // Import dependent libraries (pixi.js and RotationNeedleGauge)
-import {RotationNeedleGauge} from 'lib/Graphics/PIXIGauge';
-import {RotationNeedleGaugeOptions} from 'lib/Graphics/PIXIGauge';
+import {RotationNeedleGauge} from 'pixi-gauge';
+import {RotationNeedleGaugeOptions} from 'pixi-gauge';
 
 import * as PIXI from 'pixi.js';
 

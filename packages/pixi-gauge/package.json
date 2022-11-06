@@ -1,0 +1,21 @@
+{
+  "name": "pixi-gauge",
+  "version": "3.0.0",
+  "description": "Gauge parts library for pixi.js",
+  "private": true,
+  "files": ["dist"],
+  "main": "dist/index.js",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run clean ; tsc"
+  },
+  "dependencies": {
+    "pixi.js": "^6.5.6"
+  },
+  "devDependencies": {
+    "typescript": "^4.7.4",
+    "rimraf": "^3.0.2"
+  },
+  "author": "K. Sugiura",
+  "license": "MIT"
+}

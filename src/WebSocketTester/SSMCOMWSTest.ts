@@ -22,9 +22,9 @@
  * THE SOFTWARE.
  */
 
-import { SSMWebsocket } from "lib/WebSocket/WebSocketCommunication";
-import { SSMParameterCode } from "lib/WebSocket/WebSocketCommunication";
-import { ReadModeCode } from "lib/WebSocket/WebSocketCommunication";
+import { SSMWebsocket } from "websocket-gauge-client-communication";
+import { SSMParameterCode } from "websocket-gauge-client-communication";
+import { ReadModeCode } from "websocket-gauge-client-communication";
 import { WebSocketTesterBase } from "./base/WebSocketTesterBase";
 
 import $ from "jquery";

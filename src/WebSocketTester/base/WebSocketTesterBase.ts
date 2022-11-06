@@ -23,7 +23,7 @@
  */
 
 import $ from "jquery";
-import {WebsocketCommon} from 'lib/WebSocket/WebSocketCommunication';
+import {WebsocketCommon} from 'websocket-gauge-client-communication';
 
 export abstract class WebSocketTesterBase
 {

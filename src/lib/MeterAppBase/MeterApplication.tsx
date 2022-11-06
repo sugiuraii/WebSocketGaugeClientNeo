@@ -22,13 +22,12 @@
  * THE SOFTWARE.
  */
 
-import * as WebFont from "webfontloader";
 import * as PIXI from "pixi.js";
-import React, { Fragment } from "react";
-import ReactDOM from "react-dom";
+import React from "react";
+import { createRoot } from 'react-dom/client';
 
 import { WebstorageHandler } from "./Webstorage/WebstorageHandler";
-import { WebsocketObjectCollection } from "./WebsocketObjCollection/WebsocketObjectCollection";
+import { WebsocketServiceCollection } from "./WebsocketServiceCollection/WebsocketServiceCollection";
 import { MeterApplicationOption } from "./options/MeterApplicationOption";
 import { ApplicationNavbar } from './reactParts/navbar/ApplicationNavbar';
 import { StringListLogger } from "./utils/StringListLogger";
@@ -36,6 +35,7 @@ import PIXIApplication from "./reactParts/PIXIApplication";
 
 import 'bootswatch/dist/slate/bootstrap.min.css';
 import { MeterSelectionSetting } from "./reactParts/dialog/MeterSelectDialog";
+import { TrailLayer } from "lib/TrailMaker/TrailLayer";
 const BOOTSTRAP_CSS_FILENAME = "bootstrap.min.css";
 
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
@@ -45,7 +45,7 @@ export class MeterApplication {
     private Logger = new StringListLogger();
     private readonly WebStorage: WebstorageHandler;
 
-    private readonly webSocketCollection: WebsocketObjectCollection;
+    private readonly webSocketCollection: WebsocketServiceCollection;
     private MeterSelectDialogSetting: MeterSelectionSetting;
 
     protected get RootElem(): JSX.Element {
@@ -79,7 +79,7 @@ export class MeterApplication {
     constructor(option: MeterApplicationOption) {
         this.Option = option;
         this.WebStorage = new WebstorageHandler(option.MeteSelectDialogOption.DefaultMeterSelectDialogSetting);
-        this.webSocketCollection = new WebsocketObjectCollection(this.Logger, option.WebSocketCollectionOption, this.WebStorage.WSInterval);
+        this.webSocketCollection = new WebsocketServiceCollection(this.Logger, option.WebSocketCollectionOption, this.WebStorage.WSInterval);
 
         if (this.WebStorage.MeterSelectDialogSetting === undefined) {
             const logmessage = "MeterDialogSetting is undefined. Overwrite with default value.";
@@ -102,6 +102,9 @@ export class MeterApplication {
         pixiApp.view.style.touchAction = "auto";
         pixiApp.view.style.pointerEvents = "none";
 
+        // Register app to TrailLayer to enable traling.
+        TrailLayer.setApp(pixiApp);
+
         // Set viewport meta-tag
         this.setViewPortMetaTag();
         // Set fullscreen tag for android and ios
@@ -111,59 +114,19 @@ export class MeterApplication {
 
         // Crete react components
         const rootElement = document.createElement('div');
-        ReactDOM.render(
+        const rootReactElem = createRoot(rootElement);
+        rootReactElem.render(
             <>
                 {this.RootElem}
                 <PIXIApplication application={pixiApp} />
             </>
-            , rootElement);
+        );
 
         // Add react components to html body
         document.body.appendChild(rootElement);
 
-        // Preload Fonts -> textures-> parts
-        await this.preloadFonts();
-        await this.preloadTextures();
-        this.Option.SetupPIXIMeterPanel(pixiApp, this.webSocketCollection, this.WebStorage.MeterSelectDialogSetting);
+        await this.Option.SetupPIXIMeterPanel(pixiApp, this.webSocketCollection, this.WebStorage.MeterSelectDialogSetting);
         this.webSocketCollection.Run();
-    }
-
-    private async preloadFonts() {
-        // Use Set to remove overlaps.
-        const webFontFamilyWithoutOverlap = Array.from(new Set(this.Option.PreloadResource.WebFontFamiliyName));
-        const webFontCSSURLWithoutOverlap = Array.from(new Set(this.Option.PreloadResource.WebFontCSSURL));
-
-        return new Promise<void>((resolve) => {
-            // call callBack() without loading fonts if the webFontFamily and webFoutCSSURL contains no elements.
-            if (webFontFamilyWithoutOverlap.length === 0 && webFontCSSURLWithoutOverlap.length === 0)
-                resolve();
-
-            WebFont.load(
-                {
-                    custom:
-                    {
-                        families: webFontFamilyWithoutOverlap,
-                        urls: webFontCSSURLWithoutOverlap
-                    },
-                    active: () => { resolve(); }
-                });
-        });
-    }
-
-    private async preloadTextures() {
-        // Use Set to remove overlaps.
-        const texturePathWithoutOverlap = Array.from(new Set(this.Option.PreloadResource.TexturePath));
-
-        for (let i = 0; i < texturePathWithoutOverlap.length; i++) {
-            const texturePath = texturePathWithoutOverlap[i];
-            PIXI.Loader.shared.add(texturePath);
-        }
-
-        return new Promise<void>((resolve) => {
-            PIXI.Loader.shared.load(() => {
-                resolve();
-            });
-        });
     }
 
     private loadBootStrapCSS() {

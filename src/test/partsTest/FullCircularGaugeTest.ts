@@ -22,35 +22,24 @@
  * THE SOFTWARE.
  */
 
-import { BoostGaugePanel } from "parts/CircularGauges/FullCircularGaugePanel";
-import * as WebFont from "webfontloader";
+import { FullCircularGaugePanel } from "parts/CircularGauges/FullCircularGaugePanel";
+import { FullCircularGaugePanelPresets } from "parts/CircularGauges/FullCircularGaugePanelPresets";
 import * as PIXI from 'pixi.js';
 
 require("./FullCircularGaugeTest.html");
 
 window.onload = function () {
-    WebFont.load({
-        custom:
-        {
-            families: BoostGaugePanel.RequestedFontFamily,
-            urls: BoostGaugePanel.RequestedFontCSSURL
-        },
-        active: function () { preloadTexture(); }
-    });
+    main();
 }
 
-function preloadTexture() {
-    PIXI.Loader.shared.add(BoostGaugePanel.RequestedTexturePath);
-    PIXI.Loader.shared.load(main);
-}
-function main() {
+async function main() {
     const app = new PIXI.Application({ height: 1366, width: 1366 });
     document.body.appendChild(app.view);
-    const gaugeArray: BoostGaugePanel[] = [];
+    const gaugeArray: FullCircularGaugePanel[] = [];
     let index = 0;
     for (let j = 0; j < 6; j++) {
         for (let i = 0; i < 6; i++) {
-            gaugeArray.push(new BoostGaugePanel);
+            gaugeArray.push(await FullCircularGaugePanelPresets.BoostGaugePanel());
             gaugeArray[index].pivot.set(200, 200);
             gaugeArray[index].scale.set(0.6, 0.6);
             gaugeArray[index].position.set(240 * i + 150, 240 * j + 150);

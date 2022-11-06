@@ -22,13 +22,12 @@
  * THE SOFTWARE.
  */
 
-import { CircularProgressBar, CircularProgressBarOptions, NumericIndicator, BitmapTextNumericIndicator } from 'lib/Graphics/PIXIGauge';
+import { CircularProgressBar, CircularProgressBarOptions, NumericIndicator, BitmapTextNumericIndicator } from 'pixi-gauge';
 import * as PIXI from 'pixi.js';
+import { Assets } from '@pixi/assets';
 
 require("./LEDTachoMeterTexture.json");
 require("./LEDTachoMeterTexture.png");
-require("../fonts/font.css");
-require("../fonts/DSEG_v030/DSEG14Classic-BoldItalic.ttf");
 require("./LEDMeterFont_100px.fnt");
 require("./LEDMeterFont_88px.fnt");
 require("./LEDMeterFont_45px.fnt");
@@ -52,18 +51,6 @@ export class LEDTachoMeter extends PIXI.Container {
     private trip = 0;
     private fuel = 0;
     private gearPos = "";
-
-    static get RequestedTexturePath(): string[] {
-        return ["img/LEDTachoMeterTexture.json", "img/LEDMeterFont_100px.fnt", "img/LEDMeterFont_88px.fnt", "img/LEDMeterFont_45px.fnt", "img/LEDMeterFont_30px.fnt"];
-    }
-
-    static get RequestedFontFamily(): string[] {
-        return ["DSEG14ClassicItalic"]
-    }
-
-    static get RequestedFontCSSURL(): string[] {
-        return ['font.css'];
-    }
 
     get Tacho(): number { return this.tacho; }
     set Tacho(val: number) {
@@ -102,7 +89,13 @@ export class LEDTachoMeter extends PIXI.Container {
         this.gearPosLabel.text = val;
     }
 
-    constructor() {
+    public static async create() {
+        await Assets.load(["img/LEDTachoMeterTexture.json", "img/LEDMeterFont_100px.fnt", "img/LEDMeterFont_88px.fnt", "img/LEDMeterFont_45px.fnt", "img/LEDMeterFont_30px.fnt"]);
+        const instance = new LEDTachoMeter();
+        return instance;
+    }
+
+    private constructor() {
         super();
 
         const tachoMax = 9000;

@@ -33,7 +33,7 @@ import { AnalogMeterCluster } from "parts/AnalogMeterCluster/AnalogMeterCluster"
 
 
 //Import enumuator of parameter code
-import { AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMNumericalVALCode } from "lib/WebSocket/WebSocketCommunication";
+import { AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMNumericalVALCode } from "websocket-gauge-client-communication";
 
 //For including entry point html file in webpack
 require("./AnalogMeterCluster-AssettoCorsaSHM.html");
@@ -47,15 +47,12 @@ class AnalogMeterCluster_AssettoCorsaSHM {
     public Start() {
         const pixiAppOption: PIXI.IApplicationOptions = { width: 1100, height: 600 };
         const appOption = new MeterApplicationOption(pixiAppOption);
-        appOption.PreloadResource.WebFontFamiliyName.push(...AnalogMeterCluster.RequestedFontFamily);
-        appOption.PreloadResource.WebFontCSSURL.push(...AnalogMeterCluster.RequestedFontCSSURL);
-        appOption.PreloadResource.TexturePath.push(...AnalogMeterCluster.RequestedTexturePath);
 
         appOption.WebSocketCollectionOption.AssettoCorsaWSEnabled = true;
 
-        appOption.SetupPIXIMeterPanel = (app, ws) => {
+        appOption.SetupPIXIMeterPanel = async (app, ws) => {
             const stage = app.stage;
-            const meterCluster = new AnalogMeterCluster();
+            const meterCluster = await AnalogMeterCluster.create();
             stage.addChild(meterCluster);
 
             app.ticker.add(() => {

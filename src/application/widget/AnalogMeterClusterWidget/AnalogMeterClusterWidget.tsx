@@ -46,15 +46,12 @@ class AnalogMeterClusterWidgetApp {
     public async Start() {
         const pixiAppOption : PIXI.IApplicationOptions = {width : 1100, height : 600};
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
-        appOption.PreloadResource.WebFontFamiliyName.push(...AnalogMeterCluster.RequestedFontFamily);
-        appOption.PreloadResource.WebFontCSSURL.push(...AnalogMeterCluster.RequestedFontCSSURL);
-        appOption.PreloadResource.TexturePath.push(...AnalogMeterCluster.RequestedTexturePath);
 
         const gearCalculator = await DefaultAppSettings.getGearPositionCalculator();
         
-        appOption.SetupPIXIMeterPanel = (app, ws) => {
+        appOption.SetupPIXIMeterPanel = async (app, ws) => {
             const stage = app.stage;
-            const meterCluster = new AnalogMeterCluster();
+            const meterCluster = await AnalogMeterCluster.create();
             stage.addChild(meterCluster);
 
             app.ticker.add(() => {
