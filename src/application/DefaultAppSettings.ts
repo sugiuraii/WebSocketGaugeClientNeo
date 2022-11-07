@@ -110,7 +110,7 @@ export const getWebsocketCollectionOption = async (): Promise<WebsocketObjectCol
         case "DefaultDefiMap":
             wsOption.WSMap = wsMapFactory.DefaultDefiMap;
             break;
-        case "DefaultArduino7Map":
+        case "DefaultArduinoMap":
             wsOption.WSMap = wsMapFactory.DefaultArduinoMap;
             break;
         case "ELM327andArduinoHybridMap":
