@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { VALInterpolationBuffer } from "./utils/Interpolation";
+import { Interpolator, InterpolatorFactory } from './utils/Interpolator';
 import * as JSONFormats from "./JSONFormats";
 import { WebsocketCommon } from "./WebsocketCommon";
 import { ReadModeCode } from "./parameterCode/ReadModeCode";
@@ -37,7 +37,7 @@ export class SSMWebsocket extends WebsocketCommon {
     private valPacketIntervalTime: number;
 
     //Interpolate value buffer
-    private interpolateBuffers: { [code: string]: VALInterpolationBuffer } = {};
+    private interpolateBuffers: { [code: string]: Interpolator } = {};
     //Switch data buffer    
     private switchFlagBuffers: { [code: string]: boolean } = {};
 
@@ -50,8 +50,10 @@ export class SSMWebsocket extends WebsocketCommon {
     }
 
     private checkInterpolateBufferAndCreateIfEmpty(code: SSMParameterCode): void {
-        if (!(code in this.interpolateBuffers))
-            this.interpolateBuffers[code] = new VALInterpolationBuffer();
+        if (!(code in this.interpolateBuffers)) {
+            const interpolatorFactory = new InterpolatorFactory()
+            this.interpolateBuffers[code] = interpolatorFactory.getLinearInterpolator();
+        }
     }
 
     private checkSwitchFlagBuffersAndCreateIfEmpty(code: SSMSwitchCode): void {

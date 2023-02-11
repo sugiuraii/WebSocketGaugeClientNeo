@@ -21,7 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
- 
+
+import { Interpolator } from "./Interpolator";
+
 const UpdatePeriodCalcMethod =
 {
     Direct : "Direct",
@@ -31,7 +33,7 @@ const UpdatePeriodCalcMethod =
 
 type UpdatePeriodCalcMethod = typeof UpdatePeriodCalcMethod[keyof typeof UpdatePeriodCalcMethod];
 
-export class LinearInterpolator
+export class LinearInterpolator implements Interpolator
 {
     public static UpdatePeriodCalcMethod: UpdatePeriodCalcMethod = UpdatePeriodCalcMethod.Median;
     public static UpdatePeriodBufferLength  = 10;

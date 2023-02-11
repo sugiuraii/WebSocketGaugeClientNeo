@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import * as Interpolation from "./utils/Interpolation";
+import { Interpolator, InterpolatorFactory } from './utils/Interpolator';
 import * as JSONFormats from "./JSONFormats";
 import { WebsocketCommon } from "./WebsocketCommon";
 import {
@@ -44,7 +44,7 @@ export class AssettoCorsaSHMWebsocket extends WebsocketCommon {
     private valPacketIntervalTime: number;
 
     //Interpolate value buffer
-    private valueInterpolateBuffers: { [code: string]: Interpolation.VALInterpolationBuffer } = {};
+    private valueInterpolateBuffers: { [code: string]: Interpolator } = {};
 
     private stringBuffers: { [code: string]: string } = {};
 
@@ -106,8 +106,10 @@ export class AssettoCorsaSHMWebsocket extends WebsocketCommon {
     }
 
     private checkInterpolateBufferAndCreateIfEmpty(codeName: AssettoCorsaSHMNumericalVALCode): void {
-        if (!(codeName in this.valueInterpolateBuffers))
-            this.valueInterpolateBuffers[codeName] = new Interpolation.VALInterpolationBuffer();
+        if (!(codeName in this.valueInterpolateBuffers)) {
+            const interpolatorFactory = new InterpolatorFactory();
+            this.valueInterpolateBuffers[codeName] = interpolatorFactory.getLinearInterpolator();
+        }
     }
 
     public getVal(code: AssettoCorsaSHMNumericalVALCode, timestamp: number): number {

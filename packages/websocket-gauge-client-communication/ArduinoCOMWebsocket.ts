@@ -24,7 +24,7 @@
 
 import { WebsocketCommon } from './WebsocketCommon';
 import { ArduinoParameterCode } from './parameterCode/ArduinoParameterCode'
-import { VALInterpolationBuffer } from './utils/Interpolation';
+import { Interpolator, InterpolatorFactory } from './utils/Interpolator';
 import * as JSONFormats from './JSONFormats';
 
 export class ArduinoCOMWebsocket extends WebsocketCommon {
@@ -35,7 +35,7 @@ export class ArduinoCOMWebsocket extends WebsocketCommon {
     private valPacketIntervalTime: number;
 
     //Interpolate value buffer
-    private interpolateBuffers: { [code: string]: VALInterpolationBuffer } = {};
+    private interpolateBuffers: { [code: string]: Interpolator } = {};
 
     constructor(url? : string) {
         super(url);
@@ -48,8 +48,10 @@ export class ArduinoCOMWebsocket extends WebsocketCommon {
     }
 
     private checkInterpolateBufferAndCreateIfEmpty(code: ArduinoParameterCode): void {
-        if (!(code in this.interpolateBuffers))
-            this.interpolateBuffers[code] = new VALInterpolationBuffer();
+        if (!(code in this.interpolateBuffers)) {
+            const interpolatorFactory = new InterpolatorFactory()
+            this.interpolateBuffers[code] = interpolatorFactory.getLinearInterpolator();
+        }
     }
 
     public getVal(code: ArduinoParameterCode, timestamp: number): number {
