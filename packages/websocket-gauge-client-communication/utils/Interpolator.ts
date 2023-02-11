@@ -23,6 +23,7 @@
  */
 
 import { LinearInterpolator } from "./LinearInterpolator";
+import { PIDInterpolator } from "./PIDInterpolator";
 
 export interface Interpolator {
     setVal(value : number, period? : number, timestamp? : number) : void;
@@ -33,5 +34,9 @@ export interface Interpolator {
 export class InterpolatorFactory {
     public getLinearInterpolator() {
         return new LinearInterpolator();
+    }
+
+    public getPIDInterpolator(Kp : number, Ki : number, Kd: number) {
+        return new PIDInterpolator(Kp, Ki, Kd);
     }
 }
