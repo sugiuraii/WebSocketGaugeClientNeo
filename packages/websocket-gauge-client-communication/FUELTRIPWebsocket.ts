@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { Interpolator, InterpolatorFactory } from './utils/Interpolator';
+import { Interpolator, InterpolatorFactory, InterpolatorOption } from './utils/Interpolator';
 import * as JSONFormats from "./JSONFormats";
 import { WebsocketCommon } from "./WebsocketCommon";
 
@@ -39,7 +39,9 @@ export class FUELTRIPWebsocket extends WebsocketCommon {
     private momentFUELTripPacketIntervalTime: number;
 
     //Interpolate value buffer (Momnt fuel trip only)
-    private momentGasMilageInterpolateBuffer = (new InterpolatorFactory()).getLinearInterpolator();
+    private momentGasMilageInterpolateBuffer : Interpolator;
+    private readonly interpolatorOption : InterpolatorOption;
+
     private totalGas = 0;
     private totalTrip = 0;
     private totalGasMilage = 0;
@@ -56,13 +58,16 @@ export class FUELTRIPWebsocket extends WebsocketCommon {
     get OnSectFUELTRIPPacketReceived(): (sectSpan: number, sectTrip: number[], sectGas: number[], sectGasMilage: number[]) => void { return this.onSectFUELTRIPPacketReceived; }
     set OnSectFUELTRIPPacketReceived(func: (sectSpan: number, sectTrip: number[], sectGas: number[], sectGasMilage: number[]) => void) { this.onSectFUELTRIPPacketReceived = func; }
 
-    constructor(url? : string) {
+    constructor(url? : string, interpolatorOprion? : InterpolatorOption) {
         super(url);
         this.recordIntervalTimeEnabled = true;
         this.momentFUELTripPacketPreviousTimeStamp = window.performance.now();
         this.momentFUELTripPacketIntervalTime = 0;
         this.onMomentFUELTRIPPacketReceived = () => {/*do nothing*/};
         this.onSectFUELTRIPPacketReceived = () => {/*ddo nothing*/};
+
+        this.interpolatorOption = (interpolatorOprion === undefined)?{type:"Linear"}:interpolatorOprion;
+        this.momentGasMilageInterpolateBuffer = (new InterpolatorFactory()).get(this.interpolatorOption);
     }
 
     public getMomentGasMilage(timestamp: number): number {

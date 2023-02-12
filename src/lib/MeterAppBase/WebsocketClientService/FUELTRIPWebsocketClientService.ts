@@ -27,6 +27,7 @@ import { ILogger } from "../utils/ILogger";
 import { WebsocketClientService } from "./WebsocketClientService";
 import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";
 import { WebsocketState } from "./WebsocketState";
+import { InterpolatorOption } from "websocket-gauge-client-communication/utils/Interpolator";
 
 export class FUELTRIPWebsocketClientService implements WebsocketClientService {
     public static readonly DEFAULT_WS_PORT = 2014;
@@ -49,8 +50,8 @@ export class FUELTRIPWebsocketClientService implements WebsocketClientService {
 
     private indicatorUpdateIntervalID  = 0;
 
-    constructor(serverurl: string, logger: ILogger, fueltripSectSpan: number, fueltripSectStoremax: number) {
-        this.fueltripWS = new FUELTRIPWebsocket(serverurl);
+    constructor(serverurl: string, logger: ILogger, fueltripSectSpan: number, fueltripSectStoremax: number, interpolatorOprion? : InterpolatorOption) {
+        this.fueltripWS = new FUELTRIPWebsocket(serverurl, interpolatorOprion);
         this.logger = logger;
         this.state = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
         this.webSocketServerURL = this.fueltripWS.URL;

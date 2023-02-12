@@ -27,6 +27,7 @@ import { ILogger } from "../utils/ILogger";
 import { WebsocketClientService } from "./WebsocketClientService";
 import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";
 import { WebsocketState } from "./WebsocketState";
+import { InterpolatorOption } from "websocket-gauge-client-communication/utils/Interpolator";
 
 export class SSMWebsocketClientService implements WebsocketClientService {
    public static readonly DEFAULT_WS_PORT = 2016;
@@ -49,8 +50,8 @@ export class SSMWebsocketClientService implements WebsocketClientService {
 
    private indicatorUpdateIntervalID = 0;
 
-   constructor(serverurl: string, logger: ILogger) {
-      this.ssmWS = new SSMWebsocket(serverurl);
+   constructor(serverurl: string, logger: ILogger, interpolatorOprion? : InterpolatorOption) {
+      this.ssmWS = new SSMWebsocket(serverurl, interpolatorOprion);
       this.logger = logger;
       this.state = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
       this.webSocketServerURL = this.ssmWS.URL;

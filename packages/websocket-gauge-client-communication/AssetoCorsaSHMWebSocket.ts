@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { Interpolator, InterpolatorFactory } from './utils/Interpolator';
+import { Interpolator, InterpolatorFactory, InterpolatorOption } from './utils/Interpolator';
 import * as JSONFormats from "./JSONFormats";
 import { WebsocketCommon } from "./WebsocketCommon";
 import {
@@ -45,10 +45,11 @@ export class AssettoCorsaSHMWebsocket extends WebsocketCommon {
 
     //Interpolate value buffer
     private valueInterpolateBuffers: { [code: string]: Interpolator } = {};
+    private readonly interpolatorOption : InterpolatorOption;
 
     private stringBuffers: { [code: string]: string } = {};
 
-    constructor(url? : string) {
+    constructor(url? : string, interpolatorOprion? : InterpolatorOption) {
         super(url);
         this.modePrefix = "ACSHM";
         this.recordIntervalTimeEnabled = true;
@@ -56,6 +57,8 @@ export class AssettoCorsaSHMWebsocket extends WebsocketCommon {
         this.valPacketIntervalTime = 0;
         this.onVALPacketReceivedByCode = {};
         this.onVALPacketReceived = () =>{/* do nothing*/};
+
+        this.interpolatorOption = (interpolatorOprion === undefined)?{type:"Linear"}:interpolatorOprion;
     }
 
     public SendPhysicsWSSend(code: AssettoCorsaSHMPhysicsParameterCode, flag: boolean): void {
@@ -108,7 +111,7 @@ export class AssettoCorsaSHMWebsocket extends WebsocketCommon {
     private checkInterpolateBufferAndCreateIfEmpty(codeName: AssettoCorsaSHMNumericalVALCode): void {
         if (!(codeName in this.valueInterpolateBuffers)) {
             const interpolatorFactory = new InterpolatorFactory();
-            this.valueInterpolateBuffers[codeName] = interpolatorFactory.getLinearInterpolator();
+            this.valueInterpolateBuffers[codeName] =interpolatorFactory.get(this.interpolatorOption);
         }
     }
 

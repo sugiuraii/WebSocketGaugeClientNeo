@@ -27,6 +27,7 @@ import { ILogger } from "../utils/ILogger";
 import { WebsocketState } from "./WebsocketState";
 import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";
 import { WebsocketClientService } from "./WebsocketClientService";
+import { InterpolatorOption } from "websocket-gauge-client-communication/utils/Interpolator";
 
 export class AssettoCorsaSHMWebsocketClientService implements WebsocketClientService {
    public static readonly DEFAULT_WS_PORT = 2017;
@@ -54,8 +55,8 @@ export class AssettoCorsaSHMWebsocketClientService implements WebsocketClientSer
    public get GraphicsParameterCodeList(): AssettoCorsaSHMGraphicsParameterCode[] {return this.graphicsParameterCodeList}
    public get StaticInfoParameterCodeList(): AssettoCorsaSHMStaticInfoParameterCode[] {return this.staticInfoParameterCodeList}
 
-   constructor(serverurl: string, logger: ILogger, wsInterval : number) {
-      this.assettocorsaWS = new AssettoCorsaSHMWebsocket(serverurl);
+   constructor(serverurl: string, logger: ILogger, wsInterval : number, interpolatorOprion? : InterpolatorOption) {
+      this.assettocorsaWS = new AssettoCorsaSHMWebsocket(serverurl, interpolatorOprion);
       this.logger = logger;
       this.state = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
       this.webSocketServerURL = this.assettocorsaWS.URL;

@@ -27,6 +27,7 @@ import { ILogger } from "../utils/ILogger";
 import { WebsocketState } from "./WebsocketState";
 import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";
 import { WebsocketClientService } from "./WebsocketClientService";
+import { InterpolatorOption } from "websocket-gauge-client-communication/utils/Interpolator";
 
 export class DefiWebsocketClientService implements WebsocketClientService {
 
@@ -50,8 +51,8 @@ export class DefiWebsocketClientService implements WebsocketClientService {
 
    public get ParameterCodeList() : DefiParameterCode[] { return this.parameterCodeList }
 
-   constructor(serverurl: string, logger: ILogger, wsInterval : number) {
-      this.defiWS = new DefiCOMWebsocket(serverurl);
+   constructor(serverurl: string, logger: ILogger, wsInterval : number, interpolatorOprion? : InterpolatorOption) {
+      this.defiWS = new DefiCOMWebsocket(serverurl, interpolatorOprion);
       this.logger = logger;
       this.state = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
       this.webSocketServerURL = this.defiWS.URL;

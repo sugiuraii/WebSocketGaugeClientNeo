@@ -24,7 +24,7 @@
 
 import { WebsocketCommon } from './WebsocketCommon';
 import { DefiParameterCode } from './parameterCode/DefiParameterCode'
-import { Interpolator, InterpolatorFactory } from './utils/Interpolator';
+import { Interpolator, InterpolatorFactory, InterpolatorOption } from './utils/Interpolator';
 import * as JSONFormats from './JSONFormats';
 
 export class DefiCOMWebsocket extends WebsocketCommon {
@@ -36,19 +36,22 @@ export class DefiCOMWebsocket extends WebsocketCommon {
 
     //Interpolate value buffer
     private interpolateBuffers: { [code: string]: Interpolator } = {};
+    private readonly interpolatorOption : InterpolatorOption;
 
-    constructor(url? : string) {
+    constructor(url? : string, interpolatorOprion? : InterpolatorOption) {
         super(url);
         this.modePrefix = "DEFI";
         this.valPacketPreviousTimeStamp = window.performance.now();
         this.valPacketIntervalTime = 0;
         this.onVALPacketReceived = () => {/* do nothing*/};
+
+        this.interpolatorOption = (interpolatorOprion === undefined)?{type:"Linear"}:interpolatorOprion;
     }
 
     private checkInterpolateBufferAndCreateIfEmpty(code: DefiParameterCode): void {
         if (!(code in this.interpolateBuffers)) {
             const interpolatorFactory = new InterpolatorFactory()
-            this.interpolateBuffers[code] = interpolatorFactory.getLinearInterpolator();
+            this.interpolateBuffers[code] = interpolatorFactory.get(this.interpolatorOption);
         }
     }
 

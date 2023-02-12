@@ -27,6 +27,7 @@ import { ILogger } from "../utils/ILogger";
 import { WebsocketClientService } from "./WebsocketClientService";
 import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";
 import { WebsocketState } from "./WebsocketState";
+import { InterpolatorOption } from "websocket-gauge-client-communication/utils/Interpolator";
 
 export class ELM327WebsocketClientService implements WebsocketClientService {
    public static readonly DEFAULT_WS_PORT = 2016;
@@ -50,8 +51,8 @@ export class ELM327WebsocketClientService implements WebsocketClientService {
 
    public get ParameterCodeList(): { code: OBDIIParameterCode, readmode: ReadModeCode }[] { return this.parameterCodeList }
 
-   constructor(serverurl: string, logger: ILogger) {
-      this.elm327WS = new ELM327COMWebsocket(serverurl);
+   constructor(serverurl: string, logger: ILogger, interpolatorOprion? : InterpolatorOption) {
+      this.elm327WS = new ELM327COMWebsocket(serverurl, interpolatorOprion);
       this.logger = logger;
       this.state = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
       this.webSocketServerURL = this.elm327WS.URL;

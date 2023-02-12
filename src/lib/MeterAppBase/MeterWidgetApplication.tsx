@@ -74,7 +74,7 @@ export class MeterWidgetApplication {
 
     constructor(option: MeterApplicationOption) {
         this.Option = option;
-        this.webSocketCollection = new WebsocketServiceCollection(this.Logger, option.WebSocketCollectionOption, this.UrlQueryResult.WSInterval);
+        this.webSocketCollection = new WebsocketServiceCollection(this.Logger, option.WebSocketCollectionOption, this.UrlQueryResult.WSInterval, option.WebSocketCollectionOption.InterpolatorOption);
     }
 
     private renderSettingPageIfEmptyQuery()
