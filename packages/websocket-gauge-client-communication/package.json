@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "typescript": "^4.7.4",
+    "node-pid-controller": "^1.0.1",
     "rimraf": "^3.0.2"
   },
   "author": "K. Sugiura",

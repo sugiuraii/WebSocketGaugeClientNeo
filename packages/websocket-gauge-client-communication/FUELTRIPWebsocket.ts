@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import * as Interpolation from "./utils/Interpolation";
+import { Interpolator, InterpolatorFactory } from './utils/Interpolator';
 import * as JSONFormats from "./JSONFormats";
 import { WebsocketCommon } from "./WebsocketCommon";
 
@@ -39,7 +39,7 @@ export class FUELTRIPWebsocket extends WebsocketCommon {
     private momentFUELTripPacketIntervalTime: number;
 
     //Interpolate value buffer (Momnt fuel trip only)
-    private momentGasMilageInterpolateBuffer = new Interpolation.VALInterpolationBuffer();
+    private momentGasMilageInterpolateBuffer = (new InterpolatorFactory()).getLinearInterpolator();
     private totalGas = 0;
     private totalTrip = 0;
     private totalGasMilage = 0;

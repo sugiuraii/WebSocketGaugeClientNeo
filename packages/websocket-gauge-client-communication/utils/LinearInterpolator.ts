@@ -21,7 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
- 
+
+import { Interpolator } from "./Interpolator";
+
 const UpdatePeriodCalcMethod =
 {
     Direct : "Direct",
@@ -31,7 +33,7 @@ const UpdatePeriodCalcMethod =
 
 type UpdatePeriodCalcMethod = typeof UpdatePeriodCalcMethod[keyof typeof UpdatePeriodCalcMethod];
 
-export class VALInterpolationBuffer
+export class LinearInterpolator implements Interpolator
 {
     public static UpdatePeriodCalcMethod: UpdatePeriodCalcMethod = UpdatePeriodCalcMethod.Median;
     public static UpdatePeriodBufferLength  = 10;
@@ -51,7 +53,7 @@ export class VALInterpolationBuffer
         this.lastValue = 0; 
         this.value = 0;
 
-        this.updatePeriodAveragingQueue = new MovingAverageQueue(VALInterpolationBuffer.UpdatePeriodBufferLength);
+        this.updatePeriodAveragingQueue = new MovingAverageQueue(LinearInterpolator.UpdatePeriodBufferLength);
     }
 
     /**
@@ -72,7 +74,7 @@ export class VALInterpolationBuffer
             currentPeriod = performance.now() - this.lastUpdateTimeStamp;
 
         //Calculate average/median of valueUpdate period
-        switch (VALInterpolationBuffer.UpdatePeriodCalcMethod)
+        switch (LinearInterpolator.UpdatePeriodCalcMethod)
         {
             case UpdatePeriodCalcMethod.Direct:
                 this.valUpdatePeriod = currentPeriod;
