@@ -33,6 +33,7 @@ import { WebsocketState } from "../WebsocketClientService/WebsocketState";
 import { WebsocketServiceMapEntry, WebsocketServiceMapper } from "./WebsocketServiceMapper";
 import { WebsocketParameterCode } from "./WebsocketParameterCode";
 import { WebsocketServiceMapFactory } from "./WebsocketServiceMapFactory";
+import { InterpolatorOption } from "websocket-gauge-client-communication/utils/Interpolator";
 
 export class WebsocketObjectCollectionOption
 {
@@ -52,10 +53,13 @@ export class WebsocketObjectCollectionOption
 
     public WSMap : Map<WebsocketParameterCode, WebsocketServiceMapEntry>;
 
+    public InterpolatorOption : InterpolatorOption;
+
     constructor()
     {
         const mapFactory = new WebsocketServiceMapFactory();
         this.WSMap = mapFactory.DefaultELM327Map;
+        this.InterpolatorOption = {type: "Linear"};
     }
 }
 
@@ -122,32 +126,32 @@ export class WebsocketServiceCollection {
 
     get WebsocketStates() : {[name : string] : WebsocketState } { return this.websocketStates }
 
-    constructor(logger : ILogger, option: WebsocketObjectCollectionOption, wsInterval : number) {
+    constructor(logger : ILogger, option: WebsocketObjectCollectionOption, wsInterval : number, interpolatorOprion? : InterpolatorOption) {
         this.Option = option;
 
         if (this.Option.DefiWSEnabled) {
-            this.defiWS = new DefiWebsocketClientService(this.Option.DefiWSURL, logger, wsInterval);
+            this.defiWS = new DefiWebsocketClientService(this.Option.DefiWSURL, logger, wsInterval, interpolatorOprion);
             this.websocketStates[this.defiWS.getName()] = this.defiWS.getWebsocketState();
         }
         else
             this.defiWS = undefined;
 
         if (this.Option.SSMWSEnabled) {
-            this.ssmWS = new SSMWebsocketClientService(this.Option.SSMWSSURL, logger);
+            this.ssmWS = new SSMWebsocketClientService(this.Option.SSMWSSURL, logger, interpolatorOprion);
             this.websocketStates[this.ssmWS.getName()] = this.ssmWS.getWebsocketState();
         }
         else
             this.ssmWS = undefined;
 
         if (this.Option.ArduinoWSEnabled) {
-            this.arduinoWS = new ArduinoWebsocketClientService(this.Option.ArduinoWSURL, logger, wsInterval);
+            this.arduinoWS = new ArduinoWebsocketClientService(this.Option.ArduinoWSURL, logger, wsInterval, interpolatorOprion);
             this.websocketStates[this.arduinoWS.getName()] = this.arduinoWS.getWebsocketState();
         }
         else
             this.arduinoWS = undefined;
 
         if (this.Option.ELM327WSEnabled) {
-            this.elm327WS = new ELM327WebsocketClientService(this.Option.ELM327WSURL, logger);
+            this.elm327WS = new ELM327WebsocketClientService(this.Option.ELM327WSURL, logger, interpolatorOprion);
             this.websocketStates[this.elm327WS.getName()] = this.elm327WS.getWebsocketState();
         }
         else
@@ -156,14 +160,14 @@ export class WebsocketServiceCollection {
         if (this.Option.FUELTRIPWSEnabled) {
             const fuelTripSectSpan = this.Option.FUELTRIPWSOption.FUELTRIPSectSpan
             const fuelTripSectStoreMax = this.Option.FUELTRIPWSOption.FUELTRIPSectStoreMax;
-            this.fueltripWS = new FUELTRIPWebsocketClientService(this.Option.FUELTRIPWSURL, logger, fuelTripSectSpan, fuelTripSectStoreMax);
+            this.fueltripWS = new FUELTRIPWebsocketClientService(this.Option.FUELTRIPWSURL, logger, fuelTripSectSpan, fuelTripSectStoreMax, interpolatorOprion);
             this.websocketStates[this.fueltripWS.getName()] = this.fueltripWS.getWebsocketState();
         }
         else
             this.fueltripWS = undefined;
 
         if (this.Option.AssettoCorsaWSEnabled) {
-            this.assettoCorsaWS = new AssettoCorsaSHMWebsocketClientService(this.Option.AssettoCorsaWSURL, logger, wsInterval);
+            this.assettoCorsaWS = new AssettoCorsaSHMWebsocketClientService(this.Option.AssettoCorsaWSURL, logger, wsInterval, interpolatorOprion);
             this.websocketStates[this.assettoCorsaWS.getName()] = this.assettoCorsaWS.getWebsocketState();
         }
         else

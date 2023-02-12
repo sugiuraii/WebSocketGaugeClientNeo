@@ -79,7 +79,7 @@ export class MeterApplication {
     constructor(option: MeterApplicationOption) {
         this.Option = option;
         this.WebStorage = new WebstorageHandler(option.MeteSelectDialogOption.DefaultMeterSelectDialogSetting);
-        this.webSocketCollection = new WebsocketServiceCollection(this.Logger, option.WebSocketCollectionOption, this.WebStorage.WSInterval);
+        this.webSocketCollection = new WebsocketServiceCollection(this.Logger, option.WebSocketCollectionOption, this.WebStorage.WSInterval, option.WebSocketCollectionOption.InterpolatorOption);
 
         if (this.WebStorage.MeterSelectDialogSetting === undefined) {
             const logmessage = "MeterDialogSetting is undefined. Overwrite with default value.";
