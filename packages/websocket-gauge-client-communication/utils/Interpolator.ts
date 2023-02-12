@@ -31,7 +31,24 @@ export interface Interpolator {
     getRawVal() : number;
 }
 
+export type InterpolatorOption = {
+    type : "Linear" | "PID",
+    pidoption? : {Kp : number, Ki : number, Kd : number} 
+}
+
 export class InterpolatorFactory {
+    public get(op : InterpolatorOption) {
+        switch(op.type) {
+            case "Linear":
+                return this.getLinearInterpolator();
+            case "PID":
+                if(op.pidoption !== undefined)
+                    return this.getPIDInterpolator(op.pidoption.Kp, op.pidoption.Ki, op.pidoption.Kd);
+                else
+                    throw Error("PID interpolator is set. Howver PID option is not defined.");
+        }
+    }
+
     public getLinearInterpolator() {
         return new LinearInterpolator();
     }
