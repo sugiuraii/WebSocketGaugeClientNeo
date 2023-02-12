@@ -27,6 +27,7 @@ import { ILogger } from "../utils/ILogger";
 import { WebsocketState } from "./WebsocketState";
 import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";
 import { WebsocketClientService } from "./WebsocketClientService";
+import { InterpolatorOption } from "websocket-gauge-client-communication/utils/Interpolator";
 
 export class ArduinoWebsocketClientService implements WebsocketClientService {
    public static readonly DEFAULT_WS_PORT = 2016;
@@ -50,8 +51,8 @@ export class ArduinoWebsocketClientService implements WebsocketClientService {
 
    public get ParameterCodeList() : ArduinoParameterCode[] { return this.parameterCodeList }
 
-   constructor(serverurl: string, logger: ILogger, wsInterval : number) {
-      this.arduinoWS = new ArduinoCOMWebsocket(serverurl);
+   constructor(serverurl: string, logger: ILogger, wsInterval : number, interpolatorOprion? : InterpolatorOption) {
+      this.arduinoWS = new ArduinoCOMWebsocket(serverurl, interpolatorOprion);
       this.logger = logger;
       this.state = {isEnabled : true, connectionStatus : WebsocketConnectionStatus.Closed};
       this.webSocketServerURL = this.arduinoWS.URL;
