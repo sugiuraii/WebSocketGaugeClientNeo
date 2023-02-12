@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { Interpolator, InterpolatorFactory } from './utils/Interpolator';
+import { Interpolator, InterpolatorFactory, InterpolatorOption } from './utils/Interpolator';
 import * as JSONFormats from "./JSONFormats";
 import { WebsocketCommon } from "./WebsocketCommon";
 import { ReadModeCode } from "./parameterCode/ReadModeCode";
@@ -37,19 +37,22 @@ export class ELM327COMWebsocket extends WebsocketCommon {
 
     //Interpolate value buffer
     private interpolateBuffers: { [code: string]: Interpolator } = {};
+    private readonly interpolatorOption : InterpolatorOption;
 
-    constructor(url? : string) {
+    constructor(url? : string, interpolatorOprion? : InterpolatorOption) {
         super(url);
         this.modePrefix = "ELM327";
         this.valPacketPreviousTimeStamp = window.performance.now();
         this.valPacketIntervalTime = 0;
         this.onVALPacketReceived = () => {/* do nothing*/};
+
+        this.interpolatorOption = (interpolatorOprion === undefined)?{type:"Linear"}:interpolatorOprion;
     }
 
     private checkInterpolateBufferAndCreateIfEmpty(code: OBDIIParameterCode): void {
         if (!(code in this.interpolateBuffers)) {
             const interpolatorFactory = new InterpolatorFactory()
-            this.interpolateBuffers[code] = interpolatorFactory.getLinearInterpolator();
+            this.interpolateBuffers[code] = interpolatorFactory.get(this.interpolatorOption);
         }
     }
 

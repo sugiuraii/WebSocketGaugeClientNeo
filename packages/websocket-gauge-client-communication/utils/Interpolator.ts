@@ -49,11 +49,11 @@ export class InterpolatorFactory {
         }
     }
 
-    public getLinearInterpolator() {
+    private getLinearInterpolator() {
         return new LinearInterpolator();
     }
 
-    public getPIDInterpolator(Kp : number, Ki : number, Kd: number) {
+    private getPIDInterpolator(Kp : number, Ki : number, Kd: number) {
         return new PIDInterpolator(Kp, Ki, Kd);
     }
 }
