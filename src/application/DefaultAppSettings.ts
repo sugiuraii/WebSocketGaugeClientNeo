@@ -30,6 +30,9 @@ import * as jsonc from "jsonc-parser";
 import { ArduinoParameterCode, DefiParameterCode } from "websocket-gauge-client-communication";
 
 require('./GearPositionCalcSetting.appconfig.jsonc');
+
+const DefaultPIDParameter = {Kp : 0.1, Ki : 0.8, Kd : 0.0};
+
 type GearPositionCalcSetting =
     {
         TireParameter:
@@ -53,7 +56,8 @@ type WebSocketSetting =
             Arduino: boolean
         },
         FuelTripLoggerEnabled: boolean,
-        Mapping: string
+        Mapping: string,
+        InterpolationMode : string
     };
 
 require('./HybridWebSocketMapSetting.appconfig.jsonc');
@@ -124,6 +128,19 @@ export const getWebsocketCollectionOption = async (): Promise<WebsocketObjectCol
             break;
         default:
             throw TypeError("Invalid websocket map type in WebSocketSetting.appconfig.jsonc.");
+    }
+
+    switch(wssetting.InterpolationMode) {
+        case "Linear":
+            wsOption.InterpolatorOption.type = "Linear";
+            break;
+        case "PID":
+            wsOption.InterpolatorOption.type = "PID";
+            wsOption.InterpolatorOption.pidoption = DefaultPIDParameter;
+            break;
+        default:
+            wsOption.InterpolatorOption.type = "Linear";
+            break;
     }
 
     return wsOption;

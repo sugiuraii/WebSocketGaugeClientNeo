@@ -25,5 +25,10 @@
         "SSMandArduinoHybridMap"    : Use Arduino on selected code(select in HybridWebSocketMapSettinng.appconfig.jsonc), use SSM on other codes.
         "SSMandDefiHybridMap"       : Use Defilink on selected code(select in HybridWebSocketMapSettinng.appconfig.jsonc), use SSM on other codes.
     */
-    "Mapping" : "DefaultELM327Map"
+    "Mapping" : "DefaultELM327Map",
+    /*
+        Interpolation mode option.
+        Set "Linear" or "PID"
+    */
+    "InterpolationMode" : "Linear"
 }
