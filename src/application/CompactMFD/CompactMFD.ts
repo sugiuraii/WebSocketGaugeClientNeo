@@ -45,7 +45,7 @@ window.onload = function () {
 
 class CompactMFDApp {
     public async Start() {
-        const pixiAppOption : PIXI.IApplicationOptions = {width : 720, height : 1280};
+        const pixiAppOption : Partial<PIXI.IApplicationOptions> = {width : 720, height : 1280};
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
 
         const gearCalculator = await DefaultAppSettings.getGearPositionCalculator();

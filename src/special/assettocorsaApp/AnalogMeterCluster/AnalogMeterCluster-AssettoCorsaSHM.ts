@@ -45,7 +45,7 @@ window.onload = function () {
 
 class AnalogMeterCluster_AssettoCorsaSHM {
     public Start() {
-        const pixiAppOption: PIXI.IApplicationOptions = { width: 1100, height: 600 };
+        const pixiAppOption: Partial<PIXI.IApplicationOptions> = { width: 1100, height: 600 };
         const appOption = new MeterApplicationOption(pixiAppOption);
 
         appOption.WebSocketCollectionOption.AssettoCorsaWSEnabled = true;

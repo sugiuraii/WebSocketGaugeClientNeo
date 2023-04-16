@@ -48,7 +48,7 @@ class DigitalMFDBenchApp
 {    
     public Run()
     {
-        const pixiAppOption : PIXI.IApplicationOptions = {width : 1200, height : 600};
+        const pixiAppOption : Partial<PIXI.IApplicationOptions> = {width : 1200, height : 600};
 
         const appOption = new MeterApplicationOption(pixiAppOption);
 
