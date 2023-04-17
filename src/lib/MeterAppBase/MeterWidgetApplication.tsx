@@ -143,7 +143,7 @@ export class MeterWidgetApplication {
         await this.Option.SetupPIXIMeterPanel(pixiApp, this.webSocketCollection, this.UrlQueryResult.MeterSelectionSetting);
         
         // Set transparent background for widget, after finish loading.
-        pixiApp.renderer.backgroundAlpha = 0;
+        pixiApp.renderer.background.alpha = 0;
         this.webSocketCollection.Run();
     }
 
