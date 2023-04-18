@@ -34,7 +34,7 @@ window.onload = function()
 
 async function main()
 {
-    const app = new PIXI.Application({height:1366,width:1366});
+    const app = new PIXI.Application<HTMLCanvasElement>({height:1366,width:1366});
     document.body.appendChild(app.view);
     const gaugeArray: MilageGraphPanel[] = [];
     let index = 0;
