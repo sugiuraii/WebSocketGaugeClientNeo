@@ -10,9 +10,9 @@
     "build": "npm run clean ; tsc"
   },
   "devDependencies": {
-    "typescript": "^4.7.4",
+    "typescript": "^5.0.4",
     "node-pid-controller": "^1.0.1",
-    "rimraf": "^3.0.2"
+    "rimraf": "^5.0.0"
   },
   "author": "K. Sugiura",
   "license": "MIT"
