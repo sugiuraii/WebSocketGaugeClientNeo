@@ -126,7 +126,7 @@ export class MeterWidgetApplication {
         // Set fullscreen tag for android and ios
         this.setWebAppCapable();
         // Load bootstrap css
-        this.loadBootStrapCSS();
+        //this.loadBootStrapCSS();
 
         // Crete react components
         const rootElement = document.createElement('div');
