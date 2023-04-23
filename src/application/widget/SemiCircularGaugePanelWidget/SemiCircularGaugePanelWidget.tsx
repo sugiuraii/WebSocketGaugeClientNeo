@@ -47,7 +47,7 @@ window.onload = function () {
 class SemiCircularGaugePanelWidgetApp {
 
     public async Start() {
-        const pixiAppOption: PIXI.IApplicationOptions = { width: 405, height: 300 };
+        const pixiAppOption: Partial<PIXI.IApplicationOptions> = { width: 405, height: 300 };
 
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
         appOption.MeteSelectDialogOption.ParameterCodeListToSelect = ["Engine_Load", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Mass_Air_Flow", "Throttle_Opening_Angle", "O2Sensor_1_Air_Fuel_Ratio", "Intake_Air_Temperature"];

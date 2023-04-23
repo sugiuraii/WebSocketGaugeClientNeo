@@ -43,7 +43,7 @@ window.onload = function () {
 
 class LEDRevMeterWidgetApp {
     public async Start() {
-        const pixiAppOption : PIXI.IApplicationOptions = {width : 610, height : 600};
+        const pixiAppOption : Partial<PIXI.IApplicationOptions> = {width : 610, height : 600};
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
 
         const gearCalculator = await DefaultAppSettings.getGearPositionCalculator();

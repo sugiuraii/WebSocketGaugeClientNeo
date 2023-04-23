@@ -158,7 +158,7 @@ export class LEDTachoMeter extends PIXI.Container {
     private changeRedZoneProgressBarColor() {
         const redZoneTacho = 8000;
         if (this.tacho > redZoneTacho) {
-            const redfilter = new PIXI.filters.ColorMatrixFilter();
+            const redfilter = new PIXI.ColorMatrixFilter();
             redfilter.hue(300, true);
             this.tachoProgressBar.filters = [redfilter];
         }
