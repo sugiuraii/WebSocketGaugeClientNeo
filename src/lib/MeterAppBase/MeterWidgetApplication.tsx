@@ -31,14 +31,11 @@ import { MeterApplicationOption } from "./options/MeterApplicationOption";
 import { StringListLogger } from "./utils/StringListLogger";
 import PIXIApplication from "./reactParts/PIXIApplication";
 
-import 'bootswatch/dist/slate/bootstrap.min.css';
 import { MeterSelectionSetting } from "./reactParts/dialog/MeterSelectDialog";
 import { WebsocketParameterCode } from "./WebsocketServiceCollection/WebsocketParameterCode";
 import { MeterWidgetConfigPageRenderer } from "./reactParts/widgetSetting/MeterWidgetConfigPageRenderer";
 import { MeterWidgetConfigPageWithMeterSelectRenderer } from "./reactParts/widgetSetting/MeterWidgetConfigPageWithMeterSelectRenderer";
 import { TrailLayer } from "lib/TrailMaker/TrailLayer";
-const BOOTSTRAP_CSS_FILENAME = "bootstrap.min.css";
-
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
 
 class URLQueryParseResult {
@@ -141,15 +138,6 @@ export class MeterWidgetApplication {
 
         await this.Option.SetupPIXIMeterPanel(pixiApp, this.webSocketCollection, this.UrlQueryResult.MeterSelectionSetting);
         this.webSocketCollection.Run();
-    }
-
-    private loadBootStrapCSS() {
-        const head = document.getElementsByTagName('head')[0];
-        const link = document.createElement('link');
-        link.setAttribute('rel', 'stylesheet');
-        link.setAttribute('type', 'text/css');
-        link.setAttribute('href', BOOTSTRAP_CSS_FILENAME);
-        head.appendChild(link);
     }
 
     private setViewPortMetaTag() {
