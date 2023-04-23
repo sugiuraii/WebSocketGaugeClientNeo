@@ -31,14 +31,11 @@ import { MeterApplicationOption } from "./options/MeterApplicationOption";
 import { StringListLogger } from "./utils/StringListLogger";
 import PIXIApplication from "./reactParts/PIXIApplication";
 
-import 'bootswatch/dist/slate/bootstrap.min.css';
 import { MeterSelectionSetting } from "./reactParts/dialog/MeterSelectDialog";
 import { WebsocketParameterCode } from "./WebsocketServiceCollection/WebsocketParameterCode";
 import { MeterWidgetConfigPageRenderer } from "./reactParts/widgetSetting/MeterWidgetConfigPageRenderer";
 import { MeterWidgetConfigPageWithMeterSelectRenderer } from "./reactParts/widgetSetting/MeterWidgetConfigPageWithMeterSelectRenderer";
 import { TrailLayer } from "lib/TrailMaker/TrailLayer";
-const BOOTSTRAP_CSS_FILENAME = "bootstrap.min.css";
-
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
 
 class URLQueryParseResult {
@@ -108,9 +105,8 @@ export class MeterWidgetApplication {
             if (this.UrlQueryResult.ForceCanvas)
                 this.Option.PIXIApplicationOption.forceCanvas = true;
 
-        // Workaround for overlays app
-        // Disable transparent background before load finishes.
-        this.Option.PIXIApplicationOption.backgroundAlpha = 1;
+        // Set ransparent background.
+        this.Option.PIXIApplicationOption.backgroundAlpha = 0;
 
         const pixiApp = new PIXI.Application<HTMLCanvasElement>(this.Option.PIXIApplicationOption);
         // Append PIXI.js application to document body
@@ -126,7 +122,7 @@ export class MeterWidgetApplication {
         // Set fullscreen tag for android and ios
         this.setWebAppCapable();
         // Load bootstrap css
-        this.loadBootStrapCSS();
+        //this.loadBootStrapCSS();
 
         // Crete react components
         const rootElement = document.createElement('div');
@@ -141,19 +137,7 @@ export class MeterWidgetApplication {
         document.body.appendChild(rootElement);
 
         await this.Option.SetupPIXIMeterPanel(pixiApp, this.webSocketCollection, this.UrlQueryResult.MeterSelectionSetting);
-        
-        // Set transparent background for widget, after finish loading.
-        pixiApp.renderer.background.alpha = 0;
         this.webSocketCollection.Run();
-    }
-
-    private loadBootStrapCSS() {
-        const head = document.getElementsByTagName('head')[0];
-        const link = document.createElement('link');
-        link.setAttribute('rel', 'stylesheet');
-        link.setAttribute('type', 'text/css');
-        link.setAttribute('href', BOOTSTRAP_CSS_FILENAME);
-        head.appendChild(link);
     }
 
     private setViewPortMetaTag() {
