@@ -108,9 +108,8 @@ export class MeterWidgetApplication {
             if (this.UrlQueryResult.ForceCanvas)
                 this.Option.PIXIApplicationOption.forceCanvas = true;
 
-        // Workaround for overlays app
-        // Disable transparent background before load finishes.
-        this.Option.PIXIApplicationOption.backgroundAlpha = 1;
+        // Set ransparent background.
+        this.Option.PIXIApplicationOption.backgroundAlpha = 0;
 
         const pixiApp = new PIXI.Application<HTMLCanvasElement>(this.Option.PIXIApplicationOption);
         // Append PIXI.js application to document body
@@ -141,9 +140,6 @@ export class MeterWidgetApplication {
         document.body.appendChild(rootElement);
 
         await this.Option.SetupPIXIMeterPanel(pixiApp, this.webSocketCollection, this.UrlQueryResult.MeterSelectionSetting);
-        
-        // Set transparent background for widget, after finish loading.
-        pixiApp.renderer.background.alpha = 0;
         this.webSocketCollection.Run();
     }
 
