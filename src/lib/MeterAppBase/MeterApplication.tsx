@@ -96,7 +96,7 @@ export class MeterApplication {
             if (this.WebStorage.ForceCanvas)
                 this.Option.PIXIApplicationOption.forceCanvas = true;
 
-        const pixiApp = new PIXI.Application(this.Option.PIXIApplicationOption);
+        const pixiApp = new PIXI.Application<HTMLCanvasElement>(this.Option.PIXIApplicationOption);
         // Append PIXI.js application to document body
         pixiApp.view.style.width = "100vw";
         pixiApp.view.style.touchAction = "auto";

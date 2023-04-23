@@ -27,7 +27,7 @@ import * as PIXI from "pixi.js";
 
 type PIXIApplicationProps =
 {
-    application: PIXI.Application
+    application: PIXI.Application<HTMLCanvasElement>
 }
 
 export const PIXIApplication: FunctionComponent<PIXIApplicationProps> = (p) => {
