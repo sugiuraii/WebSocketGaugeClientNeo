@@ -110,7 +110,7 @@ export class MeterWidgetApplication {
 
         const pixiApp = new PIXI.Application<HTMLCanvasElement>(this.Option.PIXIApplicationOption);
         // Append PIXI.js application to document body
-        pixiApp.view.style.width = "100vw";
+        pixiApp.view.style.width = "95vw";
         pixiApp.view.style.touchAction = "auto";
         pixiApp.view.style.pointerEvents = "none";
 
