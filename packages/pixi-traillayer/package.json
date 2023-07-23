@@ -1,0 +1,21 @@
+{
+  "name": "pixi-traillayer",
+  "version": "1.0.0",
+  "description": "Trail layer library for pixi.js",
+  "private": true,
+  "files": ["dist"],
+  "main": "dist/index.js",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run clean ; tsc"
+  },
+  "dependencies": {
+    "pixi.js": "^7.2.4"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.4",
+    "rimraf": "^5.0.0"
+  },
+  "author": "K. Sugiura",
+  "license": "MIT"
+}
