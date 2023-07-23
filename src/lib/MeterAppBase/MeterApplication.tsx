@@ -35,7 +35,7 @@ import PIXIApplication from "./reactParts/PIXIApplication";
 
 import 'bootswatch/dist/slate/bootstrap.min.css';
 import { MeterSelectionSetting } from "./reactParts/dialog/MeterSelectDialog";
-import { TrailLayer } from "lib/TrailMaker/TrailLayer";
+import { TrailLayer } from "pixi-traillayer";
 const BOOTSTRAP_CSS_FILENAME = "bootstrap.min.css";
 
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";

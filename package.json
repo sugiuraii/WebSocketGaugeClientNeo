@@ -40,7 +40,8 @@
         "typescript": "^5.0.4",
         "url-loader": "^4.1.1",
         "webpack": "^5.79.0",
-        "websocket-gauge-client-communication": "./packages/websocket-gauge-client-communication"
+        "websocket-gauge-client-communication": "./packages/websocket-gauge-client-communication",
+        "pixi-traillayer": "./packages/pixi-traillayer"
     },
     "devDependencies": {
         "@types/react": "^18.0.35",
