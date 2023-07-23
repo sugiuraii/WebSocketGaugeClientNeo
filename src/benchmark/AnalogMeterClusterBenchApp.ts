@@ -32,7 +32,7 @@ import {MeterApplicationOption} from "lib/MeterAppBase/options/MeterApplicationO
 import {AnalogMeterCluster} from "parts/AnalogMeterCluster/AnalogMeterCluster";
 
 import {FPSCounter} from "parts/FPSIndicator/FPSCounter";
-import { TrailLayer } from 'lib/TrailMaker/TrailLayer';
+import { TrailLayer } from 'pixi-traillayer';
 
 //For including entry point html file in webpack
 require("./AnalogMeterClusterBenchApp.html");

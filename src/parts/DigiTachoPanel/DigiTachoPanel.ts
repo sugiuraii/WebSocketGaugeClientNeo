@@ -28,7 +28,7 @@ import { NumericIndicator } from 'pixi-gauge';
 
 import * as PIXI from 'pixi.js';
 import { Assets } from '@pixi/assets';
-import { TrailLayer } from 'lib/TrailMaker/TrailLayer';
+import { TrailLayer } from 'pixi-traillayer';
 
 require("./DigiTachoTexture.json");
 require("./DigiTachoTexture.png");

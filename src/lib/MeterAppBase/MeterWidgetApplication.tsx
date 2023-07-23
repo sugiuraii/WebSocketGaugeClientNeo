@@ -35,7 +35,7 @@ import { MeterSelectionSetting } from "./reactParts/dialog/MeterSelectDialog";
 import { WebsocketParameterCode } from "./WebsocketServiceCollection/WebsocketParameterCode";
 import { MeterWidgetConfigPageRenderer } from "./reactParts/widgetSetting/MeterWidgetConfigPageRenderer";
 import { MeterWidgetConfigPageWithMeterSelectRenderer } from "./reactParts/widgetSetting/MeterWidgetConfigPageWithMeterSelectRenderer";
-import { TrailLayer } from "lib/TrailMaker/TrailLayer";
+import { TrailLayer } from "pixi-traillayer";
 const VIEWPORT_ATTRIBUTE = "width=device-width, minimal-ui, initial-scale=1.0";
 
 class URLQueryParseResult {
