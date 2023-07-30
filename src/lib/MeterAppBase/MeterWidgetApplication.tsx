@@ -26,13 +26,13 @@ import * as PIXI from "pixi.js";
 import React from "react";
 import { createRoot } from "react-dom/client";
 
-import { WebsocketServiceCollection } from "./WebsocketServiceCollection/WebsocketServiceCollection";
+import { WebsocketServiceCollection } from "websocket-gauge-client-communication-service"
 import { MeterApplicationOption } from "./options/MeterApplicationOption";
 import { StringListLogger } from "basic-logger";
 import PIXIApplication from "./reactParts/PIXIApplication";
 
 import { MeterSelectionSetting } from "./reactParts/dialog/MeterSelectDialog";
-import { WebsocketParameterCode } from "./WebsocketServiceCollection/WebsocketParameterCode";
+import { WebsocketParameterCode } from "websocket-gauge-client-communication-service"
 import { MeterWidgetConfigPageRenderer } from "./reactParts/widgetSetting/MeterWidgetConfigPageRenderer";
 import { MeterWidgetConfigPageWithMeterSelectRenderer } from "./reactParts/widgetSetting/MeterWidgetConfigPageWithMeterSelectRenderer";
 import { TrailLayer } from "pixi-traillayer";

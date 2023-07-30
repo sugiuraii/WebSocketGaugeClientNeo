@@ -23,8 +23,8 @@
  */
 
 import { GearPositionCalculator, CalcTireCircumference } from "lib/MeterAppBase/utils/GearPositionCalculator";
-import { WebsocketServiceMapFactory } from "lib/MeterAppBase/WebsocketServiceCollection/WebsocketServiceMapFactory";
-import { WebsocketObjectCollectionOption } from "lib/MeterAppBase/WebsocketServiceCollection/WebsocketServiceCollection";
+import { WebsocketServiceMapFactory } from "websocket-gauge-client-communication-service"
+import { WebsocketObjectCollectionOption } from "websocket-gauge-client-communication-service"
 
 import * as jsonc from "jsonc-parser";
 import { ArduinoParameterCode, DefiParameterCode } from "websocket-gauge-client-communication";

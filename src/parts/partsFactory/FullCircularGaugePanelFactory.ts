@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import { WebsocketServiceCollection } from "lib/MeterAppBase/WebsocketServiceCollection/WebsocketServiceCollection";
-import { WebsocketParameterCode } from "lib/MeterAppBase/WebsocketServiceCollection/WebsocketParameterCode";
+import { WebsocketServiceCollection } from "websocket-gauge-client-communication-service"
+import { WebsocketParameterCode } from "websocket-gauge-client-communication-service"
 import { ReadModeCode } from "websocket-gauge-client-communication";
 import { FullCircularGaugePanel } from "parts/CircularGauges/FullCircularGaugePanel";
 import { FullCircularGaugePanelPresets } from "parts/CircularGauges/FullCircularGaugePanelPresets";

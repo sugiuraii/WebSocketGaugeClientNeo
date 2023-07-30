@@ -30,9 +30,9 @@ import { LogDialog } from '../dialog/LogDialog'
 import { WebsocketStatusIndicator } from '../WebsocketStatusIndicator'
 import React, { FunctionComponent, useState, Fragment } from 'react';
 import { Navbar, Nav } from 'react-bootstrap'
-import { WebsocketState } from '../../WebsocketClientService/WebsocketState'
+import { WebsocketState } from "websocket-gauge-client-communication-service"
 import { MeterSelectDialog, MeterSelectionSetting } from '../dialog/MeterSelectDialog'
-import { WebsocketParameterCode } from '../../WebsocketServiceCollection/WebsocketParameterCode'
+import { WebsocketParameterCode } from "websocket-gauge-client-communication-service"
 
 type ApplicationNavbarProps =
     {
