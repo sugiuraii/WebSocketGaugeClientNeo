@@ -28,7 +28,7 @@ import { ArduinoWebsocketClientService } from "../WebsocketClientService/Arduino
 import { ELM327WebsocketClientService } from "../WebsocketClientService/ELM327WebsocketClientService";
 import { AssettoCorsaSHMWebsocketClientService } from "../WebsocketClientService/AssettoCorsaSHMWebsocketService";
 import { FUELTRIPWebsocketClientService } from "../WebsocketClientService/FUELTRIPWebsocketClientService";
-import { ILogger } from "../utils/ILogger";
+import { ILogger } from "basic-logger";
 import { WebsocketState } from "../WebsocketClientService/WebsocketState";
 import { WebsocketServiceMapEntry, WebsocketServiceMapper } from "./WebsocketServiceMapper";
 import { WebsocketParameterCode } from "./WebsocketParameterCode";
