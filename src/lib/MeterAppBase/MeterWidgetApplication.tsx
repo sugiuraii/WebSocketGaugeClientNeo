@@ -28,7 +28,7 @@ import { createRoot } from "react-dom/client";
 
 import { WebsocketServiceCollection } from "./WebsocketServiceCollection/WebsocketServiceCollection";
 import { MeterApplicationOption } from "./options/MeterApplicationOption";
-import { StringListLogger } from "./utils/StringListLogger";
+import { StringListLogger } from "basic-logger";
 import PIXIApplication from "./reactParts/PIXIApplication";
 
 import { MeterSelectionSetting } from "./reactParts/dialog/MeterSelectDialog";

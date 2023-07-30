@@ -30,7 +30,7 @@ import { WebstorageHandler } from "./Webstorage/WebstorageHandler";
 import { WebsocketServiceCollection } from "./WebsocketServiceCollection/WebsocketServiceCollection";
 import { MeterApplicationOption } from "./options/MeterApplicationOption";
 import { ApplicationNavbar } from './reactParts/navbar/ApplicationNavbar';
-import { StringListLogger } from "./utils/StringListLogger";
+import { StringListLogger } from "basic-logger";
 import PIXIApplication from "./reactParts/PIXIApplication";
 
 import 'bootswatch/dist/slate/bootstrap.min.css';

@@ -23,7 +23,7 @@
  */
 
 import { ArduinoCOMWebsocket, ArduinoParameterCode } from "websocket-gauge-client-communication";
-import { ILogger } from "../utils/ILogger";
+import { ILogger } from "basic-logger";
 import { WebsocketState } from "./WebsocketState";
 import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";
 import { WebsocketClientService } from "./WebsocketClientService";
