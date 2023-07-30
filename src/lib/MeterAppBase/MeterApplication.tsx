@@ -27,7 +27,7 @@ import React from "react";
 import { createRoot } from 'react-dom/client';
 
 import { WebstorageHandler } from "./Webstorage/WebstorageHandler";
-import { WebsocketServiceCollection } from "./WebsocketServiceCollection/WebsocketServiceCollection";
+import { WebsocketServiceCollection } from "websocket-gauge-client-communication-service"
 import { MeterApplicationOption } from "./options/MeterApplicationOption";
 import { ApplicationNavbar } from './reactParts/navbar/ApplicationNavbar';
 import { StringListLogger } from "basic-logger";

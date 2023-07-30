@@ -24,8 +24,8 @@
 
 import * as PIXI from "pixi.js";
 import { MeterSelectionSetting } from "../reactParts/dialog/MeterSelectDialog";
-import { WebsocketServiceCollection, WebsocketObjectCollectionOption } from "../WebsocketServiceCollection/WebsocketServiceCollection";
-import { WebsocketParameterCode } from "../WebsocketServiceCollection/WebsocketParameterCode";
+import { WebsocketServiceCollection, WebsocketObjectCollectionOption } from "websocket-gauge-client-communication-service"
+import { WebsocketParameterCode } from "websocket-gauge-client-communication-service"
 
 class MeterSelectDialogOption {
     public DefaultMeterSelectDialogSetting : MeterSelectionSetting;
