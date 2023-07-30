@@ -3,15 +3,20 @@
   "version": "3.0.0",
   "description": "Meter application common library",
   "private": true,
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.js",
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm run clean ; tsc"
   },
-  "dependencies": {
-    "websocket-gauge-client-communication": "../websocket-gauge-client-communication",
-    "basic-logger": "../basic-logger"  
+  "dependencies": {    
+    "pixi.js": "^7.2.4",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.7.4",
+    "react-dom": "^18.2.0",
+    "basic-logger": "./packages/basic-logger"
   },
   "devDependencies": {
     "typescript": "^5.0.4",
