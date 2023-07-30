@@ -22,5 +22,5 @@
  * THE SOFTWARE.
  */
 
-export {ILogger} from "ILogger"
-export {StringListLogger} from "StringListLogger"
+export {ILogger} from "./ILogger"
+export {StringListLogger} from "./StringListLogger"

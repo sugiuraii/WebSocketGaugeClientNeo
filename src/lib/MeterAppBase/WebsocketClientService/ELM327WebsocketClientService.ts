@@ -23,7 +23,7 @@
  */
 
 import { ELM327COMWebsocket, OBDIIParameterCode, ReadModeCode } from "websocket-gauge-client-communication";
-import { ILogger } from "../utils/ILogger";
+import { ILogger } from "basic-logger";
 import { WebsocketClientService } from "./WebsocketClientService";
 import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";
 import { WebsocketState } from "./WebsocketState";
