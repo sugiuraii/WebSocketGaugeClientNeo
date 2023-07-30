@@ -48,11 +48,11 @@ You can make your custom gauges by modifying the source code. Please see []().
 		| Safari | iOS 12.1.1 | iPhone 8 <br> (Apple A11) | 60fps | 60fps | OK |
 
 ## <a name="dependency">Dependency</a>
-* [Node.js (Version.8.2.1)](https://nodejs.org/)
-* [jQuery](https://jquery.com/)
+* [Node.js (Version.18.7.0)](https://nodejs.org/)
 * [PIXI.js](http://www.pixijs.com/)
 * [webpack](https://webpack.github.io/)
 * [TypeScript](https://www.typescriptlang.org/)
+* [jQuery](https://jquery.com/)
 
 ## <a name="build">Build</a>
 This program coded by typescript. And this program uses webpack for deployment.
@@ -60,7 +60,6 @@ Before modifying the source code (including makinig your custom meter panel or p
 
 ### Install node.js
 Install node.js. On windows, you can find the installer on [official node.js site](https://nodejs.org/).
-To build sources, node.js newer than 8.x is needed (since build script calls `npx` comand).
 
 ### Install dependent npm packages
 Before build, please install dependent npm packages. Dependent npm packages can be installed automatically by simply running `npm install`,
@@ -72,19 +71,24 @@ Before build, please install dependent npm packages. Dependent npm packages can 
 Build command is incuded in npm scirpt (please see `package.json`). To build,
 ```
 > cd WebSocketGaugeClientNeo
-> npm run build-WebSocketTester
-> npm run build-benchmark
-> npm run build-application
+> npm run build-full
 ```
-### If build fails to construct thumbnails..
-At the final step of `build-all` script (or `build-thumbnails` script), thumbnails of application pages will be created by [puppeter](https://pptr.dev/). However, puppeter might fail to find chromium build, as following message.
+
+This reposiory includes several local packages (by workspace feature).
+To build packages and main project separattely, 
 ```
-UnhandledPromiseRejectionWarning: Error: Chromium revision is not downloaded.
+> cd WebSocketGaugeClientNeo
+> npm run build-depends
+> npm run build-all
 ```
-In this case, install chromium build manually (as follows) may solve the issue.
+
+### To build up thumbnails of index.html
+After building root project, goto `playwright` directory, and run,
 ```
-node node_modules/puppeteer/install.js
+> npm install
+> npm build-thumbnails
 ```
+
 ## <a name="custom">Making custom meter panel</a>
 There are some sample source codes of meter application in [`WebSocketGaugeClientNeo/src/application`](./src/application)directoy.
 To make your custom meter application, refer [CustomMeterApp.md](./docs/CustomMeterApp.md)
