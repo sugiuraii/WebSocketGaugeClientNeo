@@ -9,6 +9,10 @@
     "clean": "rimraf dist",
     "build": "npm run clean ; tsc"
   },
+  "dependencies": {
+    "websocket-gauge-client-communication": "../websocket-gauge-client-communication",
+    "basic-logger": "../basic-logger"  
+  },
   "devDependencies": {
     "typescript": "^5.0.4",
     "rimraf": "^5.0.0"
