@@ -43,7 +43,8 @@
         "websocket-gauge-client-communication": "./packages/websocket-gauge-client-communication",
         "websocket-gauge-client-communication-service": "./packages/websocket-gauge-client-communication-service",
         "pixi-traillayer": "./packages/pixi-traillayer",
-        "basic-logger": "./packages/basic-logger"
+        "basic-logger": "./packages/basic-logger",
+        "meter-application-common": "./packages/meter-application-common"
     },
     "devDependencies": {
         "@types/react": "^18.0.35",
