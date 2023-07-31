@@ -27,8 +27,8 @@ require("./AnalogTripleMeter.html");
 import * as PIXI from 'pixi.js';
 
 //Import application base class
-import { MeterApplication } from "lib/MeterAppBase/MeterApplication";
-import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicationOption";
+import { MeterApplication } from "meter-application-common"
+import { MeterApplicationOption } from "meter-application-common"
 
 //Import meter parts
 import { AnalogSingleMeterPresets } from "parts/AnalogSingleMeter/AnalogSingleMeterPresets";
