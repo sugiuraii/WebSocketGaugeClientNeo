@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { GearPositionCalculator, CalcTireCircumference } from "lib/MeterAppBase/utils/GearPositionCalculator";
+import { GearPositionCalculator, CalcTireCircumference } from "meter-application-common";
 import { WebsocketServiceMapFactory } from "websocket-gauge-client-communication-service"
 import { WebsocketObjectCollectionOption } from "websocket-gauge-client-communication-service"
 

@@ -25,3 +25,5 @@
 export {MeterApplication} from "./src/MeterApplication"
 export {MeterWidgetApplication} from "./src/MeterWidgetApplication"
 export {MeterApplicationOption} from "./src/options/MeterApplicationOption"
+export {GearPositionCalculator, CalcTireCircumference} from './src/utils/GearPositionCalculator'
+export {IndexNavbar} from './src/reactParts/navbar/IndexNavbar'
