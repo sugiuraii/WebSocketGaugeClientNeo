@@ -79,6 +79,7 @@
         "build-depends": "npm run --workspaces build"
     },
     "workspaces": [
-        "packages/*"
+        "packages/*",
+        "packages/parts-lib/*"
     ]
 }

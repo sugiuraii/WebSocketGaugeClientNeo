@@ -23,8 +23,8 @@
  */
 
 import * as PIXI from 'pixi.js';
-import { AnalogSingleMeter } from "parts-lib";
-import { AnalogSingleMeterOption } from "parts-lib";
+import { AnalogSingleMeter } from "@websocketgaugeclientneo/meterparts-analogsinglemeter";
+import { AnalogSingleMeterOption } from "@websocketgaugeclientneo/meterparts-analogsinglemeter";
 
 require("./AnalogSingleMeterTest.html");
 

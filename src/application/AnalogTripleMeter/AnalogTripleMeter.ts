@@ -31,7 +31,7 @@ import { MeterApplication } from "meter-application-common"
 import { MeterApplicationOption } from "meter-application-common"
 
 //Import meter parts
-import { AnalogSingleMeterPresets } from "parts-lib";
+import { AnalogSingleMeterPresets } from "@websocketgaugeclientneo/meterparts-analogsinglemeter";
 
 // Import AppSettings.
 import * as DefaultAppSettings from  "application/DefaultAppSettings"
