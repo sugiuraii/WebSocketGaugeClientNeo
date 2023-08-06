@@ -3,19 +3,22 @@
   "version": "1.0.0",
   "description": "Meter library parts",
   "private": true,
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.js",
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm run clean ; tsc"
   },
   "dependencies": {
-    "pixi.js": "^7.2.4",
-    "pixi-gauge": "../pixi-gauge"
+    "pixi-gauge": "../pixi-gauge",
+    "pixi.js": "^7.2.4"
   },
   "devDependencies": {
-    "typescript": "^5.0.4",
+    "copyfiles": "^2.4.1",
     "rimraf": "^5.0.0",
+    "typescript": "^5.0.4",
     "webpack": "^5.79.0"
   },
   "author": "K. Sugiura",
