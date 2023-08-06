@@ -9,7 +9,8 @@
   "main": "dist/index.js",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "npm run clean ; tsc"
+    "copy-resource": "npx copyfiles -e \"./src/**/*.ts\" \"./src/**/*\" ./dist/",
+    "build": "npm run clean ; tsc; npm run copy-resource"
   },
   "dependencies": {
     "pixi-gauge": "../pixi-gauge",
