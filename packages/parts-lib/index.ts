@@ -22,6 +22,6 @@
  * THE SOFTWARE.
  */
 
-export {AnalogSingleMeter} from './AnalogSingleMeter/AnalogSingleMeter'
-export {AnalogSingleMeterOption} from './AnalogSingleMeter/AnalogSingleMeterOption'
-export {AnalogSingleMeterPresets} from './AnalogSingleMeter/AnalogSingleMeterPresets'
+export {AnalogSingleMeter} from './src/AnalogSingleMeter/AnalogSingleMeter'
+export {AnalogSingleMeterOption} from './src/AnalogSingleMeter/AnalogSingleMeterOption'
+export {AnalogSingleMeterPresets} from './src/AnalogSingleMeter/AnalogSingleMeterPresets'
