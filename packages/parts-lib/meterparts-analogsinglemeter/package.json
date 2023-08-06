@@ -1,7 +1,7 @@
 {
-  "name": "parts-lib",
+  "name": "@websocketgaugeclientneo/meterparts-analogsinglemeter",
   "version": "1.0.0",
-  "description": "Meter library parts",
+  "description": "Analog single meter parts",
   "private": true,
   "files": [
     "dist"
