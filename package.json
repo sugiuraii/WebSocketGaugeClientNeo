@@ -45,7 +45,8 @@
         "pixi-traillayer": "./packages/pixi-traillayer",
         "basic-logger": "./packages/basic-logger",
         "meter-application-common": "./packages/meter-application-common",
-        "@websocketgaugeclientneo/meterparts-analogsinglemeter": "./packages/parts-lib/meterparts-analogsinglemeter"
+        "@websocketgaugeclientneo/meterparts-analogsinglemeter": "./packages/parts-lib/meterparts-analogsinglemeter",
+        "@websocketgaugeclientneo/meterparts-circularbargauges": "./packages/parts-lib/meterparts-circularbargauges"
     },
     "devDependencies": {
         "@types/react": "^18.0.35",

@@ -1,7 +1,7 @@
 {
-  "name": "@websocketgaugeclientneo/meterparts-analogsinglemeter",
+  "name": "@websocketgaugeclientneo/meterparts-circularbargauges",
   "version": "1.0.0",
-  "description": "Analog single meter parts",
+  "description": "Circular bar single gauge meter parts",
   "private": true,
   "files": [
     "dist"
