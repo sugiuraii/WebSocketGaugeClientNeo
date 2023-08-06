@@ -25,8 +25,8 @@
 import { WebsocketServiceCollection } from "websocket-gauge-client-communication-service"
 import { WebsocketParameterCode } from "websocket-gauge-client-communication-service"
 import { ReadModeCode } from "websocket-gauge-client-communication";
-import { AnalogSingleMeter } from "parts/AnalogSingleMeter/AnalogSingleMeter";
-import { AnalogSingleMeterPresets } from "../AnalogSingleMeter/AnalogSingleMeterPresets";
+import { AnalogSingleMeter } from "parts-lib";
+import { AnalogSingleMeterPresets } from "parts-lib";
 
 export class AnalogSingleMeterFactory {
     private readonly UseVacuumMeterInsteadOfBoost;
