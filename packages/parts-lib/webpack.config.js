@@ -40,7 +40,7 @@ module.exports = {
     output:
     {
         path: outputPath,
-        filename: (pathData) => pathData.chunk.name === "index"? "./js/[name].js" : "./app/js/[name].js"
+        filename: (pathData) => "[name].js"
     },
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.
