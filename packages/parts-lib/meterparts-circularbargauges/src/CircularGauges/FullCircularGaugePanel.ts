@@ -28,7 +28,7 @@ import { CircularGaugePanelBase } from "./private/CircularGaugePanelBase";
 
 require("./private/FullCircularGaugeTexture.json");
 require("./private/FullCircularGaugeTexture.png");
-require("../fonts/GNU-Freefonts/FreeSansBold.otf");
+require("./fonts/FreeSansBold.otf");
 
 require("./private/CircularGaugeLabelFont.fnt");
 require("./private/CircularGaugeLabelFont_0.png");

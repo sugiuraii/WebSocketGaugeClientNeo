@@ -28,7 +28,7 @@ import { SemiCircularGaugePanelOption } from "./SemiCircularGaugePanelOption"
 
 require("./private/SemiCircularGaugeTexture.json");
 require("./private/SemiCircularGaugeTexture.png");
-require("../fonts/GNU-Freefonts/FreeSansBold.otf");
+require("./fonts/FreeSansBold.otf");
 
 require("./private/CircularGaugeLabelFont.fnt");
 require("./private/CircularGaugeLabelFont_0.png");

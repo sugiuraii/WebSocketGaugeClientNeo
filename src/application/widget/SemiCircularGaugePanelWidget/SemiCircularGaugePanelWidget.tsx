@@ -31,7 +31,7 @@ import { MeterWidgetApplication } from "meter-application-common"
 import { MeterApplicationOption } from "meter-application-common"
 
 //Import meter parts
-import { SemiCircularGaugePanel } from 'parts/CircularGauges/SemiCircularGaugePanel';
+import { SemiCircularGaugePanel } from '@websocketgaugeclientneo/meterparts-circularbargauges';
 import { SemiCircularGaugePanelFactory } from 'parts/partsFactory/SemiCircularGaugePanelFactory';
 
 // Import AppSettings.

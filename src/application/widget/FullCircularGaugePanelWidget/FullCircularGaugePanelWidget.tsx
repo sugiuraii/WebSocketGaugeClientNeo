@@ -31,7 +31,6 @@ import { MeterWidgetApplication } from "meter-application-common"
 import { MeterApplicationOption } from "meter-application-common"
 
 //Import meter parts
-import { FullCircularGaugePanel } from 'parts/CircularGauges/FullCircularGaugePanel';
 import { FullCircularGaugePanelFactory } from 'parts/partsFactory/FullCircularGaugePanelFactory';
 
 // Import AppSettings.
