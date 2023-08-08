@@ -33,7 +33,7 @@ import { MeterApplicationOption } from "meter-application-common"
 //Import meter parts
 import { FullCircularGaugePanelPresets } from "@websocketgaugeclientneo/meterparts-mfdpanel";
 import { SemiCircularGaugePanelPresets } from "@websocketgaugeclientneo/meterparts-mfdpanel";
-import { DigiTachoPanel } from "parts/DigiTachoPanel/DigiTachoPanel";
+import { DigiTachoPanel } from "@websocketgaugeclientneo/meterparts-mfdpanel";
 
 //Import enumuator of parameter code
 import { AssettoCorsaSHMPhysicsParameterCode, AssettoCorsaSHMNumericalVALCode } from "websocket-gauge-client-communication";

@@ -29,10 +29,10 @@ import { MeterApplication } from "meter-application-common"
 import { MeterApplicationOption } from "meter-application-common"
 
 //Import meter parts
-import { DigiTachoPanel } from "parts/DigiTachoPanel/DigiTachoPanel";
+import { DigiTachoPanel } from "@websocketgaugeclientneo/meterparts-mfdpanel";
 import { FullCircularGaugePanelPresets } from "@websocketgaugeclientneo/meterparts-mfdpanel";
 import { SemiCircularGaugePanelPresets } from "@websocketgaugeclientneo/meterparts-mfdpanel";
-import { MilageGraphPanel } from "parts/GasMilageGraph/MilageGraph";
+import { MilageGraphPanel } from "@websocketgaugeclientneo/meterparts-mfdpanel";
 
 // Import AppSettings.
 import * as DefaultAppSettings from  "application/DefaultAppSettings"

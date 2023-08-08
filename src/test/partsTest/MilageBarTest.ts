@@ -23,7 +23,7 @@
  */
 
 import * as PIXI from 'pixi.js';
-import {MilageGraphPanel} from "parts/GasMilageGraph/MilageGraph";
+import {MilageGraphPanel} from "@websocketgaugeclientneo/meterparts-mfdpanel";
 
 require("./MilageBarTest.html");
 

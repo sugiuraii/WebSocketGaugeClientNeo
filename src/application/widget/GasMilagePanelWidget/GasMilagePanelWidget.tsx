@@ -31,7 +31,7 @@ import { MeterWidgetApplication } from "meter-application-common"
 import { MeterApplicationOption } from "meter-application-common"
 
 //Import meter parts
-import { MilageGraphPanel } from "parts/GasMilageGraph/MilageGraph";
+import { MilageGraphPanel } from "@websocketgaugeclientneo/meterparts-mfdpanel";
 
 // Import AppSettings.
 import * as DefaultAppSettings from "application/DefaultAppSettings"

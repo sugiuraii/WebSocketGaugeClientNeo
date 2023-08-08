@@ -28,3 +28,6 @@ export {FullCircularGaugePanelPresets} from './src/CircularGauges/FullCircularGa
 export {SemiCircularGaugePanel} from './src/CircularGauges/SemiCircularGaugePanel'
 export {SemiCircularGaugePanelOption} from './src/CircularGauges/SemiCircularGaugePanelOption'
 export {SemiCircularGaugePanelPresets} from './src/CircularGauges/SemiCircularGaugePanelPresets'
+
+export {DigiTachoPanel} from './src/DigiTachoPanel/DigiTachoPanel'
+export {MilageGraphPanel} from './src/GasMilageGraph/MilageGraph'
