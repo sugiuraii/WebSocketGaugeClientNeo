@@ -32,8 +32,8 @@ import { MeterApplicationOption } from "meter-application-common"
 
 //Import meter parts
 import { DigiTachoPanel } from "parts/DigiTachoPanel/DigiTachoPanel";
-import { SemiCircularGaugePanelPresets } from '@websocketgaugeclientneo/meterparts-circularbargauges';
-import { FullCircularGaugePanelPresets } from '@websocketgaugeclientneo/meterparts-circularbargauges';
+import { SemiCircularGaugePanelPresets } from "@websocketgaugeclientneo/meterparts-mfdpanel";
+import { FullCircularGaugePanelPresets } from "@websocketgaugeclientneo/meterparts-mfdpanel";
 
 // Import AppSettings.
 import * as DefaultAppSettings from  "application/DefaultAppSettings"

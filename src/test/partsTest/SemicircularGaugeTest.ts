@@ -23,8 +23,8 @@
  */
 
 import * as PIXI from 'pixi.js';
-import { SemiCircularGaugePanel } from "@websocketgaugeclientneo/meterparts-circularbargauges";
-import { SemiCircularGaugePanelPresets } from '@websocketgaugeclientneo/meterparts-circularbargauges';
+import { SemiCircularGaugePanel } from "@websocketgaugeclientneo/meterparts-mfdpanel";
+import { SemiCircularGaugePanelPresets } from '@websocketgaugeclientneo/meterparts-mfdpanel';
 
 require("./SemiCircularGaugeTest.html");
 

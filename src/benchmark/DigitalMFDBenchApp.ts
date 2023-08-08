@@ -28,8 +28,8 @@ import * as PIXI from 'pixi.js';
 import { MeterApplication } from "meter-application-common"
 
 //Import meter parts
-import { FullCircularGaugePanelPresets } from '@websocketgaugeclientneo/meterparts-circularbargauges';
-import { SemiCircularGaugePanelPresets } from '@websocketgaugeclientneo/meterparts-circularbargauges';
+import { FullCircularGaugePanelPresets } from "@websocketgaugeclientneo/meterparts-mfdpanel";
+import { SemiCircularGaugePanelPresets } from "@websocketgaugeclientneo/meterparts-mfdpanel";
 import { MeterApplicationOption } from "meter-application-common"
 import { DigiTachoPanel } from 'parts/DigiTachoPanel/DigiTachoPanel';
 import { MilageGraphPanel } from 'parts/GasMilageGraph/MilageGraph';

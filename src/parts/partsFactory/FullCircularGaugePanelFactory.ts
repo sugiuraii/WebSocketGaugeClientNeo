@@ -25,8 +25,8 @@
 import { WebsocketServiceCollection } from "websocket-gauge-client-communication-service"
 import { WebsocketParameterCode } from "websocket-gauge-client-communication-service"
 import { ReadModeCode } from "websocket-gauge-client-communication";
-import { FullCircularGaugePanel } from "@websocketgaugeclientneo/meterparts-circularbargauges";
-import { FullCircularGaugePanelPresets } from "@websocketgaugeclientneo/meterparts-circularbargauges";
+import { FullCircularGaugePanel } from "@websocketgaugeclientneo/meterparts-mfdpanel";
+import { FullCircularGaugePanelPresets } from "@websocketgaugeclientneo/meterparts-mfdpanel";
 import { MeterNotAvailableError } from "./MeterNotAvailableError";
 
 export class FullCircularGaugePanelFactory {

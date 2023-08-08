@@ -31,8 +31,8 @@ import { MeterApplication } from "meter-application-common"
 import { MeterApplicationOption } from "meter-application-common"
 
 //Import meter parts
-import { FullCircularGaugePanelPresets } from "@websocketgaugeclientneo/meterparts-circularbargauges";
-import { SemiCircularGaugePanelPresets } from "@websocketgaugeclientneo/meterparts-circularbargauges";
+import { FullCircularGaugePanelPresets } from "@websocketgaugeclientneo/meterparts-mfdpanel";
+import { SemiCircularGaugePanelPresets } from "@websocketgaugeclientneo/meterparts-mfdpanel";
 import { DigiTachoPanel } from "parts/DigiTachoPanel/DigiTachoPanel";
 
 //Import enumuator of parameter code

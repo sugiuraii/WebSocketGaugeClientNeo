@@ -1,7 +1,7 @@
 {
-  "name": "@websocketgaugeclientneo/meterparts-circularbargauges",
+  "name": "@websocketgaugeclientneo/meterparts-mfdpanel",
   "version": "1.0.0",
-  "description": "Circular bar single gauge meter parts",
+  "description": "Gauge meter parts for MFD panel",
   "private": true,
   "files": [
     "dist"
