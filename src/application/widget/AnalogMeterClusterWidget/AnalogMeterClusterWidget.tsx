@@ -31,7 +31,7 @@ import { MeterWidgetApplication } from "meter-application-common"
 import { MeterApplicationOption } from "meter-application-common"
 
 //Import meter parts
-import { AnalogMeterCluster } from "parts/AnalogMeterCluster/AnalogMeterCluster";
+import { AnalogMeterCluster } from "@websocketgaugeclientneo/meterparts-analogmetercluster";
 
 // Import AppSettings.
 import * as DefaultAppSettings from "application/DefaultAppSettings"
