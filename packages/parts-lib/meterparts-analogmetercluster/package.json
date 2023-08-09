@@ -1,0 +1,26 @@
+{
+  "name": "@websocketgaugeclientneo/meterparts-analogmetercluster",
+  "version": "1.0.0",
+  "description": "Analog meter cluster parts",
+  "private": true,
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "scripts": {
+    "clean": "rimraf dist",
+    "copy-resource": "npx copyfiles -e \"./src/**/*.ts\" \"./src/**/*\" ./dist/",
+    "build": "npm run clean ; tsc; npm run copy-resource"
+  },
+  "dependencies": {
+    "pixi-gauge": "../../pixi-gauge",
+    "pixi.js": "^7.2.4"
+  },
+  "devDependencies": {
+    "copyfiles": "^2.4.1",
+    "rimraf": "^5.0.0",
+    "typescript": "^5.0.4"
+  },
+  "author": "K. Sugiura",
+  "license": "MIT"
+}
