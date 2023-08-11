@@ -23,7 +23,7 @@
  */
 
 import * as PIXI from 'pixi.js';
-import { LEDTachoMeter } from "parts/LEDTachoMeter/LEDTachoMeter";
+import { LEDTachoMeter } from "@websocketgaugeclientneo/meterparts-ledmeter";
 
 require("./LEDTachoMeterTest.html");
 

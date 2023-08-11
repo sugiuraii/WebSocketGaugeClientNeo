@@ -47,7 +47,8 @@
         "meter-application-common": "./packages/meter-application-common",
         "@websocketgaugeclientneo/meterparts-analogsinglemeter": "./packages/parts-lib/meterparts-analogsinglemeter",
         "@websocketgaugeclientneo/meterparts-mfdpanel": "./packages/parts-lib/meterparts-mfdpanel",
-        "@websocketgaugeclientneo/meterparts-analogmetercluster": "./packages/parts-lib/meterparts-analogmetercluster"
+        "@websocketgaugeclientneo/meterparts-analogmetercluster": "./packages/parts-lib/meterparts-analogmetercluster",
+        "@websocketgaugeclientneo/meterparts-ledmeter": "./packages/parts-lib/meterparts-ledmeter"
     },
     "devDependencies": {
         "@types/react": "^18.0.35",
