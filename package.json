@@ -79,7 +79,7 @@
         "debug-watch-benchmark": "cd src/benchmark && npx webpack --watch --progress=profile",
         "debug-watch-application": "cd src/application && npx webpack --watch --progress=profile",
         "debug-watch-partsTest": "cd src/test/partsTest && npx webpack --watch --progress=profile",
-        "build-depends": "npm run --workspaces build",
+        "build-depends": "npm-run-all --parallel build-depends:* build-parts",
         "build-parts:analogmetercluster" : "npm run -w packages/parts-lib/meterparts-analogmetercluster build",
         "build-parts:analogsinglemeter" : "npm run -w packages/parts-lib/meterparts-analogsinglemeter build",
         "build-parts:ledmeter" : "npm run -w packages/parts-lib/meterparts-ledmeter build",
