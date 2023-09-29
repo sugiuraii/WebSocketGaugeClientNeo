@@ -22,38 +22,26 @@
  * THE SOFTWARE.
  */
 
-import * as PIXI from 'pixi.js';
-import {MilageGraphPanel} from "@websocketgaugeclientneo/meterparts-mfdpanel";
+import { Assets } from "@pixi/assets";
+import { FullCircularGaugePanelOption } from "./FullCircularGaugePanelOption"
+import { CircularGaugePanelBase } from "./private/CircularGaugePanelBase";
 
-require("./MilageBarTest.html");
+require("./private/FullCircularGaugeTexture.json");
+require("./private/FullCircularGaugeTexture.png");
+require("./fonts/FreeSansBold.otf");
 
-window.onload = function()
-{
-    main();
-}
+require("./private/CircularGaugeLabelFont.fnt");
+require("./private/CircularGaugeLabelFont_0.png");
 
-async function main()
-{
-    const app = new PIXI.Application<HTMLCanvasElement>({height:1366,width:1366});
-    document.body.appendChild(app.view);
-    const gaugeArray: MilageGraphPanel[] = [];
-    let index = 0;
-    for (let j = 0; j < 6; j++)
-    {
-        for (let i = 0; i < 6 ; i++)
-        {
-            gaugeArray.push(await MilageGraphPanel.create());
-            gaugeArray[index].pivot.set(200,200);
-            gaugeArray[index].scale.set(0.6, 0.6);
-            gaugeArray[index].position.set(400*i+150,200*j+150);
-            gaugeArray[index].Trip = 130.0;
-            gaugeArray[index].MomentGasMilage = 20.0;
-            gaugeArray[index].Fuel = 35.0;
-            gaugeArray[index].GasMilage = 23.5;
-            gaugeArray[index].setSectGasMllage("5min", 12.0);
-            gaugeArray[index].setSectGasMllage("25min", 7.0);
-            app.stage.addChild(gaugeArray[index]);
-            index++;
-        }
+export class FullCircularGaugePanel extends CircularGaugePanelBase {
+    private constructor(options: FullCircularGaugePanelOption) {
+        super(options);
+    }
+
+    public static async create(options: FullCircularGaugePanelOption) {
+        await Assets.load(["img/FullCircularGaugeTexture.json", "img/CircularGaugeLabelFont.fnt"]);
+        await Assets.load(["./fonts/FreeSansBold.otf"]);
+        const instance = new FullCircularGaugePanel(options);
+        return instance;
     }
 }

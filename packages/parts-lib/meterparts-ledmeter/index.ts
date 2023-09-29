@@ -22,26 +22,4 @@
  * THE SOFTWARE.
  */
 
-import * as PIXI from 'pixi.js';
-import { LEDTachoMeter } from "@websocketgaugeclientneo/meterparts-ledmeter";
-
-require("./LEDTachoMeterTest.html");
-
-window.onload = function () {
-    main();
-}
-
-async function main() {
-    const app = new PIXI.Application<HTMLCanvasElement>({ height: 1366, width: 1366 });
-    document.body.appendChild(app.view);
-
-    const meter = await LEDTachoMeter.create();
-    app.stage.addChild(meter);
-
-    app.ticker.add(function () {
-        meter.Tacho += 100;
-        if (meter.Tacho > 9000)
-            meter.Tacho = 0;
-    });
-
-}
+export {LEDTachoMeter} from './src/LEDTachoMeter/LEDTachoMeter'

@@ -22,26 +22,6 @@
  * THE SOFTWARE.
  */
 
-import { Assets } from "@pixi/assets";
-import { FullCircularGaugePanelOption } from "./FullCircularGaugePanelOption"
-import { CircularGaugePanelBase } from "./private/CircularGaugePanelBase";
-
-require("./private/FullCircularGaugeTexture.json");
-require("./private/FullCircularGaugeTexture.png");
-require("../fonts/GNU-Freefonts/FreeSansBold.otf");
-
-require("./private/CircularGaugeLabelFont.fnt");
-require("./private/CircularGaugeLabelFont_0.png");
-
-export class FullCircularGaugePanel extends CircularGaugePanelBase {
-    private constructor(options: FullCircularGaugePanelOption) {
-        super(options);
-    }
-
-    public static async create(options: FullCircularGaugePanelOption) {
-        await Assets.load(["img/FullCircularGaugeTexture.json", "img/CircularGaugeLabelFont.fnt"]);
-        await Assets.load(["./fonts/FreeSansBold.otf"]);
-        const instance = new FullCircularGaugePanel(options);
-        return instance;
-    }
-}
+export {AnalogSingleMeter} from './src/AnalogSingleMeter/AnalogSingleMeter'
+export {AnalogSingleMeterOption} from './src/AnalogSingleMeter/AnalogSingleMeterOption'
+export {AnalogSingleMeterPresets} from './src/AnalogSingleMeter/AnalogSingleMeterPresets'

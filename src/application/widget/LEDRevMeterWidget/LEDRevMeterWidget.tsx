@@ -31,7 +31,7 @@ import { MeterWidgetApplication } from "meter-application-common"
 import { MeterApplicationOption } from "meter-application-common"
 
 //Import meter parts
-import { LEDTachoMeter } from "parts/LEDTachoMeter/LEDTachoMeter";
+import { LEDTachoMeter } from "@websocketgaugeclientneo/meterparts-ledmeter";
 
 // Import AppSettings.
 import * as DefaultAppSettings from  "application/DefaultAppSettings"

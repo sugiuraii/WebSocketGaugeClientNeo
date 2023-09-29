@@ -31,7 +31,7 @@ import { MeterWidgetApplication } from "meter-application-common"
 import { MeterApplicationOption } from "meter-application-common"
 
 //Import meter parts
-import { DigiTachoPanel } from "parts/DigiTachoPanel/DigiTachoPanel";
+import { DigiTachoPanel } from "@websocketgaugeclientneo/meterparts-mfdpanel";
 
 // Import AppSettings.
 import * as DefaultAppSettings from "application/DefaultAppSettings"

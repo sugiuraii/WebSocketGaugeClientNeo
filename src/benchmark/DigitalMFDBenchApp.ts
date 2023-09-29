@@ -28,11 +28,11 @@ import * as PIXI from 'pixi.js';
 import { MeterApplication } from "meter-application-common"
 
 //Import meter parts
-import { FullCircularGaugePanelPresets } from "parts/CircularGauges/FullCircularGaugePanelPresets";
-import { SemiCircularGaugePanelPresets } from "parts/CircularGauges/SemiCircularGaugePanelPresets";
+import { FullCircularGaugePanelPresets } from "@websocketgaugeclientneo/meterparts-mfdpanel";
+import { SemiCircularGaugePanelPresets } from "@websocketgaugeclientneo/meterparts-mfdpanel";
 import { MeterApplicationOption } from "meter-application-common"
-import { DigiTachoPanel } from 'parts/DigiTachoPanel/DigiTachoPanel';
-import { MilageGraphPanel } from 'parts/GasMilageGraph/MilageGraph';
+import { DigiTachoPanel } from "@websocketgaugeclientneo/meterparts-mfdpanel";
+import { MilageGraphPanel } from "@websocketgaugeclientneo/meterparts-mfdpanel";
 import { FPSCounter } from 'parts/FPSIndicator/FPSCounter';
 
 //For including entry point html file in webpack

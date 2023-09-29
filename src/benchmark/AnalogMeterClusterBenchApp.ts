@@ -29,7 +29,7 @@ import {MeterApplication} from "meter-application-common";
 import {MeterApplicationOption} from "meter-application-common";
 
 //Import meter parts
-import {AnalogMeterCluster} from "parts/AnalogMeterCluster/AnalogMeterCluster";
+import {AnalogMeterCluster} from "@websocketgaugeclientneo/meterparts-analogmetercluster";
 
 import {FPSCounter} from "parts/FPSIndicator/FPSCounter";
 import { TrailLayer } from 'pixi-traillayer';

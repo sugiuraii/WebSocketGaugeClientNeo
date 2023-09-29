@@ -22,38 +22,12 @@
  * THE SOFTWARE.
  */
 
-import * as PIXI from 'pixi.js';
-import {MilageGraphPanel} from "@websocketgaugeclientneo/meterparts-mfdpanel";
+export {FullCircularGaugePanel} from './src/CircularGauges/FullCircularGaugePanel'
+export {FullCircularGaugePanelOption} from './src/CircularGauges/FullCircularGaugePanelOption'
+export {FullCircularGaugePanelPresets} from './src/CircularGauges/FullCircularGaugePanelPresets'
+export {SemiCircularGaugePanel} from './src/CircularGauges/SemiCircularGaugePanel'
+export {SemiCircularGaugePanelOption} from './src/CircularGauges/SemiCircularGaugePanelOption'
+export {SemiCircularGaugePanelPresets} from './src/CircularGauges/SemiCircularGaugePanelPresets'
 
-require("./MilageBarTest.html");
-
-window.onload = function()
-{
-    main();
-}
-
-async function main()
-{
-    const app = new PIXI.Application<HTMLCanvasElement>({height:1366,width:1366});
-    document.body.appendChild(app.view);
-    const gaugeArray: MilageGraphPanel[] = [];
-    let index = 0;
-    for (let j = 0; j < 6; j++)
-    {
-        for (let i = 0; i < 6 ; i++)
-        {
-            gaugeArray.push(await MilageGraphPanel.create());
-            gaugeArray[index].pivot.set(200,200);
-            gaugeArray[index].scale.set(0.6, 0.6);
-            gaugeArray[index].position.set(400*i+150,200*j+150);
-            gaugeArray[index].Trip = 130.0;
-            gaugeArray[index].MomentGasMilage = 20.0;
-            gaugeArray[index].Fuel = 35.0;
-            gaugeArray[index].GasMilage = 23.5;
-            gaugeArray[index].setSectGasMllage("5min", 12.0);
-            gaugeArray[index].setSectGasMllage("25min", 7.0);
-            app.stage.addChild(gaugeArray[index]);
-            index++;
-        }
-    }
-}
+export {DigiTachoPanel} from './src/DigiTachoPanel/DigiTachoPanel'
+export {MilageGraphPanel} from './src/GasMilageGraph/MilageGraph'

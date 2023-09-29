@@ -31,8 +31,8 @@ import { MeterApplication } from "meter-application-common"
 import { MeterApplicationOption } from "meter-application-common"
 
 //Import meter parts
-import { AnalogSingleMeterPresets} from "parts/AnalogSingleMeter/AnalogSingleMeterPresets";
-import { LEDTachoMeter } from "parts/LEDTachoMeter/LEDTachoMeter";
+import { AnalogSingleMeterPresets} from "@websocketgaugeclientneo/meterparts-analogsinglemeter";
+import { LEDTachoMeter } from "@websocketgaugeclientneo/meterparts-ledmeter";
 
 // Import AppSettings.
 import * as DefaultAppSettings from  "application/DefaultAppSettings"

@@ -30,9 +30,6 @@ import * as PIXI from 'pixi.js';
 import { MeterWidgetApplication } from "meter-application-common"
 import { MeterApplicationOption } from "meter-application-common"
 
-//Import meter parts
-import { AnalogSingleMeter } from "parts/AnalogSingleMeter/AnalogSingleMeter";
-
 // Import AppSettings.
 import * as DefaultAppSettings from "application/DefaultAppSettings"
 import { AnalogSingleMeterFactory } from 'parts/partsFactory/AnalogSingleMeterFactory';

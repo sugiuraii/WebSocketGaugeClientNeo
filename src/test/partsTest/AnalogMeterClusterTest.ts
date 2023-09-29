@@ -23,7 +23,7 @@
  */
 
 import * as PIXI from 'pixi.js';
-import { AnalogMeterCluster } from 'parts/AnalogMeterCluster/AnalogMeterCluster';
+import { AnalogMeterCluster } from '@websocketgaugeclientneo/meterparts-analogmetercluster';
 
 require("./AnalogMeterClusterTest.html");
 

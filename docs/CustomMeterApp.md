@@ -57,7 +57,7 @@ import {MeterApplicationBase} from "lib/MeterAppBase/MeterApplicationBase";
 //Import meter parts
 import {WaterTempGaugePanel} from "parts/CircularGauges/SemiCircularGaugePanel";
 import {ThrottleGaugePanel} from "parts/CircularGauges/SemiCircularGaugePanel";
-import {DigiTachoPanel} from "parts/DigiTachoPanel/DigiTachoPanel";
+import {DigiTachoPanel} from "@websocketgaugeclientneo/meterparts-mfdpanel";
 import {BoostGaugePanel} from "parts/CircularGauges/FullCircularGaugePanel";
 
 //Import enumuator of parameter code

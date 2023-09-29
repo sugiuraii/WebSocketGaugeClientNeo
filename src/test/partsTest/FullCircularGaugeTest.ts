@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import { FullCircularGaugePanel } from "parts/CircularGauges/FullCircularGaugePanel";
-import { FullCircularGaugePanelPresets } from "parts/CircularGauges/FullCircularGaugePanelPresets";
+import { FullCircularGaugePanel } from "@websocketgaugeclientneo/meterparts-mfdpanel";
+import { FullCircularGaugePanelPresets } from "@websocketgaugeclientneo/meterparts-mfdpanel";
 import * as PIXI from 'pixi.js';
 
 require("./FullCircularGaugeTest.html");

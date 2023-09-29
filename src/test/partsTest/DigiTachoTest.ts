@@ -23,7 +23,7 @@
  */
 
 
-import { DigiTachoPanel } from "parts/DigiTachoPanel/DigiTachoPanel";
+import { DigiTachoPanel } from "@websocketgaugeclientneo/meterparts-mfdpanel";
 import * as PIXI from 'pixi.js';
 
 require("./DigiTachoTest.html");

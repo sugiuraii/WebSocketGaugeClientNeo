@@ -24,7 +24,6 @@
 
 import { CircularProgressBar, CircularProgressBarOptions } from 'pixi-gauge';
 import * as PIXI from 'pixi.js';
-import { SingleValueGauge } from '../../SingleValueGauge';
 
 export class BitmapTextOption {
     public position = new PIXI.Point(0, 0);
@@ -143,7 +142,7 @@ export abstract class CircularGaugePanelOptionBase {
     }
 }
 
-export abstract class CircularGaugePanelBase extends PIXI.Container implements SingleValueGauge {
+export abstract class CircularGaugePanelBase extends PIXI.Container {
     private valueTextLabel: PIXI.BitmapText;
     private valueProgressBar: CircularProgressBar;
     private Options: CircularGaugePanelOptionBase;
