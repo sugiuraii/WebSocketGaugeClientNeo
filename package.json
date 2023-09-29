@@ -79,8 +79,18 @@
         "debug-watch-benchmark": "cd src/benchmark && npx webpack --watch --progress=profile",
         "debug-watch-application": "cd src/application && npx webpack --watch --progress=profile",
         "debug-watch-partsTest": "cd src/test/partsTest && npx webpack --watch --progress=profile",
-        "build-depends": "npm run --workspaces build"
-    },
+        "build-depends": "npm-run-all --parallel build-depends:* build-parts",
+        "build-parts:analogmetercluster" : "npm run -w packages/parts-lib/meterparts-analogmetercluster build",
+        "build-parts:analogsinglemeter" : "npm run -w packages/parts-lib/meterparts-analogsinglemeter build",
+        "build-parts:ledmeter" : "npm run -w packages/parts-lib/meterparts-ledmeter build",
+        "build-parts:mfdpanel" : "npm run -w packages/parts-lib/meterparts-mfdpanel build",
+        "build-parts" : "npm-run-all --parallel build-parts:*",
+        "build-depends:pixi-gauge" : "npm run -w packages/pixi-gauge build",
+        "build-depends:pixi-traillayer" : "npm run -w packages/pixi-traillayer build",
+        "build-depends:basic-logger" : "npm run -w packages/basic-logger build",
+        "build-depends:websocket-gauge-client-communication" : "npm run -w packages/websocket-gauge-client-communication build; npm run -w packages/websocket-gauge-client-communication-service build",
+        "build-depends:meter-application-common" : "npm run -w packages/meter-application-common build"
+        },
     "workspaces": [
         "packages/*",
         "packages/parts-lib/*"
