@@ -3,6 +3,7 @@
 FROM --platform=linux/amd64 node:16-bullseye-slim AS build
 WORKDIR /source
 COPY src/ ./src
+COPY packages/ ./packages
 COPY package.json ./
 RUN npm i
 RUN npm run build-full
