@@ -1,0 +1,19 @@
+{
+  "compilerOptions": 
+    {
+        "target": "ES2017",
+        "sourceMap": true,
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "jsx": "react",
+        "outDir": "./dist",
+        // Strict,
+        "strict": true,
+        "moduleResolution": "node",
+        "noUnusedParameters":true,
+        "lib":["dom", "es2017"],
+        "rootDir": ".",
+        "baseUrl": "./"
+    }
+}

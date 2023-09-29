@@ -27,8 +27,8 @@ require("./AnalogSingleMeterWidget.html");
 import * as PIXI from 'pixi.js';
 
 //Import application base class
-import { MeterWidgetApplication } from "lib/MeterAppBase/MeterWidgetApplication";
-import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicationOption";
+import { MeterWidgetApplication } from "meter-application-common"
+import { MeterApplicationOption } from "meter-application-common"
 
 //Import meter parts
 import { AnalogSingleMeter } from "parts/AnalogSingleMeter/AnalogSingleMeter";

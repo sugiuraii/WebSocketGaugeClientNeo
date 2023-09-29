@@ -25,12 +25,12 @@
 import * as PIXI from 'pixi.js';
 
 //Import application base class
-import { MeterApplication } from "lib/MeterAppBase/MeterApplication";
+import { MeterApplication } from "meter-application-common"
 
 //Import meter parts
 import { FullCircularGaugePanelPresets } from "parts/CircularGauges/FullCircularGaugePanelPresets";
 import { SemiCircularGaugePanelPresets } from "parts/CircularGauges/SemiCircularGaugePanelPresets";
-import { MeterApplicationOption } from "lib/MeterAppBase/options/MeterApplicationOption";
+import { MeterApplicationOption } from "meter-application-common"
 import { DigiTachoPanel } from 'parts/DigiTachoPanel/DigiTachoPanel';
 import { MilageGraphPanel } from 'parts/GasMilageGraph/MilageGraph';
 import { FPSCounter } from 'parts/FPSIndicator/FPSCounter';

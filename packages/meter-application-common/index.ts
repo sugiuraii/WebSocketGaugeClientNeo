@@ -22,16 +22,8 @@
  * THE SOFTWARE.
  */
 
-require('./index.html');
-
-import 'bootswatch/dist/slate/bootstrap.min.css';
-
-import { IndexNavbar } from 'meter-application-common'
-import React  from 'react'
-import { createRoot } from 'react-dom/client'
-
-window.onload = () => {
-    // Crete react components
-    const rootElement = createRoot(document.getElementById('root')!);
-    rootElement.render(<IndexNavbar/>);
-}
+export {MeterApplication} from "./src/MeterApplication"
+export {MeterWidgetApplication} from "./src/MeterWidgetApplication"
+export {MeterApplicationOption} from "./src/options/MeterApplicationOption"
+export {GearPositionCalculator, CalcTireCircumference} from './src/utils/GearPositionCalculator'
+export {IndexNavbar} from './src/reactParts/navbar/IndexNavbar'

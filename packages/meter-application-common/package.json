@@ -1,0 +1,31 @@
+{
+  "name": "meter-application-common",
+  "version": "3.0.0",
+  "description": "Meter application common library",
+  "private": true,
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run clean ; tsc"
+  },
+  "dependencies": {    
+    "pixi.js": "^7.2.4",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.7.4",
+    "react-dom": "^18.2.0",
+    "bootswatch": "^5.2.3",
+    "basic-logger": "../basic-logger",
+    "websocket-gauge-client-communication-service": "../websocket-gauge-client-communication-service",
+    "pixi-traillayer":"../pixi-traillayer"
+
+  },
+  "devDependencies": {
+    "typescript": "^5.0.4",
+    "rimraf": "^5.0.0"
+  },
+  "author": "K. Sugiura",
+  "license": "MIT"
+}
