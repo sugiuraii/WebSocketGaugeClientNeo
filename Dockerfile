@@ -32,5 +32,8 @@ RUN npm init -y\
 RUN node thumbnails.js
 
 # Finally, copy public_html and thumbnails to nginx container
-FROM nginx
+FROM nginx:1.24-bullseye
+RUN apt-get update
+RUN apt-get install -y vim
+RUN apt-get install -y nano
 COPY --from=thumbnails /home/pwuser/public_html /usr/share/nginx/html
