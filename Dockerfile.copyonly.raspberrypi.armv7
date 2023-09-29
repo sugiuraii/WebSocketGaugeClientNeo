@@ -1,5 +1,8 @@
 # This docker file builds image by only copying pre-build files  (for arm32)
 # To use this, build public_html before building docker image.
 # To build image by using docker container, use Dockerfile instead.
-FROM --platform=linux/arm/v7 nginx
+FROM --platform=linux/arm/v7 nginx:1.24-bullseye
+RUN apt-get update
+RUN apt-get install -y vim
+RUN apt-get install -y nano
 COPY public_html /usr/share/nginx/html
