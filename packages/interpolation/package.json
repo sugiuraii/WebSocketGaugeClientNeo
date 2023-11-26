@@ -1,0 +1,19 @@
+{
+  "name": "interpolation",
+  "version": "1.0.0",
+  "description": "Value interpolation package",
+  "private": true,
+  "files": ["dist"],
+  "main": "dist/index.js",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run clean ; tsc"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.4",
+    "node-pid-controller": "^1.0.1",
+    "rimraf": "^5.0.0"
+  },
+  "author": "K. Sugiura",
+  "license": "MIT"
+}
