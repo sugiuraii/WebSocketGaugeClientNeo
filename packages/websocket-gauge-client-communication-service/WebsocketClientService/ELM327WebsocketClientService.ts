@@ -27,7 +27,7 @@ import { ILogger } from "basic-logger";
 import { WebsocketClientService } from "./WebsocketClientService";
 import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";
 import { WebsocketState } from "./WebsocketState";
-import { InterpolatorOption } from "websocket-gauge-client-communication/utils/Interpolator";
+import { InterpolatorOption } from "interpolation";
 
 export class ELM327WebsocketClientService implements WebsocketClientService {
    public static readonly DEFAULT_WS_PORT = 2016;

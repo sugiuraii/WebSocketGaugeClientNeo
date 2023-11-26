@@ -27,7 +27,7 @@ import { ILogger } from "basic-logger";
 import { WebsocketState } from "./WebsocketState";
 import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";
 import { WebsocketClientService } from "./WebsocketClientService";
-import { InterpolatorOption } from "websocket-gauge-client-communication/utils/Interpolator";
+import { InterpolatorOption } from "interpolation";
 
 export class ArduinoWebsocketClientService implements WebsocketClientService {
    public static readonly DEFAULT_WS_PORT = 2016;
