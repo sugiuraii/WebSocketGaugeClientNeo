@@ -24,7 +24,7 @@
 
 import { WebsocketCommon } from './WebsocketCommon';
 import { ArduinoParameterCode } from './parameterCode/ArduinoParameterCode'
-import { Interpolator, InterpolatorFactory, InterpolatorOption } from './utils/Interpolator';
+import { Interpolator, InterpolatorFactory, InterpolatorOption } from 'interpolation';
 import * as JSONFormats from './JSONFormats';
 
 export class ArduinoCOMWebsocket extends WebsocketCommon {

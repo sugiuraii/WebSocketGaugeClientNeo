@@ -15,7 +15,8 @@
   },
   "devDependencies": {
     "typescript": "^5.0.4",
-    "rimraf": "^5.0.0"
+    "rimraf": "^5.0.0",
+    "interpolation": "../interpolation"
   },
   "author": "K. Sugiura",
   "license": "MIT"

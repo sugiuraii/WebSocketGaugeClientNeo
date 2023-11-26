@@ -27,7 +27,7 @@ import { ILogger } from "basic-logger";
 import { WebsocketClientService } from "./WebsocketClientService";
 import { WebsocketConnectionStatus } from "./WebsocketConnectionStatus";
 import { WebsocketState } from "./WebsocketState";
-import { InterpolatorOption } from "websocket-gauge-client-communication/utils/Interpolator";
+import { InterpolatorOption } from "interpolation";
 
 export class FUELTRIPWebsocketClientService implements WebsocketClientService {
     public static readonly DEFAULT_WS_PORT = 2014;

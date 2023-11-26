@@ -1,7 +1,7 @@
 {
-  "name": "websocket-gauge-client-communication",
-  "version": "3.0.0",
-  "description": "Websocket gauge client communication library",
+  "name": "interpolation",
+  "version": "1.0.0",
+  "description": "Value interpolation package",
   "private": true,
   "files": ["dist"],
   "main": "dist/index.js",
@@ -12,8 +12,7 @@
   "devDependencies": {
     "typescript": "^5.0.4",
     "node-pid-controller": "^1.0.1",
-    "rimraf": "^5.0.0",
-    "interpolation": "../interpolation"
+    "rimraf": "^5.0.0"
   },
   "author": "K. Sugiura",
   "license": "MIT"

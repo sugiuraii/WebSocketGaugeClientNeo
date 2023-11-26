@@ -33,7 +33,7 @@ import { WebsocketState } from "../WebsocketClientService/WebsocketState";
 import { WebsocketServiceMapEntry, WebsocketServiceMapper } from "./WebsocketServiceMapper";
 import { WebsocketParameterCode } from "./WebsocketParameterCode";
 import { WebsocketServiceMapFactory } from "./WebsocketServiceMapFactory";
-import { InterpolatorOption } from "websocket-gauge-client-communication/utils/Interpolator";
+import { InterpolatorOption } from "interpolation";
 
 export class WebsocketObjectCollectionOption
 {
