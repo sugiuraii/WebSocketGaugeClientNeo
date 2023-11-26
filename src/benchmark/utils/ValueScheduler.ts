@@ -24,10 +24,10 @@
 
 export class ValueScheduler {
     private readonly onValueUpdated : (val : number) => void;
-    private readonly Schedule : [{duration : number, val: number}];
+    private readonly Schedule : {duration : number, val: number}[];
     private readonly Loop : boolean;
 
-    public constructor(onValueUpdated : (val : number) => void, schedule : [{duration : number, val: number}], loop? : boolean) {
+    public constructor(onValueUpdated : (val : number) => void, schedule : {duration : number, val: number}[], loop? : boolean) {
         this.onValueUpdated = onValueUpdated;
         this.Schedule = schedule;
         if(loop)
