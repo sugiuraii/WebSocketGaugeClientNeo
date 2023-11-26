@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { Interpolator, InterpolatorFactory, InterpolatorOption } from './utils/Interpolator';
+import { Interpolator, InterpolatorFactory, InterpolatorOption } from 'interpolation';
 import * as JSONFormats from "./JSONFormats";
 import { WebsocketCommon } from "./WebsocketCommon";
 
