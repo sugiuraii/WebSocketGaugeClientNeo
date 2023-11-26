@@ -32,6 +32,10 @@ import {MeterApplicationOption} from "meter-application-common";
 import {AnalogMeterCluster} from "@websocketgaugeclientneo/meterparts-analogmetercluster";
 
 import {FPSCounter} from "parts/FPSIndicator/FPSCounter";
+
+import { Interpolator, InterpolatorFactory, InterpolatorOption } from 'interpolation';
+import { ValueScheduler } from './utils/ValueScheduler';
+
 import { TrailLayer } from 'pixi-traillayer';
 
 //For including entry point html file in webpack
@@ -72,15 +76,22 @@ class AnalogMeterClusterBenchApp
     
             let boost = -1.0;
             let waterTemp = 50.0;
-                    
+        
+            const tachoSchedule = [
+                {duration: 250, val: 1000},
+                {duration: 500, val: 3000},
+                {duration: 500, val: 5000},
+                {duration: 500, val: 7000},
+                {duration: 500, val: 9000},
+                {duration: 500, val: 0}
+            ];
+            const tachoValueSource = new InterpolatorFactory().get({type: "Linear"});
+            const tachoScheduler = new ValueScheduler((val) => tachoValueSource.setVal(val), tachoSchedule, false);
+            tachoScheduler.start();
             app.ticker.add(() => 
             {
                 fpsCounter.setFPS(app.ticker.FPS);
-                
-                if(tacho > 9000)
-                    tacho = 0;
-                else
-                    tacho += 500;
+                const tacho = tachoValueSource.getVal();
                 
                 if(speed > 280)
                     speed = 0;
