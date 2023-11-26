@@ -22,5 +22,6 @@
  * THE SOFTWARE.
  */
 
+export {Interpolator} from "./Interpolator";
 export {InterpolatorOption} from "./Interpolator";
 export {InterpolatorFactory} from "./Interpolator";
