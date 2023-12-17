@@ -14,7 +14,8 @@
   },
   "dependencies": {
     "pixi-gauge": "../../pixi-gauge",
-    "pixi.js": "^7.2.4"
+    "pixi.js": "^7.2.4",
+    "pixi-filters": "^5.2.1"
   },
   "devDependencies": {
     "copyfiles": "^2.4.1",
