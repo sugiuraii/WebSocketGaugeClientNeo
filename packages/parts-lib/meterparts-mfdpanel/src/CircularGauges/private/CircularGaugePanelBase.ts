@@ -252,7 +252,6 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
             const redzoneBar = new CircularProgressBar(redzoneBarOption);
             redzoneBar.Value = redzoneBarOption.Max;
             redzoneBar.updateForce();
-            backContainer.addChild(redzoneBar);
             zonebarContainer.addChild(redzoneBar);
         }
 
@@ -269,7 +268,6 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
             const yellowzoneBar = new CircularProgressBar(yellowzoneBarOption);
             yellowzoneBar.Value = yellowzoneBarOption.Max;
             yellowzoneBar.updateForce();
-            backContainer.addChild(yellowzoneBar);
             zonebarContainer.addChild(yellowzoneBar);
         }
 
@@ -286,9 +284,9 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
             const greenzoneBar = new CircularProgressBar(greenzoneBarOption);
             greenzoneBar.Value = greenzoneBarOption.Max;
             greenzoneBar.updateForce();
-            backContainer.addChild(greenzoneBar);
             zonebarContainer.addChild(greenzoneBar);
         }
+        backContainer.addChild(zonebarContainer);
         this.displayObjects.set("ZoneBar", zonebarContainer);
 
         //Add gridSprite
@@ -298,7 +296,7 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
         backContainer.addChild(gridSprite);
         this.displayObjects.set("Grid", gridSprite);
 
-        const backLabel = new PIXI.Container();
+        const backLabelContainer = new PIXI.Container();
         //Set Title and unit text
         const titleTextElem = new PIXI.Text(this.Options.TitleLabel);
         const titleTextOption = this.Options.TitleLabelOption;
@@ -316,10 +314,8 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
         unitTextElem.anchor.set(unitTextOption.anchor.x, unitTextOption.anchor.y);
         unitTextElem.position.set(unitTextOption.position.x, unitTextOption.position.y);
 
-        backContainer.addChild(titleTextElem);
-        backContainer.addChild(unitTextElem);
-        backLabel.addChild(titleTextElem);
-        backLabel.addChild(unitTextElem);
+        backLabelContainer.addChild(titleTextElem);
+        backLabelContainer.addChild(unitTextElem);
 
         //Set axis label
         for (let i = 0; i < this.Options.AxisLabelOption.length; i++) {
@@ -330,11 +326,12 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
             axisLabelElem.style.align = axisLabelOption.align;
             axisLabelElem.anchor.set(axisLabelOption.anchor.x, axisLabelOption.anchor.y);
             axisLabelElem.position.set(axisLabelOption.position.x, axisLabelOption.position.y);
-            backContainer.addChild(axisLabelElem);
-            backLabel.addChild(axisLabelElem);
+            backLabelContainer.addChild(axisLabelElem);
         }
+        backContainer.addChild(backLabelContainer);
+
         this.addChild(backContainer);
-        this.displayObjects.set("BackLabel", backLabel);
+        this.displayObjects.set("BackLabel", backLabelContainer);
 
         //Bake into texture
         backContainer.cacheAsBitmapResolution = 3; // Manually set bitmap cache resolution to avoid redzone bar glitch in Firefox.
