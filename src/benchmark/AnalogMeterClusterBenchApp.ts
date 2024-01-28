@@ -38,6 +38,8 @@ import { ValueScheduler } from './utils/ValueScheduler';
 
 import { TrailLayer } from 'pixi-traillayer';
 
+import * as TWEEN from "@tweenjs/tween.js"
+
 //For including entry point html file in webpack
 require("./AnalogMeterClusterBenchApp.html");
 
@@ -54,7 +56,7 @@ class AnalogMeterClusterBenchApp
         const pixiAppOption : Partial<PIXI.IApplicationOptions> = {width : 1100, height : 600};
 
         const appOption = new MeterApplicationOption(pixiAppOption);
-
+        
         appOption.SetupPIXIMeterPanel = async (app) =>
         {
             const meterCluster = await AnalogMeterCluster.create();
@@ -88,11 +90,24 @@ class AnalogMeterClusterBenchApp
             const tachoValueSource = new InterpolatorFactory().get({type: "Linear"});
             const tachoScheduler = new ValueScheduler((val) => tachoValueSource.setVal(val), tachoSchedule, false);
             tachoScheduler.start();
+            let meterVal = {boost: -1.0, tacho: 0, speed : 0};
+            
+            const tween = new TWEEN.Tween(meterVal).to({boost: 2.0, tacho: 9000, speed: 280}, 2500)
+            .easing(TWEEN.Easing.Quadratic.InOut);
+            const tweenback = new TWEEN.Tween(meterVal).to({boost: -1.0, tacho: 0, speed: 0}, 1000)
+            .easing(TWEEN.Easing.Quadratic.InOut);
+            
+            tween.start();
+            tween.chain(tweenback);
+            
             app.ticker.add(() => 
             {
+                const timestamp = app.ticker.lastTime;
+                TWEEN.update(timestamp);
+                //tweenback.update(timestamp);
                 fpsCounter.setFPS(app.ticker.FPS);
                 const tacho = tachoValueSource.getVal();
-                
+/*                
                 if(speed > 280)
                     speed = 0;
                 else
@@ -107,11 +122,11 @@ class AnalogMeterClusterBenchApp
                     waterTemp = 50;
                 else
                     waterTemp += 0.1;
+                */
                 gearPos = "-";
-                
-                meterCluster.Tacho = tacho;
-                meterCluster.Speed = speed;
-                meterCluster.Boost = boost;
+                meterCluster.Tacho = meterVal.tacho;
+                meterCluster.Speed = meterVal.speed;
+                meterCluster.Boost = meterVal.boost;
                 meterCluster.WaterTemp = waterTemp;
                 meterCluster.GasMilage = totalGasMilage;
                 meterCluster.Trip = totalTrip;
