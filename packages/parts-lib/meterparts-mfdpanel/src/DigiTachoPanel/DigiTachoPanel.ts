@@ -72,28 +72,70 @@ export class DigiTachoPanel extends PIXI.Container {
 
     public static async create(applyTrail = true, trailAlpha = 0.95) {
         await Assets.load(["img/DigiTachoTexture.json", "img/GearPosFont.fnt", "img/SpeedMeterFont.fnt"]);
-        const instance = new DigiTachoPanel(applyTrail, trailAlpha);
+        const progressBarTexture = await this.createProgressBarTexture();
+        const instance = new DigiTachoPanel(applyTrail, trailAlpha, progressBarTexture);
         return instance;
     }
 
-    private constructor(applyTrail : boolean, trailAlpha : number) {
+    private constructor(applyTrail : boolean, trailAlpha : number, progressBarTexture: PIXI.Texture) {
         super();
         this.applyTrail = applyTrail;
         this.trailAlpha = trailAlpha;
-        const gaugeset = this.buildGaugeSet();
+        const gaugeset = this.buildGaugeSet(progressBarTexture);
         this.tachoProgressBar = gaugeset.tachoProgressBar;
         this.speedLabel = gaugeset.speedLabel;
         this.geasposLabel = gaugeset.gearLabel;
     }
 
-    private buildGaugeSet(): { tachoProgressBar: RectangularProgressBar, speedLabel: BitmapTextNumericIndicator, gearLabel: PIXI.BitmapText } {
+    private static async createProgressBarTexture(): Promise<PIXI.Texture> {
+        const imgframe = {
+            "x": 1,
+            "y": 306,
+            "w": 577,
+            "h": 246
+        };
+        return new Promise((resolve, reject) => {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext("2d");
+            canvas.width = imgframe.w;
+            canvas.height = imgframe.h;
+            if(ctx !== null) {
+                const img = new Image();
+                img.src = "img/DigiTachoTexture.png";
+                const lineargradient = ctx.createLinearGradient(0, 0, imgframe.w, 0);
+                lineargradient.addColorStop(0, '#00fff0ff');
+                lineargradient.addColorStop(0.2, '#00ff00ff');
+                lineargradient.addColorStop(0.43, '#ffff00ff');
+                lineargradient.addColorStop(0.86, '#ffff00ff');
+                lineargradient.addColorStop(0.88, '#ff0000ff');
+                lineargradient.addColorStop(1,    '#ff0000ff');
+                img.onload = () => {
+                    ctx.fillStyle = lineargradient;
+                    ctx.fillRect(0, 0, imgframe.w, imgframe.h);
+                    ctx.globalCompositeOperation = "destination-in";
+                    ctx.drawImage(img, imgframe.x, imgframe.y, imgframe.w, imgframe.h, 0, 0, imgframe.w, imgframe.h); // Refer DigiTachoDarkBar
+                    ctx.globalCompositeOperation = "lighten";
+                    ctx.drawImage(img, imgframe.x, imgframe.y, imgframe.w, imgframe.h, 0, 0, imgframe.w, imgframe.h); // Refer DigiTachoDarkBar
+                    resolve(PIXI.Texture.from(canvas));
+                };
+            } else {
+                reject(new Error("Canvas.getContext() returns null"));
+            }    
+        })
+    };
+
+    private buildGaugeSet(tachoProgressBarTexture: PIXI.Texture): { tachoProgressBar: RectangularProgressBar, speedLabel: BitmapTextNumericIndicator, gearLabel: PIXI.BitmapText } {
         const backTexture = PIXI.Texture.from("DigiTachoBack");
-        const tachoProgressBarTexture = PIXI.Texture.from("DigiTachoBar");
+        const gridTexture = PIXI.Texture.from("DigiTachoGrid");
 
         //Create background sprite
         const backSprite = new PIXI.Sprite();
         backSprite.texture = backTexture;
         super.addChild(backSprite);
+
+        const gridSprite = new PIXI.Sprite();
+        gridSprite.texture = gridTexture;
+        super.addChild(gridSprite);
 
         //Create tacho progress bar
         const tachoProgressBarOption = new RectangularProgressBarOptions();
