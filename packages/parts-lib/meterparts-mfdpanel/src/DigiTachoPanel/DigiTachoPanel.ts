@@ -38,7 +38,11 @@ require("./SpeedMeterFont_0.png");
 require("./GearPosFont.fnt");
 require("./GearPosFont_0.png");
 
+export type DigiTachoPanelObjectName = "TachoProgressBar" | "SpeedLabel" | "GearPosLabel" | "BackLabel" | "Grid" | "Background";
+
 export class DigiTachoPanel extends PIXI.Container {
+    private readonly displayObjects: Map<DigiTachoPanelObjectName, PIXI.DisplayObject> = new Map();
+
     private tachoProgressBar: RectangularProgressBar;
 
     private speedLabel: NumericIndicator;
@@ -69,6 +73,13 @@ export class DigiTachoPanel extends PIXI.Container {
         this.gearPos = gearPos;
         this.geasposLabel.text = gearPos;
     }
+
+    public getDisplayObjects(value : DigiTachoPanelObjectName) : PIXI.DisplayObject { 
+        if(this.displayObjects.get(value) === undefined)
+            throw new Error(value + "is not exists");
+        else
+            return this.displayObjects.get(value)!;
+    };
 
     public static async create(applyTrail = true, trailAlpha = 0.95) {
         await Assets.load(["img/DigiTachoMeterTexture.json", "img/GearPosFont.fnt", "img/SpeedMeterFont.fnt"]);
