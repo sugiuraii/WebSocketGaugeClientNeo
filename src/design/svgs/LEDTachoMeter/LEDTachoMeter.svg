@@ -24,10 +24,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.54895833"
-     inkscape:cx="149.37381"
-     inkscape:cy="758.70968"
+     inkscape:cx="45.540797"
+     inkscape:cy="463.60532"
      inkscape:document-units="px"
-     inkscape:current-layer="layer_red"
+     inkscape:current-layer="layer_grid"
      showgrid="false"
      inkscape:window-width="1920"
      inkscape:window-height="1010"
@@ -5678,7 +5678,7 @@
      id="layer_base"
      inkscape:label="Base"
      style="display:inline"
-     transform="matrix(0.6237,0,0,0.6237,216.26084,275.71914)"
+     transform="matrix(0.6237,0,0,0.6237,-58.44316,-23.50286)"
      sodipodi:insensitive="true">
     <path
        id="circle8317"
@@ -5698,7 +5698,7 @@
      id="layer_red"
      inkscape:label="Red"
      style="display:inline"
-     transform="translate(0,27.637839)"
+     transform="translate(-274.704,-271.58416)"
      sodipodi:insensitive="true">
     <path
        id="path1"
@@ -5712,7 +5712,7 @@
      inkscape:label="LED_Dark"
      id="layer_led_dark"
      inkscape:groupmode="layer"
-     transform="matrix(0.6237,0,0,0.6237,216.26084,275.71914)"
+     transform="matrix(0.6237,0,0,0.6237,-58.44316,-23.50286)"
      sodipodi:insensitive="true">
     <g
        transform="matrix(1.9021131,0.61803398,-0.61803398,1.9021131,178.21912,-687.60865)"
@@ -5778,7 +5778,7 @@
      id="layer_led_bright"
      inkscape:label="LED"
      style="display:inline"
-     transform="matrix(0.6237,0,0,0.6237,216.26084,275.71914)">
+     transform="matrix(0.6237,0,0,0.6237,-58.44316,-23.50286)">
     <g
        inkscape:groupmode="layer"
        id="layer_led_bright_yellow"
@@ -5844,7 +5844,8 @@
        inkscape:groupmode="layer"
        id="layer14"
        inkscape:label="Grid 2"
-       style="display:inline">
+       style="display:inline"
+       transform="translate(-440.44252,-479.75309)">
       <g
          id="g4270"
          style="stroke:#ffffff;filter:url(#filter4368)"
@@ -6411,7 +6412,8 @@
        inkscape:groupmode="layer"
        id="layer3"
        inkscape:label="Grid3"
-       style="display:inline">
+       style="display:inline"
+       transform="translate(-440.44252,-479.75309)">
       <path
          style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:1.98643;filter:url(#filter4723)"
          d="m 572.81641,119.76172 v 59.82422 h 4.96289 v -59.82422 z m -208.32618,55.82031 -4.29882,2.48242 29.91211,51.8086 4.29882,-2.48047 z m 421.61329,0 -29.91211,51.81055 4.29882,2.48047 29.91211,-51.8086 z m -578.41602,154.98633 -2.48242,4.29883 51.81054,29.91211 2.48047,-4.29883 z m 735.2207,0 -51.81054,29.91211 2.48242,4.29883 51.80859,-29.91211 z M 149.38477,543.19141 v 4.96484 h 59.82421 v -4.96484 z m 792,0 v 4.96484 h 59.82423 v -4.96484 z m -684.36915,183.37695 -51.81054,29.91211 2.48242,4.29883 51.80859,-29.91211 z m 636.56446,0 -2.48242,4.29883 51.81054,29.91211 2.48047,-4.29883 z m -503.47656,134.90625 -29.91211,51.80859 4.29882,2.48242 29.91211,-51.81054 z m 370.38671,0 -4.29882,2.48047 29.91211,51.81054 4.29882,-2.48242 z m -187.67382,50.28711 v 59.82422 h 4.96289 v -59.82422 z"
@@ -6424,7 +6426,7 @@
      inkscape:groupmode="layer"
      id="layer_text"
      style="display:inline"
-     transform="matrix(0.6237,0,0,0.6237,216.26084,275.71914)">
+     transform="matrix(0.6237,0,0,0.6237,-58.44316,-23.50286)">
     <g
        inkscape:groupmode="layer"
        id="layer_text_variable"
