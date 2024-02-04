@@ -2,8 +2,8 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="1920"
-   height="1080"
+   width="600"
+   height="600"
    id="svg2"
    version="1.1"
    inkscape:version="1.3.2 (091e20e, 2023-11-25)"
@@ -23,11 +23,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7760497"
-     inkscape:cx="623.6714"
-     inkscape:cy="485.14934"
+     inkscape:zoom="0.54895833"
+     inkscape:cx="149.37381"
+     inkscape:cy="758.70968"
      inkscape:document-units="px"
-     inkscape:current-layer="layer_text"
+     inkscape:current-layer="layer_red"
      showgrid="false"
      inkscape:window-width="1920"
      inkscape:window-height="1010"
@@ -73,304 +73,304 @@
     </linearGradient>
     <inkscape:perspective
        sodipodi:type="inkscape:persp3d"
-       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_x="0 : 46.18109 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_z="744.09448 : 526.18109 : 1"
-       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 46.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : -129.21261 : 1"
        id="perspective10" />
     <inkscape:perspective
        id="perspective2876"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective2830"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective2858"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective2886"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective2914"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective2942"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective2971"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective3002"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective3285"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective3313"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective3341"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective3369"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective3397"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective3425"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective3453"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective3481"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective4137"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective4231"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective4325"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective4419"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective4513"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective4608"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective4649"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective4677"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective4705"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective4733"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective4761"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective4969"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective5000"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective5810"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective5841"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective5872"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective5903"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective5966"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective5997"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective6028"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective6075"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective6106"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective3481-3"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective3398"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective3514"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective3104"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <filter
        id="filter3188"
@@ -579,24 +579,24 @@
     </filter>
     <inkscape:perspective
        id="perspective3640"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective4470"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective3600"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <filter
        id="filter3208-6"
@@ -743,10 +743,10 @@
     </filter>
     <inkscape:perspective
        id="perspective3342"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <filter
        id="filter3208-0"
@@ -823,10 +823,10 @@
     </filter>
     <inkscape:perspective
        id="perspective3403"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <radialGradient
        inkscape:collect="always"
@@ -857,38 +857,38 @@
     </filter>
     <inkscape:perspective
        id="perspective4283"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective4334"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective4371"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective4418"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective3132"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <radialGradient
        inkscape:collect="always"
@@ -929,10 +929,10 @@
        inkscape:collect="always" />
     <inkscape:perspective
        id="perspective3174"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <radialGradient
        r="109"
@@ -962,17 +962,17 @@
     </linearGradient>
     <inkscape:perspective
        id="perspective3215"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective3255"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <filter
        id="filter3208-6-0"
@@ -1119,38 +1119,38 @@
     </filter>
     <inkscape:perspective
        id="perspective3393"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective4196"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective4237"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective4284"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective4343"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <filter
        id="filter3188-0"
@@ -1216,17 +1216,17 @@
     </filter>
     <inkscape:perspective
        id="perspective4408"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective4454"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <path
        style="display:inline;fill:none;stroke:none"
@@ -1235,31 +1235,31 @@
        inkscape:connector-curvature="0" />
     <inkscape:perspective
        id="perspective4508"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective4543"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective4574"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <inkscape:perspective
        id="perspective4605"
-       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
-       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : -479.66667 : 1"
+       inkscape:vp_z="1 : -479.5 : 1"
        inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_x="0 : -479.5 : 1"
        sodipodi:type="inkscape:persp3d" />
     <filter
        style="color-interpolation-filters:sRGB"
@@ -2857,10 +2857,10 @@
        inkscape:label="Cutout Glow"
        style="color-interpolation-filters:sRGB"
        id="filter4368"
-       x="-inf"
        y="-0.014977139"
-       width="inf"
-       height="1.2271524">
+       height="1.2271524"
+       x="-inf"
+       width="inf">
       <feOffset
          dy="3"
          dx="3"
@@ -3888,7 +3888,7 @@
          id="feGaussianBlur5700" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter5541">
       <feFlood
@@ -3920,7 +3920,7 @@
          id="feComposite5551" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter5715">
       <feFlood
@@ -3952,7 +3952,7 @@
          id="feComposite5725" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter5727">
       <feFlood
@@ -3984,7 +3984,7 @@
          id="feComposite5737" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter5739">
       <feFlood
@@ -4016,7 +4016,7 @@
          id="feComposite5749" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter5751">
       <feFlood
@@ -4048,7 +4048,7 @@
          id="feComposite5761" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter5763">
       <feFlood
@@ -4080,7 +4080,7 @@
          id="feComposite5773" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter5775">
       <feFlood
@@ -4112,7 +4112,7 @@
          id="feComposite5785" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter5787">
       <feFlood
@@ -4144,7 +4144,7 @@
          id="feComposite5797" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter5799">
       <feFlood
@@ -4176,7 +4176,7 @@
          id="feComposite5809" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter5811">
       <feFlood
@@ -4208,7 +4208,7 @@
          id="feComposite5821" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter5823">
       <feFlood
@@ -4240,7 +4240,7 @@
          id="feComposite5833" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter5835">
       <feFlood
@@ -4272,7 +4272,7 @@
          id="feComposite5845" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter5847">
       <feFlood
@@ -4304,7 +4304,7 @@
          id="feComposite5857" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter5859">
       <feFlood
@@ -4336,7 +4336,7 @@
          id="feComposite5869" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter5871">
       <feFlood
@@ -4368,7 +4368,7 @@
          id="feComposite5881" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter5883">
       <feFlood
@@ -4400,7 +4400,7 @@
          id="feComposite5893" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter5895">
       <feFlood
@@ -4432,7 +4432,7 @@
          id="feComposite5905" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter5907">
       <feFlood
@@ -4464,7 +4464,7 @@
          id="feComposite5917" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter5919">
       <feFlood
@@ -4496,7 +4496,7 @@
          id="feComposite5929" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter5931">
       <feFlood
@@ -4528,7 +4528,7 @@
          id="feComposite5941" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter5943">
       <feFlood
@@ -4560,7 +4560,7 @@
          id="feComposite5953" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter5955">
       <feFlood
@@ -4592,7 +4592,7 @@
          id="feComposite5965" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter5967">
       <feFlood
@@ -4624,7 +4624,7 @@
          id="feComposite5977" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter5979">
       <feFlood
@@ -4656,7 +4656,7 @@
          id="feComposite5990" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter5992">
       <feFlood
@@ -4688,7 +4688,7 @@
          id="feComposite6002" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter6004">
       <feFlood
@@ -4720,7 +4720,7 @@
          id="feComposite6014" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter4387"
        x="-0.064704051"
@@ -4756,7 +4756,7 @@
          id="feComposite4397" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter4399"
        x="-0.07725003"
@@ -4792,13 +4792,13 @@
          id="feComposite4409" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter4411"
-       x="-0.090036112"
-       y="-0.37562603"
-       width="1.1800722"
-       height="1.7512521">
+       x="-0.090036043"
+       y="-0.37562576"
+       width="1.1800721"
+       height="1.7512515">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -4828,13 +4828,13 @@
          id="feComposite4421" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter4423"
-       x="-0.15889851"
-       y="-0.34992223"
-       width="1.317797"
-       height="1.6998445">
+       x="-0.1588984"
+       y="-0.34992198"
+       width="1.3177968"
+       height="1.699844">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -4864,13 +4864,13 @@
          id="feComposite4433" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter4435"
-       x="-0.078892096"
-       y="-0.37625417"
-       width="1.1577842"
-       height="1.7525083">
+       x="-0.07889204"
+       y="-0.3762539"
+       width="1.1577841"
+       height="1.7525078">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -4900,13 +4900,13 @@
          id="feComposite4445" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter4447"
-       x="-0.37751677"
-       y="-0.38265305"
-       width="1.7550335"
-       height="1.7653061">
+       x="-0.3775165"
+       y="-0.38265278"
+       width="1.755033"
+       height="1.7653056">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -4936,7 +4936,7 @@
          id="feComposite4457" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter4459">
       <feFlood
@@ -4968,7 +4968,7 @@
          id="feComposite4469" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter4471"
        x="-0.28750091"
@@ -5004,7 +5004,7 @@
          id="feComposite4481" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter4483"
        x="-0.6615851"
@@ -5040,7 +5040,7 @@
          id="feComposite4493" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter4495"
        x="-0.29748358"
@@ -5076,7 +5076,7 @@
          id="feComposite4505" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter4507"
        x="-0.28510905"
@@ -5112,7 +5112,7 @@
          id="feComposite4517" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter4519"
        x="-0.26041116"
@@ -5148,13 +5148,13 @@
          id="feComposite4529" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter4531"
-       x="-0.28416352"
-       y="-0.29141259"
-       width="1.568327"
-       height="1.5828252">
+       x="-0.28416342"
+       y="-0.29141249"
+       width="1.5683268"
+       height="1.582825">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5184,7 +5184,7 @@
          id="feComposite4541" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter4543"
        x="-0.16835017"
@@ -5220,13 +5220,13 @@
          id="feComposite4553" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter4555"
-       x="-0.29696811"
-       y="-0.29141259"
-       width="1.5939362"
-       height="1.5828252">
+       x="-0.29696801"
+       y="-0.29141249"
+       width="1.593936"
+       height="1.582825">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5256,13 +5256,13 @@
          id="feComposite4565" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter4567"
-       x="-0.30247502"
-       y="-0.30659032"
-       width="1.60495"
-       height="1.6131806">
+       x="-0.30247491"
+       y="-0.30659022"
+       width="1.6049498"
+       height="1.6131804">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5292,13 +5292,13 @@
          id="feComposite4577" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter4579"
-       x="-0.30349345"
-       y="-0.30659032"
-       width="1.6069869"
-       height="1.6131806">
+       x="-0.30349335"
+       y="-0.30659022"
+       width="1.6069867"
+       height="1.6131804">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5328,7 +5328,7 @@
          id="feComposite4589" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter4591"
        x="-0.059689715"
@@ -5364,7 +5364,7 @@
          id="feComposite4601" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter4603"
        x="-0.038417255"
@@ -5400,7 +5400,7 @@
          id="feComposite4613" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter4615"
        x="-0.1618123"
@@ -5436,7 +5436,7 @@
          id="feComposite4625" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter4627"
        x="-0.058320374"
@@ -5472,7 +5472,7 @@
          id="feComposite4637" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter4639"
        x="-0.066410815"
@@ -5508,7 +5508,7 @@
          id="feComposite4649" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter4651"
        x="-0.074478596"
@@ -5544,7 +5544,7 @@
          id="feComposite4661" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter4663"
        x="-inf"
@@ -5580,7 +5580,7 @@
          id="feComposite4673" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter4675"
        x="-0.035654234"
@@ -5616,10 +5616,10 @@
          id="feComposite4685" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
        id="filter4723"
-       x="-0.012435916"
+       x="-0.012435917"
        y="-0.012435917"
        width="1.0248718"
        height="1.0248718">
@@ -5670,7 +5670,6 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -5679,7 +5678,7 @@
      id="layer_base"
      inkscape:label="Base"
      style="display:inline"
-     transform="translate(0,27.637839)"
+     transform="matrix(0.6237,0,0,0.6237,216.26084,275.71914)"
      sodipodi:insensitive="true">
     <path
        id="circle8317"
@@ -5690,7 +5689,7 @@
     <path
        id="circle8315"
        d="m 593.58921,512.3622 c 0,120.72349 -97.86572,218.58921 -218.58921,218.58921 -120.72349,0 -218.58921,-97.86572 -218.58921,-218.58921 0,-120.72349 97.86572,-218.58921 218.58921,-218.58921 120.72349,0 218.58921,97.86572 218.58921,218.58921 z"
-       style="display:inline;fill:#000000;stroke:#000000;stroke-width:1.82157671;filter:url(#filter3208)"
+       style="display:inline;fill:#000000;stroke:#000000;stroke-width:1.82158;filter:url(#filter3208)"
        inkscape:connector-curvature="0"
        transform="matrix(2,0,0,2,-175.29672,-506.04223)" />
   </g>
@@ -5706,14 +5705,14 @@
        d="m 593.58921,512.3622 c 0,120.72349 -97.86572,218.58921 -218.58921,218.58921 -120.72349,0 -218.58921,-97.86572 -218.58921,-218.58921 0,-120.72349 97.86572,-218.58921 218.58921,-218.58921 120.72349,0 218.58921,97.86572 218.58921,218.58921 z"
        style="display:inline;fill:url(#radialGradient2);stroke:#000000;stroke-width:1.82158;filter:url(#filter3208)"
        inkscape:connector-curvature="0"
-       transform="matrix(2,0,0,2,-175.29672,-506.04223)" />
+       transform="matrix(1.2474,0,0,1.2474,106.92828,-67.537241)" />
   </g>
   <g
      style="display:inline"
      inkscape:label="LED_Dark"
      id="layer_led_dark"
      inkscape:groupmode="layer"
-     transform="translate(0,27.637839)"
+     transform="matrix(0.6237,0,0,0.6237,216.26084,275.71914)"
      sodipodi:insensitive="true">
     <g
        transform="matrix(1.9021131,0.61803398,-0.61803398,1.9021131,178.21912,-687.60865)"
@@ -5779,7 +5778,7 @@
      id="layer_led_bright"
      inkscape:label="LED"
      style="display:inline"
-     transform="translate(0,27.637839)">
+     transform="matrix(0.6237,0,0,0.6237,216.26084,275.71914)">
     <g
        inkscape:groupmode="layer"
        id="layer_led_bright_yellow"
@@ -5804,13 +5803,13 @@
        inkscape:label="LEDWhite"
        style="display:inline">
       <path
-         style="display:inline;fill:#fffffe;stroke:none;stroke-width:1.82158;filter:url(#filter5698);fill-opacity:1"
+         style="display:inline;fill:#fffffe;fill-opacity:1;stroke:none;stroke-width:1.82158;filter:url(#filter5698)"
          d="m 373.59461,298.67406 c -6.61485,0.0427 -13.15887,0.38315 -19.61811,1.01393 l 3.22896,30.73325 c 5.3978,-0.52152 10.86436,-0.80421 16.38915,-0.8459 z m 2.75158,0 v 30.90128 c 5.52549,0.0399 10.9925,0.32219 16.39107,0.84209 l 3.23086,-30.73516 c -6.46058,-0.62922 -13.00578,-0.96732 -19.62193,-1.00821 z m 22.35632,1.29845 -3.23086,30.73325 c 5.48122,0.61093 10.89343,1.45303 16.2173,2.53771 l 6.42544,-30.23487 c -6.3706,-1.30506 -12.84842,-2.31174 -19.41188,-3.03609 z m -47.4623,0.006 c -6.56367,0.72617 -13.04119,1.73682 -19.41188,3.04373 l 6.42543,30.23106 c 5.32307,-1.08629 10.73492,-1.92888 16.21539,-2.54153 z m 69.56275,3.61658 -6.42544,30.22915 c 5.37897,1.18104 10.67025,2.59386 15.86023,4.23715 l 9.54937,-29.39469 c -6.20933,-1.97319 -12.54325,-3.66492 -18.98416,-5.07161 z m -91.6632,0.0115 c -6.43978,1.40829 -12.7722,3.10271 -18.98034,5.07734 l 9.54936,29.39469 c 5.1888,-1.64469 10.47858,-3.06028 15.85641,-4.24288 z m 113.26526,5.90987 -9.55127,29.39471 c 5.21695,1.73928 10.32593,3.71156 15.32176,5.8965 l 12.57018,-28.23564 c -5.97664,-2.62121 -12.09305,-4.98053 -18.34067,-7.05557 z m -134.8616,0.0172 c -6.24637,2.0764 -12.36148,4.43699 -18.33685,7.05938 l 12.57019,28.23564 c 4.99402,-2.18585 10.10089,-4.15985 15.31602,-5.90033 z m 155.71898,8.14779 -12.5721,28.23947 c 4.99641,2.2758 9.87001,4.77341 14.61334,7.47374 l 15.45351,-26.76724 c -5.67454,-3.23798 -11.51004,-6.22837 -17.49475,-8.94597 z m -176.57253,0.0229 c -5.98375,2.71896 -11.81934,5.70865 -17.49284,8.94787 l 15.45541,26.76724 c 4.74236,-2.70151 9.61594,-5.19855 14.61142,-7.47566 z m 196.4446,10.30743 -15.45351,26.76533 c 4.72419,2.78447 9.31458,5.76881 13.75406,8.9536 l 18.16307,-25.00096 c -5.31,-3.81713 -10.80472,-7.39148 -16.46362,-10.71797 z m -216.31095,0.0267 c -5.65753,3.32745 -11.15119,6.90196 -16.45981,10.71989 l 18.16308,25.00096 c 4.43793,-3.18544 9.02569,-6.17211 13.74834,-8.95743 l -15.45161,-26.7637 z m 234.99722,12.31431 -18.16308,24.99905 c 4.40191,3.25894 8.64801,6.71511 12.7344,10.34753 l 20.67788,-22.96544 c -4.8877,-4.35312 -9.97475,-8.48591 -15.2492,-12.38114 z m -253.67967,0.0267 c -5.27233,3.89544 -10.35587,8.03002 -15.24156,12.38304 l 20.67597,22.96355 c 4.08453,-3.63245 8.33061,-7.08641 12.73058,-10.34563 z m 270.97775,14.19133 -20.67978,22.96736 c 4.03395,3.69536 7.90381,7.56766 11.59251,11.6078 l 22.96736,-20.67979 c -4.41185,-4.84138 -9.04495,-9.47679 -13.88009,-13.89537 z m -288.26819,0.0287 c -4.83327,4.4186 -9.46619,9.05229 -13.87627,13.89346 l 22.96736,20.68169 c 3.68724,-4.04026 7.55626,-7.91213 11.58869,-11.60779 z m 303.97948,15.91942 -22.96544,20.67788 c 3.62508,4.09174 7.07143,8.34488 10.3227,12.75158 l 25.00097,-18.16499 c -3.88734,-5.27909 -8.0127,-10.37151 -12.35823,-15.26447 z m -319.68504,0.0286 c -4.34355,4.89246 -8.46697,9.98422 -12.3525,15.26256 l 25.00097,18.16499 c 3.24923,-4.40559 6.69225,-8.65874 10.31506,-12.74968 z m 333.66252,17.45656 -25.00097,18.16499 c 3.17651,4.44322 6.15083,9.03824 8.92687,13.76552 l 26.76724,-15.45542 c -3.31813,-5.66234 -6.88415,-11.16101 -10.69314,-16.47509 z m -347.63618,0.0287 c -3.80687,5.31297 -7.37113,10.8103 -10.68741,16.47126 l 26.76723,15.45542 c 2.77421,-4.72589 5.74674,-9.3196 8.92114,-13.7617 L 201.17141,388.0325 Z m 359.70797,18.82567 -26.76915,15.45541 c 2.69127,4.74512 5.18399,9.6178 7.45084,14.61525 l 28.23945,-12.5721 c -2.70877,-5.98642 -5.69196,-11.82162 -8.92114,-17.49856 z m -371.77404,0.0267 c -3.2271,5.67519 -6.20834,11.50845 -8.91541,17.49284 l 28.23946,12.574 c 2.26535,-4.99594 4.75561,-9.86758 7.4451,-14.61143 L 189.10534,406.8849 Z m 381.79887,19.99046 -28.23564,12.57208 c 2.17509,4.99468 4.13598,10.103 5.86595,15.31794 l 29.39662,-9.55127 c -2.06582,-6.24637 -4.41535,-12.36254 -7.02693,-18.33875 z m -391.81796,0.0229 c -2.61,5.97448 -4.95853,12.08861 -7.02312,18.33303 l 29.39662,9.55127 c 1.72893,-5.21354 3.68834,-10.32068 5.86213,-15.31413 z m 399.6927,20.93184 -29.3947,9.55127 c 1.63377,5.18686 3.0343,10.47567 4.20661,15.85068 l 30.23296,-6.42544 c -1.39797,-6.43785 -3.08102,-12.76945 -5.04487,-18.97651 z m -407.56363,0.0172 c -1.96266,6.20517 -3.64389,12.535 -5.04106,18.97078 l 30.23107,6.42544 c 1.17154,-5.37327 2.57388,-10.65967 4.2066,-15.84495 z m 413.18708,21.64789 -30.23678,6.42734 c 1.07606,5.31956 1.91349,10.72588 2.5167,16.20204 l 30.73516,-3.23086 c -0.71655,-6.55902 -1.71863,-13.03164 -3.01508,-19.39852 z m -418.80671,0.0115 c -1.29573,6.36513 -2.29892,12.83566 -3.01509,19.3928 l 30.73517,3.23086 c 0.60281,-5.47415 1.43948,-10.87863 2.5148,-16.19631 z m 422.10631,22.12337 -30.73707,3.23086 c 0.51223,5.39216 0.79141,10.85166 0.8249,16.37006 h 30.90129 c -0.0343,-6.6091 -0.36771,-13.14672 -0.98912,-19.60092 z m -425.404,0.006 c -0.62106,6.45236 -0.95482,12.98803 -0.98912,19.59519 h 30.90129 c 0.0335,-5.51641 0.31111,-10.97408 0.82299,-16.36433 L 162.298,491.63574 Z m -0.98339,22.34486 c 0.0491,6.6056 0.38981,13.1413 1.0254,19.59137 l 30.73707,-3.23086 c -0.52609,-5.38814 -0.81132,-10.84551 -0.85926,-16.36051 z m 396.46757,0 c -0.048,5.51693 -0.33282,10.97625 -0.85926,16.36624 l 30.73707,3.23086 c 0.63594,-6.45191 0.97626,-12.98956 1.0254,-19.5971 z m -364.41104,19.09491 -30.73516,3.23086 c 0.73069,6.55217 1.7457,13.01797 3.05518,19.37751 l 30.23107,-6.42544 c -1.08879,-5.31237 -1.93409,-10.71349 -2.55109,-16.18293 z m 363.2558,0.006 c -0.6174,5.47148 -1.46344,10.87438 -2.55298,16.18866 l 30.23296,6.42544 c 1.31021,-6.36131 2.32411,-12.82917 3.05519,-19.38324 z m -360.12042,18.86386 -30.23105,6.42734 c 1.41069,6.42828 3.10796,12.74883 5.08307,18.94596 l 29.39661,-9.55127 c -1.64502,-5.17786 -3.06382,-10.45565 -4.24863,-15.82203 z m 356.98313,0.0134 c -1.18552,5.36768 -2.60457,10.64682 -4.25053,15.82586 l 29.39662,9.55127 c 1.97626,-6.1989 3.67347,-12.52149 5.08497,-18.95169 z m -351.8867,18.42467 -29.39469,9.55129 c 2.07605,6.23316 4.4357,12.33563 7.05557,18.29864 l 28.23755,-12.57018 c -2.18363,-4.98261 -4.15819,-10.07679 -5.89843,-15.27975 z m 346.78837,0.0172 c -1.74128,5.20435 -3.71732,10.29972 -5.90224,15.28357 l 28.23564,12.57209 c 2.62165,-5.96514 4.98578,-12.06882 7.06321,-18.30439 z m -339.77289,17.77545 -28.23946,12.574 c 2.71642,5.97163 5.6998,11.79607 8.9345,17.45847 l 26.76725,-15.45541 c -2.6965,-4.73071 -5.18816,-9.59429 -7.46229,-14.57706 z m 332.7536,0.0229 c -2.27564,4.98426 -4.76974,9.8489 -7.46802,14.58087 l 26.76915,15.4535 c 3.2363,-5.66344 6.22056,-11.48941 8.93832,-17.46228 z m -323.90502,16.93145 -26.76725,15.4516 c 3.32261,5.64616 6.8915,11.12887 10.7027,16.42735 l 25.00096,-18.16307 c -3.17807,-4.42716 -6.1565,-9.00533 -8.93641,-13.71588 z m 315.05261,0.0229 c -2.78185,4.71228 -5.76371,9.29111 -8.94405,13.71969 l 25.00097,18.16498 c 3.81333,-5.29957 7.38397,-10.78363 10.70841,-16.43116 z m -304.49503,15.9156 -24.99906,18.16308 c 3.88876,5.26246 8.01543,10.33759 12.36013,15.21482 l 22.96354,-20.67787 c -3.62387,-4.076 -7.07233,-8.31 -10.32461,-12.70003 z m 293.92982,0.0267 c -3.25413,4.3908 -6.70445,8.62541 -10.33035,12.70193 l 22.96546,20.67788 c 4.34669,-4.87773 8.47528,-9.95352 12.36586,-15.21674 l -25.00097,-18.1639 z m -281.76446,14.72026 -22.96735,20.67978 c 4.40971,4.82442 9.03599,9.44853 13.86671,13.85145 l 20.67979,-22.96736 c -4.02971,-3.6801 -7.89252,-7.54022 -11.57915,-11.56387 z m 269.59527,0.0286 c -3.68834,4.02385 -7.55333,7.88378 -11.58488,11.56387 l 20.67979,22.96736 c 4.83258,-4.40288 9.46099,-9.02684 13.87245,-13.85145 z m -255.96533,13.37025 -20.67787,22.96353 c 4.88236,4.3369 9.96315,8.45464 15.2301,12.33532 l 18.16498,-24.99906 c -4.39462,-3.24468 -8.63604,-6.68321 -12.71721,-10.29979 z m 242.32967,0.0286 c -4.08279,3.61635 -8.32666,7.05364 -12.72294,10.29789 l 18.16307,25.00095 c 5.26902,-3.88038 10.3515,-7.99842 15.23583,-12.3353 L 496.14956,649.2432 Z m -227.39172,11.8904 -18.16308,25.00096 c 5.30194,3.80245 10.78804,7.3622 16.4369,10.67596 l 15.45351,-26.76533 c -4.71379,-2.77169 -9.29631,-5.74154 -13.72733,-8.91159 z m 212.44613,0.0286 c -4.43237,3.16928 -9.01601,6.13893 -13.73115,8.90968 l 15.4516,26.76533 c 5.65073,-3.31303 11.13887,-6.87207 16.44262,-10.67404 z m -196.33957,10.2616 -15.45351,26.76915 c 5.66362,3.22502 11.48647,6.20274 17.45847,8.90969 l 12.57208,-28.23755 c -4.98394,-2.26538 -9.84445,-4.75361 -14.57704,-7.44129 z m 180.22729,0.0267 c -4.73358,2.68646 -9.59602,5.17149 -14.58087,7.43556 l 12.57208,28.23945 c 5.97348,-2.70582 11.79719,-5.68369 17.46229,-8.90777 z m -163.13353,8.52587 -12.57018,28.23374 c 5.9633,2.61051 12.06597,4.95993 18.29865,7.02692 l 9.54937,-29.3947 c -5.20128,-1.7311 -10.29609,-3.69191 -15.27784,-5.86596 z m 146.03595,0.021 c -4.98355,2.17314 -10.08048,4.13223 -15.28357,5.86215 l 9.55128,29.39469 c 6.23392,-2.06563 12.33789,-4.41377 18.30246,-7.0231 z m -128.1402,6.69468 -9.55128,29.39471 c 6.19408,1.96534 12.51208,3.65078 18.93642,5.05251 l 6.42543,-30.23106 c -5.36174,-1.17596 -10.63647,-2.58087 -15.81057,-4.21616 z m 110.24063,0.0172 c -5.17597,1.63417 -10.45269,3.03778 -15.81632,4.21233 l 6.42545,30.23107 c 6.42561,-1.40015 12.74484,-3.08474 18.94023,-5.0487 z m -91.74149,4.78136 -6.42543,30.23488 c 6.35452,1.30045 12.81588,2.30382 19.36224,3.02654 l 3.23085,-30.73325 c -5.46418,-0.60928 -10.85981,-1.44803 -16.16766,-2.52817 z m 73.23661,0.01 c -5.30803,1.07842 -10.70338,1.9168 -16.16766,2.52435 l 3.22896,30.73325 c 6.54773,-0.72103 13.0101,-1.72373 19.36605,-3.02272 z m -54.33265,2.80695 -3.23085,30.73516 c 6.44311,0.62771 12.97055,0.96564 19.56845,1.00821 v -30.90128 c -5.50726,-0.0416 -10.95649,-0.3237 -16.3376,-0.84209 z m 35.42869,0.006 c -5.38182,0.51676 -10.8316,0.79655 -16.33951,0.83636 v 30.90128 c 6.59862,-0.0408 13.12648,-0.37834 19.57037,-1.00438 z"
          id="path2"
          inkscape:connector-curvature="0"
          transform="matrix(2,0,0,2,-175.29671,-506.04222)" />
       <path
-         style="display:inline;fill:#ffffff;stroke:none;stroke-width:1.82158;filter:url(#filter5456);fill-opacity:1"
+         style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.82158;filter:url(#filter5456)"
          d="m 373.59461,298.67406 c -6.61485,0.0427 -13.15887,0.38315 -19.61811,1.01393 l 3.22896,30.73325 c 5.3978,-0.52152 10.86436,-0.80421 16.38915,-0.8459 z m 2.75158,0 v 30.90128 c 5.52549,0.0399 10.9925,0.32219 16.39107,0.84209 l 3.23086,-30.73516 c -6.46058,-0.62922 -13.00578,-0.96732 -19.62193,-1.00821 z m 22.35632,1.29845 -3.23086,30.73325 c 5.48122,0.61093 10.89343,1.45303 16.2173,2.53771 l 6.42544,-30.23487 c -6.3706,-1.30506 -12.84842,-2.31174 -19.41188,-3.03609 z m -47.4623,0.006 c -6.56367,0.72617 -13.04119,1.73682 -19.41188,3.04373 l 6.42543,30.23106 c 5.32307,-1.08629 10.73492,-1.92888 16.21539,-2.54153 z m 69.56275,3.61658 -6.42544,30.22915 c 5.37897,1.18104 10.67025,2.59386 15.86023,4.23715 l 9.54937,-29.39469 c -6.20933,-1.97319 -12.54325,-3.66492 -18.98416,-5.07161 z m -91.6632,0.0115 c -6.43978,1.40829 -12.7722,3.10271 -18.98034,5.07734 l 9.54936,29.39469 c 5.1888,-1.64469 10.47858,-3.06028 15.85641,-4.24288 z m 113.26526,5.90987 -9.55127,29.39471 c 5.21695,1.73928 10.32593,3.71156 15.32176,5.8965 l 12.57018,-28.23564 c -5.97664,-2.62121 -12.09305,-4.98053 -18.34067,-7.05557 z m -134.8616,0.0172 c -6.24637,2.0764 -12.36148,4.43699 -18.33685,7.05938 l 12.57019,28.23564 c 4.99402,-2.18585 10.10089,-4.15985 15.31602,-5.90033 z m 155.71898,8.14779 -12.5721,28.23947 c 4.99641,2.2758 9.87001,4.77341 14.61334,7.47374 l 15.45351,-26.76724 c -5.67454,-3.23798 -11.51004,-6.22837 -17.49475,-8.94597 z m -176.57253,0.0229 c -5.98375,2.71896 -11.81934,5.70865 -17.49284,8.94787 l 15.45541,26.76724 c 4.74236,-2.70151 9.61594,-5.19855 14.61142,-7.47566 z m 196.4446,10.30743 -15.45351,26.76533 c 4.72419,2.78447 9.31458,5.76881 13.75406,8.9536 l 18.16307,-25.00096 c -5.31,-3.81713 -10.80472,-7.39148 -16.46362,-10.71797 z m -216.31095,0.0267 c -5.65753,3.32745 -11.15119,6.90196 -16.45981,10.71989 l 18.16308,25.00096 c 4.43793,-3.18544 9.02569,-6.17211 13.74834,-8.95743 l -15.45161,-26.7637 z m 234.99722,12.31431 -18.16308,24.99905 c 4.40191,3.25894 8.64801,6.71511 12.7344,10.34753 l 20.67788,-22.96544 c -4.8877,-4.35312 -9.97475,-8.48591 -15.2492,-12.38114 z m -253.67967,0.0267 c -5.27233,3.89544 -10.35587,8.03002 -15.24156,12.38304 l 20.67597,22.96355 c 4.08453,-3.63245 8.33061,-7.08641 12.73058,-10.34563 z m 270.97775,14.19133 -20.67978,22.96736 c 4.03395,3.69536 7.90381,7.56766 11.59251,11.6078 l 22.96736,-20.67979 c -4.41185,-4.84138 -9.04495,-9.47679 -13.88009,-13.89537 z m -288.26819,0.0287 c -4.83327,4.4186 -9.46619,9.05229 -13.87627,13.89346 l 22.96736,20.68169 c 3.68724,-4.04026 7.55626,-7.91213 11.58869,-11.60779 z m 303.97948,15.91942 -22.96544,20.67788 c 3.62508,4.09174 7.07143,8.34488 10.3227,12.75158 l 25.00097,-18.16499 c -3.88734,-5.27909 -8.0127,-10.37151 -12.35823,-15.26447 z m -319.68504,0.0286 c -4.34355,4.89246 -8.46697,9.98422 -12.3525,15.26256 l 25.00097,18.16499 c 3.24923,-4.40559 6.69225,-8.65874 10.31506,-12.74968 z m 333.66252,17.45656 -25.00097,18.16499 c 3.17651,4.44322 6.15083,9.03824 8.92687,13.76552 l 26.76724,-15.45542 c -3.31813,-5.66234 -6.88415,-11.16101 -10.69314,-16.47509 z m -347.63618,0.0287 c -3.80687,5.31297 -7.37113,10.8103 -10.68741,16.47126 l 26.76723,15.45542 c 2.77421,-4.72589 5.74674,-9.3196 8.92114,-13.7617 L 201.17141,388.0325 Z m 359.70797,18.82567 -26.76915,15.45541 c 2.69127,4.74512 5.18399,9.6178 7.45084,14.61525 l 28.23945,-12.5721 c -2.70877,-5.98642 -5.69196,-11.82162 -8.92114,-17.49856 z m -371.77404,0.0267 c -3.2271,5.67519 -6.20834,11.50845 -8.91541,17.49284 l 28.23946,12.574 c 2.26535,-4.99594 4.75561,-9.86758 7.4451,-14.61143 L 189.10534,406.8849 Z m 381.79887,19.99046 -28.23564,12.57208 c 2.17509,4.99468 4.13598,10.103 5.86595,15.31794 l 29.39662,-9.55127 c -2.06582,-6.24637 -4.41535,-12.36254 -7.02693,-18.33875 z m -391.81796,0.0229 c -2.61,5.97448 -4.95853,12.08861 -7.02312,18.33303 l 29.39662,9.55127 c 1.72893,-5.21354 3.68834,-10.32068 5.86213,-15.31413 z m 399.6927,20.93184 -29.3947,9.55127 c 1.63377,5.18686 3.0343,10.47567 4.20661,15.85068 l 30.23296,-6.42544 c -1.39797,-6.43785 -3.08102,-12.76945 -5.04487,-18.97651 z m -407.56363,0.0172 c -1.96266,6.20517 -3.64389,12.535 -5.04106,18.97078 l 30.23107,6.42544 c 1.17154,-5.37327 2.57388,-10.65967 4.2066,-15.84495 z m 413.18708,21.64789 -30.23678,6.42734 c 1.07606,5.31956 1.91349,10.72588 2.5167,16.20204 l 30.73516,-3.23086 c -0.71655,-6.55902 -1.71863,-13.03164 -3.01508,-19.39852 z m -418.80671,0.0115 c -1.29573,6.36513 -2.29892,12.83566 -3.01509,19.3928 l 30.73517,3.23086 c 0.60281,-5.47415 1.43948,-10.87863 2.5148,-16.19631 z m 422.10631,22.12337 -30.73707,3.23086 c 0.51223,5.39216 0.79141,10.85166 0.8249,16.37006 h 30.90129 c -0.0343,-6.6091 -0.36771,-13.14672 -0.98912,-19.60092 z m -425.404,0.006 c -0.62106,6.45236 -0.95482,12.98803 -0.98912,19.59519 h 30.90129 c 0.0335,-5.51641 0.31111,-10.97408 0.82299,-16.36433 L 162.298,491.63574 Z m -0.98339,22.34486 c 0.0491,6.6056 0.38981,13.1413 1.0254,19.59137 l 30.73707,-3.23086 c -0.52609,-5.38814 -0.81132,-10.84551 -0.85926,-16.36051 z m 396.46757,0 c -0.048,5.51693 -0.33282,10.97625 -0.85926,16.36624 l 30.73707,3.23086 c 0.63594,-6.45191 0.97626,-12.98956 1.0254,-19.5971 z m -364.41104,19.09491 -30.73516,3.23086 c 0.73069,6.55217 1.7457,13.01797 3.05518,19.37751 l 30.23107,-6.42544 c -1.08879,-5.31237 -1.93409,-10.71349 -2.55109,-16.18293 z m 363.2558,0.006 c -0.6174,5.47148 -1.46344,10.87438 -2.55298,16.18866 l 30.23296,6.42544 c 1.31021,-6.36131 2.32411,-12.82917 3.05519,-19.38324 z m -360.12042,18.86386 -30.23105,6.42734 c 1.41069,6.42828 3.10796,12.74883 5.08307,18.94596 l 29.39661,-9.55127 c -1.64502,-5.17786 -3.06382,-10.45565 -4.24863,-15.82203 z m 356.98313,0.0134 c -1.18552,5.36768 -2.60457,10.64682 -4.25053,15.82586 l 29.39662,9.55127 c 1.97626,-6.1989 3.67347,-12.52149 5.08497,-18.95169 z m -351.8867,18.42467 -29.39469,9.55129 c 2.07605,6.23316 4.4357,12.33563 7.05557,18.29864 l 28.23755,-12.57018 c -2.18363,-4.98261 -4.15819,-10.07679 -5.89843,-15.27975 z m 346.78837,0.0172 c -1.74128,5.20435 -3.71732,10.29972 -5.90224,15.28357 l 28.23564,12.57209 c 2.62165,-5.96514 4.98578,-12.06882 7.06321,-18.30439 z m -339.77289,17.77545 -28.23946,12.574 c 2.71642,5.97163 5.6998,11.79607 8.9345,17.45847 l 26.76725,-15.45541 c -2.6965,-4.73071 -5.18816,-9.59429 -7.46229,-14.57706 z m 332.7536,0.0229 c -2.27564,4.98426 -4.76974,9.8489 -7.46802,14.58087 l 26.76915,15.4535 c 3.2363,-5.66344 6.22056,-11.48941 8.93832,-17.46228 z m -323.90502,16.93145 -26.76725,15.4516 c 3.32261,5.64616 6.8915,11.12887 10.7027,16.42735 l 25.00096,-18.16307 c -3.17807,-4.42716 -6.1565,-9.00533 -8.93641,-13.71588 z m 315.05261,0.0229 c -2.78185,4.71228 -5.76371,9.29111 -8.94405,13.71969 l 25.00097,18.16498 c 3.81333,-5.29957 7.38397,-10.78363 10.70841,-16.43116 z m -304.49503,15.9156 -24.99906,18.16308 c 3.88876,5.26246 8.01543,10.33759 12.36013,15.21482 l 22.96354,-20.67787 c -3.62387,-4.076 -7.07233,-8.31 -10.32461,-12.70003 z m 293.92982,0.0267 c -3.25413,4.3908 -6.70445,8.62541 -10.33035,12.70193 l 22.96546,20.67788 c 4.34669,-4.87773 8.47528,-9.95352 12.36586,-15.21674 l -25.00097,-18.1639 z m -281.76446,14.72026 -22.96735,20.67978 c 4.40971,4.82442 9.03599,9.44853 13.86671,13.85145 l 20.67979,-22.96736 c -4.02971,-3.6801 -7.89252,-7.54022 -11.57915,-11.56387 z m 269.59527,0.0286 c -3.68834,4.02385 -7.55333,7.88378 -11.58488,11.56387 l 20.67979,22.96736 c 4.83258,-4.40288 9.46099,-9.02684 13.87245,-13.85145 z m -255.96533,13.37025 -20.67787,22.96353 c 4.88236,4.3369 9.96315,8.45464 15.2301,12.33532 l 18.16498,-24.99906 c -4.39462,-3.24468 -8.63604,-6.68321 -12.71721,-10.29979 z m 242.32967,0.0286 c -4.08279,3.61635 -8.32666,7.05364 -12.72294,10.29789 l 18.16307,25.00095 c 5.26902,-3.88038 10.3515,-7.99842 15.23583,-12.3353 L 496.14956,649.2432 Z m -227.39172,11.8904 -18.16308,25.00096 c 5.30194,3.80245 10.78804,7.3622 16.4369,10.67596 l 15.45351,-26.76533 c -4.71379,-2.77169 -9.29631,-5.74154 -13.72733,-8.91159 z m 212.44613,0.0286 c -4.43237,3.16928 -9.01601,6.13893 -13.73115,8.90968 l 15.4516,26.76533 c 5.65073,-3.31303 11.13887,-6.87207 16.44262,-10.67404 z m -196.33957,10.2616 -15.45351,26.76915 c 5.66362,3.22502 11.48647,6.20274 17.45847,8.90969 l 12.57208,-28.23755 c -4.98394,-2.26538 -9.84445,-4.75361 -14.57704,-7.44129 z m 180.22729,0.0267 c -4.73358,2.68646 -9.59602,5.17149 -14.58087,7.43556 l 12.57208,28.23945 c 5.97348,-2.70582 11.79719,-5.68369 17.46229,-8.90777 z m -163.13353,8.52587 -12.57018,28.23374 c 5.9633,2.61051 12.06597,4.95993 18.29865,7.02692 l 9.54937,-29.3947 c -5.20128,-1.7311 -10.29609,-3.69191 -15.27784,-5.86596 z m 146.03595,0.021 c -4.98355,2.17314 -10.08048,4.13223 -15.28357,5.86215 l 9.55128,29.39469 c 6.23392,-2.06563 12.33789,-4.41377 18.30246,-7.0231 z m -128.1402,6.69468 -9.55128,29.39471 c 6.19408,1.96534 12.51208,3.65078 18.93642,5.05251 l 6.42543,-30.23106 c -5.36174,-1.17596 -10.63647,-2.58087 -15.81057,-4.21616 z m 110.24063,0.0172 c -5.17597,1.63417 -10.45269,3.03778 -15.81632,4.21233 l 6.42545,30.23107 c 6.42561,-1.40015 12.74484,-3.08474 18.94023,-5.0487 z m -91.74149,4.78136 -6.42543,30.23488 c 6.35452,1.30045 12.81588,2.30382 19.36224,3.02654 l 3.23085,-30.73325 c -5.46418,-0.60928 -10.85981,-1.44803 -16.16766,-2.52817 z m 73.23661,0.01 c -5.30803,1.07842 -10.70338,1.9168 -16.16766,2.52435 l 3.22896,30.73325 c 6.54773,-0.72103 13.0101,-1.72373 19.36605,-3.02272 z m -54.33265,2.80695 -3.23085,30.73516 c 6.44311,0.62771 12.97055,0.96564 19.56845,1.00821 v -30.90128 c -5.50726,-0.0416 -10.95649,-0.3237 -16.3376,-0.84209 z m 35.42869,0.006 c -5.38182,0.51676 -10.8316,0.79655 -16.33951,0.83636 v 30.90128 c 6.59862,-0.0408 13.12648,-0.37834 19.57037,-1.00438 z"
          id="path3"
          inkscape:connector-curvature="0"
@@ -5840,7 +5839,7 @@
      id="layer_grid"
      inkscape:label="Grid"
      style="display:inline"
-     transform="translate(0,27.637839)">
+     transform="matrix(0.6237,0,0,0.6237,216.26084,275.71914)">
     <g
        inkscape:groupmode="layer"
        id="layer14"
@@ -5853,102 +5852,102 @@
         <g
            id="g3957-3"
            style="display:inline;stroke:#ffffff"
-           transform="matrix(0,-1,1,0,-137.0056,887.00559)">
+           transform="rotate(-90,375,512.00559)">
           <path
              inkscape:label="RadialGridline0"
-             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685293"
-             d="m 375,271.63926 0,26.73267"
+             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685"
+             d="m 375,271.63926 v 26.73267"
              id="path8319-8-5"
              inkscape:connector-curvature="0" />
           <path
              inkscape:label="RadialGridline0"
-             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685293"
-             d="m 375,725.63926 0,26.73267"
+             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685"
+             d="m 375,725.63926 v 26.73267"
              id="path8319-8-0-0"
              inkscape:connector-curvature="0" />
         </g>
         <g
            id="g3957-4"
            style="display:inline;stroke:#ffffff"
-           transform="matrix(0.8660254,-0.5,0.5,0.8660254,-205.76233,256.09574)">
+           transform="rotate(-30,374.99999,512.00561)">
           <path
              inkscape:label="RadialGridline0"
-             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685293"
-             d="m 375,271.63926 0,26.73267"
+             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685"
+             d="m 375,271.63926 v 26.73267"
              id="path8319-8-1"
              inkscape:connector-curvature="0" />
           <path
              inkscape:label="RadialGridline0"
-             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685293"
-             d="m 375,725.63926 0,26.73267"
+             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685"
+             d="m 375,725.63926 v 26.73267"
              id="path8319-8-0-8"
              inkscape:connector-curvature="0" />
         </g>
         <g
            id="g3957-33"
            style="display:inline;stroke:#ffffff"
-           transform="matrix(0.5,-0.8660254,0.8660254,0.5,-255.90986,580.76232)">
+           transform="rotate(-60,374.99999,512.0056)">
           <path
              inkscape:label="RadialGridline0"
-             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685293"
-             d="m 375,271.63926 0,26.73267"
+             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685"
+             d="m 375,271.63926 v 26.73267"
              id="path8319-8-2"
              inkscape:connector-curvature="0" />
           <path
              inkscape:label="RadialGridline0"
-             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685293"
-             d="m 375,725.63926 0,26.73267"
+             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685"
+             d="m 375,725.63926 v 26.73267"
              id="path8319-8-0-3"
              inkscape:connector-curvature="0" />
         </g>
         <g
            id="g3957-5"
            style="display:inline;stroke:#ffffff"
-           transform="matrix(-0.5,-0.8660254,0.8660254,-0.5,119.09014,1092.7679)">
+           transform="rotate(-120,374.99999,512.00559)">
           <path
              inkscape:label="RadialGridline0"
-             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685293"
-             d="m 375,271.63926 0,26.73267"
+             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685"
+             d="m 375,271.63926 v 26.73267"
              id="path8319-8-4"
              inkscape:connector-curvature="0" />
           <path
              inkscape:label="RadialGridline0"
-             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685293"
-             d="m 375,725.63926 0,26.73267"
+             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685"
+             d="m 375,725.63926 v 26.73267"
              id="path8319-8-0-30"
              inkscape:connector-curvature="0" />
         </g>
         <g
            id="g3957-7"
            style="display:inline;stroke:#ffffff"
-           transform="matrix(-0.8660254,-0.5,0.5,-0.8660254,443.75673,1142.9154)">
+           transform="rotate(-150,375,512.00557)">
           <path
              inkscape:label="RadialGridline0"
-             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685293"
-             d="m 375,271.63926 0,26.73267"
+             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685"
+             d="m 375,271.63926 v 26.73267"
              id="path8319-8-40"
              inkscape:connector-curvature="0" />
           <path
              inkscape:label="RadialGridline0"
-             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685293"
-             d="m 375,725.63926 0,26.73267"
+             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685"
+             d="m 375,725.63926 v 26.73267"
              id="path8319-8-0-6"
              inkscape:connector-curvature="0" />
         </g>
         <g
            id="g3957-78"
            style="display:inline;stroke:#ffffff"
-           transform="translate(-3.5340119e-6,-1.0000001e-6)">
+           transform="translate(-3.5340119e-6)">
           <path
              inkscape:label="RadialGridline0"
-             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685293"
-             d="m 375,271.63926 0,26.73267"
+             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685"
+             d="m 375,271.63926 v 26.73267"
              id="path8319-8-56"
              inkscape:connector-curvature="0" />
           <path
              inkscape:label="RadialGridline0"
-             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685293"
-             d="m 375,725.63926 0,26.73267"
+             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685"
+             d="m 375,725.63926 v 26.73267"
              id="path8319-8-0-83"
              inkscape:connector-curvature="0" />
         </g>
@@ -5957,435 +5956,435 @@
            style="stroke:#ffffff">
           <g
              id="g3957"
-             transform="matrix(0.9945219,-0.10452846,0.10452846,0.9945219,-51.464865,42.002984)"
+             transform="rotate(-5.9999998,374.99994,512.00556)"
              style="stroke:#ffffff">
             <path
                inkscape:connector-curvature="0"
                id="path8319-8"
-               d="m 375,280.63893 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 375,280.63893 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-0"
-               d="m 374.99982,725.63918 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 374.99982,725.63918 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
           </g>
           <g
              style="display:inline;stroke:#ffffff"
              id="g3957-34"
-             transform="matrix(0.97814761,-0.20791169,0.20791169,0.97814761,-98.257293,89.155415)">
+             transform="rotate(-12,374.99993,512.00554)">
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-13"
-               d="m 375,280.63893 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 375,280.63893 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-0-7"
-               d="m 374.99982,725.63918 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 374.99982,725.63918 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
           </g>
           <g
              style="display:inline;stroke:#ffffff"
              id="g3957-31"
-             transform="matrix(0.95105652,-0.30901699,0.30901699,0.95105652,-139.86462,140.94068)">
+             transform="rotate(-18,374.99992,512.00557)">
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-50"
-               d="m 375,280.63893 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 375,280.63893 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-0-1"
-               d="m 374.99982,725.63918 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 374.99982,725.63918 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
           </g>
           <g
              style="display:inline;stroke:#ffffff"
              id="g3957-2"
-             transform="matrix(0.91354546,-0.40673664,0.40673664,0.91354546,-175.83098,196.79141)">
+             transform="rotate(-24,374.99991,512.00557)">
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-9"
-               d="m 375,280.63893 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 375,280.63893 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-0-07"
-               d="m 374.99982,725.63918 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 374.99982,725.63918 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
           </g>
         </g>
         <g
-           transform="matrix(0.8660254,-0.5,0.5,0.8660254,-205.76232,256.09569)"
+           transform="rotate(-30,374.9999,512.00556)"
            id="g4073-1"
            style="display:inline;stroke:#ffffff">
           <g
              id="g3957-28"
-             transform="matrix(0.9945219,-0.10452846,0.10452846,0.9945219,-51.464865,42.002984)"
+             transform="rotate(-5.9999998,374.99994,512.00556)"
              style="stroke:#ffffff">
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-06"
-               d="m 375,280.63893 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 375,280.63893 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-0-06"
-               d="m 374.99982,725.63918 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 374.99982,725.63918 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
           </g>
           <g
              style="display:inline;stroke:#ffffff"
              id="g3957-34-9"
-             transform="matrix(0.97814761,-0.20791169,0.20791169,0.97814761,-98.257293,89.155415)">
+             transform="rotate(-12,374.99993,512.00554)">
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-13-0"
-               d="m 375,280.63893 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 375,280.63893 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-0-7-8"
-               d="m 374.99982,725.63918 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 374.99982,725.63918 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
           </g>
           <g
              style="display:inline;stroke:#ffffff"
              id="g3957-31-5"
-             transform="matrix(0.95105652,-0.30901699,0.30901699,0.95105652,-139.86462,140.94068)">
+             transform="rotate(-18,374.99992,512.00557)">
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-50-9"
-               d="m 375,280.63893 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 375,280.63893 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-0-1-4"
-               d="m 374.99982,725.63918 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 374.99982,725.63918 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
           </g>
           <g
              style="display:inline;stroke:#ffffff"
              id="g3957-2-3"
-             transform="matrix(0.91354546,-0.40673664,0.40673664,0.91354546,-175.83098,196.79141)">
+             transform="rotate(-24,374.99991,512.00557)">
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-9-4"
-               d="m 375,280.63893 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 375,280.63893 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-0-07-5"
-               d="m 374.99982,725.63918 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 374.99982,725.63918 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
           </g>
         </g>
         <g
-           transform="matrix(0.5,-0.8660254,0.8660254,0.5,-255.90987,580.76222)"
+           transform="rotate(-60,374.9999,512.00556)"
            id="g4073-6"
            style="display:inline;stroke:#ffffff">
           <g
              id="g3957-37"
-             transform="matrix(0.9945219,-0.10452846,0.10452846,0.9945219,-51.464865,42.002984)"
+             transform="rotate(-5.9999998,374.99994,512.00556)"
              style="stroke:#ffffff">
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-12"
-               d="m 375,280.63893 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 375,280.63893 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-0-70"
-               d="m 374.99982,725.63918 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 374.99982,725.63918 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
           </g>
           <g
              style="display:inline;stroke:#ffffff"
              id="g3957-34-1"
-             transform="matrix(0.97814761,-0.20791169,0.20791169,0.97814761,-98.257293,89.155415)">
+             transform="rotate(-12,374.99993,512.00554)">
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-13-7"
-               d="m 375,280.63893 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 375,280.63893 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-0-7-89"
-               d="m 374.99982,725.63918 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 374.99982,725.63918 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
           </g>
           <g
              style="display:inline;stroke:#ffffff"
              id="g3957-31-1"
-             transform="matrix(0.95105652,-0.30901699,0.30901699,0.95105652,-139.86462,140.94068)">
+             transform="rotate(-18,374.99992,512.00557)">
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-50-8"
-               d="m 375,280.63893 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 375,280.63893 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-0-1-7"
-               d="m 374.99982,725.63918 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 374.99982,725.63918 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
           </g>
           <g
              style="display:inline;stroke:#ffffff"
              id="g3957-2-1"
-             transform="matrix(0.91354546,-0.40673664,0.40673664,0.91354546,-175.83098,196.79141)">
+             transform="rotate(-24,374.99991,512.00557)">
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-9-9"
-               d="m 375,280.63893 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 375,280.63893 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-0-07-9"
-               d="m 374.99982,725.63918 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 374.99982,725.63918 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
           </g>
         </g>
         <g
-           transform="matrix(0,-1,1,0,-137.00565,887.00546)"
+           transform="rotate(-90,374.9999,512.00555)"
            id="g4073-3"
            style="display:inline;stroke:#ffffff">
           <g
              id="g3957-47"
-             transform="matrix(0.9945219,-0.10452846,0.10452846,0.9945219,-51.464865,42.002984)"
+             transform="rotate(-5.9999998,374.99994,512.00556)"
              style="stroke:#ffffff">
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-7"
-               d="m 375,280.63893 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 375,280.63893 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-0-12"
-               d="m 374.99982,725.63918 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 374.99982,725.63918 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
           </g>
           <g
              style="display:inline;stroke:#ffffff"
              id="g3957-34-19"
-             transform="matrix(0.97814761,-0.20791169,0.20791169,0.97814761,-98.257293,89.155415)">
+             transform="rotate(-12,374.99993,512.00554)">
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-13-5"
-               d="m 375,280.63893 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 375,280.63893 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-0-7-4"
-               d="m 374.99982,725.63918 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 374.99982,725.63918 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
           </g>
           <g
              style="display:inline;stroke:#ffffff"
              id="g3957-31-4"
-             transform="matrix(0.95105652,-0.30901699,0.30901699,0.95105652,-139.86462,140.94068)">
+             transform="rotate(-18,374.99992,512.00557)">
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-50-6"
-               d="m 375,280.63893 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 375,280.63893 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-0-1-72"
-               d="m 374.99982,725.63918 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 374.99982,725.63918 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
           </g>
           <g
              style="display:inline;stroke:#ffffff"
              id="g3957-2-4"
-             transform="matrix(0.91354546,-0.40673664,0.40673664,0.91354546,-175.83098,196.79141)">
+             transform="rotate(-24,374.99991,512.00557)">
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-9-3"
-               d="m 375,280.63893 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 375,280.63893 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-0-07-6"
-               d="m 374.99982,725.63918 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 374.99982,725.63918 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
           </g>
         </g>
         <g
-           transform="matrix(-0.5,-0.8660254,0.8660254,-0.5,119.09004,1092.7678)"
+           transform="rotate(-120,374.99991,512.00557)"
            id="g4073-0"
            style="display:inline;stroke:#ffffff">
           <g
              id="g3957-1"
-             transform="matrix(0.9945219,-0.10452846,0.10452846,0.9945219,-51.464865,42.002984)"
+             transform="rotate(-5.9999998,374.99994,512.00556)"
              style="stroke:#ffffff">
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-3"
-               d="m 375,280.63893 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 375,280.63893 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-0-4"
-               d="m 374.99982,725.63918 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 374.99982,725.63918 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
           </g>
           <g
              style="display:inline;stroke:#ffffff"
              id="g3957-34-5"
-             transform="matrix(0.97814761,-0.20791169,0.20791169,0.97814761,-98.257293,89.155415)">
+             transform="rotate(-12,374.99993,512.00554)">
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-13-77"
-               d="m 375,280.63893 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 375,280.63893 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-0-7-85"
-               d="m 374.99982,725.63918 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 374.99982,725.63918 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
           </g>
           <g
              style="display:inline;stroke:#ffffff"
              id="g3957-31-17"
-             transform="matrix(0.95105652,-0.30901699,0.30901699,0.95105652,-139.86462,140.94068)">
+             transform="rotate(-18,374.99992,512.00557)">
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-50-2"
-               d="m 375,280.63893 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 375,280.63893 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-0-1-2"
-               d="m 374.99982,725.63918 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 374.99982,725.63918 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
           </g>
           <g
              style="display:inline;stroke:#ffffff"
              id="g3957-2-8"
-             transform="matrix(0.91354546,-0.40673664,0.40673664,0.91354546,-175.83098,196.79141)">
+             transform="rotate(-24,374.99991,512.00557)">
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-9-32"
-               d="m 375,280.63893 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 375,280.63893 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-0-07-3"
-               d="m 374.99982,725.63918 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 374.99982,725.63918 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
           </g>
         </g>
         <g
-           transform="matrix(-0.8660254,-0.5,0.5,-0.8660254,443.75657,1142.9153)"
+           transform="rotate(-150,374.9999,512.00554)"
            id="g4073-7"
            style="display:inline;stroke:#ffffff">
           <g
              id="g3957-20"
-             transform="matrix(0.9945219,-0.10452846,0.10452846,0.9945219,-51.464865,42.002984)"
+             transform="rotate(-5.9999998,374.99994,512.00556)"
              style="stroke:#ffffff">
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-26"
-               d="m 375,280.63893 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 375,280.63893 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-0-67"
-               d="m 374.99982,725.63918 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 374.99982,725.63918 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
           </g>
           <g
              style="display:inline;stroke:#ffffff"
              id="g3957-34-3"
-             transform="matrix(0.97814761,-0.20791169,0.20791169,0.97814761,-98.257293,89.155415)">
+             transform="rotate(-12,374.99993,512.00554)">
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-13-8"
-               d="m 375,280.63893 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 375,280.63893 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-0-7-9"
-               d="m 374.99982,725.63918 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 374.99982,725.63918 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
           </g>
           <g
              style="display:inline;stroke:#ffffff"
              id="g3957-31-9"
-             transform="matrix(0.95105652,-0.30901699,0.30901699,0.95105652,-139.86462,140.94068)">
+             transform="rotate(-18,374.99992,512.00557)">
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-50-90"
-               d="m 375,280.63893 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 375,280.63893 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-0-1-5"
-               d="m 374.99982,725.63918 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 374.99982,725.63918 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
           </g>
           <g
              style="display:inline;stroke:#ffffff"
              id="g3957-2-6"
-             transform="matrix(0.91354546,-0.40673664,0.40673664,0.91354546,-175.83098,196.79141)">
+             transform="rotate(-24,374.99991,512.00557)">
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-9-2"
-               d="m 375,280.63893 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 375,280.63893 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
             <path
                inkscape:connector-curvature="0"
                id="path8319-8-0-07-69"
-               d="m 374.99982,725.63918 0,17.733"
-               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364079"
+               d="m 374.99982,725.63918 v 17.733"
+               style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:3.61364"
                inkscape:label="RadialGridline0" />
           </g>
         </g>
@@ -6395,14 +6394,14 @@
            transform="translate(-2.21843,48.073268)">
           <path
              inkscape:label="RadialGridline0"
-             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685293"
-             d="m 375,271.63926 0,26.73267"
+             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685"
+             d="m 375,271.63926 v 26.73267"
              id="path8319-8-56-0"
              inkscape:connector-curvature="0" />
           <path
              inkscape:label="RadialGridline0"
-             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685293"
-             d="m 375,725.63926 0,26.73267"
+             style="display:inline;fill:#000000;stroke:#ffffff;stroke-width:4.43685"
+             d="m 375,725.63926 v 26.73267"
              id="path8319-8-0-83-0"
              inkscape:connector-curvature="0" />
         </g>
@@ -6414,8 +6413,8 @@
        inkscape:label="Grid3"
        style="display:inline">
       <path
-         style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:1.98642993;filter:url(#filter4723)"
-         d="M 572.81641 119.76172 L 572.81641 179.58594 L 577.7793 179.58594 L 577.7793 119.76172 L 572.81641 119.76172 z M 364.49023 175.58203 L 360.19141 178.06445 L 390.10352 229.87305 L 394.40234 227.39258 L 364.49023 175.58203 z M 786.10352 175.58203 L 756.19141 227.39258 L 760.49023 229.87305 L 790.40234 178.06445 L 786.10352 175.58203 z M 207.6875 330.56836 L 205.20508 334.86719 L 257.01562 364.7793 L 259.49609 360.48047 L 207.6875 330.56836 z M 942.9082 330.56836 L 891.09766 360.48047 L 893.58008 364.7793 L 945.38867 334.86719 L 942.9082 330.56836 z M 149.38477 543.19141 L 149.38477 548.15625 L 209.20898 548.15625 L 209.20898 543.19141 L 149.38477 543.19141 z M 941.38477 543.19141 L 941.38477 548.15625 L 1001.209 548.15625 L 1001.209 543.19141 L 941.38477 543.19141 z M 257.01562 726.56836 L 205.20508 756.48047 L 207.6875 760.7793 L 259.49609 730.86719 L 257.01562 726.56836 z M 893.58008 726.56836 L 891.09766 730.86719 L 942.9082 760.7793 L 945.38867 756.48047 L 893.58008 726.56836 z M 390.10352 861.47461 L 360.19141 913.2832 L 364.49023 915.76562 L 394.40234 863.95508 L 390.10352 861.47461 z M 760.49023 861.47461 L 756.19141 863.95508 L 786.10352 915.76562 L 790.40234 913.2832 L 760.49023 861.47461 z M 572.81641 911.76172 L 572.81641 971.58594 L 577.7793 971.58594 L 577.7793 911.76172 L 572.81641 911.76172 z "
+         style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:1.98643;filter:url(#filter4723)"
+         d="m 572.81641,119.76172 v 59.82422 h 4.96289 v -59.82422 z m -208.32618,55.82031 -4.29882,2.48242 29.91211,51.8086 4.29882,-2.48047 z m 421.61329,0 -29.91211,51.81055 4.29882,2.48047 29.91211,-51.8086 z m -578.41602,154.98633 -2.48242,4.29883 51.81054,29.91211 2.48047,-4.29883 z m 735.2207,0 -51.81054,29.91211 2.48242,4.29883 51.80859,-29.91211 z M 149.38477,543.19141 v 4.96484 h 59.82421 v -4.96484 z m 792,0 v 4.96484 h 59.82423 v -4.96484 z m -684.36915,183.37695 -51.81054,29.91211 2.48242,4.29883 51.80859,-29.91211 z m 636.56446,0 -2.48242,4.29883 51.81054,29.91211 2.48047,-4.29883 z m -503.47656,134.90625 -29.91211,51.80859 4.29882,2.48242 29.91211,-51.81054 z m 370.38671,0 -4.29882,2.48047 29.91211,51.81054 4.29882,-2.48242 z m -187.67382,50.28711 v 59.82422 h 4.96289 v -59.82422 z"
          transform="translate(0,-27.637839)"
          id="rect4589" />
     </g>
@@ -6425,7 +6424,7 @@
      inkscape:groupmode="layer"
      id="layer_text"
      style="display:inline"
-     transform="translate(0,27.637839)">
+     transform="matrix(0.6237,0,0,0.6237,216.26084,275.71914)">
     <g
        inkscape:groupmode="layer"
        id="layer_text_variable"
@@ -6538,7 +6537,7 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;line-height:1.25;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff">km/L</tspan></text>
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4411);font-size:42.66666667px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.6667px;line-height:0%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4411)"
          x="608.3479"
          y="631.83167"
          id="text4835-7"><tspan
@@ -6546,10 +6545,10 @@
            id="tspan4837-77"
            x="608.3479"
            y="631.83167"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.66666667px;line-height:1.25;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">TRIP</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.6667px;line-height:1.25;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff">TRIP</tspan></text>
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4423);font-size:42.66666667px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.6667px;line-height:0%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4423)"
          x="914.42621"
          y="634.10522"
          id="text4835-1"><tspan
@@ -6557,10 +6556,10 @@
            id="tspan4837-9"
            x="914.42621"
            y="634.10522"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.66666667px;line-height:1.25;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">km</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.6667px;line-height:1.25;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff">km</tspan></text>
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4435);font-size:42.66666667px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.6667px;line-height:0%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4435)"
          x="609.00623"
          y="689.89832"
          id="text4835-7-6"><tspan
@@ -6568,10 +6567,10 @@
            id="tspan4837-77-8"
            x="609.00623"
            y="689.89832"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.66666667px;line-height:1.25;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">FUEL</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.6667px;line-height:1.25;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff">FUEL</tspan></text>
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4447);font-size:42.66666667px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.6667px;line-height:0%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4447)"
          x="913.33063"
          y="690.44543"
          id="text4835-1-9"><tspan
@@ -6579,7 +6578,7 @@
            id="tspan4837-9-3"
            x="913.33063"
            y="690.44543"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.66666667px;line-height:1.25;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">L</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.6667px;line-height:1.25;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff">L</tspan></text>
       <flowRoot
          xml:space="preserve"
          id="flowRoot5786"
@@ -6672,10 +6671,10 @@
       <flowRoot
          xml:space="preserve"
          id="flowRoot5794-1-2-3-5-4"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4531);font-size:56.02548226px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.0255px;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4531)"
          transform="matrix(1.713506,0,0,1.713506,-209.82899,-931.69532)"><flowRegion
            id="flowRegion5796-0-7-4-3-1"
-           style="-inkscape-font-specification:'Goldman, Normal';font-family:Goldman;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:56.02548226px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.0255px;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
              id="rect5798-4-9-1-3-2"
              width="65.719299"
              height="80.396973"
@@ -6683,7 +6682,7 @@
              y="659.21082"
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.02548226px;line-height:101.99999809%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" /></flowRegion><flowPara
            id="flowPara5800-8-6-7-2-9"
-           style="font-size:56.02548226px;line-height:1.02;-inkscape-font-specification:'Goldman, Normal';font-family:Goldman;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">5</flowPara></flowRoot>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.0255px;line-height:1.02;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">5</flowPara></flowRoot>
       <flowRoot
          xml:space="preserve"
          id="flowRoot5794-1-2-3-5-4-0"
@@ -6702,10 +6701,10 @@
       <flowRoot
          xml:space="preserve"
          id="flowRoot5794-1-2-3-5-4-0-5"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4555);font-size:56.02548226px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.0255px;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4555)"
          transform="matrix(1.713506,0,0,1.713506,116.99711,-926.05292)"><flowRegion
            id="flowRegion5796-0-7-4-3-1-8-6"
-           style="-inkscape-font-specification:'Goldman, Normal';font-family:Goldman;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:56.02548226px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.0255px;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
              id="rect5798-4-9-1-3-2-7-8"
              width="61.719299"
              height="97.396973"
@@ -6713,14 +6712,14 @@
              y="659.21082"
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.02548226px;line-height:101.99999809%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" /></flowRegion><flowPara
            id="flowPara5800-8-6-7-2-9-4-0"
-           style="font-size:56.02548226px;line-height:1.02;-inkscape-font-specification:'Goldman, Normal';font-family:Goldman;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">7</flowPara></flowRoot>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.0255px;line-height:1.02;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">7</flowPara></flowRoot>
       <flowRoot
          xml:space="preserve"
          id="flowRoot5794-1-2-3-5-4-0-5-7"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffff00;fill-opacity:1;stroke:#ff0000;filter:url(#filter4567);font-size:56.02548226px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.0255px;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffff00;fill-opacity:1;stroke:#ff0000;filter:url(#filter4567)"
          transform="matrix(1.713506,0,0,1.713506,229.88673,-806.44062)"><flowRegion
            id="flowRegion5796-0-7-4-3-1-8-6-7"
-           style="-inkscape-font-specification:'Goldman, Normal';font-family:Goldman;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:56.02548226px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.0255px;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
              id="rect5798-4-9-1-3-2-7-8-4"
              width="57.719299"
              height="76.396973"
@@ -6728,14 +6727,14 @@
              y="659.21082"
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.02548226px;line-height:101.99999809%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffff00;stroke:#ff0000;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" /></flowRegion><flowPara
            id="flowPara5800-8-6-7-2-9-4-0-3"
-           style="font-size:56.02548226px;line-height:1.02;-inkscape-font-specification:'Goldman, Normal';font-family:Goldman;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">8</flowPara></flowRoot>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.0255px;line-height:1.02;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">8</flowPara></flowRoot>
       <flowRoot
          xml:space="preserve"
          id="flowRoot5794-1-2-3-5-4-0-5-7-1"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffff00;fill-opacity:1;stroke:#ff0000;filter:url(#filter4579);font-size:56.02548226px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.0255px;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffff00;fill-opacity:1;stroke:#ff0000;filter:url(#filter4579)"
          transform="matrix(1.713506,0,0,1.713506,275.99439,-650.99618)"><flowRegion
            id="flowRegion5796-0-7-4-3-1-8-6-7-3"
-           style="-inkscape-font-specification:'Goldman, Normal';font-family:Goldman;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:56.02548226px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.0255px;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
              id="rect5798-4-9-1-3-2-7-8-4-6"
              width="56.719299"
              height="77.396973"
@@ -6743,7 +6742,7 @@
              y="659.21082"
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.02548226px;line-height:101.99999809%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffff00;stroke:#ff0000;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" /></flowRegion><flowPara
            id="flowPara5800-8-6-7-2-9-4-0-3-3"
-           style="font-size:56.02548226px;line-height:1.02;-inkscape-font-specification:'Goldman, Normal';font-family:Goldman;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">9</flowPara></flowRoot>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.0255px;line-height:1.02;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">9</flowPara></flowRoot>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:64px;line-height:0%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4591)"
