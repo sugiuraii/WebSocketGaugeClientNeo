@@ -2,20 +2,20 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="1920"
    height="1080"
    id="svg2"
    version="1.1"
-   inkscape:version="0.91 r13725"
-   sodipodi:docname="tachometer_2_analog-LED1.svg">
+   inkscape:version="1.3.2 (091e20e, 2023-11-25)"
+   sodipodi:docname="tachometer_2_analog-LED1.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -23,19 +23,22 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.38802485"
-     inkscape:cx="304.54296"
-     inkscape:cy="582.47759"
+     inkscape:zoom="0.7760497"
+     inkscape:cx="623.6714"
+     inkscape:cy="485.14934"
      inkscape:document-units="px"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer12"
      showgrid="false"
-     inkscape:window-width="1366"
-     inkscape:window-height="705"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
+     inkscape:window-width="1920"
+     inkscape:window-height="1010"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      showguides="false"
-     units="px" />
+     units="px"
+     inkscape:showpageshadow="2"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1" />
   <defs
      id="defs4">
     <linearGradient
@@ -374,7 +377,11 @@
        inkscape:menu-tooltip="Glowing metal texture"
        inkscape:menu="Bevels"
        inkscape:label="Glowing metal"
-       style="color-interpolation-filters:sRGB">
+       style="color-interpolation-filters:sRGB"
+       x="-0.041041667"
+       y="-0.041041667"
+       width="1.0820833"
+       height="1.0820833">
       <feGaussianBlur
          id="feGaussianBlur3190"
          stdDeviation="3"
@@ -436,7 +443,11 @@
        inkscape:menu-tooltip="Pressed metal with a rolled edge"
        inkscape:menu="Bevels"
        inkscape:label="Pressed steel"
-       style="color-interpolation-filters:sRGB">
+       style="color-interpolation-filters:sRGB"
+       x="-0.024042331"
+       y="-0.024042331"
+       width="1.0480847"
+       height="1.0480847">
       <feGaussianBlur
          id="feGaussianBlur3210"
          result="result1"
@@ -2762,7 +2773,11 @@
     <filter
        style="color-interpolation-filters:sRGB"
        inkscape:label="Wax Bump"
-       id="filter14427">
+       id="filter14427"
+       x="-0.050371769"
+       y="-0.050372283"
+       width="1.1007435"
+       height="1.1007446">
       <feGaussianBlur
          in="SourceGraphic"
          stdDeviation="3.6"
@@ -2852,7 +2867,11 @@
        inkscape:menu="Shadows and Glows"
        inkscape:label="Cutout Glow"
        style="color-interpolation-filters:sRGB"
-       id="filter4368">
+       id="filter4368"
+       x="-inf"
+       y="-0.014977139"
+       width="inf"
+       height="1.2271524">
       <feOffset
          dy="3"
          dx="3"
@@ -3540,7 +3559,11 @@
        inkscape:menu="Bevels"
        inkscape:menu-tooltip="Basic specular bevel to use for building textures"
        style="color-interpolation-filters:sRGB"
-       id="filter5456">
+       id="filter5456"
+       x="-0.067386984"
+       y="-0.067387671"
+       width="1.134774"
+       height="1.1347753">
       <feGaussianBlur
          stdDeviation="6"
          in="SourceGraphic"
@@ -3783,7 +3806,11 @@
        inkscape:menu="Bevels"
        inkscape:menu-tooltip="Basic specular bevel to use for building textures"
        style="color-interpolation-filters:sRGB"
-       id="filter5562">
+       id="filter5562"
+       x="-0.069529162"
+       y="-0.06953258"
+       width="1.1390583"
+       height="1.1390646">
       <feGaussianBlur
          stdDeviation="6"
          in="SourceGraphic"
@@ -3849,10 +3876,10 @@
        inkscape:collect="always"
        style="color-interpolation-filters:sRGB"
        id="filter5686"
-       x="-0.023999877"
-       width="1.0479999"
-       y="-0.024000121"
-       height="1.0480002">
+       x="-0.026142054"
+       width="1.0522841"
+       y="-0.02614503"
+       height="1.0522895">
       <feGaussianBlur
          inkscape:collect="always"
          stdDeviation="4.2738006"
@@ -3862,8 +3889,8 @@
        inkscape:collect="always"
        style="color-interpolation-filters:sRGB"
        id="filter5698"
-       x="-0.023999877"
-       width="1.0479999"
+       x="-0.023999876"
+       width="1.0479998"
        y="-0.024000121"
        height="1.0480002">
       <feGaussianBlur
@@ -4706,7 +4733,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4387">
+       id="filter4387"
+       x="-0.071503142"
+       y="-0.25682183"
+       width="1.1430063"
+       height="1.5136437">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -4738,7 +4769,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4399">
+       id="filter4399"
+       x="-0.094674616"
+       y="-0.35955056"
+       width="1.1893492"
+       height="1.7191011">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -4770,7 +4805,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4411">
+       id="filter4411"
+       x="-0.12990554"
+       y="-0.35955056"
+       width="1.2598111"
+       height="1.7191011">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -4802,7 +4841,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4423">
+       id="filter4423"
+       x="-0.18604666"
+       y="-0.35955056"
+       width="1.3720933"
+       height="1.7191011">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -4834,7 +4877,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4435">
+       id="filter4435"
+       x="-0.10619484"
+       y="-0.35955056"
+       width="1.2123897"
+       height="1.7191011">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -4866,7 +4913,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4447">
+       id="filter4447"
+       x="-0.61146497"
+       y="-0.35955056"
+       width="2.2229299"
+       height="1.7191011">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -4930,7 +4981,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4471">
+       id="filter4471"
+       x="-0.2548135"
+       y="-0.29175451"
+       width="1.509627"
+       height="1.583509">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -4962,7 +5017,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4483">
+       id="filter4483"
+       x="-1.1588886"
+       y="-0.29945682"
+       width="3.3177773"
+       height="1.5989136">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -4994,7 +5053,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4495">
+       id="filter4495"
+       x="-0.28949809"
+       y="-0.29945682"
+       width="1.5789962"
+       height="1.5989136">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5026,7 +5089,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4507">
+       id="filter4507"
+       x="-0.3135017"
+       y="-0.29945682"
+       width="1.6270034"
+       height="1.5989136">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5058,7 +5125,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4519">
+       id="filter4519"
+       x="-0.25691217"
+       y="-0.29873985"
+       width="1.5138243"
+       height="1.5974797">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5090,7 +5161,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4531">
+       id="filter4531"
+       x="-0.28838292"
+       y="-0.29945682"
+       width="1.5767658"
+       height="1.5989136">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5122,7 +5197,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4543">
+       id="filter4543"
+       x="-0.15704769"
+       y="-0.172827"
+       width="1.3140954"
+       height="1.345654">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5154,7 +5233,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4555">
+       id="filter4555"
+       x="-0.28727631"
+       y="-0.29945682"
+       width="1.5745526"
+       height="1.5989136">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5186,7 +5269,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4567">
+       id="filter4567"
+       x="-0.28149887"
+       y="-0.31505353"
+       width="1.5629977"
+       height="1.6301071">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5218,7 +5305,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4579">
+       id="filter4579"
+       x="-0.28332152"
+       y="-0.31131772"
+       width="1.566643"
+       height="1.6226354">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5250,7 +5341,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4591">
+       id="filter4591"
+       x="-0.069444592"
+       y="-0.16410256"
+       width="1.1388892"
+       height="1.3282051">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5282,7 +5377,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4603">
+       id="filter4603"
+       x="-0.042426361"
+       y="-0.26367331"
+       width="1.0848527"
+       height="1.5273466">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5314,7 +5413,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4615">
+       id="filter4615"
+       x="-0.16466552"
+       y="-0.13074566"
+       width="1.329331"
+       height="1.2614913">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5346,7 +5449,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4627">
+       id="filter4627"
+       x="-0.042879077"
+       y="-0.14981273"
+       width="1.0857582"
+       height="1.2996255">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5378,7 +5485,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4639">
+       id="filter4639"
+       x="-0.050767628"
+       y="-0.2247191"
+       width="1.1015353"
+       height="1.4494382">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5410,7 +5521,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4651">
+       id="filter4651"
+       x="-0.064308791"
+       y="-0.2247191"
+       width="1.1286176"
+       height="1.4494382">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5442,7 +5557,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4663">
+       id="filter4663"
+       x="-inf"
+       y="-inf"
+       width="inf"
+       height="inf">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5474,7 +5593,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4675">
+       id="filter4675"
+       x="-0.031434251"
+       y="-0.063241107"
+       width="1.0628685"
+       height="1.1264822">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5506,7 +5629,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4723">
+       id="filter4723"
+       x="-0.012435916"
+       y="-0.012435917"
+       width="1.0248718"
+       height="1.0248718">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -6346,8 +6473,7 @@
      inkscape:groupmode="layer"
      id="layer1"
      style="display:inline"
-     transform="translate(0,27.637839)"
-     sodipodi:insensitive="true">
+     transform="translate(0,27.637839)">
     <g
        inkscape:groupmode="layer"
        id="layer15"
@@ -6356,57 +6482,56 @@
       <flowRoot
          xml:space="preserve"
          id="flowRoot4865"
-         style="font-style:normal;font-weight:normal;font-size:137.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4615)"
-         transform="matrix(2,0,0,2,-136.09903,-523.30662)"><flowRegion
-           id="flowRegion4867"><rect
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:96px;line-height:0.01%;font-family:'DSEG14 Classic';-inkscape-font-specification:'DSEG14 Classic, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4615)"
+         transform="matrix(2,0,0,2,-136.09903,-403.30662)"><flowRegion
+           id="flowRegion4867"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:96px;font-family:'DSEG14 Classic';-inkscape-font-specification:'DSEG14 Classic, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
              id="rect4869"
              width="85.458649"
              height="157.96893"
              x="372.91046"
              y="556.87469"
-             style="font-size:137.5px;fill:#ffffff"
+             style="font-size:96px;fill:#ffffff;-inkscape-font-specification:'DSEG14 Classic, Normal';font-family:'DSEG14 Classic';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
              ry="0" /></flowRegion><flowPara
            id="flowPara4871"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:137.5px;font-family:'Astronaut II';-inkscape-font-specification:'Astronaut II';fill:#ffffff">N</flowPara></flowRoot>      <text
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:96px;line-height:1.25;font-family:'DSEG14 Classic';-inkscape-font-specification:'DSEG14 Classic, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff">N</flowPara></flowRoot>
+      <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:120px;line-height:125%;font-family:'Astronaut II';-inkscape-font-specification:'Astronaut II, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4627)"
-         x="360.14465"
-         y="658.75043"
-         id="text4835-7-5"
-         sodipodi:linespacing="125%"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:64px;line-height:0%;font-family:'DSEG14 Classic';-inkscape-font-specification:'DSEG14 Classic, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4627)"
+         x="386.15707"
+         y="654.75043"
+         id="text4835-7-5"><tspan
            sodipodi:role="line"
            id="tspan4837-77-0"
-           x="360.14465"
-           y="658.75043"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:120px;line-height:125%;font-family:'Astronaut II';-inkscape-font-specification:'Astronaut II, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff">12.00</tspan></text>
+           x="386.15707"
+           y="654.75043"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:64px;line-height:125%;font-family:'DSEG14 Classic';-inkscape-font-specification:'DSEG14 Classic, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff">12.00</tspan></text>
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:80px;line-height:125%;font-family:'Astronaut II';-inkscape-font-specification:'Astronaut II';letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4639)"
-         x="707.37073"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.6667px;line-height:0%;font-family:'DSEG14 Classic';-inkscape-font-specification:'DSEG14 Classic, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4639)"
+         x="730.30493"
          y="633.56799"
-         id="text4835-7-5-0"
-         sodipodi:linespacing="125%"><tspan
+         id="text4835-7-5-0"><tspan
            sodipodi:role="line"
            id="tspan4837-77-0-4"
-           x="707.37073"
+           x="730.30493"
            y="633.56799"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:80px;font-family:'Astronaut II';-inkscape-font-specification:'Astronaut II';fill:#ffffff">1200.0</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.6667px;line-height:1.25;font-family:'DSEG14 Classic';-inkscape-font-specification:'DSEG14 Classic, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff">1200.0</tspan></text>
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:80px;line-height:125%;font-family:'Astronaut II';-inkscape-font-specification:'Astronaut II';letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4651)"
-         x="744.67999"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.6667px;line-height:0%;font-family:'DSEG14 Classic';-inkscape-font-specification:'DSEG14 Classic, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4651)"
+         x="763.6142"
          y="690.75684"
-         id="text4835-7-5-0-9"
-         sodipodi:linespacing="125%"><tspan
+         id="text4835-7-5-0-9"><tspan
            sodipodi:role="line"
            id="tspan4837-77-0-4-7"
-           x="744.67999"
+           x="763.6142"
            y="690.75684"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:80px;font-family:'Astronaut II';-inkscape-font-specification:'Astronaut II';fill:#ffffff">38.01</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.6667px;line-height:1.25;font-family:'DSEG14 Classic';-inkscape-font-specification:'DSEG14 Classic, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff">38.01</tspan></text>
       <flowRoot
          xml:space="preserve"
          id="flowRoot5062"
-         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4663)"
+         style="font-style:normal;font-weight:normal;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4663)"
          transform="translate(0,-27.637839)"><flowRegion
            id="flowRegion5064"><rect
              id="rect5066"
@@ -6414,101 +6539,99 @@
              height="326.19589"
              x="355.35309"
              y="626.24146" /></flowRegion><flowPara
-           id="flowPara5068" /></flowRoot>      <flowRoot
+           id="flowPara5068"
+           style="font-size:40px;line-height:1.25"> </flowPara></flowRoot>
+      <flowRoot
          xml:space="preserve"
          id="flowRoot5794-1-2-3-5-4-0-54"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:200px;line-height:101.99999809%;font-family:'Alien Encounters';-inkscape-font-specification:'Alien Encounters, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4675)"
-         transform="translate(1.875e-6,27.999999)"><flowRegion
-           id="flowRegion5796-0-7-4-3-1-8-4"><rect
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:153.333px;line-height:0.01%;font-family:'DSEG14 Classic';-inkscape-font-specification:'DSEG14 Classic, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4675)"
+         transform="translate(-60,27.999999)"><flowRegion
+           id="flowRegion5796-0-7-4-3-1-8-4"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:153.333px;font-family:'DSEG14 Classic';-inkscape-font-specification:'DSEG14 Classic, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
              id="rect5798-4-9-1-3-2-7-5"
-             width="366.80536"
-             height="203.87547"
+             width="572.27185"
+             height="329.70065"
              x="442.51666"
              y="303.26083"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:200px;line-height:101.99999809%;font-family:'Alien Encounters';-inkscape-font-specification:'Alien Encounters, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff" /></flowRegion><flowPara
-           id="flowPara5800-8-6-7-2-9-4-6">132</flowPara></flowRoot>    </g>
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:153.33333333px;line-height:102%;font-family:'DSEG14 Classic';-inkscape-font-specification:'DSEG14 Classic, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff" /></flowRegion><flowPara
+           id="flowPara5800-8-6-7-2-9-4-6"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:153.333px;line-height:1.02;font-family:'DSEG14 Classic';-inkscape-font-specification:'DSEG14 Classic, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">132</flowPara></flowRoot>
+    </g>
     <g
        inkscape:groupmode="layer"
        id="layer12"
        inkscape:label="Text_Fixed"
-       style="display:inline"
-       sodipodi:insensitive="true">
+       style="display:inline">
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:70px;line-height:125%;font-family:'Astronaut II';-inkscape-font-specification:'Astronaut II';letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4387)"
-         x="757.14081"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;line-height:0%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4387)"
+         x="768.33771"
          y="758.86169"
-         id="text4835-5"
-         sodipodi:linespacing="125%"><tspan
+         id="text4835-5"><tspan
            sodipodi:role="line"
            id="tspan4837-7"
-           x="757.14081"
+           x="768.33771"
            y="758.86169"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:70px;font-family:'Astronaut II';-inkscape-font-specification:'Astronaut II';fill:#ffffff">GEAR</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;line-height:1.25;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff">GEAR</tspan></text>
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50px;line-height:125%;font-family:'Astronaut II';-inkscape-font-specification:'Astronaut II';letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4399)"
-         x="480.37024"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;line-height:0%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4399)"
+         x="461.85889"
          y="700.61951"
-         id="text4835"
-         sodipodi:linespacing="125%"><tspan
+         id="text4835"><tspan
            sodipodi:role="line"
            id="tspan4837"
-           x="480.37024"
+           x="461.85889"
            y="700.61951"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50px;font-family:'Astronaut II';-inkscape-font-specification:'Astronaut II';fill:#ffffff">km/L</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;line-height:1.25;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff">km/L</tspan></text>
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50px;line-height:125%;font-family:'Astronaut II';-inkscape-font-specification:'Astronaut II';letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4411)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4411);font-size:42.66666667px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
          x="608.3479"
          y="631.83167"
-         id="text4835-7"
-         sodipodi:linespacing="125%"><tspan
+         id="text4835-7"><tspan
            sodipodi:role="line"
            id="tspan4837-77"
            x="608.3479"
            y="631.83167"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50px;font-family:'Astronaut II';-inkscape-font-specification:'Astronaut II';fill:#ffffff">TRIP</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.66666667px;line-height:1.25;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">TRIP</tspan></text>
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50px;line-height:125%;font-family:'Astronaut II';-inkscape-font-specification:'Astronaut II';letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4423)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4423);font-size:42.66666667px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
          x="914.42621"
          y="634.10522"
-         id="text4835-1"
-         sodipodi:linespacing="125%"><tspan
+         id="text4835-1"><tspan
            sodipodi:role="line"
            id="tspan4837-9"
            x="914.42621"
            y="634.10522"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50px;font-family:'Astronaut II';-inkscape-font-specification:'Astronaut II';fill:#ffffff">km</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.66666667px;line-height:1.25;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">km</tspan></text>
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50px;line-height:125%;font-family:'Astronaut II';-inkscape-font-specification:'Astronaut II';letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4435)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4435);font-size:42.66666667px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
          x="609.00623"
          y="689.89832"
-         id="text4835-7-6"
-         sodipodi:linespacing="125%"><tspan
+         id="text4835-7-6"><tspan
            sodipodi:role="line"
            id="tspan4837-77-8"
            x="609.00623"
            y="689.89832"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50px;font-family:'Astronaut II';-inkscape-font-specification:'Astronaut II';fill:#ffffff">FUEL</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.66666667px;line-height:1.25;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">FUEL</tspan></text>
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50px;line-height:125%;font-family:'Astronaut II';-inkscape-font-specification:'Astronaut II';letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4447)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4447);font-size:42.66666667px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
          x="913.33063"
          y="690.44543"
-         id="text4835-1-9"
-         sodipodi:linespacing="125%"><tspan
+         id="text4835-1-9"><tspan
            sodipodi:role="line"
            id="tspan4837-9-3"
            x="913.33063"
            y="690.44543"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50px;font-family:'Astronaut II';-inkscape-font-specification:'Astronaut II';fill:#ffffff">L</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.66666667px;line-height:1.25;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">L</tspan></text>
       <flowRoot
          xml:space="preserve"
          id="flowRoot5786"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:90px;line-height:101.99999809%;font-family:'7barPBd';-inkscape-font-specification:'7barPBd, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4459)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:'7barPBd';-inkscape-font-specification:'7barPBd, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4459)"
          transform="translate(199.99999,30.000001)"><flowRegion
            id="flowRegion5788"><rect
              id="rect5790"
@@ -6517,150 +6640,184 @@
              x="350.19485"
              y="795.49426"
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:90px;line-height:101.99999809%;font-family:'7barPBd';-inkscape-font-specification:'7barPBd, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff" /></flowRegion><flowPara
-           id="flowPara5792">000100-000</flowPara></flowRoot>      <flowRoot
+           id="flowPara5792"
+           style="font-size:90px;line-height:1.02">000100-000</flowPara></flowRoot>
+      <flowRoot
          xml:space="preserve"
          id="flowRoot5794"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:52.52389145px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4471)"
-         transform="matrix(1.713506,0,0,1.713506,-54.306935,-323.38626)"><flowRegion
-           id="flowRegion5796"><rect
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.0255px;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4471)"
+         transform="matrix(1.713506,0,0,1.713506,-54.306935,-329.38626)"><flowRegion
+           id="flowRegion5796"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.0255px;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
              id="rect5798"
              width="57.219299"
              height="85.896973"
              x="347.18942"
              y="659.21082"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:52.52389145px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff" /></flowRegion><flowPara
-           id="flowPara5800">0</flowPara></flowRoot>      <flowRoot
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.02548226px;line-height:101.99999809%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" /></flowRegion><flowPara
+           id="flowPara5800"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.0255px;line-height:1.02;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">0</flowPara></flowRoot>
+      <flowRoot
          xml:space="preserve"
          id="flowRoot5794-1"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:52.52389145px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4483)"
-         transform="matrix(1.713506,0,0,1.713506,-205.8892,-369.49826)"><flowRegion
-           id="flowRegion5796-0"><rect
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.0255px;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4483)"
+         transform="matrix(1.713506,0,0,1.713506,-205.8892,-377.49826)"><flowRegion
+           id="flowRegion5796-0"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.0255px;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
              id="rect5798-4"
              width="47.719299"
              height="69.396973"
              x="347.18942"
              y="659.21082"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:52.52389145px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff" /></flowRegion><flowPara
-           id="flowPara5800-8">1</flowPara></flowRoot>      <flowRoot
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.02548226px;line-height:101.99999809%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" /></flowRegion><flowPara
+           id="flowPara5800-8"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.0255px;line-height:1.02;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">1</flowPara></flowRoot>
+      <flowRoot
          xml:space="preserve"
          id="flowRoot5794-1-2"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:52.52389145px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4495)"
-         transform="matrix(1.713506,0,0,1.713506,-333.93775,-500.17251)"><flowRegion
-           id="flowRegion5796-0-7"><rect
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.0255px;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4495)"
+         transform="matrix(1.713506,0,0,1.713506,-325.93775,-504.17251)"><flowRegion
+           id="flowRegion5796-0-7"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.0255px;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
              id="rect5798-4-9"
              width="50.719299"
              height="78.396973"
              x="347.18942"
              y="659.21082"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:52.52389145px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff" /></flowRegion><flowPara
-           id="flowPara5800-8-6">2</flowPara></flowRoot>      <flowRoot
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.02548226px;line-height:101.99999809%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" /></flowRegion><flowPara
+           id="flowPara5800-8-6"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.0255px;line-height:1.02;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">2</flowPara></flowRoot>
+      <flowRoot
          xml:space="preserve"
          id="flowRoot5794-1-2-3"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:52.52389145px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4507)"
-         transform="matrix(1.713506,0,0,1.713506,-380.9835,-650.16605)"><flowRegion
-           id="flowRegion5796-0-7-4"><rect
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.0255px;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4507)"
+         transform="matrix(1.713506,0,0,1.713506,-376.9835,-656.16605)"><flowRegion
+           id="flowRegion5796-0-7-4"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.0255px;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
              id="rect5798-4-9-1"
              width="49.719299"
              height="75.396973"
              x="347.18942"
              y="659.21082"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:52.52389145px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff" /></flowRegion><flowPara
-           id="flowPara5800-8-6-7">3</flowPara></flowRoot>      <flowRoot
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.02548226px;line-height:101.99999809%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" /></flowRegion><flowPara
+           id="flowPara5800-8-6-7"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.0255px;line-height:1.02;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">3</flowPara></flowRoot>
+      <flowRoot
          xml:space="preserve"
          id="flowRoot5794-1-2-3-5"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:52.52389145px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4519)"
-         transform="matrix(1.713506,0,0,1.713506,-344.99965,-816.31682)"><flowRegion
-           id="flowRegion5796-0-7-4-3"><rect
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.0255px;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4519)"
+         transform="matrix(1.713506,0,0,1.713506,-338.99965,-816.31682)"><flowRegion
+           id="flowRegion5796-0-7-4-3"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.0255px;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
              id="rect5798-4-9-1-3"
              width="48.719299"
              height="72.396973"
              x="347.18942"
              y="659.21082"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:52.52389145px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff" /></flowRegion><flowPara
-           id="flowPara5800-8-6-7-2">4</flowPara></flowRoot>      <flowRoot
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.02548226px;line-height:101.99999809%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" /></flowRegion><flowPara
+           id="flowPara5800-8-6-7-2"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.0255px;line-height:1.02;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">4</flowPara></flowRoot>
+      <flowRoot
          xml:space="preserve"
          id="flowRoot5794-1-2-3-5-4"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:52.52389145px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4531)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4531);font-size:56.02548226px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
          transform="matrix(1.713506,0,0,1.713506,-209.82899,-931.69532)"><flowRegion
-           id="flowRegion5796-0-7-4-3-1"><rect
+           id="flowRegion5796-0-7-4-3-1"
+           style="-inkscape-font-specification:'Goldman, Normal';font-family:Goldman;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:56.02548226px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
              id="rect5798-4-9-1-3-2"
              width="65.719299"
              height="80.396973"
              x="347.18942"
              y="659.21082"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:52.52389145px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff" /></flowRegion><flowPara
-           id="flowPara5800-8-6-7-2-9">5</flowPara></flowRoot>      <flowRoot
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.02548226px;line-height:101.99999809%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" /></flowRegion><flowPara
+           id="flowPara5800-8-6-7-2-9"
+           style="font-size:56.02548226px;line-height:1.02;-inkscape-font-specification:'Goldman, Normal';font-family:Goldman;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">5</flowPara></flowRoot>
+      <flowRoot
          xml:space="preserve"
          id="flowRoot5794-1-2-3-5-4-0"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:90px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4543)"
-         transform="translate(199.99999,30.000001)"><flowRegion
-           id="flowRegion5796-0-7-4-3-1-8"><rect
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:96px;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4543)"
+         transform="translate(195.99999,26.000001)"><flowRegion
+           id="flowRegion5796-0-7-4-3-1-8"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:96px;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
              id="rect5798-4-9-1-3-2-7"
              width="124.60495"
              height="149.75523"
              x="342.85281"
              y="127.83177"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:90px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff" /></flowRegion><flowPara
-           id="flowPara5800-8-6-7-2-9-4">6</flowPara></flowRoot>      <flowRoot
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:96px;line-height:101.99999809%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" /></flowRegion><flowPara
+           id="flowPara5800-8-6-7-2-9-4"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:96px;line-height:1.02;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">6</flowPara></flowRoot>
+      <flowRoot
          xml:space="preserve"
          id="flowRoot5794-1-2-3-5-4-0-5"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:52.52389145px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4555)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4555);font-size:56.02548226px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
          transform="matrix(1.713506,0,0,1.713506,116.99711,-926.05292)"><flowRegion
-           id="flowRegion5796-0-7-4-3-1-8-6"><rect
+           id="flowRegion5796-0-7-4-3-1-8-6"
+           style="-inkscape-font-specification:'Goldman, Normal';font-family:Goldman;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:56.02548226px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
              id="rect5798-4-9-1-3-2-7-8"
              width="61.719299"
              height="97.396973"
              x="347.18942"
              y="659.21082"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:52.52389145px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff" /></flowRegion><flowPara
-           id="flowPara5800-8-6-7-2-9-4-0">7</flowPara></flowRoot>      <flowRoot
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.02548226px;line-height:101.99999809%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" /></flowRegion><flowPara
+           id="flowPara5800-8-6-7-2-9-4-0"
+           style="font-size:56.02548226px;line-height:1.02;-inkscape-font-specification:'Goldman, Normal';font-family:Goldman;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">7</flowPara></flowRoot>
+      <flowRoot
          xml:space="preserve"
          id="flowRoot5794-1-2-3-5-4-0-5-7"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:52.52389145px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffff00;fill-opacity:1;stroke:#ff0000;filter:url(#filter4567)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffff00;fill-opacity:1;stroke:#ff0000;filter:url(#filter4567);font-size:56.02548226px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
          transform="matrix(1.713506,0,0,1.713506,229.88673,-806.44062)"><flowRegion
-           id="flowRegion5796-0-7-4-3-1-8-6-7"><rect
+           id="flowRegion5796-0-7-4-3-1-8-6-7"
+           style="-inkscape-font-specification:'Goldman, Normal';font-family:Goldman;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:56.02548226px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
              id="rect5798-4-9-1-3-2-7-8-4"
              width="57.719299"
              height="76.396973"
              x="347.18942"
              y="659.21082"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:52.52389145px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffff00;stroke:#ff0000" /></flowRegion><flowPara
-           id="flowPara5800-8-6-7-2-9-4-0-3">8</flowPara></flowRoot>      <flowRoot
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.02548226px;line-height:101.99999809%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffff00;stroke:#ff0000;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" /></flowRegion><flowPara
+           id="flowPara5800-8-6-7-2-9-4-0-3"
+           style="font-size:56.02548226px;line-height:1.02;-inkscape-font-specification:'Goldman, Normal';font-family:Goldman;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">8</flowPara></flowRoot>
+      <flowRoot
          xml:space="preserve"
          id="flowRoot5794-1-2-3-5-4-0-5-7-1"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:52.52389145px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffff00;fill-opacity:1;stroke:#ff0000;filter:url(#filter4579)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffff00;fill-opacity:1;stroke:#ff0000;filter:url(#filter4579);font-size:56.02548226px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
          transform="matrix(1.713506,0,0,1.713506,275.99439,-650.99618)"><flowRegion
-           id="flowRegion5796-0-7-4-3-1-8-6-7-3"><rect
+           id="flowRegion5796-0-7-4-3-1-8-6-7-3"
+           style="-inkscape-font-specification:'Goldman, Normal';font-family:Goldman;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:56.02548226px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
              id="rect5798-4-9-1-3-2-7-8-4-6"
              width="56.719299"
              height="77.396973"
              x="347.18942"
              y="659.21082"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:52.52389145px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffff00;stroke:#ff0000" /></flowRegion><flowPara
-           id="flowPara5800-8-6-7-2-9-4-0-3-3">9</flowPara></flowRoot>      <text
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.02548226px;line-height:101.99999809%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffff00;stroke:#ff0000;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" /></flowRegion><flowPara
+           id="flowPara5800-8-6-7-2-9-4-0-3-3"
+           style="font-size:56.02548226px;line-height:1.02;-inkscape-font-specification:'Goldman, Normal';font-family:Goldman;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">9</flowPara></flowRoot>
+      <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:60px;line-height:125%;font-family:'Alien Encounters';-inkscape-font-specification:'Alien Encounters, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4591)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:64px;line-height:0%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4591)"
          x="637.80249"
-         y="542.5722"
-         id="text3966"
-         sodipodi:linespacing="125%"><tspan
+         y="554.5722"
+         id="text3966"><tspan
            sodipodi:role="line"
            id="tspan3968"
            x="637.80249"
-           y="542.5722">km/h</tspan></text>
+           y="554.5722"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:64px;line-height:1.25;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">km/h</tspan></text>
       <flowRoot
          xml:space="preserve"
          id="flowRoot5794-1-2-3-5-4-0-547"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:45px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4603)"
-         transform="translate(-4.5453182e-6,24.000001)"><flowRegion
-           id="flowRegion5796-0-7-4-3-1-8-7"><rect
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4603)"
+         transform="translate(-6.000004,24.000001)"><flowRegion
+           id="flowRegion5796-0-7-4-3-1-8-7"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
              id="rect5798-4-9-1-3-2-7-2"
              width="469.94366"
              height="87.903526"
              x="463.82645"
              y="247.07655"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:45px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff" /></flowRegion><flowPara
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;line-height:101.99999809%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" /></flowRegion><flowPara
            id="flowPara5800-8-6-7-2-9-4-2"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:45px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start">x1000rpm</flowPara></flowRoot>    </g>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;line-height:102%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">x1000rpm</flowPara></flowRoot>
+    </g>
   </g>
 </svg>

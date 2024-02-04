@@ -2,20 +2,20 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="1920"
    height="1080"
    id="svg2"
    version="1.1"
-   inkscape:version="0.91 r13725"
-   sodipodi:docname="temp_2_analog-LED2.svg">
+   inkscape:version="1.3.2 (091e20e, 2023-11-25)"
+   sodipodi:docname="temp_2_analog-LED2.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -23,19 +23,22 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.64081552"
-     inkscape:cx="701.32718"
-     inkscape:cy="564.35834"
+     inkscape:zoom="0.453125"
+     inkscape:cx="744.82759"
+     inkscape:cy="551.72414"
      inkscape:document-units="px"
      inkscape:current-layer="layer12"
      showgrid="false"
-     inkscape:window-width="1366"
-     inkscape:window-height="705"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
-     inkscape:window-maximized="1"
+     inkscape:window-width="1272"
+     inkscape:window-height="865"
+     inkscape:window-x="877"
+     inkscape:window-y="72"
+     inkscape:window-maximized="0"
      showguides="false"
-     units="px" />
+     units="px"
+     inkscape:showpageshadow="2"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1" />
   <defs
      id="defs4">
     <linearGradient
@@ -374,7 +377,11 @@
        inkscape:menu-tooltip="Glowing metal texture"
        inkscape:menu="Bevels"
        inkscape:label="Glowing metal"
-       style="color-interpolation-filters:sRGB">
+       style="color-interpolation-filters:sRGB"
+       x="-0.041041667"
+       y="-0.041041667"
+       width="1.0820833"
+       height="1.0820833">
       <feGaussianBlur
          id="feGaussianBlur3190"
          stdDeviation="3"
@@ -436,7 +443,11 @@
        inkscape:menu-tooltip="Pressed metal with a rolled edge"
        inkscape:menu="Bevels"
        inkscape:label="Pressed steel"
-       style="color-interpolation-filters:sRGB">
+       style="color-interpolation-filters:sRGB"
+       x="-0.024042331"
+       y="-0.024042331"
+       width="1.0480847"
+       height="1.0480847">
       <feGaussianBlur
          id="feGaussianBlur3210"
          result="result1"
@@ -2841,7 +2852,11 @@
        inkscape:menu="Shadows and Glows"
        inkscape:label="Cutout Glow"
        style="color-interpolation-filters:sRGB"
-       id="filter4368">
+       id="filter4368"
+       x="-inf"
+       y="-0.014977139"
+       width="inf"
+       height="1.2271524">
       <feOffset
          dy="3"
          dx="3"
@@ -4063,7 +4078,9 @@
          k2="2"
          k3="0.8"
          in2="fbSourceGraphic"
-         id="feComposite4965" />
+         id="feComposite4965"
+         k1="0"
+         k4="0" />
       <feBlend
          in="result4"
          in2="result4"
@@ -4523,7 +4540,11 @@
     <filter
        style="color-interpolation-filters:sRGB"
        inkscape:label="Wax Bump"
-       id="filter14427-42-2-3">
+       id="filter14427-42-2-3"
+       x="-0.024934645"
+       y="-0.025005784"
+       width="1.0498693"
+       height="1.0500116">
       <feGaussianBlur
          in="SourceGraphic"
          stdDeviation="3.6"
@@ -4768,7 +4789,11 @@
        inkscape:menu="Bevels"
        inkscape:menu-tooltip="Basic specular bevel to use for building textures"
        style="color-interpolation-filters:sRGB"
-       id="filter5562-7">
+       id="filter5562-7"
+       x="-0.035545633"
+       y="-0.035666238"
+       width="1.0711021"
+       height="1.0713197">
       <feGaussianBlur
          stdDeviation="6"
          in="SourceGraphic"
@@ -4835,7 +4860,11 @@
        inkscape:menu="Bevels"
        inkscape:menu-tooltip="Basic specular bevel to use for building textures"
        style="color-interpolation-filters:sRGB"
-       id="filter5562-71">
+       id="filter5562-71"
+       x="-0.035545633"
+       y="-0.035666238"
+       width="1.0711021"
+       height="1.0713197">
       <feGaussianBlur
          stdDeviation="6"
          in="SourceGraphic"
@@ -5366,7 +5395,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter10361">
+       id="filter10361"
+       x="-0.1851635"
+       y="-0.24729195"
+       width="1.370327"
+       height="1.4945839">
       <feFlood
          flood-opacity="0.498039"
          flood-color="rgb(255,255,255)"
@@ -5431,7 +5464,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4516">
+       id="filter4516"
+       x="-0.023705847"
+       y="-0.023705846"
+       width="1.0474117"
+       height="1.0474117">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5528,7 +5565,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4552">
+       id="filter4552"
+       x="-0.15944046"
+       y="-0.18255497"
+       width="1.3188809"
+       height="1.3651099">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5560,7 +5601,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4564">
+       id="filter4564"
+       x="-0.081780039"
+       y="-0.18255497"
+       width="1.1635601"
+       height="1.3651099">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5592,7 +5637,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4576">
+       id="filter4576"
+       x="-0.076893642"
+       y="-0.18255497"
+       width="1.1537873"
+       height="1.3651099">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5624,7 +5673,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4588">
+       id="filter4588"
+       x="-0.079288432"
+       y="-0.18255497"
+       width="1.1585769"
+       height="1.3651099">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5656,7 +5709,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4600">
+       id="filter4600"
+       x="-0.078543941"
+       y="-0.18255497"
+       width="1.1570879"
+       height="1.3651099">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5688,7 +5745,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4612">
+       id="filter4612"
+       x="-0.1112163"
+       y="-0.30695005"
+       width="1.2224326"
+       height="1.6139001">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5720,7 +5781,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4624">
+       id="filter4624"
+       x="-0.075667722"
+       y="-0.19775049"
+       width="1.1513354"
+       height="1.395501">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5752,7 +5817,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4636">
+       id="filter4636"
+       x="-0.1922497"
+       y="-0.27157302"
+       width="1.3844994"
+       height="1.543146">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5784,7 +5853,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4648">
+       id="filter4648"
+       x="-0.10814046"
+       y="-0.15275982"
+       width="1.2162809"
+       height="1.3055196">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5816,7 +5889,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4660">
+       id="filter4660"
+       x="-0.038665828"
+       y="-0.19215012"
+       width="1.0773317"
+       height="1.3843002">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -5848,7 +5925,11 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter4672">
+       id="filter4672"
+       x="-0.093297543"
+       y="-0.10665834"
+       width="1.1865951"
+       height="1.2133167">
       <feFlood
          flood-opacity="1"
          flood-color="rgb(0,0,0)"
@@ -6286,21 +6367,23 @@
        inkscape:groupmode="layer"
        id="layer15"
        inkscape:label="Text_Var"
-       style="display:inline"
-       sodipodi:insensitive="true">
+       style="display:inline">
       <flowRoot
          xml:space="preserve"
          id="flowRoot5794-1-2-3-5-4-0-54"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:200px;line-height:101.99999809%;font-family:'Alien Encounters';-inkscape-font-specification:'Alien Encounters, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter10361)"
-         transform="translate(-143.56707,-193.50342)"><flowRegion
-           id="flowRegion5796-0-7-4-3-1-8-4"><rect
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:181.333px;line-height:0.01%;font-family:'DSEG14 Classic';-inkscape-font-specification:'DSEG14 Classic, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter10361)"
+         transform="translate(-178.85931,-205.67424)"><flowRegion
+           id="flowRegion5796-0-7-4-3-1-8-4"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:181.333px;font-family:'DSEG14 Classic';-inkscape-font-specification:'DSEG14 Classic, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
              id="rect5798-4-9-1-3-2-7-5"
              width="366.80536"
              height="203.87547"
              x="607.93091"
              y="584.94269"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:200px;line-height:101.99999809%;font-family:'Alien Encounters';-inkscape-font-specification:'Alien Encounters, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff" /></flowRegion><flowPara
-           id="flowPara5800-8-6-7-2-9-4-6">85</flowPara></flowRoot>    </g>
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:181.33333333px;line-height:101.99999809%;font-family:'DSEG14 Classic';-inkscape-font-specification:'DSEG14 Classic, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" /></flowRegion><flowPara
+           id="flowPara5800-8-6-7-2-9-4-6"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:181.333px;line-height:1.02;font-family:'DSEG14 Classic';-inkscape-font-specification:'DSEG14 Classic, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">85</flowPara></flowRoot>
+    </g>
     <g
        inkscape:groupmode="layer"
        id="layer12"
@@ -6309,7 +6392,7 @@
       <flowRoot
          xml:space="preserve"
          id="flowRoot5786"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:90px;line-height:101.99999809%;font-family:'7barPBd';-inkscape-font-specification:'7barPBd, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4540)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:'7barPBd';-inkscape-font-specification:'7barPBd, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4540)"
          transform="translate(199.99999,30.000001)"><flowRegion
            id="flowRegion5788"><rect
              id="rect5790"
@@ -6318,136 +6401,146 @@
              x="350.19485"
              y="795.49426"
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:90px;line-height:101.99999809%;font-family:'7barPBd';-inkscape-font-specification:'7barPBd, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;" /></flowRegion><flowPara
-           id="flowPara5792">000100-000</flowPara></flowRoot>      <flowRoot
+           id="flowPara5792"
+           style="font-size:90px;line-height:1.02">000100-000</flowPara></flowRoot>
+      <flowRoot
          xml:space="preserve"
          id="flowRoot5794"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:83.94228363px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4552)"
-         transform="translate(0.30161363,9.5967302)"><flowRegion
-           id="flowRegion5796"><rect
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.3333px;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4552)"
+         transform="translate(-7.4058994,7.5348751)"><flowRegion
+           id="flowRegion5796"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.3333px;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
              id="rect5798"
              width="142.47141"
              height="109.94341"
              x="542.90247"
              y="787.1734"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:83.94228363px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;" /></flowRegion><flowPara
-           id="flowPara5800">0</flowPara></flowRoot>      <flowRoot
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.33333333px;line-height:101.99999809%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" /></flowRegion><flowPara
+           id="flowPara5800"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.3333px;line-height:1.02;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">0</flowPara></flowRoot>
+      <flowRoot
          xml:space="preserve"
          id="flowRoot5794-1"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:83.94228363px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4564)"
-         transform="translate(-82.389142,-42.197473)"><flowRegion
-           id="flowRegion5796-0"><rect
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.3333px;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4564)"
+         transform="translate(-90.096655,-44.259328)"><flowRegion
+           id="flowRegion5796-0"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.3333px;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
              id="rect5798-4"
              width="172.84685"
              height="96.329796"
              x="401.52289"
              y="744.1651"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:83.94228363px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;" /></flowRegion><flowPara
-           id="flowPara5800-8">20</flowPara></flowRoot>      <flowRoot
-         transform="translate(-19.862074,-6.6206888)"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.33333333px;line-height:101.99999809%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" /></flowRegion><flowPara
+           id="flowPara5800-8"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.3333px;line-height:1.02;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">20</flowPara></flowRoot>
+      <flowRoot
+         transform="translate(-19.569587,-8.6825439)"
          xml:space="preserve"
          id="flowRoot5794-1-2-3"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:83.94228363px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4576)"><flowRegion
-           id="flowRegion5796-0-7-4"><rect
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.3333px;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4576)"><flowRegion
+           id="flowRegion5796-0-7-4"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.3333px;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
              id="rect5798-4-9-1"
              width="163.32213"
              height="120.49744"
              x="238.21384"
              y="482.38849"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:83.94228363px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;" /></flowRegion><flowPara
-           id="flowPara5800-8-6-7">40</flowPara></flowRoot>      <flowRoot
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.33333333px;line-height:101.99999809%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" /></flowRegion><flowPara
+           id="flowPara5800-8-6-7"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.3333px;line-height:1.02;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">40</flowPara></flowRoot>
+      <flowRoot
          xml:space="preserve"
          id="flowRoot5794-1-2-3-5"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:83.94228363px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4588)"
-         transform="translate(46.126142,-71.555728)"><flowRegion
-           id="flowRegion5796-0-7-4-3"><rect
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.3333px;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4588)"
+         transform="translate(38.418629,-73.617583)"><flowRegion
+           id="flowRegion5796-0-7-4-3"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.3333px;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
              id="rect5798-4-9-1-3"
              width="148.48257"
              height="104.66843"
              x="271.7757"
              y="327.42096"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:83.94228363px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;" /></flowRegion><flowPara
-           id="flowPara5800-8-6-7-2">60</flowPara></flowRoot>      <flowRoot
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.33333333px;line-height:101.99999809%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" /></flowRegion><flowPara
+           id="flowPara5800-8-6-7-2"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.3333px;line-height:1.02;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">60</flowPara></flowRoot>
+      <flowRoot
          xml:space="preserve"
          id="flowRoot5794-1-2-3-5-4-0"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:83.94228363px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4600)"
-         transform="translate(-29.565167,-18.708348)"><flowRegion
-           id="flowRegion5796-0-7-4-3-1-8"><rect
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.3333px;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4600)"
+         transform="translate(-37.27268,-20.770203)"><flowRegion
+           id="flowRegion5796-0-7-4-3-1-8"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.3333px;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
              id="rect5798-4-9-1-3-2-7"
              width="180.21802"
              height="108.77895"
              x="544.99969"
              y="182.46844"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:83.94228363px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;" /></flowRegion><flowPara
-           id="flowPara5800-8-6-7-2-9-4">80</flowPara></flowRoot>      <flowRoot
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.33333333px;line-height:101.99999809%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" /></flowRegion><flowPara
+           id="flowPara5800-8-6-7-2-9-4"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.3333px;line-height:1.02;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">80</flowPara></flowRoot>
+      <flowRoot
          xml:space="preserve"
          id="flowRoot5794-1-2-3-5-4-0-5-7"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:52.52389145px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffff00;fill-opacity:1;stroke:#ff0000;filter:url(#filter4612)"
-         transform="matrix(1.5981734,0,0,1.5981734,138.34012,-805.17659)"><flowRegion
-           id="flowRegion5796-0-7-4-3-1-8-6-7"><rect
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.3943px;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffff00;fill-opacity:1;stroke:#ff0000;filter:url(#filter4612)"
+         transform="matrix(1.5981734,0,0,1.5981734,124.63261,-805.23845)"><flowRegion
+           id="flowRegion5796-0-7-4-3-1-8-6-7"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.3943px;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
              id="rect5798-4-9-1-3-2-7-8-4"
-             width="97.765022"
-             height="52.921867"
+             width="121.64031"
+             height="50.74448"
              x="347.18942"
              y="659.21082"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:52.52389145px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffff00;stroke:#ff0000;" /></flowRegion><flowPara
-           id="flowPara5800-8-6-7-2-9-4-0-3">100</flowPara></flowRoot>      <flowRoot
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.39428959px;line-height:102%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffff00;stroke:#ff0000" /></flowRegion><flowPara
+           id="flowPara5800-8-6-7-2-9-4-0-3"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.3943px;line-height:1.02;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">100</flowPara></flowRoot>
+      <flowRoot
          xml:space="preserve"
          id="flowRoot5794-1-2-3-5-4-0-5-7-1"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:83.94228363px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffff00;fill-opacity:1;stroke:#ff0000;stroke-width:1.59817338;filter:url(#filter4624)"
-         transform="translate(-68.413801,2.2068972)"><flowRegion
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.3333px;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffff00;fill-opacity:1;stroke:#ff0000;stroke-width:1.59817;filter:url(#filter4624)"
+         transform="translate(-72.121314,0.14504208)"><flowRegion
            id="flowRegion5796-0-7-4-3-1-8-6-7-3"
-           style="stroke-width:1.59817338"><rect
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.3333px;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:1.59817"><rect
              id="rect5798-4-9-1-3-2-7-8-4-6"
              width="178.92317"
              height="81.762695"
              x="850.97186"
              y="481.61423"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:83.94228363px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffff00;stroke:#ff0000;stroke-width:2.55415821;" /></flowRegion><flowPara
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.33333333px;line-height:101.99999809%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffff00;stroke:#ff0000;stroke-width:2.55415821;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" /></flowRegion><flowPara
            id="flowPara5800-8-6-7-2-9-4-0-3-3"
-           style="stroke-width:1.59817338;">120</flowPara></flowRoot>      <flowRoot
-         xml:space="preserve"
-         id="flowRoot5794-1-2-3-5-4-0-547"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:45px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4636)"
-         transform="translate(92.068955,10.346162)"><flowRegion
-           id="flowRegion5796-0-7-4-3-1-8-7"><rect
-             id="rect5798-4-9-1-3-2-7-2"
-             width="469.94366"
-             height="87.903526"
-             x="463.82645"
-             y="247.07655"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:45px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;" /></flowRegion><flowPara
-           id="flowPara5800-8-6-7-2-9-4-2"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:45px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;">C<flowSpan
-   style="font-size:64.99999762%;baseline-shift:super;"
-   id="flowSpan6393">O</flowSpan></flowPara></flowRoot>      <flowRoot
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:85.3333px;line-height:1.02;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:1.59817">120</flowPara></flowRoot>
+      <flowRoot
          xml:space="preserve"
          id="flowRoot5794-1-2-3-5-4-0-547-6"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:45px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4648)"
-         transform="translate(226.63011,310.29573)"><flowRegion
-           id="flowRegion5796-0-7-4-3-1-8-7-8"><rect
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:74.6667px;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4648)"
+         transform="translate(201.87701,348.34936)"><flowRegion
+           id="flowRegion5796-0-7-4-3-1-8-7-8"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:74.6667px;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
              id="rect5798-4-9-1-3-2-7-2-9"
              width="469.94366"
              height="87.903526"
              x="463.82645"
              y="247.07655"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:45px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;" /></flowRegion><flowPara
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:74.66666667px;line-height:101.99999809%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" /></flowRegion><flowPara
            id="flowPara5800-8-6-7-2-9-4-2-7"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:80px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;">C<flowSpan
-   style="font-size:64.99999762%;baseline-shift:super;"
-   id="flowSpan5241">O</flowSpan></flowPara></flowRoot>      <flowRoot
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:74.6667px;line-height:102%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">C<flowSpan
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:74.6667px;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;baseline-shift:super"
+   id="flowSpan5241">O</flowSpan></flowPara></flowRoot>
+      <flowRoot
          xml:space="preserve"
          id="flowRoot5794-1-2-3-5-4-0-547-6-6"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:45px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4660)"
-         transform="translate(202.40313,407.08521)"><flowRegion
-           id="flowRegion5796-0-7-4-3-1-8-7-8-4"><rect
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:74.6667px;line-height:0.01%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter4660)"
+         transform="translate(177.16889,418.77758)"><flowRegion
+           id="flowRegion5796-0-7-4-3-1-8-7-8-4"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:74.6667px;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
              id="rect5798-4-9-1-3-2-7-2-9-5"
              width="469.94366"
              height="87.903526"
              x="463.82645"
              y="247.07655"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:45px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;" /></flowRegion><flowPara
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:74.66666667px;line-height:101.99999809%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal" /></flowRegion><flowPara
            id="flowPara5800-8-6-7-2-9-4-2-7-9"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:semi-expanded;font-size:80px;line-height:101.99999809%;font-family:'Toyota MR2';-inkscape-font-specification:'Toyota MR2, Semi-Expanded';text-align:start;writing-mode:lr-tb;text-anchor:start;">Water</flowPara></flowRoot>      <path
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:74.6667px;line-height:102%;font-family:Goldman;-inkscape-font-specification:'Goldman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">Water</flowPara></flowRoot>
+      <path
          style="fill:#ffffff;filter:url(#filter4672)"
          d="m 754.61252,830.12781 c -0.5142,-0.20243 -2.2349,-1.19247 -3.8238,-2.20009 -3.2576,-2.06589 -6.9869,-2.40648 -9.8719,-0.90155 l -1.7685,0.92255 0,-3.10754 c 0,-3.05023 0.05,-3.12751 2.703,-4.1891 3.3786,-1.35186 5.7547,-0.94373 9.8847,1.69779 4.4609,2.85317 7.8732,2.84993 12.3344,-0.0116 5.0228,-3.22185 7.2759,-3.28898 12.6994,-0.37836 6.0362,3.23947 8.7552,3.23947 14.7914,0 5.4235,-2.91062 7.6766,-2.84349 12.6994,0.37836 4.4612,2.86161 7.8735,2.86484 12.3344,0.0116 4.13,-2.64152 6.5061,-3.04965 9.8847,-1.69779 2.6513,1.06084 2.703,1.14082 2.703,4.17794 l 0,3.0964 -1.9876,-0.99158 c -2.9297,-1.46155 -7.5469,-0.83748 -10.5067,1.42013 -1.7237,1.31475 -3.3179,1.89366 -5.7197,2.07715 -2.9539,0.22567 -3.7268,-0.005 -6.8453,-2.04102 -4.6992,-3.06837 -7.5317,-3.0779 -13.2495,-0.0445 -2.7204,1.44324 -5.1274,2.25086 -6.7084,2.25086 -1.5809,0 -3.9879,-0.80762 -6.7084,-2.25086 -2.9376,-1.55842 -5.0875,-2.25087 -6.9885,-2.25087 -2.0436,0 -3.6389,0.57547 -6.2393,2.25087 -3.4111,2.19763 -6.912,2.84608 -9.6168,1.78126 z m 25.1668,-14.76022 c -6.3576,-3.13289 -7.5902,-12.01782 -2.3502,-16.94055 l 1.5916,-1.49521 0,-26.85157 0,-26.85156 1.6945,-1.33288 c 2.1588,-1.69813 4.7418,-1.69813 6.9006,0 1.6045,1.2621 1.6945,1.63775 1.6945,7.07414 l 0,5.74125 9.6101,0 c 8.9814,0 9.6709,0.0869 10.5402,1.32781 1.2239,1.7474 0.6371,3.76975 -1.3085,4.50946 -0.859,0.32657 -5.4624,0.59376 -10.2299,0.59376 l -8.6682,0 0.1889,4.6625 0.189,4.6625 8.6819,0.15674 c 4.775,0.0862 9.2984,0.30009 10.052,0.47529 1.8092,0.42063 2.3169,2.58666 0.9819,4.18944 -0.9611,1.15397 -1.982,1.2959 -10.3908,1.44463 l -9.325,0.16494 -0.189,4.6625 -0.1889,4.6625 9.2302,0 c 9.4237,0 10.7781,0.31082 11.5886,2.65936 0.1996,0.57838 -0.066,1.66361 -0.5897,2.41164 -0.8976,1.28147 -1.5077,1.36003 -10.5627,1.36003 l -9.6101,0 0,2.00518 c 0,1.30415 0.6644,2.76187 1.9003,4.16951 2.6612,3.03096 3.6551,6.6396 2.7035,9.81582 -1.9442,6.48906 -8.3888,9.55427 -14.1348,6.72277 z m -47.0621,-3.74173 c 0,-2.35586 0.2148,-2.89396 1.1552,-2.89396 0.6354,0 2.7335,-1.00548 4.6625,-2.2344 4.921,-3.135 8.367,-3.11758 13.5286,0.0684 3.2613,2.013 4.1774,2.29138 6.63,2.01493 1.5653,-0.17642 3.7077,-0.93444 4.7611,-1.68448 l 1.9151,-1.36373 0.3857,1.43888 c 0.8086,3.01696 0.4127,4.15137 -2.043,5.85314 -3.6195,2.50833 -7.8927,2.36847 -12.0646,-0.39487 -2.5103,-1.66277 -3.8168,-2.09008 -6.3901,-2.09008 -2.5732,0 -3.8797,0.42731 -6.39,2.09008 -1.7355,1.14955 -3.8293,2.09009 -4.653,2.09009 -1.3461,0 -1.4975,-0.29262 -1.4975,-2.89397 z m 71.8554,1.26303 c -2.4218,-1.64563 -2.8232,-2.83495 -1.997,-5.91742 l 0.3857,-1.43888 1.9151,1.36373 c 1.0534,0.75004 3.1958,1.50806 4.7611,1.68448 2.4526,0.27645 3.3687,-0.002 6.63,-2.01493 5.1616,-3.18595 8.6076,-3.20337 13.5286,-0.0684 1.929,1.22892 4.0271,2.2344 4.6625,2.2344 0.9404,0 1.1552,0.5381 1.1552,2.89396 0,2.60135 -0.1514,2.89397 -1.4975,2.89397 -0.8237,0 -2.9175,-0.94054 -4.653,-2.09009 -2.5103,-1.66277 -3.8168,-2.09008 -6.39,-2.09008 -2.5733,0 -3.8798,0.42731 -6.3901,2.09008 -4.1321,2.73699 -8.514,2.90313 -12.1106,0.45915 z"
          id="path6447"
