@@ -563,6 +563,82 @@
        id="radialGradient37542"
        xlink:href="#linearGradient33859-3"
        inkscape:collect="always" />
+    <radialGradient
+       gradientTransform="matrix(1.1186226,0,0,1.1186226,-259.54916,110.65609)"
+       r="201"
+       fy="435.36218"
+       fx="502"
+       cy="435.36218"
+       cx="502"
+       gradientUnits="userSpaceOnUse"
+       id="radialGradient4123-7"
+       xlink:href="#linearGradient4841-5"
+       inkscape:collect="always" />
+    <linearGradient
+       id="linearGradient4841-5">
+      <stop
+         id="stop4920"
+         offset="0"
+         style="stop-color:#000000;stop-opacity:0;" />
+      <stop
+         style="stop-color:#333333;stop-opacity:0;"
+         offset="0.87988079"
+         id="stop4922" />
+      <stop
+         id="stop4924"
+         offset="0.89661556"
+         style="stop-color:#009900;stop-opacity:1" />
+      <stop
+         style="stop-color:#00ff00;stop-opacity:1"
+         offset="0.93927014"
+         id="stop4926" />
+      <stop
+         style="stop-color:#00ff00;stop-opacity:1"
+         offset="0.96818912"
+         id="stop4928" />
+      <stop
+         style="stop-color:#00dd00;stop-opacity:1"
+         offset="1"
+         id="stop4930" />
+    </linearGradient>
+    <radialGradient
+       gradientTransform="matrix(1.1186226,0,0,1.1186226,-259.54915,113.68111)"
+       r="201"
+       fy="435.36218"
+       fx="502"
+       cy="435.36218"
+       cx="502"
+       gradientUnits="userSpaceOnUse"
+       id="radialGradient4123-8"
+       xlink:href="#linearGradient4841-3"
+       inkscape:collect="always" />
+    <linearGradient
+       id="linearGradient4841-3">
+      <stop
+         id="stop4890"
+         offset="0"
+         style="stop-color:#000000;stop-opacity:0;" />
+      <stop
+         style="stop-color:#333333;stop-opacity:0;"
+         offset="0.87988079"
+         id="stop4892" />
+      <stop
+         id="stop4894"
+         offset="0.89661556"
+         style="stop-color:#999900;stop-opacity:1" />
+      <stop
+         style="stop-color:#ffff00;stop-opacity:1"
+         offset="0.93927014"
+         id="stop4896" />
+      <stop
+         style="stop-color:#ffff00;stop-opacity:1"
+         offset="0.96818912"
+         id="stop4898" />
+      <stop
+         style="stop-color:#dddd00;stop-opacity:1"
+         offset="1"
+         id="stop4900" />
+    </linearGradient>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -574,14 +650,14 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="258.99999"
-     inkscape:cy="196.49999"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="195.16147"
+     inkscape:cy="136.29483"
      inkscape:document-units="px"
-     inkscape:current-layer="layer_valuebar"
+     inkscape:current-layer="layer_greenzone_bar"
      showgrid="false"
      inkscape:window-width="1920"
-     inkscape:window-height="1012"
+     inkscape:window-height="1010"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -608,7 +684,8 @@
      id="layer_back"
      inkscape:label="Background"
      style="display:inline"
-     transform="translate(-178.9375,-157)">
+     transform="translate(-178.9375,-157)"
+     sodipodi:insensitive="true">
     <rect
        style="fill:url(#linearGradient3521);fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient3523);stroke-width:4.3767;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect3261"
@@ -640,6 +717,33 @@
            y="619.36218" /></flowRegion><flowPara
          id="flowPara2490"
          style="font-size:24px;line-height:1.25"> </flowPara></flowRoot>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer_greenzone_bar"
+     inkscape:label="Greenzone_Bar"
+     style="display:inline"
+     transform="matrix(0.66115999,0,0,0.66115999,2.156377,-200.59998)"
+     sodipodi:insensitive="true">
+    <circle
+       style="display:inline;opacity:1;fill:url(#radialGradient4123-7);fill-opacity:1;stroke:none"
+       id="path33085-7-1"
+       cx="301.99939"
+       cy="597.66211"
+       r="224.84314" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer_yellowzone_bar"
+     inkscape:label="Yellowzone_Bar"
+     style="display:inline"
+     transform="matrix(0.66115999,0,0,0.66115999,2.156377,-202.59998)">
+    <circle
+       style="display:inline;opacity:1;fill:url(#radialGradient4123-8);fill-opacity:1;stroke:none"
+       id="path33085-7-6"
+       cx="301.99939"
+       cy="600.68707"
+       r="224.84314" />
   </g>
   <!--  
 <g
@@ -766,7 +870,8 @@
      id="layer_redzone_bar"
      inkscape:label="Redzone_Bar"
      style="display:inline"
-     transform="matrix(1.66959,0,0,1.66959,-298.73553,-262.11676)">
+     transform="matrix(1.66959,0,0,1.66959,-298.73553,-262.11676)"
+     sodipodi:insensitive="true">
     <circle
        style="display:inline;fill:url(#radialGradient37495);fill-opacity:1;stroke:none"
        id="path33085-7"
@@ -780,7 +885,8 @@
      id="layer_grid"
      inkscape:label="Grid"
      style="display:inline"
-     transform="matrix(1.66959,0,0,1.66959,-298.73553,-262.11676)">
+     transform="matrix(1.66959,0,0,1.66959,-298.73553,-262.11676)"
+     sodipodi:insensitive="true">
     <path
        style="display:inline;fill:#000000;fill-opacity:0.144928;stroke:url(#linearGradient3183);stroke-width:1.188;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
        d="m 299.41491,183.50956 c -49.61979,0 -89.9087,40.22286 -90.01575,89.81775 h 11.8305 c 0.10721,-43.06423 35.09606,-77.98725 78.18525,-77.98725 43.0892,0 78.07804,34.923 78.18525,77.98725 h 11.8305 c -0.10705,-49.59488 -40.39597,-89.81774 -90.01575,-89.81775 z"
@@ -1026,7 +1132,8 @@
      id="layer_valuebar"
      inkscape:label="Value_bar"
      style="display:inline"
-     transform="matrix(1.66959,0,0,1.66959,-298.73553,-262.11676)">
+     transform="matrix(1.66959,0,0,1.66959,-298.73553,-262.11676)"
+     sodipodi:insensitive="true">
     <path
        inkscape:connector-curvature="0"
        style="display:inline;fill:url(#radialGradient37542);fill-opacity:1;stroke:none"
