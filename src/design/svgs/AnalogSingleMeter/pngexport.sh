@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set command/path of inkscape
-#inkscape_cmd=inkscape
+inkscape_cmd=inkscape
 
 # Set svg file name
 svg_filename=AnalogSingleMeter.svg
