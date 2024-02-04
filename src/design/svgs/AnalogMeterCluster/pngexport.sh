@@ -6,7 +6,7 @@ inkscape_cmd=inkscape
 # Set svg file name
 svg_filename=AnalogMeterCluster.svg
 
-# Set list of ids to export
+# Perform export (crop by object border)
 id_list=(\
  "layer_tacho_base"\
  "layer_tacho_red"\
