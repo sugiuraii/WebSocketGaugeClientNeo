@@ -8,6 +8,7 @@ svg_filename=AnalogMeterCluster.svg
 
 # Set export folder
 export_dir=spritesheet
+export_filename_prefix=${svg_filename%.*}
 
 # Perform export (crop by object border)
 id_list=(\
@@ -34,5 +35,5 @@ id_list=(\
 mkdir $export_dir
 for id in "${id_list[@]}"
 do
-  $inkscape_cmd --export-type="png" $svg_filename --export-id="$id" --export-id-only --export-filename=$export_dir/$id.png
+  $inkscape_cmd --export-type="png" $svg_filename --export-id="$id" --export-id-only --export-filename=$export_dir/${export_filename_prefix}_$id.png
 done
