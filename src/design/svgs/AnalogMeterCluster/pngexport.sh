@@ -39,4 +39,4 @@ do
 done
 
 cd $export_dir
-npx spritesheet-js --format pixi.js *.png --name AnalogMeterClusterTexture
+npx spritesheet-js --format pixi.js *.png --name ${export_filename_prefix}Texture
