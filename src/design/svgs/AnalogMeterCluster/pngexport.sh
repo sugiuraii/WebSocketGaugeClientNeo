@@ -37,3 +37,6 @@ for id in "${id_list[@]}"
 do
   $inkscape_cmd --export-type="png" $svg_filename --export-id="$id" --export-id-only --export-filename=$export_dir/${export_filename_prefix}_$id.png
 done
+
+cd $export_dir
+npx spritesheet-js --format pixi.js *.png
