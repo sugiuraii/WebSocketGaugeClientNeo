@@ -6,6 +6,9 @@ inkscape_cmd=inkscape
 # Set svg file name
 svg_filename=AnalogMeterCluster.svg
 
+# Set export folder
+export_dir=spritesheet
+
 # Perform export (crop by object border)
 id_list=(\
  "layer_tacho_base"\
@@ -28,7 +31,8 @@ id_list=(\
  "layer_boost_needle"\
 )
 
+mkdir $export_dir
 for id in "${id_list[@]}"
 do
-  $inkscape_cmd --export-type="png" $svg_filename --export-id="$id" --export-id-only
+  $inkscape_cmd --export-type="png" $svg_filename --export-id="$id" --export-id-only --export-filename=$export_dir/$id.png
 done
