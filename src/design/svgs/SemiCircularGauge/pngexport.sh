@@ -2,20 +2,19 @@
 
 # Import function
 source ../../lib/export_spritesheet.sh
-
-# Set svg file name
-svg_filename=MilageGraph.svg
+svg_filename=SemiCircularGauge.svg
 id_list=(\
- "layer_milagegraph_back"\
- "layer_milagegraph_grid"\
- "layer_milagegraph_text"\
+ "layer_back"\
+ "layer_grid"\
 )
 inkscape_extra_options="--export-area-page"
 export_pngs
 
 id_list=(\
- "milagegraph_valuebar"\
- "milagegraph_valuebar2"\
+ "layer_valuebar"\
+ "layer_redzone_bar"\
+ "layer_yellowzone_bar"\
+ "layer_greenzone_bar"\
 )
 inkscape_extra_options=""
 export_pngs
