@@ -10,7 +10,7 @@ function export_pngs() {
     local inkscape_cmd=inkscape
 
     # Set export folder
-    local export_dir=spritesheet
+    local export_dir=pngexport
     local export_filename_prefix=${svg_filename%.*}
 
     # Perform export (crop by object border)
@@ -26,9 +26,10 @@ function export_pngs() {
 # as global variable
 function create_spritesheets() {
     # Set export folder
-    local export_dir=spritesheet
+    local pngexport_dir=pngexport
     local export_filename_prefix=${svg_filename%.*}
-
-    cd $export_dir
-    npx spritesheet-js --format pixi.js ${export_filename_prefix}*.png --name ${export_filename_prefix}Texture
+    local spritesheet_dir=spritesheet
+    mkdir $spritesheet_dir
+    cd $spritesheet_dir
+    npx spritesheet-js --format pixi.js ../$pngexport_dir/${export_filename_prefix}*.png --name ${export_filename_prefix}Texture
 }
