@@ -13,7 +13,7 @@ function bmfontmake() {
     local BMFont_Chars=$6
     local FontBM_Opts=$7
 
-    if [ -e $BMFONT_path ]; then
+    if [ ! -d $BMFONT_path ]; then
         mkdir $BMFONT_path
     fi
     local TTF_PATH=$FONT_DIR/$TTF_rel_path

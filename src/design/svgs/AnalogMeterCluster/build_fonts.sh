@@ -1,11 +1,11 @@
 #!/bin/bash
+source ../../lib/build_fonts_functuions.sh
 
-FONT_DIR=../../fonts/dist
-FONTBM_CMD=../../bin/fontbm
-BMFONT_path=bmfont
-mkdir $BMFONT_path
+PADDING=0
+Color=0,0,0
+Char=48-57,78,80,68,45
 
-$FONTBM_CMD --font-file $FONT_DIR/DSEG/DSEG14-Classic/DSEG14Classic-Regular.ttf  --output $BMFONT_path/AnalogMeterFont_40px --font-size 40 --color 0,0,0 --data-format xml --chars 48-57
-$FONTBM_CMD --font-file $FONT_DIR/DSEG/DSEG14-Classic/DSEG14Classic-Regular.ttf  --output $BMFONT_path/AnalogMeterFont_45px --font-size 45 --color 0,0,0 --data-format xml --chars 48-57
-$FONTBM_CMD --font-file $FONT_DIR/DSEG/DSEG14-Classic/DSEG14Classic-Bold.ttf  --output $BMFONT_path/AnalogMeterFont_60px --font-size 60 --color 0,0,0 --data-format xml --chars 48-57
-$FONTBM_CMD --font-file $FONT_DIR/DSEG/DSEG14-Classic/DSEG14Classic-Bold.ttf  --output $BMFONT_path/AnalogMeterFont_115px --font-size 115 --color 0,0,0 --data-format xml --chars 48-57,78,80,68,45
+bmfontmake DSEG/DSEG14-Classic/DSEG14Classic-Regular.ttf AnalogMeterFont_40px 40 $Color $PADDING $Char
+bmfontmake DSEG/DSEG14-Classic/DSEG14Classic-Regular.ttf AnalogMeterFont_45px 45 $Color $PADDING $Char
+bmfontmake DSEG/DSEG14-Classic/DSEG14Classic-Bold.ttf LEDMeterFont_60px 60 $Color $PADDING $Char
+bmfontmake DSEG/DSEG14-Classic/DSEG14Classic-Bold.ttf LEDMeterFont_115px 115 $Color $PADDING $Char
