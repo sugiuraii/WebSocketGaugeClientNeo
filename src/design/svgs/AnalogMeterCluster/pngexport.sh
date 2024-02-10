@@ -1,14 +1,10 @@
 #!/bin/bash
 
-# Set command/path of inkscape
-inkscape_cmd=inkscape
+# Import function
+source ../../lib/export_spritesheet.sh
 
 # Set svg file name
 svg_filename=AnalogMeterCluster.svg
-
-# Set export folder
-export_dir=spritesheet
-export_filename_prefix=${svg_filename%.*}
 
 # Perform export (crop by object border)
 id_list=(\
@@ -32,11 +28,5 @@ id_list=(\
  "layer_boost_needle"\
 )
 
-mkdir $export_dir
-for id in "${id_list[@]}"
-do
-  $inkscape_cmd --export-type="png" $svg_filename --export-id="$id" --export-id-only --export-filename=$export_dir/${export_filename_prefix}_$id.png
-done
-
-cd $export_dir
-npx spritesheet-js --format pixi.js *.png --name ${export_filename_prefix}Texture
+# Run script
+export_spritesheet
