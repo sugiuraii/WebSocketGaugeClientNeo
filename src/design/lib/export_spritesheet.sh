@@ -30,5 +30,5 @@ function create_spritesheets() {
     local export_filename_prefix=${svg_filename%.*}
 
     cd $export_dir
-    npx spritesheet-js --format pixi.js *.png --name ${export_filename_prefix}Texture
+    npx spritesheet-js --format pixi.js ${export_filename_prefix}*.png --name ${export_filename_prefix}Texture
 }
