@@ -29,4 +29,5 @@ id_list=(\
 )
 
 # Run script
-export_spritesheet
+export_pngs
+create_spritesheets

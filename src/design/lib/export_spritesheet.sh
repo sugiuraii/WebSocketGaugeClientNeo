@@ -5,7 +5,7 @@
 # svg_file
 # inkscape_extra_options
 # as global variable
-function export_spritesheet() {
+function export_pngs() {
     # Set command/path of inkscape
     local inkscape_cmd=inkscape
 
@@ -19,6 +19,15 @@ function export_spritesheet() {
     do
     $inkscape_cmd --export-type="png" $svg_filename --export-id="$id" --export-id-only --export-filename=$export_dir/${export_filename_prefix}_$id.png $inkscape_extra_options
     done
+}
+
+# Set variable of 
+# svg_file
+# as global variable
+function create_spritesheets() {
+    # Set export folder
+    local export_dir=spritesheet
+    local export_filename_prefix=${svg_filename%.*}
 
     cd $export_dir
     npx spritesheet-js --format pixi.js *.png --name ${export_filename_prefix}Texture
