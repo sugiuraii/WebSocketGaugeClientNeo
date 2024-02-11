@@ -27,6 +27,7 @@
         "jquery": "^3.6.4",
         "jsonc-parser": "^3.2.0",
         "pixi-gauge": "./packages/pixi-gauge",
+        "placement-coordinate-calc": "./packages/placement-coordinate-calc",
         "pixi.js": "^7.2.4",
         "popper.js": "^1.16.1",
         "postcss-loader": "^7.2.4",
