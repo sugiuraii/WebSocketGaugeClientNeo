@@ -38,3 +38,5 @@ export {TextNumericIndicator} from './private/NumericIndicator'
 export {BitmapTextNumericIndicator} from './private/NumericIndicator'
 
 export {GaugeDirection} from './private/GaugeBase'
+
+export {CircularPlacementCooridnateCalculator} from './private/utils/coordinatecalc/CircularPlacementCoordinateCalculator'
