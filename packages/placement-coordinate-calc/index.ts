@@ -22,4 +22,4 @@
  * THE SOFTWARE.
  */
 
-export {CircularPlacementCooridnateCalculator} from './private/CircularPlacementCoordinateCalculator'
+export {CircularPlacementCooridnateCalculator} from './src/CircularPlacementCoordinateCalculator'
