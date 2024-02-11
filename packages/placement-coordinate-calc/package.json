@@ -10,7 +10,6 @@
     "build": "npm run clean ; tsc"
   },
   "dependencies": {
-    "cubic-spline": "^3.0.3"
   },
   "devDependencies": {
     "typescript": "^5.0.4",
