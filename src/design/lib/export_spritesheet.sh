@@ -14,10 +14,12 @@ function export_pngs() {
     local export_filename_prefix=${svg_filename%.*}
 
     # Perform export (crop by object border)
-    mkdir $export_dir
+    if [ ! -d $export_dir ]; then
+        mkdir $export_dir
+    fi
     for id in "${id_list[@]}"
     do
-    $inkscape_cmd --export-type="png" $svg_filename --export-id="$id" --export-id-only --export-filename=$export_dir/${export_filename_prefix}_$id.png $inkscape_extra_options
+        $inkscape_cmd --export-type="png" $svg_filename --export-id="$id" --export-id-only --export-filename=$export_dir/${export_filename_prefix}_$id.png $inkscape_extra_options
     done
 }
 
