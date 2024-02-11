@@ -86,6 +86,7 @@
         "build-parts:ledmeter" : "npm run -w packages/parts-lib/meterparts-ledmeter build",
         "build-parts:mfdpanel" : "npm run -w packages/parts-lib/meterparts-mfdpanel build",
         "build-parts" : "npm-run-all --parallel build-parts:*",
+        "build-depends:placement-coordinate-calc" : "npm run -w packages/placement-coordinate-calc build",
         "build-depends:pixi-gauge" : "npm run -w packages/pixi-gauge build",
         "build-depends:pixi-traillayer" : "npm run -w packages/pixi-traillayer build",
         "build-depends:basic-logger" : "npm run -w packages/basic-logger build",
