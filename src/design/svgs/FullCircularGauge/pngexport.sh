@@ -14,7 +14,6 @@ export_pngs
 
 id_list=(\
  "layer_valuebar"\
- "layer_shaft"\
  "layer_redzone_bar"\
  "layer_yellowzone_bar"\
  "layer_greenzone_bar"\
