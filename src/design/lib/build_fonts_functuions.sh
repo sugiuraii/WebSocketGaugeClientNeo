@@ -29,3 +29,32 @@ function glowFilter() {
 
     $ImageMagick_convert_cmd $BMFONT_path/$PNG_FileName \( -clone 0 -blur $Blur_Option \) \( -clone 0,1 -compose plus -composite \) -delete 0,1 $BMFONT_path/$PNG_FileName
 }
+
+function replaceFace() {
+    local fntFileName=$1
+    local newFaceName=$2
+
+    local BMFONT_path=bmfont
+    # Use xmllint to edit xml attribute, by injecting xmllint shell by heredocument
+    xmllint --shell $BMFONT_path/$1 <<- _SHELL_
+    cd font/info/@face
+    set $2
+    save
+_SHELL_
+# End of heredocument (do not make indent in front of _SHELL_)
+}
+
+function reverseSizeSign() {
+    local fntFileName=$1
+    local BMFONT_path=bmfont
+    local orig_size=`xmllint --xpath "string(font/info/@size)" $BMFONT_path/$1`
+    echo $orig_size
+    local new_size=`expr $orig_size \* -1`
+    # Use xmllint to edit xml attribute, by injecting xmllint shell by heredocument
+    xmllint --shell $BMFONT_path/$1 <<- _SHELL_
+    cd font/info/@size
+    set $new_size
+    save
+_SHELL_
+# End of heredocument (do not make indent in front of _SHELL_)
+}
