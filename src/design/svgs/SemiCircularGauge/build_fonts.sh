@@ -3,7 +3,7 @@ source ../../lib/build_fonts_functuions.sh
 
 PADDING=10
 Color=255,255,255
-Char=48-57,78,80,68,45
+Char=40-64
 
 bmfontmake freefont/sfd/FreeSansBold.ttf CircularGaugeLabelFont 90 $Color $PADDING $Char
 
