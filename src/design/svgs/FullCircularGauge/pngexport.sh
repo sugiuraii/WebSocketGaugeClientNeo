@@ -4,7 +4,7 @@
 source ../../lib/export_spritesheet.sh
 
 # Set svg file name
-svg_filename=FullcircularGauge.svg
+svg_filename=FullCircularGauge.svg
 id_list=(\
  "layer_back"\
  "layer_grid"\
