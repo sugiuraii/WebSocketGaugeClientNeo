@@ -95,12 +95,20 @@ export class MilageGraphPanel extends PIXI.Container {
     private constructor() {
         super();
 
-        const backTexture = PIXI.Texture.from("MilageGraph_Back");
+        const backTexture = PIXI.Texture.from("MilageGraph_layer_milagegraph_back.png");
         const backSprite = new PIXI.Sprite(backTexture);
         super.addChild(backSprite);
 
+        const gridTexture = PIXI.Texture.from("MilageGraph_layer_milagegraph_grid.png");
+        const gridSprite = new PIXI.Sprite(gridTexture);
+        super.addChild(gridSprite);
+
+        const textTexture = PIXI.Texture.from("MilageGraph_layer_milagegraph_text.png");
+        const textSprite = new PIXI.Sprite(textTexture);
+        super.addChild(textSprite);
+
         const momentGasMilageBarOption = new RectangularProgressBarOptions();
-        momentGasMilageBarOption.Texture = PIXI.Texture.from("MilageGraph_valueBar2");
+        momentGasMilageBarOption.Texture = PIXI.Texture.from("MilageGraph_milagegraph_valuebar2.png");
         momentGasMilageBarOption.GaugeDirection = "DownToUp";
         momentGasMilageBarOption.Width = 40;
         momentGasMilageBarOption.Height = 240;
@@ -112,7 +120,7 @@ export class MilageGraphPanel extends PIXI.Container {
         super.addChild(this.momentGasMilageBar);
 
         //Sect fuelTrip progressbar
-        const sectGasMilageBarTexture = PIXI.Texture.from("MilageGraph_valueBar1");
+        const sectGasMilageBarTexture = PIXI.Texture.from("MilageGraph_milagegraph_valuebar.png");
         for (let i = 0; i < this.sectSpan.length; i++) {
             const spankey: string = this.sectSpan[i];
             const sectGasMilageBarOption = new RectangularProgressBarOptions();
