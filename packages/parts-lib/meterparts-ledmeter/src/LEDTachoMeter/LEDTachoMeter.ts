@@ -105,12 +105,45 @@ export class LEDTachoMeter extends PIXI.Container {
         const gasMilageValDefault = 12.0;
         const tripValDefault = 230.0;
         const fuelValDefault = 30.00;
-
-        const backSprite = PIXI.Sprite.from("LEDTachoMeter_Base");
+        
+        const backSprite = PIXI.Sprite.from("LEDTachoMeter_layer_base.png");
         super.addChild(backSprite);
 
+        const redZoneOption = new CircularProgressBarOptions();
+        redZoneOption.Texture = PIXI.Texture.from("LEDTachoMeter_layer_red.png");
+        redZoneOption.Center.set(300, 300);
+        redZoneOption.Radius = 300;
+        redZoneOption.InnerRadius = 0;
+        redZoneOption.Max = 9000;
+        redZoneOption.Min = 0;
+        redZoneOption.OffsetAngle = 0;
+        redZoneOption.FullAngle = 270;
+        redZoneOption.AntiClockwise = true;
+        const redZone = new CircularProgressBar(redZoneOption);
+        redZone.Value = 1000;
+        redZone.updateForce();
+        super.addChild(redZone);
+        
+        const textSprite = PIXI.Sprite.from("LEDTachoMeter_layer_text_fixed.png");
+        super.addChild(textSprite);
+
+        const ledDarkOption = new CircularProgressBarOptions();
+        ledDarkOption.Texture = PIXI.Texture.from("LEDTachoMeter_layer_led_dark.png");
+        ledDarkOption.Center.set(300, 300);
+        ledDarkOption.Radius = 300;
+        ledDarkOption.InnerRadius = 200;
+        ledDarkOption.Max = 1;
+        ledDarkOption.Min = 0;
+        ledDarkOption.OffsetAngle = 0;
+        ledDarkOption.FullAngle = 270;
+        ledDarkOption.AntiClockwise = true;
+        const ledDark = new CircularProgressBar(ledDarkOption);
+        ledDark.Value = 1;
+        ledDark.updateForce();
+        super.addChild(ledDark);
+
         const tachoProgressBarOption = new CircularProgressBarOptions();
-        tachoProgressBarOption.Texture = PIXI.Texture.from("LEDTachoMeter_LED_Yellow");
+        tachoProgressBarOption.Texture = PIXI.Texture.from("LEDTachoMeter_layer_led_bright_white.png");
         tachoProgressBarOption.Center.set(300, 300);
         tachoProgressBarOption.Radius = 300;
         tachoProgressBarOption.InnerRadius = 200;
@@ -128,27 +161,27 @@ export class LEDTachoMeter extends PIXI.Container {
         this.tachoProgressBar = tachoProgressBar;
         super.addChild(tachoProgressBar);
 
-        const speedLabel = this.speedLabel = new BitmapTextNumericIndicator(speedValDefault.toFixed(0), { fontName: "DSEG14_Classic_88px", fontSize: 88, align: "right" });
+        const speedLabel = this.speedLabel = new BitmapTextNumericIndicator(speedValDefault.toFixed(0), { fontName: "LEDMeterFont_88px", fontSize: -88, align: "right" });
         speedLabel.anchor.set(1, 0.5);
-        speedLabel.position.set(410, 230);
+        speedLabel.position.set(410, 240);
         super.addChild(speedLabel);
 
-        const gasMilageLabel = this.gasMilageLabel = new BitmapTextNumericIndicator(gasMilageValDefault.toFixed(2), { fontName: "DSEG14_Classic_45px", fontSize: 45, align: "right" });
+        const gasMilageLabel = this.gasMilageLabel = new BitmapTextNumericIndicator(gasMilageValDefault.toFixed(2), { fontName: "LEDMeterFont_45px", fontSize: -45, align: "right" });
         gasMilageLabel.anchor.set(1, 0.5);
         gasMilageLabel.position.set(310, 360);
         super.addChild(gasMilageLabel);
 
-        const tripLabel = this.tripLabel = new BitmapTextNumericIndicator(tripValDefault.toFixed(1), { fontName: "DSEG14_Classic_30px", fontSize: 30, align: "right" });
+        const tripLabel = this.tripLabel = new BitmapTextNumericIndicator(tripValDefault.toFixed(1), { fontName: "LEDMeterFont_30px", fontSize: -30, align: "right" });
         tripLabel.anchor.set(1, 0.5);
         tripLabel.position.set(510, 355);
         super.addChild(tripLabel);
 
-        const fuelLabel = this.fuelLabel = new BitmapTextNumericIndicator(fuelValDefault.toFixed(2), { fontName: "DSEG14_Classic_30px", fontSize: 30, align: "right" });
+        const fuelLabel = this.fuelLabel = new BitmapTextNumericIndicator(fuelValDefault.toFixed(2), { fontName: "LEDMeterFont_30px", fontSize: -30, align: "right" });
         fuelLabel.anchor.set(1, 0.5);
         fuelLabel.position.set(510, 395);
         super.addChild(fuelLabel);
 
-        const gearPosLabel = this.gearPosLabel = new BitmapTextNumericIndicator("N", { fontName: "DSEG14_Classic_100px", fontSize: 100, align: "right" });
+        const gearPosLabel = this.gearPosLabel = new BitmapTextNumericIndicator("N", { fontName: "LEDMeterFont_100px", fontSize: -100, align: "right" });
         gearPosLabel.anchor.set(1, 0.5);
         gearPosLabel.text = "N";
         gearPosLabel.position.set(410, 495);
