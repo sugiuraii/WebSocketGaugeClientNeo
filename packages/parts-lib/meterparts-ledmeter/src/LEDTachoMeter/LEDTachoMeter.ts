@@ -23,6 +23,7 @@
  */
 
 import { CircularProgressBar, CircularProgressBarOptions, NumericIndicator, BitmapTextNumericIndicator } from 'pixi-gauge';
+import { CircularPlacementCooridnateCalculator } from 'placement-coordinate-calc';
 import * as PIXI from 'pixi.js';
 import { Assets } from '@pixi/assets';
 
@@ -36,6 +37,8 @@ require("./LEDMeterFont_100px_0.png");
 require("./LEDMeterFont_88px_0.png");
 require("./LEDMeterFont_45px_0.png");
 require("./LEDMeterFont_30px_0.png");
+require("./LEDMeter_RPMFont_58px.fnt");
+require("./LEDMeter_RPMFont_58px_0.png");
 
 export class LEDTachoMeter extends PIXI.Container {
     private tachoProgressBar : CircularProgressBar;
@@ -90,7 +93,7 @@ export class LEDTachoMeter extends PIXI.Container {
     }
 
     public static async create() {
-        await Assets.load(["img/LEDTachoMeterTexture.json", "img/LEDMeterFont_100px.fnt", "img/LEDMeterFont_88px.fnt", "img/LEDMeterFont_45px.fnt", "img/LEDMeterFont_30px.fnt"]);
+        await Assets.load(["img/LEDTachoMeterTexture.json", "img/LEDMeterFont_100px.fnt", "img/LEDMeterFont_88px.fnt", "img/LEDMeterFont_45px.fnt", "img/LEDMeterFont_30px.fnt", "img/LEDMeter_RPMFont_58px.fnt"]);
         const instance = new LEDTachoMeter();
         return instance;
     }
@@ -123,9 +126,22 @@ export class LEDTachoMeter extends PIXI.Container {
         redZone.Value = 1000;
         redZone.updateForce();
         super.addChild(redZone);
-        
+
         const textSprite = PIXI.Sprite.from("LEDTachoMeter_layer_text_fixed.png");
         super.addChild(textSprite);
+
+        //Create meter number label
+        const numberElements: PIXI.BitmapText[] = [];
+        const place = new CircularPlacementCooridnateCalculator(197, {x: 300, y: 300});
+        for(let num = 0; num <= 9; num++) {
+            numberElements[num] = new PIXI.BitmapText(String(num), { fontName: "LEDMeter_RPMFont_58px", fontSize: -58, align: "center" });
+            numberElements[num].anchor.set(0.5, 0.5);
+            const angle = 270 - num * 30;
+            numberElements[num].position.set(place.X(angle), place.Y(angle));
+            if(num >= 8)
+                numberElements[num].tint = 0xffff00;
+        }
+        numberElements.forEach(e => super.addChild(e));
 
         const ledDarkOption = new CircularProgressBarOptions();
         ledDarkOption.Texture = PIXI.Texture.from("LEDTachoMeter_layer_led_dark.png");
@@ -159,6 +175,7 @@ export class LEDTachoMeter extends PIXI.Container {
         tachoProgressBar.Value = tachoValDefault;
         tachoProgressBar.updateForce();
         this.tachoProgressBar = tachoProgressBar;
+        tachoProgressBar.Sprite.tint = 0xffff00;
         super.addChild(tachoProgressBar);
 
         const speedLabel = this.speedLabel = new BitmapTextNumericIndicator(speedValDefault.toFixed(0), { fontName: "LEDMeterFont_88px", fontSize: -88, align: "right" });
