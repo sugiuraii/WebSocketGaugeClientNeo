@@ -276,15 +276,25 @@ export class AnalogMeterCluster extends PIXI.Container {
         backSprite.position.set(319,319);
         speedMeterContainer.addChild(backSprite);
 
+        const speedTextSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_speed_text.png");
+        speedTextSprite.anchor.set(1, 0.5);
+        speedTextSprite.position.set(440,320);
+        speedMeterContainer.addChild(speedTextSprite);
+
         const lcdBaseSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_speed_lcdbase.png");
         lcdBaseSprite.anchor.set(0.5, 0.5);
         lcdBaseSprite.position.set(319,319);
         speedMeterContainer.addChild(lcdBaseSprite);
 
+        const lcdTextSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_speed_lcdtext_fixed.png");
+        lcdTextSprite.anchor.set(1, 0.5);
+        lcdTextSprite.position.set(365,345);
+        speedMeterContainer.addChild(lcdTextSprite);
+
         const speedLabel = this.speedLabel = new BitmapTextNumericIndicator(speedValDefault.toFixed(0), { fontName: "AnalogMeterFont_60px", fontSize: -60, align: "center" });
         speedLabel.NumberOfDecimalPlace = 0;
         speedLabel.anchor.set(1, 0.5);
-        speedLabel.position.set(355, 407);
+        speedLabel.position.set(365, 432);
         speedLabel.scale.set(0.9);
         speedMeterContainer.addChild(speedLabel);
 
@@ -341,6 +351,11 @@ export class AnalogMeterCluster extends PIXI.Container {
         const backSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_boost_base.png");
         boostMeterContainer.addChild(backSprite);
 
+        const textSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_boost_text.png");
+        textSprite.anchor.set(0, 0.5);
+        textSprite.position.set(290,235);
+        boostMeterContainer.addChild(textSprite);
+
         const boostNeedleGaugeOptions = new RotationNeedleGaugeOptions();
         boostNeedleGaugeOptions.Texture = PIXI.Texture.from("AnalogMeterCluster_layer_boost_needle.png");
         boostNeedleGaugeOptions.OffsetAngle = 30;
@@ -349,8 +364,8 @@ export class AnalogMeterCluster extends PIXI.Container {
         boostNeedleGaugeOptions.Max = boostMax;
         boostNeedleGaugeOptions.Min = boostMin;
         const boostNeedleGauge = new RotationNeedleGauge(boostNeedleGaugeOptions);
-        boostNeedleGauge.pivot.set(90, 23);
-        boostNeedleGauge.position.set(220, 220);
+        boostNeedleGauge.pivot.set(105, 23);
+        boostNeedleGauge.position.set(235, 235);
         boostNeedleGauge.Value = boostValDefault;
         boostNeedleGauge.updateForce();
         if(this.applyTrail) {
