@@ -89,12 +89,7 @@ export class DigiTachoPanel extends PIXI.Container {
 
     private static async createProgressBarTexture(): Promise<PIXI.Texture> {
         // Set coordinate of DigiTachoMeter_layer_digitachometer_led_dark at the spritesheet.
-        const imgframe = {
-            "x": 0,
-            "y": 0,
-            "w": 659,
-            "h": 328
-        };
+        const imgframe = {"x":11,"y":310,"w":574,"h":245};
         return new Promise((resolve, reject) => {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext("2d");
@@ -102,7 +97,7 @@ export class DigiTachoPanel extends PIXI.Container {
             canvas.height = imgframe.h;
             if(ctx !== null) {
                 const img = new Image();
-                img.src = "img/DigiTachoTexture.png";
+                img.src = "img/DigiTachoMeterTexture.png";
                 const lineargradient = ctx.createLinearGradient(0, 0, imgframe.w, 0);
                 lineargradient.addColorStop(0, '#00fff0ff');
                 lineargradient.addColorStop(0.2, '#00ff00ff');
@@ -129,10 +124,15 @@ export class DigiTachoPanel extends PIXI.Container {
         const backTexture = PIXI.Texture.from("DigiTachoMeter_layer_digitachometer_back.png");
         const gridTexture = PIXI.Texture.from("DigiTachoMeter_layer_digitachometer_grid.png");
         const backTextTexture = PIXI.Texture.from("DigiTachoMeter_layer_digitachometer_text.png");
+        const darkBarTexture = PIXI.Texture.from("DigiTachoMeter_layer_digitachometer_led_dark.png");
         //Create background sprite
         const backSprite = new PIXI.Sprite();
         backSprite.texture = backTexture;
         super.addChild(backSprite);
+
+        const darkBarSprite = new PIXI.Sprite();
+        darkBarSprite.texture = darkBarTexture ;
+        super.addChild(darkBarSprite);
 
         const gridSprite = new PIXI.Sprite();
         gridSprite.texture = gridTexture;
@@ -150,11 +150,11 @@ export class DigiTachoPanel extends PIXI.Container {
         tachoProgressBarOption.GaugeDirection = "LeftToRight";
         tachoProgressBarOption.GagueFullOnValueMin = false;
         tachoProgressBarOption.PixelStep = 8;
-        tachoProgressBarOption.Height = 246;
-        tachoProgressBarOption.Width = 577;
+        tachoProgressBarOption.Height = 245;
+        tachoProgressBarOption.Width = 574;
 
         const tachoProgressBar = new RectangularProgressBar(tachoProgressBarOption);
-        tachoProgressBar.position.set(10, 6);
+        tachoProgressBar.position.set(11, 7);
         
         if(this.applyTrail) {
             const trailLayer = new TrailLayer({height : backSprite.height, width : backSprite.width});
