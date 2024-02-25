@@ -30,8 +30,8 @@ import * as PIXI from 'pixi.js';
 import { Assets } from '@pixi/assets';
 import { TrailLayer } from 'pixi-traillayer';
 
-require("./DigiTachoTexture.json");
-require("./DigiTachoTexture.png");
+require("./DigiTachoMeterTexture.json");
+require("./DigiTachoMeterTexture.png");
 
 require("./SpeedMeterFont.fnt");
 require("./SpeedMeterFont_0.png");
@@ -71,7 +71,7 @@ export class DigiTachoPanel extends PIXI.Container {
     }
 
     public static async create(applyTrail = true, trailAlpha = 0.95) {
-        await Assets.load(["img/DigiTachoTexture.json", "img/GearPosFont.fnt", "img/SpeedMeterFont.fnt"]);
+        await Assets.load(["img/DigiTachoMeterTexture.json", "img/GearPosFont.fnt", "img/SpeedMeterFont.fnt"]);
         const progressBarTexture = await this.createProgressBarTexture();
         const instance = new DigiTachoPanel(applyTrail, trailAlpha, progressBarTexture);
         return instance;
@@ -88,11 +88,12 @@ export class DigiTachoPanel extends PIXI.Container {
     }
 
     private static async createProgressBarTexture(): Promise<PIXI.Texture> {
+        // Set coordinate of DigiTachoMeter_layer_digitachometer_led_dark at the spritesheet.
         const imgframe = {
-            "x": 1,
-            "y": 306,
-            "w": 577,
-            "h": 246
+            "x": 0,
+            "y": 0,
+            "w": 659,
+            "h": 328
         };
         return new Promise((resolve, reject) => {
             const canvas = document.createElement('canvas');
@@ -125,9 +126,9 @@ export class DigiTachoPanel extends PIXI.Container {
     };
 
     private buildGaugeSet(tachoProgressBarTexture: PIXI.Texture): { tachoProgressBar: RectangularProgressBar, speedLabel: BitmapTextNumericIndicator, gearLabel: PIXI.BitmapText } {
-        const backTexture = PIXI.Texture.from("DigiTachoBack");
-        const gridTexture = PIXI.Texture.from("DigiTachoGrid");
-
+        const backTexture = PIXI.Texture.from("DigiTachoMeter_layer_digitachometer_back.png");
+        const gridTexture = PIXI.Texture.from("DigiTachoMeter_layer_digitachometer_grid.png");
+        const backTextTexture = PIXI.Texture.from("DigiTachoMeter_layer_digitachometer_text.png");
         //Create background sprite
         const backSprite = new PIXI.Sprite();
         backSprite.texture = backTexture;
@@ -136,6 +137,10 @@ export class DigiTachoPanel extends PIXI.Container {
         const gridSprite = new PIXI.Sprite();
         gridSprite.texture = gridTexture;
         super.addChild(gridSprite);
+
+        const backTextSprite = new PIXI.Sprite();
+        backTextSprite.texture = backTextTexture;
+        super.addChild(backTextSprite);
 
         //Create tacho progress bar
         const tachoProgressBarOption = new RectangularProgressBarOptions();
