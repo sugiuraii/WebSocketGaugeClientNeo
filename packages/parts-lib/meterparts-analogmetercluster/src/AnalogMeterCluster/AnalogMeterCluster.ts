@@ -36,13 +36,13 @@ import { TrailLayer } from 'pixi-traillayer';
 require("./AnalogMeterClusterTexture.json");
 require("./AnalogMeterClusterTexture.png");
 require("./AnalogMeterFont_115px.fnt");
-require("./AnalogMeterFont_45px.fnt");
 require("./AnalogMeterFont_40px.fnt");
+require("./AnalogMeterFont_35px.fnt");
 require("./AnalogMeterFont_60px.fnt");
 
 require("./AnalogMeterFont_115px_0.png");
-require("./AnalogMeterFont_45px_0.png");
 require("./AnalogMeterFont_40px_0.png");
+require("./AnalogMeterFont_35px_0.png");
 require("./AnalogMeterFont_60px_0.png");
 
 export class AnalogMeterCluster extends PIXI.Container {
@@ -154,7 +154,7 @@ export class AnalogMeterCluster extends PIXI.Container {
     }
 
     public static async create(applyTrail = true, trailAlpha = 0.95) {
-        await Assets.load(["img/AnalogMeterClusterTexture.json", "img/AnalogMeterFont_115px.fnt", "img/AnalogMeterFont_45px.fnt", "img/AnalogMeterFont_40px.fnt", "img/AnalogMeterFont_60px.fnt"]);
+        await Assets.load(["img/AnalogMeterClusterTexture.json", "img/AnalogMeterFont_115px.fnt", "img/AnalogMeterFont_40px.fnt", "img/AnalogMeterFont_35px.fnt", "img/AnalogMeterFont_60px.fnt"]);
         //await Assets.load('./fonts/DSEG14Classic-BoldItalic.ttf');
         const instance = new AnalogMeterCluster(applyTrail, trailAlpha);
         return instance;
@@ -164,36 +164,54 @@ export class AnalogMeterCluster extends PIXI.Container {
         const tachoMax = 9000;
         const tachoMin = 0;
         const tachoValDefalut = 0;
+        const containerCenter = new PIXI.Point(319, 319);
 
         const tachoContainer = new PIXI.Container();
-        const backSprite = PIXI.Sprite.from("AnalogTachoMeter_Base");
+
+        const backSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_tacho_base.png");
+        backSprite.anchor.set(0.5, 0.5);
+        backSprite.position = containerCenter;
         tachoContainer.addChild(backSprite);
 
+        const lcdBaseSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_tacho_lcd_base.png");
+        lcdBaseSprite.pivot.set(220, 220);
+        lcdBaseSprite.position = containerCenter;        
+        tachoContainer.addChild(lcdBaseSprite);
+
+        const tachoTextSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_tacho_tachotext.png");
+        tachoTextSprite.anchor.set(0.5, 0.5);
+        tachoTextSprite.position = containerCenter;        
+        tachoContainer.addChild(tachoTextSprite);
+
         const tachoProgressBarOptions = new CircularProgressBarOptions();
-        tachoProgressBarOptions.Texture = PIXI.Texture.from("AnalogTachoMeter_Bar");
+        tachoProgressBarOptions.Texture = PIXI.Texture.from("AnalogMeterCluster_layer_tacho_lcd_bar.png");
         tachoProgressBarOptions.OffsetAngle = 90;
         tachoProgressBarOptions.FullAngle = 270;
         tachoProgressBarOptions.Max = tachoMax;
         tachoProgressBarOptions.Min = tachoMin;
-        tachoProgressBarOptions.Radius = 193;
+        tachoProgressBarOptions.Radius = 192;
         tachoProgressBarOptions.InnerRadius = 160;
-        tachoProgressBarOptions.Center.set(193, 193);
+        tachoProgressBarOptions.Center.set(192, 192);
         const tachoProgressBar = new CircularProgressBar(tachoProgressBarOptions);
-        tachoProgressBar.pivot.set(193, 193);
-        tachoProgressBar.position.set(300, 300);
+        tachoProgressBar.pivot.set(192, 192);
+        tachoProgressBar.position.set(319, 319);
         tachoContainer.addChild(tachoProgressBar);
         tachoProgressBar.Value = tachoValDefalut;
         tachoProgressBar.updateForce();
 
+        const lcdTextSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_tacho_text_lcd_fixed.png");
+        lcdTextSprite.position.set(335, 352);        
+        tachoContainer.addChild(lcdTextSprite);
+
         const tachoNeedleGaugeOptions = new RotationNeedleGaugeOptions();
-        tachoNeedleGaugeOptions.Texture = PIXI.Texture.from("AnalogTachoMeter_Needle");
+        tachoNeedleGaugeOptions.Texture = PIXI.Texture.from("AnalogMeterCluster_layer_tacho_needle.png");
         tachoNeedleGaugeOptions.Max = tachoMax;
         tachoNeedleGaugeOptions.Min = tachoMin;
         tachoNeedleGaugeOptions.OffsetAngle = 90;
         tachoNeedleGaugeOptions.FullAngle = 270;
         const tachoNeedleGauge = new RotationNeedleGauge(tachoNeedleGaugeOptions);
-        tachoNeedleGauge.pivot.set(15, 15);
-        tachoNeedleGauge.position.set(300, 300);
+        tachoNeedleGauge.pivot.set(33, 23);
+        tachoNeedleGauge.position.set(319, 319);
         tachoNeedleGauge.Value = tachoValDefalut;
         tachoNeedleGauge.updateForce();
         if(this.applyTrail) {
@@ -205,37 +223,37 @@ export class AnalogMeterCluster extends PIXI.Container {
         } else
             tachoContainer.addChild(tachoNeedleGauge);
 
-        const shaftSprite = PIXI.Sprite.from("AnalogTachoMeter_NeedleCap");
-        shaftSprite.pivot.set(72, 72);
-        shaftSprite.position.set(300, 300);
+        const shaftSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_tacho_needlecap.png");
+        shaftSprite.anchor.set(0.5, 0.5);
+        shaftSprite.position.set(319, 319);
         tachoContainer.addChild(shaftSprite);
 
-        const gasMilageLabel = new BitmapTextNumericIndicator("0.00", { fontName: "DSEG14_Classic_45px", fontSize: 45, align: "right" });
+        const gasMilageLabel = new BitmapTextNumericIndicator("0.00", { fontName: "AnalogMeterFont_40px", fontSize: -40, align: "right" });
         gasMilageLabel.NumberOfDecimalPlace = 2;
         gasMilageLabel.anchor.set(1, 0.5);
-        gasMilageLabel.position.set(495, 335);
+        gasMilageLabel.position.set(505, 353);
         gasMilageLabel.scale.set(0.9);
         tachoContainer.addChild(gasMilageLabel);
 
-        const tripLabel = new BitmapTextNumericIndicator("0.0", { fontName: "DSEG14_Classic_40px", fontSize: 40, align: "right" });
+        const tripLabel = new BitmapTextNumericIndicator("0.0", { fontName: "AnalogMeterFont_35px", fontSize: -35, align: "right" });
         tripLabel.NumberOfDecimalPlace = 1;
         tripLabel.anchor.set(1, 0.5);
-        tripLabel.position.set(505, 378);
+        tripLabel.position.set(520, 395);
         tripLabel.text = "0.0";
         tripLabel.scale.set(0.9);
         tachoContainer.addChild(tripLabel);
 
-        const fuelLabel = new BitmapTextNumericIndicator("0.00", { fontName: "DSEG14_Classic_40px", fontSize: 40, align: "right" });
+        const fuelLabel = new BitmapTextNumericIndicator("0.00", { fontName: "AnalogMeterFont_35px", fontSize: -35, align: "right" });
         fuelLabel.NumberOfDecimalPlace = 2;
         fuelLabel.anchor.set(1, 0.5);
-        fuelLabel.position.set(505, 420);
+        fuelLabel.position.set(520, 435);
         fuelLabel.text = "0.00";
         fuelLabel.scale.set(0.9);
         tachoContainer.addChild(fuelLabel);
 
-        const gearPosLabel = new BitmapTextNumericIndicator("N", { fontName: "DSEG14_Classic_115px", fontSize: 115, align: "center" });
+        const gearPosLabel = new BitmapTextNumericIndicator("N", { fontName: "AnalogMeterFont_115px", fontSize: -115, align: "center" });
         gearPosLabel.anchor.set(0.5, 0.5);
-        gearPosLabel.position.set(358, 493);
+        gearPosLabel.position.set(377, 515);
         gearPosLabel.text = "N";
         gearPosLabel.scale.set(0.9);
         tachoContainer.addChild(gearPosLabel);
@@ -253,42 +271,58 @@ export class AnalogMeterCluster extends PIXI.Container {
 
         const speedMeterContainer = new PIXI.Container();
 
-        const backSprite = PIXI.Sprite.from("AnalogSpeedMeter_Base");
+        const backSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_speed_base.png");
+        backSprite.anchor.set(0.5, 0.5);
+        backSprite.position.set(319,319);
         speedMeterContainer.addChild(backSprite);
 
-        const speedLabel = this.speedLabel = new BitmapTextNumericIndicator(speedValDefault.toFixed(0), { fontName: "DSEG14_Classic_60px", fontSize: 60, align: "center" });
+        const speedTextSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_speed_text.png");
+        speedTextSprite.anchor.set(1, 0.5);
+        speedTextSprite.position.set(440,320);
+        speedMeterContainer.addChild(speedTextSprite);
+
+        const lcdBaseSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_speed_lcdbase.png");
+        lcdBaseSprite.anchor.set(0.5, 0.5);
+        lcdBaseSprite.position.set(319,319);
+        speedMeterContainer.addChild(lcdBaseSprite);
+
+        const lcdTextSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_speed_lcdtext_fixed.png");
+        lcdTextSprite.anchor.set(1, 0.5);
+        lcdTextSprite.position.set(365,345);
+        speedMeterContainer.addChild(lcdTextSprite);
+
+        const speedLabel = this.speedLabel = new BitmapTextNumericIndicator(speedValDefault.toFixed(0), { fontName: "AnalogMeterFont_60px", fontSize: -60, align: "center" });
         speedLabel.NumberOfDecimalPlace = 0;
         speedLabel.anchor.set(1, 0.5);
-        speedLabel.position.set(355, 407);
+        speedLabel.position.set(365, 432);
         speedLabel.scale.set(0.9);
         speedMeterContainer.addChild(speedLabel);
 
         const waterTempProgressBarOptions = new CircularProgressBarOptions();
-        waterTempProgressBarOptions.Texture = PIXI.Texture.from("AnalogSpeedMeter_Bar");
+        waterTempProgressBarOptions.Texture = PIXI.Texture.from("AnalogMeterCluster_layer_speed_lcdbar.png");
         waterTempProgressBarOptions.Max = waterTempMax;
         waterTempProgressBarOptions.Min = waterTempMin;
-
-        waterTempProgressBarOptions.Radius = 162;
+        waterTempProgressBarOptions.Radius = 160;
         waterTempProgressBarOptions.InnerRadius = 120;
         waterTempProgressBarOptions.OffsetAngle = 165;
         waterTempProgressBarOptions.FullAngle = 120;
-        waterTempProgressBarOptions.Center.set(162, 162);
+        waterTempProgressBarOptions.Center.set(160, 160);
         const waterTempProgressBar = new CircularProgressBar(waterTempProgressBarOptions);
-        waterTempProgressBar.pivot.set(162, 162);
-        waterTempProgressBar.position.set(300, 300);
+        waterTempProgressBar.pivot.set(160, 160);
+        waterTempProgressBar.position.set(319, 319);
         speedMeterContainer.addChild(waterTempProgressBar);
         waterTempProgressBar.Value = waterTempValDefault;
         waterTempProgressBar.updateForce();
 
         const speedNeedleGaugeOptions = new RotationNeedleGaugeOptions();
-        speedNeedleGaugeOptions.Texture = PIXI.Texture.from("AnalogSpeedMeter_Needle");
+        speedNeedleGaugeOptions.Texture = PIXI.Texture.from("AnalogMeterCluster_layer_speed_needle.png");
         speedNeedleGaugeOptions.Max = speedMax;
         speedNeedleGaugeOptions.Min = speedMin;
         speedNeedleGaugeOptions.OffsetAngle = 75;
         speedNeedleGaugeOptions.FullAngle = 210;
         const speedNeedleGauge = new RotationNeedleGauge(speedNeedleGaugeOptions);
-        speedNeedleGauge.pivot.set(15, 15);
-        speedNeedleGauge.position.set(300, 300);
+        speedNeedleGauge.pivot.set(35, 23);
+        speedNeedleGauge.position.set(319, 319);
         speedNeedleGauge.Value = speedValDefault;
         speedNeedleGauge.updateForce();
         if(this.applyTrail) {
@@ -299,9 +333,9 @@ export class AnalogMeterCluster extends PIXI.Container {
         } else
             speedMeterContainer.addChild(speedNeedleGauge);
         
-        const shaftSprite = PIXI.Sprite.from("AnalogSpeedMeter_NeedleCap");
+        const shaftSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_speed_needlecap.png");
         shaftSprite.anchor.set(0.5, 0.5);
-        shaftSprite.position.set(300, 300);
+        shaftSprite.position.set(319, 319);
         speedMeterContainer.addChild(shaftSprite);
 
         return { container: speedMeterContainer, speedNeedleGauge: speedNeedleGauge, speedLabel: speedLabel, waterTempProgressBar: waterTempProgressBar };
@@ -314,19 +348,24 @@ export class AnalogMeterCluster extends PIXI.Container {
 
         const boostMeterContainer = new PIXI.Container();
 
-        const backSprite = PIXI.Sprite.from("BoostMeter_Base");
+        const backSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_boost_base.png");
         boostMeterContainer.addChild(backSprite);
 
+        const textSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_boost_text.png");
+        textSprite.anchor.set(0, 0.5);
+        textSprite.position.set(290,235);
+        boostMeterContainer.addChild(textSprite);
+
         const boostNeedleGaugeOptions = new RotationNeedleGaugeOptions();
-        boostNeedleGaugeOptions.Texture = PIXI.Texture.from("BoostMeter_Needle");
+        boostNeedleGaugeOptions.Texture = PIXI.Texture.from("AnalogMeterCluster_layer_boost_needle.png");
         boostNeedleGaugeOptions.OffsetAngle = 30;
         boostNeedleGaugeOptions.FullAngle = 90;
         boostNeedleGaugeOptions.AntiClockwise = true;
         boostNeedleGaugeOptions.Max = boostMax;
         boostNeedleGaugeOptions.Min = boostMin;
         const boostNeedleGauge = new RotationNeedleGauge(boostNeedleGaugeOptions);
-        boostNeedleGauge.pivot.set(90, 15);
-        boostNeedleGauge.position.set(220, 220);
+        boostNeedleGauge.pivot.set(105, 23);
+        boostNeedleGauge.position.set(235, 235);
         boostNeedleGauge.Value = boostValDefault;
         boostNeedleGauge.updateForce();
         if(this.applyTrail) {

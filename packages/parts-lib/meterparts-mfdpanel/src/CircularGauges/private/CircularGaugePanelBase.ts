@@ -29,8 +29,9 @@ export class BitmapTextOption {
     public position = new PIXI.Point(0, 0);
     public anchor = new PIXI.Point(0, 0);
     public align: PIXI.TextStyleAlign = "left";
-    public fontName = "FreeSans_90px";
-    public fontSize = 90;
+    public fontName = "CircularGaugeLabel";
+    public fontSize = -77;
+    public letterSpacing = -5;
 
     constructor(position?: PIXI.Point, anchor?: PIXI.Point, align?: PIXI.TextStyleAlign) {
         if (typeof (align) !== "undefined")
@@ -174,7 +175,6 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
         valueProgressBarOption.AngleStep = this.Options.AngleStep;
         valueProgressBarOption.GagueFullOnValueMin = this.Options.GaugeFullOnValueMin;
         valueProgressBarOption.AntiClockwise = this.Options.AntiClockWise;
-
         valueProgressBarOption.GaugeDrawConversionFucntion = this.Options.GaugeDrawValConversionFunc;
 
         valueProgressBarOption.Center = this.Options.CenterPosition;
@@ -187,7 +187,7 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
 
         const valueTextLabelOption = this.Options.ValueTextLabelOption;
         const valueTextLabelStyle = {
-            fontName: valueTextLabelOption.fontName, fontSize: valueTextLabelOption.fontSize, align: valueTextLabelOption.align
+            fontName: valueTextLabelOption.fontName, fontSize: valueTextLabelOption.fontSize, align: valueTextLabelOption.align, letterSpacing: valueTextLabelOption.letterSpacing
         };
         const valueTextLabel = new PIXI.BitmapText(this.Options.Min.toFixed(this.Options.ValueNumberRoundDigit).toString(), valueTextLabelStyle);
         valueTextLabel.position.set(valueTextLabelOption.position.x, valueTextLabelOption.position.y);

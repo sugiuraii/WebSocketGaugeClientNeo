@@ -1,0 +1,20 @@
+{
+  "name": "placement-coordinate-calc",
+  "version": "1.0.0",
+  "description": "Placcemant coordinate calculator",
+  "private": true,
+  "files": ["dist"],
+  "main": "dist/index.js",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run clean ; tsc"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "typescript": "^5.0.4",
+    "rimraf": "^5.0.0"
+  },
+  "author": "K. Sugiura",
+  "license": "MIT"
+}

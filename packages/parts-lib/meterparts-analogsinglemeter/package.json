@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "pixi-gauge": "../../pixi-gauge",
+    "placement-coordinate-calc": "../../placement-coordinate-calc",
     "pixi.js": "^7.2.4"
   },
   "devDependencies": {

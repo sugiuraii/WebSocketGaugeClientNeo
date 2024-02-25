@@ -33,12 +33,12 @@ export class SemiCircularGaugePanelOption extends CircularGaugePanelOptionBase {
     }
 
     private setOption(): void {
-        this.RedZoneBarTextureName = "SemiCircular_Gauge1_Redzone_Bar";
-        this.YellowZoneBarTextureName = "SemiCircular_Gauge1_Yellowzone_Bar";
-        this.GreenZoneBarTextureName = "SemiCircular_Gauge1_Greenzone_Bar";
-        this.ValueBarTextureName = "SemiCircular_Gauge1_Value_Bar";
-        this.BackTextureName = "SemiCircular_Gauge1_Back";
-        this.GridTextureName = "SemiCircular_Gauge1_Grid";
+        this.RedZoneBarTextureName = "SemiCircularGauge_layer_redzone_bar.png";
+        this.YellowZoneBarTextureName = "SemiCircularGauge_layer_yellowzone_bar.png";
+        this.GreenZoneBarTextureName = "SemiCircularGauge_layer_greenzone_bar.png";
+        this.ValueBarTextureName = "SemiCircularGauge_layer_valuebar.png";
+        this.BackTextureName = "SemiCircularGauge_layer_back.png";
+        this.GridTextureName = "SemiCircularGauge_layer_grid.png";
 
         this.MasterTextStyle = new PIXI.TextStyle(
             {

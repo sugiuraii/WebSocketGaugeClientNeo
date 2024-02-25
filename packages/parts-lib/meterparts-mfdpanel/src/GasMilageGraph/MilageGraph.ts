@@ -29,10 +29,10 @@ import { Assets } from '@pixi/assets';
 require("./MilageGraphTexture.json");
 require("./MilageGraphTexture.png");
 
-require("./MilageGraphFont_45px.fnt");
-require("./MilageGraphFont_45px_0.png");
-require("./MilageGraphFont_68px.fnt");
-require("./MilageGraphFont_68px_0.png");
+require("./MilageGraphFont_38px.fnt");
+require("./MilageGraphFont_38px_0.png");
+require("./MilageGraphFont_57px.fnt");
+require("./MilageGraphFont_57px_0.png");
 
 export class MilageGraphPanel extends PIXI.Container {
     private momentGasMilageBar: RectangularProgressBar;
@@ -87,7 +87,7 @@ export class MilageGraphPanel extends PIXI.Container {
     }
 
     public static async create() {
-        await Assets.load(["img/MilageGraphTexture.json", "img/MilageGraphFont_45px.fnt", "img/MilageGraphFont_68px.fnt"]);
+        await Assets.load(["img/MilageGraphTexture.json", "img/MilageGraphFont_38px.fnt", "img/MilageGraphFont_57px.fnt"]);
         const instance = new MilageGraphPanel();
         return instance;
     }
@@ -95,12 +95,20 @@ export class MilageGraphPanel extends PIXI.Container {
     private constructor() {
         super();
 
-        const backTexture = PIXI.Texture.from("MilageGraph_Back");
+        const backTexture = PIXI.Texture.from("MilageGraph_layer_milagegraph_back.png");
         const backSprite = new PIXI.Sprite(backTexture);
         super.addChild(backSprite);
 
+        const gridTexture = PIXI.Texture.from("MilageGraph_layer_milagegraph_grid.png");
+        const gridSprite = new PIXI.Sprite(gridTexture);
+        super.addChild(gridSprite);
+
+        const textTexture = PIXI.Texture.from("MilageGraph_layer_milagegraph_text.png");
+        const textSprite = new PIXI.Sprite(textTexture);
+        super.addChild(textSprite);
+
         const momentGasMilageBarOption = new RectangularProgressBarOptions();
-        momentGasMilageBarOption.Texture = PIXI.Texture.from("MilageGraph_valueBar2");
+        momentGasMilageBarOption.Texture = PIXI.Texture.from("MilageGraph_milagegraph_valuebar2.png");
         momentGasMilageBarOption.GaugeDirection = "DownToUp";
         momentGasMilageBarOption.Width = 40;
         momentGasMilageBarOption.Height = 240;
@@ -112,7 +120,7 @@ export class MilageGraphPanel extends PIXI.Container {
         super.addChild(this.momentGasMilageBar);
 
         //Sect fuelTrip progressbar
-        const sectGasMilageBarTexture = PIXI.Texture.from("MilageGraph_valueBar1");
+        const sectGasMilageBarTexture = PIXI.Texture.from("MilageGraph_milagegraph_valuebar.png");
         for (let i = 0; i < this.sectSpan.length; i++) {
             const spankey: string = this.sectSpan[i];
             const sectGasMilageBarOption = new RectangularProgressBarOptions();
@@ -133,19 +141,19 @@ export class MilageGraphPanel extends PIXI.Container {
         this.sectGasMilageBar["10min"].position.set(303, 17);
         this.sectGasMilageBar["5min"].position.set(360, 17);
 
-        this.tripLabel = new PIXI.BitmapText("0.0", { fontName: "FreeSans_45px", fontSize: 45, align: "right" });
+        this.tripLabel = new PIXI.BitmapText("0.0", { fontName: "MilageGraphFont_38px", fontSize: -38, align: "right", letterSpacing : -2});
         this.tripLabel.anchor.set(1, 1);
-        this.tripLabel.position.set(600, 115);
+        this.tripLabel.position.set(612, 120);
         super.addChild(this.tripLabel);
 
-        this.fuelLabel = new PIXI.BitmapText("0.00", { fontName: "FreeSans_45px", fontSize: 45, align: "right" });
+        this.fuelLabel = new PIXI.BitmapText("0.00", { fontName: "MilageGraphFont_38px", fontSize: -38, align: "right", letterSpacing : -2});
         this.fuelLabel.anchor.set(1, 1);
-        this.fuelLabel.position.set(600, 170);
+        this.fuelLabel.position.set(612, 177);
         super.addChild(this.fuelLabel);
 
-        this.gasMilageLabel = new PIXI.BitmapText("0.00", { fontName: "FreeSans_68px", fontSize: 68, align: "right" });
+        this.gasMilageLabel = new PIXI.BitmapText("0.00", { fontName: "MilageGraphFont_57px", fontSize: -57, align: "right" , letterSpacing : -5 });
         this.gasMilageLabel.anchor.set(1, 1);
-        this.gasMilageLabel.position.set(625, 270);
+        this.gasMilageLabel.position.set(635, 275);
         super.addChild(this.gasMilageLabel);
     }
 }
