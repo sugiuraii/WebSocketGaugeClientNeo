@@ -142,10 +142,14 @@ export abstract class CircularGaugePanelOptionBase {
         this.ValueTextLabelOption = new BitmapTextOption();
     }
 }
+export type CircularProgressBarObjectName = "ProgressBar" | "ValueLabel" | "BackLabel" | "Grid" | "ZoneBar" | "Background";
 
 export abstract class CircularGaugePanelBase extends PIXI.Container {
-    private valueTextLabel: PIXI.BitmapText;
-    private valueProgressBar: CircularProgressBar;
+    private readonly valueTextLabel: PIXI.BitmapText;
+    private readonly valueProgressBar: CircularProgressBar;
+    private readonly backContainer : PIXI.Container;
+    private readonly displayObjects: Map<CircularProgressBarObjectName, PIXI.DisplayObject> = new Map();
+
     private Options: CircularGaugePanelOptionBase;
 
     public get Value(): number { return this.valueProgressBar.Value }
@@ -157,13 +161,24 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
             this.valueTextLabel.text = value.toFixed(this.Options.ValueNumberRoundDigit).toString();
     }
 
+    public set CacheBackContainerAsBitMap(value : boolean) { this.backContainer.cacheAsBitmap = value};
+    public getDisplayObjects(value : CircularProgressBarObjectName) : PIXI.DisplayObject { 
+        if(this.displayObjects.get(value) === undefined)
+            throw new Error(value + "is not exists");
+        else
+            return this.displayObjects.get(value)!;
+    };
+        
+
     constructor(options: CircularGaugePanelOptionBase) {
         super();
         this.Options = options;
-        this.createBackContainer();
-        const ValueProgressBar = this.createValueProgressBar()
+        this.backContainer = this.createBackContainer();
+        const ValueProgressBar = this.createValueProgressBar();
         this.valueProgressBar = ValueProgressBar.progressBar;
         this.valueTextLabel = ValueProgressBar.valueLabel;
+        this.displayObjects.set("ProgressBar", ValueProgressBar.progressBar);
+        this.displayObjects.set("ValueLabel",ValueProgressBar.valueLabel);
     }
 
     private createValueProgressBar(): { progressBar: CircularProgressBar, valueLabel: PIXI.BitmapText } {
@@ -208,7 +223,7 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
             this.Options.AxisLabelOption.push(axisLabelOption[i]);
     }
 
-    private createBackContainer(): void {
+    private createBackContainer(): PIXI.Container {
         const backContainer = new PIXI.Container();
         //Unlock baked texture
         backContainer.cacheAsBitmap = false;
@@ -221,7 +236,9 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
         const backSprite = new PIXI.Sprite();
         backSprite.texture = PIXI.Texture.from(backTexture);
         backContainer.addChild(backSprite);
+        this.displayObjects.set("Background", backSprite);
 
+        const zonebarContainer = new PIXI.Container();
         //Add redzoneBar
         if (this.Options.RedZoneBarEnable) {
             const redZoneBarTexture = this.Options.RedZoneBarTextureName;
@@ -235,7 +252,7 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
             const redzoneBar = new CircularProgressBar(redzoneBarOption);
             redzoneBar.Value = redzoneBarOption.Max;
             redzoneBar.updateForce();
-            backContainer.addChild(redzoneBar);
+            zonebarContainer.addChild(redzoneBar);
         }
 
         //Add yellowzoneBar
@@ -251,7 +268,7 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
             const yellowzoneBar = new CircularProgressBar(yellowzoneBarOption);
             yellowzoneBar.Value = yellowzoneBarOption.Max;
             yellowzoneBar.updateForce();
-            backContainer.addChild(yellowzoneBar);
+            zonebarContainer.addChild(yellowzoneBar);
         }
 
         //Add greenZoneBar
@@ -267,15 +284,19 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
             const greenzoneBar = new CircularProgressBar(greenzoneBarOption);
             greenzoneBar.Value = greenzoneBarOption.Max;
             greenzoneBar.updateForce();
-            backContainer.addChild(greenzoneBar);
+            zonebarContainer.addChild(greenzoneBar);
         }
+        backContainer.addChild(zonebarContainer);
+        this.displayObjects.set("ZoneBar", zonebarContainer);
 
         //Add gridSprite
         const gridTexture = this.Options.GridTextureName;
         const gridSprite = new PIXI.Sprite();
         gridSprite.texture = PIXI.Texture.from(gridTexture);
         backContainer.addChild(gridSprite);
+        this.displayObjects.set("Grid", gridSprite);
 
+        const backLabelContainer = new PIXI.Container();
         //Set Title and unit text
         const titleTextElem = new PIXI.Text(this.Options.TitleLabel);
         const titleTextOption = this.Options.TitleLabelOption;
@@ -293,8 +314,8 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
         unitTextElem.anchor.set(unitTextOption.anchor.x, unitTextOption.anchor.y);
         unitTextElem.position.set(unitTextOption.position.x, unitTextOption.position.y);
 
-        backContainer.addChild(titleTextElem);
-        backContainer.addChild(unitTextElem);
+        backLabelContainer.addChild(titleTextElem);
+        backLabelContainer.addChild(unitTextElem);
 
         //Set axis label
         for (let i = 0; i < this.Options.AxisLabelOption.length; i++) {
@@ -305,12 +326,16 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
             axisLabelElem.style.align = axisLabelOption.align;
             axisLabelElem.anchor.set(axisLabelOption.anchor.x, axisLabelOption.anchor.y);
             axisLabelElem.position.set(axisLabelOption.position.x, axisLabelOption.position.y);
-            backContainer.addChild(axisLabelElem);
+            backLabelContainer.addChild(axisLabelElem);
         }
+        backContainer.addChild(backLabelContainer);
+
         this.addChild(backContainer);
+        this.displayObjects.set("BackLabel", backLabelContainer);
 
         //Bake into texture
         backContainer.cacheAsBitmapResolution = 3; // Manually set bitmap cache resolution to avoid redzone bar glitch in Firefox.
         backContainer.cacheAsBitmap = true;
+        return backContainer;
     }
 }
