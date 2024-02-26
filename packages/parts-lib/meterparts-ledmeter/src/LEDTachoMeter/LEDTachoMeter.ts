@@ -40,6 +40,8 @@ require("./LEDMeterFont_30px_0.png");
 require("./LEDMeter_RPMFont_58px.fnt");
 require("./LEDMeter_RPMFont_58px_0.png");
 
+export type LEDTachoMeterObjectName = "ProgressBar" | "ValueLabel" | "BackLabel" | "RedZoneBar" | "Background";
+
 export class LEDTachoMeter extends PIXI.Container {
     private tachoProgressBar : CircularProgressBar;
     private speedLabel: NumericIndicator;
@@ -47,6 +49,16 @@ export class LEDTachoMeter extends PIXI.Container {
     private tripLabel: NumericIndicator;
     private fuelLabel: NumericIndicator;
     private gearPosLabel: NumericIndicator;
+    private readonly displayObjects: Map<LEDTachoMeterObjectName, PIXI.DisplayObject> = new Map();
+    private readonly fixedBackContainer = new PIXI.Container();
+
+    public set CacheBackContainerAsBitMap(value : boolean) { this.fixedBackContainer.cacheAsBitmap = value};
+    public getDisplayObjects(value : LEDTachoMeterObjectName) : PIXI.DisplayObject { 
+        if(this.displayObjects.get(value) === undefined)
+            throw new Error(value + "is not exists");
+        else
+            return this.displayObjects.get(value)!;
+    };
 
     private tacho = 0;
     private speed = 0;
@@ -108,9 +120,9 @@ export class LEDTachoMeter extends PIXI.Container {
         const gasMilageValDefault = 12.0;
         const tripValDefault = 230.0;
         const fuelValDefault = 30.00;
-        
+        const backGroundContainer = new PIXI.Container();
         const backSprite = PIXI.Sprite.from("LEDTachoMeter_layer_base.png");
-        super.addChild(backSprite);
+        backGroundContainer.addChild(backSprite);
 
         const redZoneOption = new CircularProgressBarOptions();
         redZoneOption.Texture = PIXI.Texture.from("LEDTachoMeter_layer_red.png");
@@ -125,23 +137,7 @@ export class LEDTachoMeter extends PIXI.Container {
         const redZone = new CircularProgressBar(redZoneOption);
         redZone.Value = 1000;
         redZone.updateForce();
-        super.addChild(redZone);
-
-        const textSprite = PIXI.Sprite.from("LEDTachoMeter_layer_text_fixed.png");
-        super.addChild(textSprite);
-
-        //Create meter number label
-        const numberElements: PIXI.BitmapText[] = [];
-        const place = new CircularPlacementCooridnateCalculator(197, {x: 300, y: 300});
-        for(let num = 0; num <= 9; num++) {
-            numberElements[num] = new PIXI.BitmapText(String(num), { fontName: "LEDMeter_RPMFont_58px", fontSize: -58, align: "center" });
-            numberElements[num].anchor.set(0.5, 0.5);
-            const angle = 270 - num * 30;
-            numberElements[num].position.set(place.X(angle), place.Y(angle));
-            if(num >= 8)
-                numberElements[num].tint = 0xffff00;
-        }
-        numberElements.forEach(e => super.addChild(e));
+        backGroundContainer.addChild(redZone);
 
         const ledDarkOption = new CircularProgressBarOptions();
         ledDarkOption.Texture = PIXI.Texture.from("LEDTachoMeter_layer_led_dark.png");
@@ -156,7 +152,29 @@ export class LEDTachoMeter extends PIXI.Container {
         const ledDark = new CircularProgressBar(ledDarkOption);
         ledDark.Value = 1;
         ledDark.updateForce();
-        super.addChild(ledDark);
+        backGroundContainer.addChild(ledDark);
+        this.displayObjects.set("Background", backGroundContainer);
+        this.fixedBackContainer.addChild(backGroundContainer);
+
+        const backTextContainer = new PIXI.Container();
+        const textSprite = PIXI.Sprite.from("LEDTachoMeter_layer_text_fixed.png");
+        backTextContainer.addChild(textSprite);
+
+        //Create meter number label
+        const numberElements: PIXI.BitmapText[] = [];
+        const place = new CircularPlacementCooridnateCalculator(197, {x: 300, y: 300});
+        for(let num = 0; num <= 9; num++) {
+            numberElements[num] = new PIXI.BitmapText(String(num), { fontName: "LEDMeter_RPMFont_58px", fontSize: -58, align: "center" });
+            numberElements[num].anchor.set(0.5, 0.5);
+            const angle = 270 - num * 30;
+            numberElements[num].position.set(place.X(angle), place.Y(angle));
+            if(num >= 8)
+                numberElements[num].tint = 0xffff00;
+        }
+        numberElements.forEach(e => backTextContainer.addChild(e));
+        this.displayObjects.set("BackLabel", backTextContainer);
+        this.fixedBackContainer.addChild(backTextContainer);
+        super.addChild(this.fixedBackContainer);
 
         const tachoProgressBarOption = new CircularProgressBarOptions();
         tachoProgressBarOption.Texture = PIXI.Texture.from("LEDTachoMeter_layer_led_bright_white.png");
@@ -176,33 +194,40 @@ export class LEDTachoMeter extends PIXI.Container {
         tachoProgressBar.updateForce();
         this.tachoProgressBar = tachoProgressBar;
         tachoProgressBar.Sprite.tint = 0xffff00;
+        this.displayObjects.set("ProgressBar", tachoProgressBar);
         super.addChild(tachoProgressBar);
 
+        const valueLabelContainer = new PIXI.Container();
         const speedLabel = this.speedLabel = new BitmapTextNumericIndicator(speedValDefault.toFixed(0), { fontName: "LEDMeterFont_88px", fontSize: -88, align: "right" });
         speedLabel.anchor.set(1, 0.5);
         speedLabel.position.set(410, 240);
-        super.addChild(speedLabel);
+        valueLabelContainer.addChild(speedLabel);
 
         const gasMilageLabel = this.gasMilageLabel = new BitmapTextNumericIndicator(gasMilageValDefault.toFixed(2), { fontName: "LEDMeterFont_45px", fontSize: -45, align: "right" });
         gasMilageLabel.anchor.set(1, 0.5);
         gasMilageLabel.position.set(310, 360);
-        super.addChild(gasMilageLabel);
+        valueLabelContainer.addChild(gasMilageLabel);
 
         const tripLabel = this.tripLabel = new BitmapTextNumericIndicator(tripValDefault.toFixed(1), { fontName: "LEDMeterFont_30px", fontSize: -30, align: "right" });
         tripLabel.anchor.set(1, 0.5);
         tripLabel.position.set(510, 355);
-        super.addChild(tripLabel);
+        valueLabelContainer.addChild(tripLabel);
 
         const fuelLabel = this.fuelLabel = new BitmapTextNumericIndicator(fuelValDefault.toFixed(2), { fontName: "LEDMeterFont_30px", fontSize: -30, align: "right" });
         fuelLabel.anchor.set(1, 0.5);
         fuelLabel.position.set(510, 395);
-        super.addChild(fuelLabel);
+        valueLabelContainer.addChild(fuelLabel);
 
         const gearPosLabel = this.gearPosLabel = new BitmapTextNumericIndicator("N", { fontName: "LEDMeterFont_100px", fontSize: -100, align: "right" });
         gearPosLabel.anchor.set(1, 0.5);
         gearPosLabel.text = "N";
         gearPosLabel.position.set(410, 495);
-        super.addChild(gearPosLabel);
+        valueLabelContainer.addChild(gearPosLabel);
+        
+        this.displayObjects.set("ValueLabel",valueLabelContainer);
+        super.addChild(valueLabelContainer);
+
+        this.CacheBackContainerAsBitMap = true;
     }
 
     private changeRedZoneProgressBarColor() {

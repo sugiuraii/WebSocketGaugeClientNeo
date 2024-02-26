@@ -142,6 +142,7 @@ export abstract class CircularGaugePanelOptionBase {
         this.ValueTextLabelOption = new BitmapTextOption();
     }
 }
+
 export type CircularProgressBarObjectName = "ProgressBar" | "ValueLabel" | "BackLabel" | "Grid" | "ZoneBar" | "Background";
 
 export abstract class CircularGaugePanelBase extends PIXI.Container {
