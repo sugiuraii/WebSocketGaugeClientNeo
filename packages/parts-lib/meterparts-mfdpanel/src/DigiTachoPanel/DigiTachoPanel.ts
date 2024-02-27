@@ -99,6 +99,8 @@ export class DigiTachoPanel extends PIXI.Container {
         this.speedLabel = gaugeset.speedLabel;
         this.geasposLabel = gaugeset.gearLabel;
         this.fixedBackContainer = gaugeset.fixedContainer;
+
+        this.CacheBackContainerAsBitMap = true;
     }
 
     private static async createProgressBarTexture(): Promise<PIXI.Texture> {
