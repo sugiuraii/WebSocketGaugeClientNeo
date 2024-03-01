@@ -45,6 +45,10 @@ require("./AnalogMeterFont_40px_0.png");
 require("./AnalogMeterFont_35px_0.png");
 require("./AnalogMeterFont_60px_0.png");
 
+export type TachoMeterObjectName = "Needle" | "NeedleCap" | "LCDValueLabel" | "LCDBackLabel" | "LCDBase" | "BackLabel" | "ZoneBar" | "Background";
+export type SpeedMeterObjectName = "Needle" | "NeedleCap" | "LCDValueLabel" | "LCDBackLabel" | "LCDBase" | "BackLabel" | "ZoneBar" | "Background";
+export type BoostMeterObjectName = "Needle" | "BackLabel" |  "Background";
+
 export class AnalogMeterCluster extends PIXI.Container {
     private tachoProgressBar: CircularProgressBar;
     private waterTempProgressBar: CircularProgressBar;
@@ -57,6 +61,13 @@ export class AnalogMeterCluster extends PIXI.Container {
     private tripLabel: NumericIndicator;
     private fuelLabel: NumericIndicator;
     private gearPosLabel: NumericIndicator;
+
+    private readonly tachoBackContainer = new PIXI.Container();
+    private readonly speedBackContainer = new PIXI.Container();
+    private readonly boostBackContainer = new PIXI.Container();
+    private readonly tachoDisplayObjects: Map<TachoMeterObjectName, PIXI.DisplayObject> = new Map();
+    private readonly speedDisplayObjects: Map<SpeedMeterObjectName, PIXI.DisplayObject> = new Map();
+    private readonly boostDisplayObjects: Map<BoostMeterObjectName, PIXI.DisplayObject> = new Map();
 
     private tacho = 0;
     private speed = 0;
@@ -125,6 +136,30 @@ export class AnalogMeterCluster extends PIXI.Container {
         this.gearPosLabel.text = val;
     }
     
+    public set CacheBackContainerAsBitMap(value : boolean) { 
+        this.tachoBackContainer.cacheAsBitmap = value;
+        this.speedBackContainer.cacheAsBitmap = value;
+        this.boostBackContainer.cacheAsBitmap = value;
+    }
+    public getTachoDisplayObjects(value : TachoMeterObjectName) : PIXI.DisplayObject { 
+        if(this.tachoDisplayObjects.get(value) === undefined)
+            throw new Error(value + "is not exists");
+        else
+            return this.tachoDisplayObjects.get(value)!;
+    };
+    public getSpeedDisplayObjects(value : SpeedMeterObjectName) : PIXI.DisplayObject { 
+        if(this.speedDisplayObjects.get(value) === undefined)
+            throw new Error(value + "is not exists");
+        else
+            return this.speedDisplayObjects.get(value)!;
+    };
+    public getBoostDisplayObjects(value : BoostMeterObjectName) : PIXI.DisplayObject { 
+        if(this.boostDisplayObjects.get(value) === undefined)
+            throw new Error(value + "is not exists");
+        else
+            return this.boostDisplayObjects.get(value)!;
+    };
+
     private constructor(applyTrail : boolean, trailAlpha : number) {
         super();
         this.applyTrail = applyTrail;
@@ -151,6 +186,8 @@ export class AnalogMeterCluster extends PIXI.Container {
         this.waterTempProgressBar = SpeedMeter.waterTempProgressBar;
 
         this.boostNeedleGauge = BoostMeter.boostNeedleGauge;
+
+        this.CacheBackContainerAsBitMap = true;
     }
 
     public static async create(applyTrail = true, trailAlpha = 0.95) {
@@ -171,17 +208,55 @@ export class AnalogMeterCluster extends PIXI.Container {
         const backSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_tacho_base.png");
         backSprite.anchor.set(0.5, 0.5);
         backSprite.position = containerCenter;
-        tachoContainer.addChild(backSprite);
+        this.tachoBackContainer.addChild(backSprite);
 
         const lcdBaseSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_tacho_lcd_base.png");
         lcdBaseSprite.pivot.set(220, 220);
         lcdBaseSprite.position = containerCenter;        
-        tachoContainer.addChild(lcdBaseSprite);
+        this.tachoBackContainer.addChild(lcdBaseSprite);
 
         const tachoTextSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_tacho_tachotext.png");
         tachoTextSprite.anchor.set(0.5, 0.5);
         tachoTextSprite.position = containerCenter;        
-        tachoContainer.addChild(tachoTextSprite);
+        this.tachoBackContainer.addChild(tachoTextSprite);
+
+        const lcdTextSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_tacho_text_lcd_fixed.png");
+        lcdTextSprite.position.set(335, 352);        
+        this.tachoBackContainer.addChild(lcdTextSprite);
+
+        tachoContainer.addChild(this.tachoBackContainer);
+
+        // LCD value label and progressbar
+        const lcdValueLabelContainer = new PIXI.Container();
+        const gasMilageLabel = new BitmapTextNumericIndicator("0.00", { fontName: "AnalogMeterFont_40px", fontSize: -40, align: "right" });
+        gasMilageLabel.NumberOfDecimalPlace = 2;
+        gasMilageLabel.anchor.set(1, 0.5);
+        gasMilageLabel.position.set(505, 353);
+        gasMilageLabel.scale.set(0.9);
+        lcdValueLabelContainer.addChild(gasMilageLabel);
+
+        const tripLabel = new BitmapTextNumericIndicator("0.0", { fontName: "AnalogMeterFont_35px", fontSize: -35, align: "right" });
+        tripLabel.NumberOfDecimalPlace = 1;
+        tripLabel.anchor.set(1, 0.5);
+        tripLabel.position.set(520, 395);
+        tripLabel.text = "0.0";
+        tripLabel.scale.set(0.9);
+        lcdValueLabelContainer.addChild(tripLabel);
+
+        const fuelLabel = new BitmapTextNumericIndicator("0.00", { fontName: "AnalogMeterFont_35px", fontSize: -35, align: "right" });
+        fuelLabel.NumberOfDecimalPlace = 2;
+        fuelLabel.anchor.set(1, 0.5);
+        fuelLabel.position.set(520, 435);
+        fuelLabel.text = "0.00";
+        fuelLabel.scale.set(0.9);
+        lcdValueLabelContainer.addChild(fuelLabel);
+
+        const gearPosLabel = new BitmapTextNumericIndicator("N", { fontName: "AnalogMeterFont_115px", fontSize: -115, align: "center" });
+        gearPosLabel.anchor.set(0.5, 0.5);
+        gearPosLabel.position.set(377, 515);
+        gearPosLabel.text = "N";
+        gearPosLabel.scale.set(0.9);
+        lcdValueLabelContainer.addChild(gearPosLabel);
 
         const tachoProgressBarOptions = new CircularProgressBarOptions();
         tachoProgressBarOptions.Texture = PIXI.Texture.from("AnalogMeterCluster_layer_tacho_lcd_bar.png");
@@ -195,13 +270,11 @@ export class AnalogMeterCluster extends PIXI.Container {
         const tachoProgressBar = new CircularProgressBar(tachoProgressBarOptions);
         tachoProgressBar.pivot.set(192, 192);
         tachoProgressBar.position.set(319, 319);
-        tachoContainer.addChild(tachoProgressBar);
+        lcdValueLabelContainer.addChild(tachoProgressBar);
         tachoProgressBar.Value = tachoValDefalut;
         tachoProgressBar.updateForce();
 
-        const lcdTextSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_tacho_text_lcd_fixed.png");
-        lcdTextSprite.position.set(335, 352);        
-        tachoContainer.addChild(lcdTextSprite);
+        tachoContainer.addChild(lcdValueLabelContainer);
 
         const tachoNeedleGaugeOptions = new RotationNeedleGaugeOptions();
         tachoNeedleGaugeOptions.Texture = PIXI.Texture.from("AnalogMeterCluster_layer_tacho_needle.png");
@@ -219,44 +292,25 @@ export class AnalogMeterCluster extends PIXI.Container {
             trailLayer.addChild(tachoNeedleGauge);
             trailLayer.trailAlpha = this.trailAlpha;
             tachoContainer.addChild(trailLayer);
+            this.tachoDisplayObjects.set("Needle", trailLayer);
             tachoNeedleGauge.SubFrameRenderCallback.push(() => trailLayer.updateTexture());
-        } else
+        } else {
+            this.tachoDisplayObjects.set("Needle", tachoNeedleGauge);
             tachoContainer.addChild(tachoNeedleGauge);
+        }
 
         const shaftSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_tacho_needlecap.png");
         shaftSprite.anchor.set(0.5, 0.5);
         shaftSprite.position.set(319, 319);
         tachoContainer.addChild(shaftSprite);
 
-        const gasMilageLabel = new BitmapTextNumericIndicator("0.00", { fontName: "AnalogMeterFont_40px", fontSize: -40, align: "right" });
-        gasMilageLabel.NumberOfDecimalPlace = 2;
-        gasMilageLabel.anchor.set(1, 0.5);
-        gasMilageLabel.position.set(505, 353);
-        gasMilageLabel.scale.set(0.9);
-        tachoContainer.addChild(gasMilageLabel);
-
-        const tripLabel = new BitmapTextNumericIndicator("0.0", { fontName: "AnalogMeterFont_35px", fontSize: -35, align: "right" });
-        tripLabel.NumberOfDecimalPlace = 1;
-        tripLabel.anchor.set(1, 0.5);
-        tripLabel.position.set(520, 395);
-        tripLabel.text = "0.0";
-        tripLabel.scale.set(0.9);
-        tachoContainer.addChild(tripLabel);
-
-        const fuelLabel = new BitmapTextNumericIndicator("0.00", { fontName: "AnalogMeterFont_35px", fontSize: -35, align: "right" });
-        fuelLabel.NumberOfDecimalPlace = 2;
-        fuelLabel.anchor.set(1, 0.5);
-        fuelLabel.position.set(520, 435);
-        fuelLabel.text = "0.00";
-        fuelLabel.scale.set(0.9);
-        tachoContainer.addChild(fuelLabel);
-
-        const gearPosLabel = new BitmapTextNumericIndicator("N", { fontName: "AnalogMeterFont_115px", fontSize: -115, align: "center" });
-        gearPosLabel.anchor.set(0.5, 0.5);
-        gearPosLabel.position.set(377, 515);
-        gearPosLabel.text = "N";
-        gearPosLabel.scale.set(0.9);
-        tachoContainer.addChild(gearPosLabel);
+        // Map object to display object map
+        this.tachoDisplayObjects.set("NeedleCap", shaftSprite);
+        this.tachoDisplayObjects.set("LCDValueLabel", lcdValueLabelContainer);
+        this.tachoDisplayObjects.set("LCDBackLabel", lcdTextSprite);
+        this.tachoDisplayObjects.set("BackLabel", tachoTextSprite);
+        this.tachoDisplayObjects.set("LCDBase", lcdBaseSprite);
+        this.tachoDisplayObjects.set("Background", backSprite);
 
         return { container: tachoContainer, progressBar: tachoProgressBar, needleGauge: tachoNeedleGauge, gasmilageLabel: gasMilageLabel, tripLabel: tripLabel, fuelLabel: fuelLabel, gearPosLabel: gearPosLabel };
     }
@@ -274,29 +328,32 @@ export class AnalogMeterCluster extends PIXI.Container {
         const backSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_speed_base.png");
         backSprite.anchor.set(0.5, 0.5);
         backSprite.position.set(319,319);
-        speedMeterContainer.addChild(backSprite);
+        this.speedBackContainer.addChild(backSprite);
 
         const speedTextSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_speed_text.png");
         speedTextSprite.anchor.set(1, 0.5);
         speedTextSprite.position.set(440,320);
-        speedMeterContainer.addChild(speedTextSprite);
+        this.speedBackContainer.addChild(speedTextSprite);
 
         const lcdBaseSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_speed_lcdbase.png");
         lcdBaseSprite.anchor.set(0.5, 0.5);
         lcdBaseSprite.position.set(319,319);
-        speedMeterContainer.addChild(lcdBaseSprite);
+        this.speedBackContainer.addChild(lcdBaseSprite);
 
         const lcdTextSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_speed_lcdtext_fixed.png");
         lcdTextSprite.anchor.set(1, 0.5);
         lcdTextSprite.position.set(365,345);
-        speedMeterContainer.addChild(lcdTextSprite);
+        this.speedBackContainer.addChild(lcdTextSprite);
 
+        speedMeterContainer.addChild(this.speedBackContainer);
+
+        const lcdValueLabelContainer = new PIXI.Container();
         const speedLabel = this.speedLabel = new BitmapTextNumericIndicator(speedValDefault.toFixed(0), { fontName: "AnalogMeterFont_60px", fontSize: -60, align: "center" });
         speedLabel.NumberOfDecimalPlace = 0;
         speedLabel.anchor.set(1, 0.5);
         speedLabel.position.set(365, 432);
         speedLabel.scale.set(0.9);
-        speedMeterContainer.addChild(speedLabel);
+        lcdValueLabelContainer.addChild(speedLabel);
 
         const waterTempProgressBarOptions = new CircularProgressBarOptions();
         waterTempProgressBarOptions.Texture = PIXI.Texture.from("AnalogMeterCluster_layer_speed_lcdbar.png");
@@ -310,9 +367,11 @@ export class AnalogMeterCluster extends PIXI.Container {
         const waterTempProgressBar = new CircularProgressBar(waterTempProgressBarOptions);
         waterTempProgressBar.pivot.set(160, 160);
         waterTempProgressBar.position.set(319, 319);
-        speedMeterContainer.addChild(waterTempProgressBar);
+        lcdValueLabelContainer.addChild(waterTempProgressBar);
         waterTempProgressBar.Value = waterTempValDefault;
         waterTempProgressBar.updateForce();
+
+        speedMeterContainer.addChild(lcdValueLabelContainer);
 
         const speedNeedleGaugeOptions = new RotationNeedleGaugeOptions();
         speedNeedleGaugeOptions.Texture = PIXI.Texture.from("AnalogMeterCluster_layer_speed_needle.png");
@@ -329,14 +388,25 @@ export class AnalogMeterCluster extends PIXI.Container {
             const trailLayer = new TrailLayer({height : backSprite.height, width : backSprite.width});
             trailLayer.addChild(speedNeedleGauge);
             trailLayer.trailAlpha = this.trailAlpha;
+            this.tachoDisplayObjects.set("Needle", trailLayer);
             speedMeterContainer.addChild(trailLayer);
-        } else
+        } else {
+            this.tachoDisplayObjects.set("Needle", speedNeedleGauge);
             speedMeterContainer.addChild(speedNeedleGauge);
-        
+        }
+
         const shaftSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_speed_needlecap.png");
         shaftSprite.anchor.set(0.5, 0.5);
         shaftSprite.position.set(319, 319);
         speedMeterContainer.addChild(shaftSprite);
+
+        // Map object to display object map
+        this.tachoDisplayObjects.set("NeedleCap", shaftSprite);
+        this.tachoDisplayObjects.set("LCDValueLabel", lcdValueLabelContainer);
+        this.tachoDisplayObjects.set("LCDBackLabel", lcdTextSprite);
+        this.tachoDisplayObjects.set("BackLabel", speedTextSprite);
+        this.tachoDisplayObjects.set("LCDBase", lcdBaseSprite);
+        this.tachoDisplayObjects.set("Background", backSprite);
 
         return { container: speedMeterContainer, speedNeedleGauge: speedNeedleGauge, speedLabel: speedLabel, waterTempProgressBar: waterTempProgressBar };
     }
@@ -349,12 +419,14 @@ export class AnalogMeterCluster extends PIXI.Container {
         const boostMeterContainer = new PIXI.Container();
 
         const backSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_boost_base.png");
-        boostMeterContainer.addChild(backSprite);
+        this.boostBackContainer.addChild(backSprite);
 
         const textSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_boost_text.png");
         textSprite.anchor.set(0, 0.5);
         textSprite.position.set(290,235);
-        boostMeterContainer.addChild(textSprite);
+        this.boostBackContainer.addChild(textSprite);
+
+        boostMeterContainer.addChild(this.boostBackContainer);
 
         const boostNeedleGaugeOptions = new RotationNeedleGaugeOptions();
         boostNeedleGaugeOptions.Texture = PIXI.Texture.from("AnalogMeterCluster_layer_boost_needle.png");
@@ -372,9 +444,15 @@ export class AnalogMeterCluster extends PIXI.Container {
             const trailLayer = new TrailLayer({height : backSprite.height, width :backSprite.width});
             trailLayer.addChild(boostNeedleGauge);
             trailLayer.trailAlpha = this.trailAlpha;
+            this.tachoDisplayObjects.set("Needle", trailLayer);
             boostMeterContainer.addChild(trailLayer);
-        } else
+        } else {
+            this.tachoDisplayObjects.set("Needle", boostNeedleGauge);
             boostMeterContainer.addChild(boostNeedleGauge);
+        }
+
+        this.tachoDisplayObjects.set("BackLabel", textSprite);
+        this.tachoDisplayObjects.set("Background", backSprite);
 
         return { container: boostMeterContainer, boostNeedleGauge: boostNeedleGauge };
     }
