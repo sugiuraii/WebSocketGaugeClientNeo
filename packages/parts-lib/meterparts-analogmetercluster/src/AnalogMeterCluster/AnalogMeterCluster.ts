@@ -388,10 +388,10 @@ export class AnalogMeterCluster extends PIXI.Container {
             const trailLayer = new TrailLayer({height : backSprite.height, width : backSprite.width});
             trailLayer.addChild(speedNeedleGauge);
             trailLayer.trailAlpha = this.trailAlpha;
-            this.tachoDisplayObjects.set("Needle", trailLayer);
+            this.speedDisplayObjects.set("Needle", trailLayer);
             speedMeterContainer.addChild(trailLayer);
         } else {
-            this.tachoDisplayObjects.set("Needle", speedNeedleGauge);
+            this.speedDisplayObjects.set("Needle", speedNeedleGauge);
             speedMeterContainer.addChild(speedNeedleGauge);
         }
 
@@ -401,12 +401,12 @@ export class AnalogMeterCluster extends PIXI.Container {
         speedMeterContainer.addChild(shaftSprite);
 
         // Map object to display object map
-        this.tachoDisplayObjects.set("NeedleCap", shaftSprite);
-        this.tachoDisplayObjects.set("LCDValueLabel", lcdValueLabelContainer);
-        this.tachoDisplayObjects.set("LCDBackLabel", lcdTextSprite);
-        this.tachoDisplayObjects.set("BackLabel", speedTextSprite);
-        this.tachoDisplayObjects.set("LCDBase", lcdBaseSprite);
-        this.tachoDisplayObjects.set("Background", backSprite);
+        this.speedDisplayObjects.set("NeedleCap", shaftSprite);
+        this.speedDisplayObjects.set("LCDValueLabel", lcdValueLabelContainer);
+        this.speedDisplayObjects.set("LCDBackLabel", lcdTextSprite);
+        this.speedDisplayObjects.set("BackLabel", speedTextSprite);
+        this.speedDisplayObjects.set("LCDBase", lcdBaseSprite);
+        this.speedDisplayObjects.set("Background", backSprite);
 
         return { container: speedMeterContainer, speedNeedleGauge: speedNeedleGauge, speedLabel: speedLabel, waterTempProgressBar: waterTempProgressBar };
     }
@@ -444,15 +444,15 @@ export class AnalogMeterCluster extends PIXI.Container {
             const trailLayer = new TrailLayer({height : backSprite.height, width :backSprite.width});
             trailLayer.addChild(boostNeedleGauge);
             trailLayer.trailAlpha = this.trailAlpha;
-            this.tachoDisplayObjects.set("Needle", trailLayer);
+            this.boostDisplayObjects.set("Needle", trailLayer);
             boostMeterContainer.addChild(trailLayer);
         } else {
-            this.tachoDisplayObjects.set("Needle", boostNeedleGauge);
+            this.boostDisplayObjects.set("Needle", boostNeedleGauge);
             boostMeterContainer.addChild(boostNeedleGauge);
         }
 
-        this.tachoDisplayObjects.set("BackLabel", textSprite);
-        this.tachoDisplayObjects.set("Background", backSprite);
+        this.boostDisplayObjects.set("BackLabel", textSprite);
+        this.boostDisplayObjects.set("Background", backSprite);
 
         return { container: boostMeterContainer, boostNeedleGauge: boostNeedleGauge };
     }
