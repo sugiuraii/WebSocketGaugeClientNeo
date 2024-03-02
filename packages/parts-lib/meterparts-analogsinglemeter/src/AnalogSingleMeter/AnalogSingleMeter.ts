@@ -134,13 +134,13 @@ export class AnalogSingleMeter extends PIXI.Container {
         needleGaugeOptions.GaugeDrawConversionFucntion = option.GaugeDrawValConversionFunc;
         
         const needleGauge = new RotationNeedleGauge(needleGaugeOptions);
-        needleGauge.pivot.set(220, 15);
+        needleGauge.pivot.set(200, 15);
         needleGauge.position.set(210, 210);
         needleGauge.Value = option.Min;
 
         //Create needleCap
         const needleCap = PIXI.Sprite.from("AnalogSingleMeter_layer_analogsinglemeter_needlecap.png");
-        needleCap.pivot.set(47, 47);
+        needleCap.pivot.set(50, 50);
         needleCap.position.set(210, 210);
 
         //Add each sub container to master container.
