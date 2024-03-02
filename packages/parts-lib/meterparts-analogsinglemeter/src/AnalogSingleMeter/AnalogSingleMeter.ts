@@ -39,6 +39,8 @@ require("./AnalogSingleMeter_18px_0.png");
 require("./AnalogSingleMeter_36px.fnt");
 require("./AnalogSingleMeter_36px_0.png");
 
+export type AnalogSingleMeterObjectName = "Needle" | "NeedleCap" | "BackLabel" | "Grid" | "Background";
+
 /**
  * Analog single meter gauge example class
  */
@@ -54,6 +56,17 @@ export class AnalogSingleMeter extends PIXI.Container {
      */
     private NeedleGauge: RotationNeedleGauge;
 
+    /**
+     * Reference of background container (to set CacheAsBitMap by CacheBackContainerAsBitMap property)
+     * @see CacheBackContainerAsBitMap
+     */
+    private readonly backContainer: PIXI.Container;
+
+    /**
+     * Map of object name - displayobject
+     * @see getDisplayObjects
+     */
+    private readonly displayObjects: Map<AnalogSingleMeterObjectName, PIXI.DisplayObject> = new Map();
     /**
      * Get gauge value.
      * @return Gauge value.
@@ -78,6 +91,22 @@ export class AnalogSingleMeter extends PIXI.Container {
         const instance = new AnalogSingleMeter(option);
         return instance;
     }
+    /**
+     * Set CacheAsBitMap to background container (to improve performance.)
+     */
+    public set CacheBackContainerAsBitMap(value : boolean) { this.backContainer.cacheAsBitmap = value};
+    
+    /**
+     * Get referencce of parts.
+     * @param value Object name to get reference.
+     * @returns The reference of object.
+     */
+    public getDisplayObjects(value : AnalogSingleMeterObjectName) : PIXI.DisplayObject { 
+        if(this.displayObjects.get(value) === undefined)
+            throw new Error(value + "is not exists");
+        else
+            return this.displayObjects.get(value)!;
+    };
 
     /**
      * Construct AnalogSingleMeter class (called from create()).
@@ -92,6 +121,7 @@ export class AnalogSingleMeter extends PIXI.Container {
 
         //Create meter backplate.
         const meterBackPlate = this.createMeterBackPlate(option.Title, option.ScaleLabel, option.Unit)
+        this.backContainer = meterBackPlate;
 
         //Create needle gauge.
         const needleGaugeOptions = new RotationNeedleGaugeOptions();
@@ -104,13 +134,13 @@ export class AnalogSingleMeter extends PIXI.Container {
         needleGaugeOptions.GaugeDrawConversionFucntion = option.GaugeDrawValConversionFunc;
         
         const needleGauge = new RotationNeedleGauge(needleGaugeOptions);
-        needleGauge.pivot.set(220, 15);
+        needleGauge.pivot.set(200, 15);
         needleGauge.position.set(210, 210);
         needleGauge.Value = option.Min;
 
         //Create needleCap
         const needleCap = PIXI.Sprite.from("AnalogSingleMeter_layer_analogsinglemeter_needlecap.png");
-        needleCap.pivot.set(47, 47);
+        needleCap.pivot.set(50, 50);
         needleCap.position.set(210, 210);
 
         //Add each sub container to master container.
@@ -118,8 +148,16 @@ export class AnalogSingleMeter extends PIXI.Container {
         this.addChild(needleGauge);
         this.addChild(needleCap);
 
+        // Register objects to displayObjects map
+        this.displayObjects.set("Needle", needleGauge);
+        this.displayObjects.set("NeedleCap", needleCap);
+
         //Set reference of needleGauge to this.NeedleGauge.
         this.NeedleGauge = needleGauge;
+
+        // "Baking" this container to single texture
+        // This can speed up the rendering (since gpu dose not need to construct this constructor on every frame)
+        this.CacheBackContainerAsBitMap = true;
     }
 
     /**
@@ -132,7 +170,7 @@ export class AnalogSingleMeter extends PIXI.Container {
 
         //Create MeterGrid sprite
         const gridSprite = PIXI.Sprite.from("AnalogSingleMeter_layer_analogsinglemeter_grid.png");
-
+        
         //Create gauge title label
         const titleElem = new PIXI.BitmapText(gaugeTitle, { fontName: "AnalogSingleMeter_36px", fontSize: -36, align: "right" });
         titleElem.anchor.set(1, 0.5);
@@ -168,18 +206,24 @@ export class AnalogSingleMeter extends PIXI.Container {
         numberElements[6].anchor.set(1, 0.5);
         numberElements[6].position.set(place.X(0), place.Y(0));
 
-        // Add all of elements to baseContainer.
+        // Merge backtexts fixedLabelContainer
+        const fixedLabelContainer = new PIXI.Container();
+        fixedLabelContainer.addChild(titleElem);
+        fixedLabelContainer.addChild(unitElem);
+        for (let i = 0; i < numberLabels.length; i++)
+            fixedLabelContainer.addChild(numberElements[i]);
+
+        // Assign objects to displayObjetcs map.
+        this.displayObjects.set("Background", backSprite);
+        this.displayObjects.set("Grid", gridSprite);
+        this.displayObjects.set("BackLabel", fixedLabelContainer);
+        
+        // Create base container.
         const baseContainer = new PIXI.Container();
         baseContainer.addChild(backSprite);
-        baseContainer.addChild(gridSprite);
-        baseContainer.addChild(titleElem);
-        baseContainer.addChild(unitElem);
-        for (let i = 0; i < numberLabels.length; i++)
-            baseContainer.addChild(numberElements[i]);
-
-        // "Baking" this container to single texture
-        // This can speed up the rendering (since gpu dose not need to construct this constructor on every frame)
-        baseContainer.cacheAsBitmap = true;
+        baseContainer.addChild(gridSprite)
+        baseContainer.addChild(fixedLabelContainer);
+        
         return baseContainer;
     }
 }
