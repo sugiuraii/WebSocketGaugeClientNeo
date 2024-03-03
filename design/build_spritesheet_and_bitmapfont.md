@@ -18,3 +18,19 @@ Before build spritesheet and bitmapfont,
     bash download_ttfs.sh
     ```
 
+# 3. Install npm package 
+```
+cd svgs
+npm i
+```
+# 4. Install ttf fonts (refered from svgs) to your system
+* Unfortunately there is no script to install font file requried from svgs.
+    * Please open svg files by Inkscape, check font is correctly drawn. If some of fonts is missing, please install by yourself.
+
+# 5. Run build script
+```
+cd (folder of design)
+bash build_fonts.sh
+bash pngexport.sh
+```
+
