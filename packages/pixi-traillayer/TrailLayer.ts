@@ -34,8 +34,8 @@ export class TrailLayer extends PIXI.Sprite {
         this.app = app;
     }
 
-    private frontTrailImageTexture: PIXI.RenderTexture;
-    private backBufferTexture: PIXI.RenderTexture;
+    private frontTrailImageTexture: PIXI.Texture;
+    private backBufferTexture: PIXI.Texture;
     private readonly trailSprite = new PIXI.Sprite;
     private readonly clearingSprite = new PIXI.Sprite(PIXI.Texture.EMPTY); // used for clearing texture
     private trailAlphaSetInterval_ = 0;
@@ -70,10 +70,10 @@ export class TrailLayer extends PIXI.Sprite {
             this.trailSprite.alpha = 1;
         }
         // Render trail image to frontTrailImageTexture
-        renderer.render(this.trailSprite, { renderTexture: this.frontTrailImageTexture, clear: true });
+        renderer.render({ container: this.trailSprite, target: this.frontTrailImageTexture, clear: true });
 
         // Store the image of this container to backBufferTexure (to reuse on next frame)
-        renderer.render(this, { renderTexture: this.backBufferTexture, clear: true });
+        renderer.render({ container: this, target: this.backBufferTexture, clear: true });
     }
 
     /**
@@ -81,21 +81,22 @@ export class TrailLayer extends PIXI.Sprite {
      */
     public clear() {
         const renderer = TrailLayer.app.renderer;
-        renderer.render(this.clearingSprite, { renderTexture: this.backBufferTexture, clear: true });
+        renderer.render({ container: this.clearingSprite, target: this.backBufferTexture, clear: true });
     }
+    
     /**
      * Get the access of the Sprite of trail image
      */
     public get TrailSprite() {
         return this.trailSprite;
     }
+
     /**
      * Set filter to trail image sprite.
      * @param f Filter to apply.
      */
-    public addFilter(f: PIXI.Filter) {
-        if (!this.trailSprite.filters) this.trailSprite.filters = [];
-        this.trailSprite.filters = this.trailSprite.filters.concat(f);
+    public get trailFilters() {
+        return this.trailSprite.filters;
     }
 
     /**
