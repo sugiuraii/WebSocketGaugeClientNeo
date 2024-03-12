@@ -174,7 +174,7 @@ export class MilageGraphPanel extends PIXI.Container {
         this.fuelLabel.position.set(612, 177);
         variableTextContainer.addChild(this.fuelLabel);
 
-        this.gasMilageLabel = new PIXI.BitmapText("0.00", { fontName: "MilageGraphFont_57px", fontSize: -57, align: "right" , letterSpacing : -5 });
+        this.gasMilageLabel = new PIXI.BitmapText({ text: "0.00",  style: { fontFamily: "MilageGraphFont_57px", fontSize: -57, align: "right" , letterSpacing : -5}});
         this.gasMilageLabel.anchor.set(1, 1);
         this.gasMilageLabel.position.set(635, 275);
         variableTextContainer.addChild(this.gasMilageLabel);

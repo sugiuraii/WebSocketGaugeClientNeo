@@ -191,14 +191,14 @@ export class DigiTachoPanel extends PIXI.Container {
             super.addChild(tachoProgressBar);
         }
 
-        const speedTextLabel = new BitmapTextNumericIndicator(this.speed.toString(), { fontName: "DigiTacho_SpeedMeter", fontSize: -170, align: "right", letterSpacing: -5 });
+        const speedTextLabel = new BitmapTextNumericIndicator({ text: this.speed.toString(),  style: { fontFamily: "DigiTacho_SpeedMeter", fontSize: -170, align: "right", letterSpacing: -5}});
         speedTextLabel.position.set(485, 360);
         speedTextLabel.anchor.set(1, 1);
         speedTextLabel.NumberOfDecimalPlace = 0;
         this.displayObjects.set("SpeedLabel", speedTextLabel);
         super.addChild(speedTextLabel);
 
-        const gearTextLabel = new PIXI.BitmapText(this.gearPos, { fontName: "DigiTacho_GearPos", fontSize: -101, align: "center" });
+        const gearTextLabel = new PIXI.BitmapText({ text: this.gearPos,  style: { fontFamily: "DigiTacho_GearPos", fontSize: -101, align: "center"}});
         gearTextLabel.position.set(66, 62);
         gearTextLabel.anchor.set(0.5, 0.5);
         this.displayObjects.set("GearPosLabel", gearTextLabel);

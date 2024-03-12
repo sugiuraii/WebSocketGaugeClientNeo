@@ -172,37 +172,37 @@ export class AnalogSingleMeter extends PIXI.Container {
         const gridSprite = PIXI.Sprite.from("AnalogSingleMeter_layer_analogsinglemeter_grid.png");
         
         //Create gauge title label
-        const titleElem = new PIXI.BitmapText(gaugeTitle, { fontName: "AnalogSingleMeter_36px", fontSize: -36, align: "right" });
+        const titleElem = new PIXI.BitmapText({ text: gaugeTitle,  style: { fontFamily: "AnalogSingleMeter_36px", fontSize: -36, align: "right"}});
         titleElem.anchor.set(1, 0.5);
         titleElem.position.set(370, 260);
 
         //Create gauge unit label
-        const unitElem = new PIXI.BitmapText(unit, { fontName: "AnalogSingleMeter_18px", fontSize: -18, align: "center" });
+        const unitElem = new PIXI.BitmapText({ text: unit,  style: { fontFamily: "AnalogSingleMeter_18px", fontSize: -18, align: "center"}});
         unitElem.anchor.set(0.5, 0.5);
         unitElem.position.set(210, 150);
 
         //Create meter number label
         const numberElements: PIXI.BitmapText[] = [];
         const place = new CircularPlacementCooridnateCalculator(175, {x: 210, y: 210});
-        numberElements[0] = new PIXI.BitmapText(numberLabels[0], { fontName: "AnalogSingleMeter_36px", fontSize: -36, align: "center" });
+        numberElements[0] = new PIXI.BitmapText({ text: numberLabels[0],  style: { fontFamily: "AnalogSingleMeter_36px", fontSize: -36, align: "center"}});
         numberElements[0].anchor.set(0.5, 1);
         numberElements[0].position.set(place.X(270), place.Y(270));
-        numberElements[1] = new PIXI.BitmapText(numberLabels[1], { fontName: "AnalogSingleMeter_36px", fontSize: -36, align: "left" });
+        numberElements[1] = new PIXI.BitmapText({ text: numberLabels[1],  style: { fontFamily: "AnalogSingleMeter_36px", fontSize: -36, align: "left"}});
         numberElements[1].anchor.set(0.1, 1);
         numberElements[1].position.set(place.X(225), place.Y(225));
-        numberElements[2] = new PIXI.BitmapText(numberLabels[2], { fontName: "AnalogSingleMeter_36px", fontSize: -36, align: "left" });
+        numberElements[2] = new PIXI.BitmapText({ text: numberLabels[2],  style: { fontFamily: "AnalogSingleMeter_36px", fontSize: -36, align: "left"}});
         numberElements[2].anchor.set(0, 0.5);
         numberElements[2].position.set(place.X(180), place.Y(180));
-        numberElements[3] = new PIXI.BitmapText(numberLabels[3], { fontName: "AnalogSingleMeter_36px", fontSize: -36, align: "left" });
+        numberElements[3] = new PIXI.BitmapText({ text: numberLabels[3],  style: { fontFamily: "AnalogSingleMeter_36px", fontSize: -36, align: "left"}});
         numberElements[3].anchor.set(0.1, 0);
         numberElements[3].position.set(place.X(135), place.Y(135));
-        numberElements[4] = new PIXI.BitmapText(numberLabels[4], { fontName: "AnalogSingleMeter_36px", fontSize: -36, align: "center" });
+        numberElements[4] = new PIXI.BitmapText({ text: numberLabels[4],  style: { fontFamily: "AnalogSingleMeter_36px", fontSize: -36, align: "center"}});
         numberElements[4].anchor.set(0.5, 0.1);
         numberElements[4].position.set(place.X(90), place.Y(90));
-        numberElements[5] = new PIXI.BitmapText(numberLabels[5], { fontName: "AnalogSingleMeter_36px", fontSize: -36, align: "right" });
+        numberElements[5] = new PIXI.BitmapText({ text: numberLabels[5],  style: { fontFamily: "AnalogSingleMeter_36px", fontSize: -36, align: "right"}});
         numberElements[5].anchor.set(0.9, 0);
         numberElements[5].position.set(place.X(45), place.Y(45));
-        numberElements[6] = new PIXI.BitmapText(numberLabels[6], { fontName: "AnalogSingleMeter_36px", fontSize: -36, align: "right" });
+        numberElements[6] = new PIXI.BitmapText({ text: numberLabels[6],  style: { fontFamily: "AnalogSingleMeter_36px", fontSize: -36, align: "right"}});
         numberElements[6].anchor.set(1, 0.5);
         numberElements[6].position.set(place.X(0), place.Y(0));
 
