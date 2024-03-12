@@ -149,7 +149,7 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
     private readonly valueTextLabel: PIXI.BitmapText;
     private readonly valueProgressBar: CircularProgressBar;
     private readonly backContainer : PIXI.Container;
-    private readonly displayObjects: Map<CircularProgressBarObjectName, PIXI.DisplayObject> = new Map();
+    private readonly displayObjects: Map<CircularProgressBarObjectName, PIXI.Container> = new Map();
 
     private Options: CircularGaugePanelOptionBase;
 
@@ -163,7 +163,7 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
     }
 
     public set CacheBackContainerAsBitMap(value : boolean) { this.backContainer.cacheAsBitmap = value};
-    public getDisplayObjects(value : CircularProgressBarObjectName) : PIXI.DisplayObject { 
+    public getDisplayObjects(value : CircularProgressBarObjectName) : PIXI.Container { 
         if(this.displayObjects.get(value) === undefined)
             throw new Error(value + "is not exists");
         else

@@ -49,11 +49,11 @@ export class LEDTachoMeter extends PIXI.Container {
     private tripLabel: NumericIndicator;
     private fuelLabel: NumericIndicator;
     private gearPosLabel: NumericIndicator;
-    private readonly displayObjects: Map<LEDTachoMeterObjectName, PIXI.DisplayObject> = new Map();
+    private readonly displayObjects: Map<LEDTachoMeterObjectName, PIXI.Container> = new Map();
     private readonly fixedBackContainer = new PIXI.Container();
 
     public set CacheBackContainerAsBitMap(value : boolean) { this.fixedBackContainer.cacheAsBitmap = value};
-    public getDisplayObjects(value : LEDTachoMeterObjectName) : PIXI.DisplayObject { 
+    public getDisplayObjects(value : LEDTachoMeterObjectName) : PIXI.Container { 
         if(this.displayObjects.get(value) === undefined)
             throw new Error(value + "is not exists");
         else

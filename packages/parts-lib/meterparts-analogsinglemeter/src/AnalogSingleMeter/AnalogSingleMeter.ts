@@ -66,7 +66,7 @@ export class AnalogSingleMeter extends PIXI.Container {
      * Map of object name - displayobject
      * @see getDisplayObjects
      */
-    private readonly displayObjects: Map<AnalogSingleMeterObjectName, PIXI.DisplayObject> = new Map();
+    private readonly displayObjects: Map<AnalogSingleMeterObjectName, PIXI.Container> = new Map();
     /**
      * Get gauge value.
      * @return Gauge value.
@@ -101,7 +101,7 @@ export class AnalogSingleMeter extends PIXI.Container {
      * @param value Object name to get reference.
      * @returns The reference of object.
      */
-    public getDisplayObjects(value : AnalogSingleMeterObjectName) : PIXI.DisplayObject { 
+    public getDisplayObjects(value : AnalogSingleMeterObjectName) : PIXI.Container { 
         if(this.displayObjects.get(value) === undefined)
             throw new Error(value + "is not exists");
         else

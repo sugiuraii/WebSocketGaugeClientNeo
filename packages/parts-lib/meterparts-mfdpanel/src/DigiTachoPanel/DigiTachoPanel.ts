@@ -41,7 +41,7 @@ require("./GearPosFont_0.png");
 export type DigiTachoPanelObjectName = "TachoProgressBar" | "SpeedLabel" | "GearPosLabel" | "BackLabel" | "Grid" | "Background";
 
 export class DigiTachoPanel extends PIXI.Container {
-    private readonly displayObjects: Map<DigiTachoPanelObjectName, PIXI.DisplayObject> = new Map();
+    private readonly displayObjects: Map<DigiTachoPanelObjectName, PIXI.Container> = new Map();
     private readonly fixedBackContainer: PIXI.Container;
     private tachoProgressBar: RectangularProgressBar;
 
@@ -74,7 +74,7 @@ export class DigiTachoPanel extends PIXI.Container {
         this.geasposLabel.text = gearPos;
     }
 
-    public getDisplayObjects(value : DigiTachoPanelObjectName) : PIXI.DisplayObject { 
+    public getDisplayObjects(value : DigiTachoPanelObjectName) : PIXI.Container { 
         if(this.displayObjects.get(value) === undefined)
             throw new Error(value + "is not exists");
         else

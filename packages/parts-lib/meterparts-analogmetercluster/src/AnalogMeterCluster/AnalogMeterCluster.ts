@@ -65,9 +65,9 @@ export class AnalogMeterCluster extends PIXI.Container {
     private readonly tachoBackContainer = new PIXI.Container();
     private readonly speedBackContainer = new PIXI.Container();
     private readonly boostBackContainer = new PIXI.Container();
-    private readonly tachoDisplayObjects: Map<TachoMeterObjectName, PIXI.DisplayObject> = new Map();
-    private readonly speedDisplayObjects: Map<SpeedMeterObjectName, PIXI.DisplayObject> = new Map();
-    private readonly boostDisplayObjects: Map<BoostMeterObjectName, PIXI.DisplayObject> = new Map();
+    private readonly tachoDisplayObjects: Map<TachoMeterObjectName, PIXI.Container> = new Map();
+    private readonly speedDisplayObjects: Map<SpeedMeterObjectName, PIXI.Container> = new Map();
+    private readonly boostDisplayObjects: Map<BoostMeterObjectName, PIXI.Container> = new Map();
 
     private tacho = 0;
     private speed = 0;
@@ -141,19 +141,19 @@ export class AnalogMeterCluster extends PIXI.Container {
         this.speedBackContainer.cacheAsBitmap = value;
         this.boostBackContainer.cacheAsBitmap = value;
     }
-    public getTachoDisplayObjects(value : TachoMeterObjectName) : PIXI.DisplayObject { 
+    public getTachoDisplayObjects(value : TachoMeterObjectName) : PIXI.Container { 
         if(this.tachoDisplayObjects.get(value) === undefined)
             throw new Error(value + "is not exists");
         else
             return this.tachoDisplayObjects.get(value)!;
     };
-    public getSpeedDisplayObjects(value : SpeedMeterObjectName) : PIXI.DisplayObject { 
+    public getSpeedDisplayObjects(value : SpeedMeterObjectName) : PIXI.Container { 
         if(this.speedDisplayObjects.get(value) === undefined)
             throw new Error(value + "is not exists");
         else
             return this.speedDisplayObjects.get(value)!;
     };
-    public getBoostDisplayObjects(value : BoostMeterObjectName) : PIXI.DisplayObject { 
+    public getBoostDisplayObjects(value : BoostMeterObjectName) : PIXI.Container { 
         if(this.boostDisplayObjects.get(value) === undefined)
             throw new Error(value + "is not exists");
         else

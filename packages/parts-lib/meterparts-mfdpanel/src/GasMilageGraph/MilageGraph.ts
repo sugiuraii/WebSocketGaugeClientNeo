@@ -42,7 +42,7 @@ export class MilageGraphPanel extends PIXI.Container {
     private tripLabel: PIXI.BitmapText;
     private fuelLabel: PIXI.BitmapText;
     private gasMilageLabel: PIXI.BitmapText;
-    private readonly displayObjects: Map<MilageGraphPanelObjectName, PIXI.DisplayObject> = new Map();
+    private readonly displayObjects: Map<MilageGraphPanelObjectName, PIXI.Container> = new Map();
     private readonly fixedBackContainer = new PIXI.Container();
 
     private momentGasMilage = 0;
@@ -55,7 +55,7 @@ export class MilageGraphPanel extends PIXI.Container {
 
 
     public set CacheBackContainerAsBitMap(value : boolean) { this.fixedBackContainer.cacheAsBitmap = value};
-    public getDisplayObjects(value : MilageGraphPanelObjectName) : PIXI.DisplayObject { 
+    public getDisplayObjects(value : MilageGraphPanelObjectName) : PIXI.Container { 
         if(this.displayObjects.get(value) === undefined)
             throw new Error(value + "is not exists");
         else
