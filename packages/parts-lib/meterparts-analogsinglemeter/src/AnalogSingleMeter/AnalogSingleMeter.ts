@@ -27,7 +27,6 @@ import { RotationNeedleGaugeOptions } from 'pixi-gauge';
 import { CircularPlacementCooridnateCalculator } from 'placement-coordinate-calc';
 
 import * as PIXI from 'pixi.js';
-import { Assets } from '@pixi/assets';
 import { AnalogSingleMeterOption } from './AnalogSingleMeterOption';
 
 
@@ -86,7 +85,7 @@ export class AnalogSingleMeter extends PIXI.Container {
      * @returns 
      */
     public static async create(option: AnalogSingleMeterOption) {
-        await Assets.load(["img/AnalogSingleMeterTexture.json", "img/AnalogSingleMeter_18px.fnt", "img/AnalogSingleMeter_36px.fnt"]);
+        await PIXI.Assets.load(["img/AnalogSingleMeterTexture.json", "img/AnalogSingleMeter_18px.fnt", "img/AnalogSingleMeter_36px.fnt"]);
         const instance = new AnalogSingleMeter(option);
         return instance;
     }

@@ -27,7 +27,6 @@ import { BitmapTextNumericIndicator } from 'pixi-gauge';
 import { NumericIndicator } from 'pixi-gauge';
 
 import * as PIXI from 'pixi.js';
-import { Assets } from '@pixi/assets';
 import { TrailLayer } from 'pixi-traillayer';
 
 require("./DigiTachoMeterTexture.json");
@@ -82,7 +81,7 @@ export class DigiTachoPanel extends PIXI.Container {
     };
 
     public static async create(applyTrail = true, trailAlpha = 0.95) {
-        await Assets.load(["img/DigiTachoMeterTexture.json", "img/GearPosFont.fnt", "img/SpeedMeterFont.fnt"]);
+        await PIXI.Assets.load(["img/DigiTachoMeterTexture.json", "img/GearPosFont.fnt", "img/SpeedMeterFont.fnt"]);
         const progressBarTexture = await this.createProgressBarTexture();
         const instance = new DigiTachoPanel(applyTrail, trailAlpha, progressBarTexture);
         return instance;

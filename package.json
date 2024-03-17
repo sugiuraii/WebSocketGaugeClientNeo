@@ -16,7 +16,6 @@
     "author": "K. Sugiura",
     "contributors": [],
     "dependencies": {
-        "@pixi/assets": "^7.2.4",
         "@types/jquery": "^3.5.16",
         "@types/react-bootstrap": "^0.32.32",
         "autoprefixer": "^10.4.14",

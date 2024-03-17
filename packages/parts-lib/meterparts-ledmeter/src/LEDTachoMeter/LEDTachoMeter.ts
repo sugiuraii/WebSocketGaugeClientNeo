@@ -25,7 +25,6 @@
 import { CircularProgressBar, CircularProgressBarOptions, NumericIndicator, BitmapTextNumericIndicator } from 'pixi-gauge';
 import { CircularPlacementCooridnateCalculator } from 'placement-coordinate-calc';
 import * as PIXI from 'pixi.js';
-import { Assets } from '@pixi/assets';
 
 require("./LEDTachoMeterTexture.json");
 require("./LEDTachoMeterTexture.png");
@@ -104,7 +103,7 @@ export class LEDTachoMeter extends PIXI.Container {
     }
 
     public static async create() {
-        await Assets.load(["img/LEDTachoMeterTexture.json", "img/LEDMeterFont_100px.fnt", "img/LEDMeterFont_88px.fnt", "img/LEDMeterFont_45px.fnt", "img/LEDMeterFont_30px.fnt", "img/LEDMeter_RPMFont_58px.fnt"]);
+        await PIXI.Assets.load(["img/LEDTachoMeterTexture.json", "img/LEDMeterFont_100px.fnt", "img/LEDMeterFont_88px.fnt", "img/LEDMeterFont_45px.fnt", "img/LEDMeterFont_30px.fnt", "img/LEDMeter_RPMFont_58px.fnt"]);
         const instance = new LEDTachoMeter();
         return instance;
     }

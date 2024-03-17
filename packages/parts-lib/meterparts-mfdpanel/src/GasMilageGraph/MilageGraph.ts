@@ -24,7 +24,6 @@
 
 import { RectangularProgressBar, RectangularProgressBarOptions } from 'pixi-gauge';
 import * as PIXI from 'pixi.js';
-import { Assets } from '@pixi/assets';
 
 require("./MilageGraphTexture.json");
 require("./MilageGraphTexture.png");
@@ -98,7 +97,7 @@ export class MilageGraphPanel extends PIXI.Container {
     }
 
     public static async create() {
-        await Assets.load(["img/MilageGraphTexture.json", "img/MilageGraphFont_38px.fnt", "img/MilageGraphFont_57px.fnt"]);
+        await PIXI.Assets.load(["img/MilageGraphTexture.json", "img/MilageGraphFont_38px.fnt", "img/MilageGraphFont_57px.fnt"]);
         const instance = new MilageGraphPanel();
         return instance;
     }

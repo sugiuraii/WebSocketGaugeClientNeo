@@ -30,7 +30,6 @@ import { BitmapTextNumericIndicator } from 'pixi-gauge';
 import { NumericIndicator } from 'pixi-gauge';
 
 import * as PIXI from 'pixi.js';
-import { Assets } from '@pixi/assets';
 import { TrailLayer } from 'pixi-traillayer';
 
 require("./AnalogMeterClusterTexture.json");
@@ -184,8 +183,8 @@ export class AnalogMeterCluster extends PIXI.Container {
     }
 
     public static async create(applyTrail = true, trailAlpha = 0.95) {
-        await Assets.load(["img/AnalogMeterClusterTexture.json", "img/AnalogMeterFont_115px.fnt", "img/AnalogMeterFont_40px.fnt", "img/AnalogMeterFont_35px.fnt", "img/AnalogMeterFont_60px.fnt"]);
-        //await Assets.load('./fonts/DSEG14Classic-BoldItalic.ttf');
+        await PIXI.Assets.load(["img/AnalogMeterClusterTexture.json", "img/AnalogMeterFont_115px.fnt", "img/AnalogMeterFont_40px.fnt", "img/AnalogMeterFont_35px.fnt", "img/AnalogMeterFont_60px.fnt"]);
+        //await PIXI.Assets.load('./fonts/DSEG14Classic-BoldItalic.ttf');
         const instance = new AnalogMeterCluster(applyTrail, trailAlpha);
         return instance;
     }
