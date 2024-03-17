@@ -28,7 +28,7 @@ import * as PIXI from 'pixi.js';
 // Need to set the priority of updateTexture() between NORMAL(=> for ticker.add()) and LOW (= rendering of application) 
 const PRIORITY_OF_UPDATETEXTURE_TICKER = PIXI.UPDATE_PRIORITY.LOW + 5;
 
-export class TrailLayer extends PIXI.Sprite {
+export class TrailLayer extends PIXI.Container {
     private static app: PIXI.Application;
     public static setApp(app: PIXI.Application) {
         this.app = app;
@@ -36,6 +36,7 @@ export class TrailLayer extends PIXI.Sprite {
 
     private frontTrailImageTexture: PIXI.Texture;
     private backBufferTexture: PIXI.Texture;
+    private readonly baseSprite = new PIXI.Sprite;
     private readonly trailSprite = new PIXI.Sprite;
     private readonly clearingSprite = new PIXI.Sprite(PIXI.Texture.EMPTY); // used for clearing texture
     private trailAlphaSetInterval_ = 0;
@@ -46,7 +47,8 @@ export class TrailLayer extends PIXI.Sprite {
 
         this.frontTrailImageTexture = PIXI.RenderTexture.create(bufferTextureSize);
         this.backBufferTexture = PIXI.RenderTexture.create(bufferTextureSize);
-        this.texture = this.frontTrailImageTexture;
+        this.baseSprite.texture = this.frontTrailImageTexture;
+        this.addChild(this.baseSprite);
 
         if (TrailLayer.app === undefined)
             throw Error("PIXI app is null on constructing TrailLayer. Call TralLayer.setApp() before constructing TrailLayer.");
