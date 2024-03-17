@@ -91,10 +91,12 @@ export class MeterApplication {
     }
 
     public async Run(): Promise<void> {
+        /*
         // Override forceCanvas flag from webstorage, if Option.PIXIApplication.forceCanvas is undefinded.
         if (this.Option.PIXIApplicationOption.forceCanvas === undefined)
             if (this.WebStorage.ForceCanvas)
                 this.Option.PIXIApplicationOption.forceCanvas = true;
+        */
         const pixiApp = new PIXI.Application();
         await pixiApp.init(this.Option.PIXIApplicationOption);
         // Append PIXI.js application to document body

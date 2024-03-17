@@ -99,12 +99,13 @@ export class MeterWidgetApplication {
             this.renderSettingPageIfEmptyQuery();
             return;
         }
-
+        /*
         // Override forceCanvas flag from query, if Option.PIXIApplication.forceCanvas is undefinded.
         if (this.Option.PIXIApplicationOption.forceCanvas === undefined)
             if (this.UrlQueryResult.ForceCanvas)
                 this.Option.PIXIApplicationOption.forceCanvas = true;
-
+        */
+       
         // Set ransparent background.
         this.Option.PIXIApplicationOption.backgroundAlpha = 0;
 
