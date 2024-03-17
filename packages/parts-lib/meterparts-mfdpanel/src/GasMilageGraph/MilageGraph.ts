@@ -162,12 +162,12 @@ export class MilageGraphPanel extends PIXI.Container {
         super.addChild(progressBarContainer);
 
         const variableTextContainer = new PIXI.Container();
-        this.tripLabel = new PIXI.BitmapText("0.0", { fontName: "MilageGraphFont_38px", fontSize: -38, align: "right", letterSpacing : -2});
+        this.tripLabel = new PIXI.BitmapText({text: "0.0", style: { fontFamily: "MilageGraphFont_38px", fontSize: -38, align: "right", letterSpacing : -2}});
         this.tripLabel.anchor.set(1, 1);
         this.tripLabel.position.set(612, 120);
         variableTextContainer.addChild(this.tripLabel);
 
-        this.fuelLabel = new PIXI.BitmapText("0.00", { fontName: "MilageGraphFont_38px", fontSize: -38, align: "right", letterSpacing : -2});
+        this.fuelLabel = new PIXI.BitmapText({text: "0.00", style: { fontFamily: "MilageGraphFont_38px", fontSize: -38, align: "right", letterSpacing : -2}});
         this.fuelLabel.anchor.set(1, 1);
         this.fuelLabel.position.set(612, 177);
         variableTextContainer.addChild(this.fuelLabel);
