@@ -44,7 +44,7 @@ window.onload = function () {
 class ChangeableAnalogTripleMeterApp {
 
     public async Start() {
-        const pixiAppOption: Partial<PIXI.IApplicationOptions> = { width: 1280, height: 720 };
+        const pixiAppOption: Partial<PIXI.ApplicationOptions> = { width: 1280, height: 720 };
 
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
         appOption.MeteSelectDialogOption.ParameterCodeListToSelect = ["Engine_Speed", "Engine_Load", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Oil_Pressure", "Mass_Air_Flow", "O2Sensor_1_Air_Fuel_Ratio", "Intake_Air_Temperature"];

@@ -50,7 +50,7 @@ window.onload = function () {
 
 class ChangeableDigitalMFDApp {
     public async Start() {
-        const pixiAppOption: Partial<PIXI.IApplicationOptions> = { width: 1200, height: 600 };
+        const pixiAppOption: Partial<PIXI.ApplicationOptions> = { width: 1200, height: 600 };
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
 
         appOption.MeteSelectDialogOption.ParameterCodeListToSelect = ["Engine_Load", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Mass_Air_Flow", "Throttle_Opening_Angle", "O2Sensor_1_Air_Fuel_Ratio", "Intake_Air_Temperature"];

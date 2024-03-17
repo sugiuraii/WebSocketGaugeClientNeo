@@ -43,7 +43,7 @@ window.onload = function () {
 
 class AnalogTripleMeterApp {
     public async Start() {
-        const pixiAppOption : Partial<PIXI.IApplicationOptions> = {width : 1280, height : 720};
+        const pixiAppOption : Partial<PIXI.ApplicationOptions> = {width : 1280, height : 720};
 
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
 
