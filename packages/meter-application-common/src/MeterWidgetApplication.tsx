@@ -108,11 +108,12 @@ export class MeterWidgetApplication {
         // Set ransparent background.
         this.Option.PIXIApplicationOption.backgroundAlpha = 0;
 
-        const pixiApp = new PIXI.Application<HTMLCanvasElement>(this.Option.PIXIApplicationOption);
+        const pixiApp = new PIXI.Application();
+        await pixiApp.init(this.Option.PIXIApplicationOption);
         // Append PIXI.js application to document body
-        pixiApp.view.style.width = "95vw";
-        pixiApp.view.style.touchAction = "auto";
-        pixiApp.view.style.pointerEvents = "none";
+        pixiApp.canvas.style.width = "95vw";
+        pixiApp.canvas.style.touchAction = "auto";
+        pixiApp.canvas.style.pointerEvents = "none";
 
         // Register app to TrailLayer to enable traling.
         TrailLayer.setApp(pixiApp);
