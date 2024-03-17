@@ -129,11 +129,10 @@ export class CircularProgressBar extends ProgressBar {
         const startPointX = centerPos.x + Math.cos(startAngleRad)*radius;
         const startPointY = centerPos.y + Math.sin(startAngleRad)*radius;
         spriteMask.clear();
-        spriteMask.fill(0x000000);
         spriteMask.moveTo(startPointX, startPointY);
         spriteMask.arc(centerPos.x, centerPos.y, radius, startAngleRad, endAngleRad, anticlockwise);
         spriteMask.arc(centerPos.x, centerPos.y, innerRadius, endAngleRad, startAngleRad, !anticlockwise);
-
+        spriteMask.fill(0x000000);
         return;
     };
     /**
