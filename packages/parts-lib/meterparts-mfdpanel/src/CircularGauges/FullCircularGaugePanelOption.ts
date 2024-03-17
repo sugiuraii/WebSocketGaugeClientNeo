@@ -42,11 +42,8 @@ export class FullCircularGaugePanelOption extends CircularGaugePanelOptionBase {
 
         this.MasterTextStyle = new PIXI.TextStyle(
             {
-                dropShadow: true,
-                dropShadowBlur: 15,
+                dropShadow: {blur: 15, color: "#FFFFFF", distance: 0},
                 padding: 15,
-                dropShadowColor: "#FFFFFF",
-                dropShadowDistance: 0,
                 fill: "white",
                 fontFamily: "Freesansbold"
             });
