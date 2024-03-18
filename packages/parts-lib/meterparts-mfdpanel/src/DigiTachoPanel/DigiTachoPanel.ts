@@ -194,8 +194,8 @@ export class DigiTachoPanel extends PIXI.Container {
         super.addChild(speedTextLabel);
 
         const gearTextLabel = new PIXI.BitmapText({ text: this.gearPos,  style: { fontFamily: "DigiTacho_GearPos", fontSize: -101, align: "center"}});
-        gearTextLabel.position.set(66, 62);
         gearTextLabel.anchor.set(0.5, 0.5);
+        gearTextLabel.position.set(64, 47);
         this.displayObjects.set("GearPosLabel", gearTextLabel);
         super.addChild(gearTextLabel);
 

@@ -160,7 +160,7 @@ export class LEDTachoMeter extends PIXI.Container {
 
         //Create meter number label
         const numberElements: PIXI.BitmapText[] = [];
-        const place = new CircularPlacementCooridnateCalculator(197, {x: 300, y: 300});
+        const place = new CircularPlacementCooridnateCalculator(197, {x: 300, y: 290});
         for(let num = 0; num <= 9; num++) {
             numberElements[num] = new PIXI.BitmapText({ text: String(num),  style: { fontFamily: "LEDMeter_RPMFont_58px", fontSize: -58, align: "center"}});
             numberElements[num].anchor.set(0.5, 0.5);
