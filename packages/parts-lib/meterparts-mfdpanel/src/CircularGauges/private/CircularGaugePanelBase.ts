@@ -132,7 +132,6 @@ export abstract class CircularGaugePanelOptionBase {
         this.MasterTextStyle = new PIXI.TextStyle(
             {
                 dropShadow: {blur: 15, color: "#FFFFFF", distance: 0},
-                padding: 15,
                 fill: "white",
                 fontFamily: "Freesansbold"
             });

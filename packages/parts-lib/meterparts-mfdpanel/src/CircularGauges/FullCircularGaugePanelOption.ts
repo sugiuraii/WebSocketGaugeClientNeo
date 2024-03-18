@@ -43,7 +43,6 @@ export class FullCircularGaugePanelOption extends CircularGaugePanelOptionBase {
         this.MasterTextStyle = new PIXI.TextStyle(
             {
                 dropShadow: {blur: 15, color: "#FFFFFF", distance: 0},
-                padding: 15,
                 fill: "white",
                 fontFamily: "Freesansbold"
             });
@@ -55,8 +54,7 @@ export class FullCircularGaugePanelOption extends CircularGaugePanelOptionBase {
 
         this.ValueBarRadius = 150;
         this.ValueBarInnerRadius = 50;
-        this.ValueTextLabelOption.position.set(200, 185);
-        this.ValueTextLabelOption.position.set(200, 185);
+        this.ValueTextLabelOption.position.set(200, 170);
         this.ValueTextLabelOption.anchor.set(0.5, 0.5);
         this.ValueTextLabelOption.align = "center";
 
