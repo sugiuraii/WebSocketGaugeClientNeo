@@ -292,7 +292,7 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
 
         const backLabelContainer = new PIXI.Container();
         //Set Title and unit text
-        const titleTextElem = new PIXI.Text(this.Options.TitleLabel);
+        const titleTextElem = new PIXI.Text({text:this.Options.TitleLabel});
         const titleTextOption = this.Options.TitleLabelOption;
         titleTextElem.style = this.Options.MasterTextStyle.clone();
         titleTextElem.style.fontSize = titleTextOption.fontSize;
@@ -300,7 +300,7 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
         titleTextElem.anchor.set(titleTextOption.anchor.x, titleTextOption.anchor.y)
         titleTextElem.position.set(titleTextOption.position.x, titleTextOption.position.y);
 
-        const unitTextElem = new PIXI.Text(this.Options.UnitLabel);
+        const unitTextElem = new PIXI.Text({text:this.Options.UnitLabel});
         const unitTextOption = this.Options.UnitLabelOption;
         unitTextElem.style = this.Options.MasterTextStyle.clone();
         unitTextElem.style.fontSize = unitTextOption.fontSize;
@@ -314,7 +314,7 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
         //Set axis label
         for (let i = 0; i < this.Options.AxisLabelOption.length; i++) {
             const axisLabelOption = this.Options.AxisLabelOption[i];
-            const axisLabelElem = new PIXI.Text(this.Options.AxisLabel[i]);
+            const axisLabelElem = new PIXI.Text({text:this.Options.AxisLabel[i]});
             axisLabelElem.style = this.Options.MasterTextStyle.clone();
             axisLabelElem.style.fontSize = axisLabelOption.fontSize;
             axisLabelElem.style.align = axisLabelOption.align;
