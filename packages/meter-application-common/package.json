@@ -12,19 +12,19 @@
     "build": "npm run clean ; tsc"
   },
   "dependencies": {    
-    "pixi.js": "^8.0.1",
+    "pixi.js": "^8.0.4",
     "react": "^18.2.0",
-    "react-bootstrap": "^2.7.4",
+    "react-bootstrap": "^2.10.2",
     "react-dom": "^18.2.0",
-    "bootswatch": "^5.2.3",
+    "bootswatch": "^5.3.3",
     "basic-logger": "../basic-logger",
     "websocket-gauge-client-communication-service": "../websocket-gauge-client-communication-service",
     "pixi-traillayer":"../pixi-traillayer"
 
   },
   "devDependencies": {
-    "typescript": "^5.0.4",
-    "rimraf": "^5.0.0"
+    "typescript": "^5.4.3",
+    "rimraf": "^5.0.5"
   },
   "author": "K. Sugiura",
   "license": "MIT"

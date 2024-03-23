@@ -10,9 +10,9 @@
     "build": "npm run clean ; tsc"
   },
   "devDependencies": {
-    "typescript": "^5.0.4",
+    "typescript": "^5.4.3",
     "node-pid-controller": "^1.0.1",
-    "rimraf": "^5.0.0",
+    "rimraf": "^5.0.5",
     "interpolation": "../interpolation"
   },
   "author": "K. Sugiura",
