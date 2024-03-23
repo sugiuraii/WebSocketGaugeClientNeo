@@ -47,7 +47,7 @@ window.onload = function () {
 
 class DigitalMFDApp {
     public async  Start() {
-        const pixiAppOption : Partial<PIXI.IApplicationOptions> = {width : 1200, height : 600};
+        const pixiAppOption : Partial<PIXI.ApplicationOptions> = {width : 1200, height : 600};
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
 
         const gearCalculator = await DefaultAppSettings.getGearPositionCalculator();

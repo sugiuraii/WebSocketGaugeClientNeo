@@ -28,14 +28,15 @@ import * as PIXI from 'pixi.js';
 // Need to set the priority of updateTexture() between NORMAL(=> for ticker.add()) and LOW (= rendering of application) 
 const PRIORITY_OF_UPDATETEXTURE_TICKER = PIXI.UPDATE_PRIORITY.LOW + 5;
 
-export class TrailLayer extends PIXI.Sprite {
+export class TrailLayer extends PIXI.Container {
     private static app: PIXI.Application;
     public static setApp(app: PIXI.Application) {
         this.app = app;
     }
 
-    private frontTrailImageTexture: PIXI.RenderTexture;
-    private backBufferTexture: PIXI.RenderTexture;
+    private frontTrailImageTexture: PIXI.Texture;
+    private backBufferTexture: PIXI.Texture;
+    private readonly baseSprite = new PIXI.Sprite;
     private readonly trailSprite = new PIXI.Sprite;
     private readonly clearingSprite = new PIXI.Sprite(PIXI.Texture.EMPTY); // used for clearing texture
     private trailAlphaSetInterval_ = 0;
@@ -46,7 +47,8 @@ export class TrailLayer extends PIXI.Sprite {
 
         this.frontTrailImageTexture = PIXI.RenderTexture.create(bufferTextureSize);
         this.backBufferTexture = PIXI.RenderTexture.create(bufferTextureSize);
-        this.texture = this.frontTrailImageTexture;
+        this.baseSprite.texture = this.frontTrailImageTexture;
+        this.addChild(this.baseSprite);
 
         if (TrailLayer.app === undefined)
             throw Error("PIXI app is null on constructing TrailLayer. Call TralLayer.setApp() before constructing TrailLayer.");
@@ -70,10 +72,10 @@ export class TrailLayer extends PIXI.Sprite {
             this.trailSprite.alpha = 1;
         }
         // Render trail image to frontTrailImageTexture
-        renderer.render(this.trailSprite, { renderTexture: this.frontTrailImageTexture, clear: true });
+        renderer.render({ container: this.trailSprite, target: this.frontTrailImageTexture, clear: true });
 
         // Store the image of this container to backBufferTexure (to reuse on next frame)
-        renderer.render(this, { renderTexture: this.backBufferTexture, clear: true });
+        renderer.render({ container: this, target: this.backBufferTexture, clear: true });
     }
 
     /**
@@ -81,21 +83,22 @@ export class TrailLayer extends PIXI.Sprite {
      */
     public clear() {
         const renderer = TrailLayer.app.renderer;
-        renderer.render(this.clearingSprite, { renderTexture: this.backBufferTexture, clear: true });
+        renderer.render({ container: this.clearingSprite, target: this.backBufferTexture, clear: true });
     }
+    
     /**
      * Get the access of the Sprite of trail image
      */
     public get TrailSprite() {
         return this.trailSprite;
     }
+
     /**
      * Set filter to trail image sprite.
      * @param f Filter to apply.
      */
-    public addFilter(f: PIXI.Filter) {
-        if (!this.trailSprite.filters) this.trailSprite.filters = [];
-        this.trailSprite.filters = this.trailSprite.filters.concat(f);
+    public get trailFilters() {
+        return this.trailSprite.filters;
     }
 
     /**

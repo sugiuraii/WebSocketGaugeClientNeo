@@ -91,16 +91,18 @@ export class MeterApplication {
     }
 
     public async Run(): Promise<void> {
+        /*
         // Override forceCanvas flag from webstorage, if Option.PIXIApplication.forceCanvas is undefinded.
         if (this.Option.PIXIApplicationOption.forceCanvas === undefined)
             if (this.WebStorage.ForceCanvas)
                 this.Option.PIXIApplicationOption.forceCanvas = true;
-
-        const pixiApp = new PIXI.Application<HTMLCanvasElement>(this.Option.PIXIApplicationOption);
+        */
+        const pixiApp = new PIXI.Application();
+        await pixiApp.init(this.Option.PIXIApplicationOption);
         // Append PIXI.js application to document body
-        pixiApp.view.style.width = "100vw";
-        pixiApp.view.style.touchAction = "auto";
-        pixiApp.view.style.pointerEvents = "none";
+        pixiApp.canvas.style.width = "100vw";
+        pixiApp.canvas.style.touchAction = "auto";
+        pixiApp.canvas.style.pointerEvents = "none";
 
         // Register app to TrailLayer to enable traling.
         TrailLayer.setApp(pixiApp);

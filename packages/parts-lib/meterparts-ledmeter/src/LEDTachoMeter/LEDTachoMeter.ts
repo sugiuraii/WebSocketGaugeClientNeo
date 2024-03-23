@@ -25,7 +25,6 @@
 import { CircularProgressBar, CircularProgressBarOptions, NumericIndicator, BitmapTextNumericIndicator } from 'pixi-gauge';
 import { CircularPlacementCooridnateCalculator } from 'placement-coordinate-calc';
 import * as PIXI from 'pixi.js';
-import { Assets } from '@pixi/assets';
 
 require("./LEDTachoMeterTexture.json");
 require("./LEDTachoMeterTexture.png");
@@ -49,11 +48,10 @@ export class LEDTachoMeter extends PIXI.Container {
     private tripLabel: NumericIndicator;
     private fuelLabel: NumericIndicator;
     private gearPosLabel: NumericIndicator;
-    private readonly displayObjects: Map<LEDTachoMeterObjectName, PIXI.DisplayObject> = new Map();
+    private readonly displayObjects: Map<LEDTachoMeterObjectName, PIXI.Container> = new Map();
     private readonly fixedBackContainer = new PIXI.Container();
 
-    public set CacheBackContainerAsBitMap(value : boolean) { this.fixedBackContainer.cacheAsBitmap = value};
-    public getDisplayObjects(value : LEDTachoMeterObjectName) : PIXI.DisplayObject { 
+    public getDisplayObjects(value : LEDTachoMeterObjectName) : PIXI.Container { 
         if(this.displayObjects.get(value) === undefined)
             throw new Error(value + "is not exists");
         else
@@ -105,7 +103,7 @@ export class LEDTachoMeter extends PIXI.Container {
     }
 
     public static async create() {
-        await Assets.load(["img/LEDTachoMeterTexture.json", "img/LEDMeterFont_100px.fnt", "img/LEDMeterFont_88px.fnt", "img/LEDMeterFont_45px.fnt", "img/LEDMeterFont_30px.fnt", "img/LEDMeter_RPMFont_58px.fnt"]);
+        await PIXI.Assets.load(["img/LEDTachoMeterTexture.json", "img/LEDMeterFont_100px.fnt", "img/LEDMeterFont_88px.fnt", "img/LEDMeterFont_45px.fnt", "img/LEDMeterFont_30px.fnt", "img/LEDMeter_RPMFont_58px.fnt"]);
         const instance = new LEDTachoMeter();
         return instance;
     }
@@ -162,9 +160,9 @@ export class LEDTachoMeter extends PIXI.Container {
 
         //Create meter number label
         const numberElements: PIXI.BitmapText[] = [];
-        const place = new CircularPlacementCooridnateCalculator(197, {x: 300, y: 300});
+        const place = new CircularPlacementCooridnateCalculator(197, {x: 300, y: 290});
         for(let num = 0; num <= 9; num++) {
-            numberElements[num] = new PIXI.BitmapText(String(num), { fontName: "LEDMeter_RPMFont_58px", fontSize: -58, align: "center" });
+            numberElements[num] = new PIXI.BitmapText({ text: String(num),  style: { fontFamily: "LEDMeter_RPMFont_58px", fontSize: -58, align: "center"}});
             numberElements[num].anchor.set(0.5, 0.5);
             const angle = 270 - num * 30;
             numberElements[num].position.set(place.X(angle), place.Y(angle));
@@ -198,27 +196,27 @@ export class LEDTachoMeter extends PIXI.Container {
         super.addChild(tachoProgressBar);
 
         const valueLabelContainer = new PIXI.Container();
-        const speedLabel = this.speedLabel = new BitmapTextNumericIndicator(speedValDefault.toFixed(0), { fontName: "LEDMeterFont_88px", fontSize: -88, align: "right" });
+        const speedLabel = this.speedLabel = new BitmapTextNumericIndicator({ text: speedValDefault.toFixed(0),  style: { fontFamily: "LEDMeterFont_88px", fontSize: -88, align: "right"}});
         speedLabel.anchor.set(1, 0.5);
         speedLabel.position.set(410, 240);
         valueLabelContainer.addChild(speedLabel);
 
-        const gasMilageLabel = this.gasMilageLabel = new BitmapTextNumericIndicator(gasMilageValDefault.toFixed(2), { fontName: "LEDMeterFont_45px", fontSize: -45, align: "right" });
+        const gasMilageLabel = this.gasMilageLabel = new BitmapTextNumericIndicator({ text: gasMilageValDefault.toFixed(2),  style: { fontFamily: "LEDMeterFont_45px", fontSize: -45, align: "right"}});
         gasMilageLabel.anchor.set(1, 0.5);
         gasMilageLabel.position.set(310, 360);
         valueLabelContainer.addChild(gasMilageLabel);
 
-        const tripLabel = this.tripLabel = new BitmapTextNumericIndicator(tripValDefault.toFixed(1), { fontName: "LEDMeterFont_30px", fontSize: -30, align: "right" });
+        const tripLabel = this.tripLabel = new BitmapTextNumericIndicator({ text: tripValDefault.toFixed(1),  style: { fontFamily: "LEDMeterFont_30px", fontSize: -30, align: "right"}});
         tripLabel.anchor.set(1, 0.5);
         tripLabel.position.set(510, 355);
         valueLabelContainer.addChild(tripLabel);
 
-        const fuelLabel = this.fuelLabel = new BitmapTextNumericIndicator(fuelValDefault.toFixed(2), { fontName: "LEDMeterFont_30px", fontSize: -30, align: "right" });
+        const fuelLabel = this.fuelLabel = new BitmapTextNumericIndicator({ text: fuelValDefault.toFixed(2),  style: { fontFamily: "LEDMeterFont_30px", fontSize: -30, align: "right"}});
         fuelLabel.anchor.set(1, 0.5);
         fuelLabel.position.set(510, 395);
         valueLabelContainer.addChild(fuelLabel);
 
-        const gearPosLabel = this.gearPosLabel = new BitmapTextNumericIndicator("N", { fontName: "LEDMeterFont_100px", fontSize: -100, align: "right" });
+        const gearPosLabel = this.gearPosLabel = new BitmapTextNumericIndicator({ text: "N",  style: { fontFamily: "LEDMeterFont_100px", fontSize: -100, align: "right"}});
         gearPosLabel.anchor.set(1, 0.5);
         gearPosLabel.text = "N";
         gearPosLabel.position.set(410, 495);
@@ -226,8 +224,6 @@ export class LEDTachoMeter extends PIXI.Container {
         
         this.displayObjects.set("ValueLabel",valueLabelContainer);
         super.addChild(valueLabelContainer);
-
-        this.CacheBackContainerAsBitMap = true;
     }
 
     private changeRedZoneProgressBarColor() {

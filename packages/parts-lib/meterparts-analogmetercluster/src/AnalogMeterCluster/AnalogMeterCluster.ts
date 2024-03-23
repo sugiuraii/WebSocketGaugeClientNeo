@@ -30,7 +30,6 @@ import { BitmapTextNumericIndicator } from 'pixi-gauge';
 import { NumericIndicator } from 'pixi-gauge';
 
 import * as PIXI from 'pixi.js';
-import { Assets } from '@pixi/assets';
 import { TrailLayer } from 'pixi-traillayer';
 
 require("./AnalogMeterClusterTexture.json");
@@ -65,9 +64,9 @@ export class AnalogMeterCluster extends PIXI.Container {
     private readonly tachoBackContainer = new PIXI.Container();
     private readonly speedBackContainer = new PIXI.Container();
     private readonly boostBackContainer = new PIXI.Container();
-    private readonly tachoDisplayObjects: Map<TachoMeterObjectName, PIXI.DisplayObject> = new Map();
-    private readonly speedDisplayObjects: Map<SpeedMeterObjectName, PIXI.DisplayObject> = new Map();
-    private readonly boostDisplayObjects: Map<BoostMeterObjectName, PIXI.DisplayObject> = new Map();
+    private readonly tachoDisplayObjects: Map<TachoMeterObjectName, PIXI.Container> = new Map();
+    private readonly speedDisplayObjects: Map<SpeedMeterObjectName, PIXI.Container> = new Map();
+    private readonly boostDisplayObjects: Map<BoostMeterObjectName, PIXI.Container> = new Map();
 
     private tacho = 0;
     private speed = 0;
@@ -136,24 +135,19 @@ export class AnalogMeterCluster extends PIXI.Container {
         this.gearPosLabel.text = val;
     }
     
-    public set CacheBackContainerAsBitMap(value : boolean) { 
-        this.tachoBackContainer.cacheAsBitmap = value;
-        this.speedBackContainer.cacheAsBitmap = value;
-        this.boostBackContainer.cacheAsBitmap = value;
-    }
-    public getTachoDisplayObjects(value : TachoMeterObjectName) : PIXI.DisplayObject { 
+    public getTachoDisplayObjects(value : TachoMeterObjectName) : PIXI.Container { 
         if(this.tachoDisplayObjects.get(value) === undefined)
             throw new Error(value + "is not exists");
         else
             return this.tachoDisplayObjects.get(value)!;
     };
-    public getSpeedDisplayObjects(value : SpeedMeterObjectName) : PIXI.DisplayObject { 
+    public getSpeedDisplayObjects(value : SpeedMeterObjectName) : PIXI.Container { 
         if(this.speedDisplayObjects.get(value) === undefined)
             throw new Error(value + "is not exists");
         else
             return this.speedDisplayObjects.get(value)!;
     };
-    public getBoostDisplayObjects(value : BoostMeterObjectName) : PIXI.DisplayObject { 
+    public getBoostDisplayObjects(value : BoostMeterObjectName) : PIXI.Container { 
         if(this.boostDisplayObjects.get(value) === undefined)
             throw new Error(value + "is not exists");
         else
@@ -186,13 +180,11 @@ export class AnalogMeterCluster extends PIXI.Container {
         this.waterTempProgressBar = SpeedMeter.waterTempProgressBar;
 
         this.boostNeedleGauge = BoostMeter.boostNeedleGauge;
-
-        this.CacheBackContainerAsBitMap = true;
     }
 
     public static async create(applyTrail = true, trailAlpha = 0.95) {
-        await Assets.load(["img/AnalogMeterClusterTexture.json", "img/AnalogMeterFont_115px.fnt", "img/AnalogMeterFont_40px.fnt", "img/AnalogMeterFont_35px.fnt", "img/AnalogMeterFont_60px.fnt"]);
-        //await Assets.load('./fonts/DSEG14Classic-BoldItalic.ttf');
+        await PIXI.Assets.load(["img/AnalogMeterClusterTexture.json", "img/AnalogMeterFont_115px.fnt", "img/AnalogMeterFont_40px.fnt", "img/AnalogMeterFont_35px.fnt", "img/AnalogMeterFont_60px.fnt"]);
+        //await PIXI.Assets.load('./fonts/DSEG14Classic-BoldItalic.ttf');
         const instance = new AnalogMeterCluster(applyTrail, trailAlpha);
         return instance;
     }
@@ -228,14 +220,14 @@ export class AnalogMeterCluster extends PIXI.Container {
 
         // LCD value label and progressbar
         const lcdValueLabelContainer = new PIXI.Container();
-        const gasMilageLabel = new BitmapTextNumericIndicator("0.00", { fontName: "AnalogMeterFont_40px", fontSize: -40, align: "right" });
+        const gasMilageLabel = new BitmapTextNumericIndicator({ text: "0.00",  style: { fontFamily: "AnalogMeterFont_40px", fontSize: -40, align: "right"}});
         gasMilageLabel.NumberOfDecimalPlace = 2;
         gasMilageLabel.anchor.set(1, 0.5);
         gasMilageLabel.position.set(505, 353);
         gasMilageLabel.scale.set(0.9);
         lcdValueLabelContainer.addChild(gasMilageLabel);
 
-        const tripLabel = new BitmapTextNumericIndicator("0.0", { fontName: "AnalogMeterFont_35px", fontSize: -35, align: "right" });
+        const tripLabel = new BitmapTextNumericIndicator({ text: "0.0",  style: { fontFamily: "AnalogMeterFont_35px", fontSize: -35, align: "right"}});
         tripLabel.NumberOfDecimalPlace = 1;
         tripLabel.anchor.set(1, 0.5);
         tripLabel.position.set(520, 395);
@@ -243,7 +235,7 @@ export class AnalogMeterCluster extends PIXI.Container {
         tripLabel.scale.set(0.9);
         lcdValueLabelContainer.addChild(tripLabel);
 
-        const fuelLabel = new BitmapTextNumericIndicator("0.00", { fontName: "AnalogMeterFont_35px", fontSize: -35, align: "right" });
+        const fuelLabel = new BitmapTextNumericIndicator({ text: "0.00",  style: { fontFamily: "AnalogMeterFont_35px", fontSize: -35, align: "right"}});
         fuelLabel.NumberOfDecimalPlace = 2;
         fuelLabel.anchor.set(1, 0.5);
         fuelLabel.position.set(520, 435);
@@ -251,7 +243,7 @@ export class AnalogMeterCluster extends PIXI.Container {
         fuelLabel.scale.set(0.9);
         lcdValueLabelContainer.addChild(fuelLabel);
 
-        const gearPosLabel = new BitmapTextNumericIndicator("N", { fontName: "AnalogMeterFont_115px", fontSize: -115, align: "center" });
+        const gearPosLabel = new BitmapTextNumericIndicator({ text: "N",  style: { fontFamily: "AnalogMeterFont_115px", fontSize: -115, align: "center"}});
         gearPosLabel.anchor.set(0.5, 0.5);
         gearPosLabel.position.set(377, 515);
         gearPosLabel.text = "N";
@@ -348,7 +340,7 @@ export class AnalogMeterCluster extends PIXI.Container {
         speedMeterContainer.addChild(this.speedBackContainer);
 
         const lcdValueLabelContainer = new PIXI.Container();
-        const speedLabel = this.speedLabel = new BitmapTextNumericIndicator(speedValDefault.toFixed(0), { fontName: "AnalogMeterFont_60px", fontSize: -60, align: "center" });
+        const speedLabel = this.speedLabel = new BitmapTextNumericIndicator({ text: speedValDefault.toFixed(0),  style: { fontFamily: "AnalogMeterFont_60px", fontSize: -60, align: "center"}});
         speedLabel.NumberOfDecimalPlace = 0;
         speedLabel.anchor.set(1, 0.5);
         speedLabel.position.set(365, 432);

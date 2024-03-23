@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { Assets } from "@pixi/assets";
+import * as PIXI from 'pixi.js';
 import { CircularGaugePanelBase } from "./private/CircularGaugePanelBase";
 import { SemiCircularGaugePanelOption } from "./SemiCircularGaugePanelOption"
 
@@ -39,8 +39,8 @@ export class SemiCircularGaugePanel extends CircularGaugePanelBase {
     }
 
     public static async create(options: SemiCircularGaugePanelOption) {
-        await Assets.load(["img/SemiCircularGaugeTexture.json", "img/CircularGaugeLabelFont.fnt"]);
-        await Assets.load(["./fonts/FreeSansBold.otf"]);
+        await PIXI.Assets.load(["img/SemiCircularGaugeTexture.json", "img/CircularGaugeLabelFont.fnt"]);
+        await PIXI.Assets.load(["./fonts/FreeSansBold.otf"]);
         const instance = new SemiCircularGaugePanel(options);
         return instance;
     }

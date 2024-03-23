@@ -27,7 +27,6 @@ import { BitmapTextNumericIndicator } from 'pixi-gauge';
 import { NumericIndicator } from 'pixi-gauge';
 
 import * as PIXI from 'pixi.js';
-import { Assets } from '@pixi/assets';
 import { TrailLayer } from 'pixi-traillayer';
 
 require("./DigiTachoMeterTexture.json");
@@ -41,7 +40,7 @@ require("./GearPosFont_0.png");
 export type DigiTachoPanelObjectName = "TachoProgressBar" | "SpeedLabel" | "GearPosLabel" | "BackLabel" | "Grid" | "Background";
 
 export class DigiTachoPanel extends PIXI.Container {
-    private readonly displayObjects: Map<DigiTachoPanelObjectName, PIXI.DisplayObject> = new Map();
+    private readonly displayObjects: Map<DigiTachoPanelObjectName, PIXI.Container> = new Map();
     private readonly fixedBackContainer: PIXI.Container;
     private tachoProgressBar: RectangularProgressBar;
 
@@ -74,17 +73,15 @@ export class DigiTachoPanel extends PIXI.Container {
         this.geasposLabel.text = gearPos;
     }
 
-    public getDisplayObjects(value : DigiTachoPanelObjectName) : PIXI.DisplayObject { 
+    public getDisplayObjects(value : DigiTachoPanelObjectName) : PIXI.Container { 
         if(this.displayObjects.get(value) === undefined)
             throw new Error(value + "is not exists");
         else
             return this.displayObjects.get(value)!;
     };
 
-    public set CacheBackContainerAsBitMap(value : boolean) { this.fixedBackContainer.cacheAsBitmap = value};
-
     public static async create(applyTrail = true, trailAlpha = 0.95) {
-        await Assets.load(["img/DigiTachoMeterTexture.json", "img/GearPosFont.fnt", "img/SpeedMeterFont.fnt"]);
+        await PIXI.Assets.load(["img/DigiTachoMeterTexture.json", "img/GearPosFont.fnt", "img/SpeedMeterFont.fnt"]);
         const progressBarTexture = await this.createProgressBarTexture();
         const instance = new DigiTachoPanel(applyTrail, trailAlpha, progressBarTexture);
         return instance;
@@ -99,8 +96,6 @@ export class DigiTachoPanel extends PIXI.Container {
         this.speedLabel = gaugeset.speedLabel;
         this.geasposLabel = gaugeset.gearLabel;
         this.fixedBackContainer = gaugeset.fixedContainer;
-
-        this.CacheBackContainerAsBitMap = true;
     }
 
     private static async createProgressBarTexture(): Promise<PIXI.Texture> {
@@ -191,16 +186,16 @@ export class DigiTachoPanel extends PIXI.Container {
             super.addChild(tachoProgressBar);
         }
 
-        const speedTextLabel = new BitmapTextNumericIndicator(this.speed.toString(), { fontName: "DigiTacho_SpeedMeter", fontSize: -170, align: "right", letterSpacing: -5 });
+        const speedTextLabel = new BitmapTextNumericIndicator({ text: this.speed.toString(),  style: { fontFamily: "DigiTacho_SpeedMeter", fontSize: -170, align: "right", letterSpacing: -5}});
         speedTextLabel.position.set(485, 360);
         speedTextLabel.anchor.set(1, 1);
         speedTextLabel.NumberOfDecimalPlace = 0;
         this.displayObjects.set("SpeedLabel", speedTextLabel);
         super.addChild(speedTextLabel);
 
-        const gearTextLabel = new PIXI.BitmapText(this.gearPos, { fontName: "DigiTacho_GearPos", fontSize: -101, align: "center" });
-        gearTextLabel.position.set(66, 62);
+        const gearTextLabel = new PIXI.BitmapText({ text: this.gearPos,  style: { fontFamily: "DigiTacho_GearPos", fontSize: -101, align: "center"}});
         gearTextLabel.anchor.set(0.5, 0.5);
+        gearTextLabel.position.set(64, 47);
         this.displayObjects.set("GearPosLabel", gearTextLabel);
         super.addChild(gearTextLabel);
 
