@@ -100,7 +100,12 @@ export class MeterApplication {
         const pixiApp = new PIXI.Application();
         await pixiApp.init(this.Option.PIXIApplicationOption);
         // Append PIXI.js application to document body
-        pixiApp.canvas.style.width = "100vw";
+        if(window.innerHeight > (this.Option.PIXIApplicationOption.height ?? 0))
+            pixiApp.canvas.style.width = "100vw";
+        else
+            pixiApp.canvas.style.height = "100vh";
+        pixiApp.canvas.style.display = "block";
+        pixiApp.canvas.style.margin = "0 auto";
         pixiApp.canvas.style.touchAction = "auto";
         pixiApp.canvas.style.pointerEvents = "none";
 
