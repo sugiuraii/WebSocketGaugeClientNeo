@@ -14,8 +14,8 @@
     "basic-logger": "../basic-logger"  
   },
   "devDependencies": {
-    "typescript": "^5.0.4",
-    "rimraf": "^5.0.0",
+    "typescript": "^5.4.3",
+    "rimraf": "^5.0.5",
     "interpolation": "../interpolation"
   },
   "author": "K. Sugiura",
