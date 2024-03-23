@@ -101,13 +101,13 @@ export class MeterApplication {
         await pixiApp.init(this.Option.PIXIApplicationOption);
         // Append PIXI.js application to document body
         if(window.innerHeight > (this.Option.PIXIApplicationOption.height ?? 0))
-            pixiApp.view.style.width = "100vw";
+            pixiApp.canvas.style.width = "100vw";
         else
-            pixiApp.view.style.height = "100vh";
-        pixiApp.view.style.display = "block";
-        pixiApp.view.style.margin = "0 auto";
-        pixiApp.view.style.touchAction = "auto";
-        pixiApp.view.style.pointerEvents = "none";
+            pixiApp.canvas.style.height = "100vh";
+        pixiApp.canvas.style.display = "block";
+        pixiApp.canvas.style.margin = "0 auto";
+        pixiApp.canvas.style.touchAction = "auto";
+        pixiApp.canvas.style.pointerEvents = "none";
 
         // Register app to TrailLayer to enable traling.
         TrailLayer.setApp(pixiApp);
