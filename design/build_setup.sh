@@ -8,4 +8,5 @@ cd fonts
 bash download_ttfs.sh
 cd ../
 
+cd svgs
 npm i
