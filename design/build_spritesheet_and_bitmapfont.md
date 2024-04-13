@@ -7,30 +7,17 @@ Before build spritesheet and bitmapfont,
     * Imagemagick is required by spritesheet.js, and postprocessing of bitmapfont
 
 # 2. Run download script
-* Install tool program binary
+* Install tool program binary, and ttf fonts to build bitmapfont.
     ```
-    cd bin
-    bash download_tools.sh
-    ```
-* Install ttf fonts to build bitmapfont
-    ```
-    cd fonts
-    bash download_ttfs.sh
+    bash build_setup.sh
     ```
 
-# 3. Install npm package 
-```
-cd svgs
-npm i
-```
-# 4. Install ttf fonts (refered from svgs) to your system
+# 3. Install ttf fonts (refered from svgs) to your system
 * Unfortunately there is no script to install font file requried from svgs.
     * Please open svg files by Inkscape, check font is correctly drawn. If some of fonts is missing, please install by yourself.
 
-# 5. Run build script
+# 4. Run build script and deploy
 ```
-cd (folder of design)
-bash build_fonts.sh
-bash pngexport.sh
+bash build_install_all.sh
 ```
 
