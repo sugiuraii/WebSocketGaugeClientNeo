@@ -70,6 +70,7 @@
         "@types/react-bootstrap": "^0.32.36"
     },
     "scripts": {
+        "update-package-all": "npx npm-check-updates -u --deep",
         "build-full": "npm run build-depends; npm run build-all",
         "build-all": "npm-run-all --parallel build-WebSocketTester build-benchmark build-application build-partsTest build-index",
         "build-WebSocketTester": "cd src/WebSocketTester && npx webpack --progress=profile",
