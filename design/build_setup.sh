@@ -6,3 +6,6 @@ cd ../
 
 cd fonts
 bash download_ttfs.sh
+cd ../
+
+npm i
