@@ -19,7 +19,9 @@ function export_pngs() {
     fi
     for id in "${id_list[@]}"
     do
-        $inkscape_cmd --export-type="png" $svg_filename --export-id="$id" --export-id-only --export-filename=$export_dir/${export_filename_prefix}_$id.png $inkscape_extra_options
+        local svg_filename_abs=$(realpath $svg_filename)
+        local export_filename_abs=$(realpath $export_dir/${export_filename_prefix}_$id.png)
+        $inkscape_cmd --export-type="png" $svg_filename_abs --export-id="$id" --export-id-only --export-filename=${export_filename_abs} $inkscape_extra_options
     done
 }
 
