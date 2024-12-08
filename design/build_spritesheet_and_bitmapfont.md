@@ -3,9 +3,14 @@
 # 1. Install required application to your sysem.
 Before build spritesheet and bitmapfont,
 * Install Inkscape (to build spritesheet from svg files)
+    * For ubuntu, Inkscape by snap do not work well (since Inkscape has problem to access home directory from command.)
 * Install imagemagick (6.9)
     * Imagemagick is required by spritesheet.js, and postprocessing of bitmapfont
-
+* Install `xmllint`
+    * For ubuntu, type
+    ```
+    apt -y install libxml2-utils
+    ```
 # 2. Run download script
 * Install tool program binary, and ttf fonts to build bitmapfont.
     ```
