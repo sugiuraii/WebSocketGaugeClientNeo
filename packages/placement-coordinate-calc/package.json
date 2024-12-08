@@ -12,8 +12,8 @@
   "dependencies": {
   },
   "devDependencies": {
-    "typescript": "^5.4.5",
-    "rimraf": "^5.0.5"
+    "typescript": "^5.7.2",
+    "rimraf": "^6.0.1"
   },
   "author": "K. Sugiura",
   "license": "MIT"
