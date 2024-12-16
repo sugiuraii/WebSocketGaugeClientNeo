@@ -48,7 +48,7 @@ export class MeterApplication {
     private readonly webSocketCollection: WebsocketServiceCollection;
     private MeterSelectDialogSetting: MeterSelectionSetting;
 
-    protected get RootElem(): JSX.Element {
+    protected get RootElem(): React.JSX.Element {
         const onMeterSelectDialogSet = (Object.keys(this.MeterSelectDialogSetting).length === 0) ? undefined : (c: MeterSelectionSetting) => {
             this.MeterSelectDialogSetting = c;
             this.WebStorage.MeterSelectDialogSetting = c;

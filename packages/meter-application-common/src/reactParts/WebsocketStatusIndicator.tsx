@@ -33,7 +33,7 @@ type WebsocketStatusIndicatorProps =
     }
 
 export const WebsocketStatusIndicator: FunctionComponent<WebsocketStatusIndicatorProps> = (p) => {
-    const badges: JSX.Element[] = [];
+    const badges: React.JSX.Element[] = [];
     for (const name in p.statusList) {
         const bg = getBadgeBg(p.statusList[name].isEnabled, p.statusList[name].connectionStatus);
         badges.push(<Badge key={name} bg={bg}>{name}</Badge>);

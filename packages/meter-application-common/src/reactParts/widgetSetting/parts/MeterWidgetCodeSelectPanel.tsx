@@ -41,7 +41,7 @@ export const MeterWidgetCodeSelectPanel: FunctionComponent<MeterWidgetCodeSelect
     const selectOptions = p.codesToSelect.map(c => <option key={c}>{c}</option>);
 
     // Create parameter code selector
-    const selectors: JSX.Element[] = [];
+    const selectors: React.JSX.Element[] = [];
     for (const key in content) {
         const val = content[key];
         selectors.push(

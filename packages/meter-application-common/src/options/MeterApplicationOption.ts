@@ -40,7 +40,7 @@ class MeterSelectDialogOption {
 export class MeterApplicationOption {
     public readonly WebSocketCollectionOption : WebsocketObjectCollectionOption;
     public readonly PIXIApplicationOption : Partial<PIXI.ApplicationOptions>;
-    public readonly NavBarItems : JSX.Element[] = [];
+    public readonly NavBarItems : React.JSX.Element[] = [];
     public readonly MeteSelectDialogOption = new MeterSelectDialogOption();
     
     public SetupPIXIMeterPanel: (pixiApp: PIXI.Application, wsObj: WebsocketServiceCollection, meterSelection : MeterSelectionSetting) => Promise<void> = async () => {/* do nothing*/};
