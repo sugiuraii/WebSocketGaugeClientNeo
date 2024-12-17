@@ -136,9 +136,9 @@ export class AnalogMeterCluster extends PIXI.Container {
     }
     
     public set CacheBackContainerAsBitMap(value : boolean) { 
-        this.tachoBackContainer.cacheAsBitmap = value;
-        this.speedBackContainer.cacheAsBitmap = value;
-        this.boostBackContainer.cacheAsBitmap = value;
+        this.tachoBackContainer.cacheAsTexture(value);
+        this.speedBackContainer.cacheAsTexture(value);
+        this.boostBackContainer.cacheAsTexture(value);
     }
     public getTachoDisplayObjects(value : TachoMeterObjectName) : PIXI.Container { 
         if(this.tachoDisplayObjects.get(value) === undefined)

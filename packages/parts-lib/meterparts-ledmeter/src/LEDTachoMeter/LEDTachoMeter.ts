@@ -51,7 +51,7 @@ export class LEDTachoMeter extends PIXI.Container {
     private readonly displayObjects: Map<LEDTachoMeterObjectName, PIXI.Container> = new Map();
     private readonly fixedBackContainer = new PIXI.Container();
 
-    public set CacheBackContainerAsBitMap(value : boolean) { this.fixedBackContainer.cacheAsBitmap = value};
+    public set CacheBackContainerAsBitMap(value : boolean) { this.fixedBackContainer.cacheAsTexture(value) }
     public getDisplayObjects(value : LEDTachoMeterObjectName) : PIXI.Container { 
         if(this.displayObjects.get(value) === undefined)
             throw new Error(value + "is not exists");

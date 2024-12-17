@@ -322,7 +322,7 @@ export class AnalogSingleMeter extends PIXI.Container
         
         // "Baking" this container to single texture
         // This can speed up the rendering (since gpu dose not need to construct this constructor on every frame)
-        baseContainer.cacheAsBitmap = true;
+        baseContainer.cacheAsTexture(true);
         return baseContainer;
     }
 }

@@ -80,7 +80,7 @@ export class DigiTachoPanel extends PIXI.Container {
             return this.displayObjects.get(value)!;
     };
 
-    public set CacheBackContainerAsBitMap(value : boolean) { this.fixedBackContainer.cacheAsBitmap = value};
+    public set CacheBackContainerAsBitMap(value : boolean) { this.fixedBackContainer.cacheAsTexture(value) }
 
     public static async create(applyTrail = true, trailAlpha = 0.95) {
         await PIXI.Assets.load(["img/DigiTachoMeterTexture.json", "img/GearPosFont.fnt", "img/SpeedMeterFont.fnt"]);

@@ -53,7 +53,7 @@ export class MilageGraphPanel extends PIXI.Container {
     private sectSpan: string[] = ["5min", "10min", "15min", "20min", "25min", "30min"];
 
 
-    public set CacheBackContainerAsBitMap(value : boolean) { this.fixedBackContainer.cacheAsBitmap = value};
+    public set CacheBackContainerAsBitMap(value : boolean) { this.fixedBackContainer.cacheAsTexture(value) }
     public getDisplayObjects(value : MilageGraphPanelObjectName) : PIXI.Container { 
         if(this.displayObjects.get(value) === undefined)
             throw new Error(value + "is not exists");

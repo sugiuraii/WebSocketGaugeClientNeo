@@ -93,7 +93,7 @@ export class AnalogSingleMeter extends PIXI.Container {
     /**
      * Set CacheAsBitMap to background container (to improve performance.)
      */
-    public set CacheBackContainerAsBitMap(value : boolean) { this.backContainer.cacheAsBitmap = value};
+    public set CacheBackContainerAsBitMap(value : boolean) { this.backContainer.cacheAsTexture(value) }
     
     /**
      * Get referencce of parts.
