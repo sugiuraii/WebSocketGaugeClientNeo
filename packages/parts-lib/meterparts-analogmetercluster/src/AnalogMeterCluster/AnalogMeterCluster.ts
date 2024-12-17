@@ -135,7 +135,7 @@ export class AnalogMeterCluster extends PIXI.Container {
         this.gearPosLabel.text = val;
     }
     
-    public set CacheBackContainerAsBitMap(value : boolean) { 
+    public set CacheBackContainerAsTexture(value : boolean) { 
         this.tachoBackContainer.cacheAsTexture(value);
         this.speedBackContainer.cacheAsTexture(value);
         this.boostBackContainer.cacheAsTexture(value);
@@ -186,7 +186,7 @@ export class AnalogMeterCluster extends PIXI.Container {
 
         this.boostNeedleGauge = BoostMeter.boostNeedleGauge;
 
-        this.CacheBackContainerAsBitMap = true;
+        this.CacheBackContainerAsTexture = true;
     }
 
     public static async create(applyTrail = true, trailAlpha = 0.95) {

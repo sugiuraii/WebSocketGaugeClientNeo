@@ -158,7 +158,7 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
             this.valueTextLabel.text = value.toFixed(this.Options.ValueNumberRoundDigit).toString();
     }
 
-    public set CacheBackContainerAsBitMap(value : boolean) { this.backContainer.cacheAsTexture(value) }
+    public set CacheBackContainerAsTexture(value : boolean) { this.backContainer.cacheAsTexture(value) }
     public getDisplayObjects(value : CircularProgressBarObjectName) : PIXI.Container { 
         if(this.displayObjects.get(value) === undefined)
             throw new Error(value + "is not exists");

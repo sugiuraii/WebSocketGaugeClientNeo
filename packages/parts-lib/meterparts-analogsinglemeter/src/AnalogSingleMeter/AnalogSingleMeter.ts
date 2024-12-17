@@ -56,8 +56,8 @@ export class AnalogSingleMeter extends PIXI.Container {
     private NeedleGauge: RotationNeedleGauge;
 
     /**
-     * Reference of background container (to set CacheAsBitMap by CacheBackContainerAsBitMap property)
-     * @see CacheBackContainerAsBitMap
+     * Reference of background container (to set CacheAsTexture by CacheBackContainerAsTexture property)
+     * @see CacheBackContainerAsTexture
      */
     private readonly backContainer: PIXI.Container;
 
@@ -91,9 +91,9 @@ export class AnalogSingleMeter extends PIXI.Container {
         return instance;
     }
     /**
-     * Set CacheAsBitMap to background container (to improve performance.)
+     * Set CacheAsTexture to background container (to improve performance.)
      */
-    public set CacheBackContainerAsBitMap(value : boolean) { this.backContainer.cacheAsTexture(value) }
+    public set CacheBackContainerAsTexture(value : boolean) { this.backContainer.cacheAsTexture(value) }
     
     /**
      * Get referencce of parts.
@@ -156,7 +156,7 @@ export class AnalogSingleMeter extends PIXI.Container {
 
         // "Baking" this container to single texture
         // This can speed up the rendering (since gpu dose not need to construct this constructor on every frame)
-        this.CacheBackContainerAsBitMap = true;
+        this.CacheBackContainerAsTexture = true;
     }
 
     /**
