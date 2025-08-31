@@ -158,6 +158,7 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
             this.valueTextLabel.text = value.toFixed(this.Options.ValueNumberRoundDigit).toString();
     }
 
+    public set CacheBackContainerAsTexture(value : boolean) { this.backContainer.cacheAsTexture(value) }
     public getDisplayObjects(value : CircularProgressBarObjectName) : PIXI.Container { 
         if(this.displayObjects.get(value) === undefined)
             throw new Error(value + "is not exists");
@@ -221,6 +222,8 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
 
     private createBackContainer(): PIXI.Container {
         const backContainer = new PIXI.Container();
+        //Unlock baked texture
+        backContainer.cacheAsTexture(false);
 
         const centerPosition = this.Options.CenterPosition;
         const zoneBarRadius = this.Options.ZoneBarRadius;
@@ -327,6 +330,9 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
         this.addChild(backContainer);
         this.displayObjects.set("BackLabel", backLabelContainer);
 
+        //Bake into texture
+        //backContainer.cacheAsTexture({resolution : 3}); // Manually set bitmap cache resolution to avoid redzone bar glitch in Firefox.(Temporary disable)
+        backContainer.cacheAsTexture(true)
         return backContainer;
     }
 }

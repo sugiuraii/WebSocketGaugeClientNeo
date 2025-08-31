@@ -135,6 +135,11 @@ export class AnalogMeterCluster extends PIXI.Container {
         this.gearPosLabel.text = val;
     }
     
+    public set CacheBackContainerAsTexture(value : boolean) { 
+        this.tachoBackContainer.cacheAsTexture(value);
+        this.speedBackContainer.cacheAsTexture(value);
+        this.boostBackContainer.cacheAsTexture(value);
+    }
     public getTachoDisplayObjects(value : TachoMeterObjectName) : PIXI.Container { 
         if(this.tachoDisplayObjects.get(value) === undefined)
             throw new Error(value + "is not exists");
@@ -180,6 +185,8 @@ export class AnalogMeterCluster extends PIXI.Container {
         this.waterTempProgressBar = SpeedMeter.waterTempProgressBar;
 
         this.boostNeedleGauge = BoostMeter.boostNeedleGauge;
+
+        this.CacheBackContainerAsTexture = true;
     }
 
     public static async create(applyTrail = true, trailAlpha = 0.95) {

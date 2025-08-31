@@ -80,6 +80,8 @@ export class DigiTachoPanel extends PIXI.Container {
             return this.displayObjects.get(value)!;
     };
 
+    public set CacheBackContainerAsTexture(value : boolean) { this.fixedBackContainer.cacheAsTexture(value) }
+
     public static async create(applyTrail = true, trailAlpha = 0.95) {
         await PIXI.Assets.load(["img/DigiTachoMeterTexture.json", "img/GearPosFont.fnt", "img/SpeedMeterFont.fnt"]);
         const progressBarTexture = await this.createProgressBarTexture();
@@ -96,6 +98,8 @@ export class DigiTachoPanel extends PIXI.Container {
         this.speedLabel = gaugeset.speedLabel;
         this.geasposLabel = gaugeset.gearLabel;
         this.fixedBackContainer = gaugeset.fixedContainer;
+
+        this.CacheBackContainerAsTexture = true;
     }
 
     private static async createProgressBarTexture(): Promise<PIXI.Texture> {

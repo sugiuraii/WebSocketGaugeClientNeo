@@ -2,21 +2,21 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="2600"
    height="2600"
    viewBox="0 0 687.9167 687.91664"
    version="1.1"
    id="svg5563"
-   sodipodi:docname="描画2.svg"
-   inkscape:version="0.92.1 r15371">
+   sodipodi:docname="MeterPartsAndContainers.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <defs
      id="defs5557">
     <marker
@@ -358,8 +358,8 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.35"
-     inkscape:cx="110.43208"
-     inkscape:cy="1418.1343"
+     inkscape:cx="1402.8571"
+     inkscape:cy="1418.5714"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -369,11 +369,14 @@
      fit-margin-right="0"
      fit-margin-bottom="0"
      inkscape:window-width="1920"
-     inkscape:window-height="1018"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
-     showguides="true" />
+     showguides="true"
+     inkscape:showpageshadow="2"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1" />
   <metadata
      id="metadata5560">
     <rdf:RDF>
@@ -449,7 +452,8 @@
            x="-60.609154"
            y="-163.19016"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#ffffff" /></flowRegion><flowPara
-         id="flowPara7295" /></flowRoot>    <path
+         id="flowPara7295" /></flowRoot>
+    <path
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:1.25;font-family:'Iskoola Pota';-inkscape-font-specification:'Iskoola Pota';letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.627303"
        inkscape:transform-center-y="16.570711"
        inkscape:transform-center-x="-18.433357"
@@ -495,12 +499,13 @@
            height="285.71429"
            width="517.14288"
            id="rect7385" /></flowRegion><flowPara
-         id="flowPara7387" /></flowRoot>    <flowRoot
+         id="flowPara7387" /></flowRoot>
+    <flowRoot
        transform="matrix(0.26458333,0,0,0.26458333,43.421891,-331.98263)"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48.0000006px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none"
        id="flowRoot26"
        xml:space="preserve"><flowRegion
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;font-size:48.0000006px;"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff"
          id="flowRegion28"><rect
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;font-size:48.0000006px;"
            y="37.371479"
@@ -509,7 +514,8 @@
            width="280.00006"
            id="rect30" /></flowRegion><flowPara
          id="flowPara32">Backsprite</flowPara><flowPara
-         id="flowPara42">(PIXI.Sprite)</flowPara></flowRoot>    <flowRoot
+         id="flowPara42">(PIXI.Sprite)</flowPara></flowRoot>
+    <flowRoot
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:'DSEG14 Classic';-inkscape-font-specification:'DSEG14 Classic';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot34"
        xml:space="preserve"
@@ -520,12 +526,13 @@
            height="54.285713"
            width="245.71428"
            id="rect38" /></flowRegion><flowPara
-         id="flowPara40" /></flowRoot>    <flowRoot
+         id="flowPara40" /></flowRoot>
+    <flowRoot
        transform="matrix(0.26458333,0,0,0.26458333,-79.798348,-333.49454)"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48.0000006px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none"
        id="flowRoot26-0"
        xml:space="preserve"><flowRegion
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;font-size:48.0000006px;"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff"
          id="flowRegion28-4"><rect
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;font-size:48.0000006px;"
            y="37.371479"
@@ -534,12 +541,13 @@
            width="280.00006"
            id="rect30-8" /></flowRegion><flowPara
          id="flowPara32-4">GridSprite</flowPara><flowPara
-         id="flowPara42-1">(PIXI.Sprite)</flowPara></flowRoot>    <flowRoot
+         id="flowPara42-1">(PIXI.Sprite)</flowPara></flowRoot>
+    <flowRoot
        transform="matrix(0.26458333,0,0,0.26458333,-196.97097,-335.7624)"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48.0000006px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none"
        id="flowRoot26-5"
        xml:space="preserve"><flowRegion
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;font-size:48.0000006px;"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff"
          id="flowRegion28-3"><rect
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;font-size:48.0000006px;"
            y="37.371479"
@@ -548,12 +556,13 @@
            width="308.57144"
            id="rect30-0" /></flowRegion><flowPara
          id="flowPara42-2">TextElements</flowPara><flowPara
-         id="flowPara87">(PIXI.extras.BitmapText)</flowPara></flowRoot>    <flowRoot
+         id="flowPara87">(PIXI.extras.BitmapText)</flowPara></flowRoot>
+    <flowRoot
        transform="matrix(0.26458333,0,0,0.26458333,-318.14622,-343.18798)"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48.0000006px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none"
        id="flowRoot26-4"
        xml:space="preserve"><flowRegion
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;font-size:48.0000006px;"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff"
          id="flowRegion28-2"><rect
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;font-size:48.0000006px;"
            y="37.371479"
@@ -562,12 +571,13 @@
            width="391.42856"
            id="rect30-6" /></flowRegion><flowPara
          id="flowPara42-12">NeedleGauge</flowPara><flowPara
-         id="flowPara105">(RotationNeedleGauge)</flowPara></flowRoot>    <flowRoot
+         id="flowPara105">(RotationNeedleGauge)</flowPara></flowRoot>
+    <flowRoot
        transform="matrix(0.26458333,0,0,0.26458333,-420.1998,-341.67607)"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48.0000006px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none"
        id="flowRoot26-06"
        xml:space="preserve"><flowRegion
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;font-size:48.0000006px;"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff"
          id="flowRegion28-38"><rect
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;font-size:48.0000006px;"
            y="37.371479"
@@ -576,7 +586,8 @@
            width="315.12808"
            id="rect30-01" /></flowRegion><flowPara
          id="flowPara42-8">NeedleCap</flowPara><flowPara
-         id="flowPara123">(PIXI.Sprite)</flowPara></flowRoot>    <image
+         id="flowPara123">(PIXI.Sprite)</flowPara></flowRoot>
+    <image
        y="-330.42538"
        x="477.81372"
        id="image6149-1"
@@ -634,12 +645,13 @@
            x="1871.4286"
            y="1325.9429"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff" /></flowRegion><flowPara
-         id="flowPara4708" /></flowRoot>    <flowRoot
+         id="flowPara4708" /></flowRoot>
+    <flowRoot
        transform="matrix(0.26458333,0,0,0.26458333,24.338972,-4.4567191)"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.33333588px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.3333px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none"
        id="flowRoot26-0-9"
        xml:space="preserve"><flowRegion
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.33333588px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.3333px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff"
          id="flowRegion28-4-2"><rect
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.33333588px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff"
            y="77.371483"
@@ -650,7 +662,8 @@
          id="flowPara42-1-0">Add to sub-Container</flowPara><flowPara
          id="flowPara4755">(by createMeterBackPlate())</flowPara><flowPara
          id="flowPara4759" /><flowPara
-         id="flowPara4757">and bake into single sprite(texture) by setting cacheAsBitmap = true</flowPara></flowRoot>    <image
+         id="flowPara4757">and bake into single sprite(texture) by setting cacheAsTexture(true)</flowPara></flowRoot>
+    <image
        y="-58.280861"
        x="115.97113"
        id="image4769"
@@ -679,10 +692,10 @@
        sodipodi:nodetypes="cc" />
     <flowRoot
        transform="matrix(0.26458333,0,0,0.26458333,-299.14922,-35.326372)"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.333334px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.3333px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none"
        id="flowRoot26-5-1"
        xml:space="preserve"><flowRegion
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;font-size:53.333334px;"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.3333px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff"
          id="flowRegion28-3-5"><rect
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;font-size:53.333334px;"
            y="37.371479"
@@ -690,12 +703,13 @@
            height="214.28572"
            width="308.57144"
            id="rect30-0-9" /></flowRegion><flowPara
-         id="flowPara87-3">Add to container</flowPara></flowRoot>    <flowRoot
+         id="flowPara87-3">Add to container</flowPara></flowRoot>
+    <flowRoot
        transform="matrix(0.26458333,0,0,0.26458333,-197.0377,112.75798)"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.33333588px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.3333px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none"
        id="flowRoot26-5-1-7"
        xml:space="preserve"><flowRegion
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.33333588px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.3333px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff"
          id="flowRegion28-3-5-4"><rect
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.33333588px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff"
            y="37.371479"
@@ -703,12 +717,13 @@
            height="171.42857"
            width="317.14285"
            id="rect30-0-9-1" /></flowRegion><flowPara
-         id="flowPara87-3-3">Add to container</flowPara></flowRoot>    <flowRoot
+         id="flowPara87-3-3">Add to container</flowPara></flowRoot>
+    <flowRoot
        transform="matrix(0.26458333,0,0,0.26458333,-450.28175,-35.408692)"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.333334px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.3333px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none"
        id="flowRoot26-5-1-2"
        xml:space="preserve"><flowRegion
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;font-size:53.333334px;"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.3333px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff"
          id="flowRegion28-3-5-46"><rect
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;font-size:53.333334px;"
            y="37.371479"
@@ -716,12 +731,13 @@
            height="214.28572"
            width="308.57144"
            id="rect30-0-9-4" /></flowRegion><flowPara
-         id="flowPara87-3-30">Add to container</flowPara></flowRoot>    <flowRoot
+         id="flowPara87-3-30">Add to container</flowPara></flowRoot>
+    <flowRoot
        transform="matrix(0.26458333,0,0,0.26458333,-409.46032,251.85322)"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.333334px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.3333px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none"
        id="flowRoot26-5-1-2-3"
        xml:space="preserve"><flowRegion
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;font-size:53.333334px;"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.3333px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff"
          id="flowRegion28-3-5-46-4"><rect
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.33333588px;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff"
            y="37.371479"
@@ -729,35 +745,39 @@
            height="128.57143"
            width="925.71442"
            id="rect30-0-9-4-7" /></flowRegion><flowPara
-         id="flowPara87-3-30-5">class AnalogSingleMeter (extends PIXI.Container)</flowPara></flowRoot>    <flowRoot
+         id="flowPara87-3-30-5">class AnalogSingleMeter (extends PIXI.Container)</flowPara></flowRoot>
+    <flowRoot
        xml:space="preserve"
        id="flowRoot4742"
-       style="fill:black;fill-opacity:1;stroke:none;font-family:'DSEG14 Classic';font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;letter-spacing:0px;word-spacing:0px;-inkscape-font-specification:'DSEG14 Classic';font-stretch:normal;font-variant:normal"><flowRegion
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:'DSEG14 Classic';-inkscape-font-specification:'DSEG14 Classic';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"><flowRegion
          id="flowRegion4744"><rect
            id="rect4746"
            width="57.142857"
            height="51.42857"
            x="84.285713"
            y="181.42857" /></flowRegion><flowPara
-         id="flowPara4748"></flowPara></flowRoot>    <flowRoot
+         id="flowPara4748" /></flowRoot>
+    <flowRoot
        xml:space="preserve"
        id="flowRoot4750"
-       style="fill:black;fill-opacity:1;stroke:none;font-family:'DSEG14 Classic';font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;letter-spacing:0px;word-spacing:0px;-inkscape-font-specification:'DSEG14 Classic';font-stretch:normal;font-variant:normal"><flowRegion
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:'DSEG14 Classic';-inkscape-font-specification:'DSEG14 Classic';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"><flowRegion
          id="flowRegion4752"><rect
            id="rect4754"
            width="1002.8571"
            height="394.28571"
            x="-65.714287"
            y="1200" /></flowRegion><flowPara
-         id="flowPara4756"></flowPara></flowRoot>    <flowRoot
+         id="flowPara4756" /></flowRoot>
+    <flowRoot
        xml:space="preserve"
        id="flowRoot4758"
-       style="fill:black;fill-opacity:1;stroke:none;font-family:'DSEG14 Classic';font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;letter-spacing:0px;word-spacing:0px;-inkscape-font-specification:'DSEG14 Classic';font-stretch:normal;font-variant:normal"><flowRegion
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:'DSEG14 Classic';-inkscape-font-specification:'DSEG14 Classic';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"><flowRegion
          id="flowRegion4760"><rect
            id="rect4762"
            width="531.42859"
            height="222.85715"
            x="937.14288"
            y="1865.7142" /></flowRegion><flowPara
-         id="flowPara4764"></flowPara></flowRoot>  </g>
+         id="flowPara4764" /></flowRoot>
+  </g>
 </svg>
