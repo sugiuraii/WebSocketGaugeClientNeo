@@ -38,25 +38,35 @@ import { InterpolatorOption } from "interpolation";
 export class WebsocketObjectCollectionOption
 {
     public DefiWSEnabled = false;
-    public DefiWSURL =  "ws://" + location.hostname + ":" + DefiWebsocketClientService.DEFAULT_WS_PORT.toString() + DefiWebsocketClientService.WS_URL_PATH;
+    public DefiWSURL:string;
     public SSMWSEnabled = false;
-    public SSMWSSURL = "ws://" + location.hostname + ":" + SSMWebsocketClientService.DEFAULT_WS_PORT.toString() + SSMWebsocketClientService.WS_URL_PATH;
+    public SSMWSSURL:string;
     public ArduinoWSEnabled = false;
-    public ArduinoWSURL = "ws://" + location.hostname + ":" + ArduinoWebsocketClientService.DEFAULT_WS_PORT.toString() + ArduinoWebsocketClientService.WS_URL_PATH;
+    public ArduinoWSURL:string;
     public ELM327WSEnabled = false;
-    public ELM327WSURL = "ws://" + location.hostname + ":" + ELM327WebsocketClientService.DEFAULT_WS_PORT.toString() + ELM327WebsocketClientService.WS_URL_PATH;
+    public ELM327WSURL:string;
     public FUELTRIPWSEnabled = false;
-    public FUELTRIPWSURL = "ws://" + location.hostname + ":" + FUELTRIPWebsocketClientService.DEFAULT_WS_PORT.toString() + FUELTRIPWebsocketClientService.WS_URL_PATH;
+    public FUELTRIPWSURL:string;
     public FUELTRIPWSOption : {FUELTRIPSectSpan: number, FUELTRIPSectStoreMax: number} = {FUELTRIPSectSpan : 300, FUELTRIPSectStoreMax : 6};
     public AssettoCorsaWSEnabled = false;
-    public AssettoCorsaWSURL = "ws://" + location.hostname + ":" + AssettoCorsaSHMWebsocketClientService.DEFAULT_WS_PORT.toString() + AssettoCorsaSHMWebsocketClientService.WS_URL_PATH;
+    public AssettoCorsaWSURL:string;
 
     public WSMap : Map<WebsocketParameterCode, WebsocketServiceMapEntry>;
 
     public InterpolatorOption : InterpolatorOption;
 
-    constructor()
+    constructor(host?: string)
     {
+        if(host === undefined)
+            host = location.hostname;
+
+        this.DefiWSURL =  "ws://" + host + ":" + DefiWebsocketClientService.DEFAULT_WS_PORT.toString() + DefiWebsocketClientService.WS_URL_PATH;
+        this.SSMWSSURL = "ws://" + host + ":" + SSMWebsocketClientService.DEFAULT_WS_PORT.toString() + SSMWebsocketClientService.WS_URL_PATH;
+        this.ArduinoWSURL = "ws://" + host + ":" + ArduinoWebsocketClientService.DEFAULT_WS_PORT.toString() + ArduinoWebsocketClientService.WS_URL_PATH;
+        this.ELM327WSURL = "ws://" + host + ":" + ELM327WebsocketClientService.DEFAULT_WS_PORT.toString() + ELM327WebsocketClientService.WS_URL_PATH;
+        this.FUELTRIPWSURL = "ws://" + host + ":" + FUELTRIPWebsocketClientService.DEFAULT_WS_PORT.toString() + FUELTRIPWebsocketClientService.WS_URL_PATH;
+        this.AssettoCorsaWSURL = "ws://" + host  + ":" + AssettoCorsaSHMWebsocketClientService.DEFAULT_WS_PORT.toString() + AssettoCorsaSHMWebsocketClientService.WS_URL_PATH;
+    
         const mapFactory = new WebsocketServiceMapFactory();
         this.WSMap = mapFactory.DefaultELM327Map;
         this.InterpolatorOption = {type: "Linear"};

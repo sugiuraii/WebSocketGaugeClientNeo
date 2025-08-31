@@ -1,5 +1,8 @@
 // WebSocket  settings.
 {
+    // Uncomment this and set hostname or ipaddress of websoccketserver, if the server address is different from webhost
+    // "ServerHost": "x.x.x.x",
+
     //  Flags to enable websocket clients
     "WebSocketEnable" :
     {
