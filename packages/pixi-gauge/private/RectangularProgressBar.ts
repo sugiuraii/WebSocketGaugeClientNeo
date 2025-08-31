@@ -139,8 +139,8 @@ export class RectangularProgressBar extends ProgressBar {
 
         //Define mask
         spriteMask.clear();
-        spriteMask.fill(0x000000);
         spriteMask.rect(drawMaskX, drawMaskY, drawMaskWidth, drawMaskHeight);
+        spriteMask.fill(0x000000);
 
         return;
     }

@@ -21,7 +21,21 @@ Before build spritesheet and bitmapfont,
 * Unfortunately there is no script to install font file requried from svgs.
     * Please open svg files by Inkscape, check font is correctly drawn. If some of fonts is missing, please install by yourself.
 
-# 4. Run build script and deploy
+# 4. Modify Inkscape path (needed, if the Inkscape is not installed in the directory of PATH environment variable)
+* If the Inkscape is installed in non-standard method (such as downloading AppImage), `inkscape` command in the script should fail.
+* To avoid this, modify the Inkscape launching command by manual.
+    * Open `./lib/export_spritesheet.sh` and edit by,
+
+    ```bash
+    function export_pngs() {
+        # Set command/path of inkscape
+        # !-------------- EDII HERE to install path and file of inkscape image
+        local inkscape_cmd=inkscape
+
+    }
+    ```
+
+# 5. Run build script and deploy
 ```
 bash build_install_all.sh
 ```
