@@ -27,7 +27,7 @@ function glowFilter() {
     local Blur_Option=$2
     local BMFONT_path=bmfont
 
-    $ImageMagick_convert_cmd $BMFONT_path/$PNG_FileName \( -clone 0 -blur $Blur_Option \) \( -clone 0,1 -compose plus -composite \) -delete 0,1 $BMFONT_path/$PNG_FileName
+    $ImageMagick_convert_cmd $BMFONT_path/$PNG_FileName \( -clone 0 -channel RGBA -blur $Blur_Option \) \( -clone 0,1 -compose screen -composite \) -delete 0,1 $BMFONT_path/$PNG_FileName
 }
 
 function replaceFace() {
