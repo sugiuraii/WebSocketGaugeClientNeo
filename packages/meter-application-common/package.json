@@ -12,7 +12,7 @@
     "build": "npm run clean ; tsc"
   },
   "dependencies": {    
-    "pixi.js": "^8.13.0",
+    "pixi.js": "^8.13.1",
     "react": "^19.1.1",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.1.1",

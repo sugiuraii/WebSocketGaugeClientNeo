@@ -10,7 +10,7 @@
     "build": "npm run clean ; tsc"
   },
   "dependencies": {
-    "pixi.js": "^8.13.0"
+    "pixi.js": "^8.13.1"
   },
   "devDependencies": {
     "typescript": "^5.9.2",
