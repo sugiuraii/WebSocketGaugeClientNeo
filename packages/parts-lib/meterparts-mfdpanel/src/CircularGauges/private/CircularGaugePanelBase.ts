@@ -30,7 +30,7 @@ export class BitmapTextOption {
     public anchor = new PIXI.Point(0, 0);
     public align: PIXI.TextStyleAlign = "left";
     public fontName = "CircularGaugeLabel";
-    public fontSize = -77;
+    public fontSize = 77;
     public letterSpacing = -5;
 
     constructor(position?: PIXI.Point, anchor?: PIXI.Point, align?: PIXI.TextStyleAlign) {
