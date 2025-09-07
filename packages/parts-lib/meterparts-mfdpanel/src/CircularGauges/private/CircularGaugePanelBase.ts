@@ -30,7 +30,7 @@ export class BitmapTextOption {
     public anchor = new PIXI.Point(0, 0);
     public align: PIXI.TextStyleAlign = "left";
     public fontName = "CircularGaugeLabel";
-    public fontSize = -77;
+    public fontSize = 77;
     public letterSpacing = -5;
 
     constructor(position?: PIXI.Point, anchor?: PIXI.Point, align?: PIXI.TextStyleAlign) {
@@ -131,7 +131,7 @@ export abstract class CircularGaugePanelOptionBase {
     constructor() {
         this.MasterTextStyle = new PIXI.TextStyle(
             {
-                dropShadow: {blur: 15, color: "#FFFFFF", distance: 0},
+                dropShadow: {blur: 7, color: "#FFFFFF", distance: 0},
                 fill: "white",
                 fontFamily: "Freesansbold"
             });

@@ -16,7 +16,14 @@ replaceFace LEDMeterFont_88px.fnt LEDMeterFont_88px
 replaceFace LEDMeterFont_100px.fnt LEDMeterFont_100px
 replaceFace LEDMeter_RPMFont_58px.fnt LEDMeter_RPMFont_58px
 
-BLUR_OPTION=0x7 
+# Fix negative fontsize
+reverseSizeSign LEDMeterFont_30px.fnt
+reverseSizeSign LEDMeterFont_45px.fnt
+reverseSizeSign LEDMeterFont_88px.fnt
+reverseSizeSign LEDMeterFont_100px.fnt
+reverseSizeSign LEDMeter_RPMFont_58px.fnt
+
+BLUR_OPTION=0x5
 glowFilter LEDMeterFont_30px_0.png $BLUR_OPTION
 glowFilter LEDMeterFont_45px_0.png $BLUR_OPTION
 glowFilter LEDMeterFont_88px_0.png $BLUR_OPTION

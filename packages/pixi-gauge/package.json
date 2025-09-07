@@ -10,10 +10,10 @@
     "build": "npm run clean ; tsc"
   },
   "dependencies": {
-    "pixi.js": "^8.6.3"
+    "pixi.js": "^8.13.1"
   },
   "devDependencies": {
-    "typescript": "^5.7.2",
+    "typescript": "^5.9.2",
     "rimraf": "^6.0.1"
   },
   "author": "K. Sugiura",

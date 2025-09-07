@@ -10,6 +10,10 @@ bmfontmake Michroma.ttf AnalogSingleMeter_36px 36 $Color $PADDING $Char
 replaceFace AnalogSingleMeter_18px.fnt AnalogSingleMeter_18px
 replaceFace AnalogSingleMeter_36px.fnt AnalogSingleMeter_36px
 
+# Fix negative fontsize
+reverseSizeSign AnalogSingleMeter_18px.fnt
+reverseSizeSign AnalogSingleMeter_36px.fnt
+
 BLUR_OPTION=0x2
 glowFilter AnalogSingleMeter_18px_0.png $BLUR_OPTION
 glowFilter AnalogSingleMeter_36px_0.png $BLUR_OPTION

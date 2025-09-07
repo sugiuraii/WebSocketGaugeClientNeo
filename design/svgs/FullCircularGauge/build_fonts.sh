@@ -7,6 +7,8 @@ Char=40-64
 
 bmfontmake freefont/sfd/FreeSansBold.ttf CircularGaugeLabelFont 77 $Color $PADDING $Char
 replaceFace CircularGaugeLabelFont.fnt CircularGaugeLabel
+# Fix negative fontsize
+reverseSizeSign CircularGaugeLabelFont.fnt
 
-BLUR_OPTION=0x7 
+BLUR_OPTION=0x5
 glowFilter CircularGaugeLabelFont_0.png $BLUR_OPTION
