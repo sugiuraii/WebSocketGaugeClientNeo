@@ -13,3 +13,9 @@ replaceFace AnalogMeterFont_35px.fnt AnalogMeterFont_35px
 replaceFace AnalogMeterFont_40px.fnt AnalogMeterFont_40px
 replaceFace AnalogMeterFont_60px.fnt AnalogMeterFont_60px
 replaceFace AnalogMeterFont_115px.fnt AnalogMeterFont_115px
+
+# Fix negative fontsize
+reverseSizeSign AnalogMeterFont_35px.fnt
+reverseSizeSign AnalogMeterFont_40px.fnt
+reverseSizeSign AnalogMeterFont_60px.fnt
+reverseSizeSign AnalogMeterFont_115px.fnt
