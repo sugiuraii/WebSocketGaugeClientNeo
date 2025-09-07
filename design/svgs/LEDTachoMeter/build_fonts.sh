@@ -23,7 +23,7 @@ reverseSizeSign LEDMeterFont_88px.fnt
 reverseSizeSign LEDMeterFont_100px.fnt
 reverseSizeSign LEDMeter_RPMFont_58px.fnt
 
-BLUR_OPTION=0x7 
+BLUR_OPTION=0x5
 glowFilter LEDMeterFont_30px_0.png $BLUR_OPTION
 glowFilter LEDMeterFont_45px_0.png $BLUR_OPTION
 glowFilter LEDMeterFont_88px_0.png $BLUR_OPTION

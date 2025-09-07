@@ -13,6 +13,6 @@ replaceFace MilageGraphFont_57px.fnt MilageGraphFont_57px
 reverseSizeSign MilageGraphFont_38px.fnt
 reverseSizeSign MilageGraphFont_57px.fnt
 
-BLUR_OPTION=0x7 
+BLUR_OPTION=0x5
 glowFilter MilageGraphFont_38px_0.png $BLUR_OPTION
 glowFilter MilageGraphFont_57px_0.png $BLUR_OPTION
