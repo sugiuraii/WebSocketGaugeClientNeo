@@ -208,7 +208,24 @@ export class AnalogMeterCluster extends PIXI.Container {
         backSprite.anchor.set(0.5, 0.5);
         backSprite.position = containerCenter;
         this.tachoBackContainer.addChild(backSprite);
-
+        
+        const redzoneProgressBarOptions = new CircularProgressBarOptions();
+        redzoneProgressBarOptions.Texture = PIXI.Texture.from("AnalogMeterCluster_layer_tacho_red.png");
+        redzoneProgressBarOptions.OffsetAngle = 0;
+        redzoneProgressBarOptions.FullAngle = 270;
+        redzoneProgressBarOptions.AntiClockwise = true;
+        redzoneProgressBarOptions.Max = tachoMax;
+        redzoneProgressBarOptions.Min = tachoMin;
+        redzoneProgressBarOptions.Radius = 269;
+        redzoneProgressBarOptions.InnerRadius = 0;
+        redzoneProgressBarOptions.Center.set(269, 269);
+        const redzoneProgressBar = new CircularProgressBar(redzoneProgressBarOptions);
+        redzoneProgressBar.pivot.set(269, 269);
+        redzoneProgressBar.position.set(319, 319);
+        this.tachoBackContainer.addChild(redzoneProgressBar);
+        redzoneProgressBar.Value = 2000;
+        redzoneProgressBar.updateForce();
+        
         const lcdBaseSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_tacho_lcd_base.png");
         lcdBaseSprite.pivot.set(220, 220);
         lcdBaseSprite.position = containerCenter;        
