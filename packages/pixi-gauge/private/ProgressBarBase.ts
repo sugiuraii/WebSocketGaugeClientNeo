@@ -75,10 +75,10 @@ export abstract class ProgressBar extends Gauge1D {
     /**
      * Get sprite mask.
      */
-    protected get SpriteMask(): PIXI.Graphics { return this.spriteMask; }
+    public get SpriteMask(): PIXI.Graphics { return this.spriteMask; }
 
     /**
      * Get sprite.
      */
-    protected get Sprite(): PIXI.Sprite { return this.sprite; }
+    public get Sprite(): PIXI.Sprite { return this.sprite; }
 }

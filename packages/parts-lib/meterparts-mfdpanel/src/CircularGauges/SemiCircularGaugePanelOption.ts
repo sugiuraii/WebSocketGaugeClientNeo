@@ -33,20 +33,16 @@ export class SemiCircularGaugePanelOption extends CircularGaugePanelOptionBase {
     }
 
     private setOption(): void {
-        this.RedZoneBarTextureName = "SemiCircular_Gauge1_Redzone_Bar";
-        this.YellowZoneBarTextureName = "SemiCircular_Gauge1_Yellowzone_Bar";
-        this.GreenZoneBarTextureName = "SemiCircular_Gauge1_Greenzone_Bar";
-        this.ValueBarTextureName = "SemiCircular_Gauge1_Value_Bar";
-        this.BackTextureName = "SemiCircular_Gauge1_Back";
-        this.GridTextureName = "SemiCircular_Gauge1_Grid";
+        this.RedZoneBarTextureName = "SemiCircularGauge_layer_redzone_bar.png";
+        this.YellowZoneBarTextureName = "SemiCircularGauge_layer_yellowzone_bar.png";
+        this.GreenZoneBarTextureName = "SemiCircularGauge_layer_greenzone_bar.png";
+        this.ValueBarTextureName = "SemiCircularGauge_layer_valuebar.png";
+        this.BackTextureName = "SemiCircularGauge_layer_back.png";
+        this.GridTextureName = "SemiCircularGauge_layer_grid.png";
 
         this.MasterTextStyle = new PIXI.TextStyle(
             {
-                dropShadow: true,
-                dropShadowBlur: 15,
-                padding: 15,
-                dropShadowColor: "#FFFFFF",
-                dropShadowDistance: 0,
+                dropShadow: {blur: 7, color: "#FFFFFF", distance: 0},
                 fill: "white",
                 fontFamily: "Freesansbold"
             });
@@ -58,8 +54,7 @@ export class SemiCircularGaugePanelOption extends CircularGaugePanelOptionBase {
 
         this.ValueBarRadius = 200;
         this.ValueBarInnerRadius = 0;
-        this.ValueTextLabelOption.position.set(200, 185);
-        this.ValueTextLabelOption.position.set(200, 185);
+        this.ValueTextLabelOption.position.set(200, 170);
         this.ValueTextLabelOption.anchor.set(0.5, 0.5);
         this.ValueTextLabelOption.align = "center";
 

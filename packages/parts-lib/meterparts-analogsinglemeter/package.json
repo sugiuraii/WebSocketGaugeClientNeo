@@ -14,12 +14,13 @@
   },
   "dependencies": {
     "pixi-gauge": "../../pixi-gauge",
-    "pixi.js": "^7.2.4"
+    "placement-coordinate-calc": "../../placement-coordinate-calc",
+    "pixi.js": "^8.13.1"
   },
   "devDependencies": {
     "copyfiles": "^2.4.1",
-    "rimraf": "^5.0.0",
-    "typescript": "^5.0.4"
+    "rimraf": "^6.0.1",
+    "typescript": "^5.9.2"
   },
   "author": "K. Sugiura",
   "license": "MIT"

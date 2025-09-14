@@ -1,0 +1,42 @@
+# Build spritesheet and bitmapfont
+
+# 1. Install required application to your sysem.
+Before build spritesheet and bitmapfont,
+* Install Inkscape (to build spritesheet from svg files)
+    * For ubuntu, Inkscape by snap do not work well (since Inkscape has problem to access home directory from command.)
+* Install imagemagick (6.9)
+    * Imagemagick is required by spritesheet.js, and postprocessing of bitmapfont
+* Install `xmllint`
+    * For ubuntu, type
+    ```
+    apt -y install libxml2-utils
+    ```
+# 2. Run download script
+* Install tool program binary, and ttf fonts to build bitmapfont.
+    ```
+    bash build_setup.sh
+    ```
+
+# 3. Install ttf fonts (refered from svgs) to your system
+* Unfortunately there is no script to install font file requried from svgs.
+    * Please open svg files by Inkscape, check font is correctly drawn. If some of fonts is missing, please install by yourself.
+
+# 4. Modify Inkscape path (needed, if the Inkscape is not installed in the directory of PATH environment variable)
+* If the Inkscape is installed in non-standard method (such as downloading AppImage), `inkscape` command in the script should fail.
+* To avoid this, modify the Inkscape launching command by manual.
+    * Open `./lib/export_spritesheet.sh` and edit by,
+
+    ```bash
+    function export_pngs() {
+        # Set command/path of inkscape
+        # !-------------- EDII HERE to install path and file of inkscape image
+        local inkscape_cmd=inkscape
+
+    }
+    ```
+
+# 5. Run build script and deploy
+```
+bash build_install_all.sh
+```
+

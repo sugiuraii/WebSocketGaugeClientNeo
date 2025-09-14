@@ -1,0 +1,2723 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="640"
+   height="330"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25)"
+   sodipodi:docname="Milage_Graph.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   inkscape:export-filename="../../../../../../デスクトップ/C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\WpfApplication1\描画SVG\Digi_Tacho\DigiTachi_Back.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   version="1.1"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient3203">
+      <stop
+         style="stop-color:#131a20;stop-opacity:1;"
+         offset="0"
+         id="stop3205" />
+      <stop
+         id="stop3215"
+         offset="0.15031824"
+         style="stop-color:#232c32;stop-opacity:1;" />
+      <stop
+         id="stop3211"
+         offset="0.28092229"
+         style="stop-color:#bdd6ec;stop-opacity:1;" />
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0.49269104"
+         id="stop3213" />
+      <stop
+         style="stop-color:#cbdff0;stop-opacity:1;"
+         offset="0.75805265"
+         id="stop3272" />
+      <stop
+         style="stop-color:#1a1a1a;stop-opacity:1;"
+         offset="1"
+         id="stop3207" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient4089">
+      <stop
+         style="stop-color:#00fff0;stop-opacity:1;"
+         offset="0"
+         id="stop4091" />
+      <stop
+         id="stop4105"
+         offset="0.19933924"
+         style="stop-color:#00ff00;stop-opacity:0.99607843;" />
+      <stop
+         id="stop4097"
+         offset="0.43343624"
+         style="stop-color:#ffff00;stop-opacity:0.99215686;" />
+      <stop
+         style="stop-color:#ffff00;stop-opacity:0.99215686;"
+         offset="0.85758197"
+         id="stop4103" />
+      <stop
+         style="stop-color:#ff0000;stop-opacity:0.99607843;"
+         offset="0.87810516"
+         id="stop4101" />
+      <stop
+         style="stop-color:#ff0000;stop-opacity:1;"
+         offset="1"
+         id="stop4093" />
+    </linearGradient>
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect3538"
+       prop_scale="1"
+       pattern="m -62,-3 h 1"
+       is_visible="true"
+       lpeversion="0"
+       copytype="single_stretched"
+       scale_y_rel="false"
+       spacing="0"
+       normal_offset="0"
+       tang_offset="0"
+       prop_units="false"
+       vertical_pattern="false"
+       hide_knot="false"
+       fuse_tolerance="0" />
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : -196.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : -196.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : -371.57479 : 1"
+       id="perspective10" />
+    <filter
+       height="2.7497319"
+       y="-0.87486594"
+       width="1.7087521"
+       x="-0.35437606"
+       id="filter3516"
+       inkscape:collect="always">
+      <feGaussianBlur
+         id="feGaussianBlur3518"
+         stdDeviation="66.656451"
+         inkscape:collect="always" />
+    </filter>
+    <inkscape:perspective
+       id="perspective3503"
+       inkscape:persp3d-origin="372.04724 : -371.57479 : 1"
+       inkscape:vp_z="744.09448 : -196.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -196.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <linearGradient
+       id="linearGradient3164">
+      <stop
+         id="stop3166"
+         offset="0"
+         style="stop-color:#999999;stop-opacity:1" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1"
+         offset="0.5"
+         id="stop4983" />
+      <stop
+         id="stop4985"
+         offset="0.75"
+         style="stop-color:#ffffff;stop-opacity:1" />
+      <stop
+         id="stop3168"
+         offset="1"
+         style="stop-color:#dddddd;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3522">
+      <stop
+         id="stop3524"
+         offset="0"
+         style="stop-color:#182e38;stop-opacity:1;" />
+      <stop
+         id="stop3526"
+         offset="1"
+         style="stop-color:#000000;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3271"
+       inkscape:collect="always">
+      <stop
+         id="stop3273"
+         offset="0"
+         style="stop-color:#000000;stop-opacity:1;" />
+      <stop
+         id="stop3275"
+         offset="1"
+         style="stop-color:#000000;stop-opacity:0;" />
+    </linearGradient>
+    <inkscape:perspective
+       id="perspective3233"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <linearGradient
+       id="linearGradient3203-8">
+      <stop
+         style="stop-color:#131a20;stop-opacity:1;"
+         offset="0"
+         id="stop3205-22" />
+      <stop
+         id="stop3215-7"
+         offset="0.15031824"
+         style="stop-color:#232c32;stop-opacity:1;" />
+      <stop
+         id="stop3211-8"
+         offset="0.28092229"
+         style="stop-color:#bdd6ec;stop-opacity:1;" />
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0.49269104"
+         id="stop3213-5" />
+      <stop
+         style="stop-color:#cbdff0;stop-opacity:1;"
+         offset="0.75805265"
+         id="stop3272-8" />
+      <stop
+         style="stop-color:#1a1a1a;stop-opacity:1;"
+         offset="1"
+         id="stop3207-3" />
+    </linearGradient>
+    <inkscape:perspective
+       id="perspective4133"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4449"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4494"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4494-5"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4494-0"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4494-8"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4600"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <linearGradient
+       id="linearGradient3203-8-6">
+      <stop
+         style="stop-color:#131a20;stop-opacity:1;"
+         offset="0"
+         id="stop3205-22-1" />
+      <stop
+         id="stop3215-7-2"
+         offset="0.15031824"
+         style="stop-color:#232c32;stop-opacity:1;" />
+      <stop
+         id="stop3211-8-4"
+         offset="0.28092229"
+         style="stop-color:#bdd6ec;stop-opacity:1;" />
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0.49269104"
+         id="stop3213-5-2" />
+      <stop
+         style="stop-color:#cbdff0;stop-opacity:1;"
+         offset="0.75805265"
+         id="stop3272-8-5" />
+      <stop
+         style="stop-color:#1a1a1a;stop-opacity:1;"
+         offset="1"
+         id="stop3207-3-8" />
+    </linearGradient>
+    <inkscape:perspective
+       id="perspective4721"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4743"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4765"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4813"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4835"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4857"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4879"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4912"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective5678"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3303"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3334"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3522"
+       id="linearGradient3372"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(2.6366746,0,0,2.0978659,-297.84389,-1185.6992)"
+       x1="230"
+       y1="791.86218"
+       x2="234"
+       y2="597.86218" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3271"
+       id="linearGradient3374"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(2.6366746,0,0,2.0978659,-297.84389,-1185.6992)"
+       x1="252.5"
+       y1="465.86218"
+       x2="259.5"
+       y2="1202.8622" />
+    <inkscape:perspective
+       id="perspective3398"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3429"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3460"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3491"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3522"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3556"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3590"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3624"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3674"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3708"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3742"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3776"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3810"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3844"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3946"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3980"
+       inkscape:persp3d-origin="0.5 : -722.02885 : 1"
+       inkscape:vp_z="1 : -721.86218 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : -721.86218 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <filter
+       inkscape:collect="always"
+       id="filter5030"
+       x="-5.2352609"
+       width="11.470522"
+       y="-21.210422"
+       height="43.420844">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="44.209247"
+         id="feGaussianBlur5032" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter5034"
+       x="-5.2352609"
+       width="11.470522"
+       y="-21.210422"
+       height="43.420844">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="44.209247"
+         id="feGaussianBlur5036" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter5038"
+       x="-5.2352609"
+       width="11.470522"
+       y="-21.210422"
+       height="43.420844">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="44.209247"
+         id="feGaussianBlur5040" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter5042"
+       x="-5.2352609"
+       width="11.470522"
+       y="-21.210422"
+       height="43.420844">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="44.209247"
+         id="feGaussianBlur5044" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter5046"
+       x="-5.2352609"
+       width="11.470522"
+       y="-21.210422"
+       height="43.420844">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="44.209247"
+         id="feGaussianBlur5048" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter5050"
+       x="-3.5796962"
+       width="8.1593923"
+       y="-2.1506475"
+       height="5.301295">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="44.209247"
+         id="feGaussianBlur5052" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter5054"
+       x="-3.4365083"
+       width="7.8730166"
+       y="-2.1881253"
+       height="5.3762505">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="44.209247"
+         id="feGaussianBlur5056" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter5058"
+       x="-1.6776404"
+       width="4.3552808"
+       y="-2.1506475"
+       height="5.301295">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="44.209247"
+         id="feGaussianBlur5060" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter5062"
+       x="-1.6845656"
+       width="4.3691313"
+       y="-2.1881253"
+       height="5.3762505">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="44.209247"
+         id="feGaussianBlur5064" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter5066"
+       x="-1.5987698"
+       width="4.1975396"
+       y="-2.1506475"
+       height="5.301295">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="44.209247"
+         id="feGaussianBlur5068" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter5114"
+       x="-0.99837503"
+       width="2.9967501"
+       y="-1.1288668"
+       height="3.2577337">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="44.209247"
+         id="feGaussianBlur5116" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter5118"
+       x="-0.99837503"
+       width="2.9967501"
+       y="-1.1288668"
+       height="3.2577337">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="44.209247"
+         id="feGaussianBlur5120" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter5122"
+       x="-0.99837503"
+       width="2.9967501"
+       y="-1.1288668"
+       height="3.2577337">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="44.209247"
+         id="feGaussianBlur5124" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter5126"
+       x="-0.99837503"
+       width="2.9967501"
+       y="-1.1391078"
+       height="3.2782156">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="44.209247"
+         id="feGaussianBlur5128" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter5130"
+       x="-0.99837503"
+       width="2.9967501"
+       y="-1.1288668"
+       height="3.2577337">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="44.209247"
+         id="feGaussianBlur5132" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter5134"
+       x="-0.99837503"
+       width="2.9967501"
+       y="-1.1391078"
+       height="3.2782156">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="44.209247"
+         id="feGaussianBlur5136" />
+    </filter>
+    <linearGradient
+       y2="-415.63782"
+       x2="916"
+       y1="848.36218"
+       x1="858"
+       gradientTransform="matrix(0.39174317,0,0,0.3765618,284.52375,374.12861)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4359-8"
+       xlink:href="#linearGradient3203"
+       inkscape:collect="always" />
+    <linearGradient
+       y2="-415.63782"
+       x2="916"
+       y1="848.36218"
+       x1="858"
+       gradientTransform="matrix(0.39174317,0,0,0.3765618,-543.47625,374.12861)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4359"
+       xlink:href="#linearGradient3203"
+       inkscape:collect="always" />
+    <filter
+       inkscape:collect="always"
+       id="filter5642"
+       x="-1.9767427"
+       width="4.9534854"
+       y="-8.0086833"
+       height="17.017367">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="16.692637"
+         id="feGaussianBlur5644" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter5638"
+       x="-1.9767427"
+       width="4.9534854"
+       y="-8.0086833"
+       height="17.017367">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="16.692637"
+         id="feGaussianBlur5640" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter5634"
+       x="-1.9767427"
+       width="4.9534854"
+       y="-8.0086833"
+       height="17.017367">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="16.692637"
+         id="feGaussianBlur5636" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter5630"
+       x="-1.9767427"
+       width="4.9534854"
+       y="-8.0086833"
+       height="17.017367">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="16.692637"
+         id="feGaussianBlur5632" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter5626"
+       x="-1.9767427"
+       width="4.9534854"
+       y="-8.0086833"
+       height="17.017367">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="16.692637"
+         id="feGaussianBlur5628" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3164"
+       id="linearGradient4981"
+       x1="-120"
+       y1="452.36218"
+       x2="-60"
+       y2="452.36218"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-32)" />
+    <linearGradient
+       gradientTransform="matrix(1.3333333,0,0,1,682,2.6171875e-6)"
+       inkscape:collect="always"
+       xlink:href="#linearGradient3164"
+       id="linearGradient4981-3"
+       x1="-120"
+       y1="452.36218"
+       x2="-60"
+       y2="452.36218"
+       gradientUnits="userSpaceOnUse" />
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter7387"
+       x="-1.1557272"
+       width="3.3114544"
+       y="-0.75501321"
+       height="2.5100264">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="13.786549"
+         id="feGaussianBlur7389" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter7391"
+       x="-1.1510099"
+       width="3.3020199"
+       y="-0.77048479"
+       height="2.5409696">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="13.786549"
+         id="feGaussianBlur7393" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter7395"
+       x="-0.56118904"
+       width="2.1223781"
+       y="-0.75501321"
+       height="2.5100264">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="13.786549"
+         id="feGaussianBlur7397" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter7399"
+       x="-0.56118904"
+       width="2.1223781"
+       y="-0.77048479"
+       height="2.5409696">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="13.786549"
+         id="feGaussianBlur7401" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter7403"
+       x="-0.54074303"
+       width="2.0814861"
+       y="-0.75501321"
+       height="2.5100264">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="13.786549"
+         id="feGaussianBlur7405" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter7427"
+       x="-0.37093891"
+       width="1.7418778"
+       y="-1.1133148"
+       height="3.2266297">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="13.786549"
+         id="feGaussianBlur7429" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter7431"
+       x="-1.6326036"
+       width="4.2652073"
+       y="-6.6144196"
+       height="14.228839">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="13.786549"
+         id="feGaussianBlur7433" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter7435"
+       x="-1.6326036"
+       width="4.2652073"
+       y="-6.6144196"
+       height="14.228839">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="13.786549"
+         id="feGaussianBlur7437" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter7439"
+       x="-1.6326036"
+       width="4.2652073"
+       y="-6.6144196"
+       height="14.228839">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="13.786549"
+         id="feGaussianBlur7441" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter7443"
+       x="-1.6326036"
+       width="4.2652073"
+       y="-6.6144196"
+       height="14.228839">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="13.786549"
+         id="feGaussianBlur7445" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter7447"
+       x="-1.6326036"
+       width="4.2652073"
+       y="-6.6144196"
+       height="14.228839">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="13.786549"
+         id="feGaussianBlur7449" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter7479"
+       x="-0.3411764"
+       width="1.6823528"
+       y="-1.0637761"
+       height="3.1275522">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="13.786549"
+         id="feGaussianBlur7481" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter7483"
+       x="-0.59288498"
+       width="2.18577"
+       y="-1.0637761"
+       height="3.1275522">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="13.786549"
+         id="feGaussianBlur7485" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter7487"
+       x="-0.31156828"
+       width="1.6231366"
+       y="-1.0312404"
+       height="3.0624808">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="13.786549"
+         id="feGaussianBlur7489" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter7491"
+       x="-1.5540938"
+       width="4.1081875"
+       y="-1.0637761"
+       height="3.1275522">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="13.786549"
+         id="feGaussianBlur7493" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter7495"
+       x="-0.34775496"
+       width="1.6955099"
+       y="-1.0437319"
+       height="3.0874637">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="13.786549"
+         id="feGaussianBlur7497" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter12"
+       x="-0.54867472"
+       y="-0.76608783"
+       width="2.0973494"
+       height="2.5321757">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="13.988771"
+         id="feGaussianBlur12" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter13"
+       x="-0.56942063"
+       y="-0.78178636"
+       width="2.1388413"
+       height="2.5635727">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="13.988771"
+         id="feGaussianBlur13" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter14"
+       x="-0.56942063"
+       y="-0.76608783"
+       width="2.1388413"
+       height="2.5321757">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="13.988771"
+         id="feGaussianBlur14" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter15"
+       x="-1.1678931"
+       y="-0.78178636"
+       width="3.3357862"
+       height="2.5635727">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="13.988771"
+         id="feGaussianBlur15" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter16"
+       x="-1.1726795"
+       y="-0.76608783"
+       width="3.3453591"
+       height="2.5321757">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="13.988771"
+         id="feGaussianBlur16" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter17"
+       x="-0.28380273"
+       y="-0.30484539"
+       width="1.5676055"
+       height="1.6096908">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="11.356512"
+         id="feGaussianBlur17" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter18"
+       x="-0.28380273"
+       y="-0.30484539"
+       width="1.5676055"
+       height="1.6096908">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="11.356512"
+         id="feGaussianBlur18" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter19"
+       x="-0.28380273"
+       y="-0.30484539"
+       width="1.5676055"
+       height="1.6096908">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="11.356512"
+         id="feGaussianBlur19" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter20"
+       x="-0.28380273"
+       y="-0.30787567"
+       width="1.5676055"
+       height="1.6157513">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="11.356512"
+         id="feGaussianBlur20" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter21"
+       x="-0.28380273"
+       y="-0.30484539"
+       width="1.5676055"
+       height="1.6096908">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="11.356512"
+         id="feGaussianBlur21" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter22"
+       x="-0.28380273"
+       y="-0.30787567"
+       width="1.5676055"
+       height="1.6157513">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="11.356512"
+         id="feGaussianBlur22" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter23"
+       x="-0.28380273"
+       y="-0.30484539"
+       width="1.5676055"
+       height="1.6096908">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="11.356512"
+         id="feGaussianBlur23" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     gridtolerance="10000"
+     guidetolerance="10"
+     objecttolerance="10"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="791.25249"
+     inkscape:cy="392.44426"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer_milagegraph_grid"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1010"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     showguides="false"
+     inkscape:showpageshadow="2"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer_milagegraph_back"
+     inkscape:label="Back"
+     style="display:inline"
+     transform="matrix(0.5,0,0,0.5,149.22553,-88.49441)">
+    <rect
+       style="fill:url(#linearGradient3372);fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient3374);stroke-width:11.7595;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect3261"
+       width="1268.2406"
+       height="648.24054"
+       x="-292.57056"
+       y="182.86905"
+       inkscape:export-filename="../../../../../../デスクトップ/rect3261.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <ellipse
+       style="fill:#2b76cc;fill-opacity:1;stroke:none;filter:url(#filter3516)"
+       id="path3279"
+       transform="matrix(2.2122062,0,0,0.8013279,-238.11467,431.81876)"
+       cx="240"
+       cy="380.93362"
+       rx="225.71428"
+       ry="91.428566" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4478"
+       style="font-style:normal;font-weight:normal;line-height:0.01%;font-family:'Bitstream Vera Sans';fill:#000000;fill-opacity:1;stroke:none"><flowRegion
+         id="flowRegion4480"><rect
+           id="rect4482"
+           width="194"
+           height="264"
+           x="-384"
+           y="652.36218" /></flowRegion><flowPara
+         id="flowPara4484"
+         style="font-size:40px;line-height:1.25"> </flowPara></flowRoot>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot6524"
+       style="font-style:normal;font-weight:normal;line-height:0.01%;font-family:'Bitstream Vera Sans';fill:#000000;fill-opacity:1;stroke:none"><flowRegion
+         id="flowRegion6526"><rect
+           id="rect6528"
+           width="248"
+           height="50"
+           x="-180"
+           y="186.36218" /></flowRegion><flowPara
+         id="flowPara6530"
+         style="font-size:40px;line-height:1.25"> </flowPara></flowRoot>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3652"
+       style="font-style:normal;font-weight:normal;line-height:0.01%;font-family:'Bitstream Vera Sans';fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"><flowRegion
+         id="flowRegion3654"><rect
+           id="rect3656"
+           width="16"
+           height="46"
+           x="-6"
+           y="764.36218" /></flowRegion><flowPara
+         id="flowPara3658"
+         style="font-size:40px;line-height:1.25"> </flowPara></flowRoot>
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter5030)"
+       id="rect3356-9"
+       width="20.26684"
+       height="5.0023613"
+       x="-206.05371"
+       y="571.33746"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter5034)"
+       id="rect3356-2-1"
+       width="20.26684"
+       height="5.0023613"
+       x="-206.05371"
+       y="451.28076"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter5038)"
+       id="rect3356-2-2-8"
+       width="20.26684"
+       height="5.0023613"
+       x="-206.05371"
+       y="331.72433"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter5042)"
+       id="rect3356-2-2-5-1"
+       width="20.26684"
+       height="5.0023613"
+       x="-206.05371"
+       y="212.16791"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter5046)"
+       id="rect3356-6-9"
+       width="20.26684"
+       height="5.0023613"
+       x="-206.05371"
+       y="690.83746"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <flowRoot
+       transform="translate(-308.18779,79.139616)"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Coolvetica;-inkscape-font-specification:Coolvetica;text-align:end;writing-mode:lr-tb;text-anchor:end;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter5050)"
+       id="flowRoot2448-0-5"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001"><flowRegion
+         id="flowRegion2450-1-32"><rect
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:65px;line-height:125%;font-family:Coolvetica;-inkscape-font-specification:Coolvetica;text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff"
+           y="573.36218"
+           x="9"
+           height="77"
+           width="86"
+           id="rect2453-6-5" /></flowRegion><flowPara
+         id="flowPara2455-4-2"
+         style="font-size:65px;line-height:1.25">0</flowPara></flowRoot>
+    <flowRoot
+       transform="translate(-308.18779,-36.860384)"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Coolvetica;-inkscape-font-specification:Coolvetica;text-align:end;writing-mode:lr-tb;text-anchor:end;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter5054)"
+       id="flowRoot2448-0-9-5"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001"><flowRegion
+         id="flowRegion2450-1-9-8"><rect
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:65px;line-height:125%;font-family:Coolvetica;-inkscape-font-specification:Coolvetica;text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff"
+           y="573.36218"
+           x="9"
+           height="77"
+           width="86"
+           id="rect2453-6-2-67" /></flowRegion><flowPara
+         id="flowPara2455-4-5-7"
+         style="font-size:65px;line-height:1.25">5</flowPara></flowRoot>
+    <flowRoot
+       transform="translate(-308.18779,-158.86038)"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Coolvetica;-inkscape-font-specification:Coolvetica;text-align:end;writing-mode:lr-tb;text-anchor:end;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter5058)"
+       id="flowRoot2448-0-3-2"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001"><flowRegion
+         id="flowRegion2450-1-3-2"><rect
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:65px;line-height:125%;font-family:Coolvetica;-inkscape-font-specification:Coolvetica;text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff"
+           y="573.36218"
+           x="9"
+           height="77"
+           width="86"
+           id="rect2453-6-3-9" /></flowRegion><flowPara
+         id="flowPara2455-4-7-4"
+         style="font-size:65px;line-height:1.25">10</flowPara></flowRoot>
+    <flowRoot
+       transform="translate(-308.18779,-276.86038)"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Coolvetica;-inkscape-font-specification:Coolvetica;text-align:end;writing-mode:lr-tb;text-anchor:end;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter5062)"
+       id="flowRoot2448-0-8-1"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001"><flowRegion
+         id="flowRegion2450-1-8-9"><rect
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:65px;line-height:125%;font-family:Coolvetica;-inkscape-font-specification:Coolvetica;text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff"
+           y="573.36218"
+           x="9"
+           height="77"
+           width="86"
+           id="rect2453-6-0-6" /></flowRegion><flowPara
+         id="flowPara2455-4-6-9"
+         style="font-size:65px;line-height:1.25">15</flowPara></flowRoot>
+    <flowRoot
+       transform="translate(-308.18779,-398.86038)"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Coolvetica;-inkscape-font-specification:Coolvetica;text-align:end;writing-mode:lr-tb;text-anchor:end;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter5066)"
+       id="flowRoot2448-0-90-82"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001"><flowRegion
+         id="flowRegion2450-1-7-5"><rect
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:65px;line-height:125%;font-family:Coolvetica;-inkscape-font-specification:Coolvetica;text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff"
+           y="573.36218"
+           x="9"
+           height="77"
+           width="86"
+           id="rect2453-6-8-5" /></flowRegion><flowPara
+         id="flowPara2455-4-1-4"
+         style="font-size:65px;line-height:1.25">20</flowPara></flowRoot>
+    <flowRoot
+       transform="translate(-186.18779,143.13962)"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Coolvetica;-inkscape-font-specification:Coolvetica;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter5114)"
+       id="flowRoot2448-0-90-6-3-1"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001"><flowRegion
+         id="flowRegion2450-1-7-7-8-6"><rect
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:65px;line-height:69.99999881%;font-family:Coolvetica;-inkscape-font-specification:Coolvetica;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff"
+           y="573.36218"
+           x="9"
+           height="151"
+           width="172"
+           id="rect2453-6-8-7-9-3" /></flowRegion><flowPara
+         id="flowPara3382-3"
+         style="font-size:65px;line-height:0.7">30</flowPara><flowPara
+         id="flowPara3664-5"
+         style="font-size:65px;line-height:0.7">min</flowPara></flowRoot>
+    <flowRoot
+       transform="translate(-72.18779,143.13962)"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Coolvetica;-inkscape-font-specification:Coolvetica;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter5118)"
+       id="flowRoot2448-0-90-6-3-8-5"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001"><flowRegion
+         id="flowRegion2450-1-7-7-8-3-3"><rect
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:65px;line-height:69.99999881%;font-family:Coolvetica;-inkscape-font-specification:Coolvetica;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff"
+           y="573.36218"
+           x="9"
+           height="151"
+           width="172"
+           id="rect2453-6-8-7-9-7-2" /></flowRegion><flowPara
+         id="flowPara3382-1-8"
+         style="font-size:65px;line-height:0.7">25</flowPara><flowPara
+         id="flowPara3664-0-2"
+         style="font-size:65px;line-height:0.7">min</flowPara></flowRoot>
+    <flowRoot
+       transform="translate(43.81221,143.13962)"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Coolvetica;-inkscape-font-specification:Coolvetica;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter5122)"
+       id="flowRoot2448-0-90-6-3-8-3-5"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001"><flowRegion
+         id="flowRegion2450-1-7-7-8-3-4-3"><rect
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:65px;line-height:69.99999881%;font-family:Coolvetica;-inkscape-font-specification:Coolvetica;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff"
+           y="573.36218"
+           x="9"
+           height="151"
+           width="172"
+           id="rect2453-6-8-7-9-7-8-6" /></flowRegion><flowPara
+         id="flowPara3382-1-4-1"
+         style="font-size:65px;line-height:0.7">20</flowPara><flowPara
+         id="flowPara3664-0-9-8"
+         style="font-size:65px;line-height:0.7">min</flowPara></flowRoot>
+    <flowRoot
+       transform="translate(157.81221,143.13962)"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Coolvetica;-inkscape-font-specification:Coolvetica;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter5126)"
+       id="flowRoot2448-0-90-6-3-8-3-9-6"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001"><flowRegion
+         id="flowRegion2450-1-7-7-8-3-4-2-2"><rect
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:65px;line-height:69.99999881%;font-family:Coolvetica;-inkscape-font-specification:Coolvetica;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff"
+           y="573.36218"
+           x="9"
+           height="151"
+           width="172"
+           id="rect2453-6-8-7-9-7-8-5-1" /></flowRegion><flowPara
+         id="flowPara3382-1-4-5-4"
+         style="font-size:65px;line-height:0.7">15</flowPara><flowPara
+         id="flowPara3664-0-9-3-6"
+         style="font-size:65px;line-height:0.7">min</flowPara></flowRoot>
+    <flowRoot
+       transform="translate(269.81221,143.13962)"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Coolvetica;-inkscape-font-specification:Coolvetica;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter5130)"
+       id="flowRoot2448-0-90-6-3-8-3-9-7-2"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001"><flowRegion
+         id="flowRegion2450-1-7-7-8-3-4-2-4-9"><rect
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:65px;line-height:69.99999881%;font-family:Coolvetica;-inkscape-font-specification:Coolvetica;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff"
+           y="573.36218"
+           x="9"
+           height="151"
+           width="172"
+           id="rect2453-6-8-7-9-7-8-5-3-1" /></flowRegion><flowPara
+         id="flowPara3382-1-4-5-8-5"
+         style="font-size:65px;line-height:0.7">10</flowPara><flowPara
+         id="flowPara3664-0-9-3-0-0"
+         style="font-size:65px;line-height:0.7">min</flowPara></flowRoot>
+    <flowRoot
+       transform="translate(383.81221,143.13962)"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:Coolvetica;-inkscape-font-specification:Coolvetica;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter5134)"
+       id="flowRoot2448-0-90-6-3-8-3-9-7-0-3"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001"><flowRegion
+         id="flowRegion2450-1-7-7-8-3-4-2-4-6-6"><rect
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:65px;line-height:69.99999881%;font-family:Coolvetica;-inkscape-font-specification:Coolvetica;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff"
+           y="573.36218"
+           x="9"
+           height="151"
+           width="172"
+           id="rect2453-6-8-7-9-7-8-5-3-8-4" /></flowRegion><flowPara
+         id="flowPara3382-1-4-5-8-1-9"
+         style="font-size:65px;line-height:0.7">5</flowPara><flowPara
+         id="flowPara3664-0-9-3-0-9-2"
+         style="font-size:65px;line-height:0.7">min</flowPara></flowRoot>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer_milagegraph_grid"
+     inkscape:label="Grid"
+     style="display:inline"
+     transform="matrix(0.5,0,0,0.5,149.22553,-88.49441)">
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect3356"
+       width="20.26684"
+       height="5.0023613"
+       x="-206.05371"
+       y="571.33746"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect3356-2"
+       width="20.26684"
+       height="5.0023613"
+       x="-206.05371"
+       y="451.28076"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect3356-2-2"
+       width="20.26684"
+       height="5.0023613"
+       x="-206.05371"
+       y="331.72433"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect3356-2-2-5"
+       width="20.26684"
+       height="5.0023613"
+       x="-206.05371"
+       y="212.16791"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;fill:none;stroke:url(#linearGradient4359);stroke-width:2.23167;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect3134"
+       width="21.154133"
+       height="474.46786"
+       x="-206.57707"
+       y="218.36844" />
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect3356-6"
+       width="20.26684"
+       height="5.0023613"
+       x="-206.05371"
+       y="690.83746"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect3356-62"
+       width="20.26684"
+       height="5.0023613"
+       x="621.94629"
+       y="571.33746"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect3356-2-6"
+       width="20.26684"
+       height="5.0023613"
+       x="621.94629"
+       y="451.28076"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect3356-2-2-53"
+       width="20.26684"
+       height="5.0023613"
+       x="621.94629"
+       y="331.72433"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect3356-2-2-5-9"
+       width="20.26684"
+       height="5.0023613"
+       x="621.94629"
+       y="212.16791"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;fill:none;stroke:url(#linearGradient4359-8);stroke-width:2.23167;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect3134-2"
+       width="21.154133"
+       height="474.46786"
+       x="621.42285"
+       y="218.36844" />
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect3356-6-4"
+       width="20.26684"
+       height="5.0023613"
+       x="621.94629"
+       y="690.83746"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;opacity:0.523026;fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect3356-6-3"
+       width="825.43842"
+       height="5.0023613"
+       x="-184.05371"
+       y="690.83746"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;opacity:0.523026;fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect3356-6-3-2"
+       width="825.43842"
+       height="5.0023613"
+       x="-184.05371"
+       y="570.83746"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;opacity:0.523026;fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect3356-6-3-2-2"
+       width="825.43842"
+       height="5.0023613"
+       x="-184.05371"
+       y="450.83746"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;opacity:0.523026;fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect3356-6-3-2-2-5"
+       width="825.43842"
+       height="5.0023613"
+       x="-184.05371"
+       y="330.83746"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter7431)"
+       id="rect3356-1-3"
+       width="20.26684"
+       height="5.0023613"
+       x="-206.05371"
+       y="571.33746"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter7435)"
+       id="rect3356-2-25-4"
+       width="20.26684"
+       height="5.0023613"
+       x="-206.05371"
+       y="451.28076"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter7439)"
+       id="rect3356-2-2-0-1"
+       width="20.26684"
+       height="5.0023613"
+       x="-206.05371"
+       y="331.72433"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter7443)"
+       id="rect3356-2-2-5-8-7"
+       width="20.26684"
+       height="5.0023613"
+       x="-206.05371"
+       y="212.16791"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter7447)"
+       id="rect3356-6-39-3"
+       width="20.26684"
+       height="5.0023613"
+       x="-206.05371"
+       y="690.83746"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter5626)"
+       id="rect3356-1"
+       width="20.26684"
+       height="5.0023613"
+       x="-206.05371"
+       y="571.33746"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter5630)"
+       id="rect3356-2-25"
+       width="20.26684"
+       height="5.0023613"
+       x="-206.05371"
+       y="451.28076"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter5634)"
+       id="rect3356-2-2-0"
+       width="20.26684"
+       height="5.0023613"
+       x="-206.05371"
+       y="331.72433"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter5638)"
+       id="rect3356-2-2-5-8"
+       width="20.26684"
+       height="5.0023613"
+       x="-206.05371"
+       y="212.16791"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter5642)"
+       id="rect3356-6-39"
+       width="20.26684"
+       height="5.0023613"
+       x="-206.05371"
+       y="690.83746"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+    <rect
+       style="display:inline;opacity:0.523026;fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect3356-6-3-2-2-5-8"
+       width="825.43842"
+       height="5.0023613"
+       x="-184.05371"
+       y="210.83746"
+       ry="0"
+       inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+       inkscape:export-xdpi="35.700001"
+       inkscape:export-ydpi="35.700001" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer_milagegraph_text"
+     inkscape:label="Text">
+    <g
+       inkscape:groupmode="layer"
+       id="layer_milagegraph_text_base"
+       inkscape:label="Text_Base"
+       style="display:inline"
+       transform="matrix(0.5,0,0,0.5,149.22553,-88.49441)">
+      <g
+         id="g3"
+         inkscape:label="ValueLabelL">
+        <flowRoot
+           transform="translate(-308.18779,79.13962)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+           id="flowRoot2448-0"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="77"
+               width="86"
+               id="rect2453-6" /></flowRegion><flowPara
+             id="flowPara2455-4"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">0</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(-308.18779,-36.860379)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+           id="flowRoot2448-0-9"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-9"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="77"
+               width="86"
+               id="rect2453-6-2" /></flowRegion><flowPara
+             id="flowPara2455-4-5"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">5</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(-308.18779,-158.86038)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+           id="flowRoot2448-0-3"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-3"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="77"
+               width="86"
+               id="rect2453-6-3" /></flowRegion><flowPara
+             id="flowPara2455-4-7"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">10</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(-308.18779,-276.86038)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+           id="flowRoot2448-0-8"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-8"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="77"
+               width="86"
+               id="rect2453-6-0" /></flowRegion><flowPara
+             id="flowPara2455-4-6"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">15</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(-308.18779,-398.86038)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+           id="flowRoot2448-0-90"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-7"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="77"
+               width="86"
+               id="rect2453-6-8" /></flowRegion><flowPara
+             id="flowPara2455-4-1"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">20</flowPara></flowRoot>
+      </g>
+      <g
+         id="g7"
+         style="display:inline"
+         inkscape:label="ValueLabelR"
+         transform="translate(20)">
+        <flowRoot
+           transform="translate(567.48153,79.13962)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+           id="flowRoot2448-0-6"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-1"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="77"
+               width="86"
+               id="rect2453-6-82" /></flowRegion><flowPara
+             id="flowPara2455-4-11"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">0</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(567.59886,-36.860379)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+           id="flowRoot2448-0-9-9"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-9-7"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="77"
+               width="86"
+               id="rect2453-6-2-6" /></flowRegion><flowPara
+             id="flowPara2455-4-5-2"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">5</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(597.81218,-158.86038)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+           id="flowRoot2448-0-3-9"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-3-5"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="77"
+               width="86"
+               id="rect2453-6-3-2" /></flowRegion><flowPara
+             id="flowPara2455-4-7-0"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">10</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(597.81218,-276.86038)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+           id="flowRoot2448-0-8-0"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-8-3"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="77"
+               width="86"
+               id="rect2453-6-0-9" /></flowRegion><flowPara
+             id="flowPara2455-4-6-1"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">15</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(620.80421,-398.86038)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+           id="flowRoot2448-0-90-8"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-7-1"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="77"
+               width="86"
+               id="rect2453-6-8-9" /></flowRegion><flowPara
+             id="flowPara2455-4-1-5"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">20</flowPara></flowRoot>
+      </g>
+      <g
+         id="g1"
+         inkscape:label="TimeLabel">
+        <flowRoot
+           transform="translate(-218.18779,143.13962)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+           id="flowRoot2448-0-90-6-3"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-7-7-8"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="151"
+               width="172"
+               id="rect2453-6-8-7-9" /></flowRegion><flowPara
+             id="flowPara3382"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">30</flowPara><flowPara
+             id="flowPara3664"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">min</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(-104.18779,143.13962)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+           id="flowRoot2448-0-90-6-3-8"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-7-7-8-3"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;line-height:0.8"
+               y="573.36218"
+               x="9"
+               height="151"
+               width="172"
+               id="rect2453-6-8-7-9-7" /></flowRegion><flowPara
+             id="flowPara3382-1"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">25</flowPara><flowPara
+             id="flowPara3664-0"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">min</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(11.81221,143.13962)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+           id="flowRoot2448-0-90-6-3-8-3"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-7-7-8-3-4"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;line-height:0.8"
+               y="573.36218"
+               x="9"
+               height="151"
+               width="172"
+               id="rect2453-6-8-7-9-7-8" /></flowRegion><flowPara
+             id="flowPara3382-1-4"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">20</flowPara><flowPara
+             id="flowPara3664-0-9"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">min</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(125.81221,143.13962)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+           id="flowRoot2448-0-90-6-3-8-3-9"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-7-7-8-3-4-2"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;line-height:0.8"
+               y="573.36218"
+               x="9"
+               height="151"
+               width="172"
+               id="rect2453-6-8-7-9-7-8-5" /></flowRegion><flowPara
+             id="flowPara3382-1-4-5"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">15</flowPara><flowPara
+             id="flowPara3664-0-9-3"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">min</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(237.81221,143.13962)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+           id="flowRoot2448-0-90-6-3-8-3-9-7"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-7-7-8-3-4-2-4"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;line-height:0.8"
+               y="573.36218"
+               x="9"
+               height="151"
+               width="172"
+               id="rect2453-6-8-7-9-7-8-5-3" /></flowRegion><flowPara
+             id="flowPara3382-1-4-5-8"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">10</flowPara><flowPara
+             id="flowPara3664-0-9-3-0"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">min</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(351.81221,143.13962)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+           id="flowRoot2448-0-90-6-3-8-3-9-7-0"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-7-7-8-3-4-2-4-6"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;line-height:0.8"
+               y="573.36218"
+               x="9"
+               height="151"
+               width="172"
+               id="rect2453-6-8-7-9-7-8-5-3-8" /></flowRegion><flowPara
+             id="flowPara3382-1-4-5-8-1"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">5</flowPara><flowPara
+             id="flowPara3664-0-9-3-0-9"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">min</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(467.81221,143.13962)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+           id="flowRoot2448-0-90-6-3-8-3-9-7-0-2"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-7-7-8-3-4-2-4-6-9"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;line-height:0.8"
+               y="573.36218"
+               x="9"
+               height="151"
+               width="172"
+               id="rect2453-6-8-7-9-7-8-5-3-8-5" /></flowRegion><flowPara
+             id="flowPara3382-1-4-5-8-1-2"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">0</flowPara><flowPara
+             id="flowPara3664-0-9-3-0-9-0"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">min</flowPara></flowRoot>
+      </g>
+      <g
+         id="g5"
+         inkscape:label="IndicatorLabel">
+        <flowRoot
+           transform="translate(727.81218,-298.86038)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+           id="flowRoot2448-0-90-8-8"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-7-1-7"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="51"
+               width="112"
+               id="rect2453-6-8-9-4" /></flowRegion><flowPara
+             id="flowPara2455-4-1-5-0"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;text-anchor:start">TRIP</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(902.68285,-223.8703)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+           id="flowRoot2448-0-90-8-8-4"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-7-1-7-1"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="51"
+               width="70"
+               id="rect2453-6-8-9-4-6" /></flowRegion><flowPara
+             id="flowPara2455-4-1-5-0-6"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;text-anchor:start">km</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(726.68285,-183.8703)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+           id="flowRoot2448-0-90-8-8-6"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-7-1-7-4"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="51"
+               width="112"
+               id="rect2453-6-8-9-4-3" /></flowRegion><flowPara
+             id="flowPara2455-4-1-5-0-0"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;text-anchor:start">FUEL</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(902.68285,-111.8703)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+           id="flowRoot2448-0-90-8-8-4-9"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-7-1-7-1-5"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="51"
+               width="70"
+               id="rect2453-6-8-9-4-6-5" /></flowRegion><flowPara
+             id="flowPara2455-4-1-5-0-6-8"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;text-anchor:start">L</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(866.68285,104.1297)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+           id="flowRoot2448-0-90-8-8-4-3"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"
+           inkscape:label="flowRoot2448-0-90-8-8-4-3"><flowRegion
+             id="flowRegion2450-1-7-1-7-1-6"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="51"
+               width="132"
+               id="rect2453-6-8-9-4-6-7" /></flowRegion><flowPara
+             id="flowPara2455-4-1-5-0-6-3"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;text-anchor:start">km/L</flowPara></flowRoot>
+      </g>
+      <flowRoot
+         transform="translate(-316.18779,131.13962)"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:40px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;display:inline;fill:#ffffff;fill-opacity:1;stroke:none"
+         id="flowRoot2448-0-90-6"
+         xml:space="preserve"
+         inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+         inkscape:export-xdpi="35.700001"
+         inkscape:export-ydpi="35.700001"
+         inkscape:label="kmL"><flowRegion
+           id="flowRegion2450-1-7-7"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:40px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:40px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+             y="573.36218"
+             x="9"
+             height="73"
+             width="126"
+             id="rect2453-6-8-7" /></flowRegion><flowPara
+           id="flowPara2455-4-1-2"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:40px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">km/L</flowPara></flowRoot>
+    </g>
+    <g
+       inkscape:groupmode="layer"
+       id="layer_milagegraph_text_glow"
+       inkscape:label="Text_Glow"
+       transform="matrix(0.5,0,0,0.5,149.22553,-88.49441)"
+       style="display:inline">
+      <g
+         id="g4"
+         style="display:inline"
+         inkscape:label="ValueLabelRGlow"
+         transform="translate(20)">
+        <flowRoot
+           transform="translate(567.48153,79.13962)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter16)"
+           id="flowRoot2448-0-6-3"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-1-6"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="77"
+               width="86"
+               id="rect2453-6-82-7" /></flowRegion><flowPara
+             id="flowPara2455-4-11-2"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">0</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(567.59886,-36.860379)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter15)"
+           id="flowRoot2448-0-9-9-1"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-9-7-3"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="77"
+               width="86"
+               id="rect2453-6-2-6-3" /></flowRegion><flowPara
+             id="flowPara2455-4-5-2-8"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">5</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(597.81218,-158.86038)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter14)"
+           id="flowRoot2448-0-3-9-5"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-3-5-9"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="77"
+               width="86"
+               id="rect2453-6-3-2-6" /></flowRegion><flowPara
+             id="flowPara2455-4-7-0-5"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">10</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(597.81218,-276.86038)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter13)"
+           id="flowRoot2448-0-8-0-7"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-8-3-7"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="77"
+               width="86"
+               id="rect2453-6-0-9-9" /></flowRegion><flowPara
+             id="flowPara2455-4-6-1-5"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">15</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(620.80421,-398.86038)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter12)"
+           id="flowRoot2448-0-90-8-6"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-7-1-8"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="77"
+               width="86"
+               id="rect2453-6-8-9-6" /></flowRegion><flowPara
+             id="flowPara2455-4-1-5-05"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">20</flowPara></flowRoot>
+      </g>
+      <g
+         id="g8"
+         inkscape:label="ValueLabelLGlow"
+         style="display:inline">
+        <flowRoot
+           transform="translate(-308.18779,79.13962)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter7387)"
+           id="flowRoot2448-0-61"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-6"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="77"
+               width="86"
+               id="rect2453-6-32" /></flowRegion><flowPara
+             id="flowPara2455-4-3"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">0</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(-308.18779,-36.860379)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter7391)"
+           id="flowRoot2448-0-9-92"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-9-6"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="77"
+               width="86"
+               id="rect2453-6-2-4" /></flowRegion><flowPara
+             id="flowPara2455-4-5-25"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">5</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(-308.18779,-158.86038)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter7395)"
+           id="flowRoot2448-0-3-6"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-3-4"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="77"
+               width="86"
+               id="rect2453-6-3-4" /></flowRegion><flowPara
+             id="flowPara2455-4-7-5"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">10</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(-308.18779,-276.86038)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter7399)"
+           id="flowRoot2448-0-8-5"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-8-4"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="77"
+               width="86"
+               id="rect2453-6-0-92" /></flowRegion><flowPara
+             id="flowPara2455-4-6-4"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">15</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(-308.18779,-398.86038)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;display:inline;mix-blend-mode:normal;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter7403)"
+           id="flowRoot2448-0-90-9"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-7-8"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="77"
+               width="86"
+               id="rect2453-6-8-53" /></flowRegion><flowPara
+             id="flowPara2455-4-1-58"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">20</flowPara></flowRoot>
+      </g>
+      <g
+         id="g6"
+         inkscape:label="IndicatorLabelGlow">
+        <flowRoot
+           transform="translate(727.81217,-298.86038)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter7479)"
+           id="flowRoot2448-0-90-8-8-3"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-7-1-7-5"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="51"
+               width="112"
+               id="rect2453-6-8-9-4-1" /></flowRegion><flowPara
+             id="flowPara2455-4-1-5-0-61"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;text-anchor:start">TRIP</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(902.68287,-223.8703)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter7483)"
+           id="flowRoot2448-0-90-8-8-4-7"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-7-1-7-1-7"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="51"
+               width="70"
+               id="rect2453-6-8-9-4-6-0" /></flowRegion><flowPara
+             id="flowPara2455-4-1-5-0-6-6"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;text-anchor:start">km</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(726.68287,-183.8703)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter7487)"
+           id="flowRoot2448-0-90-8-8-6-5"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-7-1-7-4-7"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="51"
+               width="112"
+               id="rect2453-6-8-9-4-3-1" /></flowRegion><flowPara
+             id="flowPara2455-4-1-5-0-0-9"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;text-anchor:start">FUEL</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(902.68287,-111.8703)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter7491)"
+           id="flowRoot2448-0-90-8-8-4-9-7"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-7-1-7-1-5-5"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="51"
+               width="70"
+               id="rect2453-6-8-9-4-6-5-5" /></flowRegion><flowPara
+             id="flowPara2455-4-1-5-0-6-8-2"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;text-anchor:start">L</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(866.68287,104.1297)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter7495)"
+           id="flowRoot2448-0-90-8-8-4-3-3"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2450-1-7-1-7-1-6-2"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.66666667px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="51"
+               width="132"
+               id="rect2453-6-8-9-4-6-7-6" /></flowRegion><flowPara
+             id="flowPara2455-4-1-5-0-6-3-3"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;text-anchor:start">km/L</flowPara></flowRoot>
+      </g>
+      <g
+         id="g14"
+         inkscape:label="TimeLabel"
+         style="display:inline">
+        <flowRoot
+           transform="translate(-218.18779,143.13962)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;mix-blend-mode:normal;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter17)"
+           id="flowRoot2"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion1"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+               y="573.36218"
+               x="9"
+               height="151"
+               width="172"
+               id="rect1" /></flowRegion><flowPara
+             id="flowPara1"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">30</flowPara><flowPara
+             id="flowPara2"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">min</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(-104.18779,143.13962)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;mix-blend-mode:normal;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter18)"
+           id="flowRoot4"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion2"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;line-height:0.8"
+               y="573.36218"
+               x="9"
+               height="151"
+               width="172"
+               id="rect2" /></flowRegion><flowPara
+             id="flowPara3"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">25</flowPara><flowPara
+             id="flowPara4"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">min</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(11.81221,143.13962)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;mix-blend-mode:normal;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter19)"
+           id="flowRoot6"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion4"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;line-height:0.8"
+               y="573.36218"
+               x="9"
+               height="151"
+               width="172"
+               id="rect4" /></flowRegion><flowPara
+             id="flowPara5"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">20</flowPara><flowPara
+             id="flowPara6"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">min</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(125.81221,143.13962)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;mix-blend-mode:normal;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter20)"
+           id="flowRoot8"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion6"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;line-height:0.8"
+               y="573.36218"
+               x="9"
+               height="151"
+               width="172"
+               id="rect6" /></flowRegion><flowPara
+             id="flowPara7"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">15</flowPara><flowPara
+             id="flowPara8"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">min</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(237.81221,143.13962)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;mix-blend-mode:normal;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter21)"
+           id="flowRoot10"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion8"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;line-height:0.8"
+               y="573.36218"
+               x="9"
+               height="151"
+               width="172"
+               id="rect8" /></flowRegion><flowPara
+             id="flowPara9"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">10</flowPara><flowPara
+             id="flowPara10"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">min</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(351.81221,143.13962)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;mix-blend-mode:normal;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter22)"
+           id="flowRoot12"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion10"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;line-height:0.8"
+               y="573.36218"
+               x="9"
+               height="151"
+               width="172"
+               id="rect10" /></flowRegion><flowPara
+             id="flowPara11"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">5</flowPara><flowPara
+             id="flowPara12"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">min</flowPara></flowRoot>
+        <flowRoot
+           transform="translate(467.81221,143.13962)"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;display:inline;mix-blend-mode:normal;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter23)"
+           id="flowRoot14"
+           xml:space="preserve"
+           inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+           inkscape:export-xdpi="35.700001"
+           inkscape:export-ydpi="35.700001"><flowRegion
+             id="flowRegion12"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+               style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.66666667px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;line-height:0.8"
+               y="573.36218"
+               x="9"
+               height="151"
+               width="172"
+               id="rect12" /></flowRegion><flowPara
+             id="flowPara13"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">0</flowPara><flowPara
+             id="flowPara14"
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:58.6667px;line-height:0.8;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">min</flowPara></flowRoot>
+      </g>
+      <flowRoot
+         transform="translate(-316.1878,131.13962)"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:40px;line-height:0.01%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter7427)"
+         id="flowRoot2448-0-90-6-2"
+         xml:space="preserve"
+         inkscape:export-filename="C:\Documents and Settings\kuniaki\My Documents\Visual Studio 2008\Projects\DefiSubaruMonitor\描画SVG\AF_Bar\flowRoot2480-7.png"
+         inkscape:export-xdpi="35.700001"
+         inkscape:export-ydpi="35.700001"
+         inkscape:label="KmLGlow"><flowRegion
+           id="flowRegion2450-1-7-7-2"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:40px;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"><rect
+             style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:40px;line-height:125%;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';text-align:end;writing-mode:lr-tb;text-anchor:end;fill:#ffffff;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+             y="573.36218"
+             x="9"
+             height="73"
+             width="126"
+             id="rect2453-6-8-7-8" /></flowRegion><flowPara
+           id="flowPara2455-4-1-2-4"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:40px;line-height:1.25;font-family:FreeSans;-inkscape-font-specification:'FreeSans, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">km/L</flowPara></flowRoot>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="Value_Bar"
+     transform="matrix(0.5,0,0,0.5,149.22553,-88.49441)">
+    <rect
+       style="opacity:1;fill:url(#linearGradient4981);fill-opacity:1;stroke:none"
+       id="milagegraph_valuebar"
+       width="60"
+       height="480"
+       x="-152"
+       y="212.36218" />
+    <rect
+       style="opacity:1;fill:url(#linearGradient4981-3);fill-opacity:1;stroke:none"
+       id="milagegraph_valuebar2"
+       width="80"
+       height="480"
+       x="522"
+       y="212.36218" />
+  </g>
+</svg>

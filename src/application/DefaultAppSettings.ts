@@ -48,6 +48,7 @@ type GearPositionCalcSetting =
 require('./WebSocketSetting.appconfig.jsonc');
 type WebSocketSetting =
     {
+        ServerHost?: string,
         WebSocketEnable:
         {
             ELM327: boolean,
@@ -90,7 +91,8 @@ export const getWebsocketCollectionOption = async (): Promise<WebsocketObjectCol
     const wssetting: WebSocketSetting = jsonc.parse(await (await fetch("./config/WebSocketSetting.appconfig.jsonc")).text());
     const hybridmapsetting: HybridWebSocketMapSetting = jsonc.parse(await (await fetch("./config/HybridWebSocketMapSetting.appconfig.jsonc")).text());
 
-    const wsOption = new WebsocketObjectCollectionOption();
+    const wsOption = (wssetting.ServerHost !== undefined) ? new WebsocketObjectCollectionOption(wssetting.ServerHost): new WebsocketObjectCollectionOption();
+    
     if (wssetting.WebSocketEnable.Defi)
         wsOption.DefiWSEnabled = true;
     if (wssetting.WebSocketEnable.SSM)

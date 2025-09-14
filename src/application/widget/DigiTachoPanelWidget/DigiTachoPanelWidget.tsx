@@ -44,7 +44,7 @@ window.onload = function () {
 class DigiTachoPanelWidgetApp {
 
     public async Start() {
-        const pixiAppOption: Partial<PIXI.IApplicationOptions> = { width: 600, height: 300 };
+        const pixiAppOption: Partial<PIXI.ApplicationOptions> = { width: 600, height: 300 };
 
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
 

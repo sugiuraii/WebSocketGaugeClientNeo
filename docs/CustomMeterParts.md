@@ -322,7 +322,7 @@ export class AnalogSingleMeter extends PIXI.Container
         
         // "Baking" this container to single texture
         // This can speed up the rendering (since gpu dose not need to construct this constructor on every frame)
-        baseContainer.cacheAsBitmap = true;
+        baseContainer.cacheAsTexture(true);
         return baseContainer;
     }
 }
@@ -331,5 +331,5 @@ Finally, `AnalogSingleMeter` is constructed by defining elements (sprites, bitma
 (To know the meanings of element's properties, please see [pixi.js examples](http://pixijs.github.io/examples/), [pixi.js tutorials](http://www.pixijs.com/tutorials), or [MeterPrimitive.md](./MeterPrimitive.md)).
 
 On this example, "Meter back plate" (=backSprite + gridSprite + title label + unit label + number labels) are grouped into single container (by the method of `createMeterBackPlate()`).
-At the final step of `createMeterBackPlate()`, the contents of this container are cached ("baked") into single texture by setting `cacheAsBitMap = true`. By this, the WebGL renderer need not to construct this container by every frame and improve rendering performance (This technique is explained in [cachAsBitmap section of pixi.js demo](https://pixijs.github.io/examples/#/demos/cacheAsBitmap.js).
+At the final step of `createMeterBackPlate()`, the contents of this container are cached ("baked") into single texture by setting `cacheAsTexture(true)`. By this, the WebGL renderer need not to construct this container by every frame and improve rendering performance (This technique is explained in [cachAsTexture section of pixi.js demo](https://pixijs.com/8.x/examples/basic/cache-as-texture).
 

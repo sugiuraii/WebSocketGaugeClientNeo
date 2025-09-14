@@ -29,8 +29,9 @@ export class BitmapTextOption {
     public position = new PIXI.Point(0, 0);
     public anchor = new PIXI.Point(0, 0);
     public align: PIXI.TextStyleAlign = "left";
-    public fontName = "FreeSans_90px";
-    public fontSize = 90;
+    public fontName = "CircularGaugeLabel";
+    public fontSize = 77;
+    public letterSpacing = -5;
 
     constructor(position?: PIXI.Point, anchor?: PIXI.Point, align?: PIXI.TextStyleAlign) {
         if (typeof (align) !== "undefined")
@@ -130,24 +131,21 @@ export abstract class CircularGaugePanelOptionBase {
     constructor() {
         this.MasterTextStyle = new PIXI.TextStyle(
             {
-                dropShadow: true,
-                dropShadowBlur: 15,
-                padding: 15,
-                dropShadowColor: "#FFFFFF",
-                dropShadowDistance: 0,
+                dropShadow: {blur: 7, color: "#FFFFFF", distance: 0},
                 fill: "white",
                 fontFamily: "Freesansbold"
             });
         this.ValueTextLabelOption = new BitmapTextOption();
     }
 }
+
 export type CircularProgressBarObjectName = "ProgressBar" | "ValueLabel" | "BackLabel" | "Grid" | "ZoneBar" | "Background";
 
 export abstract class CircularGaugePanelBase extends PIXI.Container {
     private readonly valueTextLabel: PIXI.BitmapText;
     private readonly valueProgressBar: CircularProgressBar;
     private readonly backContainer : PIXI.Container;
-    private readonly displayObjects: Map<CircularProgressBarObjectName, PIXI.DisplayObject> = new Map();
+    private readonly displayObjects: Map<CircularProgressBarObjectName, PIXI.Container> = new Map();
 
     private Options: CircularGaugePanelOptionBase;
 
@@ -160,8 +158,8 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
             this.valueTextLabel.text = value.toFixed(this.Options.ValueNumberRoundDigit).toString();
     }
 
-    public set CacheBackContainerAsBitMap(value : boolean) { this.backContainer.cacheAsBitmap = value};
-    public getDisplayObjects(value : CircularProgressBarObjectName) : PIXI.DisplayObject { 
+    public set CacheBackContainerAsTexture(value : boolean) { this.backContainer.cacheAsTexture(value) }
+    public getDisplayObjects(value : CircularProgressBarObjectName) : PIXI.Container { 
         if(this.displayObjects.get(value) === undefined)
             throw new Error(value + "is not exists");
         else
@@ -189,7 +187,6 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
         valueProgressBarOption.AngleStep = this.Options.AngleStep;
         valueProgressBarOption.GagueFullOnValueMin = this.Options.GaugeFullOnValueMin;
         valueProgressBarOption.AntiClockwise = this.Options.AntiClockWise;
-
         valueProgressBarOption.GaugeDrawConversionFucntion = this.Options.GaugeDrawValConversionFunc;
 
         valueProgressBarOption.Center = this.Options.CenterPosition;
@@ -202,9 +199,9 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
 
         const valueTextLabelOption = this.Options.ValueTextLabelOption;
         const valueTextLabelStyle = {
-            fontName: valueTextLabelOption.fontName, fontSize: valueTextLabelOption.fontSize, align: valueTextLabelOption.align
+            fontFamily: valueTextLabelOption.fontName, fontSize: valueTextLabelOption.fontSize, align: valueTextLabelOption.align, letterSpacing: valueTextLabelOption.letterSpacing
         };
-        const valueTextLabel = new PIXI.BitmapText(this.Options.Min.toFixed(this.Options.ValueNumberRoundDigit).toString(), valueTextLabelStyle);
+        const valueTextLabel = new PIXI.BitmapText({text: this.Options.Min.toFixed(this.Options.ValueNumberRoundDigit).toString(), style:valueTextLabelStyle});
         valueTextLabel.position.set(valueTextLabelOption.position.x, valueTextLabelOption.position.y);
         valueTextLabel.anchor.set(valueTextLabelOption.anchor.x, valueTextLabelOption.anchor.y);
         super.addChild(valueTextLabel);
@@ -226,7 +223,7 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
     private createBackContainer(): PIXI.Container {
         const backContainer = new PIXI.Container();
         //Unlock baked texture
-        backContainer.cacheAsBitmap = false;
+        backContainer.cacheAsTexture(false);
 
         const centerPosition = this.Options.CenterPosition;
         const zoneBarRadius = this.Options.ZoneBarRadius;
@@ -298,7 +295,7 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
 
         const backLabelContainer = new PIXI.Container();
         //Set Title and unit text
-        const titleTextElem = new PIXI.Text(this.Options.TitleLabel);
+        const titleTextElem = new PIXI.Text({text:this.Options.TitleLabel});
         const titleTextOption = this.Options.TitleLabelOption;
         titleTextElem.style = this.Options.MasterTextStyle.clone();
         titleTextElem.style.fontSize = titleTextOption.fontSize;
@@ -306,7 +303,7 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
         titleTextElem.anchor.set(titleTextOption.anchor.x, titleTextOption.anchor.y)
         titleTextElem.position.set(titleTextOption.position.x, titleTextOption.position.y);
 
-        const unitTextElem = new PIXI.Text(this.Options.UnitLabel);
+        const unitTextElem = new PIXI.Text({text:this.Options.UnitLabel});
         const unitTextOption = this.Options.UnitLabelOption;
         unitTextElem.style = this.Options.MasterTextStyle.clone();
         unitTextElem.style.fontSize = unitTextOption.fontSize;
@@ -320,7 +317,7 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
         //Set axis label
         for (let i = 0; i < this.Options.AxisLabelOption.length; i++) {
             const axisLabelOption = this.Options.AxisLabelOption[i];
-            const axisLabelElem = new PIXI.Text(this.Options.AxisLabel[i]);
+            const axisLabelElem = new PIXI.Text({text:this.Options.AxisLabel[i]});
             axisLabelElem.style = this.Options.MasterTextStyle.clone();
             axisLabelElem.style.fontSize = axisLabelOption.fontSize;
             axisLabelElem.style.align = axisLabelOption.align;
@@ -334,8 +331,8 @@ export abstract class CircularGaugePanelBase extends PIXI.Container {
         this.displayObjects.set("BackLabel", backLabelContainer);
 
         //Bake into texture
-        backContainer.cacheAsBitmapResolution = 3; // Manually set bitmap cache resolution to avoid redzone bar glitch in Firefox.
-        backContainer.cacheAsBitmap = true;
+        //backContainer.cacheAsTexture({resolution : 3}); // Manually set bitmap cache resolution to avoid redzone bar glitch in Firefox.(Temporary disable)
+        backContainer.cacheAsTexture(true)
         return backContainer;
     }
 }

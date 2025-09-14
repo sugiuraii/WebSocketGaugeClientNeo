@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { Assets } from "@pixi/assets";
+import * as PIXI from 'pixi.js';
 import { FullCircularGaugePanelOption } from "./FullCircularGaugePanelOption"
 import { CircularGaugePanelBase } from "./private/CircularGaugePanelBase";
 
@@ -39,8 +39,8 @@ export class FullCircularGaugePanel extends CircularGaugePanelBase {
     }
 
     public static async create(options: FullCircularGaugePanelOption) {
-        await Assets.load(["img/FullCircularGaugeTexture.json", "img/CircularGaugeLabelFont.fnt"]);
-        await Assets.load(["./fonts/FreeSansBold.otf"]);
+        await PIXI.Assets.load(["img/FullCircularGaugeTexture.json", "img/CircularGaugeLabelFont.fnt"]);
+        await PIXI.Assets.load(["./fonts/FreeSansBold.otf"]);
         const instance = new FullCircularGaugePanel(options);
         return instance;
     }

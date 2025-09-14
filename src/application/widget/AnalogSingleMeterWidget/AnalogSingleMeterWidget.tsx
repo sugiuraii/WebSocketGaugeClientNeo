@@ -44,7 +44,7 @@ window.onload = function () {
 class AnalogSingleMeterWidgetApp {
 
     public async Start() {
-        const pixiAppOption: Partial<PIXI.IApplicationOptions> = { width: 410, height: 410 };
+        const pixiAppOption: Partial<PIXI.ApplicationOptions> = { width: 410, height: 410 };
 
         const appOption = new MeterApplicationOption(pixiAppOption, await DefaultAppSettings.getWebsocketCollectionOption());
         appOption.MeteSelectDialogOption.ParameterCodeListToSelect = ["Engine_Speed", "Engine_Load", "Manifold_Absolute_Pressure", "Coolant_Temperature", "Engine_oil_temperature", "Battery_Voltage", "Oil_Pressure", "Mass_Air_Flow", "O2Sensor_1_Air_Fuel_Ratio", "Intake_Air_Temperature"];

@@ -27,7 +27,7 @@ import * as PIXI from "pixi.js";
 
 type PIXIApplicationProps =
 {
-    application: PIXI.Application<HTMLCanvasElement>
+    application: PIXI.Application
 }
 
 export const PIXIApplication: FunctionComponent<PIXIApplicationProps> = (p) => {
@@ -47,7 +47,7 @@ export const PIXIApplication: FunctionComponent<PIXIApplicationProps> = (p) => {
         const app = p.application;
         if (!pixiAppRef.current)
             return;
-        pixiAppRef.current.appendChild(app.view);
+        pixiAppRef.current.appendChild(app.canvas);
     };
 
     /* eslint-disable react-hooks/exhaustive-deps */

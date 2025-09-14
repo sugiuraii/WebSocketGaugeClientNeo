@@ -23,7 +23,6 @@
  */
 
 import * as PIXI from 'pixi.js';
-import { Assets } from '@pixi/assets';
 require("./fpsCounterFont.fnt");
 require("./fpsCounterFont_0.png");
 
@@ -34,14 +33,14 @@ export class FPSCounter extends PIXI.Container {
     private fpsbuffer: number[] = [];
 
     public static async create() {
-        await Assets.load(["img/fpsCounterFont.fnt"]);
+        await PIXI.Assets.load(["img/fpsCounterFont.fnt"]);
         const instance = new FPSCounter();
         return instance;
     }
 
     private constructor() {
         super();
-        this.fpsText = new PIXI.BitmapText("0fps", { fontName: "fpsCounterFont", fontSize: 32, align: "left" });
+        this.fpsText = new PIXI.BitmapText({ text: "0fps",  style: { fontFamily: "fpsCounterFont", fontSize: 32, align: "left"}});
         super.addChild(this.fpsText);
     }
 
