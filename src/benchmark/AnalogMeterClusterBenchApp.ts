@@ -79,17 +79,6 @@ class AnalogMeterClusterBenchApp
             let boost = -1.0;
             let waterTemp = 50.0;
         
-            const tachoSchedule = [
-                {duration: 250, val: 1000},
-                {duration: 500, val: 3000},
-                {duration: 500, val: 5000},
-                {duration: 500, val: 7000},
-                {duration: 500, val: 9000},
-                {duration: 500, val: 0}
-            ];
-            const tachoValueSource = new InterpolatorFactory().get({type: "Linear"});
-            const tachoScheduler = new ValueScheduler((val) => tachoValueSource.setVal(val), tachoSchedule, false);
-            tachoScheduler.start();
             let meterVal = {boost: -1.0, tacho: 0, speed : 0};
             
             const tween = new TWEEN.Tween(meterVal).to({boost: 2.0, tacho: 9000, speed: 280}, 2500)
@@ -103,38 +92,52 @@ class AnalogMeterClusterBenchApp
             const tweenGroup = new TWEEN.Group();
             tweenGroup.add(tween);
             tweenGroup.add(tweenback);
+            let tweenEnd = false;
+            tweenback.onComplete(() => tweenEnd = true);
+
             app.ticker.add(() => 
             {
-                const timestamp = app.ticker.lastTime;
-                tweenGroup.update(timestamp);
-                //tweenback.update(timestamp);
                 fpsCounter.setFPS(app.ticker.FPS);
-                const tacho = tachoValueSource.getVal();
-/*                
-                if(speed > 280)
-                    speed = 0;
-                else
-                    speed += 0.5;
-                
-                if(boost > 2.0)
-                    boost = -1.0;
-                else
-                    boost += 0.05;
-                
-                if (waterTemp > 140)
-                    waterTemp = 50;
-                else
-                    waterTemp += 0.1;
-                */
-                gearPos = "-";
-                meterCluster.Tacho = meterVal.tacho;
-                meterCluster.Speed = meterVal.speed;
-                meterCluster.Boost = meterVal.boost;
-                meterCluster.WaterTemp = waterTemp;
-                meterCluster.GasMilage = totalGasMilage;
-                meterCluster.Trip = totalTrip;
-                meterCluster.Fuel = totalFuel;
-                meterCluster.GearPos = gearPos;
+                if(!tweenEnd) {
+                    const timestamp = app.ticker.lastTime;
+                    tweenGroup.update(timestamp);
+                    meterCluster.Tacho = meterVal.tacho;
+                    meterCluster.Speed = meterVal.speed;
+                    meterCluster.Boost = meterVal.boost;
+                    meterCluster.WaterTemp = waterTemp;
+                    meterCluster.GasMilage = totalGasMilage;
+                    meterCluster.Trip = totalTrip;
+                    meterCluster.Fuel = totalFuel;
+                    meterCluster.GearPos = "-";
+                } else {      
+                    if(tacho > 9000)
+                        tacho = 0;
+                    else
+                        tacho+=100;          
+                    if(speed > 280)
+                        speed = 0;
+                    else
+                        speed += 0.5;
+                    
+                    if(boost > 2.0)
+                        boost = -1.0;
+                    else
+                        boost += 0.05;
+                    
+                    if (waterTemp > 140)
+                        waterTemp = 50;
+                    else
+                        waterTemp += 0.1;
+                    gearPos = "-";
+                    meterCluster.Tacho = tacho;
+                    meterCluster.Speed = speed;
+                    meterCluster.Boost = boost;
+                    meterCluster.WaterTemp = waterTemp;
+                    meterCluster.GasMilage = totalGasMilage;
+                    meterCluster.Trip = totalTrip;
+                    meterCluster.Fuel = totalFuel;
+                    meterCluster.GearPos = "-";    
+                }
            });    
         };
 
