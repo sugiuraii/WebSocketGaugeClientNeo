@@ -100,10 +100,13 @@ class AnalogMeterClusterBenchApp
             tween.start();
             tween.chain(tweenback);
             
+            const tweenGroup = new TWEEN.Group();
+            tweenGroup.add(tween);
+            tweenGroup.add(tweenback);
             app.ticker.add(() => 
             {
                 const timestamp = app.ticker.lastTime;
-                TWEEN.update(timestamp);
+                tweenGroup.update(timestamp);
                 //tweenback.update(timestamp);
                 fpsCounter.setFPS(app.ticker.FPS);
                 const tacho = tachoValueSource.getVal();
