@@ -23,6 +23,7 @@
  */
 
 import * as PIXI from 'pixi.js';
+import * as TWEEN from "@tweenjs/tween.js"
 
 //Import application base class
 import {MeterApplication} from "meter-application-common";
@@ -38,8 +39,6 @@ import { ValueScheduler } from './utils/ValueScheduler';
 
 import { TrailLayer } from 'pixi-traillayer';
 
-import * as TWEEN from "@tweenjs/tween.js"
-
 //For including entry point html file in webpack
 require("./AnalogMeterClusterBenchApp.html");
 
@@ -48,9 +47,10 @@ window.onload = function()
     const meterapp = new AnalogMeterClusterBenchApp();
     meterapp.Start();
 }
-
+type AnimationStatus = "ShowUp" | "SweepDemo" | "Normal";
 class AnalogMeterClusterBenchApp
 {
+    
     public Start()
     {
         const pixiAppOption : Partial<PIXI.ApplicationOptions> = {width : 1100, height : 600};
@@ -61,6 +61,7 @@ class AnalogMeterClusterBenchApp
         {
             const meterCluster = await AnalogMeterCluster.create();
             const stage = app.stage;
+            meterCluster.visible = false;
 
             stage.addChild(meterCluster);
             
@@ -78,66 +79,101 @@ class AnalogMeterClusterBenchApp
     
             let boost = -1.0;
             let waterTemp = 50.0;
-        
             let meterVal = {boost: -1.0, tacho: 0, speed : 0};
-            
-            const tween = new TWEEN.Tween(meterVal).to({boost: 2.0, tacho: 9000, speed: 280}, 2500)
+            let brightness = {back : 0.1, text : 0.1};
+            let textblur = {val: 10.0};
+            const blurTween = new TWEEN.Tween(textblur).to({val:0.0}, 1000);
+            const btween1 = new TWEEN.Tween(brightness).to({back : 0.1, text:1.0}, 1000) .easing(TWEEN.Easing.Quadratic.InOut);
+            const btween2 = new TWEEN.Tween(brightness).to({back : 1.0, text:1.0}, 1000) .easing(TWEEN.Easing.Quadratic.InOut);
+                
+            const sweepTween = new TWEEN.Tween(meterVal).to({boost: 2.0, tacho: 9000, speed: 280}, 2500)
             .easing(TWEEN.Easing.Quadratic.InOut);
-            const tweenback = new TWEEN.Tween(meterVal).to({boost: -1.0, tacho: 0, speed: 0}, 1000)
+            const sweepBackTween = new TWEEN.Tween(meterVal).to({boost: -1.0, tacho: 0, speed: 0}, 1000)
             .easing(TWEEN.Easing.Quadratic.InOut);
-            
-            tween.start();
-            tween.chain(tweenback);
+
+            btween1.start();
+            btween1.chain(blurTween);
+            blurTween.chain(btween2);
+            btween2.chain(sweepTween);
+            sweepTween.chain(sweepBackTween);
             
             const tweenGroup = new TWEEN.Group();
-            tweenGroup.add(tween);
-            tweenGroup.add(tweenback);
-            let tweenEnd = false;
-            tweenback.onComplete(() => tweenEnd = true);
+            tweenGroup.add(btween1);
+            tweenGroup.add(blurTween);
+            tweenGroup.add(btween2);
+            tweenGroup.add(sweepTween);
+            tweenGroup.add(sweepBackTween);
+            let animationStatus: AnimationStatus = "ShowUp";
+
+            btween2.onComplete(() => animationStatus = "SweepDemo");
+            sweepBackTween.onComplete(() => animationStatus = "Normal");
 
             app.ticker.add(() => 
             {
+                meterCluster.visible = true;
                 fpsCounter.setFPS(app.ticker.FPS);
-                if(!tweenEnd) {
-                    const timestamp = app.ticker.lastTime;
-                    tweenGroup.update(timestamp);
-                    meterCluster.Tacho = meterVal.tacho;
-                    meterCluster.Speed = meterVal.speed;
-                    meterCluster.Boost = meterVal.boost;
-                    meterCluster.WaterTemp = waterTemp;
-                    meterCluster.GasMilage = totalGasMilage;
-                    meterCluster.Trip = totalTrip;
-                    meterCluster.Fuel = totalFuel;
-                    meterCluster.GearPos = "-";
-                } else {      
-                    if(tacho > 9000)
-                        tacho = 0;
-                    else
-                        tacho+=100;          
-                    if(speed > 280)
-                        speed = 0;
-                    else
-                        speed += 0.5;
-                    
-                    if(boost > 2.0)
-                        boost = -1.0;
-                    else
-                        boost += 0.05;
-                    
-                    if (waterTemp > 140)
-                        waterTemp = 50;
-                    else
-                        waterTemp += 0.1;
-                    gearPos = "-";
-                    meterCluster.Tacho = tacho;
-                    meterCluster.Speed = speed;
-                    meterCluster.Boost = boost;
-                    meterCluster.WaterTemp = waterTemp;
-                    meterCluster.GasMilage = totalGasMilage;
-                    meterCluster.Trip = totalTrip;
-                    meterCluster.Fuel = totalFuel;
-                    meterCluster.GearPos = "-";    
+                const timestamp = app.ticker.lastTime;
+                tweenGroup.update(timestamp);
+                
+                const tblurFilter = new PIXI.BlurFilter();
+                tblurFilter.blur = textblur.val;
+                tblurFilter.enabled = !(textblur.val === 0.0);
+                const bfilter = new PIXI.ColorMatrixFilter();
+                bfilter.brightness(brightness.back, false);
+                const tfilter = new PIXI.ColorMatrixFilter();
+                tfilter.brightness(brightness.text, false);
+                meterCluster.getBoostDisplayObjects("Background").filters = [bfilter];
+                meterCluster.getTachoDisplayObjects("Background").filters = [bfilter];
+                meterCluster.getSpeedDisplayObjects("Background").filters = [bfilter];
+                meterCluster.getTachoDisplayObjects("LCDBase").filters = [bfilter];
+                meterCluster.getSpeedDisplayObjects("LCDBase").filters = [bfilter];
+                meterCluster.getBoostDisplayObjects("BackLabel").filters = [tfilter, tblurFilter];
+                meterCluster.getTachoDisplayObjects("BackLabel").filters = [tfilter, tblurFilter];
+                meterCluster.getSpeedDisplayObjects("BackLabel").filters = [tfilter, tblurFilter];
+                
+                switch(animationStatus) {
+                    case "ShowUp":
+                        meterCluster.CacheBackContainerAsTexture = false;
+                        break;
+                    case "SweepDemo":
+                        meterCluster.CacheBackContainerAsTexture = true;
+                        tacho = meterVal.tacho;
+                        speed = meterVal.speed;
+                        boost = meterVal.boost;
+                        break;
+                    case "Normal":
+                        if(tacho > 9000)
+                            tacho = 0;
+                        else
+                            tacho += 500;
+                        
+                        if(speed > 280)
+                            speed = 0;
+                        else
+                            speed += 0.5;
+                        
+                        if(boost > 2.0)
+                            boost = -1.0;
+                        else
+                            boost += 0.05;
+                        
+                        if (waterTemp > 140)
+                            waterTemp = 50;
+                        else
+                            waterTemp += 0.1;
+                        break;
                 }
+
+                gearPos = "-";
+                
+                meterCluster.Tacho = tacho;
+                meterCluster.Speed = speed;
+                meterCluster.Boost = boost;
+                meterCluster.WaterTemp = waterTemp;
+                meterCluster.GasMilage = totalGasMilage;
+                meterCluster.Trip = totalTrip;
+                meterCluster.Fuel = totalFuel;
+                meterCluster.GearPos = gearPos;
            });    
         };
 
