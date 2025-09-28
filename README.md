@@ -86,7 +86,8 @@ To build packages and main project separattely,
 After building root project, goto `playwright` directory, and run,
 ```
 > npm install
-> npm build-thumbnails
+> npx playwright install
+> npm run build-thumbnails
 ```
 
 ## <a name="custom">Making custom meter panel</a>
