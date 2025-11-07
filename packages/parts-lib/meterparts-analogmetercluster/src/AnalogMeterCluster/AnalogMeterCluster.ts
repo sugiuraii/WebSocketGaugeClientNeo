@@ -68,6 +68,8 @@ export class AnalogMeterCluster extends PIXI.Container {
     private readonly speedDisplayObjects: Map<SpeedMeterObjectName, PIXI.Container> = new Map();
     private readonly boostDisplayObjects: Map<BoostMeterObjectName, PIXI.Container> = new Map();
 
+    private readonly redzone_rpm: number;
+
     private tacho = 0;
     private speed = 0;
     private boost = 0;
@@ -159,10 +161,11 @@ export class AnalogMeterCluster extends PIXI.Container {
             return this.boostDisplayObjects.get(value)!;
     };
 
-    private constructor(applyTrail : boolean, trailAlpha : number) {
+    private constructor(applyTrail : boolean, trailAlpha : number, redzone_rpm : number) {
         super();
         this.applyTrail = applyTrail;
         this.trailAlpha = trailAlpha;
+        this.redzone_rpm = redzone_rpm;
         const TachoMeter = this.createTachoMeter();
         const SpeedMeter = this.createSpeedMeter();
         const BoostMeter = this.createBoostMeter();
@@ -189,10 +192,10 @@ export class AnalogMeterCluster extends PIXI.Container {
         this.CacheBackContainerAsTexture = true;
     }
 
-    public static async create(applyTrail = true, trailAlpha = 0.95) {
+    public static async create(applyTrail = true, trailAlpha = 0.95, redzone_rpm = 8000) {
         await PIXI.Assets.load(["img/AnalogMeterClusterTexture.json", "img/AnalogMeterFont_115px.fnt", "img/AnalogMeterFont_40px.fnt", "img/AnalogMeterFont_35px.fnt", "img/AnalogMeterFont_60px.fnt"]);
         //await PIXI.Assets.load('./fonts/DSEG14Classic-BoldItalic.ttf');
-        const instance = new AnalogMeterCluster(applyTrail, trailAlpha);
+        const instance = new AnalogMeterCluster(applyTrail, trailAlpha, redzone_rpm);
         return instance;
     }
 
@@ -223,7 +226,7 @@ export class AnalogMeterCluster extends PIXI.Container {
         redzoneProgressBar.pivot.set(269, 269);
         redzoneProgressBar.position.set(319, 319);
         this.tachoBackContainer.addChild(redzoneProgressBar);
-        redzoneProgressBar.Value = 2000;
+        redzoneProgressBar.Value = tachoMax - this.redzone_rpm;
         redzoneProgressBar.updateForce();
         
         const lcdBaseSprite = PIXI.Sprite.from("AnalogMeterCluster_layer_tacho_lcd_base.png");
