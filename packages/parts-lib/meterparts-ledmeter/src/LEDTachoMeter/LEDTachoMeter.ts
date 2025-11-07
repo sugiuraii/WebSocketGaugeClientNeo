@@ -51,6 +51,8 @@ export class LEDTachoMeter extends PIXI.Container {
     private readonly displayObjects: Map<LEDTachoMeterObjectName, PIXI.Container> = new Map();
     private readonly fixedBackContainer = new PIXI.Container();
 
+    private readonly redzone_rpm;
+
     public set CacheBackContainerAsTexture(value : boolean) { this.fixedBackContainer.cacheAsTexture(value) }
     public getDisplayObjects(value : LEDTachoMeterObjectName) : PIXI.Container { 
         if(this.displayObjects.get(value) === undefined)
@@ -103,14 +105,15 @@ export class LEDTachoMeter extends PIXI.Container {
         this.gearPosLabel.text = val;
     }
 
-    public static async create() {
+    public static async create(redzone_rpm = 8000) {
         await PIXI.Assets.load(["img/LEDTachoMeterTexture.json", "img/LEDMeterFont_100px.fnt", "img/LEDMeterFont_88px.fnt", "img/LEDMeterFont_45px.fnt", "img/LEDMeterFont_30px.fnt", "img/LEDMeter_RPMFont_58px.fnt"]);
-        const instance = new LEDTachoMeter();
+        const instance = new LEDTachoMeter(redzone_rpm);
         return instance;
     }
 
-    private constructor() {
+    private constructor(redzone_rpm: number) {
         super();
+        this.redzone_rpm = redzone_rpm;
 
         const tachoMax = 9000;
         const tachoMin = 0;
@@ -134,7 +137,7 @@ export class LEDTachoMeter extends PIXI.Container {
         redZoneOption.FullAngle = 270;
         redZoneOption.AntiClockwise = true;
         const redZone = new CircularProgressBar(redZoneOption);
-        redZone.Value = 1000;
+        redZone.Value = tachoMax - redzone_rpm;
         redZone.updateForce();
         backGroundContainer.addChild(redZone);
 
@@ -167,7 +170,7 @@ export class LEDTachoMeter extends PIXI.Container {
             numberElements[num].anchor.set(0.5, 0.5);
             const angle = 270 - num * 30;
             numberElements[num].position.set(place.X(angle), place.Y(angle));
-            if(num >= 8)
+            if(num >= this.redzone_rpm/1000)
                 numberElements[num].tint = 0xffff00;
         }
         numberElements.forEach(e => backTextContainer.addChild(e));
@@ -230,8 +233,7 @@ export class LEDTachoMeter extends PIXI.Container {
     }
 
     private changeRedZoneProgressBarColor() {
-        const redZoneTacho = 8000;
-        if (this.tacho > redZoneTacho) {
+        if (this.tacho > this.redzone_rpm) {
             const redfilter = new PIXI.ColorMatrixFilter();
             redfilter.hue(300, true);
             this.tachoProgressBar.filters = [redfilter];
