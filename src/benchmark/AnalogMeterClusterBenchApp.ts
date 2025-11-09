@@ -47,7 +47,75 @@ window.onload = function()
     const meterapp = new AnalogMeterClusterBenchApp();
     meterapp.Start();
 }
-type AnimationStatus = "ShowUp" | "SweepDemo" | "Normal";
+
+class AnalogMeterClusterStartupAnimation {
+    private readonly AnalogMeterCluster:AnalogMeterCluster;
+    private IsFinished = false;
+    private meterVal = {boost: -1.0, tacho: 0, speed : 0};
+    private brightness = {back : 0.1, text : 0.1};
+    private textblur = {val: 10.0};
+    private readonly tweenGroup = new TWEEN.Group();
+
+    constructor(AnalogMeterCluster:AnalogMeterCluster) {
+        this.AnalogMeterCluster = AnalogMeterCluster;
+        this.setup();
+    }
+
+    public isFinished() {return this.IsFinished};
+    private setup() {
+        const blurTween = new TWEEN.Tween(this.textblur).to({val:0.0}, 1000);
+        const brightnessTween1 = new TWEEN.Tween(this.brightness).to({back : 0.1, text:1.0}, 1000) .easing(TWEEN.Easing.Quadratic.InOut);
+        const brightnessTween2 = new TWEEN.Tween(this.brightness).to({back : 1.0, text:1.0}, 1000) .easing(TWEEN.Easing.Quadratic.InOut);
+            
+        const sweepTween = new TWEEN.Tween(this.meterVal).to({boost: 2.0, tacho: 9000, speed: 280}, 2500)
+        .easing(TWEEN.Easing.Quadratic.InOut);
+        const sweepBackTween = new TWEEN.Tween(this.meterVal).to({boost: -1.0, tacho: 0, speed: 0}, 1000)
+        .easing(TWEEN.Easing.Quadratic.InOut);
+
+        brightnessTween1.start();
+        brightnessTween1.chain(blurTween);
+        blurTween.chain(brightnessTween2);
+        brightnessTween2.chain(sweepTween);
+        sweepTween.chain(sweepBackTween);
+        
+        this.tweenGroup.add(brightnessTween1);
+        this.tweenGroup.add(blurTween);
+        this.tweenGroup.add(brightnessTween2);
+        this.tweenGroup.add(sweepTween);
+        this.tweenGroup.add(sweepBackTween);
+
+        this.IsFinished = false;
+        this.AnalogMeterCluster.CacheBackContainerAsTexture = false;
+        brightnessTween2.onComplete(() => this.AnalogMeterCluster.CacheBackContainerAsTexture = true);
+        sweepBackTween.onComplete(() => this.IsFinished = true);
+    }
+
+    public ticker(timestamp: number) {
+        const meterCluster = this.AnalogMeterCluster;
+        this.tweenGroup.update(timestamp);
+                
+        const tblurFilter = new PIXI.BlurFilter();
+        tblurFilter.blur = this.textblur.val;
+        tblurFilter.enabled = !(this.textblur.val === 0.0);
+        const bfilter = new PIXI.ColorMatrixFilter();
+        bfilter.brightness(this.brightness.back, false);
+        const tfilter = new PIXI.ColorMatrixFilter();
+        tfilter.brightness(this.brightness.text, false);
+        meterCluster.getBoostDisplayObjects("Background").filters = [bfilter];
+        meterCluster.getTachoDisplayObjects("Background").filters = [bfilter];
+        meterCluster.getSpeedDisplayObjects("Background").filters = [bfilter];
+        meterCluster.getTachoDisplayObjects("LCDBase").filters = [bfilter];
+        meterCluster.getSpeedDisplayObjects("LCDBase").filters = [bfilter];
+        meterCluster.getBoostDisplayObjects("BackLabel").filters = [tfilter, tblurFilter];
+        meterCluster.getTachoDisplayObjects("BackLabel").filters = [tfilter, tblurFilter];
+        meterCluster.getSpeedDisplayObjects("BackLabel").filters = [tfilter, tblurFilter];
+        
+        meterCluster.Tacho = this.meterVal.tacho;
+        meterCluster.Speed = this.meterVal.speed;
+        meterCluster.Boost = this.meterVal.boost;
+    }
+}
+
 class AnalogMeterClusterBenchApp
 {
     
